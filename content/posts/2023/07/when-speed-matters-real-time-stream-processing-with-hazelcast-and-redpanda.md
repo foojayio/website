@@ -7,7 +7,7 @@ description: "Explore the combination of Hazelcast and Redpanda for high-perform
 authors:
   - "dunith-danushka"
   - "fawaz-ghali"
-image: "https://foojay.io/wp-content/uploads/2023/07/hazelcast-redpanda.png"
+image: "/images/posts/2023/07/when-speed-matters-real-time-stream-processing-with-hazelcast-and-redpanda/hazelcast-redpanda.png"
 categories:
   - "Hazelcast"
   - "Performance"
@@ -203,7 +203,7 @@ if __name__ == "__main__":
 Start a Hazelcast local cluster. This will run a Hazelcast cluster in client/server mode and an instance of Management Center running on your local network.
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="345c554e51585755474074011a071a05">[email&nbsp;protected]</a>
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8c0c9d2cdc4cbc9dbdce89d869b8699">[email&nbsp;protected]</a>
 hz -V</pre>
 
 Now that we understand what we are going to build, and have prerequisites set up, let's jump right into the solution.

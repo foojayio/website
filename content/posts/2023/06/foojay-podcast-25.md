@@ -9,7 +9,7 @@ authors:
   - "chengen-zhao"
   - "frankdelporte"
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2023/06/episode-25-guests.png"
+image: "/images/posts/2023/06/foojay-podcast-25/episode-25-guests.png"
 categories:
   - "JavaFX"
   - "Podcast"

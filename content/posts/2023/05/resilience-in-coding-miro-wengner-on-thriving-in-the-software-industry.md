@@ -6,7 +6,7 @@ lastmod: "2023-06-01T20:52:21+00:00"
 description: "Dive into our interview with software engineer Miro Wengner as he discusses his career, software challenges, and insights from his experience in the industry."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/05/miro.jpeg"
+image: "/images/posts/2023/05/resilience-in-coding-miro-wengner-on-thriving-in-the-software-industry/miro.jpeg"
 categories:
   - "Interviews"
 tags:

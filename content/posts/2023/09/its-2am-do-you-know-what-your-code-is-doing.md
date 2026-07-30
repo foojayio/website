@@ -7,7 +7,7 @@ description: "There's a newer approach to developer observability that helps wit
 canonical: "https://debugagent.com/its-2am-do-you-know-what-your-code-is-doing"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/08/doppleware_a_developer_programming_in_pijamas_from_bed_with_a_s_7abdabf7-a4ec-47e5-8733-78b85aac2cf7.jpg"
+image: "/images/posts/2023/09/its-2am-do-you-know-what-your-code-is-doing/doppleware_a_developer_programming_in_pijamas_from_bed_with_a_s_7abdabf7-a4ec-47e5-8733-78b85aac2cf7.jpg"
 categories:
   - "Observability"
 tags:

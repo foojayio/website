@@ -6,7 +6,7 @@ lastmod: "2023-07-03T11:00:52+00:00"
 description: "Great big overview of Foojay.io, plus its subprojects and related insights and statistics, as well as upcoming plans."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2023/07/image-1-1024x631-1.png"
+image: "/images/posts/2023/07/foojay-status-report-july-2023/image-1-1024x631-1.png"
 categories:
   - "Events"
   - "Foojay"

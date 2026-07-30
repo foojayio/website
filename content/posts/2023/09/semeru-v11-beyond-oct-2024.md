@@ -6,7 +6,7 @@ lastmod: "2023-09-21T09:14:19+00:00"
 description: "IBM extends availability for Semeru Runtimes V11 from Oct 2024 to Nov 2026. IBM Semeru Runtimes support page is now updated to reflect this."
 authors:
   - "laura-cowen"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2023/09/semeru-v11-beyond-oct-2024/Favicon-3-2.png"
 categories:
   - "Java"
   - "Release Notes"

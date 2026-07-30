@@ -6,7 +6,7 @@ lastmod: "2023-05-23T16:46:43+00:00"
 description: "Learn the why and how of a group of enthusiastic people implementing a new sort of developer certification that objectively measures dev skills on Foojay."
 authors:
   - "roy-wasse"
-image: "https://foojay.io/wp-content/uploads/2023/05/task-screenshot.png"
+image: "/images/posts/2023/05/foojay-developer-certification-measure-skills/task-screenshot.png"
 categories:
   - "Java Beginner"
   - "Java Core"

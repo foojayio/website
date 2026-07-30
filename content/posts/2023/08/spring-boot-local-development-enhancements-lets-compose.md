@@ -6,7 +6,7 @@ lastmod: "2023-08-25T12:07:27+00:00"
 description: "How to make use of the new local development enhancements in Spring boot 3.1. Get started here on Foojay.io Today!"
 authors:
   - "simon-verhoeven"
-image: "https://foojay.io/wp-content/uploads/2021/09/1024px-Spring_Framework_Logo_2018.svg.png"
+image: "/images/posts/2023/08/spring-boot-local-development-enhancements-lets-compose/1024px-Spring_Framework_Logo_2018.svg.png"
 categories:
   - "Developer Tools"
   - "Spring"

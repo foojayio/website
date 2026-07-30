@@ -6,7 +6,7 @@ lastmod: "2023-07-26T13:00:06+00:00"
 description: "On placing a higher value on things that you've either made yourself, or to which you’ve contributed towards making!"
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2023/07/the-ikea-effect/Favicon-3-2.png"
 categories:
   - "Chronicle Software"
   - "Opinion"

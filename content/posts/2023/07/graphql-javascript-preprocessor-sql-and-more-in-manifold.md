@@ -7,7 +7,7 @@ description: "In the final installment of the Manifold series we discuss the fin
 canonical: "https://debugagent.com/graphql-javascript-preprocessor-sql-and-more-in-manifold"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/07/thumbnail-24.jpg"
+image: "/images/posts/2023/07/graphql-javascript-preprocessor-sql-and-more-in-manifold/thumbnail-24.jpg"
 categories:
   - "Tutorials"
 tags:

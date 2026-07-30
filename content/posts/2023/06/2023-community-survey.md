@@ -6,7 +6,7 @@ lastmod: "2023-06-06T08:37:48+00:00"
 description: "Friends of OpenJDK Community Survey. Kickoff and instructions for a community driven data gathering exercise."
 authors:
   - "steve-poole"
-image: "https://foojay.io/wp-content/uploads/2021/05/question-mark-1872665_1280.jpg"
+image: "/images/posts/2023/06/2023-community-survey/question-mark-1872665_1280.jpg"
 categories:
   - "Research"
   - "Surveys"

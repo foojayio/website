@@ -7,7 +7,7 @@ description: "Pi4J is an ideal way to introduce the Java language into experimen
 canonical: "https://pi4j.com/blog/2023/20230731_pi4j_os/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/08/desktop-with-ip-info-1024x577-1.png"
+image: "/images/posts/2023/08/pi4j-operating-system-for-java-development-on-raspberry-pi/desktop-with-ip-info-1024x577-1.png"
 categories:
   - "Embedded"
   - "Java"

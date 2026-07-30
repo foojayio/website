@@ -6,7 +6,7 @@ lastmod: "2023-07-15T07:09:34+00:00"
 description: "Go out, visit the world, have friends, and read my blog post on flame-graph construction mid-next week."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2022/11/1D4_0564_me@mostlynerdless.de2_-1024x1024.jpg"
+image: "/images/posts/2023/07/i-could-write-a-blog-post-or/1D4_0564_me-mostlynerdless.de2_-1024x1024.jpg"
 categories:
   - "Opinion"
 tags:

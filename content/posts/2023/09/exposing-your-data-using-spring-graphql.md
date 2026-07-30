@@ -6,7 +6,7 @@ lastmod: "2023-09-19T08:34:54+00:00"
 description: "An introductory look at how we can use Spring GraphQL in our Java applications."
 authors:
   - "simon-verhoeven"
-image: "https://foojay.io/wp-content/uploads/2021/11/1280px-Spring_Framework_Logo_2018.svg.png"
+image: "/images/posts/2023/09/exposing-your-data-using-spring-graphql/1280px-Spring_Framework_Logo_2018.svg.png"
 categories:
   - "Java"
   - "Tutorials"

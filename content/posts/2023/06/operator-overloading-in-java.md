@@ -7,7 +7,7 @@ description: "Write expressions like (bigDecimalMap[ObjKey] * 5 > 20) in Java. M
 canonical: "https://debugagent.com/operator-overloading-in-java"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/05/thumbnail-21.jpg"
+image: "/images/posts/2023/06/operator-overloading-in-java/thumbnail-21.jpg"
 categories:
   - "Java Core"
   - "Tutorials"

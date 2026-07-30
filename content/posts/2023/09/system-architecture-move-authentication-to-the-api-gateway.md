@@ -7,7 +7,7 @@ description: "When exposing an application to the outside world, consider a Reve
 canonical: "https://blog.frankel.ch/authentication-api-gateway/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/07/eye-2771174.jpg"
+image: "/images/posts/2023/09/system-architecture-move-authentication-to-the-api-gateway/eye-2771174.jpg"
 categories:
   - "DevOps"
   - "Spring"

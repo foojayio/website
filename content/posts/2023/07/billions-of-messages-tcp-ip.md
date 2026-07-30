@@ -6,7 +6,7 @@ lastmod: "2023-07-05T21:05:09+00:00"
 description: "Chronicle Wire has had new features added to permit communication with other components across a TCP/IP network."
 authors:
   - "george-ball"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2023/07/billions-of-messages-tcp-ip/Favicon-3-2.png"
 categories:
   - "Java Core"
   - "JavaFX"

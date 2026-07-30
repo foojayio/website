@@ -6,7 +6,7 @@ lastmod: "2023-08-17T10:01:03+00:00"
 description: "Renowned for its resilience and low latency, EDA is a reliable choice for developing robust, high-performing microservices."
 authors:
   - "rob-austin"
-image: "https://foojay.io/wp-content/uploads/2023/08/Screenshot-2023-08-10-at-5.13.36-PM-1024x607-1.png"
+image: "/images/posts/2023/08/6-considerations-when-building-high-performance-java-microservices-with-eda/Screenshot-2023-08-10-at-5.13.36-PM-1024x607-1.png"
 categories:
   - "Chronicle Software"
   - "Developer Tools"

@@ -6,7 +6,7 @@ lastmod: "2023-09-27T13:47:29+00:00"
 description: "Understanding memory management in Java, and particularly the role of object allocation is essential when optimising system performance."
 authors:
   - "jasmine-taylor"
-image: "https://foojay.io/wp-content/uploads/2023/09/Screenshot-2023-09-22-at-5.40.01-PM.png"
+image: "/images/posts/2023/09/java-memory-management/Screenshot-2023-09-22-at-5.40.01-PM.png"
 categories:
   - "Java Core"
   - "Performance"

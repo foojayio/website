@@ -6,7 +6,7 @@ lastmod: "2024-01-09T12:59:25+00:00"
 description: "As we prepare for NODES 2023, let's pull out the time machine and review the Java sessions from NODES 2022."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2023/06/nodes2023-java-scaled.jpg"
+image: "/images/posts/2023/06/time-machine-a-look-back-at-java-sessions-from-nodes-2022/nodes2023-java-scaled.jpg"
 categories:
   - "Conference"
   - "Events"

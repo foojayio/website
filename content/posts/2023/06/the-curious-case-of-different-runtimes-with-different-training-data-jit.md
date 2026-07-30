@@ -6,7 +6,7 @@ lastmod: "2023-06-30T08:12:45+00:00"
 description: "Strange runtime behavior when presenting different training data to the JIT. We show how we diagnosed and condense down to a few test cases."
 authors:
   - "rene-schwietzke"
-image: "https://foojay.io/wp-content/uploads/2023/06/jitwatch-triview.png"
+image: "/images/posts/2023/06/the-curious-case-of-different-runtimes-with-different-training-data-jit/jitwatch-triview.png"
 categories:
   - "Performance"
   - "Use Cases"

@@ -6,7 +6,7 @@ lastmod: "2023-09-12T03:45:38+00:00"
 description: "Foojay is not only a human-readable OpenJDK knowledge base but also provides the Disco API that lets you search all OpenJDK distributions?"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/08/discoapi-logo.png"
+image: "/images/posts/2023/09/disco-api-helping-you-to-find-any-openjdk-distribution/discoapi-logo.png"
 categories:
   - "Developer Tools"
   - "DevOps"

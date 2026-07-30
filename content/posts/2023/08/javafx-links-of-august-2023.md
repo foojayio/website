@@ -7,7 +7,7 @@ description: "I've taken a holiday this month, so probably missed a lot of the a
 canonical: "https://webtechie.be/post/2023-08-25-javafx-links-of-august-2023/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/08/homepage.png"
+image: "/images/posts/2023/08/javafx-links-of-august-2023/homepage.png"
 categories:
   - "JavaFX"
 tags:

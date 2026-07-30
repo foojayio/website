@@ -6,7 +6,7 @@ lastmod: "2023-08-08T10:34:38+00:00"
 description: "Everything you need to know before upgrading to Jakarta EE 10 and a guide to upgrade successfully and in almost no time!"
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2023/06/omnifish-jakarta-ee-10-no-release-1024x576-1.jpeg"
+image: "/images/posts/2023/06/how-to-upgrade-to-jakarta-ee-10-and-glassfish-7-its-much-easier-than-you-think/omnifish-jakarta-ee-10-no-release-1024x576-1.jpeg"
 categories:
   - "Developer Tools"
   - "Jakarta EE"

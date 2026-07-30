@@ -6,7 +6,7 @@ lastmod: "2023-07-30T07:47:48+00:00"
 description: "Part one of a two part series on Running Apache Kafka Server, Configuring Kafka Topics, and Creating a Kafka Consumer and Kafka Producer."
 authors:
   - "sumith-puri"
-image: "https://foojay.io/wp-content/uploads/2023/07/image-6-1.png"
+image: "/images/posts/2023/07/starting-apache-kafka-on-windows-10-kafka-v3-4/image-6-1.png"
 categories:
   - "Kafka"
   - "Tutorials"

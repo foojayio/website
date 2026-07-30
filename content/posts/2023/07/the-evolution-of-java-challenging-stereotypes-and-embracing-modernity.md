@@ -6,7 +6,7 @@ lastmod: "2023-07-10T04:00:31+00:00"
 description: "Dive into the modern evolution of Java, challenging stereotypes and showcasing its transformative features."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/07/19d24567-abd1-47f8-ab6d-1a8f05cd3801.jpeg"
+image: "/images/posts/2023/07/the-evolution-of-java-challenging-stereotypes-and-embracing-modernity/19d24567-abd1-47f8-ab6d-1a8f05cd3801.jpeg"
 categories:
   - "Opinion"
 tags:

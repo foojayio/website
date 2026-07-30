@@ -7,7 +7,7 @@ description: "\"It works on my machine\" is not an excuse. Sometimes we have bug
 canonical: "https://debugagent.com/cant-reproduce-a-bug"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/08/shaialmog_Woman_at_a_crossroads_with_her_back_to_the_camera_try_38986eec-685c-40b5-adb8-10e4c6b10751.jpg"
+image: "/images/posts/2023/08/cant-reproduce-a-bug/shaialmog_Woman_at_a_crossroads_with_her_back_to_the_camera_try_38986eec-685c-40b5-adb8-10e4c6b10751.jpg"
 categories:
   - "Tutorials"
 tags:

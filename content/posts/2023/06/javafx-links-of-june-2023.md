@@ -6,7 +6,7 @@ description: "Again a lot has been shared this month in the jfx-central.com #Lin
 canonical: "https://webtechie.be/post/2023-06-30-javafx-links-of-june-2023/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2023/06/javafx-links-of-june-2023/Favicon-3-2.png"
 categories:
   - "JavaFX"
 tags:

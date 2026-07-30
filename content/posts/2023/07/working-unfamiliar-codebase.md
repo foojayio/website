@@ -7,7 +7,7 @@ description: "If you want to understand a codebase better, you need more than ju
 canonical: "https://blog.frankel.ch/working-unfamiliar-codebase/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/05/compass-g781aadc6c.jpg"
+image: "/images/posts/2023/07/working-unfamiliar-codebase/compass-g781aadc6c.jpg"
 categories:
   - "Developer Tools"
   - "Tools"

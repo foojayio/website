@@ -7,7 +7,7 @@ description: "Again a busy month in JavaFX-world! Here is a nice list with links
 canonical: "https://webtechie.be/post/2023-05-30-javafx-links-of-may-2023"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/09/javafx-community.png"
+image: "/images/posts/2023/05/javafx-links-of-may-2023/javafx-community.png"
 categories:
   - "JavaFX"
 tags:

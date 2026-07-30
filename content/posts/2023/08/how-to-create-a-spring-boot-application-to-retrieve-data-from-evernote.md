@@ -6,7 +6,7 @@ lastmod: "2023-08-28T12:19:12+00:00"
 description: "In this article, I will show you how to use the Evernote API and SDK in a Spring Boot application to retrieve data from Evernote."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2023/08/blank-sticky-notes-scaled.jpg"
+image: "/images/posts/2023/08/how-to-create-a-spring-boot-application-to-retrieve-data-from-evernote/blank-sticky-notes-scaled.jpg"
 categories:
   - "Java"
   - "Spring"

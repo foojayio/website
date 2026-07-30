@@ -6,7 +6,7 @@ lastmod: "2023-09-12T03:11:11+00:00"
 description: "Because I will be in the US this month, I decided to do a little Java User Group tour again. Ivar Grimstad will join me!"
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2023/09/ivar-gerrit.png"
+image: "/images/posts/2023/09/gerrit-and-ivars-north-america-jug-tour/ivar-gerrit.png"
 categories:
   - "CRaC"
   - "Jakarta EE"

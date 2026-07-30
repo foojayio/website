@@ -7,7 +7,7 @@ description: "IntelliJ IDEA supports working with GitLab Merge Requests. See Mer
 canonical: "https://maritvandijk.com/gitlab-merge-requests/"
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2023/08/logo-1.png"
+image: "/images/posts/2023/08/working-with-gitlab-merge-requests-in-intellij-idea/logo-1.png"
 categories:
   - "GitLab"
   - "IntelliJ IDEA"

@@ -7,7 +7,7 @@ description: "Learn about all the essential features and tools needed for Reacto
 canonical: "https://blog.jetbrains.com/idea/2023/06/reactive-programming-made-easy/"
 authors:
   - "irina-mariasova"
-image: "https://foojay.io/wp-content/uploads/2023/07/image7.png"
+image: "/images/posts/2023/07/reactive-programming-made-easy/image7.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

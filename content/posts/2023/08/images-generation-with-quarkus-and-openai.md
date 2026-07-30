@@ -6,7 +6,7 @@ lastmod: "2023-08-21T07:39:49+00:00"
 description: "We explore image generation with Quarkus and OpenAI using the new REST Client Reactive to invoke the OpenAI DALL.E API."
 authors:
   - "anto_perrone"
-image: "https://foojay.io/wp-content/uploads/2023/08/pic01-1.png"
+image: "/images/posts/2023/08/images-generation-with-quarkus-and-openai/pic01-1.png"
 categories:
   - "Jakarta EE"
   - "Java"

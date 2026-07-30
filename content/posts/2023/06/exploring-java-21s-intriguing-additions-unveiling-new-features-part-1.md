@@ -6,7 +6,7 @@ lastmod: "2023-11-13T07:00:15+00:00"
 description: "Learn about a few notable features that stand out in the upcoming Java 21, in an overview of their functionalities and potential use cases."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/06/c1b005f8f2f84531abe9db67cf6b919e.png"
+image: "/images/posts/2023/06/exploring-java-21s-intriguing-additions-unveiling-new-features-part-1/c1b005f8f2f84531abe9db67cf6b919e.png"
 categories:
   - "Java Core"
   - "JDK21"

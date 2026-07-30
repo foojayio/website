@@ -7,7 +7,7 @@ description: "Unlock the secrets of debugging in software development. Dive deep
 canonical: "https://debugagent.com/the-evolution-of-bugs"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/09/shaialmog_A_tall_skyscraper_stretching_into_the_sky_but_there_a_1e39ebd0-e675-4486-b5ce-8020e78ce19e.png"
+image: "/images/posts/2023/09/the-evolution-of-bugs/shaialmog_A_tall_skyscraper_stretching_into_the_sky_but_there_a_1e39ebd0-e675-4486-b5ce-8020e78ce19e.png"
 categories:
   - "Debugging"
   - "Java Core"

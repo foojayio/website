@@ -7,7 +7,7 @@ description: "Let's take a look at contributing to Open Source Software, specifi
 canonical: "https://maritvandijk.com/contributing-to-open-source-software-creating-a-pull-request/"
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2023/07/checks-1.png"
+image: "/images/posts/2023/07/creating-an-open-source-pull-request/checks-1.png"
 categories:
   - "Developer Tools"
   - "IntelliJ IDEA"

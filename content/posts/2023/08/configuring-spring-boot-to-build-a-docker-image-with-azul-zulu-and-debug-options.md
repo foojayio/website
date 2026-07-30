@@ -7,7 +7,7 @@ description: "The Spring Boot Maven Plugin makes creating a Docker image from yo
 canonical: "https://www.azul.com/blog/configuring-spring-boot-to-build-a-docker-image-with-azul-zulu-and-debug-options/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/08/azul-zulu-springboot-docker.jpg"
+image: "/images/posts/2023/08/configuring-spring-boot-to-build-a-docker-image-with-azul-zulu-and-debug-options/azul-zulu-springboot-docker.jpg"
 categories:
   - "Spring"
   - "Tutorials"

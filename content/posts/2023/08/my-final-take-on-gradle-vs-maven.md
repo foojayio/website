@@ -7,7 +7,7 @@ description: "Software development is a fast-changing field, and much of our und
 canonical: "https://blog.frankel.ch/final-take-gradle/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/08/maven.jpg"
+image: "/images/posts/2023/08/my-final-take-on-gradle-vs-maven/maven.jpg"
 categories:
   - "Gradle"
   - "Maven"

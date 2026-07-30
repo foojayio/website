@@ -7,7 +7,7 @@ description: "Find out how the JVM handles many tasks that you, as a developer, 
 canonical: "https://www.azul.com/blog/the-anatomy-of-a-jvm/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/06/FY24-Q2-Oracle-Compete-Anatomy-of-a-JDK-hero-1.jpg"
+image: "/images/posts/2023/06/the-anatomy-of-a-jvm/FY24-Q2-Oracle-Compete-Anatomy-of-a-JDK-hero-1.jpg"
 categories:
   - "Java Core"
   - "Performance"

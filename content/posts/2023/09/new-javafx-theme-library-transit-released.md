@@ -6,7 +6,7 @@ lastmod: "2023-09-12T07:24:45+00:00"
 description: "A new Java (JavaFX) theme has been released. This is a new theme called \"Transit\" and it builds upon JMetro."
 authors:
   - "pedro-vieira"
-image: "https://foojay.io/wp-content/uploads/2023/09/Councious-ScrollPane-Transit-2.gif"
+image: "/images/posts/2023/09/new-javafx-theme-library-transit-released/Councious-ScrollPane-Transit-2.gif"
 categories:
   - "Java"
   - "JavaFX"

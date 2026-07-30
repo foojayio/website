@@ -6,7 +6,7 @@ lastmod: "2024-06-30T11:16:33+00:00"
 description: "Not just a technical manual, Simon Ritter's new book is a companion on a journey through the complexities of OpenJDK migration."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/08/dummies.png"
+image: "/images/posts/2023/08/book-review-openjdk-migration-for-dummies/dummies.png"
 categories:
   - "Book Review"
   - "Books"

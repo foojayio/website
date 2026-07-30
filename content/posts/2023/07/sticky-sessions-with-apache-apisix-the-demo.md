@@ -7,7 +7,7 @@ description: "Learn how to setup sticky sessions with Apache APISIX and replicat
 canonical: "https://blog.frankel.ch/sticky-sessions-apache-apisix/2/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/06/bubble-gum-438404-1.jpg"
+image: "/images/posts/2023/07/sticky-sessions-with-apache-apisix-the-demo/bubble-gum-438404-1.jpg"
 categories:
   - "DevOps"
   - "Hazelcast"

@@ -6,7 +6,7 @@ lastmod: "2023-06-29T06:37:51+00:00"
 description: "Standard solutions for controlling CPU isolation for low-latency Linux applications are isolcpus and cgroups/csets. Each have their downsides"
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2023/06/Screenshot-2023-06-20-at-2.12.53-PM-1024x632-1.png"
+image: "/images/posts/2023/06/how-to-optimise-cpu-performance-through-isolation-and-system-tuning/Screenshot-2023-06-20-at-2.12.53-PM-1024x632-1.png"
 categories:
   - "Chronicle Software"
   - "Performance"

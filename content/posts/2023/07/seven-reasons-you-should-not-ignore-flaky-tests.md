@@ -7,7 +7,7 @@ description: "Flaky tests might seem like a minor annoyance, but in fact they ar
 canonical: "https://gradle.com/blog/seven-reasons-you-should-not-ignore-flaky-tests/"
 authors:
   - "trisha-gee"
-image: "https://foojay.io/wp-content/uploads/2023/06/seven-reasons-flaky-tests-chart.png"
+image: "/images/posts/2023/07/seven-reasons-you-should-not-ignore-flaky-tests/seven-reasons-flaky-tests-chart.png"
 categories:
   - "Testing"
 tags:

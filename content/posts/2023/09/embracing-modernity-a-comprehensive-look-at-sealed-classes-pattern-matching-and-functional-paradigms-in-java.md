@@ -6,7 +6,7 @@ lastmod: "2023-09-11T08:42:46+00:00"
 description: "Let's examine the principles and practical applications of Sealed Classes and pattern matching in Java."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/09/sealed-classes-benefits.png"
+image: "/images/posts/2023/09/embracing-modernity-a-comprehensive-look-at-sealed-classes-pattern-matching-and-functional-paradigms-in-java/sealed-classes-benefits.png"
 categories:
   - "Java"
   - "Java Core"

@@ -6,7 +6,7 @@ lastmod: "2023-06-02T15:18:50+00:00"
 description: "There's no support for the pipe operator |> in Kotlin, so we have to come up with a custom and clean implementation for this function."
 authors:
   - "tobias-briones"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2023/06/fp-in-kotlin-defining-a-pipe-operator/Favicon-3-2.png"
 categories:
   - "Kotlin"
 tags:

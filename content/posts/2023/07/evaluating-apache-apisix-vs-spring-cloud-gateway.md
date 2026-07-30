@@ -7,7 +7,7 @@ description: "In this article, I'd like to share my understanding of Spring Clou
 canonical: "https://blog.frankel.ch/spring-cloud-gateway-apache-apisix/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/06/pexels-pixabay-67280.jpg"
+image: "/images/posts/2023/07/evaluating-apache-apisix-vs-spring-cloud-gateway/pexels-pixabay-67280.jpg"
 categories:
   - "DevOps"
   - "Opinion"

@@ -6,7 +6,7 @@ lastmod: "2023-08-02T15:45:26+00:00"
 description: "As we inch to the release of JDK 21 in September (next month!), get familiar with the features and improvements this version will bring!"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/07/e3e3ed8c-25e7-4088-b504-9f70c219eec1.jpeg"
+image: "/images/posts/2023/08/preparing-for-jdk-21-a-comprehensive-overview-of-key-features-and-enhancements/e3e3ed8c-25e7-4088-b504-9f70c219eec1.jpeg"
 categories:
   - "Java"
   - "JDK21"

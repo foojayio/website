@@ -8,7 +8,7 @@ canonical: "https://webtechie.be/post/2023-03-17-podcast-editing/"
 authors:
   - "frankdelporte"
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/06/zoom-setting-audio-track-per-person-1024x522-1.png"
+image: "/images/posts/2023/07/how-to-share-your-work-with-a-video-or-podcast/zoom-setting-audio-track-per-person-1024x522-1.png"
 categories:
   - "Developer Tools"
   - "Tutorials"

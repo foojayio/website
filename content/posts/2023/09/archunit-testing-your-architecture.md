@@ -6,7 +6,7 @@ lastmod: "2023-09-14T14:09:58+00:00"
 description: "How to test your application architecture, and make life easier for those joining the team later on."
 authors:
   - "simon-verhoeven"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2023/09/archunit-testing-your-architecture/Favicon-3-2.png"
 categories:
   - "Java"
   - "Testing"

@@ -6,7 +6,7 @@ lastmod: "2023-09-18T12:24:50+00:00"
 description: "OpenRewrite is a powerful tool for automatic code refactoring and maintenance, utilizing customizable recipes to streamline your coding process."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2023/09/OpenRewrite.gif"
+image: "/images/posts/2023/09/openrewrite-automatic-code-refactoring-and-maintenance/OpenRewrite.gif"
 categories:
   - "Java"
   - "OpenRewrite"

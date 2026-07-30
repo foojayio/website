@@ -6,7 +6,7 @@ lastmod: "2023-07-13T10:35:34+00:00"
 description: "Eureka: service discovery to help services interact with one another without hardwiring in instance-specific or environment-dependent details."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2023/07/unsplash-person-high-bridge-scaled.jpeg"
+image: "/images/posts/2023/07/journeys-in-java-level-10-service-discovery-with-eureka/unsplash-person-high-bridge-scaled.jpeg"
 categories:
   - "Databases"
   - "Graph"

@@ -6,7 +6,7 @@ lastmod: "2023-08-21T07:53:10+00:00"
 description: "Learn how you can simplify your application testing and local development workflow using Testcontainers Desktop app."
 authors:
   - "siva-katamreddy"
-image: "https://foojay.io/wp-content/uploads/2023/08/tcd-switch-runtimes-700x259-1.png"
+image: "/images/posts/2023/08/testing-and-local-development-made-simpler-with-testcontainers-desktop-app/tcd-switch-runtimes-700x259-1.png"
 categories:
   - "Testcontainers"
   - "Testing"

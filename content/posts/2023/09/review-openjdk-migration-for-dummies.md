@@ -6,7 +6,7 @@ lastmod: "2024-06-30T11:19:47+00:00"
 description: "Have you been thinking of moving away from the Oracle JDK to OpenJDK? The book \"OpenJDK Migration for Dummies\", written by Simon Ritter of Azul, provides - by Josh Juneau"
 authors:
   - "josh-juneau"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2023/09/review-openjdk-migration-for-dummies/Favicon-3-2.png"
 categories:
   - "Book Review"
   - "Books"

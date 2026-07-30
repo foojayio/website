@@ -7,7 +7,7 @@ description: "In Rust, Tower is designed around Functional Programming and two m
 canonical: "https://blog.frankel.ch/introduction-tower/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/08/pexels-marius-ispas-3994380.jpg"
+image: "/images/posts/2023/08/introduction-tower/pexels-marius-ispas-3994380.jpg"
 categories:
   - "Tutorials"
 tags:

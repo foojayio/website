@@ -7,7 +7,7 @@ description: "An easy non-obtrusive way to collect data about your dockerized ap
 canonical: "https://digma.ai/blog/observing-java-application-running-via-docker-compose-using-opentelemetry/"
 authors:
   - "roni-dover"
-image: "https://foojay.io/wp-content/uploads/2023/08/doppleware_someone_watching_a_shipping_container_using_a_telesc_96929aa6-ccc4-478c-bffe-df76d290173e-1-1024x512-1.png"
+image: "/images/posts/2023/08/observing-java-applications-running-via-docker-compose-using-opentelemetry/doppleware_someone_watching_a_shipping_container_using_a_telesc_96929aa6-ccc4-478c-bffe-df76d290173e-1-1024x512-1.png"
 categories:
   - "Observability"
 tags:

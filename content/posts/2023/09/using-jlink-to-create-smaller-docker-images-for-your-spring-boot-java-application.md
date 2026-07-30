@@ -7,7 +7,7 @@ description: "An in-depth exploration of utilizing JLink to optimize Docker imag
 canonical: "https://snyk.io/blog/jlink-create-docker-images-spring-boot-java/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/11/snyk-logo.png"
+image: "/images/posts/2023/09/using-jlink-to-create-smaller-docker-images-for-your-spring-boot-java-application/snyk-logo.png"
 categories:
   - "Java"
   - "Security"

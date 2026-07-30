@@ -6,7 +6,7 @@ lastmod: "2023-06-29T06:46:52+00:00"
 description: "Sometimes time spent reinventing the wheel results in a revolutionary new rolling device. But sometimes not!"
 authors:
   - "rob-austin"
-image: "https://foojay.io/wp-content/uploads/2023/06/Screenshot-2023-06-12-at-5.05.20-PM-1024x705-1.png"
+image: "/images/posts/2023/06/building-custom-solutions-vs-buy-and-build-software/Screenshot-2023-06-12-at-5.05.20-PM-1024x705-1.png"
 categories:
   - "Chronicle Software"
   - "Developer Tools"

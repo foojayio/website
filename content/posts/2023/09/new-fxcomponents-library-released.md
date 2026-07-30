@@ -6,7 +6,7 @@ lastmod: "2023-09-22T10:15:44+00:00"
 description: "A new library for Java / JavaFX has just been released. The library’s name is FXComponents and it is a Java library that contains a collection of new controls to be used in JavaFX applications."
 authors:
   - "pedro-vieira"
-image: "https://foojay.io/wp-content/uploads/2023/09/List-Builder.gif"
+image: "/images/posts/2023/09/new-fxcomponents-library-released/List-Builder.gif"
 categories:
   - "Java"
   - "JavaFX"

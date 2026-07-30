@@ -6,7 +6,7 @@ lastmod: "2023-06-29T06:40:30+00:00"
 description: "Generate a highly efficient approach to generating an 8-byte lightweight identifier that is unique across many hosts."
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2023/06/Screenshot-2023-06-06-at-1.19.51-PM-1024x268-1.png"
+image: "/images/posts/2023/06/unique-identifiers-based-on-timestamps-in-distributed-applications/Screenshot-2023-06-06-at-1.19.51-PM-1024x268-1.png"
 categories:
   - "Chronicle Software"
   - "Java Core"

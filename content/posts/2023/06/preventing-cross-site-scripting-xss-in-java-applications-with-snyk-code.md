@@ -7,7 +7,7 @@ description: "By taking a proactive approach to XSS prevention and using the rig
 canonical: "https://snyk.io/blog/preventing-xss-snyk-code/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2023/06/snykvulnxxcode-1.png"
+image: "/images/posts/2023/06/preventing-cross-site-scripting-xss-in-java-applications-with-snyk-code/snykvulnxxcode-1.png"
 categories:
   - "Security"
   - "Snyk"

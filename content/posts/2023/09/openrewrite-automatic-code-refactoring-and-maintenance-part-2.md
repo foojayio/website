@@ -6,7 +6,7 @@ lastmod: "2023-09-14T06:56:37+00:00"
 description: "Discover OpenRewrite Library, the ultimate solution for code refactoring and maintenance. Optimize your code with ease and efficiency."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2023/09/OpenRewrite.gif"
+image: "/images/posts/2023/09/openrewrite-automatic-code-refactoring-and-maintenance-part-2/OpenRewrite.gif"
 categories:
   - "Java"
   - "OpenRewrite"

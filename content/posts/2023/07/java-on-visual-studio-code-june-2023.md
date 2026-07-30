@@ -6,7 +6,7 @@ lastmod: "2023-07-10T12:46:06+00:00"
 description: "Hi everyone, welcome to the our June update for Visual Studio Code for Java!"
 authors:
   - "nick-zhu"
-image: "https://foojay.io/wp-content/uploads/2023/07/settings.png"
+image: "/images/posts/2023/07/java-on-visual-studio-code-june-2023/settings.png"
 categories:
   - "Developer Tools"
   - "Tools"

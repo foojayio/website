@@ -7,7 +7,7 @@ description: "What are the pitfalls in replacing OracleJDK with OpenJDK? Simon R
 canonical: "https://debugagent.com/is-openjdk-just-a-drop-in-replacement"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/08/shaialmog_A_lego_piece_dropping_into_place_27e61d76-d8a0-443d-9978-d0c37de2f5db.jpg"
+image: "/images/posts/2023/08/is-openjdk-just-a-drop-in-replacement/shaialmog_A_lego_piece_dropping_into_place_27e61d76-d8a0-443d-9978-d0c37de2f5db.jpg"
 categories:
   - "Book Review"
   - "Books"

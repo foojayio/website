@@ -6,7 +6,7 @@ lastmod: "2023-08-17T14:07:06+00:00"
 description: "Erik Österlund summed up the problems with my previous JEP proposal quite nicely, and here are my responses!"
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2023/08/taming-the-bias-unbiased-safepoint-based-stack-walking/Favicon-3-2.png"
 categories:
   - "Java"
   - "Java Core"

@@ -6,7 +6,7 @@ lastmod: "2023-06-03T08:56:56+00:00"
 description: "Understanding class loader hierarchies is essential when developing instrumenting Java agents. So I wrote an article about it."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/06/classloaderhierarchies.png"
+image: "/images/posts/2023/06/class-loader-hierarchies/classloaderhierarchies.png"
 categories:
   - "Java Core"
 tags:

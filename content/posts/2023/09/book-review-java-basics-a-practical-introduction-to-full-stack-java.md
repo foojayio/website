@@ -6,7 +6,7 @@ lastmod: "2023-09-16T08:50:17+00:00"
 description: "Shai Almog's \"Java Basics\" more than lives up to its title. And how could it be otherwise, with its highly Java driven and opinionated author"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2023/09/B0CCCJ38WH.01._SCLZZZZZZZ_SX500_.jpg"
+image: "/images/posts/2023/09/book-review-java-basics-a-practical-introduction-to-full-stack-java/B0CCCJ38WH.01._SCLZZZZZZZ_SX500_.jpg"
 categories:
   - "Book Review"
   - "Books"

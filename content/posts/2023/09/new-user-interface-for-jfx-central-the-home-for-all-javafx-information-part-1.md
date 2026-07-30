@@ -7,7 +7,7 @@ description: "JFX Central is the place to be for all JavaFX info. The website is
 canonical: "https://webtechie.be/post/2023-09-07-jfxcentral-new-user-interface/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/09/homepage-intro-1024x769-1.png"
+image: "/images/posts/2023/09/new-user-interface-for-jfx-central-the-home-for-all-javafx-information-part-1/homepage-intro-1024x769-1.png"
 categories:
   - "JavaFX"
 tags:

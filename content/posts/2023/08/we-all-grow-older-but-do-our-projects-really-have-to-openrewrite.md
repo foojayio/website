@@ -6,7 +6,7 @@ lastmod: "2023-08-08T10:32:46+00:00"
 description: "An introduction to how OpenRewrite can help you modernize your application, refactor it, perform migrations, and more!"
 authors:
   - "simon-verhoeven"
-image: "https://foojay.io/wp-content/uploads/2023/08/openrewrite.png"
+image: "/images/posts/2023/08/we-all-grow-older-but-do-our-projects-really-have-to-openrewrite/openrewrite.png"
 categories:
   - "Developer Tools"
   - "OpenRewrite"

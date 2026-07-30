@@ -7,7 +7,7 @@ description: "Delve into a two-pronged strategy that streamlines debugging, enab
 canonical: "https://debugagent.com/eliminating-bugs-using-the-tong-motion-approach"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/09/shaialmog_A_pair_of_metal_tongs_in_motion_capturing_the_intrica_184316ea-7c79-4104-9604-c3659517b6bc.jpg"
+image: "/images/posts/2023/09/eliminating-bugs-using-the-tong-motion-approach/shaialmog_A_pair_of_metal_tongs_in_motion_capturing_the_intrica_184316ea-7c79-4104-9604-c3659517b6bc.jpg"
 categories:
   - "Tutorials"
 tags:

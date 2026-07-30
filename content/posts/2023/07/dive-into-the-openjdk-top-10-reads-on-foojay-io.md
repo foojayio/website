@@ -6,7 +6,7 @@ lastmod: "2023-07-19T07:45:05+00:00"
 description: "Foojay.io is a community platform dedicated to the needs of developers who use the OpenJDK and related technologies."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/07/9e77b5a4-f3dc-46ae-a3d3-a318471f9b96.jpeg"
+image: "/images/posts/2023/07/dive-into-the-openjdk-top-10-reads-on-foojay-io/9e77b5a4-f3dc-46ae-a3d3-a318471f9b96.jpeg"
 categories:
   - "Java Core"
   - "Tutorials"

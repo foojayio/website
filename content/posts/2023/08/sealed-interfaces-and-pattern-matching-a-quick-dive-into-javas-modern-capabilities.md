@@ -6,7 +6,7 @@ lastmod: "2023-08-09T07:08:11+00:00"
 description: "Sealed classes and interfaces with pattern matching provide powerful new tools for more explicit, controlled, and flexible design in Java."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/07/55a4556f-11e5-4259-8d35-760a02911362.jpeg"
+image: "/images/posts/2023/08/sealed-interfaces-and-pattern-matching-a-quick-dive-into-javas-modern-capabilities/55a4556f-11e5-4259-8d35-760a02911362.jpeg"
 categories:
   - "Java Core"
   - "Tutorials"

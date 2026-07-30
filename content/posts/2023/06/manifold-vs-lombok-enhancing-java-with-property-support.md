@@ -7,7 +7,7 @@ description: "Two decades ago we worked on properties in Java. Lombok filled in 
 canonical: "https://debugagent.com/manifold-vs-lombok-enhancing-java-with-property-support"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/06/thumbnail-23.jpg"
+image: "/images/posts/2023/06/manifold-vs-lombok-enhancing-java-with-property-support/thumbnail-23.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

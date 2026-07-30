@@ -6,7 +6,7 @@ lastmod: "2023-09-20T07:28:45+00:00"
 description: "This article debunks the commonly held belief that stack size influences the number of native threads that can be created in a JVM environment."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/09/ajda-atz-Dz4iJ3v4-X4-unsplash-scaled.jpg"
+image: "/images/posts/2023/09/exploring-the-impact-of-stack-size-on-jvm-thread-creation-a-myth-debunked/ajda-atz-Dz4iJ3v4-X4-unsplash-scaled.jpg"
 categories:
   - "Java"
 tags:

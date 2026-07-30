@@ -7,7 +7,7 @@ description: "Let's check the parameters of the _M.access(conf, ctx) function in
 canonical: "https://blog.frankel.ch/rabbit-hole-apisix-plugin/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/09/falling-5472195.jpg"
+image: "/images/posts/2023/09/down-the-rabbit-hole-of-an-apache-apisix-plugin/falling-5472195.jpg"
 categories:
   - "DevOps"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2024-06-30T11:20:15+00:00"
 description: "Good job of establishing the motivation for using OpenJDK and providing actionable steps for how to pursue that migration."
 authors:
   - "tom-wheeler"
-image: "https://foojay.io/wp-content/uploads/2023/08/image-764x1024-dummies.png"
+image: "/images/posts/2023/08/well-worth-my-time-openjdk-migration-for-dummies/image-764x1024-dummies.png"
 categories:
   - "Book Review"
   - "Books"

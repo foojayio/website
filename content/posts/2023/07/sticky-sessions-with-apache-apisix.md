@@ -7,7 +7,7 @@ description: "Learn about sticky sessions, that you should always use session re
 canonical: "https://blog.frankel.ch/sticky-sessions-apache-apisix/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/06/bubble-gum-438404.jpg"
+image: "/images/posts/2023/07/sticky-sessions-with-apache-apisix/bubble-gum-438404.jpg"
 categories:
   - "DevOps"
 tags:

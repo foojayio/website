@@ -8,7 +8,7 @@ authors:
   - "frankdelporte"
   - "mohamed-taman"
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2023/09/episode-28-guests.png"
+image: "/images/posts/2023/09/foojay-podcast-28/episode-28-guests.png"
 categories:
   - "Java"
   - "Java Core"

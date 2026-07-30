@@ -7,7 +7,7 @@ description: "Applications fail, that's inevitable. Testing, QA, CI and defensiv
 canonical: "https://debugagent.com/building-for-failure-best-practices-for-easy-production-debugging"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/07/Building-for-Failure-Best-Practices-for-Easy-Production-Debugging.jpg"
+image: "/images/posts/2023/07/building-for-failure-best-practices-for-easy-production-debugging/Building-for-Failure-Best-Practices-for-Easy-Production-Debugging.jpg"
 categories:
   - "Developer Tools"
   - "Java Core"

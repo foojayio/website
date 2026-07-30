@@ -6,7 +6,7 @@ lastmod: "2023-07-06T12:50:22+00:00"
 description: "What are the common vulnerabilities we need to be aware of? How do they look & how can we better protect ourselves from these common attacks?"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/06/Shai_Almog_hacker_with_his_back_to_the_camera_wide_angle_shot_7c4fd868-3eca-43d3-b98e-76bff1a07b49.jpg"
+image: "/images/posts/2023/07/understanding-security-vulnerabilities-a-first-step-in-preventing-attacks/Shai_Almog_hacker_with_his_back_to_the_camera_wide_angle_shot_7c4fd868-3eca-43d3-b98e-76bff1a07b49.jpg"
 categories:
   - "Security"
   - "Tutorials"

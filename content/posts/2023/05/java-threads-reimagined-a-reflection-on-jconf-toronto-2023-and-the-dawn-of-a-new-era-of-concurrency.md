@@ -6,7 +6,7 @@ lastmod: "2023-05-23T17:02:36+00:00"
 description: "Experience the intersection of expertise, innovation, and camaraderie at JConf Toronto 2023, a unique platform."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/05/PXL_20230503_132727732-scaled.jpg"
+image: "/images/posts/2023/05/java-threads-reimagined-a-reflection-on-jconf-toronto-2023-and-the-dawn-of-a-new-era-of-concurrency/PXL_20230503_132727732-scaled.jpg"
 categories:
   - "Events"
   - "Trip Reports"

@@ -6,7 +6,7 @@ lastmod: "2023-07-05T16:21:31+00:00"
 description: "Explore the first part of our in-depth interview with Jakob Jenkov, an experienced Java developer and AWS solution architect, as he shares his insights on the past, present, and future of Java."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/06/jekov.jpeg"
+image: "/images/posts/2023/07/exploring-the-depths-of-java-a-comprehensive-conversation-with-jakob-jenkov-part-ii/jekov.jpeg"
 categories:
   - "Interviews"
 tags:

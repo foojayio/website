@@ -6,7 +6,7 @@ lastmod: "2023-05-23T20:26:51+00:00"
 description: "Uncover the dynamics of software development and product management in our discussion with Erik, Senior Director at Azul. Learn about his transition from engineering to product management, key industry challenges, and the importance of application security in today's tech-driven world."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/05/erik.jpeg"
+image: "/images/posts/2023/05/decoding-success-an-industry-experts-guide-to-thriving-in-software-development-and-security/erik.jpeg"
 categories:
   - "Interviews"
 tags:

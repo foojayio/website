@@ -6,7 +6,7 @@ lastmod: "2023-09-25T08:39:43+00:00"
 description: "Chronicle Services presents an opinionated view of several of the specialised libraries we have developed to support low-latency applications."
 authors:
   - "george-ball"
-image: "https://foojay.io/wp-content/uploads/2023/09/Screenshot-2023-09-08-at-3.15.36-PM.png"
+image: "/images/posts/2023/09/chronicle-services-building-fast-microservices-with-java/Screenshot-2023-09-08-at-3.15.36-PM.png"
 categories:
   - "Chronicle Software"
   - "Performance"

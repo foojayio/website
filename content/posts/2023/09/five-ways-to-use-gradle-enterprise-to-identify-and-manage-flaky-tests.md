@@ -7,7 +7,7 @@ description: "Dealing with flaky tests is a challenge. These unpredictable and i
 canonical: "https://gradle.com/blog/5-ways-to-use-gradle-enterprise-to-identify-and-manage-flaky-tests/"
 authors:
   - "trisha-gee"
-image: "https://foojay.io/wp-content/uploads/2023/08/5-ways-flaky-test-header.png"
+image: "/images/posts/2023/09/five-ways-to-use-gradle-enterprise-to-identify-and-manage-flaky-tests/5-ways-flaky-test-header.png"
 categories:
   - "Developer Tools"
   - "Gradle"

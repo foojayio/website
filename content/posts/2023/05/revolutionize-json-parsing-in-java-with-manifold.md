@@ -7,7 +7,7 @@ description: "Parsing JSON in Java (and other formats) can be as easy as in JS. 
 canonical: "https://debugagent.com/revolutionize-json-parsing-in-java-with-manifold"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/05/thumbnail-18.png"
+image: "/images/posts/2023/05/revolutionize-json-parsing-in-java-with-manifold/thumbnail-18.png"
 categories:
   - "Developer Tools"
   - "Tutorials"
@@ -245,7 +245,7 @@ User.builder("Name", "/cdn-cgi/l/email-protection")
 
 That is just the start... The schema includes a date. Dates are a painful prospect in JSON, the standardization is poor and fraught with issues. The schema also includes a gender field which is effectively an enum. This is all converted to type-safe semantics using common Java classes such as LocalDate:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">User u = User.builder("Name", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="51343c30383d11353e3c30383f7f323e3c">[email&nbsp;protected]</a>")
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">User u = User.builder("Name", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c2a7afa3abae82a6adafa3abaceca1adaf">[email&nbsp;protected]</a>")
        .withDate_of_birth(LocalDate.of(1999, 10, 11))
        .withGender(User.Gender.male)
        .build();</pre>

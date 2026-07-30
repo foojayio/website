@@ -6,7 +6,7 @@ lastmod: "2023-07-04T13:56:42+00:00"
 description: "Batching for PostgreSQL JDBC is a property of the extended protocol. It uniquely allows you to send multiple statements in a single request."
 authors:
   - "frits-hoogland"
-image: "https://foojay.io/wp-content/uploads/2023/07/forjdbcfrits.png"
+image: "/images/posts/2023/07/a-dissection-of-java-jdbc-to-postgresql-connections-part-2-batching/forjdbcfrits.png"
 categories:
   - "Databases"
   - "Performance"

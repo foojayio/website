@@ -6,7 +6,7 @@ lastmod: "2023-08-07T09:40:48+00:00"
 description: "Learn how to configure Kafka topics and create a Java-based Kafka Consumer and Producer, withApache Kafka v3.4 on Windows 10."
 authors:
   - "sumith-puri"
-image: "https://foojay.io/wp-content/uploads/2023/07/techila_shots_kafka_java_001.png"
+image: "/images/posts/2023/08/starting-apache-kafka-java-producer-consumer-windows-10/techila_shots_kafka_java_001.png"
 categories:
   - "Kafka"
   - "Tutorials"

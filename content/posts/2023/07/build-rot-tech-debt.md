@@ -7,7 +7,7 @@ description: "Explore the impact of Build Rot on build speed and test times, off
 canonical: "https://gradle.com/blog/build-rot-the-hidden-technical-debt-in-maven-and-gradle-builds/"
 authors:
   - "brian-demers"
-image: "https://foojay.io/wp-content/uploads/2023/07/build-rot-social.jpeg"
+image: "/images/posts/2023/07/build-rot-tech-debt/build-rot-social.jpeg"
 categories:
   - "Developer Tools"
   - "Gradle"

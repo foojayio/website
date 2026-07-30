@@ -6,7 +6,7 @@ lastmod: "2023-08-10T09:44:03+00:00"
 description: "This article is the first of two articles covering the draft of a new iterator-based stack walking API, which builds the base for the follow-up article on safepoint-based profiling."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/08/asgct_asgst-2000x1125-1.png"
+image: "/images/posts/2023/08/asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch/asgct_asgst-2000x1125-1.png"
 categories:
   - "Java"
   - "Java Core"

@@ -6,7 +6,7 @@ lastmod: "2023-07-12T06:54:59+00:00"
 description: "Let's explore libraries and framework used to write an office suite in Java."
 authors:
   - "anthony-goubard"
-image: "https://foojay.io/wp-content/uploads/2023/07/dark-mode.png"
+image: "/images/posts/2023/07/dissection-of-joeffice-open-source-office-suite-in-java/dark-mode.png"
 categories:
   - "Developer Tools"
   - "NetBeans"

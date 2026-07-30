@@ -7,7 +7,7 @@ description: "Did you know that CRaC on embedded / Raspberry Pi is definitely po
 canonical: "https://webtechie.be/post/2023-06-15-crac-on-raspberry-pi/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/06/azul-download.png"
+image: "/images/posts/2023/07/running-a-crac-java-application-on-raspberry-pi/azul-download.png"
 categories:
   - "CRaC"
   - "Raspberry Pi"
@@ -299,7 +299,7 @@ Fix 2: Replace Zulu with a Dev Version {#h2-9-fix-2-replace-zulu-with-a-dev-vers
 
 As it turns out, the current Zulu version 17.0.7 with CRaC doesn't support this Linux kernel. Luckily, Sergey could provide me a dev-version of Zulu with changes that will be part of the next release in July. First, I needed to upload them to my Raspberry Pi.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% scp zulu17.42.21-dev-20230613095837-jdk17.0.7-linux-aarch64.tar.gz <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b6d5c4d7d5f6878184988780988798878283">[email&nbsp;protected]</a>:/home/crac/</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% scp zulu17.42.21-dev-20230613095837-jdk17.0.7-linux-aarch64.tar.gz <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e5d4c5f5d7e0f090c100f08100f100f0a0b">[email&nbsp;protected]</a>:/home/crac/</pre>
 
 And then installed in the `/opt/` directory as described above.
 

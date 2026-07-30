@@ -6,7 +6,7 @@ lastmod: "2023-07-19T08:25:24+00:00"
 description: "Guess what? One of my hobbies is regularly searching the JDK for new Java classes with executable main methods."
 authors:
   - "thomas-darimont"
-image: "https://foojay.io/wp-content/uploads/2023/07/mainmethod.png"
+image: "/images/posts/2023/07/jdk-safari-how-to-find-hidden-tools-in-the-jdk/mainmethod.png"
 categories:
   - "Java Core"
 tags:

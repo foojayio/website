@@ -7,7 +7,7 @@ description: "Flaky tests pose substantial challenges. What do you do with flaky
 canonical: "https://gradle.com/blog/3-key-elements-to-incorporate-into-your-flaky-test-remediation-approach/"
 authors:
   - "trisha-gee"
-image: "https://foojay.io/wp-content/uploads/2023/08/blog-3ways_bodyImage.jpg"
+image: "/images/posts/2023/08/three-key-elements-to-incorporate-into-your-flaky-test-remediation-approach/blog-3ways_bodyImage.jpg"
 categories:
   - "Testing"
 tags:

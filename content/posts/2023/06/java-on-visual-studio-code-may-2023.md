@@ -6,7 +6,7 @@ lastmod: "2023-06-13T11:03:10+00:00"
 description: "Tons of new features covering performance improvement, user experience as well as Spring Boot integration."
 authors:
   - "nick-zhu"
-image: "https://foojay.io/wp-content/uploads/2023/06/projectexplorer.gif"
+image: "/images/posts/2023/06/java-on-visual-studio-code-may-2023/projectexplorer.gif"
 categories:
   - "Developer Tools"
   - "Tools"

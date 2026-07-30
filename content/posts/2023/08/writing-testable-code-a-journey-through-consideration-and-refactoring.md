@@ -6,7 +6,7 @@ lastmod: "2023-08-30T06:47:48+00:00"
 description: "By considering real-world examples and learning from the process of refactoring and testing, we can create robust and maintainable code!"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/06/chemical-scientist-test-chemistry-chemist-student.jpg"
+image: "/images/posts/2023/08/writing-testable-code-a-journey-through-consideration-and-refactoring/chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Testing"
 tags:

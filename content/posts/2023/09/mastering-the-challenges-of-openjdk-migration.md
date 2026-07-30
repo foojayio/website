@@ -6,7 +6,7 @@ lastmod: "2024-03-15T14:05:34+00:00"
 description: "If you're in a Java-centric role and need to confront the ever-evolving JDK landscape, Simon Ritter's book is the lighthouse guiding you safely to shore."
 authors:
   - "mark-clarke"
-image: "https://foojay.io/wp-content/uploads/2023/08/image-764x1024-dummies.png"
+image: "/images/posts/2023/09/mastering-the-challenges-of-openjdk-migration/image-764x1024-dummies.png"
 categories:
   - "Book Review"
   - "Books"

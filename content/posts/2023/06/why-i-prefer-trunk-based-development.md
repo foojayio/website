@@ -7,7 +7,7 @@ description: "Trisha summarizes the advantages of trunk-based development (as op
 canonical: "https://trishagee.com/2023/05/29/why-i-prefer-trunk-based-development/"
 authors:
   - "trisha-gee"
-image: "https://foojay.io/wp-content/uploads/2023/06/tree.jpg"
+image: "/images/posts/2023/06/why-i-prefer-trunk-based-development/tree.jpg"
 categories:
   - "Agile"
   - "Opinion"
@@ -18,14 +18,6 @@ related_posts:
   - "7-ways-to-improve-your-code-reading-skills"
 frozen: false
 ---
-
-### Author (1)
-
-![](https://secure.gravatar.com/avatar/d81ec5234b6f81801771d566349950891a2627c210328bd49a5a7539cc0a3b17?s=80&d=mm&r=g)  
-[#### Trisha Gee](https://foojay.io/today/author/trisha-gee/)
-
-* [](https://x.com/trisha_gee)
-* [](https://mastodon.social/@trishagee)
 
 **Trisha summarizes the advantages of trunk-based development (as opposed to branch-based development) in this article.**
 

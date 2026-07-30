@@ -7,7 +7,7 @@ description: "Join the biggest graph community gathering dedicated to learning h
 authors:
   - "jennifer-reif"
   - "yolande-poirier"
-image: "https://foojay.io/wp-content/uploads/2023/06/05.03_Nodes_Banner_1200x628-1.png"
+image: "/images/posts/2023/06/neo4js-online-conference-is-coming-in-october-and-youre-invited/05.03_Nodes_Banner_1200x628-1.png"
 categories:
   - "Conference"
   - "Databases"

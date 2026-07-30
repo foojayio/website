@@ -8,7 +8,7 @@ canonical: "https://blog.payara.fish/getting-started-with-apache-camel-on-jakart
 authors:
   - "jadon-ortlepp"
   - "luqman-saeed"
-image: "https://foojay.io/wp-content/uploads/2023/07/camelcase.png"
+image: "/images/posts/2023/07/getting-started-with-apache-camel-on-jakarta-ee-10/camelcase.png"
 categories:
   - "Developer Tools"
   - "Jakarta EE"

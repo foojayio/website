@@ -7,7 +7,7 @@ description: "Let's browse through the surface of the main three reactive databa
 canonical: "https://blog.frankel.ch/reactive-database-access/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/07/superhero-534120.jpg"
+image: "/images/posts/2023/07/reactive-database-access-on-the-jvm/superhero-534120.jpg"
 categories:
   - "Databases"
   - "Kotlin"

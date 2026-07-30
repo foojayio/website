@@ -6,7 +6,7 @@ lastmod: "2024-06-30T11:18:26+00:00"
 description: "Is \"OpenJDK Migration for Dummies\" worth reading? I'd say so!"
 authors:
   - "simon-verhoeven"
-image: "https://foojay.io/wp-content/uploads/2023/08/image-764x1024-dummies.png"
+image: "/images/posts/2023/09/book-review-openjdk-migration-for-dummies-2/image-764x1024-dummies.png"
 categories:
   - "Book Review"
   - "Books"

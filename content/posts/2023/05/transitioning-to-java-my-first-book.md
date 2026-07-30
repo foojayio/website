@@ -6,7 +6,7 @@ lastmod: "2023-05-24T08:01:59+00:00"
 description: "I like to describe this book as a beginner's book for experts. Anyone who needs to get up to speed quickly using Java is my primary audience."
 authors:
   - "kfogel"
-image: "https://foojay.io/wp-content/uploads/2023/05/BookCover.jpg"
+image: "/images/posts/2023/05/transitioning-to-java-my-first-book/BookCover.jpg"
 categories:
   - "Book Announcement"
   - "Books"

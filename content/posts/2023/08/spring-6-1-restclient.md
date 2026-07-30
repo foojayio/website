@@ -6,7 +6,7 @@ lastmod: "2023-08-31T17:46:29+00:00"
 description: "Getting started making use of the new RestClient introduced in Spring 6.1!"
 authors:
   - "simon-verhoeven"
-image: "https://foojay.io/wp-content/uploads/2021/09/1024px-Spring_Framework_Logo_2018.svg.png"
+image: "/images/posts/2023/08/spring-6-1-restclient/1024px-Spring_Framework_Logo_2018.svg.png"
 categories:
   - "Spring"
 tags:

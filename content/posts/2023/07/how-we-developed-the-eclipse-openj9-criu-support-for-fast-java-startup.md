@@ -6,7 +6,7 @@ lastmod: "2023-07-20T15:01:07+00:00"
 description: "Java startup is a hot topic. Learn how we made Eclipse OpenJ9 start in milliseconds in the Cloud."
 authors:
   - "younes-manton"
-image: "https://foojay.io/wp-content/uploads/2023/07/open-liberty-restore-perf-ga.png"
+image: "/images/posts/2023/07/how-we-developed-the-eclipse-openj9-criu-support-for-fast-java-startup/open-liberty-restore-perf-ga.png"
 categories:
   - "Cloud"
   - "Microservices"

@@ -6,7 +6,7 @@ lastmod: "2023-09-23T12:00:33+00:00"
 description: "A hands on guide to creating clean web applications with code examples in Java to elevate your coding skills with this essential guide!"
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2023/09/GetYourHandsDirtyOnCleanArchitecture-1.jpg"
+image: "/images/posts/2023/09/book-review-get-your-hands-dirty-on-clean-architecture/GetYourHandsDirtyOnCleanArchitecture-1.jpg"
 categories:
   - "Book Review"
   - "Books"

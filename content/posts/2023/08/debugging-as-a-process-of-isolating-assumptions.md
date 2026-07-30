@@ -6,7 +6,7 @@ lastmod: "2023-08-23T08:16:23+00:00"
 description: "When looking at a vast project, how do we know the direction to narrow assumptions during debugging? When should we backtrack and rethink?"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/08/shaialmog_A_person_looking_at_a_vast_expanse_of_forest_from_abo_38ba9288-a778-4573-8c1c-adf23fd767ba.jpg"
+image: "/images/posts/2023/08/debugging-as-a-process-of-isolating-assumptions/shaialmog_A_person_looking_at_a_vast_expanse_of_forest_from_abo_38ba9288-a778-4573-8c1c-adf23fd767ba.jpg"
 categories:
   - "Tutorials"
 tags:

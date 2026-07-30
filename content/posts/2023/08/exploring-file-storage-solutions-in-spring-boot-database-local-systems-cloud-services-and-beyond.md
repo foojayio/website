@@ -6,7 +6,7 @@ lastmod: "2023-08-23T08:13:32+00:00"
 description: "In this article, we will cover how to store files in a database using Spring Boot and discuss some alternatives."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/08/cd03deb1-489d-4867-9b5b-2ffde99a3e20.jpeg"
+image: "/images/posts/2023/08/exploring-file-storage-solutions-in-spring-boot-database-local-systems-cloud-services-and-beyond/cd03deb1-489d-4867-9b5b-2ffde99a3e20.jpeg"
 categories:
   - "Spring"
   - "Tutorials"

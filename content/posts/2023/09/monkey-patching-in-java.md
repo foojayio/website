@@ -6,7 +6,7 @@ lastmod: "2023-09-21T07:34:24+00:00"
 description: "Monkey patching is a technique used to dynamically update the behavior of a piece of code at run-time."
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/09/Decorator_UML_class_diagram.png"
+image: "/images/posts/2023/09/monkey-patching-in-java/Decorator_UML_class_diagram.png"
 categories:
   - "Java"
   - "Tutorials"

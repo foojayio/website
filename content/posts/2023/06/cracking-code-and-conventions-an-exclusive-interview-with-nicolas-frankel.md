@@ -6,7 +6,7 @@ lastmod: "2023-06-06T20:08:26+00:00"
 description: "Join us as we explore Nicolas Fränkel's journey in software development, industry challenges, and the potential role of AI in the future of coding."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/06/nicols.jpeg"
+image: "/images/posts/2023/06/cracking-code-and-conventions-an-exclusive-interview-with-nicolas-frankel/nicols.jpeg"
 categories:
   - "Interviews"
 tags:

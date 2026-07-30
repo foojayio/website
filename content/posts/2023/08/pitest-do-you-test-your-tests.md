@@ -6,7 +6,7 @@ lastmod: "2023-08-15T14:53:37+00:00"
 description: "A brief introduction with code to mutation testing using Pitest. Now you too can get started testing your tests!"
 authors:
   - "simon-verhoeven"
-image: "https://foojay.io/wp-content/uploads/2023/08/report5-1024x601-1.png"
+image: "/images/posts/2023/08/pitest-do-you-test-your-tests/report5-1024x601-1.png"
 categories:
   - "Testing"
   - "Tutorials"

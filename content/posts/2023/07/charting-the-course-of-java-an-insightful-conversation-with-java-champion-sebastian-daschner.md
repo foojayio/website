@@ -6,7 +6,7 @@ lastmod: "2023-07-12T06:55:27+00:00"
 description: "Explore the world of Java with Champion Sebastian Daschner, discussing his journey, future trends in Java, and tips for developer growth."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/07/Sebastian-Daschner.png"
+image: "/images/posts/2023/07/charting-the-course-of-java-an-insightful-conversation-with-java-champion-sebastian-daschner/Sebastian-Daschner.png"
 categories:
   - "Interviews"
 tags:

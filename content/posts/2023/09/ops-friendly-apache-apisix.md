@@ -6,7 +6,7 @@ lastmod: "2023-09-06T06:27:43+00:00"
 description: "When configuring Apache APISIX, we should ensure it's as operable as possible. In this post, I've described several ways to make it so."
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/01/apache-apisix.jpeg"
+image: "/images/posts/2023/09/ops-friendly-apache-apisix/apache-apisix.jpeg"
 categories:
   - "Developer Tools"
   - "DevOps"

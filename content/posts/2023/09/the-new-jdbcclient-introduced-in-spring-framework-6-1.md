@@ -6,7 +6,7 @@ lastmod: "2023-09-08T06:45:45+00:00"
 description: "Learn how to perform JDBC operations using the new JdbcClient fluent API introduced in Spring framework 6.1."
 authors:
   - "siva-katamreddy"
-image: "https://foojay.io/wp-content/uploads/2021/09/1024px-Spring_Framework_Logo_2018.svg.png"
+image: "/images/posts/2023/09/the-new-jdbcclient-introduced-in-spring-framework-6-1/1024px-Spring_Framework_Logo_2018.svg.png"
 categories:
   - "Java"
   - "Spring"

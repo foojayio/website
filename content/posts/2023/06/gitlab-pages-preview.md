@@ -7,7 +7,7 @@ description: "How to preview GitLab Pages and share the preview's URL with teamm
 canonical: "https://blog.frankel.ch/gitlab-pages-preview/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/06/pexels-noelle-otto-906018.jpg"
+image: "/images/posts/2023/06/gitlab-pages-preview/pexels-noelle-otto-906018.jpg"
 categories:
   - "DevOps"
   - "GitLab"

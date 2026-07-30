@@ -6,7 +6,7 @@ lastmod: "2023-06-29T06:46:12+00:00"
 description: "The cost of object creation can be far higher than the cost of cleaning them up if they are very short lived."
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2023/05/Screenshot-2023-05-24-at-10.15.53-AM-1024x379.png"
+image: "/images/posts/2023/06/java-is-very-fast/Screenshot-2023-05-24-at-10.15.53-AM-1024x379.png"
 categories:
   - "Chronicle Software"
   - "Foojay"

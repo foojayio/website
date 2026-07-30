@@ -6,7 +6,7 @@ lastmod: "2023-11-01T14:31:05+00:00"
 description: "A JUG PH Continuation Report for the June and August Meetups. This report focuses on the meetups that happened in June and August 2023."
 authors:
   - "tristan-mahinay"
-image: "https://foojay.io/wp-content/uploads/2023/09/jugph_3_group_photo-scaled.jpg"
+image: "/images/posts/2023/09/jugph-continuing-the-connection-with-the-java-enthusiasts/jugph_3_group_photo-scaled.jpg"
 categories:
   - "Events"
   - "JUGs"

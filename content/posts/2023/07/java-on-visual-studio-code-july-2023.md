@@ -6,7 +6,7 @@ lastmod: "2023-08-01T07:11:40+00:00"
 description: "Learn about the improved decompiler functionality. Additionally, we are going to do a deep-dive into our code completion."
 authors:
   - "nick-zhu"
-image: "https://foojay.io/wp-content/uploads/2023/07/decompile_debugging.gif"
+image: "/images/posts/2023/07/java-on-visual-studio-code-july-2023/decompile_debugging.gif"
 categories:
   - "Developer Tools"
   - "VS Code"

@@ -6,7 +6,7 @@ lastmod: "2023-08-02T10:27:28+00:00"
 description: "Have you ever wondered how safepoints are implemented in the OpenJDK? Follow me down the rabbit hole into the inner workings of the JVM."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/07/safepoint-2000x726-1.png"
+image: "/images/posts/2023/08/the-inner-workings-of-safepoints/safepoint-2000x726-1.png"
 categories:
   - "Java Core"
 tags:

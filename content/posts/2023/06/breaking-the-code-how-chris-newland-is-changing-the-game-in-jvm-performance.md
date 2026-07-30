@@ -7,7 +7,7 @@ description: "Dive into an exclusive interview with Chris Newland, the creator o
 authors:
   - "bazlur-rahman"
   - "chriswhocodes"
-image: "https://foojay.io/wp-content/uploads/2023/06/chris.png"
+image: "/images/posts/2023/06/breaking-the-code-how-chris-newland-is-changing-the-game-in-jvm-performance/chris.png"
 categories:
   - "Interviews"
   - "Performance"
@@ -103,7 +103,7 @@ If you want to specialize in Java performance, then I have two pieces of advice:
 
 #### **Bazlur: You've developed a number of open-source JVM tools that have been widely used and contributed to. For individuals interested in joining and contributing to these projects, could you provide a brief guide on how they can get started?**
 
-**Chris:** Please talk to me first 🙂 Drop me an email at [\[email protected\]](/cdn-cgi/l/email-protection#06656e746f7546656e746f756863716a6768622865696b) with your idea before submitting a PR because I might already be working on something similar or taking the tools in a different direction.
+**Chris:** Please talk to me first 🙂 Drop me an email at [\[email protected\]](/cdn-cgi/l/email-protection#56353e243f2516353e243f253833213a3738327835393b) with your idea before submitting a PR because I might already be working on something similar or taking the tools in a different direction.
 
 *** ** * ** ***
 

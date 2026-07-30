@@ -6,7 +6,7 @@ lastmod: "2023-09-06T09:32:30+00:00"
 description: "Load testing entails testing how our application performs under a significant load so we can be certain it behaves as expected when there’s an influx of users."
 authors:
   - "simon-verhoeven"
-image: "https://foojay.io/wp-content/uploads/2022/05/Image_3.png"
+image: "/images/posts/2023/09/load-testing-shoot-your-application-with-gatling/Image_3.png"
 categories:
   - "Performance"
   - "Testing"

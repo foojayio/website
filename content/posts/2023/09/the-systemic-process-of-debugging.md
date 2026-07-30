@@ -7,7 +7,7 @@ description: "Explore the academic theory of the debugging process, focuse on is
 canonical: "https://debugagent.com/the-systemic-process-of-debugging"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/09/shaialmog_A_software_developers_desk_cluttered_with_notes_diagr_6b092aec-0553-49e8-8490-a15d29b6c513.jpg"
+image: "/images/posts/2023/09/the-systemic-process-of-debugging/shaialmog_A_software_developers_desk_cluttered_with_notes_diagr_6b092aec-0553-49e8-8490-a15d29b6c513.jpg"
 categories:
   - "Debugging"
   - "Tutorials"

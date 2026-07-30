@@ -6,7 +6,7 @@ lastmod: "2023-09-15T14:54:42+00:00"
 description: "Learn how to build a real-time application to process Wikimedia streams using Kafka and Hazelcast."
 authors:
   - "fawaz-ghali"
-image: "https://foojay.io/wp-content/uploads/2023/09/1693934925104.png"
+image: "/images/posts/2023/09/building-real-time-applications-to-process-wikimedia-streams-using-kafka-and-hazelcast/1693934925104.png"
 categories:
   - "Hazelcast"
   - "Java"

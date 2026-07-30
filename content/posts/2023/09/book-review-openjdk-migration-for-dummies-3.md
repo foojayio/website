@@ -6,7 +6,7 @@ lastmod: "2024-06-30T11:18:56+00:00"
 description: "A comprehensive and informative guide for those looking to navigate the complex world of JDK distributions and licenses,"
 authors:
   - "deepu-sasidharan"
-image: "https://foojay.io/wp-content/uploads/2023/08/image-764x1024-dummies.png"
+image: "/images/posts/2023/09/book-review-openjdk-migration-for-dummies-3/image-764x1024-dummies.png"
 categories:
   - "Book Review"
   - "Books"

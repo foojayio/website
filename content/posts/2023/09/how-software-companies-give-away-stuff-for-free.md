@@ -6,7 +6,7 @@ lastmod: "2023-09-26T14:39:57+00:00"
 description: "There are many different ways to give away stuff for free and in this article I try and explain the main approaches that software companies use and the reasoning behind these methods."
 authors:
   - "jamie-coleman"
-image: "https://foojay.io/wp-content/uploads/2023/09/Free-software-article.jpg"
+image: "/images/posts/2023/09/how-software-companies-give-away-stuff-for-free/Free-software-article.jpg"
 categories:
   - "Developer Tools"
   - "Tools"

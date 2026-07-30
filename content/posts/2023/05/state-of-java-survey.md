@@ -6,7 +6,7 @@ lastmod: "2024-10-01T07:12:29+00:00"
 description: "Do you ever wonder what OpenJDK distributions and what Java versions your peers are using? What Java versions?"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2023/05/image-6.png"
+image: "/images/posts/2023/05/state-of-java-survey/image-6.png"
 categories:
   - "FinOps"
   - "Performance"

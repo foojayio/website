@@ -6,7 +6,7 @@ lastmod: "2023-07-18T21:13:51+00:00"
 description: "What are examples of things that observability can tell you, right now, about your code and how can it help you improve it?"
 authors:
   - "roni-dover"
-image: "https://foojay.io/wp-content/uploads/2023/07/image-16-1024x512-1.png"
+image: "/images/posts/2023/07/effective-coding-with-java-observability/image-16-1024x512-1.png"
 categories:
   - "Developer Tools"
   - "Observability"

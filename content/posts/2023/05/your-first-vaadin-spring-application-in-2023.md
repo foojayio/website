@@ -6,7 +6,7 @@ lastmod: "2023-05-25T12:08:31+00:00"
 description: "Create new Vaadin Java web application projects using start.spring.io. Configure the dependencies and choose your Maven or Gradle."
 authors:
   - "sami-ekblad"
-image: "https://foojay.io/wp-content/uploads/2023/05/reindeer-lines-474x510-1.png"
+image: "/images/posts/2023/05/your-first-vaadin-spring-application-in-2023/reindeer-lines-474x510-1.png"
 categories:
   - "Cloud"
   - "Vaadin"

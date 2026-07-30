@@ -7,7 +7,7 @@ description: "This review is about Designing APIs with Swagger and OpenAPI by Jo
 canonical: "https://blog.frankel.ch/designing-apis-swagger-openapi/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/07/Designing_APIs_with_Swagger_and_OpenAPI_large.jpg"
+image: "/images/posts/2023/08/book-review-designing-apis-with-swagger-and-openapi/Designing_APIs_with_Swagger_and_OpenAPI_large.jpg"
 categories:
   - "Book Review"
   - "Books"

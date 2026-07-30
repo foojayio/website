@@ -7,7 +7,7 @@ description: "In this tutorial, I want to show you how you can read the temperat
 canonical: "https://webtechie.be/post/2023-07-26-read-temperature-pressure-humidity-bme280-java-pi4j-jbang-raspberrypi/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/07/bme280.png"
+image: "/images/posts/2023/08/reading-the-temperature-humidity-and-pressure-from-a-bme280-sensor-with-java-pi4j-i2c-spi-and-jbang/bme280.png"
 categories:
   - "Embedded"
   - "JBang"

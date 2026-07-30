@@ -7,7 +7,7 @@ description: "As a sponsor of the largest Java developer community conference in
 canonical: "https://www.azul.com/blog/join-azul-at-the-largest-java-developer-community-conference-in-europe/"
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2023/09/2023-9-14b-devoxx-hero.jpg"
+image: "/images/posts/2023/09/visit-azul-at-devoxx/2023-9-14b-devoxx-hero.jpg"
 categories:
   - "Books"
   - "Events"

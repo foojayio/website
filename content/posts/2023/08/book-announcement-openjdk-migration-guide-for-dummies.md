@@ -6,7 +6,7 @@ lastmod: "2024-06-30T11:17:04+00:00"
 description: "Learn how to migrate to OpenJDK and get tips on how to select the right Java partner to assist with your migration and provide suppoer."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2023/08/dummies.png"
+image: "/images/posts/2023/08/book-announcement-openjdk-migration-guide-for-dummies/dummies.png"
 categories:
   - "Book Announcement"
   - "Books"

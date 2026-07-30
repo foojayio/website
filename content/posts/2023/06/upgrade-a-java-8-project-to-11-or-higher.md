@@ -7,7 +7,7 @@ description: "Keeping a project on Java 8 will eventually lead to running it on 
 canonical: "https://www.azul.com/blog/upgrade-a-java-8-project-to-11-or-higher/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/05/10-11-unsupported-java-1024x400-1.jpeg"
+image: "/images/posts/2023/06/upgrade-a-java-8-project-to-11-or-higher/10-11-unsupported-java-1024x400-1.jpeg"
 categories:
   - "Java Core"
 tags:

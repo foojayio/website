@@ -8,7 +8,7 @@ canonical: "https://blog.payara.fish/exploring-java-records-in-a-jakarta-ee-cont
 authors:
   - "jadon-ortlepp"
   - "luqman-saeed"
-image: "https://foojay.io/wp-content/uploads/2023/06/record.png"
+image: "/images/posts/2023/06/exploring-java-records-in-a-jakarta-ee-context/record.png"
 categories:
   - "Jakarta EE"
   - "Payara"

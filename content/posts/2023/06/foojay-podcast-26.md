@@ -8,7 +8,7 @@ authors:
   - "frankdelporte"
   - "hanno-embregts"
   - "trisha-gee"
-image: "https://foojay.io/wp-content/uploads/2023/06/podcast-versioncontrol-guests.png"
+image: "/images/posts/2023/06/foojay-podcast-26/podcast-versioncontrol-guests.png"
 categories:
   - "Developer Tools"
   - "DevOps"

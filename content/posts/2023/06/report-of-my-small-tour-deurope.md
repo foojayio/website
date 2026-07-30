@@ -6,7 +6,7 @@ lastmod: "2023-06-16T17:16:25+00:00"
 description: "I spoke in two weeks in 3 countries, 4 cities and 5 different venues. This is my report on the trip. Check it out!"
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/06/image-7.png"
+image: "/images/posts/2023/06/report-of-my-small-tour-deurope/image-7.png"
 categories:
   - "Trip Reports"
 tags:
