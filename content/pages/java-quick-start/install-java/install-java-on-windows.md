@@ -21,7 +21,25 @@ This is a direct link to get the Azul Zulu build of OpenJDK distribution, versio
 Many more distributions and versions of Java exist. You can [read more info here](https://foojay.io/java-quick-start/install-java/find-another-java-version/) on how to find another distribution or version.
 
 Once the `.msi` file has completed downloading, double-click it, and follow the instructions.
-![](/images/pages/2023/01/zulu-install-windows-1.png) ![](/images/pages/2023/01/zulu-install-windows-2.png) ![](/images/pages/2023/01/zulu-install-windows-3.png) ![](/images/pages/2023/01/zulu-install-windows-4.png)
+
+
+
+<figure class="wp-block-gallery has-nested-images columns-4 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
+ <figure class="wp-block-image size-large">
+  <img fetchpriority="high" decoding="async" width="616" height="481" data-id="61633" src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-1.png" alt="" class="wp-image-61633">
+ </figure>
+ <figure class="wp-block-image size-large">
+  <img decoding="async" width="616" height="481" data-id="61632" src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-2.png" alt="" class="wp-image-61632">
+ </figure>
+ <figure class="wp-block-image size-large">
+  <img decoding="async" width="616" height="481" data-id="61630" src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-3.png" alt="" class="wp-image-61630">
+ </figure>
+ <figure class="wp-block-image size-large">
+  <img loading="lazy" decoding="async" width="616" height="481" data-id="61631" src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-4.png" alt="" class="wp-image-61631">
+ </figure>
+</figure>
+
+
 
 After the installation has been completed, you can check the installed version by opening a terminal (click Start, type `cmd`, and hit Enter) and running the `java -version` command.
 

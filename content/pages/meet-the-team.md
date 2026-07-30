@@ -13,7 +13,7 @@ frozen: false
 Geertjan Wielenga {#geertjan-wielenga}
 --------------------------------------
 
-![](/images/pages/2023/04/geertjan-3-41-32-120x120.png)  
+![](/images/pages/meet-the-team/geertjan-3-41-32-120x120.png)  
 
 #### Founder of Foojay
 
@@ -24,7 +24,7 @@ Geertjan founded Foojay and is still the driving force behind it, staying deeply
 Frank Delporte {#frank-delporte}
 --------------------------------
 
-![](/images/pages/2025/05/cropped-frank-delporte-scaled-1-120x120.jpg)  
+![](/images/pages/meet-the-team/cropped-frank-delporte-scaled-1-120x120.jpg)  
 
 #### Lead Reviewer, Editor \& Contributor · Host of the Foojay Podcast
 
@@ -33,7 +33,7 @@ Frank is Foojay's main reviewer, editor, and contributor, and hosts the Foojay P
 Dominika Tasarz-Sochacka {#dominika-tasarz-sochacka}
 ----------------------------------------------------
 
-![](/images/pages/2026/05/cropped-Dominika-2025-Speaker-Profile-Square-120x120.png)  
+![](/images/pages/meet-the-team/cropped-Dominika-2025-Speaker-Profile-Square-120x120.png)  
 
 #### Community, Editing, Maintenance \& Sponsorships
 

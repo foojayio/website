@@ -41,4 +41,9 @@ Each section has a video demonstrating the example code, and the [entire playlis
 *** ** * ** ***
 
 Sidenote: this tutorial is based on a section of the book "[Getting Started with Java on the Raspberry Pi](https://webtechie.be/books/)" by Frank Delporte.
-![](/images/pages/2020/12/ebook-paperbook.jpg)
+
+
+
+<figure class="wp-block-image size-full is-resized">
+ <img fetchpriority="high" decoding="async" src="/images/pages/java-quick-start/quick-start-tutorial/ebook-paperbook.jpg" alt="" class="wp-image-36654" width="300" height="200">
+</figure>

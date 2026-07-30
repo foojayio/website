@@ -23,11 +23,7 @@ And discover one of the many posts here on Foojay.io or the tutorials on the web
 
 
 
-<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio">
- <div class="wp-block-embed__wrapper">
-  <iframe title="Foojay - Getting Started With Java - 11. What's Next?" width="500" height="281" src="https://www.youtube.com/embed/c0lr979nTT4?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
- </div>
-</figure>
+{{< youtube c0lr979nTT4 >}}
 
 
 

@@ -8,7 +8,7 @@ aliases:
 frozen: false
 ---
 
-![](/images/pages/2026/07/almanac-java-25.png)  
+![](/images/pages/java-almanac/almanac-java-25.png)  
 <br />
 
 **Ever needed to quickly check what changed between Java 17 and Java 21?**

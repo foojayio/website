@@ -11,7 +11,13 @@ frozen: false
 Towards an Understanding of Sustainable Software Development
 ------------------------------------------------------------
 
-![](/images/pages/2026/04/foojay_free_ebook_ad-510x510.png)  
+
+
+<figure class="alignleft size-medium is-resized">
+ <img fetchpriority="high" decoding="async" width="510" height="510" src="/images/pages/sustainability-for-java-developers/foojay_free_ebook_ad-510x510.png" alt="" class="wp-image-123539" style="width:350px">
+</figure>
+
+  
 **Java developers from around the world are writing a book about a question that's becoming impossible to ignore: how do we write software that's good for both our projects and the planet?**
 
 *Sustainability for Java Developers: Towards an Understanding of Sustainable Java Software Development* is now [**freely available on Leanpub**](https://leanpub.com/sustainabilityforjavadevelopers), bringing together Java Champions, architects, and technical writers to look at sustainability from every angle.

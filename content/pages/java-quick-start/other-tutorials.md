@@ -14,21 +14,39 @@ Java is an open-source project, meaning it's totally free to use, and there is a
 
 ### Java Programming by Angie Jones
 
-![](/images/pages/2023/01/angie-jones.jpg)  
+
+
+<figure class="wp-block-image size-full is-resized">
+ <img decoding="async" src="/images/pages/java-quick-start/other-tutorials/angie-jones.jpg" alt="" class="wp-image-61675" width="180" height="180">
+</figure>
+
+  
 Angie Jones is an award-winning teacher and international keynote speaker who shares her wealth of knowledge at software companies and conferences worldwide. Her Java introduction course is excellent and free.
 
 <https://testautomationu.applitools.com/java-programming-course/>
 
 ### Java Tutorial by Jakob Jenkov
 
-![](/images/pages/2023/01/jakob-jenkov.png)  
+
+
+<figure class="wp-block-image size-full is-resized">
+ <img decoding="async" src="/images/pages/java-quick-start/other-tutorials/jakob-jenkov.png" alt="" class="wp-image-61676" width="180" height="180">
+</figure>
+
+  
 Jakob Jenkov is a technopreneur, software architect and writer, and publisher focused on the big ideas in the software and tech industry. Jakob feels most at home in the nexus between business and technology. He has published over 800 technical articles, which attract millions of readers every year. His tutorial site contains a lot of different sections, including a very extended one about Java.
 
 <https://jenkov.com/tutorials/java/index.html>
 
 ### Learn Java Basics with IntelliJ IDEA by Shai Almog
 
-![](/images/pages/2023/01/shai-almog.jpg)  
+
+
+<figure class="wp-block-image size-full is-resized">
+ <img decoding="async" src="/images/pages/java-quick-start/other-tutorials/shai-almog.jpg" alt="" class="wp-image-61677" width="180" height="180">
+</figure>
+
+  
 Shai Almog is an author, DevRel, Blogger, Open Source Hacker, Java Rockstar, Conference Speaker, Instructor, and Entrepreneur. And he creates terrific video tutorials. In this series of videos, he teaches you to program with Java in the free IntelliJ IDEA community edition.
 
 [You can find all the videos in this playlist on YouTube](https://www.youtube.com/watch?v=1Bum2gYETUQ&list=PL8GhfcywW9YMucwRw2IbpeCp1FBMEgsmk).
@@ -36,7 +54,13 @@ Shai Almog is an author, DevRel, Blogger, Open Source Hacker, Java Rockstar, Con
 Introduction to Java Programming by SJSU
 ----------------------------------------
 
-![](/images/pages/2023/02/course-sjsu.png)  
+
+
+<figure class="wp-block-image size-full is-resized">
+ <img decoding="async" src="/images/pages/java-quick-start/other-tutorials/course-sjsu.png" alt="" class="wp-image-62585" width="180">
+</figure>
+
+  
 This course was created by Cay Horstmann and Kathleen O'Brien of SJSU (San José State University) and Cheng-Han Lee and Sara Tansey of Udacity. It was initially published on Udacity but is now [available for free on the website of Cay](https://horstmann.com/sjsu/cs046/). It's much more interactive than a typical YouTube tutorial, as it follows the principle of "If you talk for more than two minutes without an exercise, you've failed".
 
 <br />

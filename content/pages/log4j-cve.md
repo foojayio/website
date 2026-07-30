@@ -22,7 +22,7 @@ Many application frameworks in the Java ecosystem use this logging framework by 
 (Read the complete article on [Snyk.io](https://snyk.io/blog/log4j-rce-log4shell-vulnerability-cve-2021-4428/).)
 
 The above describes the RCE (remote code execution vulnerability), illustrated below by [GovCERT.ch](https://www.govcert.admin.ch/blog/zero-day-exploit-targeting-popular-java-library-log4j/#general):
-![](/images/pages/2021/12/image-13-1024x692.png)
+![](/images/pages/log4j-cve/image-13-1024x692.png)
 
 Note the following on the attack vulnerabilities relating to system properties, environment variables, and deserialization, provided by [Lari Hotari from DataStax](https://gist.github.com/lhotari/18292c08586d1982e88658d239f02c57).
 
@@ -100,4 +100,24 @@ Other information
 Relevant Tweets
 ---------------
 
-[![](/images/pages/2021/12/image-950x1024.png)](https://twitter.com/malwaretechblog/status/1469289471463944198) [![](/images/pages/2021/12/kryptos-1024x1000.png)](https://twitter.com/malwaretechblog/status/1470096336133373954) [![](/images/pages/2021/12/checking-1024x802.png)](https://twitter.com/TomGranot/status/1469704635715706885)
+
+
+<figure class="wp-block-image size-large is-resized">
+ <a target="_blank" href="https://twitter.com/malwaretechblog/status/1469289471463944198"><img decoding="async" src="/images/pages/log4j-cve/image-950x1024.png" alt="" class="wp-image-50965" width="436" height="469"></a>
+</figure>
+
+
+
+
+
+<figure class="wp-block-image size-large is-resized">
+ <a target="_blank" href="https://twitter.com/malwaretechblog/status/1470096336133373954"><img decoding="async" src="/images/pages/log4j-cve/kryptos-1024x1000.png" alt="" class="wp-image-50966" width="438" height="428"></a>
+</figure>
+
+
+
+
+
+<figure class="wp-block-image size-large is-resized">
+ <a target="_blank" href="https://twitter.com/TomGranot/status/1469704635715706885"><img loading="lazy" decoding="async" src="/images/pages/log4j-cve/checking-1024x802.png" alt="" class="wp-image-50978" width="440" height="345"></a>
+</figure>
