@@ -1,21 +1,22 @@
 {{ define "main" }}
 <div class="layout-with-sidebar">
   <article class="post-single">
-    {{ with .Params.categories }}
-    <div class="post-categories post-categories--top">
-      {{ range first 2 . }}<a href="{{ printf "today/category/%s/" (. | urlize) | relURL }}">{{ . }}</a>{{ end }}
-    </div>
-    {{ end }}
+    <header class="post-header{{ if .Params.image }} post-header--with-hero{{ end }}">
+      {{ with .Params.image }}<img class="post-hero is-zoomable" src="{{ . | strings.TrimPrefix "/" | relURL }}" alt="{{ $.Title }}" loading="lazy">{{ end }}
+      {{ with .Params.categories }}
+      <div class="post-categories post-categories--top">
+        {{ range first 2 . }}<a href="{{ printf "today/category/%s/" (. | urlize) | relURL }}">{{ . }}</a>{{ end }}
+      </div>
+      {{ end }}
 
-    <h1>{{ .Title }}</h1>
+      <h1>{{ .Title }}</h1>
 
-    <div class="post-meta">
-      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-      {{ partial "byline.html" . }}
-      <span class="reading-time">{{ .ReadingTime }} min read</span>
-    </div>
-
-    {{ with .Params.image }}<img class="post-hero" src="{{ . }}" alt="{{ $.Title }}">{{ end }}
+      <div class="post-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        {{ partial "byline.html" . }}
+        <span class="reading-time">{{ .ReadingTime }} min read</span>
+      </div>
+    </header>
 
     <div class="prose">
       {{ .Content }}

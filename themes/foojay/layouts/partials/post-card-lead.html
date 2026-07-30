@@ -1,7 +1,7 @@
 <article class="post-card post-card--lead">
   {{ with .Params.image }}
   <a href="{{ $.Permalink }}" class="post-card-image" tabindex="-1" aria-hidden="true">
-    <img src="{{ . }}" alt="" decoding="async">
+    <img src="{{ . | strings.TrimPrefix "/" | relURL }}" alt="" decoding="async">
   </a>
   {{ end }}
   <div class="post-card-body">
