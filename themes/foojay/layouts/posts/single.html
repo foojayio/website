@@ -1,38 +1,53 @@
 {{ define "main" }}
 <div class="layout-with-sidebar">
   <article class="post-single">
-    <h1>{{ .Title }}</h1>
-    <div class="post-meta">
-      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-      {{ with .Params.author }}
-        {{ range where $.Site.Pages "Section" "authors" }}
-          {{ if eq .File.LogicalName (printf "%s.md" $.Params.author) }}<a href="{{ .Permalink }}">{{ .Title }}</a>{{ end }}
-        {{ end }}
-      {{ end }}
-    </div>
-    {{ if .Params.image }}<img class="post-hero" src="{{ .Params.image }}" alt="{{ .Title }}">{{ end }}
-
-    {{ .Content }}
-
     {{ with .Params.categories }}
-    <div class="post-categories">
-      {{ range . }}<a href="{{ $.Site.Home.RelPermalink }}today/category/{{ . | urlize }}/">{{ . }}</a>{{ end }}
+    <div class="post-categories post-categories--top">
+      {{ range first 2 . }}<a href="{{ printf "/today/category/%s/" (. | urlize) | relURL }}">{{ . }}</a>{{ end }}
     </div>
     {{ end }}
+
+    <h1>{{ .Title }}</h1>
+
+    <div class="post-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+      {{ partial "byline.html" . }}
+      <span class="reading-time">{{ .ReadingTime }} min read</span>
+    </div>
+
+    {{ with .Params.image }}<img class="post-hero" src="{{ . }}" alt="{{ $.Title }}">{{ end }}
+
+    <div class="prose">
+      {{ .Content }}
+    </div>
+
     {{ with .Params.tags }}
     <div class="post-tags">
-      {{ range . }}<a href="{{ $.Site.Home.RelPermalink }}today/tag/{{ . | urlize }}/">#{{ . }}</a>{{ end }}
+      {{ range . }}<a href="{{ printf "/today/tag/%s/" (. | urlize) | relURL }}">#{{ . }}</a>{{ end }}
     </div>
+    {{ end }}
+
+    {{ with .Params.author }}
+      {{ $author := site.GetPage (printf "/authors/%s" .) }}
+      {{ with $author }}
+      <section class="author-callout">
+        {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" src="{{ . }}" alt="" loading="lazy">{{ end }}
+        <div>
+          <span class="eyebrow">Written by</span>
+          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+          {{ with .Params.bio }}<p>{{ . | truncate 260 }}</p>{{ end }}
+        </div>
+      </section>
+      {{ end }}
     {{ end }}
 
     {{ with .Params.related_posts }}
     <section class="related-posts">
-      <h3>Related Posts</h3>
+      <h3>Related posts</h3>
       <ul>
-        {{ $allPosts := where $.Site.Pages "Section" "posts" }}
         {{ range . }}
           {{ $slug := . }}
-          {{ range $allPosts }}
+          {{ range where site.RegularPages "Section" "posts" }}
             {{ if eq .File.ContentBaseName $slug }}
               <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
             {{ end }}
@@ -42,6 +57,7 @@
     </section>
     {{ end }}
   </article>
+
   {{ partial "sidebar.html" . }}
 </div>
 {{ end }}

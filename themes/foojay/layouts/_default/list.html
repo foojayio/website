@@ -1,9 +1,16 @@
 {{ define "main" }}
+<div class="page-head">
+  <div class="page-head__inner">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
 <div class="content-col full-width">
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  <ul>
-    {{ range .Pages }}<li><a href="{{ .Permalink }}">{{ .Title }}</a></li>{{ end }}
-  </ul>
+  {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+  {{ with .Pages }}
+  <div class="post-grid">
+    {{ range . }}{{ partial "post-card.html" . }}{{ end }}
+  </div>
+  {{ end }}
 </div>
 {{ end }}

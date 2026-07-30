@@ -23,10 +23,283 @@ enableRobotsTXT = true
 
 [params]
   description = "Foojay is a place for Friends Of OpenJDK, providing free, reference materials and blogs for daily Java usage."
+  logo = "/images/foojay-logo.png"
   # Path to the JUG list consumed by the events sidebar/calendar page.
   jugsDataFile = "jugs"
   eventsDataFile = "events"
+  [params.headerCta]
+    label = "Write for foojay"
+    url = "/today/how-to-submit-your-next-article-on-foojay-io/"
 
 [outputs]
   home = ["HTML", "RSS"]
   section = ["HTML", "RSS"]
+
+# ---------------------------------------------------------------------------
+# Navigation
+#
+# The header partial renders THREE levels: top level = nav bar, second level =
+# either a plain link or (when it has children of its own) a titled column, and
+# third level = the links inside that column. That flattening is deliberate:
+# the WordPress nav nests a third level as a second hover flyout, which is
+# fiddly to hit and unusable on touch. Here it becomes a column heading.
+#
+# Menu entries are an array of tables, so each one is `[[menu.main]]`.
+# Params per top-level entry:
+#   cols     1 | 2 | 3   — panel column count (default 1)
+#   footlink { label, url } — a highlighted link pinned to the panel bottom
+# Params per second/third-level entry:
+#   desc     one-line description shown under the link (single-column panels)
+# ---------------------------------------------------------------------------
+
+[[menu.main]]
+  name = "News"
+  weight = 10
+  [menu.main.params]
+    cols = 1
+    [menu.main.params.footlink]
+      label = "View all articles"
+      url = "/today/"
+
+[[menu.main]]
+  name = "Daily News"
+  parent = "News"
+  url = "/today/"
+  weight = 11
+  [menu.main.params]
+    desc = "Everything the community published, newest first"
+
+[[menu.main]]
+  name = "Podcast"
+  parent = "News"
+  url = "/today/category/podcast/"
+  weight = 12
+  [menu.main.params]
+    desc = "Conversations with the people building Java"
+
+[[menu.main]]
+  name = "JC-AI Newsletter"
+  parent = "News"
+  url = "/today/category/jc-ai-newsletter/"
+  weight = 13
+
+[[menu.main]]
+  name = "Foojay.io AI Portal"
+  parent = "News"
+  url = "/ai/"
+  weight = 14
+
+[[menu.main]]
+  name = "Event Calendar"
+  parent = "News"
+  url = "/calendar/"
+  weight = 15
+  [menu.main.params]
+    desc = "JUG meetups and conferences, synced daily"
+
+# ---------------------------------------------------------------------------
+
+[[menu.main]]
+  name = "Resources"
+  weight = 20
+  [menu.main.params]
+    cols = 1
+
+[[menu.main]]
+  name = "Sustainability for Java Developers"
+  parent = "Resources"
+  url = "/sustainability-for-java-developers/"
+  weight = 21
+  [menu.main.params]
+    desc = "The free community eBook"
+
+[[menu.main]]
+  name = "Java Almanac"
+  parent = "Resources"
+  url = "/java-almanac/"
+  weight = 22
+
+[[menu.main]]
+  name = "Java User Groups"
+  parent = "Resources"
+  url = "/jugs/"
+  weight = 23
+
+# ---------------------------------------------------------------------------
+# Java Basics: the deep Quick Start tree. Third level renders as columns, so
+# the 11-step tutorial no longer hides behind two hover intents.
+
+[[menu.main]]
+  name = "Java Basics"
+  weight = 30
+  [menu.main.params]
+    cols = 3
+    [menu.main.params.footlink]
+      label = "Open the full Java Quick Start guide"
+      url = "/java-quick-start/"
+
+[[menu.main]]
+  name = "Java Terms Explained"
+  parent = "Java Basics"
+  url = "/pedia"
+  weight = 31
+  [menu.main.params]
+    desc = "The jargon dictionary"
+
+[[menu.main]]
+  name = "Other Tutorials"
+  parent = "Java Basics"
+  url = "/java-quick-start/other-tutorials/"
+  weight = 32
+
+# -- column: Install Java -------------------------------------------------
+[[menu.main]]
+  name = "Install Java"
+  identifier = "install-java"
+  parent = "Java Basics"
+  url = "/java-quick-start/install-java/"
+  weight = 33
+
+[[menu.main]]
+  name = "Windows"
+  parent = "install-java"
+  url = "/java-quick-start/install-java/install-java-on-windows/"
+  weight = 1
+
+[[menu.main]]
+  name = "macOS"
+  parent = "install-java"
+  url = "/java-quick-start/install-java/install-java-on-macos/"
+  weight = 2
+
+[[menu.main]]
+  name = "Linux"
+  parent = "install-java"
+  url = "/java-quick-start/install-java/install-java-on-linux/"
+  weight = 3
+
+[[menu.main]]
+  name = "Check your installation"
+  parent = "install-java"
+  url = "/java-quick-start/install-java/check-your-java-installation/"
+  weight = 4
+
+[[menu.main]]
+  name = "Find another Java version"
+  parent = "install-java"
+  url = "/java-quick-start/install-java/find-another-java-version/"
+  weight = 5
+
+# -- column: Quick Start Tutorial ----------------------------------------
+[[menu.main]]
+  name = "Quick Start Tutorial"
+  identifier = "quick-start-tutorial"
+  parent = "Java Basics"
+  url = "/java-quick-start/quick-start-tutorial/"
+  weight = 34
+
+[[menu.main]]
+  name = "1. Choosing an editor"
+  parent = "quick-start-tutorial"
+  url = "/java-quick-start/quick-start-tutorial/choosing-an-editor/"
+  weight = 1
+
+[[menu.main]]
+  name = "2. Hello World"
+  parent = "quick-start-tutorial"
+  url = "/java-quick-start/quick-start-tutorial/hello-world/"
+  weight = 2
+
+[[menu.main]]
+  name = "3. Arguments and string arrays"
+  parent = "quick-start-tutorial"
+  url = "/java-quick-start/quick-start-tutorial/using-the-arguments/"
+  weight = 3
+
+[[menu.main]]
+  name = "4. Working with numbers"
+  parent = "quick-start-tutorial"
+  url = "/java-quick-start/quick-start-tutorial/working-with-numbers/"
+  weight = 4
+
+[[menu.main]]
+  name = "5. If, then, else"
+  parent = "quick-start-tutorial"
+  url = "/java-quick-start/quick-start-tutorial/if-then-else/"
+  weight = 5
+
+[[menu.main]]
+  name = "6. Enum and switch"
+  parent = "quick-start-tutorial"
+  url = "/java-quick-start/quick-start-tutorial/enum-and-switch/"
+  weight = 6
+
+[[menu.main]]
+  name = "7. Using methods"
+  parent = "quick-start-tutorial"
+  url = "/java-quick-start/quick-start-tutorial/using-methods/"
+  weight = 7
+
+[[menu.main]]
+  name = "8. Using objects"
+  parent = "quick-start-tutorial"
+  url = "/java-quick-start/quick-start-tutorial/using-objects/"
+  weight = 8
+
+[[menu.main]]
+  name = "9. Reading a text file"
+  parent = "quick-start-tutorial"
+  url = "/java-quick-start/quick-start-tutorial/reading-a-text-file/"
+  weight = 9
+
+[[menu.main]]
+  name = "10. Using streams"
+  parent = "quick-start-tutorial"
+  url = "/java-quick-start/quick-start-tutorial/using-streams/"
+  weight = 10
+
+[[menu.main]]
+  name = "What's next?"
+  parent = "quick-start-tutorial"
+  url = "/java-quick-start/quick-start-tutorial/whats-next/"
+  weight = 11
+
+# ---------------------------------------------------------------------------
+
+[[menu.main]]
+  name = "About"
+  weight = 40
+  [menu.main.params]
+    cols = 1
+
+[[menu.main]]
+  name = "What is Foojay?"
+  parent = "About"
+  url = "/who-we-are/"
+  weight = 41
+
+[[menu.main]]
+  name = "Meet the Team"
+  parent = "About"
+  url = "/meet-the-team/"
+  weight = 42
+
+[[menu.main]]
+  name = "Authors"
+  parent = "About"
+  url = "/today/author/"
+  weight = 43
+  [menu.main.params]
+    desc = "Everyone who writes for foojay.io"
+
+[[menu.main]]
+  name = "Where to Find Friends of OpenJDK"
+  parent = "About"
+  url = "/where/"
+  weight = 44
+
+[[menu.main]]
+  name = "Advisory Board"
+  parent = "About"
+  url = "/board/"
+  weight = 45

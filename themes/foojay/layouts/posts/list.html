@@ -1,7 +1,14 @@
 {{ define "main" }}
+<div class="page-head">
+  <div class="page-head__inner">
+    <span class="eyebrow">Friends of OpenJDK</span>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
+
 <div class="layout-with-sidebar">
   <div class="content-col">
-    <h1>{{ .Title }}</h1>
     <div class="post-grid">
       {{ range .Paginator.Pages }}
         {{ partial "post-card.html" . }}

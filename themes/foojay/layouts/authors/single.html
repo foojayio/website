@@ -2,27 +2,25 @@
 <div class="layout-with-sidebar">
   <div class="content-col">
     <div class="author-profile">
-      {{ $avatar := or .Params.avatarFull .Params.avatar }}
-      {{ if $avatar }}<img class="author-avatar" src="{{ $avatar }}" alt="{{ .Title }}">{{ end }}
+      {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" src="{{ . }}" alt="{{ $.Title }}">{{ end }}
       <h1>{{ .Title }}</h1>
-      <p class="author-bio">{{ .Params.bio }}</p>
+      {{ with .Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}
       <ul class="author-social">
         {{ with .Params.bluesky }}<li><a href="{{ . }}" rel="me">Bluesky</a></li>{{ end }}
         {{ with .Params.mastodon }}<li><a href="{{ . }}" rel="me">Mastodon</a></li>{{ end }}
         {{ with .Params.linkedin }}<li><a href="{{ . }}">LinkedIn</a></li>{{ end }}
         {{ with .Params.github }}<li><a href="{{ . }}">GitHub</a></li>{{ end }}
         {{ with .Params.youtube }}<li><a href="{{ . }}">YouTube</a></li>{{ end }}
+        {{ with .Params.twitter }}<li><a href="{{ . }}">Twitter/X</a></li>{{ end }}
         {{ with .Params.website }}<li><a href="{{ . }}">Website</a></li>{{ end }}
       </ul>
     </div>
-    <h2>Articles</h2>
+
+    {{ $slug := .File.ContentBaseName }}
+    {{ $written := where (where site.RegularPages "Section" "posts") "Params.author" $slug }}
+    <div class="section-head"><h2>{{ len $written }} article{{ if ne (len $written) 1 }}s{{ end }}</h2></div>
     <div class="post-grid">
-      {{ $authorSlug := .File.ContentBaseName }}
-      {{ range where .Site.RegularPages "Section" "posts" }}
-        {{ if eq .Params.author $authorSlug }}
-          {{ partial "post-card.html" . }}
-        {{ end }}
-      {{ end }}
+      {{ range $written }}{{ partial "post-card.html" . }}{{ end }}
     </div>
   </div>
   {{ partial "sidebar.html" . }}

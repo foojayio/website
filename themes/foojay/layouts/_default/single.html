@@ -1,7 +1,12 @@
 {{ define "main" }}
-<div class="content-col full-width">
-  <article class="page-single">
+<div class="page-head">
+  <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
+<div class="content-col full-width">
+  <article class="page-single prose">
     {{ .Content }}
   </article>
 </div>

@@ -1,14 +1,19 @@
 {{ define "main" }}
+<div class="page-head">
+  <div class="page-head__inner">
+    <span class="eyebrow">Friends of OpenJDK</span>
+    <h1>Authors</h1>
+    <p>Everyone who has contributed writing to foojay.io.</p>
+  </div>
+</div>
+
 <div class="content-col full-width">
-  <h1>Authors</h1>
   <div class="author-grid">
-    {{ range .Site.RegularPages }}
-      {{ if eq .Section "authors" }}
+    {{ range where .Site.RegularPages "Section" "authors" }}
       <a class="author-card" href="{{ .Permalink }}">
-        {{ if .Params.avatar }}<img src="{{ .Params.avatar }}" alt="{{ .Title }}">{{ end }}
+        {{ with .Params.avatar }}<img src="{{ . }}" alt="" loading="lazy">{{ end }}
         <span>{{ .Title }}</span>
       </a>
-      {{ end }}
     {{ end }}
   </div>
 </div>

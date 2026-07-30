@@ -1,32 +1,60 @@
 <footer class="site-footer">
   <div class="footer-cols">
+
+    <div class="footer-col footer-brand">
+      <a class="logo" href="{{ "/" | relURL }}">
+        {{ partial "site-logo.html" . }}
+      </a>
+      <span class="logo__tag">Friends of OpenJDK</span>
+      <p>A place for friends of OpenJDK — free reference material, community news and daily Java insight.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>OpenJDK Hub</h4>
+      <ul>
+        <li><a href="{{ "/java-quick-start/" | relURL }}">Java Quick Start</a></li>
+        <li><a href="{{ "/pedia" | relURL }}">Java Terms Explained</a></li>
+        <li><a href="{{ "/java-almanac/" | relURL }}">Java Almanac</a></li>
+        <li><a href="{{ "/today/category/podcast/" | relURL }}">Podcast</a></li>
+      </ul>
+    </div>
+
     <div class="footer-col">
       <h4>Community Hub</h4>
       <ul>
         <li><a href="{{ "/today/" | relURL }}">Friends of OpenJDK Today</a></li>
         <li><a href="{{ "/all-events/" | relURL }}">Events Calendar</a></li>
         <li><a href="{{ "/jugs/" | relURL }}">Java User Groups</a></li>
+        <li><a href="{{ "/where/" | relURL }}">Where to Find Foojay</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
       <h4>About</h4>
       <ul>
         <li><a href="{{ "/who-we-are/" | relURL }}">What is Foojay?</a></li>
         <li><a href="{{ "/meet-the-team/" | relURL }}">Meet The Team</a></li>
         <li><a href="{{ "/today/author/" | relURL }}">Authors</a></li>
+        <li><a href="{{ "/board/" | relURL }}">Advisory Board</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
-      <h4>Join the Community</h4>
+      <h4>Join the community</h4>
       <ul class="social-links">
-        <li><a href="https://bsky.app/profile/foojay.io">Bluesky</a></li>
-        <li><a href="https://foojay.social/@foojay">Mastodon</a></li>
+        <li><a href="https://bsky.app/profile/foojay.io" rel="me">Bluesky</a></li>
+        <li><a href="https://foojay.social/@foojay" rel="me">Mastodon</a></li>
         <li><a href="https://www.linkedin.com/company/foojayio/">LinkedIn</a></li>
+        <li><a href="https://bit.ly/join-foojay-slack">Slack</a></li>
+        <li><a href="{{ "/index.xml" | relURL }}">RSS</a></li>
       </ul>
     </div>
+
   </div>
+
   <div class="footer-legal">
     <span>&copy; {{ now.Year }} foojay.io</span>
+    <a href="{{ "/sitemap/" | relURL }}">Sitemap</a>
     <a href="{{ "/terms-of-use/" | relURL }}">Terms of Use</a>
     <a href="{{ "/privacy-policy/" | relURL }}">Privacy Policy</a>
   </div>

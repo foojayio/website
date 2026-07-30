@@ -1,8 +1,13 @@
 {{ define "main" }}
-<div class="content-col full-width">
-  <h1>{{ .Title }}</h1>
-  <p>{{ .Params.description }}</p>
+<div class="page-head">
+  <div class="page-head__inner">
+    <span class="eyebrow">Community</span>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
 
+<div class="content-col full-width">
   {{ $data := .Site.Data.events }}
   {{ if $data }}
     <p class="events-updated">Last updated: {{ $data.generatedAt }}</p>

@@ -1,42 +1,44 @@
 <aside class="sidebar">
+
+  {{ with .Site.Params.sponsors }}
+  <section class="widget widget-sponsors">
+    <h4>Thanks to our sponsors</h4>
+    <ul class="sponsor-logos">
+      {{ range . }}
+        <li><a href="{{ .url }}">{{ with .logo }}<img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">{{ else }}{{ .name }}{{ end }}</a></li>
+      {{ end }}
+    </ul>
+  </section>
+  {{ end }}
+
   <section class="widget widget-categories">
     <h4>Categories</h4>
     <ul>
-      {{ range (.Site.Taxonomies.categories.ByCount) }}
-        <li><a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a></li>
+      {{ range first 12 .Site.Taxonomies.categories.ByCount }}
+        <li><a href="{{ .Page.Permalink }}">{{ .Page.Title }} <span class="count">{{ .Count }}</span></a></li>
       {{ end }}
     </ul>
+    <a class="view-all" href="{{ "/today/" | relURL }}">All categories</a>
   </section>
 
   <section class="widget widget-authors">
     <h4>Authors</h4>
     <ul>
-      {{ range first 5 (where .Site.Pages "Section" "authors") }}
+      {{ range first 6 (where .Site.RegularPages "Section" "authors") }}
         <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "/today/author/" | relURL }}">View All</a>
+    <a class="view-all" href="{{ "/today/author/" | relURL }}">View all authors</a>
   </section>
 
   <section class="widget widget-jugs">
     <h4>Java User Groups</h4>
-    {{ $jugs := .Site.Data.jugs }}
     <ul>
-      {{ range $jugs }}
+      {{ range first 8 .Site.Data.jugs }}
         <li><a href="https://www.meetup.com/{{ .slug }}/">{{ .name }}</a></li>
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "/all-events/" | relURL }}">Full Event Calendar</a>
+    <a class="view-all" href="{{ "/all-events/" | relURL }}">Full event calendar</a>
   </section>
 
-  {{ with .Site.Params.sponsors }}
-  <section class="widget widget-sponsors">
-    <h4>Thanks to our Sponsors!</h4>
-    <ul class="sponsor-logos">
-      {{ range . }}
-        <li><a href="{{ .url }}">{{ .name }}</a></li>
-      {{ end }}
-    </ul>
-  </section>
-  {{ end }}
 </aside>

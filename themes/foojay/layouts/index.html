@@ -1,13 +1,75 @@
 {{ define "main" }}
+
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+{{ $lead := index $posts 0 }}
+
 <div class="layout-with-sidebar">
   <div class="content-col">
-    <h1>Friends of OpenJDK Today</h1>
+
+    {{ with $lead }}{{ partial "post-card-lead.html" . }}{{ end }}
+
     <div class="post-grid">
-      {{ range (where .Site.RegularPages "Section" "posts") | first 12 }}
+      {{ range first 9 (after 1 $posts) }}
+        {{ partial "post-card.html" . }}
+      {{ end }}
+    </div>
+
+    <p class="section-more"><a class="btn btn--ghost" href="{{ "/today/" | relURL }}">View all articles</a></p>
+  </div>
+
+  {{ partial "sidebar.html" . }}
+</div>
+
+{{ $podcasts := where $posts "Params.categories" "intersect" (slice "Podcast" "podcast") }}
+{{ with $podcasts }}
+<section class="band band--sunken">
+  <div class="shell">
+    <div class="section-head">
+      <div>
+        <h2>Podcasts</h2>
+        <p>Catch up on the most recent episodes and stay updated with the latest OpenJDK innovations.</p>
+      </div>
+      <a class="more" href="{{ "/today/category/podcast/" | relURL }}">More podcasts &rarr;</a>
+    </div>
+    <div class="post-grid">
+      {{ range first 4 . }}{{ partial "post-card.html" . }}{{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<section class="band">
+  <div class="shell">
+    <div class="section-head">
+      <div>
+        <h2>Getting started with Java</h2>
+        <p>Is Java your first language, or are you coming from another one? Let friends of OpenJDK help you get up and running.</p>
+      </div>
+      <a class="more" href="{{ "/java-quick-start/" | relURL }}">Quick Start guide &rarr;</a>
+    </div>
+    <div class="post-grid">
+      {{ range first 4 (where $posts "Params.categories" "intersect" (slice "Java Beginner" "java-beginner")) }}
         {{ partial "post-card.html" . }}
       {{ end }}
     </div>
   </div>
-  {{ partial "sidebar.html" . }}
-</div>
+</section>
+
+<section class="band band--sunken">
+  <div class="shell">
+    <div class="section-head">
+      <div>
+        <h2>More blog categories</h2>
+        <p>Explore the full breadth of what the community writes about.</p>
+      </div>
+      <a class="more" href="{{ "/today/" | relURL }}">View more &rarr;</a>
+    </div>
+    <div class="chip-row chip-row--lg">
+      {{ range first 14 .Site.Taxonomies.categories.ByCount }}
+        <a href="{{ .Page.Permalink }}">{{ .Page.Title }} <span class="chip-count">{{ .Count }}</span></a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
 {{ end }}

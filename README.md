@@ -1,8 +1,8 @@
 # foojay.io — Hugo migration
 
-This repo is the new static (Hugo) home for foojay.io, replacing the current
+This repo is an experiment to create static (Hugo) home for foojay.io, replacing the current
 WordPress site. It's being built and run in parallel with the live WordPress
-site during a trial/transition period, then cut over once it's solid.
+site during a trial/transition period, then cut over once it proves to be solid and better.
 
 ## Structure
 

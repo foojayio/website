@@ -2,12 +2,14 @@
 //DEPS org.jsoup:jsoup:1.17.2
 //JAVA 17+
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -38,10 +40,30 @@ public class ConvertPages {
 
     static final String BASE_URL = "https://foojay.io";
     static final Path OUTPUT_DIR = Path.of("content/pages");
+    static final Path PAGE_IMAGE_DIR = Path.of("static/images/pages");
+    static final String PAGE_IMAGE_URL_PREFIX = "/images/pages/";
+    static final String USER_AGENT = "foojay-hugo-migration-bot/1.0";
     static final int REQUEST_TIMEOUT_MS = 20_000;
     static final int POLITE_DELAY_MS = 250;
 
-    static final String SELECTOR_ARTICLE_CONTENT = "div.entry-content, article .entry-content, main .content, article";
+    // Body images hosted on foojay.io die at cutover, so they are pulled local.
+    // Third-party images (youtube thumbs, badges, ...) are left untouched.
+    static final Pattern IMAGE_HREF = Pattern.compile("(?i)\\.(jpe?g|png|gif|webp|svg|avif)(?:[?#].*)?$");
+    static final String LOCAL_HOST_SUFFIX = "foojay.io";
+
+    // Interactive widgets embedded in page bodies. Detected here so the layout
+    // only loads their (heavier) scripts on the pages that actually use them.
+    // JDoodle: <div data-pym-src="https://www.jdoodle.com/plugin" ...> runnable snippets.
+    static final String SELECTOR_JDOODLE = "[data-pym-src]";
+    // EnlighterJS: <pre class="EnlighterJSRAW"> / <code class="EnlighterJSRAW"> code blocks.
+    static final String SELECTOR_ENLIGHTERJS = "pre.EnlighterJSRAW, code.EnlighterJSRAW";
+
+    // Verified against foojay.io's live block-theme markup (2026-07): every Page
+    // wraps its body in a single .about__content-wrapper (the theme reuses one
+    // template for all Pages). The rest are fallbacks for anything that differs.
+    static final String SELECTOR_ARTICLE_CONTENT = ".about__content-wrapper, div.entry-content, article .entry-content, article";
+    // Chrome that sits inside the content wrapper but isn't part of the body.
+    static final String SELECTOR_CONTENT_NOISE = ".yoast-breadcrumbs, script, style";
 
     // Path prefixes that belong to other scripts or are WP system paths, not
     // real content pages.
@@ -141,7 +163,7 @@ public class ConvertPages {
 
         PageData d = new PageData();
         d.url = url;
-        d.relPath = new java.net.URI(url).getPath(); // e.g. /who-we-are/
+        d.relPath = java.net.URI.create(url).getPath(); // e.g. /who-we-are/
 
         d.title = firstNonBlank(
                 metaContent(doc, "og:title"),
@@ -156,9 +178,100 @@ public class ConvertPages {
         d.canonical = canonicalEl != null ? canonicalEl.attr("href") : d.url;
 
         Element content = doc.selectFirst(SELECTOR_ARTICLE_CONTENT);
-        d.bodyHtml = content != null ? content.html() : "";
+        if (content != null) {
+            content.select(SELECTOR_CONTENT_NOISE).remove();
+            localizeImages(content);
+            d.jdoodle = !content.select(SELECTOR_JDOODLE).isEmpty();
+            d.enlighterjs = !content.select(SELECTOR_ENLIGHTERJS).isEmpty();
+            d.bodyHtml = content.html();
+        } else {
+            d.bodyHtml = "";
+            System.err.println("  WARNING: no content matched for " + url);
+        }
 
         return d;
+    }
+
+    // ---- image localization ---------------------------------------------
+
+    /**
+     * Downloads every foojay-hosted image referenced in the body into
+     * static/images/pages/ and rewrites the reference to the local path.
+     * Covers both <img src>/srcset and <a href> lightbox links to image files.
+     * Third-party images (kept working after cutover) are left as-is.
+     */
+    static void localizeImages(Element content) {
+        for (Element img : content.select("img[src]")) {
+            String local = localizeImage(img.absUrl("src"));
+            if (local != null) {
+                img.attr("src", local);
+                // srcset points at WordPress-sized variants that vanish at cutover;
+                // drop it so the browser just uses the localized src.
+                img.removeAttr("srcset");
+                img.removeAttr("sizes");
+            }
+        }
+        for (Element a : content.select("a[href]")) {
+            String href = a.absUrl("href");
+            if (IMAGE_HREF.matcher(href).find()) {
+                String local = localizeImage(href);
+                if (local != null) a.attr("href", local);
+            }
+        }
+    }
+
+    /**
+     * Localizes one image URL, returning its new site-absolute path, or null to
+     * leave the reference unchanged (not a foojay-hosted image, or the download
+     * failed). The WordPress uploads subpath is preserved under images/pages/ so
+     * filenames from different upload folders can't collide. Idempotent: an
+     * already-downloaded file is not fetched again.
+     */
+    static String localizeImage(String absoluteUrl) {
+        String rel = pageImageRelPath(absoluteUrl);
+        if (rel == null) return null;
+        Path out = PAGE_IMAGE_DIR.resolve(rel);
+        try {
+            if (!Files.exists(out)) {
+                Connection.Response res = Jsoup.connect(absoluteUrl)
+                        .userAgent(USER_AGENT)
+                        .timeout(REQUEST_TIMEOUT_MS)
+                        .ignoreContentType(true)
+                        .maxBodySize(0)
+                        .execute();
+                Files.createDirectories(out.getParent());
+                Files.write(out, res.bodyAsBytes());
+            }
+            return PAGE_IMAGE_URL_PREFIX + rel;
+        } catch (IOException e) {
+            System.err.println("  image download failed: " + absoluteUrl + " -> " + e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Maps a foojay-hosted image URL to its relative path under images/pages/,
+     * or null if it shouldn't be localized. Uses the WordPress uploads subpath
+     * (e.g. .../uploads/2025/05/foo.jpg -> 2025/05/foo.jpg) when present, else
+     * the URL path minus its leading slash.
+     */
+    static String pageImageRelPath(String absoluteUrl) {
+        if (absoluteUrl == null || absoluteUrl.isBlank() || absoluteUrl.startsWith("data:")) return null;
+        URI uri;
+        try {
+            uri = URI.create(absoluteUrl);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+        String host = uri.getHost();
+        if (host == null || !host.endsWith(LOCAL_HOST_SUFFIX)) return null; // only foojay-hosted
+        String path = uri.getPath();
+        if (path == null || path.isBlank()) return null;
+
+        int uploads = path.indexOf("/uploads/");
+        String rel = uploads >= 0 ? path.substring(uploads + "/uploads/".length()) : path.replaceFirst("^/+", "");
+        rel = rel.replaceAll("\\.\\.(?:/|$)", ""); // defensive: no path traversal
+        return rel.isBlank() ? null : rel;
     }
 
     static boolean isFrozen(String relPath) {
@@ -181,6 +294,8 @@ public class ConvertPages {
         fm.append("description: ").append(yamlString(d.description)).append("\n");
         fm.append("canonical: ").append(yamlString(d.canonical)).append("\n");
         fm.append("url: ").append(yamlString(d.relPath)).append("\n");
+        if (d.jdoodle) fm.append("jdoodle: true\n");
+        if (d.enlighterjs) fm.append("enlighterjs: true\n");
         fm.append("aliases:\n");
         fm.append("  - ").append(yamlString(d.relPath)).append("\n");
         fm.append("frozen: false\n");
@@ -242,5 +357,6 @@ public class ConvertPages {
 
     static class PageData {
         String url, relPath, title, description, canonical, bodyHtml;
+        boolean jdoodle, enlighterjs;
     }
 }

@@ -1,19 +1,91 @@
-<header class="site-header">
-  <div class="branding">
-    <a href="{{ "/" | relURL }}" class="logo">foojay<span>.io</span></a>
-    <span class="tagline">Friends of OpenJDK</span>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" data-nav>
+  <div class="site-header__inner">
+
+    <a class="logo" href="{{ "/" | relURL }}">
+      {{ partial "site-logo.html" . }}
+      <span class="logo__tag">Friends of OpenJDK</span>
+    </a>
+
+    <button class="nav-toggle" type="button" data-nav-toggle
+            aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+      <span class="nav-toggle__bars"></span>
+    </button>
+
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+      <ul class="primary-nav__list">
+        {{ $page := . }}
+        {{ range .Site.Menus.main }}
+          {{ if .HasChildren }}
+            {{/* Count direct children that are plain links, so an empty grid cell
+                 is never rendered when a menu is made up only of groups. */}}
+            {{ $plain := 0 }}
+            {{ range .Children }}{{ if not .HasChildren }}{{ $plain = add $plain 1 }}{{ end }}{{ end }}
+            {{ $cols := .Params.cols | default 1 }}
+            <li class="nav-item nav-item--has-panel" data-nav-item>
+              <button class="nav-link nav-link--parent" type="button" data-nav-trigger aria-expanded="false"
+                      {{ if $page.HasMenuCurrent "main" . }}aria-current="page"{{ end }}>{{ .Name }}</button>
+              <div class="nav-panel">
+                <div class="nav-panel__inner nav-panel__inner--cols-{{ $cols }}">
+
+                  {{ if gt $plain 0 }}
+                  <ul class="nav-panel__list">
+                    {{ range .Children }}{{ if not .HasChildren }}
+                      <li><a href="{{ .URL | relURL }}">{{ .Name }}{{ with .Params.desc }}<span class="nav-panel__desc">{{ . }}</span>{{ end }}</a></li>
+                    {{ end }}{{ end }}
+                  </ul>
+                  {{ end }}
+
+                  {{/* Third level is flattened into a titled column instead of a
+                       nested hover flyout — the main fix vs. the WordPress nav. */}}
+                  {{ range .Children }}{{ if .HasChildren }}
+                    <div class="nav-group">
+                      <a class="nav-group__title" href="{{ .URL | relURL }}">{{ .Name }}</a>
+                      <ul class="nav-panel__list">
+                        {{ range .Children }}
+                          <li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>
+                        {{ end }}
+                      </ul>
+                    </div>
+                  {{ end }}{{ end }}
+
+                  {{ with .Params.footlink }}
+                  <div class="nav-panel__foot">
+                    <a href="{{ .url | relURL }}">{{ .label }} &rarr;</a>
+                  </div>
+                  {{ end }}
+
+                </div>
+              </div>
+            </li>
+          {{ else }}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ .URL | relURL }}"
+                 {{ if $page.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>{{ .Name }}</a>
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+
+      {{/* Drawer copy of the header actions — hidden on desktop by CSS. */}}
+      <div class="header-actions header-actions--mobile">
+        {{ partial "search-form.html" . }}
+        {{ partial "theme-toggle.html" . }}
+        {{ with .Site.Params.headerCta }}
+          <a class="btn btn--accent" href="{{ .url | relURL }}">{{ .label }}</a>
+        {{ end }}
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      {{ partial "search-form.html" . }}
+      {{ partial "theme-toggle.html" . }}
+      {{ with .Site.Params.headerCta }}
+        <a class="btn btn--accent" href="{{ .url | relURL }}">{{ .label }}</a>
+      {{ end }}
+    </div>
+
   </div>
-  <nav class="main-nav">
-    <ul>
-      <li><a href="{{ "/today/" | relURL }}">Daily News</a></li>
-      <li><a href="{{ "/today/category/podcast/" | relURL }}">Podcast</a></li>
-      <li><a href="{{ "/all-events/" | relURL }}">Event Calendar</a></li>
-      <li><a href="{{ "/jugs/" | relURL }}">Java User Groups</a></li>
-      <li><a href="{{ "/who-we-are/" | relURL }}">About</a></li>
-      <li><a href="{{ "/today/author/" | relURL }}">Authors</a></li>
-    </ul>
-  </nav>
-  <form class="site-search" role="search" action="{{ "/search/" | relURL }}">
-    <input type="search" name="q" placeholder="Search...">
-  </form>
 </header>
+<div class="nav-backdrop" data-nav-backdrop hidden></div>

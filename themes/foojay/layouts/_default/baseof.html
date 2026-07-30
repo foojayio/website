@@ -1,25 +1,58 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
+<html lang="{{ .Site.LanguageCode | default "en-us" }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, minimum-scale=1">
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
-  <meta name="description" content="{{ if .Params.description }}{{ .Params.description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-  {{ if .Params.canonical }}<link rel="canonical" href="{{ .Params.canonical }}">{{ else }}<link rel="canonical" href="{{ .Permalink }}">{{ end }}
-  <meta property="og:title" content="{{ .Title }}">
-  <meta property="og:description" content="{{ if .Params.description }}{{ .Params.description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  {{ $desc := .Params.description | default .Site.Params.description }}
+  <meta name="description" content="{{ $desc }}">
+  <link rel="canonical" href="{{ .Params.canonical | default .Permalink }}">
+
+  <meta property="og:site_name" content="foojay">
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
+  <meta property="og:description" content="{{ $desc }}">
+  <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:type" content="{{ if eq .Section "posts" }}article{{ else }}website{{ end }}">
-  {{ if .Params.image }}<meta property="og:image" content="{{ .Params.image }}">{{ end }}
+  {{ with .Params.image }}<meta property="og:image" content="{{ . }}">{{ end }}
+  <meta name="twitter:card" content="{{ if .Params.image }}summary_large_image{{ else }}summary{{ end }}">
+  {{ if eq .Section "posts" }}
+  <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+  {{ end }}
+
+  {{ with .Site.Params.favicon }}<link rel="icon" href="{{ . | relURL }}">{{ end }}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+
+  {{/* Resolve the colour scheme before first paint so the page never flashes
+       the wrong theme. Stored choice wins, otherwise follow the OS. */}}
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('foojay-theme');
+        var dark = stored ? stored === 'dark'
+                          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+        else document.documentElement.setAttribute('data-theme', 'light');
+      } catch (e) {}
+    })();
+  </script>
+
   {{ range .AlternativeOutputFormats }}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
   {{ end }}
 </head>
 <body>
   {{ partial "header.html" . }}
-  <main class="site-main">
+
+  <main class="site-main" id="main">
     {{ block "main" . }}{{ end }}
   </main>
+
   {{ partial "footer.html" . }}
+
+  <script src="{{ "js/nav.js" | relURL }}" defer></script>
 </body>
 </html>
