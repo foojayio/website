@@ -69,12 +69,31 @@
           status.textContent = search.results.length + ' result' + (search.results.length === 1 ? '' : 's') + ' for "' + query + '"';
           return Promise.all(search.results.slice(0, 30).map(function (r) { return r.data(); }))
             .then(function (datas) {
-              render(datas.map(function (d) {
+              // Newest first, for whichever results have a date (posts do,
+              // via data-pagefind-meta="date[datetime]" in posts/single.html;
+              // authors/pages don't). Undated results keep their original
+              // relevance order and sort after all dated ones, rather than
+              // being dropped -- Pagefind's own `sort` option would exclude
+              // anything missing the sort key entirely, which isn't what we
+              // want on a mixed-content site.
+              var dated = datas.filter(function (d) { return d.meta && d.meta.date; });
+              var undated = datas.filter(function (d) { return !(d.meta && d.meta.date); });
+              dated.sort(function (a, b) { return b.meta.date.localeCompare(a.meta.date); });
+              var ordered = dated.concat(undated);
+
+              render(ordered.map(function (d) {
+                var dateLabel = '';
+                if (d.meta && d.meta.date) {
+                  var parsed = new Date(d.meta.date);
+                  dateLabel = isNaN(parsed) ? d.meta.date
+                    : parsed.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+                }
                 return '' +
                   '<article class="search-result">' +
                   (d.meta && d.meta.image ? '<a class="search-result__image" href="' + d.url + '"><img src="' + d.meta.image + '" alt="" loading="lazy"></a>' : '') +
                   '<div class="search-result__body">' +
                   '<h3><a href="' + d.url + '">' + (d.meta && d.meta.title ? d.meta.title : d.url) + '</a></h3>' +
+                  (dateLabel ? '<time class="search-result__date">' + dateLabel + '</time>' : '') +
                   '<p>' + d.excerpt + '</p>' +
                   '</div>' +
                   '</article>';

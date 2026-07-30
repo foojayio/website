@@ -12,7 +12,11 @@
       <h1>{{ .Title }}</h1>
 
       <div class="post-meta">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        {{/* data-pagefind-meta captures the ISO datetime attribute as the
+             "date" meta key (see search/single.html), so search results can
+             show/sort by date without Pagefind having to parse the display
+             text. */}}
+        <time datetime="{{ .Date.Format "2006-01-02" }}" data-pagefind-meta="date[datetime]">{{ .Date.Format "Jan 2, 2006" }}</time>
         {{ partial "byline.html" . }}
         <span class="reading-time">{{ .ReadingTime }} min read</span>
       </div>

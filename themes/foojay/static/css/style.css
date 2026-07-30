@@ -852,6 +852,10 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .search-result__image { display: block; width: 120px; border-radius: var(--radius-sm); overflow: hidden; }
 .search-result__image img { width: 120px; height: 84px; object-fit: cover; }
 .search-result h3 { margin: 0 0 .3rem; font-size: 1.1rem; }
+.search-result__date {
+  display: block; margin: 0 0 .4rem;
+  color: var(--ink-muted); font-size: .85rem; font-variant-numeric: tabular-nums;
+}
 .search-result p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
 .search-result mark { background: var(--brand-accent-soft); color: var(--ink); border-radius: 2px; }
 
