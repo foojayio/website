@@ -33,7 +33,7 @@
       {{ $author := partial "author-page.html" . }}
       {{ with $author }}
       <section class="author-callout">
-        {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" src="{{ . }}" alt="" loading="lazy">{{ end }}
+        {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" src="{{ . | strings.TrimPrefix "/" | relURL }}" alt="" loading="lazy">{{ end }}
         <div>
           <span class="eyebrow">Written by</span>
           <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>

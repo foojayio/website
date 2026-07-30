@@ -2,7 +2,7 @@
 <div class="layout-with-sidebar">
   <div class="content-col">
     <div class="author-profile">
-      {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" src="{{ . }}" alt="{{ $.Title }}">{{ end }}
+      {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" src="{{ . | strings.TrimPrefix "/" | relURL }}" alt="{{ $.Title }}">{{ end }}
       <h1>{{ .Title }}</h1>
       {{ with .Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}
       <ul class="author-social">
