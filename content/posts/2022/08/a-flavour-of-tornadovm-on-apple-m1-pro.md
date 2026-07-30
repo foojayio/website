@@ -6,7 +6,7 @@ lastmod: "2023-02-16T08:01:45+00:00"
 description: "This article aims to describe all of the main steps required to install and run TornadoVM on Apple M1 Pro."
 authors:
   - "thanos-stratikopoulos"
-image: "https://foojay.io/wp-content/uploads/2022/08/opted.png"
+image: "/images/posts/2022/08/a-flavour-of-tornadovm-on-apple-m1-pro/opted.png"
 categories:
   - "Performance"
   - "TornadoVM"

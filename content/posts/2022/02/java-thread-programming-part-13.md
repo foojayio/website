@@ -6,7 +6,7 @@ lastmod: "2022-02-08T08:19:37+00:00"
 description: "What is the maximum number of worker threads we can put in a ThreadPool? Let's find out today on Foojay's amazing Java threading series!"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/02/hp-koch-2OuTr9_VaUg-unsplash-scaled.jpg"
+image: "/images/posts/2022/02/java-thread-programming-part-13/hp-koch-2OuTr9_VaUg-unsplash-scaled.jpg"
 categories:
   - "Java Core"
 tags:

@@ -7,7 +7,7 @@ description: "Improving our DevOps skills can help us become better developers, 
 canonical: "https://debugagent.com/devops-for-developers-introduction-and-version-control"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/02/devops4devs-01.jpg"
+image: "/images/posts/2023/03/devops-for-developers-introduction-version-control/devops4devs-01.jpg"
 categories:
   - "Developer Tools"
   - "DevOps"

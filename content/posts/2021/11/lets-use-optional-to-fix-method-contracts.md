@@ -6,7 +6,7 @@ lastmod: "2021-11-10T11:56:20+00:00"
 description: "Optional is a mystery box, a wrapping paper: it may not contain value. When we specify that in a signature, we assume the box might be empty."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/11/lets-use-optional-to-fix-method-contracts/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

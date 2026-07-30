@@ -7,7 +7,7 @@ description: "Learn how to run a build on GitLab only if a condition is met, esp
 canonical: "https://blog.frankel.ch/conditional-build-gitlab/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/05/pexels-james-wheeler-1578750.jpg"
+image: "/images/posts/2022/05/conditional-builds-on-gitlab/pexels-james-wheeler-1578750.jpg"
 categories:
   - "DevOps"
   - "GitLab"

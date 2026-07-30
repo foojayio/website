@@ -7,7 +7,7 @@ description: "Learn how the most challenging issue with server-side caching is t
 canonical: "https://blog.frankel.ch/web-caching/server/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/11/pexels-tom-fisk-3063470-1.jpg"
+image: "/images/posts/2022/12/web-caching-server/pexels-tom-fisk-3063470-1.jpg"
 categories:
   - "Performance"
   - "Tools"

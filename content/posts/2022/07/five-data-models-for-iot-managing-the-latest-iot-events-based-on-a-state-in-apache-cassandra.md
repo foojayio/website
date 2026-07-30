@@ -7,7 +7,7 @@ description: "© Shutterstock / everything possible Apache Cassandra is a rock-
 canonical: "https://jaxenter.com/apache-cassandra-iot-174970.html"
 authors:
   - "artem-chebotko"
-image: "https://foojay.io/wp-content/uploads/2022/02/shutterstock_1111260050-350x233-1.jpg"
+image: "/images/posts/2022/07/five-data-models-for-iot-managing-the-latest-iot-events-based-on-a-state-in-apache-cassandra/shutterstock_1111260050-350x233-1.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"

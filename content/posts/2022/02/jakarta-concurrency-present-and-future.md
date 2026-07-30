@@ -7,7 +7,7 @@ description: "Jakarta Concurrency is a small, but fundamental, specification in 
 canonical: "https://blog.payara.fish/jakarta-concurrency-present-and-future"
 authors:
   - "steve-millidge"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/02/jakarta-concurrency-present-and-future/Favicon-3-2.png"
 categories:
   - "Jakarta EE"
   - "Performance"

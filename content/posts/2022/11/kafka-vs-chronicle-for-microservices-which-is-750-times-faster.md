@@ -6,7 +6,7 @@ lastmod: "2022-11-30T08:24:05+00:00"
 description: "Find out why, while Kafka is a good choice for log aggregation, it might not be low latency enough for use cases involving microservices."
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2022/11/Screen-Shot-2022-11-22-at-11.27.55-AM.png"
+image: "/images/posts/2022/11/kafka-vs-chronicle-for-microservices-which-is-750-times-faster/Screen-Shot-2022-11-22-at-11.27.55-AM.png"
 categories:
   - "Java Core"
   - "Kafka"

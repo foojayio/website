@@ -6,7 +6,7 @@ lastmod: "2021-05-25T12:10:18+00:00"
 description: "Changelog and release notes. Learn More."
 authors:
   - "almasbaimagambetov"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/05/fxgl-game-engine-11-16-release/Favicon-3-2.png"
 categories:
   - "Game Development"
   - "JavaFX"

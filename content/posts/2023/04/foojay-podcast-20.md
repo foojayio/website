@@ -9,7 +9,7 @@ authors:
   - "deepu-sasidharan"
   - "frankdelporte"
   - "ties-van-de-ven"
-image: "https://foojay.io/wp-content/uploads/2023/04/guests-podcast-functional-programming-1024x575-1.png"
+image: "/images/posts/2023/04/foojay-podcast-20/guests-podcast-functional-programming-1024x575-1.png"
 categories:
   - "Opinion"
   - "Podcast"

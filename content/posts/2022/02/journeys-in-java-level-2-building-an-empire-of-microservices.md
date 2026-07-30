@@ -6,7 +6,7 @@ lastmod: "2022-06-01T20:08:48+00:00"
 description: "Let's dive into the world of microservices find out the complexities, best practices, and troubles. I will share all my learnings, as well!"
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2022/02/unsplash-small-bridge-scaled.jpeg"
+image: "/images/posts/2022/02/journeys-in-java-level-2-building-an-empire-of-microservices/unsplash-small-bridge-scaled.jpeg"
 categories:
   - "Databases"
   - "Microservices"

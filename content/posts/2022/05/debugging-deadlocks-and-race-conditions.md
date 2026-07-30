@@ -7,7 +7,7 @@ description: "Threading issues are a piece of cake with these simple debugger te
 canonical: "https://talktotheduck.dev/debugging-deadlocks-and-race-conditions"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/05/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
+image: "/images/posts/2022/05/debugging-deadlocks-and-race-conditions/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

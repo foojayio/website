@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:35:13+00:00"
 description: "Solving the limitations of the Future interface, we have the CompletableFuture API with methods to build reliable high-performant software."
 authors:
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2021/05/completable_future-1024x801-1.png"
+image: "/images/posts/2021/06/asynchronous-completablefuture-san-francisco-adventure-java-challenge/completable_future-1024x801-1.png"
 categories:
   - "Tutorials"
 tags:

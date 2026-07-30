@@ -6,7 +6,7 @@ lastmod: "2022-12-15T00:01:51+00:00"
 description: "With full-stack type safety, 45+ UI components and integrated tooling, Hilla lets you build Spring Boot + React apps faster than ever."
 authors:
   - "marcus-hellberg"
-image: "https://foojay.io/wp-content/uploads/2021/12/VaadinLogo_RGB_500x155.png"
+image: "/images/posts/2022/12/hilla-1-3-faster-react-spring-boot-development/VaadinLogo_RGB_500x155.png"
 categories:
   - "Cloud"
   - "Hilla"

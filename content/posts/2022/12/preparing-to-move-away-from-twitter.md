@@ -7,7 +7,7 @@ description: "I opened my Twitter account more than 13 years ago, in August 2009
 canonical: "https://blog.frankel.ch/move-away-twitter/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/12/Mastodon_Logotype_Simple.svg.png"
+image: "/images/posts/2022/12/preparing-to-move-away-from-twitter/Mastodon_Logotype_Simple.svg.png"
 categories:
   - "Tools"
 tags:

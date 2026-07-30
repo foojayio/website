@@ -7,7 +7,7 @@ description: "Learn how to integrate Snyk into your GitHub CI/CD to automate sec
 canonical: "https://snyk.io/blog/building-a-secure-pipeline-with-github-actions/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2022/08/blog-github-actions-pipeline-1-1240x415-1.jpeg"
+image: "/images/posts/2022/08/building-secure-ci-cd-pipelines-with-github-actions-for-your-java-application/blog-github-actions-pipeline-1-1240x415-1.jpeg"
 categories:
   - "Developer Tools"
   - "DevOps"
@@ -153,7 +153,7 @@ Since we only want to release the package when the build job and both security j
          java-version: 17
      - name: Set Git user
        run: |
-         git config user.email "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="284f40494b5c4147465b684a5a4149465e4d5a454d4d5a064644">[email&nbsp;protected]</a>"
+         git config user.email "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="214649404255484e4f5261435348404f5744534c4444530f4f4d">[email&nbsp;protected]</a>"
          git config user.name "GitHub Actions"
      - name: Publish JAR
        run: mvn -B release:prepare release:perform -DskipTests

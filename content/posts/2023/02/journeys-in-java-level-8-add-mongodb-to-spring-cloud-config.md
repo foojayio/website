@@ -6,7 +6,7 @@ lastmod: "2023-02-09T16:56:30+00:00"
 description: "Convert an existing MongoDB-connected service to use Spring Cloud Config for accessing database credentials, as with a Neo4j microservice."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2023/01/unsplash-high-stone-bridge-scaled.jpg"
+image: "/images/posts/2023/02/journeys-in-java-level-8-add-mongodb-to-spring-cloud-config/unsplash-high-stone-bridge-scaled.jpg"
 categories:
   - "Databases"
   - "Graph"

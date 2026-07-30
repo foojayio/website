@@ -6,7 +6,7 @@ lastmod: "2022-02-16T00:43:56+00:00"
 description: "Let’s learn java stream API with a few practical examples."
 authors:
   - "mainuls18"
-image: "https://foojay.io/wp-content/uploads/2022/02/steve-bittinger-GXasHuHbDmY-unsplash-scaled.jpg"
+image: "/images/posts/2022/02/playing-practically-with-stream-api/steve-bittinger-GXasHuHbDmY-unsplash-scaled.jpg"
 categories:
   - "Tutorials"
 tags:

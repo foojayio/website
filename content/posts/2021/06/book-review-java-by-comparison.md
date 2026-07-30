@@ -6,7 +6,7 @@ lastmod: "2021-09-04T07:46:46+00:00"
 description: "“Java by Comparison”, Simon Harrer, Jörg Lenhard, and Linus Dietz, promises the reader to become a “Java Craftsman” by studying 70 examples."
 authors:
   - "cay-horstmann"
-image: "https://foojay.io/wp-content/uploads/2021/06/javabycomparison.png"
+image: "/images/posts/2021/06/book-review-java-by-comparison/javabycomparison.png"
 categories:
   - "Book Review"
   - "Books"

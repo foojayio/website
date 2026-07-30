@@ -7,7 +7,7 @@ description: "In this post, learn how relational and NoSQL databases, Google Clo
 canonical: "https://medium.com/building-the-open-data-stack/optimizing-distributed-joins-the-case-of-google-cloud-spanner-and-datastax-astra-db-fbdaecc2863b"
 authors:
   - "artem-chebotko"
-image: "https://foojay.io/wp-content/uploads/2022/01/0_6VGah2hwaLIBjW7R.jpeg"
+image: "/images/posts/2022/05/optimizing-distributed-joins-the-case-of-google-cloud-spanner-and-datastax-astra-db/0_6VGah2hwaLIBjW7R.jpeg"
 categories:
   - "Apache Cassandra"
   - "Databases"

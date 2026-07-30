@@ -7,7 +7,7 @@ description: "Learn why when you use hyper-optimized Java runtimes instead of va
 canonical: "https://www.azul.com/blog/why-your-choice-of-java-virtual-machine-jvm-matters-more-than-ever/"
 authors:
   - "john-ceccarelli"
-image: "https://foojay.io/wp-content/uploads/2022/05/blog-image-platform-prime.png"
+image: "/images/posts/2023/01/why-your-choice-of-java-virtual-machine-jvm-matters-more-than-ever/blog-image-platform-prime.png"
 categories:
   - "Java Core"
   - "Performance"

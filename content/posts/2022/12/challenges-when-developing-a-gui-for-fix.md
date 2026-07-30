@@ -6,7 +6,7 @@ lastmod: "2022-12-21T10:36:50+00:00"
 description: "In this article, we explore the challenges in developing a Graphical User Interface (GUI) for Financial Information Exchange (FIX) data."
 authors:
   - "rob-austin"
-image: "https://foojay.io/wp-content/uploads/2022/12/Screen-Shot-2022-12-13-at-2.42.46-PM.png"
+image: "/images/posts/2022/12/challenges-when-developing-a-gui-for-fix/Screen-Shot-2022-12-13-at-2.42.46-PM.png"
 categories:
   - "Developer Tools"
   - "Java Core"

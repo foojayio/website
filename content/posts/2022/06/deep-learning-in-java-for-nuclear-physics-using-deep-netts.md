@@ -6,7 +6,7 @@ lastmod: "2023-07-11T09:38:24+00:00"
 description: "We use the Deep Netts library to implement our neural networks to do track classification, using Multi-Layer Perceptron (MLP) Neural Network."
 authors:
   - "gagik-gavalian"
-image: "https://foojay.io/wp-content/uploads/2022/06/CLAS12-side.png"
+image: "/images/posts/2022/06/deep-learning-in-java-for-nuclear-physics-using-deep-netts/CLAS12-side.png"
 categories:
   - "Deep Netts"
   - "Machine Learning"

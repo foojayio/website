@@ -6,7 +6,7 @@ lastmod: "2022-02-11T09:12:35+00:00"
 description: "Let's discuss technologies we use with JavaFX to build JVM byte code versions as well as native images that target iOS and Android devices!"
 authors:
   - "gail-anderson"
-image: "https://foojay.io/wp-content/uploads/2021/06/tiltmaze-logo-small.png"
+image: "/images/posts/2021/06/creating-mobile-apps-with-javafx-part-2/tiltmaze-logo-small.png"
 categories:
   - "Game Development"
   - "JavaFX"

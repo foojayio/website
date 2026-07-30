@@ -7,7 +7,7 @@ description: "When we get an exception stack, it can often contain the solution 
 canonical: "https://talktotheduck.dev/understanding-stack-traces-and-debugging-them-further"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2021/09/Understanding-Stack-Traces1.jpg"
+image: "/images/posts/2021/10/understanding-stack-traces-and-debugging-them-further/Understanding-Stack-Traces1.jpg"
 categories:
   - "Uncategorized"
 tags:

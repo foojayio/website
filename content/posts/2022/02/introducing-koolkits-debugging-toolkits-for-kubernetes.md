@@ -7,7 +7,7 @@ description: "New OSS approach for debugging live applications - right from insi
 canonical: "https://lightrun.com/debugging/koolkits-debugging-toolkits-for-kubernetes/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/02/lightrun-koolkits.png"
+image: "/images/posts/2022/02/introducing-koolkits-debugging-toolkits-for-kubernetes/lightrun-koolkits.png"
 categories:
   - "Kubernetes"
   - "Microservices"

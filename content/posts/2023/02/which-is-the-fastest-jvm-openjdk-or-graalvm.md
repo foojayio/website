@@ -6,7 +6,7 @@ lastmod: "2023-02-08T10:55:11+00:00"
 description: "How is a high-performance, low-latency Java application affected by the JVM version used? Find out more on Foojay!"
 authors:
   - "per-minborg"
-image: "https://foojay.io/wp-content/uploads/2023/01/Screen-Shot-2023-01-31-at-9.45.13-AM-1024x602-1.png"
+image: "/images/posts/2023/02/which-is-the-fastest-jvm-openjdk-or-graalvm/Screen-Shot-2023-01-31-at-9.45.13-AM-1024x602-1.png"
 categories:
   - "Java Core"
   - "Performance"

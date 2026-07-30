@@ -7,7 +7,7 @@ description: "From this video, learn how the Jakarta EE deployment model using t
 canonical: "https://www.payara.fish/dismiss-the-myths/"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2021/08/MicrosoftTeams-image-12-scaled.jpg"
+image: "/images/posts/2021/08/is-the-java-jakarta-ee-deployment-model-out-of-date/MicrosoftTeams-image-12-scaled.jpg"
 categories:
   - "Jakarta EE"
   - "Microservices"

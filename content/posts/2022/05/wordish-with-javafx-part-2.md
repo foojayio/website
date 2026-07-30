@@ -6,7 +6,7 @@ lastmod: "2022-05-24T07:50:55+00:00"
 description: "Learn specialized JavaFX Labels and Buttons, pseudo-classes for CSS styling, and third-party font libraries and customizing Scene Builder!"
 authors:
   - "gail-anderson"
-image: "https://foojay.io/wp-content/uploads/2022/05/playgame5.png"
+image: "/images/posts/2022/05/wordish-with-javafx-part-2/playgame5.png"
 categories:
   - "Game Development"
   - "Gluon"

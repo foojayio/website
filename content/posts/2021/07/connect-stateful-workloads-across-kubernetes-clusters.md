@@ -7,7 +7,7 @@ description: "How we utilize off-the-shelf functionality and components to set u
 canonical: "https://www.datastax.com/blog/how-connect-stateful-workloads-across-kubernetes-clusters"
 authors:
   - "roman-chernobelskiy"
-image: "https://foojay.io/wp-content/uploads/2021/07/multi-cluster-overlay-networking.png"
+image: "/images/posts/2021/07/connect-stateful-workloads-across-kubernetes-clusters/multi-cluster-overlay-networking.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

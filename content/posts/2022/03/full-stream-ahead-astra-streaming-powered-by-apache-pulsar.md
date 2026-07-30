@@ -7,7 +7,7 @@ description: "Astra Streaming is a scalable highly performant event streaming c
 canonical: "https://www.datastax.com/blog/full-stream-ahead-astra-streaming-powered-apache-pulsar-here"
 authors:
   - "chris-latimer"
-image: "https://foojay.io/wp-content/uploads/2021/07/Astra-Streamingblog-post-cover-image.png"
+image: "/images/posts/2022/03/full-stream-ahead-astra-streaming-powered-by-apache-pulsar/Astra-Streamingblog-post-cover-image.png"
 categories:
   - "Apache Pulsar"
   - "DataStax"

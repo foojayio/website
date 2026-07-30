@@ -6,7 +6,7 @@ lastmod: "2022-08-17T11:21:15+00:00"
 description: "Learn how to improve your test performance against container-based resources by magnitudes in a couple of easy steps!"
 authors:
   - "michael-simons"
-image: "https://foojay.io/wp-content/uploads/2022/08/logo.png"
+image: "/images/posts/2022/08/faster-integration-tests-with-reusable-testcontainers/logo.png"
 categories:
   - "Databases"
   - "Neo4J"

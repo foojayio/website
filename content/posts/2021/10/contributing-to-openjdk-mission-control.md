@@ -7,7 +7,7 @@ description: "Since this month is Hacktoberfest, I thought it would be a good i
 canonical: "http://hirt.se/blog/?p=1365"
 authors:
   - "hirt"
-image: "https://foojay.io/wp-content/uploads/2021/10/JDK_Mission_Control_logo.png"
+image: "/images/posts/2021/10/contributing-to-openjdk-mission-control/JDK_Mission_Control_logo.png"
 categories:
   - "JDK Flight Recorder"
 tags:

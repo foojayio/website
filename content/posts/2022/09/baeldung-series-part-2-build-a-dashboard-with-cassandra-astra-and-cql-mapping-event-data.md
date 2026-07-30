@@ -7,7 +7,7 @@ description: "1. Introduction In our previous article, we looked at augmenting 
 canonical: "https://www.baeldung.com/cassandra-astra-rest-dashboard-map"
 authors:
   - "graham-cox"
-image: "https://foojay.io/wp-content/uploads/2022/02/astra-secure-connect.png"
+image: "/images/posts/2022/09/baeldung-series-part-2-build-a-dashboard-with-cassandra-astra-and-cql-mapping-event-data/astra-secure-connect.png"
 categories:
   - "Apache Cassandra"
   - "Databases"
@@ -233,7 +233,7 @@ Once we've written our controller, we need a template to actually render the HTM
   &lt;meta charset="utf-8" /&gt;
   &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
 
-  &lt;link href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d1f1212090e090f1c0d3d48534d534d501f18091c4e">[email&nbsp;protected]</a>/dist/css/bootstrap.min.css" rel="stylesheet"
+  &lt;link href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1a7875756e696e687b6a5a2f342a342a37787f6e7b29">[email&nbsp;protected]</a>/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" /&gt;
 
   &lt;title&gt;Avengers Status Map&lt;/title&gt;
@@ -275,7 +275,7 @@ Once we've written our controller, we need a template to actually render the HTM
     &lt;/div&gt;
   &lt;/div&gt;
 
-  &lt;script src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3a1acacb7b0b7b1a2b383f6edf3edf3eea1a6b7a2f0">[email&nbsp;protected]</a>/dist/js/bootstrap.bundle.min.js"
+  &lt;script src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="03616c6c77707771627343362d332d332e6166776230">[email&nbsp;protected]</a>/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"&gt;
     &lt;/script&gt;
   &lt;script type="text/javascript" th:inline="javascript"&gt;

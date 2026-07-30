@@ -6,7 +6,7 @@ lastmod: "2021-10-27T15:03:39+00:00"
 description: "Working correctly with exceptions is crucial to a high-quality application that users enjoy using. This quiz reinforces some of the basics."
 authors:
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/10/exception-chaos-java-code-quiz/Favicon-3-2.png"
 categories:
   - "Books"
 tags:

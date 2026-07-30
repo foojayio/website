@@ -6,7 +6,7 @@ lastmod: "2021-09-03T08:40:14+00:00"
 description: "Here's a book to be read thoroughly several times and then to be placed behind glass to be broken in case of emergency!"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2021/08/book-help-your-boss-help-you-415x510.png"
+image: "/images/posts/2021/08/book-review-help-your-boss-help-you/book-help-your-boss-help-you-415x510.png"
 categories:
   - "Book Review"
   - "Books"

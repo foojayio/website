@@ -6,7 +6,7 @@ lastmod: "2023-02-03T07:15:30+00:00"
 description: "2023 has taken of with a flying start! Here is a summary of the Links Of The Week that were published in January on jfx-central.com."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/12/podcast-javafx-guests-1024x393.png"
+image: "/images/posts/2023/01/javafx-links-of-january-2023/podcast-javafx-guests-1024x393.png"
 categories:
   - "JavaFX"
 tags:

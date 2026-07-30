@@ -7,7 +7,7 @@ description: "This article argues how Apache Cassandra is the Serverless databas
 canonical: "https://thenewstack.io/the-serverless-database-you-really-want/"
 authors:
   - "patrick-mcfadin"
-image: "https://foojay.io/wp-content/uploads/2022/02/16701f93-data-2899899_1280-1024x682-1.jpg"
+image: "/images/posts/2022/03/the-serverless-database-you-really-want/16701f93-data-2899899_1280-1024x682-1.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"

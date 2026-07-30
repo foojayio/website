@@ -6,7 +6,7 @@ lastmod: "2026-01-01T04:57:29+00:00"
 description: "imagine C code capable of performing a computation and after its completion the C code will notify Java code to perform updates to JavaFX UI."
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2022/02/duke_and_panama.png"
+image: "/images/posts/2022/02/project-panama-for-newbies-part-4/duke_and_panama.png"
 categories:
   - "Java Core"
   - "JEPs"

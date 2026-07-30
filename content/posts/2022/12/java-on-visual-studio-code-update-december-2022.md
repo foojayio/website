@@ -6,7 +6,7 @@ lastmod: "2022-12-28T08:11:45+00:00"
 description: "Hi everyone, we are near the end of year. Looking back on 2022, there are a few highlights that we wanted to share with you all!"
 authors:
   - "nick-zhu"
-image: "https://foojay.io/wp-content/uploads/2022/12/springbootdashboard-1.png"
+image: "/images/posts/2022/12/java-on-visual-studio-code-update-december-2022/springbootdashboard-1.png"
 categories:
   - "Tools"
   - "VS Code"

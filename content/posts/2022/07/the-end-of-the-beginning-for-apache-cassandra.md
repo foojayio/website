@@ -7,7 +7,7 @@ description: "Image: Pixabay Editor’s note: This story originally ran on July
 canonical: "https://datastax.medium.com/the-end-of-the-beginning-for-apache-cassandra-f58b5b4b7504"
 authors:
   - "patrick-mcfadin"
-image: "https://foojay.io/wp-content/uploads/2022/01/1_xslbFHC3hRapwGV_wj17vg.jpeg"
+image: "/images/posts/2022/07/the-end-of-the-beginning-for-apache-cassandra/1_xslbFHC3hRapwGV_wj17vg.jpeg"
 categories:
   - "Apache Cassandra"
   - "Cloud"

@@ -7,7 +7,7 @@ description: "Discussing the problem offers insight into what the problem is all
 canonical: "https://blog.frankel.ch/discuss-problem-not-solution/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/10/man-g90bbc5746.jpg"
+image: "/images/posts/2022/11/discuss-problem-not-solution/man-g90bbc5746.jpg"
 categories:
   - "DevOps"
   - "Opinion"

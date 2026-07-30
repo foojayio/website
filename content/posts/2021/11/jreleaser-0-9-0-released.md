@@ -6,7 +6,7 @@ lastmod: "2021-11-30T10:30:24+00:00"
 description: "JReleaser streamlines releases, creating GitHub/GitLab/Gitea releases and packaging binaries for Homebrew, Snapcraft, Docker, and more!"
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/11/jreleaser-0-9-0-released/Favicon-3-2.png"
 categories:
   - "DevOps"
   - "Release Notes"

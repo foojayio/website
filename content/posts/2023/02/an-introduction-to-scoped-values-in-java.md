@@ -6,7 +6,7 @@ lastmod: "2023-02-20T11:32:22+00:00"
 description: "The Scoped Values API allows us to store and share immutable data for a bounded lifetime, and is included since Java 20 as an incubator API."
 authors:
   - "huseyin-akdogan"
-image: "https://foojay.io/wp-content/uploads/2023/02/scopedvalues.png"
+image: "/images/posts/2023/02/an-introduction-to-scoped-values-in-java/scopedvalues.png"
 categories:
   - "Java Core"
   - "JEPs"

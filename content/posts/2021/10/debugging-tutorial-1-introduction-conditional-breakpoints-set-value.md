@@ -7,7 +7,7 @@ description: "Debug conditional breakpoints, setValue, and more, for VSCode, Int
 canonical: "https://talktotheduck.dev/debugging-tutorial-1-introduction-conditional-breakpoints"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2021/10/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-scaled.jpg"
+image: "/images/posts/2021/10/debugging-tutorial-1-introduction-conditional-breakpoints-set-value/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-scaled.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Kotlin"

@@ -7,7 +7,7 @@ description: "Payara has developed a module to support gRPC. It is available in 
 canonical: "https://blog.payara.fish/grpc-example-in-payara-server"
 authors:
   - "luis-neto"
-image: "https://foojay.io/wp-content/uploads/2020/10/payara_square_logo.jpg"
+image: "/images/posts/2022/08/google-remote-procedure-call-grpc-example-in-payara-server/payara_square_logo.jpg"
 categories:
   - "Microservices"
   - "Payara"

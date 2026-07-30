@@ -6,7 +6,7 @@ lastmod: "2021-12-26T14:17:17+00:00"
 description: "The upcoming FOSDEM, 5 and 6 February 2022, will be virtual and everything will be prerecorded, submit to the \"Friends of OpenJDK devroom\"!"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/12/friends-of-openjdk-at-fosdem-2022/Favicon-3-2.png"
 categories:
   - "Events"
 tags:

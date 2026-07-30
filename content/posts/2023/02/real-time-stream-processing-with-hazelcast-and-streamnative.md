@@ -7,7 +7,7 @@ description: "Learn how to stream data from Apache Pulsar into Hazelcast, where 
 authors:
   - "fawaz-ghali"
   - "tim-spann"
-image: "https://foojay.io/wp-content/uploads/2023/01/Screenshot-2023-01-27-at-14.00.51.png"
+image: "/images/posts/2023/02/real-time-stream-processing-with-hazelcast-and-streamnative/Screenshot-2023-01-27-at-14.00.51.png"
 categories:
   - "Apache Pulsar"
   - "Hazelcast"
@@ -51,7 +51,7 @@ If you have macOS \& Homebrew, you can install Hazelcast using the following com
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="325a5348575e5153414672071c001c03">[email&nbsp;protected]</a></pre>
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90f8f1eaf5fcf3f1e3e4d0a5bea2bea1">[email&nbsp;protected]</a></pre>
 
 Check if Hazelcast is installed:
 
@@ -79,7 +79,7 @@ To install Management Center, use one of the following methods, depending on you
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="91f9f0ebf4fdf2f0e2e5bcfcf0fff0f6f4fcf4ffe5bcf2f4ffe5f4e3d1a4bfa3bfa0">[email&nbsp;protected]</a></pre>
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cea6afb4aba2adafbdbae3a3afa0afa9aba3aba0bae3adaba0baabbc8efbe0fce0ff">[email&nbsp;protected]</a></pre>
 
 Check that Management Center is installed:
 

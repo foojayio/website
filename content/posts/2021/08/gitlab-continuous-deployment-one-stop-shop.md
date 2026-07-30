@@ -7,7 +7,7 @@ description: "This article shows how one could offload the Docker part of your b
 canonical: "https://blog.frankel.ch/gitlab-continuous-deployment-one-stop-shop/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/07/Method-Draw-Image1.png"
+image: "/images/posts/2021/08/gitlab-continuous-deployment-one-stop-shop/Method-Draw-Image1.png"
 categories:
   - "DevOps"
   - "GitLab"

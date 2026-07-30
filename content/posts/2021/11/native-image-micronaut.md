@@ -7,7 +7,7 @@ description: "Last week, I wrote a native web app that queried the Marvel API us
 canonical: "https://blog.frankel.ch/native/micronaut/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/11/sally.jpeg"
+image: "/images/posts/2021/11/native-image-micronaut/sally.jpeg"
 categories:
   - "Kotlin"
   - "Performance"

@@ -7,7 +7,7 @@ description: "The new Kafka Connect Adaptor completes the Pulsar-Kafka compatibi
 canonical: "https://www.datastax.com/blog/simplify-migrating-kafka-to-pulsar-kafka-connect-support"
 authors:
   - "enrico-olivelli"
-image: "https://foojay.io/wp-content/uploads/2021/12/dd0ae5cb262383229cf5f694659e03b28cdad97e-1996x1322-1.png"
+image: "/images/posts/2022/01/simplify-migrating-from-kafka-to-pulsar-with-kafka-connect-support/dd0ae5cb262383229cf5f694659e03b28cdad97e-1996x1322-1.png"
 categories:
   - "Apache Cassandra"
   - "Apache Pulsar"

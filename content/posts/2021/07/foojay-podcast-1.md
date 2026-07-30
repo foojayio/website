@@ -9,7 +9,7 @@ authors:
   - "erikcostlow"
   - "gerrit-grunwald"
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/07/foojay_podcast.png"
+image: "/images/posts/2021/07/foojay-podcast-1/foojay_podcast.png"
 categories:
   - "Foojay"
   - "Podcast"

@@ -7,7 +7,7 @@ description: "Join me for a livestream discussion on logging and how observabili
 canonical: "https://debugagent.com/logging-best-practices-revisited"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/05/Screenshot-2023-05-14-at-15.27.56.png"
+image: "/images/posts/2023/05/logging-best-practices-revisited/Screenshot-2023-05-14-at-15.27.56.png"
 categories:
   - "Events"
   - "Videos"

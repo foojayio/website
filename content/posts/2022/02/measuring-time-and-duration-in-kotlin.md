@@ -7,7 +7,7 @@ description: "The DurationAPI is coming out of its experimental stage and offers
 canonical: "https://lengrand.fr/measuring-time-and-durations-in-kotlin/"
 authors:
   - "jlengrand"
-image: "https://foojay.io/wp-content/uploads/2022/02/photo-1512856246663-647a81ef198e.jpeg"
+image: "/images/posts/2022/02/measuring-time-and-duration-in-kotlin/photo-1512856246663-647a81ef198e.jpeg"
 categories:
   - "Kotlin"
 tags:

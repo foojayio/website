@@ -6,7 +6,7 @@ lastmod: "2022-06-14T07:25:40+00:00"
 description: "Let's turn to JavaFX charts, showing how to customize charts with orientation and colors and how to add nodes to the chart scene graph!"
 authors:
   - "gail-anderson"
-image: "https://foojay.io/wp-content/uploads/2022/05/playgame5.png"
+image: "/images/posts/2022/06/wordish-with-javafx-part-5/playgame5.png"
 categories:
   - "Game Development"
   - "Gluon"

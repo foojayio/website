@@ -7,7 +7,7 @@ description: "Years when one changes jobs are always challenging but very intere
 canonical: "https://blog.frankel.ch/2022-retrospective/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/01/new-years-day-g64dc8b542.jpg"
+image: "/images/posts/2023/01/2022-in-retrospective/new-years-day-g64dc8b542.jpg"
 categories:
   - "Opinion"
 tags:

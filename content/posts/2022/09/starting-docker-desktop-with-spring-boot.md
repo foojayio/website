@@ -6,7 +6,7 @@ lastmod: "2022-09-30T05:38:25+00:00"
 description: "In this article, we discuss Docker Desktop, including the Docker file, creating/pushing Docker images, creating/running Docker containers."
 authors:
   - "sumith-puri"
-image: "https://foojay.io/wp-content/uploads/2022/09/skp_ts_spring_boot_docker_sample.jpg"
+image: "/images/posts/2022/09/starting-docker-desktop-with-spring-boot/skp_ts_spring_boot_docker_sample.jpg"
 categories:
   - "DevOps"
   - "Microservices"

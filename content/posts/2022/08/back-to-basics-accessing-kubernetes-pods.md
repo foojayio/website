@@ -7,7 +7,7 @@ description: "When Kubernetes is set up, you'll want to expose some pods outside
 canonical: "https://blog.frankel.ch/basics-access-kubernetes-pods/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/08/earth-g7f5d45a7d.jpg"
+image: "/images/posts/2022/08/back-to-basics-accessing-kubernetes-pods/earth-g7f5d45a7d.jpg"
 categories:
   - "DevOps"
 tags:

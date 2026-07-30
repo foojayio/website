@@ -6,7 +6,7 @@ lastmod: "2023-01-04T08:36:30+00:00"
 description: "Learn how to use method chaining to add routing information to serialised data structures in a lightweight fashion!"
 authors:
   - "rob-austin"
-image: "https://foojay.io/wp-content/uploads/2023/01/method-chaining-chronicle.png"
+image: "/images/posts/2023/01/how-to-leverage-method-chaining-to-add-smart-message-routing/method-chaining-chronicle.png"
 categories:
   - "Java Core"
   - "Performance"

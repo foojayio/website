@@ -6,7 +6,7 @@ lastmod: "2023-08-28T12:40:10+00:00"
 description: "Using FetchType.EAGER is a very bad practice, since our services may not require all the data of the mapped entities in all cases."
 authors:
   - "mainuls18"
-image: "https://foojay.io/wp-content/uploads/2021/11/oie_koKWLHXsUxuL.jpg"
+image: "/images/posts/2021/11/a-walk-to-lazy-fetching-with-hibernate-and-spring-data-jpa/oie_koKWLHXsUxuL.jpg"
 categories:
   - "Spring"
 tags:

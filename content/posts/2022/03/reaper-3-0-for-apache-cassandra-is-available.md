@@ -7,7 +7,7 @@ description: "The K8ssandra team announced the release of Reaper 3.1. Let’s
 canonical: "https://k8ssandra.io/blog/announcements/announcing-the-release-of-reaper-3-1-for-apache-cassandra/"
 authors:
   - "alexander-dejanovski"
-image: "https://foojay.io/wp-content/uploads/2022/02/reaper-3_0-edit-schedule.png"
+image: "/images/posts/2022/03/reaper-3-0-for-apache-cassandra-is-available/reaper-3_0-edit-schedule.png"
 categories:
   - "Apache Cassandra"
   - "DataStax"

@@ -7,7 +7,7 @@ description: "Messaging has been on DataStax’s radar for several years. Let’
 canonical: "https://datastax.medium.com/four-reasons-why-apache-pulsar-is-essential-to-the-modern-data-stack-b90a8bddcb9"
 authors:
   - "jbellis"
-image: "https://foojay.io/wp-content/uploads/2021/07/0_GwQl23TRbFCO-uVu.png"
+image: "/images/posts/2022/02/four-reasons-why-apache-pulsar-is-essential-to-the-modern-data-stack/0_GwQl23TRbFCO-uVu.png"
 categories:
   - "Apache Pulsar"
   - "DataStax"

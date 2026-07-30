@@ -9,7 +9,7 @@ authors:
   - "geertjan-wielenga"
   - "helenjoscott"
   - "nick-zhu"
-image: "https://foojay.io/wp-content/uploads/2023/01/ide-podcast-guests-1024x396-1.png"
+image: "/images/posts/2023/01/foojay-podcast-12/ide-podcast-guests-1024x396-1.png"
 categories:
   - "Deep Netts"
   - "Eclipse"

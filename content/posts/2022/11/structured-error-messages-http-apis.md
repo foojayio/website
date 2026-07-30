@@ -7,7 +7,7 @@ description: "RFC 7807 helps API implementors as it provides quick guidelines to
 canonical: "https://blog.frankel.ch/structured-errors-http-apis/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/10/play-toy-cube-magic-stress-rubiks-cube.jpg"
+image: "/images/posts/2022/11/structured-error-messages-http-apis/play-toy-cube-magic-stress-rubiks-cube.jpg"
 categories:
   - "DataEngineering"
   - "Use Cases"

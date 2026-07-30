@@ -7,7 +7,7 @@ description: "EDA is a design pattern in which decoupled components (often micro
 canonical: "https://chronicle.software/how-to-develop-event-driven-architectures/"
 authors:
   - "rob-austin"
-image: "https://foojay.io/wp-content/uploads/2022/11/Screen-Shot-2022-12-02-at-11.17.40-AM.png"
+image: "/images/posts/2022/12/learn-how-to-develop-event-driven-architectures/Screen-Shot-2022-12-02-at-11.17.40-AM.png"
 categories:
   - "Java Core"
   - "Performance"

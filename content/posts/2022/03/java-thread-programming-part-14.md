@@ -6,7 +6,7 @@ lastmod: "2022-03-03T09:02:16+00:00"
 description: "What happens if the child-task creates more tasks and the parent-task waits for the child-tasks to finish in TheadPool in java."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/03/janko-ferlic-eBtwD6ZG78I-unsplash-scaled.jpg"
+image: "/images/posts/2022/03/java-thread-programming-part-14/janko-ferlic-eBtwD6ZG78I-unsplash-scaled.jpg"
 categories:
   - "Java Core"
 tags:

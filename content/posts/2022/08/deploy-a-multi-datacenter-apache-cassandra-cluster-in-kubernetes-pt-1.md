@@ -7,7 +7,7 @@ description: "Today let's examine different Kubernetes deployment patterns and s
 canonical: "https://k8ssandra.io/blog/tutorials/deploy-a-multi-datacenter-apache-cassandra-cluster-in-kubernetes/"
 authors:
   - "jeff-carpenter"
-image: "https://foojay.io/wp-content/uploads/2022/01/k8ssandra-docs-architecture-Multi-cluster-1.png"
+image: "/images/posts/2022/08/deploy-a-multi-datacenter-apache-cassandra-cluster-in-kubernetes-pt-1/k8ssandra-docs-architecture-Multi-cluster-1.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

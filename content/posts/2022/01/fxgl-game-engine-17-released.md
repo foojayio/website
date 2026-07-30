@@ -6,7 +6,7 @@ lastmod: "2022-01-03T10:44:09+00:00"
 description: "Game developers unite around Java and JavaFX! Version 17 of the FXGL game engine brings a number of improvements in many areas."
 authors:
   - "almasbaimagambetov"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/01/fxgl-game-engine-17-released/Favicon-3-2.png"
 categories:
   - "Game Development"
   - "JavaFX"

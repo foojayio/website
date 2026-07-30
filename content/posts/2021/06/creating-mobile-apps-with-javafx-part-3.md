@@ -6,7 +6,7 @@ lastmod: "2022-02-11T09:20:44+00:00"
 description: "Learn how to upload your application to the respective mobile app stores so the world can install your application on their devices!"
 authors:
   - "gail-anderson"
-image: "https://foojay.io/wp-content/uploads/2020/10/TiltMaze-android-small.png"
+image: "/images/posts/2021/06/creating-mobile-apps-with-javafx-part-3/TiltMaze-android-small.png"
 categories:
   - "Game Development"
   - "JavaFX"

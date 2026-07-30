@@ -6,7 +6,7 @@ lastmod: "2022-05-26T09:37:35+00:00"
 description: "Java Panama Polyglot series: quick tutorials or recipes on how to access native libraries written in other languages!"
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2022/04/panama_duke_cpp-1.png"
+image: "/images/posts/2022/04/java-panama-polyglot-part1/panama_duke_cpp-1.png"
 categories:
   - "JEPs"
   - "Performance"

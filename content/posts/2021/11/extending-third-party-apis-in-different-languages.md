@@ -7,7 +7,7 @@ description: "I'd like to describe how to add new behavior to an existing object
 canonical: "https://blog.frankel.ch/extending-third-party-apis/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/11/puzzle-g3926dee11_1280.jpg"
+image: "/images/posts/2021/11/extending-third-party-apis-in-different-languages/puzzle-g3926dee11_1280.jpg"
 categories:
   - "Kotlin"
   - "Research"

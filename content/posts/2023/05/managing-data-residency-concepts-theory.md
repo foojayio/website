@@ -7,7 +7,7 @@ description: "Take a look at data residency and design a draft architecture to i
 canonical: "https://blog.frankel.ch/data-residency/1/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/05/earth-gc54eda350.jpg"
+image: "/images/posts/2023/05/managing-data-residency-concepts-theory/earth-gc54eda350.jpg"
 categories:
   - "Cloud"
   - "DataEngineering"

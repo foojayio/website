@@ -6,7 +6,7 @@ lastmod: "2023-03-03T16:04:55+00:00"
 description: "Simple configuration that requires no code change can save you from hacks such as Log4Shell, & from vulnerabilities we don't know about yet!"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/02/Serialization-Filter.png"
+image: "/images/posts/2023/03/java-serialization-filtering-prevent-0-day-security-vulnerabilities/Serialization-Filter.png"
 categories:
   - "Security"
 tags:

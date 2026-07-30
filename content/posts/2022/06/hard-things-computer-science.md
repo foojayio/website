@@ -7,7 +7,7 @@ description: "Here I list several hard things I've been exposed to. I believe th
 canonical: "https://blog.frankel.ch/hard-things-computer-science/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/06/fractal-g5ca5fa693.jpg"
+image: "/images/posts/2022/06/hard-things-computer-science/fractal-g5ca5fa693.jpg"
 categories:
   - "Opinion"
 tags:

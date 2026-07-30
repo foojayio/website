@@ -7,7 +7,7 @@ description: "Steve Millidge (founder of Payara), shows you that Java/Jakarta EE
 canonical: "https://www.payara.fish/dismiss-the-myths/"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2021/08/MicrosoftTeams-image-11-scaled.jpg"
+image: "/images/posts/2021/08/is-java-jakarta-ee-cloud-native/MicrosoftTeams-image-11-scaled.jpg"
 categories:
   - "Jakarta EE"
   - "Microservices"

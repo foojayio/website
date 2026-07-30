@@ -6,7 +6,7 @@ lastmod: "2023-04-10T20:39:18+00:00"
 description: "Benefiting from a decade of work that went into original RIFE, the new RIFE2 provides an opinionated full stack web framework in a 2MB JAR."
 authors:
   - "geert-bevin"
-image: "https://foojay.io/wp-content/uploads/2023/02/rife2.png"
+image: "/images/posts/2023/02/getting-started-with-rife2-java-web-framework-v1-0-0/rife2.png"
 categories:
   - "Cloud"
   - "Release Notes"

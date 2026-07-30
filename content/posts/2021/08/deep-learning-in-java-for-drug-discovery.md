@@ -8,7 +8,7 @@ canonical: "https://www.linkedin.com/pulse/deep-learning-drug-discovery-new-fron
 authors:
   - "oscar-bastidas"
   - "zoran-sevarac"
-image: "https://foojay.io/wp-content/uploads/2021/08/deepnetts.png"
+image: "/images/posts/2021/08/deep-learning-in-java-for-drug-discovery/deepnetts.png"
 categories:
   - "Deep Netts"
   - "Machine Learning"

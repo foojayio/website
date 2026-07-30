@@ -6,7 +6,7 @@ lastmod: "2023-04-25T05:27:03+00:00"
 description: "\"Synchronized\" was revolutionary and still has great uses. But it's time to move to newer thread primitives and rethink our core logic."
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/04/threads.jpg"
+image: "/images/posts/2023/04/relearning-java-thread-primitives/threads.jpg"
 categories:
   - "Java Core"
   - "Tutorials"

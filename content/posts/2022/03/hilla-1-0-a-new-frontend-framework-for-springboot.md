@@ -7,7 +7,7 @@ description: "Hilla enables type-safe communication between SpringBoot backends 
 canonical: "https://hilla.dev/docs/"
 authors:
   - "marcus-hellberg"
-image: "https://foojay.io/wp-content/uploads/2022/03/og-image-github-700x350.png"
+image: "/images/posts/2022/03/hilla-1-0-a-new-frontend-framework-for-springboot/og-image-github-700x350.png"
 categories:
   - "Hilla"
   - "Release Notes"

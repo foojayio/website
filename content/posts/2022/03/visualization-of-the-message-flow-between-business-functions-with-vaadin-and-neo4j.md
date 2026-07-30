@@ -6,7 +6,7 @@ lastmod: "2022-04-20T07:13:47+00:00"
 description: "Analyzing & visualizing message flows between business functions was the goal of my current project. Learn about where Vaadin and Neo4J fit!"
 authors:
   - "simon-martinelli"
-image: "https://foojay.io/wp-content/uploads/2022/03/Unbenanntes-Diagramm.drawio-1.png"
+image: "/images/posts/2022/03/visualization-of-the-message-flow-between-business-functions-with-vaadin-and-neo4j/Unbenanntes-Diagramm.drawio-1.png"
 categories:
   - "Neo4J"
   - "nosql"

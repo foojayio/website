@@ -6,7 +6,7 @@ lastmod: "2022-11-14T13:41:07+00:00"
 description: "Let's investigate if the Java community is interested in joining a dedicated Mastodon instance."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/11/Screenshot-2022-11-14-at-13.47.07.png"
+image: "/images/posts/2022/11/lets-start-a-java-mastodon-community-for-friends-of-openjdk/Screenshot-2022-11-14-at-13.47.07.png"
 categories:
   - "Developer Tools"
   - "Foojay"

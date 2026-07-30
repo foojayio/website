@@ -7,7 +7,7 @@ description: "Actionable strategies for error management modeling in Apache NiFi
 canonical: "https://dzone.com/articles/best-practices-for-data-pipeline-error-handling-in"
 authors:
   - "pieter-humphrey"
-image: "https://foojay.io/wp-content/uploads/2021/07/14772514-queue.png"
+image: "/images/posts/2021/07/best-practices-for-data-pipeline-error-handling-in-apache-nifi/14772514-queue.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

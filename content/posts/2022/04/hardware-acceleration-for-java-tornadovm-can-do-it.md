@@ -6,7 +6,7 @@ lastmod: "2023-02-16T08:01:19+00:00"
 description: "In this article, learn about TornadoVM, hardware acceleration, and get a thorough overview of the TornadoVM software architecture."
 authors:
   - "thanos-stratikopoulos"
-image: "https://foojay.io/wp-content/uploads/2022/03/tornados.png"
+image: "/images/posts/2022/04/hardware-acceleration-for-java-tornadovm-can-do-it/tornados.png"
 categories:
   - "Performance"
   - "Release Notes"

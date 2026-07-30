@@ -7,7 +7,7 @@ description: "In this article, I'd like to describe how you can take advantage o
 canonical: "https://hazelcast.com/blog/querying-your-imdg-why-and-how/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/05/question-mark-1872665_1280.jpg"
+image: "/images/posts/2021/05/querying-your-in-memory-data-grid-why-and-how/question-mark-1872665_1280.jpg"
 categories:
   - "DevOps"
   - "Performance"

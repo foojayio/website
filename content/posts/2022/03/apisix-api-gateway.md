@@ -7,7 +7,7 @@ description: "Starting with Apache APISIX as your API Gateway is easy as pie. Us
 canonical: "https://blog.frankel.ch/apisix-api-gateway/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/03/apisix-objects.png"
+image: "/images/posts/2022/03/apisix-api-gateway/apisix-objects.png"
 categories:
   - "Release Notes"
 tags:

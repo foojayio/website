@@ -6,7 +6,7 @@ lastmod: "2023-04-08T13:39:45+00:00"
 description: "You aren’t a real developer until you have programmed with dates, times, daylight savings, and time zones. Luckily the JDK assists you!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/02/timezone-currency.jpg"
+image: "/images/posts/2023/04/time-zone-and-currency-database-in-jdk/timezone-currency.jpg"
 categories:
   - "Java Core"
   - "Release Notes"

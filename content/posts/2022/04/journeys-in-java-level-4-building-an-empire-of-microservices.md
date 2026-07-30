@@ -6,7 +6,7 @@ lastmod: "2022-04-27T07:23:54+00:00"
 description: "Welcome to the fourth iteration in a series about building microservices in Java. Learn how microservices work from the ground up in Java!"
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2022/04/unsplash-italy-art-bridge-scaled.jpeg"
+image: "/images/posts/2022/04/journeys-in-java-level-4-building-an-empire-of-microservices/unsplash-italy-art-bridge-scaled.jpeg"
 categories:
   - "Databases"
   - "Microservices"

@@ -7,7 +7,7 @@ description: "Did you know? Azul continues to provide updates to the Zulu build
 canonical: "https://www.azul.com/blog/jdk-7-the-long-hello-and-the-long-goodbye/"
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2022/07/jdk7.png"
+image: "/images/posts/2022/07/jdk-7-an-extended-hello-and-farewell/jdk7.png"
 categories:
   - "Developer Tools"
   - "Java Core"

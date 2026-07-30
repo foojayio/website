@@ -6,7 +6,7 @@ lastmod: "2024-01-09T12:59:47+00:00"
 description: "High availability is achieved in Chronicle FIX by failover, where workload is transferred in the event of a primary engine failure."
 authors:
   - "forough-goudarzi"
-image: "https://foojay.io/wp-content/uploads/2023/03/Screen-Shot-2023-03-27-at-3.33.54-PM-1024x888-1.png"
+image: "/images/posts/2023/04/chronicle-fix-designed-not-to-skip-a-message-even-if-your-data-centre-fails/Screen-Shot-2023-03-27-at-3.33.54-PM-1024x888-1.png"
 categories:
   - "Jakarta EE"
   - "JavaFX"

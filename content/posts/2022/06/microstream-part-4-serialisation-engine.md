@@ -6,7 +6,7 @@ lastmod: "2022-06-29T08:07:22+00:00"
 description: "Let's go even deeper in this series that focuses on the key features of the MicroStream serialisation engine."
 authors:
   - "rudy-de-busscher"
-image: "https://foojay.io/wp-content/uploads/2022/06/microstream-1.png"
+image: "/images/posts/2022/06/microstream-part-4-serialisation-engine/microstream-1.png"
 categories:
   - "Databases"
   - "DataEngineering"

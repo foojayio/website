@@ -6,7 +6,7 @@ lastmod: "2022-03-25T05:54:53+00:00"
 description: "Even while threads are helpful, they are dreadful to many developers. Here are five essential threading concepts for Java developers!"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/03/alesia-kazantceva-VWcPlbHglYc-unsplash-scaled.jpg"
+image: "/images/posts/2022/03/5-things-you-probably-didnt-know-about-java-concurrency/alesia-kazantceva-VWcPlbHglYc-unsplash-scaled.jpg"
 categories:
   - "Java Core"
 tags:

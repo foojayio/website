@@ -6,7 +6,7 @@ lastmod: "2023-03-23T09:36:41+00:00"
 description: "Following the Hello World example, this article looks at an Order Processor with a New Order Single in and an Execution Report out."
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2023/03/Screen-Shot-2023-03-13-at-2.53.19-PM-1024x651-1.png"
+image: "/images/posts/2023/03/event-driven-order-processing-program/Screen-Shot-2023-03-13-at-2.53.19-PM-1024x651-1.png"
 categories:
   - "Events"
   - "Java Core"

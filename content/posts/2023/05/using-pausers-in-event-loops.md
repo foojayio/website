@@ -6,7 +6,7 @@ lastmod: "2023-05-17T09:27:20+00:00"
 description: "Techniques that help maximise hardware utilisation, while also reducing power consumption, helping reduce costs to your organisation."
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2023/05/Screenshot-2023-05-09-at-11.00.15-AM-1024x813-1.png"
+image: "/images/posts/2023/05/using-pausers-in-event-loops/Screenshot-2023-05-09-at-11.00.15-AM-1024x813-1.png"
 categories:
   - "Java Core"
   - "Performance"

@@ -7,7 +7,7 @@ description: "Heroku's owner, Salesforce, announced it would stop the free plan,
 canonical: "https://blog.frankel.ch/evaluation-scaleway/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/03/2560px-Scaleway_logo_2018.svg.png"
+image: "/images/posts/2023/03/my-evaluation-of-the-scaleway-cloud-provider/2560px-Scaleway_logo_2018.svg.png"
 categories:
   - "Cloud"
   - "Opinion"

@@ -6,7 +6,7 @@ lastmod: "2022-05-16T08:29:08+00:00"
 description: "Azure Toolkit for IntelliJ is a plugin that allows you to easily create, develop, configure, test, and deploy Java applications to Azure."
 authors:
   - "jialuo-gan"
-image: "https://foojay.io/wp-content/uploads/2022/05/Toolkit-roadmap-2022.png"
+image: "/images/posts/2022/05/azure-toolkit-for-intellij-april-2022-update/Toolkit-roadmap-2022.png"
 categories:
   - "IntelliJ IDEA"
   - "Release Notes"

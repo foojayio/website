@@ -6,7 +6,7 @@ lastmod: "2022-08-16T15:15:24+00:00"
 description: "Let’s appreciate the Java Virtual Machine (JVM) even more. Today we'll discuss Constant Pool in quite some detail."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/03/icon256x256.png"
+image: "/images/posts/2022/08/java-bytecode-simplified-journey-to-the-wonderland-part-2/icon256x256.png"
 categories:
   - "Java Core"
 tags:

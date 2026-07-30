@@ -7,7 +7,7 @@ description: "Learn about concurrency in modern programming languages and how to
 canonical: "https://deepu.tech/concurrency-in-modern-languages-java/"
 authors:
   - "deepu-sasidharan"
-image: "https://foojay.io/wp-content/uploads/2021/06/evgeniya-litovchenko-3whkjP9a9ZI-unsplash-700x467.jpg"
+image: "/images/posts/2021/06/concurrency-in-java-and-how-it-compares-with-other-modern-programming-languages/evgeniya-litovchenko-3whkjP9a9ZI-unsplash-700x467.jpg"
 categories:
   - "Performance"
 tags:

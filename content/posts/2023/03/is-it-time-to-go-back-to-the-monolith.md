@@ -7,7 +7,7 @@ description: "Modern modular monoliths (and Moduliths) are redefining the monoli
 canonical: "https://debugagent.com/is-it-time-to-go-back-to-the-monolith"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/02/go-back-to-the-monolith.jpg"
+image: "/images/posts/2023/03/is-it-time-to-go-back-to-the-monolith/go-back-to-the-monolith.jpg"
 categories:
   - "Opinion"
   - "Spring"

@@ -7,7 +7,7 @@ description: "Geo-routing is a requirement for successful apps and businesses. A
 canonical: "https://blog.frankel.ch/georouting-apisix/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/11/earth-g36c35bf0c.jpg"
+image: "/images/posts/2022/11/geo-routing-with-apache-apisix/earth-g36c35bf0c.jpg"
 categories:
   - "DevOps"
   - "Tools"

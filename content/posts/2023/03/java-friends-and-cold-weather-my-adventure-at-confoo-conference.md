@@ -6,7 +6,7 @@ lastmod: "2023-03-06T19:16:07+00:00"
 description: "I attended the ConFoo conference in Montreal for a day, gave two talks on Java, and met with old and new friends, and had a great experience."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/02/PXL_20230223_210951111-700x394-1.jpeg"
+image: "/images/posts/2023/03/java-friends-and-cold-weather-my-adventure-at-confoo-conference/PXL_20230223_210951111-700x394-1.jpeg"
 categories:
   - "Trip Reports"
 tags:

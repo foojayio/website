@@ -6,7 +6,7 @@ lastmod: "2022-09-04T13:48:59+00:00"
 description: "Let's learn how to do asynchronous method invocation with Callable and Future by means of a practical example."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/08/Playground.java_.png"
+image: "/images/posts/2022/08/java-thread-programming-part-15/Playground.java_.png"
 categories:
   - "Java Core"
 tags:

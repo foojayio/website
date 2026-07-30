@@ -6,7 +6,7 @@ lastmod: "2023-05-15T19:49:30+00:00"
 description: "Discover valuable insights from Java Champion Michael P. Redlich and learn about continuous learning, open-source contributions, and adapting to new technologies in software development."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/05/michael-redlich.jpg"
+image: "/images/posts/2023/05/discovering-the-secrets-to-success-an-exclusive-interview-with-java-champion-michael-p-redlich/michael-redlich.jpg"
 categories:
   - "Interviews"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2023-07-03T13:03:15+00:00"
 description: "The friends of OpenJDK community has put together a number of resources, and more coming in the coming weeks!"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2022/09/image-1024x631-1.png"
+image: "/images/posts/2022/09/openjdk-19-released/image-1024x631-1.png"
 categories:
   - "Java Core"
   - "Release Notes"

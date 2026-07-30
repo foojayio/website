@@ -7,7 +7,7 @@ description: "Security is the poster child of a Non-Functional Requirement: most
 canonical: "https://blog.frankel.ch/treat-security-as-risk/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/01/nut-ge0bfbb470.jpg"
+image: "/images/posts/2022/01/treat-security-as-risk/nut-ge0bfbb470.jpg"
 categories:
   - "Security"
 tags:

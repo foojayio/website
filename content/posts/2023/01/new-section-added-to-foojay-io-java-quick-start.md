@@ -6,7 +6,7 @@ lastmod: "2023-01-12T11:28:36+00:00"
 description: "Foojay.io aims to be the starting point for “all-things OpenJDK\". The idea struck me that this site needs complete beginner materials, too!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/01/foojay-menu-quick-start.png"
+image: "/images/posts/2023/01/new-section-added-to-foojay-io-java-quick-start/foojay-menu-quick-start.png"
 categories:
   - "Foojay"
   - "Java Beginner"

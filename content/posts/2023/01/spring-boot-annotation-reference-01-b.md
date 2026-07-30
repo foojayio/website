@@ -6,7 +6,7 @@ lastmod: "2023-01-06T09:55:03+00:00"
 description: "In part #2 of my article series on Spring Boot Annotations, we focus on the REST and Spring Stereotype Annotations."
 authors:
   - "sumith-puri"
-image: "https://foojay.io/wp-content/uploads/2022/12/skp_spring_boot_annotations_002.png"
+image: "/images/posts/2023/01/spring-boot-annotation-reference-01-b/skp_spring_boot_annotations_002.png"
 categories:
   - "Microservices"
   - "Spring"

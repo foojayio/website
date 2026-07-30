@@ -6,7 +6,7 @@ lastmod: "2023-05-10T05:40:30+00:00"
 description: "If you want a superfast startup for your Java applications without warmup time or resources, why not try Java on CRaC?"
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2023/05/java-crac.jpeg"
+image: "/images/posts/2022/05/superfast-application-startup-java-on-crac/java-crac.jpeg"
 categories:
   - "CRaC"
   - "Performance"

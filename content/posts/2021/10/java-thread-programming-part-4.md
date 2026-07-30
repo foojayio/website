@@ -6,7 +6,7 @@ lastmod: "2021-12-23T22:53:28+00:00"
 description: "We need to be very careful when using the \"volatile\" keyword, and we should use it only where it’s required, and definitely not everywhere."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/10/java-thread-programming-part-4/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

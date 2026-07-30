@@ -6,7 +6,7 @@ lastmod: "2022-12-27T07:55:53+00:00"
 description: "If anyone needs a reminder Java and JavaFX are \"alive and kicking\", you can not only check out jfx-central.com, but also the list below."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/12/podcast-javafx-guests-1024x393.png"
+image: "/images/posts/2022/12/javafx-links-of-december/podcast-javafx-guests-1024x393.png"
 categories:
   - "JavaFX"
 tags:

@@ -7,7 +7,7 @@ description: "Using Kubernetes as a standard layer will help everyone to control
 canonical: "https://www.capacitymedia.com/articles/3828659/kubernetes-and-the-data-centre-is-a-full-scale-migration-possible-"
 authors:
   - "patrick-mcfadin"
-image: "https://foojay.io/wp-content/uploads/2022/02/kubernetes-genric-169jpeg_51633.jpg"
+image: "/images/posts/2022/07/kubernetes-and-the-data-centre-is-full-scale-migration-possible/kubernetes-genric-169jpeg_51633.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"

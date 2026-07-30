@@ -7,7 +7,7 @@ description: "An introduction to some approaches that can be taken when we want 
 canonical: "https://chronicle.software/tuning-for-low-latency/"
 authors:
   - "george-ball"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2023/05/tuning-java-applications-for-low-latency-on-linux/Favicon-3-2.png"
 categories:
   - "Performance"
 tags:

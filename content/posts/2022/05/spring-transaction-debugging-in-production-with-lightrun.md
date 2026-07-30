@@ -7,7 +7,7 @@ description: "We use annotations to denote transactional behavior in modern Spri
 canonical: "https://lightrun.com/tutorials/spring-transaction-debugging-in-production-with-lightrun/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/04/Debugging-Spring-Transactions.jpg"
+image: "/images/posts/2022/05/spring-transaction-debugging-in-production-with-lightrun/Debugging-Spring-Transactions.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Spring"

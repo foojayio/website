@@ -7,7 +7,7 @@ description: "From streaming with Apache Pulsar to connecting existing enterpris
 canonical: "https://www.datastax.com/blog/2021/03/developing-enterprise-level-apache-cassandra-sink-connector-apache-pulsar"
 authors:
   - "enrico-olivelli"
-image: "https://foojay.io/wp-content/uploads/2021/07/blog-category-technical-how-tos.png"
+image: "/images/posts/2021/11/developing-an-enterprise-level-apache-cassandra-sink-connector-for-apache-pulsar/blog-category-technical-how-tos.png"
 categories:
   - "Apache Cassandra"
   - "Apache Pulsar"

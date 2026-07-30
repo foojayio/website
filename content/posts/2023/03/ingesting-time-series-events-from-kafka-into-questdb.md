@@ -6,7 +6,7 @@ lastmod: "2023-03-28T09:39:34+00:00"
 description: "Learn how to Ingest streaming time-series data from Apache Kafka into QuestDB using ILP with the Kafka Sink Connector."
 authors:
   - "javier-ramirez"
-image: "https://foojay.io/wp-content/uploads/2023/03/LfxaX-nD_400x400.jpeg"
+image: "/images/posts/2023/03/ingesting-time-series-events-from-kafka-into-questdb/LfxaX-nD_400x400.jpeg"
 categories:
   - "Databases"
   - "DataEngineering"

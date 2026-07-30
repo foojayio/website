@@ -6,7 +6,7 @@ lastmod: "2022-06-02T05:08:36+00:00"
 description: "We continue building our microservices system by adding a coordination layer to handle spinning multiple services up and down."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2022/05/unsplash-long-low-stone-bridge-scaled.jpeg"
+image: "/images/posts/2022/06/journeys-in-java-level-5-building-an-empire-of-microservices/unsplash-long-low-stone-bridge-scaled.jpeg"
 categories:
   - "Databases"
   - "Microservices"
@@ -75,7 +75,7 @@ FROM openjdk:11
 
 #Author
 #-------
-LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a606f6464636c6f784a7e626f626f6961666f78792465786d">[email&nbsp;protected]</a>,@JMHReif"
+LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f79d9299999e919285b7839f929f92949c9b928584d9988590">[email&nbsp;protected]</a>,@JMHReif"
 
 #Copy jar and expose entrypoints
 #--------------------------------

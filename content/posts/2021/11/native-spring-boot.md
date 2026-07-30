@@ -7,7 +7,7 @@ description: "As the Cloud has become more widespread, the Spring ecosystem has 
 canonical: "https://blog.frankel.ch/native/spring-boot/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/11/1280px-Spring_Framework_Logo_2018.svg.png"
+image: "/images/posts/2021/11/native-spring-boot/1280px-Spring_Framework_Logo_2018.svg.png"
 categories:
   - "Kotlin"
   - "Spring"

@@ -6,7 +6,7 @@ lastmod: "2021-10-07T10:23:18+00:00"
 description: "In your Java applications, do you know if the main Thread is a daemon or not? And do you know what a daemon Thread is?"
 authors:
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2021/09/daemon_thread.png"
+image: "/images/posts/2021/09/daemon-thread-java-code-quiz/daemon_thread.png"
 categories:
   - "Tutorials"
 tags:

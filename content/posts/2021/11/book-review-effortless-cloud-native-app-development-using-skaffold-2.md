@@ -7,7 +7,7 @@ description: "Skaffold is a cloud native open source framework from Google that 
 canonical: "https://talktotheduck.dev/cloud-native-skaffold-book-review"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2021/11/Lightrun-Talk-to-the-duck-Book-Review-Recovered-01.jpg"
+image: "/images/posts/2021/11/book-review-effortless-cloud-native-app-development-using-skaffold-2/Lightrun-Talk-to-the-duck-Book-Review-Recovered-01.jpg"
 categories:
   - "Book Review"
   - "Books"

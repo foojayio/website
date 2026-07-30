@@ -7,7 +7,7 @@ description: "Following on from FOSDEM discussions, let's expand on the problem 
 canonical: "https://blog.frankel.ch/null-safety-java-vs-kotlin/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/02/slip-up-gfc8436d7a_large.jpg"
+image: "/images/posts/2023/02/null-safety-kotlin-vs-java/slip-up-gfc8436d7a_large.jpg"
 categories:
   - "Java Core"
   - "Kotlin"

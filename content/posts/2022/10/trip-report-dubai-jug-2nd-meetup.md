@@ -6,7 +6,7 @@ lastmod: "2022-10-27T08:11:30+00:00"
 description: "The second meetup, yet also the first real one. The first one was more of a practice team building version."
 authors:
   - "pacovan"
-image: "https://foojay.io/wp-content/uploads/2022/10/dubai-jug-2nd-meetup-1024x768.png"
+image: "/images/posts/2022/10/trip-report-dubai-jug-2nd-meetup/dubai-jug-2nd-meetup-1024x768.png"
 categories:
   - "Dubai JUG"
   - "JUGs"

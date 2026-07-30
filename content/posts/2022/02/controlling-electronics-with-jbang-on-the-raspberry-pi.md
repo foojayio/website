@@ -7,7 +7,7 @@ description: "JBang is a great way to create your first program to control elect
 canonical: "https://pi4j.com/documentation/building/jbang/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/02/jbang.png"
+image: "/images/posts/2022/02/controlling-electronics-with-jbang-on-the-raspberry-pi/jbang.png"
 categories:
   - "Embedded"
   - "Java Beginner"

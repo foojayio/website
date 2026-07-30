@@ -7,7 +7,7 @@ description: "Memory usage is one of the most important aspects for devs in gene
 canonical: "https://talktotheduck.dev/debugging-ram-java-garbage-collection-java-heap-deep-dive-part-1"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/01/Lightrun_-_Talk_to_the_duck_blog_-_memory_management-02.jpg"
+image: "/images/posts/2022/01/debugging-ram-java-garbage-collection-java-heap-deep-dive-part-1/Lightrun_-_Talk_to_the_duck_blog_-_memory_management-02.jpg"
 categories:
   - "Performance"
   - "Tutorials"

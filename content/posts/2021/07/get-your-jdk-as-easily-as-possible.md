@@ -6,7 +6,7 @@ lastmod: "2021-07-20T07:01:30+00:00"
 description: "After creating the Disco API, I had the idea to create plugins for IDEs and browsers to enable more easy JDK downloading."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2021/07/discoduke.png"
+image: "/images/posts/2021/07/get-your-jdk-as-easily-as-possible/discoduke.png"
 categories:
   - "Eclipse"
   - "IntelliJ IDEA"

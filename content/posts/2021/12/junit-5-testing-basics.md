@@ -7,7 +7,7 @@ description: "Continuing the series on JUnit 5, this artcle shows examples of a 
 canonical: "https://cguntur.me/2019/07/13/using-junit5-part-2/"
 authors:
   - "c-guntur"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/12/junit-5-testing-basics/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

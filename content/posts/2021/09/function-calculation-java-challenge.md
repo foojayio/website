@@ -6,7 +6,7 @@ lastmod: "2021-09-01T10:10:21+00:00"
 description: "The \"Function\" functional interface is a first-class citizen function, so we can pass a function to a method and declare it as a variable."
 authors:
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2021/08/function.png"
+image: "/images/posts/2021/09/function-calculation-java-challenge/function.png"
 categories:
   - "Tutorials"
 tags:

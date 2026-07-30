@@ -6,7 +6,7 @@ lastmod: "2021-10-18T06:43:51+00:00"
 description: "Both for Maven and Gradle lovers there are different possibilities to build Java executables and GitHub provides the free tools to do so!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/10/Screenshot-2021-10-10-at-22.08.21.png"
+image: "/images/posts/2021/10/javafx-templates-for-desktop-applications/Screenshot-2021-10-10-at-22.08.21.png"
 categories:
   - "JavaFX"
 tags:

@@ -7,7 +7,7 @@ description: "Learn how to manually reassign a PersistentVolume from one Statefu
 canonical: "https://medium.com/building-the-open-data-stack/reclaiming-persistent-volumes-in-kubernetes-5e035ba8c770"
 authors:
   - "frank-rosner"
-image: "https://foojay.io/wp-content/uploads/2022/01/1_G13CLQVHRE1sD6-vPcijCA.jpeg"
+image: "/images/posts/2022/09/reclaiming-persistent-volumes-in-kubernetes/1_G13CLQVHRE1sD6-vPcijCA.jpeg"
 categories:
   - "Apache Cassandra"
   - "Databases"

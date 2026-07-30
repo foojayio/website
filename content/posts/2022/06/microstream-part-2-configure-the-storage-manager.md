@@ -6,7 +6,7 @@ lastmod: "2022-06-15T08:05:25+00:00"
 description: "In this second article in the series, we cover how to get started configuring the StorageManager of MicroStream!"
 authors:
   - "rudy-de-busscher"
-image: "https://foojay.io/wp-content/uploads/2022/06/microstream.png"
+image: "/images/posts/2022/06/microstream-part-2-configure-the-storage-manager/microstream.png"
 categories:
   - "Databases"
   - "DataEngineering"

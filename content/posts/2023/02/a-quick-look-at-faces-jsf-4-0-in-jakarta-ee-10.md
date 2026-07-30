@@ -8,7 +8,7 @@ canonical: "https://blog.payara.fish/a-quick-look-at-faces-jsf-4.0-in-jakarta-ee
 authors:
   - "jadon-ortlepp"
   - "luqman-saeed"
-image: "https://foojay.io/wp-content/uploads/2023/02/Screenshot_20230110_135104.png"
+image: "/images/posts/2023/02/a-quick-look-at-faces-jsf-4-0-in-jakarta-ee-10/Screenshot_20230110_135104.png"
 categories:
   - "Jakarta EE"
   - "Tools"

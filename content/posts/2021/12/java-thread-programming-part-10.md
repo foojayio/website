@@ -6,7 +6,7 @@ lastmod: "2023-02-20T11:22:44+00:00"
 description: "Let's learn about BlockingQueue, one of the essential concurrent collections available in the concurrent package in the JDK."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/12/java-thread-programming-part-10/Favicon-3-2.png"
 categories:
   - "Java Core"
 tags:

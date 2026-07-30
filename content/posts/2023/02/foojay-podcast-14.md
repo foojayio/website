@@ -10,7 +10,7 @@ authors:
   - "marit-van-dijk"
   - "shai-almog"
   - "ties-van-de-ven"
-image: "https://foojay.io/wp-content/uploads/2023/02/podcast-debugging-guests.png"
+image: "/images/posts/2023/02/foojay-podcast-14/podcast-debugging-guests.png"
 categories:
   - "Developer Tools"
   - "Java Core"

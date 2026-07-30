@@ -7,7 +7,7 @@ description: "In the 2nd part of the series, learn how to use MQTT and the Raspb
 canonical: "https://www.hivemq.com/blog/mqtt-raspberrypi-part02-visualizing-sensor-data-on-a-tilesfx-dashboard/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/12/history_javafx-1024x515.png"
+image: "/images/posts/2021/12/mqtt-on-raspberry-pi-part-2-using-mqtt-and-raspberry-pi-to-visualize-sensor-data-on-a-tilesfx-dashboard/history_javafx-1024x515.png"
 categories:
   - "Embedded"
   - "MQTT"

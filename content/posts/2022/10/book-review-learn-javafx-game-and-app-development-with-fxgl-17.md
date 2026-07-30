@@ -6,7 +6,7 @@ lastmod: "2023-03-16T10:45:28+00:00"
 description: "FXGL provides an impressive list of components with methods to override and build the exact functionality your game requires."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/10/41ou5Nfo9DL.jpeg"
+image: "/images/posts/2022/10/book-review-learn-javafx-game-and-app-development-with-fxgl-17/41ou5Nfo9DL.jpeg"
 categories:
   - "Book Review"
   - "Books"

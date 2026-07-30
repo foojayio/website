@@ -6,7 +6,7 @@ lastmod: "2022-09-23T09:17:07+00:00"
 description: "OmniFish is a new international company that offers Java consulting and support for Eclipse GlassFish and a new cloud‑native runtime Piranha Cloud."
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2022/09/omnifish-logo-turquise-bg-400px-e1663869726664.png"
+image: "/images/posts/2022/09/omnifish-announces-enterprise-support-for-eclipse-glassfish/omnifish-logo-turquise-bg-400px-e1663869726664.png"
 categories:
   - "Jakarta EE"
   - "Press"

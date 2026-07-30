@@ -7,7 +7,7 @@ description: "Moving a commit to a different branch: not nearly as scary as it s
 canonical: "https://maritvandijk.com/cherry-pick-move-a-commit-to-a-different-branch/"
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2023/03/GoBackToMain-1024x575-1.png"
+image: "/images/posts/2023/04/cherry-pick-move-a-commit-to-a-different-branch/GoBackToMain-1024x575-1.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

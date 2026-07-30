@@ -7,7 +7,7 @@ description: "It isn't just about memory leaks. Understanding how RAM is used an
 canonical: "https://debugagent.com/memory-debugging-a-deep-level-of-insight"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/01/thumbnail-8.png"
+image: "/images/posts/2023/02/memory-debugging-a-deep-level-of-insight/thumbnail-8.png"
 categories:
   - "IntelliJ IDEA"
 tags:

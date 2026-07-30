@@ -7,7 +7,7 @@ description: "Monitor your application in production and locally. Understand wha
 canonical: "https://talktotheduck.dev/external-debugging-tools-3-jmxterm"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/08/Screen-Shot-2022-07-17-at-10.38.24-700x418-1.png"
+image: "/images/posts/2022/08/external-debugging-tools-3-jmxterm/Screen-Shot-2022-07-17-at-10.38.24-700x418-1.png"
 categories:
   - "Tools"
   - "Tutorials"

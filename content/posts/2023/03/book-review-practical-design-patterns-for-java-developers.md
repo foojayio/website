@@ -8,7 +8,7 @@ canonical: "https://webtechie.be/post/2023-03-08-book-review-practical-design-pa
 authors:
   - "frankdelporte"
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/03/practical-cover.jpg"
+image: "/images/posts/2023/03/book-review-practical-design-patterns-for-java-developers/practical-cover.jpg"
 categories:
   - "Book Review"
   - "Books"

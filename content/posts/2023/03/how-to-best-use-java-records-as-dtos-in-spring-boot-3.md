@@ -7,7 +7,7 @@ description: "Explore how to best use compact Java Records as Data Transfer Obje
 canonical: "https://dzone.com/articles/how-to-best-use-java-records-as-dtos-in-spring-boo"
 authors:
   - "denis-magda"
-image: "https://foojay.io/wp-content/uploads/2023/03/java_records_as_dtos.jpg"
+image: "/images/posts/2023/03/how-to-best-use-java-records-as-dtos-in-spring-boot-3/java_records_as_dtos.jpg"
 categories:
   - "Databases"
   - "Java Core"

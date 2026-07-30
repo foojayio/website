@@ -7,7 +7,7 @@ description: "Learn a new codebase by diving into it with debuggers to understan
 canonical: "https://lightrun.com/tutorials/understand-source-code-deep-into-the-codebase-locally-and-in-production/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/06/Code-exploration.png"
+image: "/images/posts/2022/07/understand-source-code-deep-into-the-codebase-locally-and-in-production/Code-exploration.png"
 categories:
   - "Tutorials"
 tags:

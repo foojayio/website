@@ -7,7 +7,7 @@ description: "In this article, we're going to take a look at the Package Checker
 canonical: "https://maritvandijk.com/package-checker/"
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2023/02/vulnerability-detection-intelli.png"
+image: "/images/posts/2023/02/package-checker-find-fix-vulnerabilities-with-intellij-idea-ultimate/vulnerability-detection-intelli.png"
 categories:
   - "Developer Tools"
   - "Gradle"

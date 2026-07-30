@@ -6,7 +6,7 @@ lastmod: "2022-09-27T09:46:54+00:00"
 description: "Chronicle Queue and Chronicle Map allows you to have a persisted store which can be embedded into multiple JVMs on the same server."
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2022/09/Screen-Shot-2022-09-20-at-10.59.01-AM-700x189-1.png"
+image: "/images/posts/2022/09/chronicle-queue-storing-1tb-in-virtual-memory-on-a-128gb-machine/Screen-Shot-2022-09-20-at-10.59.01-AM-700x189-1.png"
 categories:
   - "DataEngineering"
   - "DevOps"

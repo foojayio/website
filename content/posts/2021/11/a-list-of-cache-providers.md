@@ -7,7 +7,7 @@ description: "Recently, we described several criteria to look at to choose a cac
 canonical: "https://blog.frankel.ch/choose-cache/2/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/11/a-list-of-cache-providers/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

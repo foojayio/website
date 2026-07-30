@@ -7,7 +7,7 @@ description: "There are many things to consider before making the move to NoSQL.
 canonical: "https://datastax.medium.com/nosql-use-cases-when-to-use-a-non-relational-database-c05025aabd30"
 authors:
   - "rich-edwards"
-image: "https://foojay.io/wp-content/uploads/2022/01/0_3Rq9YyxpcW8o3bSA.png"
+image: "/images/posts/2022/07/nosql-use-cases-when-to-use-a-non-relational-database/0_3Rq9YyxpcW8o3bSA.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

@@ -7,7 +7,7 @@ description: "The idea behind Backend For Front-end is to move logic from each m
 canonical: "https://blog.frankel.ch/backend-for-frontend/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/07/pinky-swear-g6402e3105.jpg"
+image: "/images/posts/2022/07/backend-for-front-end/pinky-swear-g6402e3105.jpg"
 categories:
   - "Microservices"
 tags:

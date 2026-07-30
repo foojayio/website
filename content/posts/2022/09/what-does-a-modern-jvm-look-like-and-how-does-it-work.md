@@ -6,7 +6,7 @@ lastmod: "2022-09-30T05:31:07+00:00"
 description: "In this article, the internal workings of the JVM are discussed, e.g., interpreter, JIT compiler, and how it optimizes code."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/09/Screen-Shot-2022-09-12-at-5.26.11-PM.png"
+image: "/images/posts/2022/09/what-does-a-modern-jvm-look-like-and-how-does-it-work/Screen-Shot-2022-09-12-at-5.26.11-PM.png"
 categories:
   - "Java Core"
 tags:

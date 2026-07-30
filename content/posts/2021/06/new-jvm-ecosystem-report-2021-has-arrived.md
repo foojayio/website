@@ -6,7 +6,7 @@ lastmod: "2021-06-18T19:50:50+00:00"
 description: "JVM Ecosystem Report 2021 presents the results of the largest annual survey on the state of the JVM ecosystem."
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2021/06/tldr-jvm-2021-1024x420.png"
+image: "/images/posts/2021/06/new-jvm-ecosystem-report-2021-has-arrived/tldr-jvm-2021-1024x420.png"
 categories:
   - "Surveys"
 tags:

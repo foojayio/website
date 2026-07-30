@@ -6,7 +6,7 @@ lastmod: "2022-05-13T12:59:16+00:00"
 description: "Let's look at how frameworks work under the hood, namely Quarkus and Spring Boot, and how many threads they initiate to serve up results."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2022/05/Image_13-435x510-1.png"
+image: "/images/posts/2022/05/diving-into-jvm-framework-monitoring-and-profiling/Image_13-435x510-1.png"
 categories:
   - "Java Core"
   - "Kotlin"

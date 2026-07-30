@@ -7,7 +7,7 @@ description: "Adelphi is an open-source QA tool for Apache Cassandra, packaged 
 canonical: "https://www.datastax.com/blog/adelphi-apache-cassandratm-testing-goes-cloud-native"
 authors:
   - "gianluca-righetto"
-image: "https://foojay.io/wp-content/uploads/2021/06/adelphi-apache-cassandra-testing-goes-cloud-native.png"
+image: "/images/posts/2021/12/adelphi-apache-cassandra-testing-goes-cloud-native/adelphi-apache-cassandra-testing-goes-cloud-native.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

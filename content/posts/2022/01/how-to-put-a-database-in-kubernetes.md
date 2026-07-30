@@ -7,7 +7,7 @@ description: "Learn the key steps of deploying databases and stateful workloads 
 canonical: "https://medium.com/building-the-open-data-stack/how-to-put-a-database-in-kubernetes-ab7c21540ec2"
 authors:
   - "jeff-carpenter"
-image: "https://foojay.io/wp-content/uploads/2022/01/0_aX8FjIfXNHJhbSWU.png"
+image: "/images/posts/2022/01/how-to-put-a-database-in-kubernetes/0_aX8FjIfXNHJhbSWU.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

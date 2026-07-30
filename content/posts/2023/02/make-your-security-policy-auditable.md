@@ -7,7 +7,7 @@ description: "Learn how you can leverage OPA and Apache APISIX to move your auth
 canonical: "https://blog.frankel.ch/security-policy-auditable/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/02/opa-horizontal-color.png"
+image: "/images/posts/2023/02/make-your-security-policy-auditable/opa-horizontal-color.png"
 categories:
   - "Security"
 tags:

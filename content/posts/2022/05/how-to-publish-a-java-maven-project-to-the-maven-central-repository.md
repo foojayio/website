@@ -6,7 +6,7 @@ lastmod: "2022-05-13T16:46:17+00:00"
 description: "Get started and follow along whenever you need to publish a Java Maven-based library or artifact to Maven!"
 authors:
   - "tobias-briones"
-image: "https://foojay.io/wp-content/uploads/2022/05/jira-ticket-1.png"
+image: "/images/posts/2022/05/how-to-publish-a-java-maven-project-to-the-maven-central-repository/jira-ticket-1.png"
 categories:
   - "Developer Tools"
   - "DevOps"
@@ -166,7 +166,7 @@ As you can see, the first tags are just general project information:
     &lt;developers&gt;
         &lt;developer&gt;
             &lt;name&gt;Tobias Briones&lt;/name&gt;
-            &lt;email&gt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="76121300361b17021e0519100201170413581318111f18131304">[email&nbsp;protected]</a>&lt;/email&gt;
+            &lt;email&gt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b4d0d1c2f4d9d5c0dcc7dbd2c0c3d5c6d19ad1dad3dddad1d1c6">[email&nbsp;protected]</a>&lt;/email&gt;
             &lt;organization&gt;Tobias Briones&lt;/organization&gt;
             &lt;organizationUrl&gt;https://mathsoftware.engineer&lt;/organizationUrl&gt;
         &lt;/developer&gt;

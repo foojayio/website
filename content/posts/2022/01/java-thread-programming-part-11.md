@@ -6,7 +6,7 @@ lastmod: "2023-02-20T11:22:17+00:00"
 description: "Learn how to ask the executor framework at startup to provision threads for us and they will be reused as long as the application runs."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/01/janko-ferlic-eBtwD6ZG78I-unsplash-scaled.jpg"
+image: "/images/posts/2022/01/java-thread-programming-part-11/janko-ferlic-eBtwD6ZG78I-unsplash-scaled.jpg"
 categories:
   - "Java Core"
 tags:

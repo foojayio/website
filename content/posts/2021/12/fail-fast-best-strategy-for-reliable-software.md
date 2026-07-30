@@ -7,7 +7,7 @@ description: "A broken kitchen appliance leads me down the path of intelligent f
 canonical: "https://talktotheduck.dev/fail-fast-reliable-software-strategy-debug-failures-effectively"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2021/12/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
+image: "/images/posts/2021/12/fail-fast-best-strategy-for-reliable-software/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
 categories:
   - "Performance"
 tags:

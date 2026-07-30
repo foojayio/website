@@ -6,7 +6,7 @@ lastmod: "2023-03-29T13:36:37+00:00"
 description: "About the efficiencies of using Chronicle Wire to encode small Strings into long primitives and how this improves serialisation performance."
 authors:
   - "jasmine-taylor"
-image: "https://foojay.io/wp-content/uploads/2023/03/Screen-Shot-2023-03-20-at-11.34.03-AM-1024x616-1.png"
+image: "/images/posts/2023/03/chronicle-wire-object-marshalling/Screen-Shot-2023-03-20-at-11.34.03-AM-1024x616-1.png"
 categories:
   - "Java Core"
   - "Performance"

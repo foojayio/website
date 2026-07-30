@@ -7,7 +7,7 @@ description: "Now, with a major Cloud platform providing built-in support for th
 canonical: "https://www.azul.com/blog/aws-snapstart-builds-momentum-for-the-crac-api/"
 authors:
   - "pavel"
-image: "https://foojay.io/wp-content/uploads/2022/12/crac-momentum-blog-hero.jpg"
+image: "/images/posts/2022/12/azul-provides-the-crac-in-aws-snapstart-builds/crac-momentum-blog-hero.jpg"
 categories:
   - "CRaC"
   - "DevOps"

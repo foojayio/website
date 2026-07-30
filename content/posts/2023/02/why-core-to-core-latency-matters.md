@@ -6,7 +6,7 @@ lastmod: "2023-02-03T10:43:06+00:00"
 description: "An initial goal of Java was to “write once, run anywhere”, but does that mean we should not be sympathetic to the hardware?"
 authors:
   - "rob-austin"
-image: "https://foojay.io/wp-content/uploads/2023/01/Screen-Shot-2023-01-24-at-9.30.29-AM-1024x507-1.png"
+image: "/images/posts/2023/02/why-core-to-core-latency-matters/Screen-Shot-2023-01-24-at-9.30.29-AM-1024x507-1.png"
 categories:
   - "Performance"
 tags:

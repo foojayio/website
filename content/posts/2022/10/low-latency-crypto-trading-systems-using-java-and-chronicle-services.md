@@ -6,7 +6,7 @@ lastmod: "2022-10-18T14:59:39+00:00"
 description: "Chronicle-Services framework allows running the market data connectors within a single event loop, which is designed to minimize latency."
 authors:
   - "ivan-rakov"
-image: "https://foojay.io/wp-content/uploads/2022/10/Screen-Shot-2022-10-10-at-2.27.27-PM.png"
+image: "/images/posts/2022/10/low-latency-crypto-trading-systems-using-java-and-chronicle-services/Screen-Shot-2022-10-10-at-2.27.27-PM.png"
 categories:
   - "Developer Tools"
   - "Java Core"

@@ -7,7 +7,7 @@ description: "In this article, I highlight that microservices, as presented at c
 canonical: "https://blog.frankel.ch/chopping-monolith/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/04/roger_stone.jpg"
+image: "/images/posts/2022/04/chopping-monolith/roger_stone.jpg"
 categories:
   - "Microservices"
   - "Opinion"

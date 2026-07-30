@@ -6,7 +6,7 @@ lastmod: "2023-01-19T08:43:53+00:00"
 description: "A great line up of known and less known OpenJDK users from the Foojay community will be at FOSDEM, with a quiz and awesome prizes to be won."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2022/02/prizes.png"
+image: "/images/posts/2022/02/friends-of-openjdk-schedule-at-fosdem-2022/prizes.png"
 categories:
   - "Events"
 tags:

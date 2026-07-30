@@ -6,7 +6,7 @@ lastmod: "2022-09-22T16:05:21+00:00"
 description: "With the launch of Jakarta EE 10 today, Payara releases Payara 6 Community Alpha 4 immediately, bringing new features!"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2022/09/orange_fish-white_text-blue_background-small-1.png"
+image: "/images/posts/2022/09/payara-launches-jakarta-ee-10-platform-compatible-product/orange_fish-white_text-blue_background-small-1.png"
 categories:
   - "Payara"
   - "Press"

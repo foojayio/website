@@ -7,7 +7,7 @@ description: "Sometimes you need to make code more trivial to see the higher-lev
 canonical: "https://bmuskalla.github.io/blog/2021-06-28-simplify-protocol/"
 authors:
   - "bmuskalla"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/06/simplify-protocol-refactoring/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

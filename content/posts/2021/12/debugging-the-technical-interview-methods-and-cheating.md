@@ -7,7 +7,7 @@ description: "Can you cheat in a technical interview? This approach for hiring t
 canonical: "https://talktotheduck.dev/debugging-the-technical-interview-methods-and-cheating"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2021/11/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt1.jpg"
+image: "/images/posts/2021/12/debugging-the-technical-interview-methods-and-cheating/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt1.jpg"
 categories:
   - "Interviews"
 tags:

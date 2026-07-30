@@ -7,7 +7,7 @@ description: "A truly cloud-native approach means adopting key elements of the K
 canonical: "https://hackernoon.com/why-kubernetes-is-the-best-technology-for-running-a-cloud-native-database-hz1234ld"
 authors:
   - "jeff-carpenter"
-image: "https://foojay.io/wp-content/uploads/2021/06/image.jpg"
+image: "/images/posts/2021/06/why-kubernetes-is-the-best-technology-for-running-a-cloud-native-database/image.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"

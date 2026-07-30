@@ -6,7 +6,7 @@ lastmod: "2023-03-08T10:03:12+00:00"
 description: "Many developers struggle with writing a web UI, but it becomes absolute fun if we could do it with pure java; let's find out how."
 authors:
   - "tarek-oraby"
-image: "https://foojay.io/wp-content/uploads/2022/02/Screen-Shot-2022-02-02-at-10.49.28-AM.png"
+image: "/images/posts/2022/02/create-a-crud-ui-in-pure-java/Screen-Shot-2022-02-02-at-10.49.28-AM.png"
 categories:
   - "Tutorials"
   - "Vaadin"

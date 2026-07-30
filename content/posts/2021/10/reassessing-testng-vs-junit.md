@@ -7,7 +7,7 @@ description: "Given that the JUnit ecosystem is much more developed, I think I'l
 canonical: "https://blog.frankel.ch/reassessing-testng-junit/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/09/pexels-cottonbro-6832241.jpg"
+image: "/images/posts/2021/10/reassessing-testng-vs-junit/pexels-cottonbro-6832241.jpg"
 categories:
   - "Research"
 tags:

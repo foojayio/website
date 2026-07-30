@@ -7,7 +7,7 @@ description: "Some alternatives that allow you to make third-party APIs behave i
 canonical: "https://blog.frankel.ch/hacking-third-party-api-jvm/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/05/anonymous-2768825_1280.jpg"
+image: "/images/posts/2021/05/hacking-third-party-api-jvm/anonymous-2768825_1280.jpg"
 categories:
   - "Security"
 tags:

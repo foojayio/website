@@ -7,7 +7,7 @@ description: "Payara has launched a new product Payara Cloud, designed to run J
 canonical: "https://www.payara.fish/teamblog/2022/11/07/payara-launches-payara-cloud-serverless-approach-for-jakarta-ee/"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2021/04/2.-Payara-Services-Group-Photo-2.jpg"
+image: "/images/posts/2022/11/payara-launches-payara-cloud-serverless-approach-for-jakarta-ee/2.-Payara-Services-Group-Photo-2.jpg"
 categories:
   - "Cloud"
   - "Jakarta EE"

@@ -8,7 +8,7 @@ canonical: "https://blog.payara.fish/what-is-microprofile"
 authors:
   - "jadon-ortlepp"
   - "luis-neto"
-image: "https://foojay.io/wp-content/uploads/2022/09/microprofile.png"
+image: "/images/posts/2022/09/what-is-microprofile/microprofile.png"
 categories:
   - "Cloud"
   - "Microservices"

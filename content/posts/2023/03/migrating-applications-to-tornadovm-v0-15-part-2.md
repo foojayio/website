@@ -6,7 +6,7 @@ lastmod: "2023-03-04T18:54:54+00:00"
 description: "In this article, we will spotlight all the TornadoVM configurations/operations that regard the execution on the hardware device."
 authors:
   - "thanos-stratikopoulos"
-image: "https://foojay.io/wp-content/uploads/2023/03/taskgraph-snapshot-1-1024x79-1.png"
+image: "/images/posts/2023/03/migrating-applications-to-tornadovm-v0-15-part-2/taskgraph-snapshot-1-1024x79-1.png"
 categories:
   - "Performance"
   - "Release Notes"

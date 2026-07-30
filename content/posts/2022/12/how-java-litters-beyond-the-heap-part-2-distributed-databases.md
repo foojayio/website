@@ -6,7 +6,7 @@ lastmod: "2023-01-27T10:56:29+00:00"
 description: "Let’s create a Java application with YugabyteDB distributed database to see if garbage is generated in response to application requests."
 authors:
   - "denis-magda"
-image: "https://foojay.io/wp-content/uploads/2022/12/image2.png"
+image: "/images/posts/2022/12/how-java-litters-beyond-the-heap-part-2-distributed-databases/image2.png"
 categories:
   - "Databases"
   - "Tutorials"

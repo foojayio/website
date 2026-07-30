@@ -7,7 +7,7 @@ description: "Since Docker announced that it would remove unused images from Doc
 canonical: "https://blog.frankel.ch/free-docker-registries/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/08/business-1845350_1280.jpg"
+image: "/images/posts/2021/08/looking-for-free-docker-registries/business-1845350_1280.jpg"
 categories:
   - "DevOps"
 tags:

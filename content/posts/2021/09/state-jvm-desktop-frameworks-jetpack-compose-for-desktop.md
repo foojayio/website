@@ -7,7 +7,7 @@ description: "This article is dedicated to Jet Compose for Desktop, the new kid 
 canonical: "https://blog.frankel.ch/state-jvm-desktop-frameworks/5/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/02/basic-compose.jpg"
+image: "/images/posts/2021/09/state-jvm-desktop-frameworks-jetpack-compose-for-desktop/basic-compose.jpg"
 categories:
   - "Kotlin"
 tags:

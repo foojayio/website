@@ -7,7 +7,7 @@ description: "This is the first of a series on how Gradle works! For example, ho
 canonical: "https://blog.gradle.org/how-gradle-works-1"
 authors:
   - "bo-zhang"
-image: "https://foojay.io/wp-content/uploads/2023/02/local-distribution-startup.png"
+image: "/images/posts/2023/02/how-gradle-works-startup/local-distribution-startup.png"
 categories:
   - "Gradle"
   - "Java Core"

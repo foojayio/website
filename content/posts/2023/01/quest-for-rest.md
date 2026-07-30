@@ -7,7 +7,7 @@ description: "SOAP's biggest flaw was its complexity and its focus on big compan
 canonical: "https://blog.frankel.ch/quest-for-rest/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/01/heaven-g78b17aeb8.jpg"
+image: "/images/posts/2023/01/quest-for-rest/heaven-g78b17aeb8.jpg"
 categories:
   - "Opinion"
 tags:

@@ -7,7 +7,7 @@ description: "Working with tombstones can be one of the more frustrating aspects
 canonical: "https://medium.com/building-the-open-data-stack/tombstones-and-ghost-data-dont-have-to-be-scary-with-these-tips-and-tricks-from-datastax-48f3c275b05a"
 authors:
   - "aaron-ploetz"
-image: "https://foojay.io/wp-content/uploads/2022/01/1_g5MhVmTyqdCWG_-LkItmNg.jpeg"
+image: "/images/posts/2022/06/tombstones-and-ghost-data-dont-have-to-be-scary/1_g5MhVmTyqdCWG_-LkItmNg.jpeg"
 categories:
   - "Apache Cassandra"
   - "Databases"

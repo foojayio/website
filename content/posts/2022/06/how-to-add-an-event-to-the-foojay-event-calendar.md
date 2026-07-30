@@ -6,7 +6,7 @@ lastmod: "2022-06-07T09:39:02+00:00"
 description: "If you want to add an event to our calendar or advertize your event on Foojay.io, you can follow the following steps! "
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/05/Screen-Shot-2022-05-30-at-1.01.58-AM.png"
+image: "/images/posts/2022/06/how-to-add-an-event-to-the-foojay-event-calendar/Screen-Shot-2022-05-30-at-1.01.58-AM.png"
 categories:
   - "Events"
   - "Foojay"

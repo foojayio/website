@@ -7,7 +7,7 @@ description: "Tips and tricks on how to get productive with creating OpenAPI gen
 canonical: "https://lengrand.fr/tips-on-getting-started-with-openapi-generators/"
 authors:
   - "jlengrand"
-image: "https://foojay.io/wp-content/uploads/2023/03/postman.jpg"
+image: "/images/posts/2023/03/getting-started-with-openapi-generators-tips-tricks/postman.jpg"
 categories:
   - "Java Beginner"
   - "Tools"

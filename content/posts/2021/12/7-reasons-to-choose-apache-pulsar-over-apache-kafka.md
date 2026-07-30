@@ -7,7 +7,7 @@ description: "When you set out to build the best messaging infrastructure servic
 canonical: "https://datastax.medium.com/7-reasons-to-choose-apache-pulsar-over-apache-kafka-cb111087eadb"
 authors:
   - "chris-bartholomew"
-image: "https://foojay.io/wp-content/uploads/2021/06/1_Fp4f1tFBgsfvxyfXBGEpDQ.jpeg"
+image: "/images/posts/2021/12/7-reasons-to-choose-apache-pulsar-over-apache-kafka/1_Fp4f1tFBgsfvxyfXBGEpDQ.jpeg"
 categories:
   - "Apache Cassandra"
   - "Apache Pulsar"

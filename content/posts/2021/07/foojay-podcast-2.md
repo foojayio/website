@@ -8,7 +8,7 @@ authors:
   - "erikcostlow"
   - "frankdelporte"
   - "johan-vos"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/07/foojay-podcast-2/Favicon-3-2.png"
 categories:
   - "Foojay"
   - "Pi4J"

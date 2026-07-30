@@ -7,7 +7,7 @@ description: "When OSS advocacy goes too far and corporate greed takes over. FOS
 canonical: "https://debugagent.com/open-source-bait-and-switch"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/08/DALL·E-2022-08-23-18.47.43-unicorn-running-away-from-men-in-suits-through-wide-open-field.png"
+image: "/images/posts/2022/09/open-source-bait-and-switch/DALL-E-2022-08-23-18.47.43-unicorn-running-away-from-men-in-suits-through-wide-open-field.png"
 categories:
   - "Opinion"
 tags:

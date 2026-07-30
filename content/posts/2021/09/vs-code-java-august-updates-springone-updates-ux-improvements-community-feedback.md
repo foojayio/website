@@ -6,7 +6,7 @@ lastmod: "2021-09-23T07:02:45+00:00"
 description: "Let's share some exciting updates from the SpringOne 2021 conference, as well as various user experience improvements!"
 authors:
   - "nick-zhu"
-image: "https://foojay.io/wp-content/uploads/2021/09/Spring-Boot.gif"
+image: "/images/posts/2021/09/vs-code-java-august-updates-springone-updates-ux-improvements-community-feedback/Spring-Boot.gif"
 categories:
   - "Kotlin"
   - "Spring"

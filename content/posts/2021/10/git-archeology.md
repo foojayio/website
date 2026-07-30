@@ -6,7 +6,7 @@ lastmod: "2021-10-23T06:55:05+00:00"
 description: "How to use Git to carefully remove layer by layer of sand and dirt that has been swept over the code changes over time to unearth them!"
 authors:
   - "bmuskalla"
-image: "https://foojay.io/wp-content/uploads/2021/01/unearth.jpg"
+image: "/images/posts/2021/10/git-archeology/unearth.jpg"
 categories:
   - "DevOps"
   - "IntelliJ IDEA"
@@ -91,13 +91,13 @@ Given this history for a file, consisting of the important change as well as a c
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">❯ git log
 commit 301b7eca0eb57737e160f5d2d16208f65c4156d6 (HEAD -&gt; master)
-Author: Benjamin Muskalla &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2a48475f59414b46464b6a4d584b4e464f04494547">[email&nbsp;protected]</a>&gt;
+Author: Benjamin Muskalla &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c1e11090f171d10101d3c1b0e1d181019521f1311">[email&nbsp;protected]</a>&gt;
 Date:   Tue Jan 12 11:38:40 2021 +0100
 
     Reformat all source files
 
 commit bd3fca50ee1659e740e2f6744d95e737418f1f40
-Author: Benjamin Muskalla &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="680a051d1b0309040409280f1a090c040d460b0705">[email&nbsp;protected]</a>&gt;
+Author: Benjamin Muskalla &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdafa0b8bea6aca1a1ac8daabfaca9a1a8e3aea2a0">[email&nbsp;protected]</a>&gt;
 Date:   Tue Jan 12 11:38:12 2021 +0100
 
     Important change</pre>

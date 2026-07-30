@@ -7,7 +7,7 @@ description: "When your Java application has problems, check the running process
 canonical: "https://jfeatures.com/blog/jps"
 authors:
   - "vipin-sharma"
-image: "https://foojay.io/wp-content/uploads/2021/06/ebook_upd.png"
+image: "/images/posts/2021/07/jps/ebook_upd.png"
 categories:
   - "Tools"
 tags:

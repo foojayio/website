@@ -6,7 +6,7 @@ lastmod: "2023-01-17T16:12:45+00:00"
 description: "In this interactive tutorial and educational project, you'll learn about JUnit internals and the usage of Java annotations and reflection."
 authors:
   - "wei-lin"
-image: "https://foojay.io/wp-content/uploads/2022/06/chemical-scientist-test-chemistry-chemist-student.jpg"
+image: "/images/posts/2023/01/jtest-roll-your-own-junit-like-testing-framework/chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Testing"
   - "Tutorials"

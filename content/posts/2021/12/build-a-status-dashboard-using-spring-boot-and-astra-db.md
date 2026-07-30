@@ -7,7 +7,7 @@ description: "Learn how to leverage the Astra Document API on top of Cassandra t
 canonical: "https://www.baeldung.com/cassandra-astra-stargate-dashboard"
 authors:
   - "graham-cox"
-image: "https://foojay.io/wp-content/uploads/2021/07/db-setup.png"
+image: "/images/posts/2021/12/build-a-status-dashboard-using-spring-boot-and-astra-db/db-setup.png"
 categories:
   - "Apache Cassandra"
   - "Databases"
@@ -257,7 +257,7 @@ Our main "dashboard.html" template is then as follows:
 &lt;head&gt;  
   &lt;meta charset="utf-8" /&gt;  
   &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
-  &lt;link href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="61030e0e15121513001121544f514f514c0304150052">[email&nbsp;protected]</a>/dist/css/bootstrap.min.css" rel="stylesheet"    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" /&gt;  
+  &lt;link href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff9d90908b8c8b8d9e8fbfcad1cfd1cfd29d9a8b9ecc">[email&nbsp;protected]</a>/dist/css/bootstrap.min.css" rel="stylesheet"    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" /&gt;  
   &lt;title&gt;Avengers Status Dashboard&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;  
@@ -280,7 +280,7 @@ Our main "dashboard.html" template is then as follows:
     &lt;/div&gt;    
   &lt;/div&gt;  
 &lt;/div&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a6865657e797e786b7a4a3f243a243a27686f7e6b39">[email&nbsp;protected]</a>/dist/js/bootstrap.bundle.min.js"    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"    crossorigin="anonymous"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a2c0cdcdd6d1d6d0c3d2e2978c928c928fc0c7d6c391">[email&nbsp;protected]</a>/dist/js/bootstrap.bundle.min.js"    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"    crossorigin="anonymous"&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</pre>
 

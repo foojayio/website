@@ -6,7 +6,7 @@ lastmod: "2021-07-12T11:01:43+00:00"
 description: "Learn the basics of using jshell. Next, combine that with learning how to run a JavaFX application file from a terminal command prompt!"
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2021/06/matrix-rain-effect.gif"
+image: "/images/posts/2021/07/learn-javafx-with-jshell-in-60-seconds/matrix-rain-effect.gif"
 categories:
   - "JavaFX"
   - "JShell"
@@ -146,13 +146,13 @@ Do the following to check to make sure:
 
 You should see something like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c2a8a3b4a3a4baeca0a3b1a782f3f3ecf2ecfb">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="076d667166617f296468697375686b744736362937293e">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fd979c8b9c9b85d39b859091bdccccd3cdd3c4">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae0ebfcebecf2a4edf8ebfae2e3e9f9cabbbba4baa4b3">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dab0bbacbbbca2f4b7bfbeb3bb9aebebf4eaf4e3">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c161d0a1d1a04520f0b15121b3c4d4d524c5245">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e646f786f687620796b6c4e3f3f203e2037">[email&nbsp;protected]</a></pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5339322532352b7d313220361362627d637d6a">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e08a8196818698ce838f8e94928f8c93a0d1d1ced0ced9">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f892998e999e80d69e809594b8c9c9d6c8d6c1">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="95fff4e3f4f3edbbf2e7f4e5fdfcf6e6d5a4a4bba5bbac">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bfd5dec9ded9c791d2dadbd6deff8e8e918f9186">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e389829582859bcd90948a8d84a3d2d2cdd3cdda">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f59f948394938ddb829097b5c4c4dbc5dbcc">[email&nbsp;protected]</a></pre>
 
 If you don't see the modules shown above, you probably downloaded just the JDK itself (not containing JavaFX's modules). (Head over to Azul to download Zulu builds with JavaFX here: <https://www.azul.com/downloads/?package=jdk-fx>.)
 

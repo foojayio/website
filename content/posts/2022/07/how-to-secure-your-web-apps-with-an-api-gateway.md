@@ -7,7 +7,7 @@ description: "When header values depend on the web app, we need to reload the co
 canonical: "https://blog.frankel.ch/secure-webapps-api-gateway/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/07/safe-g188ed805c.jpg"
+image: "/images/posts/2022/07/how-to-secure-your-web-apps-with-an-api-gateway/safe-g188ed805c.jpg"
 categories:
   - "DevOps"
   - "Security"

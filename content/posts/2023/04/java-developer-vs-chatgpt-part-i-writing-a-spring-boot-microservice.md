@@ -7,7 +7,7 @@ description: "Pitting a seasoned Java developer against the all-knowing generati
 canonical: "https://digma.ai/blog/java-developer-vs-chatgpt-part-i-writing-a-spring-boot-microservice/"
 authors:
   - "roni-dover"
-image: "https://foojay.io/wp-content/uploads/2023/04/grid_0-700x350-1.png"
+image: "/images/posts/2023/04/java-developer-vs-chatgpt-part-i-writing-a-spring-boot-microservice/grid_0-700x350-1.png"
 categories:
   - "Cloud"
   - "Microservices"

@@ -6,7 +6,7 @@ lastmod: "2021-12-10T12:59:06+00:00"
 description: "The Pi4J library (a friendly object-oriented I/O API and libraries for Java access to the full I/O of the Raspberry Pi) has taken a big step!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/09/pi4j-overview-1024x427.jpg"
+image: "/images/posts/2021/08/pi4j-v-2-released/pi4j-overview-1024x427.jpg"
 categories:
   - "Embedded"
   - "Pi4J"

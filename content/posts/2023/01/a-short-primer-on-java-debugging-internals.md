@@ -6,7 +6,7 @@ lastmod: "2023-01-02T08:22:48+00:00"
 description: "How does debugging work under the hood? This article explains the basics of JDI and JDWP and gives the JDWP packets for an example program."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2022/12/diagrams2-2.png"
+image: "/images/posts/2023/01/a-short-primer-on-java-debugging-internals/diagrams2-2.png"
 categories:
   - "Developer Tools"
 tags:

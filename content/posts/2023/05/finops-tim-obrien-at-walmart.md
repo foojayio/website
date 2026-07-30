@@ -6,7 +6,7 @@ lastmod: "2023-05-23T14:14:09+00:00"
 description: "\"Java and the Java community are what brought me to this role, but my focus is now on Cloud cost, budget, and ideas for efficiency.\""
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2023/05/1683981616677.jpeg"
+image: "/images/posts/2023/05/finops-tim-obrien-at-walmart/1683981616677.jpeg"
 categories:
   - "FinOps"
   - "Research"

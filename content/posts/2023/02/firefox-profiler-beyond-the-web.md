@@ -6,7 +6,7 @@ lastmod: "2023-02-02T13:13:18+00:00"
 description: "Ever wanted to profile your application directly from your IDE? Here comes the Java JFR Profiler plugin, an open-source plugin for IntelliJ!"
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/01/Screenshot-2023-01-27-at-12.34.23.png"
+image: "/images/posts/2023/02/firefox-profiler-beyond-the-web/Screenshot-2023-01-27-at-12.34.23.png"
 categories:
   - "Developer Tools"
   - "IntelliJ IDEA"

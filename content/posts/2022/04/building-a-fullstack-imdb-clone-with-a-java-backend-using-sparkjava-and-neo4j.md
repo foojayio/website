@@ -7,7 +7,7 @@ description: "Learn about a brand new Java developer course for Neo4J with Java 
 authors:
   - "jennifer-reif"
   - "michael-hunger"
-image: "https://foojay.io/wp-content/uploads/2022/04/neo4j-graphacademy-developer.png"
+image: "/images/posts/2022/04/building-a-fullstack-imdb-clone-with-a-java-backend-using-sparkjava-and-neo4j/neo4j-graphacademy-developer.png"
 categories:
   - "Graph"
   - "Neo4J"

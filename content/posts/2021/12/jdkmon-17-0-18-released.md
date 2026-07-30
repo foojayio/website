@@ -6,7 +6,7 @@ lastmod: "2021-12-20T09:09:32+00:00"
 description: "Vulnerability information and TCK test status details are available and easily detectable with JDKMon 17.0.18."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2021/12/JDKMon-2021-12-19-05-08-12-700x385.png"
+image: "/images/posts/2021/12/jdkmon-17-0-18-released/JDKMon-2021-12-19-05-08-12-700x385.png"
 categories:
   - "Release Notes"
   - "Tools"

@@ -7,7 +7,7 @@ description: "Just in time for Halloween failures in production are scarier than
 canonical: "https://talktotheduck.dev/production-horrors-handling-disasters-public-debrief"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2021/10/Lightrun-Talk-to-the-duck-Production-Horrors_Halloween.jpg"
+image: "/images/posts/2021/11/production-horrors-handling-disasters-public-debrief/Lightrun-Talk-to-the-duck-Production-Horrors_Halloween.jpg"
 categories:
   - "DevOps"
 tags:

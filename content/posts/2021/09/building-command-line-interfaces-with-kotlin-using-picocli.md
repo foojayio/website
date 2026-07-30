@@ -7,7 +7,7 @@ description: "Use cases where CLIs are a great idea, best practises, and discove
 canonical: "https://lengrand.fr/building-command-line-interfaces-with-kotlin-using-picocli/"
 authors:
   - "jlengrand"
-image: "https://foojay.io/wp-content/uploads/2021/09/image1-700x135.png"
+image: "/images/posts/2021/09/building-command-line-interfaces-with-kotlin-using-picocli/image1-700x135.png"
 categories:
   - "Kotlin"
 tags:

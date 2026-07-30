@@ -6,7 +6,7 @@ lastmod: "2025-11-13T09:18:36+00:00"
 description: "in this episode, we talk to the organizers of the Dubai JUG that started in May of 2022. Find out how the JUG started and where it's going!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/12/dubai-jug-podcast-1024x575-1.png"
+image: "/images/posts/2023/01/foojay-podcast-10/dubai-jug-podcast-1024x575-1.png"
 categories:
   - "Foojay"
   - "JUGs"

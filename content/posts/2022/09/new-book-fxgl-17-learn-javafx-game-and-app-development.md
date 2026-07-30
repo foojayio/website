@@ -6,7 +6,7 @@ lastmod: "2022-09-19T12:03:36+00:00"
 description: "New book for beginners in Java and/or JavaFX who wish to develop apps and games with FXGL, while improving Java and JavaFX skills."
 authors:
   - "almasbaimagambetov"
-image: "https://foojay.io/wp-content/uploads/2022/09/978-1-4842-8625-8-336x510-1.jpeg"
+image: "/images/posts/2022/09/new-book-fxgl-17-learn-javafx-game-and-app-development/978-1-4842-8625-8-336x510-1.jpeg"
 categories:
   - "Book Announcement"
   - "Game Development"

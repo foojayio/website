@@ -7,7 +7,7 @@ description: "Debugging race conditions is hard, unfortunately production enviro
 canonical: "https://lightrun.com/tutorials/debug-race-condition-production/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/03/Lightrun_-_blog_banner_How_to_Debug_Race_Conditions_Between_Threads_in_Java-Opt1.jpg"
+image: "/images/posts/2022/03/debugging-race-conditions-in-production/Lightrun_-_blog_banner_How_to_Debug_Race_Conditions_Between_Threads_in_Java-Opt1.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

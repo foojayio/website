@@ -6,7 +6,7 @@ lastmod: "2023-03-10T10:08:36+00:00"
 description: "Hazelcast Serverless manages your Cloud infrastructure, handling resource isolation, resource stealing, and isolated network access."
 authors:
   - "fawaz-ghali"
-image: "https://foojay.io/wp-content/uploads/2023/02/hz-unconf-social-2.jpg"
+image: "/images/posts/2023/02/how-to-get-started-with-the-hazelcast-viridian-serverless/hz-unconf-social-2.jpg"
 categories:
   - "Hazelcast"
   - "Tutorials"

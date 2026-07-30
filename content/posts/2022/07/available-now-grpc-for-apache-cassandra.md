@@ -7,7 +7,7 @@ description: "General availability of a gRPC API for Apache Cassandra to leverag
 canonical: "https://www.datastax.com/blog/available-now-grpc-apache-cassandra"
 authors:
   - "pieter-humphrey"
-image: "https://foojay.io/wp-content/uploads/2022/06/2dc360f43686ee3be7bcd2b10d7691ae9fd3b65f-1460x968-1.png"
+image: "/images/posts/2022/07/available-now-grpc-for-apache-cassandra/2dc360f43686ee3be7bcd2b10d7691ae9fd3b65f-1460x968-1.png"
 categories:
   - "Apache Cassandra"
   - "DataStax"

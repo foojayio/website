@@ -7,7 +7,7 @@ description: "Why Apache Pulsar and its support for streaming data is the right 
 canonical: "https://www.rtinsights.com/the-critical-role-streaming-plays-in-a-data-stack/"
 authors:
   - "jbellis"
-image: "https://foojay.io/wp-content/uploads/2022/02/streaming-data-Depositphotos_5_tn-300x210-1.jpg"
+image: "/images/posts/2022/02/the-critical-role-streaming-plays-in-a-data-stack/streaming-data-Depositphotos_5_tn-300x210-1.jpg"
 categories:
   - "Apache Cassandra"
   - "Apache Pulsar"

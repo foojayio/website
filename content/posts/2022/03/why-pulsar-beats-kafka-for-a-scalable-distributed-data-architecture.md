@@ -7,7 +7,7 @@ description: "This article argues why Apache Pulser is better than Apache Kafka 
 canonical: "https://jaxenter.com/pulsar-kafka-175830.html"
 authors:
   - "jbellis"
-image: "https://foojay.io/wp-content/uploads/2022/02/shutterstock_1009002379-350x233-1.jpg"
+image: "/images/posts/2022/03/why-pulsar-beats-kafka-for-a-scalable-distributed-data-architecture/shutterstock_1009002379-350x233-1.jpg"
 categories:
   - "Apache Cassandra"
   - "Apache Pulsar"

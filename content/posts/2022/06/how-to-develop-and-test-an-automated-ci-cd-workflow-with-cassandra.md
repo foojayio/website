@@ -8,7 +8,7 @@ canonical: "https://medium.com/building-the-open-data-stack/how-to-deploy-apache
 authors:
   - "jim-dickinson"
   - "patrick-mcfadin"
-image: "https://foojay.io/wp-content/uploads/2022/01/1_-GhKztmv21IPfZZvAS7Ugg.jpeg"
+image: "/images/posts/2022/06/how-to-develop-and-test-an-automated-ci-cd-workflow-with-cassandra/1_-GhKztmv21IPfZZvAS7Ugg.jpeg"
 categories:
   - "Apache Cassandra"
   - "DevOps"

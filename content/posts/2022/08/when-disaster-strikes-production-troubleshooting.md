@@ -7,7 +7,7 @@ description: "Production is failing and everything is lost? That used to be the 
 canonical: "https://lightrun.com/inside-lightrun/when-disaster-strikes-production-troubleshooting/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/05/Lightrun-developer-productivity-dark-29.png"
+image: "/images/posts/2022/08/when-disaster-strikes-production-troubleshooting/Lightrun-developer-productivity-dark-29.png"
 categories:
   - "Spring"
   - "sql"

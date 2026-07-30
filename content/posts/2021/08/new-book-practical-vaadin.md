@@ -6,7 +6,7 @@ lastmod: "2022-03-25T14:56:15+00:00"
 description: "Alejandro Duarte's new book shows how to implement web applications in Java using the open source Vaadin framework version 20 and later."
 authors:
   - "jonathan-gennick"
-image: "https://foojay.io/wp-content/uploads/2021/08/practical-vaadin.png"
+image: "/images/posts/2021/08/new-book-practical-vaadin/practical-vaadin.png"
 categories:
   - "Book Announcement"
   - "Books"

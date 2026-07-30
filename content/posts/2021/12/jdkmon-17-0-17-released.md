@@ -6,7 +6,7 @@ lastmod: "2021-12-08T09:11:23+00:00"
 description: "Point JDKMon to the folder where all your JavaFX SDK's are installed and it will check if there are any updates available."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/12/jdkmon-17-0-17-released/Favicon-3-2.png"
 categories:
   - "Developer Tools"
   - "JavaFX"

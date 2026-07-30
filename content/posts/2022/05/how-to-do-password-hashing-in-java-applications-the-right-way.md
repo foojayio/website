@@ -7,7 +7,7 @@ description: "The first rule of password hashing algorithms is: Don't write your
 canonical: "https://snyk.io/blog/password-hashing-java-applications/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/05/how-to-do-password-hashing-in-java-applications-the-right-way/Favicon-3-2.png"
 categories:
   - "Security"
 tags:

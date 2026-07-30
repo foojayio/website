@@ -6,7 +6,7 @@ lastmod: "2022-02-07T12:23:17+00:00"
 description: "Java on Raspberry Pi has always been possible, but SDKMAN makes the getting-started process a lot easier. It's as easy as pi..."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/02/installing-java-with-sdkman-on-raspberry-pi/Favicon-3-2.png"
 categories:
   - "Embedded"
   - "Raspberry Pi"

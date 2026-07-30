@@ -7,7 +7,7 @@ description: "A new Y2K-bug seems to be approaching and we still have time to pr
 canonical: "https://webtechie.be/post/2022-12-01-schedule-holiday-2038/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/12/y2k.jpg"
+image: "/images/posts/2023/02/still-time-to-schedule-your-holiday-for-2038/y2k.jpg"
 categories:
   - "Java Core"
   - "JShell"

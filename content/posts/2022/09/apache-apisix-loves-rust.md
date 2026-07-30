@@ -7,7 +7,7 @@ description: "Context and more surrounding the Rust integration in Apache APISIX
 canonical: "https://blog.frankel.ch/rust-apisix/1/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/09/teamwork-gbacc0987f.jpg"
+image: "/images/posts/2022/09/apache-apisix-loves-rust/teamwork-gbacc0987f.jpg"
 categories:
   - "DevOps"
 tags:

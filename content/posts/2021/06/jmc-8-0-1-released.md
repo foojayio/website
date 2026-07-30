@@ -6,7 +6,7 @@ lastmod: "2021-06-25T18:19:57+00:00"
 description: "The 8.0.1-ga tag was just set in the jmc8 repository on GitHub, a patch update release, and will therefore not include any new features."
 authors:
   - "hirt"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/06/jmc-8-0-1-released/Favicon-3-2.png"
 categories:
   - "JDK Flight Recorder"
   - "Release Notes"

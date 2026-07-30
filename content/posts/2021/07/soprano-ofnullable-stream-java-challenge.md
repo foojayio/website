@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:17:43+00:00"
 description: "Since Java 9, you can use Optional with a stream to manipulate values from a List. Check out the latest Java challenge about this!"
 authors:
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2021/06/soprano_challenge.png"
+image: "/images/posts/2021/07/soprano-ofnullable-stream-java-challenge/soprano_challenge.png"
 categories:
   - "Tutorials"
 tags:

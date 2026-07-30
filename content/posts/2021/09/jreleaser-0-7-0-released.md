@@ -6,7 +6,7 @@ lastmod: "2021-09-29T12:13:32+00:00"
 description: "JReleaser is a tool that streamlines creating releases for [Java] projects. 0.7.0 is a small release as core features is mostly complete."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/09/jreleaser-0-7-0-released/Favicon-3-2.png"
 categories:
   - "DevOps"
   - "Release Notes"

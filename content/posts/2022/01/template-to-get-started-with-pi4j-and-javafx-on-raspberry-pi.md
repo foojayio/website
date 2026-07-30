@@ -7,7 +7,7 @@ description: "How to use the same architecture to implement a JavaFX-based GUI, 
 canonical: "https://pi4j.com/getting-started/javafx-mvc-template/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/08/led-button_bb-1024x378.png"
+image: "/images/posts/2022/01/template-to-get-started-with-pi4j-and-javafx-on-raspberry-pi/led-button_bb-1024x378.png"
 categories:
   - "Embedded"
   - "JavaFX"

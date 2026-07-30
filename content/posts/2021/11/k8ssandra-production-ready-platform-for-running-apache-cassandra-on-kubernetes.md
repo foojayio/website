@@ -7,7 +7,7 @@ description: "K8ssandra aims to provide a \"production-ready platform\", includi
 canonical: "https://www.infoq.com/news/2021/01/k8ssandra-cassandra-kubernetes/"
 authors:
   - "pieter-humphrey"
-image: "https://foojay.io/wp-content/uploads/2021/07/1K8ssandra_0-1609686338716.png"
+image: "/images/posts/2021/11/k8ssandra-production-ready-platform-for-running-apache-cassandra-on-kubernetes/1K8ssandra_0-1609686338716.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

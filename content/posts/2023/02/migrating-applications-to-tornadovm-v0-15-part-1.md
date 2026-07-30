@@ -6,7 +6,7 @@ lastmod: "2023-02-16T08:00:37+00:00"
 description: "TornadoVM 0.15 introduced changes at the API level with the aim of making the exposed operations more comprehensive to the programmers."
 authors:
   - "thanos-stratikopoulos"
-image: "https://foojay.io/wp-content/uploads/2023/02/programming-model-2-1.png"
+image: "/images/posts/2023/02/migrating-applications-to-tornadovm-v0-15-part-1/programming-model-2-1.png"
 categories:
   - "Release Notes"
   - "Tools"

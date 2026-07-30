@@ -6,7 +6,7 @@ lastmod: "2021-10-08T20:50:14+00:00"
 description: "Looking for people who would like to contribute translations allowing JReleaser to reach and help an even wider audience!"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2021/10/jreleaser-duke-2.png"
+image: "/images/posts/2021/10/jreleaser-looking-for-translation-contributions/jreleaser-duke-2.png"
 categories:
   - "DevOps"
 tags:

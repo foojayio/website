@@ -7,7 +7,7 @@ description: "Control flow is more than step over. You can \"jump\" to arbitrary
 canonical: "https://debugagent.com/debugging-program-control-flow"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/12/thumbnail-2.png"
+image: "/images/posts/2022/12/debugging-program-control-flow/thumbnail-2.png"
 categories:
   - "IntelliJ IDEA"
   - "Videos"

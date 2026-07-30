@@ -6,7 +6,7 @@ lastmod: "2022-12-06T15:32:49+00:00"
 description: "When I ask Java devs whether they profile, the answer is usually \"no\". A reason is the lack of info and knowledge for everyday developers."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2022/11/Screenshot-2022-10-24-at-11.46.10.png"
+image: "/images/posts/2022/11/java-profiling-overview/Screenshot-2022-10-24-at-11.46.10.png"
 categories:
   - "Developer Tools"
   - "JDK Flight Recorder"

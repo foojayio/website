@@ -6,7 +6,7 @@ lastmod: "2023-08-28T12:45:38+00:00"
 description: "One of the things that distinguishes a decent API from one that is a pleasure to work with is robust error handling."
 authors:
   - "wim-deblauwe"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/08/better-error-handling-for-your-spring-boot-rest-apis/Favicon-3-2.png"
 categories:
   - "Spring"
 tags:

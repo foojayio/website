@@ -6,7 +6,7 @@ lastmod: "2021-09-28T08:55:29+00:00"
 description: "Debugging isn't a part of curriculum, it's a crucial skill we're expected to \"just pick up\". Here we fill in the blanks on this black art!"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2021/09/Blog-Header-1200x600-px1.jpeg"
+image: "/images/posts/2021/09/the-debugger-checklist-part-ii/Blog-Header-1200x600-px1.jpeg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

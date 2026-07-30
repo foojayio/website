@@ -7,7 +7,7 @@ description: "We work with debuggers practically every day & yet so much remains
 canonical: "https://talktotheduck.dev/basics-of-breakpoints-you-might-not-know"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/03/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"
+image: "/images/posts/2022/03/the-basics-of-breakpoints-you-might-not-know/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

@@ -6,7 +6,7 @@ lastmod: "2022-11-15T08:40:16+00:00"
 description: "To Mastodon or not to Mastodon... Frank asked the question and let's take a look at the initial responses from around the Java community!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/11/new-mastodon-users.jpg"
+image: "/images/posts/2022/11/java-mastodon-service-the-feedback/new-mastodon-users.jpg"
 categories:
   - "Developer Tools"
   - "Foojay"

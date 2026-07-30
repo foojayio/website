@@ -7,7 +7,7 @@ description: "Let's use a very simple e-commerce use-case to demo how to impleme
 canonical: "https://blog.frankel.ch/backend-for-frontend-demo/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/08/pinky-swear-g6402e3105.jpg"
+image: "/images/posts/2022/08/backend-for-frontend-the-demo/pinky-swear-g6402e3105.jpg"
 categories:
   - "Microservices"
 tags:

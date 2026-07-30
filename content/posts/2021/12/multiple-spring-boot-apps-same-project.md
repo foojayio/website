@@ -7,7 +7,7 @@ description: "I frequently use Spring Boot in my demos. The latest one is no dif
 canonical: "https://blog.frankel.ch/multiple-spring-boot-apps-same-project/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/12/benches-ge9601ea94_1280.jpg"
+image: "/images/posts/2021/12/multiple-spring-boot-apps-same-project/benches-ge9601ea94_1280.jpg"
 categories:
   - "Spring"
   - "Use Cases"

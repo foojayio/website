@@ -6,7 +6,7 @@ lastmod: "2022-08-23T10:30:00+00:00"
 description: "How to avoid trouble and confusion with Java String and Unicode characters. Learn more and find out all the details here!"
 authors:
   - "jonatan-ivanov"
-image: "https://foojay.io/wp-content/uploads/2022/08/vladstudio_symbols-scaled-e1660977766137.jpg"
+image: "/images/posts/2022/08/confusing-java-strings/vladstudio_symbols-scaled-e1660977766137.jpg"
 categories:
   - "Java Core"
 tags:

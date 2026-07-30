@@ -7,7 +7,7 @@ description: "Interview with Lightruns Tom Granot about developer observability,
 canonical: "https://lightrun.com/blog/interview-with-tom-granot-developer-observability-koolkits-and-reliability/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/03/1647358638476.jpg"
+image: "/images/posts/2022/03/interview-with-tom-granot-developer-observability-koolkits-and-reliability/1647358638476.jpg"
 categories:
   - "Interviews"
   - "Kubernetes"

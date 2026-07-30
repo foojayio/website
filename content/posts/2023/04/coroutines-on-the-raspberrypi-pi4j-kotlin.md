@@ -6,7 +6,7 @@ lastmod: "2023-04-01T20:12:59+00:00"
 description: "Find out all the details on Pi4J-Kotlin v2.4.0: Coroutines, I2C, and Serial DSL on Foojay.io Today, the place for OpenJDK friends."
 authors:
   - "mhashim6"
-image: "https://foojay.io/wp-content/uploads/2023/04/code.png"
+image: "/images/posts/2023/04/coroutines-on-the-raspberrypi-pi4j-kotlin/code.png"
 categories:
   - "Embedded"
   - "Kotlin"

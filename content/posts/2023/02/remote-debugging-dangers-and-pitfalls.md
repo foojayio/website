@@ -7,7 +7,7 @@ description: "Debugging over the network using JDWP isn't hard. However, there a
 canonical: "https://debugagent.com/remote-debugging-dangers-and-pitfalls"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/01/thumbnail-9.png"
+image: "/images/posts/2023/02/remote-debugging-dangers-and-pitfalls/thumbnail-9.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

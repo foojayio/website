@@ -6,7 +6,7 @@ lastmod: "2022-02-01T16:02:06+00:00"
 description: "Let's find out what are the ways to create ThreadPool using Executor framework in java and use result-bearing tasks using Callable and Future"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/01/ThreadPool-vs-Main-Threads.png"
+image: "/images/posts/2022/02/java-thread-programming-part-12/ThreadPool-vs-Main-Threads.png"
 categories:
   - "Java Core"
 tags:

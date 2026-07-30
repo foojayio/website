@@ -7,7 +7,7 @@ description: "Another approach for my demos: a regular proxy in front of my loca
 canonical: "https://blog.frankel.ch/port-management-local-kubernetes/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/11/fantasy-g419f8d234_1280.jpg"
+image: "/images/posts/2021/11/port-management-in-local-kubernetes-clusters/fantasy-g419f8d234_1280.jpg"
 categories:
   - "DevOps"
   - "Kubernetes"

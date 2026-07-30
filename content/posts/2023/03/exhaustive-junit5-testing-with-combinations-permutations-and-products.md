@@ -6,7 +6,7 @@ lastmod: "2023-03-09T09:12:53+00:00"
 description: "Read this article and learn how to use JUnit5 in conjunction with combinations, permutations, and products."
 authors:
   - "per-minborg"
-image: "https://foojay.io/wp-content/uploads/2023/02/Screen-Shot-2023-02-27-at-9.52.42-AM-1.png"
+image: "/images/posts/2023/03/exhaustive-junit5-testing-with-combinations-permutations-and-products/Screen-Shot-2023-02-27-at-9.52.42-AM-1.png"
 categories:
   - "Testing"
 tags:

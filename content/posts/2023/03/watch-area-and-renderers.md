@@ -7,7 +7,7 @@ description: "Stop digging through variables in the watch to find nuggets of gol
 canonical: "https://debugagent.com/watch-area-and-renderers"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/01/thumbnail-6.png"
+image: "/images/posts/2023/03/watch-area-and-renderers/thumbnail-6.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

@@ -6,7 +6,7 @@ lastmod: "2021-07-20T11:23:29+00:00"
 description: "The FXGL game engine is now at 11.17. Most of the changes in this release focus on internal code quality and fixes."
 authors:
   - "almasbaimagambetov"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/07/fxgl-game-engine-11-17-release/Favicon-3-2.png"
 categories:
   - "Game Development"
   - "JavaFX"

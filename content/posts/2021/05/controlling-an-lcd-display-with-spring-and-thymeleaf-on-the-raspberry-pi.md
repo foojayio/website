@@ -8,7 +8,7 @@ canonical: "http://www.igfasouza.com/blog/spring-thymeleaf-raspberry-pi-lcd/"
 authors:
   - "frankdelporte"
   - "igor-de-souza"
-image: "https://foojay.io/wp-content/uploads/2021/05/spring_lcd.jpg"
+image: "/images/posts/2021/05/controlling-an-lcd-display-with-spring-and-thymeleaf-on-the-raspberry-pi/spring_lcd.jpg"
 categories:
   - "Raspberry Pi"
 tags:

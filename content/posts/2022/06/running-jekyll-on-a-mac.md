@@ -7,7 +7,7 @@ description: "Here is the complete process for setting up Jekyll on a Mac to hel
 canonical: "https://blog.frankel.ch/running-jekyll-mac/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/06/chemical-scientist-test-chemistry-chemist-student.jpg"
+image: "/images/posts/2022/06/running-jekyll-on-a-mac/chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Tools"
 tags:

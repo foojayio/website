@@ -7,7 +7,7 @@ description: "Antiquated features of the JVM make it hard to utilize resources o
 canonical: "https://www.azul.com/blog/cloud-native-compilation-bringing-jvms-into-the-modern-cloud-world/"
 authors:
   - "john-ceccarelli"
-image: "https://foojay.io/wp-content/uploads/2022/05/cassandra-throughput-2048x810-1.png"
+image: "/images/posts/2022/05/lets-compile-java-code-in-the-cloud/cassandra-throughput-2048x810-1.png"
 categories:
   - "Microservices"
   - "Performance"

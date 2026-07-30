@@ -7,7 +7,7 @@ description: "With Azul Vulnerability Detection, running the software and gettin
 canonical: "https://www.azul.com/blog/moving-security-into-the-jvm/"
 authors:
   - "erikcostlow"
-image: "https://foojay.io/wp-content/uploads/2022/11/Screen-Shot-2022-10-25-at-8.33.15-PM.png"
+image: "/images/posts/2023/02/moving-security-into-the-jvm/Screen-Shot-2022-10-25-at-8.33.15-PM.png"
 categories:
   - "Release Notes"
   - "Security"

@@ -6,7 +6,7 @@ lastmod: "2023-03-21T11:35:42+00:00"
 description: "Discover insights from seasoned Java developer Steve Poole on the ever-evolving software landscape, career growth, and lessons learned throughout his remarkable journey in the tech industry."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/03/Steve-Poole.png"
+image: "/images/posts/2023/03/from-assembler-to-chat-gpt-steve-poole-on-the-shifting-landscape-of-programming/Steve-Poole.png"
 categories:
   - "Interviews"
 tags:

@@ -7,7 +7,7 @@ description: "Distroless images are a solution to reduce your image size and imp
 canonical: "https://blog.frankel.ch/fearless-distroless"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/04/blood-g7e6bb5b41.jpg"
+image: "/images/posts/2023/04/fearless-distroless/blood-g7e6bb5b41.jpg"
 categories:
   - "Developer Tools"
   - "DevOps"

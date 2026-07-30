@@ -7,7 +7,7 @@ description: "In this post, I'd like to describe how a couple of popular languag
 canonical: "https://blog.frankel.ch/error-handling/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/03/car-accident.jpg"
+image: "/images/posts/2022/03/error-handling/car-accident.jpg"
 categories:
   - "Research"
 tags:

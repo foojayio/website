@@ -7,7 +7,7 @@ description: "Learn about adding computed values, as in an eager approach, but o
 canonical: "https://blog.frankel.ch/timely-computation-derived-values/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/05/learn-2300141_1280.jpg"
+image: "/images/posts/2021/09/timely-computation-derived-values/learn-2300141_1280.jpg"
 categories:
   - "Use Cases"
 tags:

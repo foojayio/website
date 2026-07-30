@@ -6,7 +6,7 @@ lastmod: "2023-02-03T13:41:27+00:00"
 description: "The goal of this research is to sensitize small and medium-sized enterprises (SMEs) to the topic of AI with the help of Open Source Tools."
 authors:
   - "phamnguy"
-image: "https://foojay.io/wp-content/uploads/2021/06/image-5-1024x303.png"
+image: "/images/posts/2021/06/open-source-tools-as-an-opportunity-for-smes-to-use-ai/image-5-1024x303.png"
 categories:
   - "Deep Netts"
   - "Machine Learning"

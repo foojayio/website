@@ -7,7 +7,7 @@ description: "Some techniques how to make your Maven builds faster in this artic
 canonical: "https://blog.frankel.ch/faster-maven-builds/1/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/09/Apache_Maven_logo.svg.png"
+image: "/images/posts/2021/10/faster-maven-builds-1/Apache_Maven_logo.svg.png"
 categories:
   - "Maven"
   - "Performance"

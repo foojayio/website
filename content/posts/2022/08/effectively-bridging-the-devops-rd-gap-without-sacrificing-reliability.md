@@ -7,7 +7,7 @@ description: "DevOps revolutionized our industry. CI & CD made six sigma common.
 canonical: "https://lightrun.com/best-practices/bridge-devops-dev-gap-without-sacrificing-reliability/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/03/Blog-–-16.jpg"
+image: "/images/posts/2022/08/effectively-bridging-the-devops-rd-gap-without-sacrificing-reliability/Blog---16.jpg"
 categories:
   - "Developer Tools"
   - "DevOps"

@@ -6,7 +6,7 @@ lastmod: "2023-04-26T08:29:52+00:00"
 description: "FEPCOS-J implements a Java-language extension that frees a Java-developer from network programming and supports cross-system concurrency."
 authors:
   - "gerhard-fuchs"
-image: "https://foojay.io/wp-content/uploads/2023/03/fuchs2023fepcos-j-toy-robots-are-parts-of-current-test-and-development-environment.png"
+image: "/images/posts/2023/04/fuchs-2023-fepcos-j-01/fuchs2023fepcos-j-toy-robots-are-parts-of-current-test-and-development-environment.png"
 categories:
   - "Developer Tools"
   - "Raspberry Pi"

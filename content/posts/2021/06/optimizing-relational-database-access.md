@@ -7,7 +7,7 @@ description: "Most database protocols have not followed the HTTP path yet and re
 authors:
   - "clement-escoffier"
   - "julien-viet"
-image: "https://foojay.io/wp-content/uploads/2021/06/pg-pipelining.png"
+image: "/images/posts/2021/06/optimizing-relational-database-access/pg-pipelining.png"
 categories:
   - "Kubernetes"
   - "Performance"

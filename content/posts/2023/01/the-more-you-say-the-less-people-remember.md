@@ -6,7 +6,7 @@ lastmod: "2023-06-29T06:38:17+00:00"
 description: "…The Fewer the Words, the Greater the Profit.” And more wisdom and insight from Peter Lawrey, covering a range of development approaches."
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2023/01/Screen-Shot-2023-01-17-at-10.36.48-AM-1024x521-1.png"
+image: "/images/posts/2023/01/the-more-you-say-the-less-people-remember/Screen-Shot-2023-01-17-at-10.36.48-AM-1024x521-1.png"
 categories:
   - "Agile"
   - "Chronicle Software"

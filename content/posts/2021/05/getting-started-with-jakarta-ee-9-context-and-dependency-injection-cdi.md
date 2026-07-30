@@ -8,7 +8,7 @@ canonical: "https://blog.payara.fish/getting-started-with-jakarta-ee-9-context-a
 authors:
   - "jadon-ortlepp"
   - "rudy-de-busscher"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/05/getting-started-with-jakarta-ee-9-context-and-dependency-injection-cdi/Favicon-3-2.png"
 categories:
   - "Jakarta EE"
   - "Microservices"

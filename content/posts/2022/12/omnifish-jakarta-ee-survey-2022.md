@@ -6,7 +6,7 @@ lastmod: "2022-12-12T11:44:27+00:00"
 description: "Want to have a say in what happens for the next version of Jakarta EE? Check out the new edition of the Jakarta EE Survey 2022 by OmniFish!"
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2022/11/omnifish-logo-transparent-400px-margin.png"
+image: "/images/posts/2022/12/omnifish-jakarta-ee-survey-2022/omnifish-logo-transparent-400px-margin.png"
 categories:
   - "Jakarta EE"
   - "Surveys"

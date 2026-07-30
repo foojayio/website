@@ -7,7 +7,7 @@ description: "Java and JavaFX are a great match with the Raspberry Pi, here on F
 canonical: "https://kiosk.entwickler.de/java-magazin/java-magazin-6-2021/status-quo-und-expertenstimmen/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/05/pi4j-overview-1024x427.jpg"
+image: "/images/posts/2021/05/interviews-with-robert-savage-and-johan-vos-on-the-state-of-java-on-raspberry-pi/pi4j-overview-1024x427.jpg"
 categories:
   - "Interviews"
   - "JavaFX"

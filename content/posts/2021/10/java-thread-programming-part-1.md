@@ -6,7 +6,7 @@ lastmod: "2022-03-25T06:57:10+00:00"
 description: "To be able to execute a piece of code requires an execution environment. In Java, a thread is an executing environment."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/10/java-thread-programming-part-1/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2023-01-31T08:34:13+00:00"
 description: "FOSDEM is around the corner and a group of great speakers is lined up to talk about the OpenJDK -- see what they predict for 2023!"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2023/01/fosdem.png"
+image: "/images/posts/2023/01/foojay-io-fosdem-speaker-predictions-for-2023/fosdem.png"
 categories:
   - "Events"
   - "Opinion"

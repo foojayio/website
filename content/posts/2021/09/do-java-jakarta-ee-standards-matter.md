@@ -7,7 +7,7 @@ description: "Among other highlights, this video shows you how having standards 
 canonical: "https://www.payara.fish/dismiss-the-myths/"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2021/08/5-Do-Java-EE-Standards-Matter-01-scaled.jpg"
+image: "/images/posts/2021/09/do-java-jakarta-ee-standards-matter/5-Do-Java-EE-Standards-Matter-01-scaled.jpg"
 categories:
   - "Jakarta EE"
   - "Videos"

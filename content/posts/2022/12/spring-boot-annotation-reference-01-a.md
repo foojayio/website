@@ -6,7 +6,7 @@ lastmod: "2023-01-06T09:56:40+00:00"
 description: "Spring Boot Annotation Guide, providing an easy reference for daily development and provides code samples."
 authors:
   - "sumith-puri"
-image: "https://foojay.io/wp-content/uploads/2021/11/1280px-Spring_Framework_Logo_2018.svg.png"
+image: "/images/posts/2022/12/spring-boot-annotation-reference-01-a/1280px-Spring_Framework_Logo_2018.svg.png"
 categories:
   - "Microservices"
   - "Spring"

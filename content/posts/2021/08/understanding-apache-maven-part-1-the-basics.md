@@ -7,7 +7,7 @@ description: "Apache Maven (commonly referred to as “Maven”) is a Build Man
 canonical: "https://cguntur.me/2020/05/23/understanding-apache-maven-part-1/"
 authors:
   - "c-guntur"
-image: "https://foojay.io/wp-content/uploads/2021/08/image-10-1024x463.png"
+image: "/images/posts/2021/08/understanding-apache-maven-part-1-the-basics/image-10-1024x463.png"
 categories:
   - "Maven"
 tags:

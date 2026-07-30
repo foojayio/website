@@ -7,7 +7,7 @@ description: "Check out this overview of the functionality of the Garbage Collec
 canonical: "https://www.azul.com/blog/what-should-i-know-about-garbage-collection-as-a-java-developer/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/01/2022-Nov-Performance-GarbageCollection-hero-1024x576-1.jpeg"
+image: "/images/posts/2023/02/what-should-i-know-about-garbage-collection-as-a-java-developer/2022-Nov-Performance-GarbageCollection-hero-1024x576-1.jpeg"
 categories:
   - "Java Core"
   - "Performance"

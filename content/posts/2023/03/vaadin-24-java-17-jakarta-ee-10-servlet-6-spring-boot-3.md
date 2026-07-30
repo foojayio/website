@@ -6,7 +6,7 @@ lastmod: "2023-03-22T09:25:55+00:00"
 description: "Vaadin 24 is a step forward with a new technology baseline that includes Java 17, Jakarta EE 10, Servlet 6.0, Spring 6.0, and Spring Boot 3."
 authors:
   - "sami-ekblad"
-image: "https://foojay.io/wp-content/uploads/2022/05/VaadinLogo_RGB_1000x310.png"
+image: "/images/posts/2023/03/vaadin-24-java-17-jakarta-ee-10-servlet-6-spring-boot-3/VaadinLogo_RGB_1000x310.png"
 categories:
   - "Cloud"
   - "Release Notes"

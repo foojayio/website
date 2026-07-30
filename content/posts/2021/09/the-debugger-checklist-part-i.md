@@ -7,7 +7,7 @@ description: "A methodology of working with debuggers to solve almost any bug. T
 canonical: "https://talktotheduck.dev/the-debugger-checklist-part-i"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2021/09/Blog-Header-1200x600-px1.jpeg"
+image: "/images/posts/2021/09/the-debugger-checklist-part-i/Blog-Header-1200x600-px1.jpeg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

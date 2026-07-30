@@ -6,7 +6,7 @@ lastmod: "2022-03-11T10:01:02+00:00"
 description: "JDKMon is a little tool written in JavaFX that tries to detect all OpenJDK distros installed while keeping track of updates for them."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2022/03/jdkmon-17.0.23.png"
+image: "/images/posts/2022/03/jdkmon-17-0-23-released/jdkmon-17.0.23.png"
 categories:
   - "DevOps"
   - "Release Notes"

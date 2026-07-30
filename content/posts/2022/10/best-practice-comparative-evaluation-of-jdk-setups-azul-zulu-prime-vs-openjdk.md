@@ -7,7 +7,7 @@ description: "How to establish whether Azul Zulu Prime improves aspects of appli
 canonical: "https://docs.azul.com/prime/comparative-evaluation-of-jdk-setups"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/05/azul_logo_large_color.png"
+image: "/images/posts/2022/10/best-practice-comparative-evaluation-of-jdk-setups-azul-zulu-prime-vs-openjdk/azul_logo_large_color.png"
 categories:
   - "Java Core"
   - "Performance"

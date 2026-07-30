@@ -6,7 +6,7 @@ lastmod: "2023-03-16T10:45:19+00:00"
 description: "In many cases, microservices are probably not ideal, but if we are to do it, we should take baby steps. Let's find out the what alternatives we have on the table."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/05/monolith-to-microservice.jpeg"
+image: "/images/posts/2022/05/book-review-monolith-to-microservices-part-2/monolith-to-microservice.jpeg"
 categories:
   - "Book Review"
   - "Books"

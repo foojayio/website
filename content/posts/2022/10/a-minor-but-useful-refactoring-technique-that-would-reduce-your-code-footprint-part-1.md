@@ -6,7 +6,7 @@ lastmod: "2022-10-20T16:21:42+00:00"
 description: "That was a long-awaited migration, but I'm pleased that we eventually made it. The next thing... \"Why not Java 17 directly?\""
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2021/11/distro-choice.jpg"
+image: "/images/posts/2022/10/a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-1/distro-choice.jpg"
 categories:
   - "Java Core"
 tags:

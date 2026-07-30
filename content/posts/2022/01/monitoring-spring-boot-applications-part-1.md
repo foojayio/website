@@ -7,7 +7,7 @@ description: "In part 1 of this new Foojay series, learn about JDK Flight Record
 canonical: "https://ashishtechmill.com/monitoring-spring-boot-applications-part-1"
 authors:
   - "yrashish"
-image: "https://foojay.io/wp-content/uploads/2022/01/JDK-Flight-Recorder.png"
+image: "/images/posts/2022/01/monitoring-spring-boot-applications-part-1/JDK-Flight-Recorder.png"
 categories:
   - "JDK Flight Recorder"
   - "Microservices"

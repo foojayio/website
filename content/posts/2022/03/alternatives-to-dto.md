@@ -6,7 +6,7 @@ lastmod: "2022-03-07T11:12:08+00:00"
 description: "I used to believe (and still do) that DTOs should be a thing of the past. Yet, it seems their usage is still widespread."
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/03/opportunity-2105406_1280.jpg"
+image: "/images/posts/2022/03/alternatives-to-dto/opportunity-2105406_1280.jpg"
 categories:
   - "Research"
 tags:

@@ -7,7 +7,7 @@ description: "Java Debug Wire Protocol (a.k.a. JDWP) was designed for testing in
 canonical: "https://talktotheduck.dev/psa-the-risks-of-remote-jdwp-debugging"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2021/10/jdwp-is-a-security-risk.jpg"
+image: "/images/posts/2021/10/psa-the-risks-of-remote-jdwp-debugging/jdwp-is-a-security-risk.jpg"
 categories:
   - "DevOps"
   - "Security"

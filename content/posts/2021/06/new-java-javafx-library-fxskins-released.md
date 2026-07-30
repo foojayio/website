@@ -6,7 +6,7 @@ lastmod: "2021-06-03T14:02:48+00:00"
 description: "FXSkins is a collection of new Skins for existing JavaFX controls, adding more functionality to the controls used in your applications."
 authors:
   - "pedro-vieira"
-image: "https://foojay.io/wp-content/uploads/2021/06/ScrollPane4.gif"
+image: "/images/posts/2021/06/new-java-javafx-library-fxskins-released/ScrollPane4.gif"
 categories:
   - "JavaFX"
   - "Release Notes"

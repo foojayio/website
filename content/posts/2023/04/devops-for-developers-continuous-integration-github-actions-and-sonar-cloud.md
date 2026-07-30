@@ -7,7 +7,7 @@ description: "When it is done badly, the CI process can turn this amazing tool i
 canonical: "https://debugagent.com/continuous-integration-github-actions-sonar-cloud"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/03/devops4devs-02.jpg"
+image: "/images/posts/2023/04/devops-for-developers-continuous-integration-github-actions-and-sonar-cloud/devops4devs-02.jpg"
 categories:
   - "DevOps"
   - "Tutorials"
@@ -225,7 +225,7 @@ void testActivateAccount() throws Exception {
     final String activationKey = "some activation key";
     User user = new User();
     user.setLogin("activate-account");
-    user.setEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef8e8c9b86998e9b8ac28e8c8c809a819baf8a978e829f838ac18c8082">[email&nbsp;protected]</a>");
+    user.setEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d3c3e29342b3c2938703c3e3e322833291d38253c302d3138733e3230">[email&nbsp;protected]</a>");
     user.setPassword(RandomStringUtils.randomAlphanumeric(60));
     user.setActivated(false);
     user.setActivationKey(activationKey);

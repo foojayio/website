@@ -6,7 +6,7 @@ lastmod: "2022-10-11T07:14:32+00:00"
 description: "Let's learn a lot of different tips and tricks that will level up your presentation skills with IntelliJ IDEA!"
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2022/10/qss-enter-presentation-mode.png"
+image: "/images/posts/2022/10/presenting-with-intellij-idea/qss-enter-presentation-mode.png"
 categories:
   - "Developer Tools"
   - "IntelliJ IDEA"

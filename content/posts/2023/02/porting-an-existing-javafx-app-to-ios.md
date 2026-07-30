@@ -6,7 +6,7 @@ lastmod: "2023-02-24T11:42:13+00:00"
 description: "Sometimes there are JavaFX apps that I would also like to use on my iPhone but I wrote them for the desktop and... how to do that?"
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2023/02/jarkanoid-ios.png"
+image: "/images/posts/2023/02/porting-an-existing-javafx-app-to-ios/jarkanoid-ios.png"
 categories:
   - "Gluon"
   - "JavaFX"

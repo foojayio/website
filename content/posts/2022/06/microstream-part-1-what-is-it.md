@@ -6,7 +6,7 @@ lastmod: "2022-06-06T08:06:10+00:00"
 description: "MicroStream is the high-performance Java-Native-Persistence framework to overcome database impedance mismatches."
 authors:
   - "rudy-de-busscher"
-image: "https://foojay.io/wp-content/uploads/2022/06/impedanceMismatch-567x510-1.png"
+image: "/images/posts/2022/06/microstream-part-1-what-is-it/impedanceMismatch-567x510-1.png"
 categories:
   - "Databases"
   - "DataEngineering"

@@ -6,7 +6,7 @@ lastmod: "2023-05-23T12:56:08+00:00"
 description: "We created bld because we're not really interested in build tools. We use them because we have to, but we'd rather just get on with coding."
 authors:
   - "geert-bevin"
-image: "https://foojay.io/wp-content/uploads/2023/04/og-bld.png"
+image: "/images/posts/2023/04/introducing-bld-a-new-pure-java-build-system/og-bld.png"
 categories:
   - "Developer Tools"
   - "Release Notes"

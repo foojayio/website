@@ -7,7 +7,7 @@ description: "This post will show you the benefits of managing your distributed 
 canonical: "https://medium.com/building-the-open-data-stack/managing-distributed-applications-in-kubernetes-using-cilium-and-istio-with-helm-and-operator-for-9652d71d6432"
 authors:
   - "christopher-bradford"
-image: "https://foojay.io/wp-content/uploads/2022/01/1_i26lEM7Wl5JA7FIMlhtKNA.jpeg"
+image: "/images/posts/2022/06/managing-distributed-applications-in-kubernetes-using-cilium-and-istio-with-helm-and-operator-for-deployment/1_i26lEM7Wl5JA7FIMlhtKNA.jpeg"
 categories:
   - "Apache Cassandra"
   - "Databases"

@@ -6,7 +6,7 @@ lastmod: "2022-04-18T11:53:12+00:00"
 description: "\"We're honored to join the Foojay Advisory Board because we know Java developers rely on the Foojay community and the foundation's mission of sharing information and improving the entire market as a whole,\" said Steve Wilson, Chief Product Officer at Contrast Security. - by Geertjan Wielenga"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/04/contrast-security-joins-foojay-advisory-board-to-accelerate-java-developer-community-growth-raise-security-perspective-pr-news/Favicon-3-2.png"
 categories:
   - "Press"
 tags:
@@ -26,7 +26,7 @@ Contrast Secure Code Platform is the only platform on the market that embeds int
 
 **About Foojay:**
 
-Foojay, a place for Friends of OpenJDK, is a fast-growing community focused around the OpenJDK, providing tips and insights for Java developers, and user-focused Java and OpenJDK technical dashboards with free information on all things Java. A dedicated blogging area is available on Foojay to anyone who has thoughts or code to share on topics relevant to the Java ecosystem. To contribute, send a mail to [\[email protected\]](/cdn-cgi/l/email-protection#81e9e4ededeec1e7eeeeebe0f8afe8ee). Follow us on Twitter @foojayio.
+Foojay, a place for Friends of OpenJDK, is a fast-growing community focused around the OpenJDK, providing tips and insights for Java developers, and user-focused Java and OpenJDK technical dashboards with free information on all things Java. A dedicated blogging area is available on Foojay to anyone who has thoughts or code to share on topics relevant to the Java ecosystem. To contribute, send a mail to [\[email protected\]](/cdn-cgi/l/email-protection#573f323b3b38173138383d362e793e38). Follow us on Twitter @foojayio.
 
 **About Contrast Security:**
 
@@ -37,4 +37,4 @@ Contrast Security secures the code that global business relies on. It is the ind
 Public Relations Manager  
 
 Contrast Security  
-[\[email protected\]](/cdn-cgi/l/email-protection#5b2b291b3834352f293a282f283e382e29322f2275383436)
+[\[email protected\]](/cdn-cgi/l/email-protection#5c2c2e1c3f3332282e3d2f282f393f292e352825723f3331)

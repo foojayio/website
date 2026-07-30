@@ -7,7 +7,7 @@ description: "In this article you will learn how to switch between two different
 canonical: "https://www.azul.com/blog/a-guide-on-increasing-kafka-event-streaming-performance/"
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2022/03/Kafka-architecture-1-2048x1310-1.png"
+image: "/images/posts/2022/03/increasing-event-streaming-with-kafka-and-azul/Kafka-architecture-1-2048x1310-1.png"
 categories:
   - "Kafka"
   - "Performance"

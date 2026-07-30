@@ -6,7 +6,7 @@ lastmod: "2022-04-06T11:01:05+00:00"
 description: "Let's examine a program selection control mechanism, for a value, expression or variable type to influence program flow execution, for Switch."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2022/04/factory_pattern.png"
+image: "/images/posts/2022/04/examining-the-switch-statement-and-the-factory-pattern-in-three-jvm-languages/factory_pattern.png"
 categories:
   - "Java Core"
   - "Kotlin"

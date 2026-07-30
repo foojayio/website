@@ -7,7 +7,7 @@ description: "Discussion extrapoliating from per-user rate limiting showing how 
 canonical: "https://blog.frankel.ch/right-feature-right-place/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/02/choice-geedae7b7e.jpg"
+image: "/images/posts/2023/02/the-right-feature-at-the-right-place/choice-geedae7b7e.jpg"
 categories:
   - "Kotlin"
   - "Research"

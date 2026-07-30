@@ -7,7 +7,7 @@ description: "I always struggled with how to implement equals and hashcode, unti
 canonical: "https://www.wimdeblauwe.com/blog/2021/04/26/equals-and-hashcode-implementation-considerations/"
 authors:
   - "wim-deblauwe"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/11/equals-and-hashcode-implementation-considerations/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

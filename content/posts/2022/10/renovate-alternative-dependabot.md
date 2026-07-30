@@ -7,7 +7,7 @@ description: "Compared to Dependabot, I love Renovate's capability to update Doc
 canonical: "https://blog.frankel.ch/renovate-alternative-dependabot/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/08/painter-g72d10f286.jpg"
+image: "/images/posts/2022/10/renovate-alternative-dependabot/painter-g72d10f286.jpg"
 categories:
   - "Dependabot"
   - "Developer Tools"
@@ -54,7 +54,7 @@ Here's a sum-up of my understanding:
 In the end, I ended up with the following Renovate runner configuration:
 
 <pre class="EnlighterJSRAW" data-enlighter-language="yaml">variables:
-  RENOVATE_GIT_AUTHOR: Renovate Bot &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2d4f42596d5f4843425b4c5948034e4240">[email&nbsp;protected]</a>&gt;
+  RENOVATE_GIT_AUTHOR: Renovate Bot &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="60020f142012050e0f160114054e030f0d">[email&nbsp;protected]</a>&gt;
   RENOVATE_REQUIRE_CONFIG: optional
 
 include:

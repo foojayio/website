@@ -6,7 +6,7 @@ lastmod: "2022-01-13T13:44:18+00:00"
 description: "Half year mark of 2021 is a good moment to reflect on the current status of Foojay.io, a place for friends of OpenJDK!"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2022/01/first-6-months-2021-1024x844.png"
+image: "/images/posts/2021/06/foojay-status-report-january-june-2021/first-6-months-2021-1024x844.png"
 categories:
   - "Foojay"
   - "Press"

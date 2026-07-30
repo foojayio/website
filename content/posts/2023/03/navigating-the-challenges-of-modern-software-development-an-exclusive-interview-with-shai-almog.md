@@ -6,7 +6,7 @@ lastmod: "2023-03-27T17:10:44+00:00"
 description: "Join our interview with Java expert Shai Almog, as he shares his journey and offers valuable advice for developers, discussing mentorship and overcoming challenges in the software industry."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/03/Steve-Poole-1.png"
+image: "/images/posts/2023/03/navigating-the-challenges-of-modern-software-development-an-exclusive-interview-with-shai-almog/Steve-Poole-1.png"
 categories:
   - "Interviews"
 tags:

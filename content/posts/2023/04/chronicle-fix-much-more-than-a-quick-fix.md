@@ -6,7 +6,7 @@ lastmod: "2023-04-12T13:57:24+00:00"
 description: "Many of our customers have upgraded from QuickFIX/J to Chronicle FIX and this article provides some background as to why."
 authors:
   - "jerry-shea"
-image: "https://foojay.io/wp-content/uploads/2023/04/Screen-Shot-2023-04-03-at-2.04.05-PM-1024x614-1.png"
+image: "/images/posts/2023/04/chronicle-fix-much-more-than-a-quick-fix/Screen-Shot-2023-04-03-at-2.04.05-PM-1024x614-1.png"
 categories:
   - "Developer Tools"
   - "Performance"

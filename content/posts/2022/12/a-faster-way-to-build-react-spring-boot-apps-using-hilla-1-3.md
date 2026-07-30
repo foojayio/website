@@ -7,7 +7,7 @@ description: "Hilla 1.3 offers an improved way to build React and Spring Boot ap
 canonical: "https://hilla.dev/blog/hilla-1-3-adds-react-support/"
 authors:
   - "marcus-hellberg"
-image: "https://foojay.io/wp-content/uploads/2022/12/hilla-react-featured-logo.webp"
+image: "/images/posts/2022/12/a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3/hilla-react-featured-logo.webp"
 categories:
   - "Hilla"
 tags:

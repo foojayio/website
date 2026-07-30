@@ -7,7 +7,7 @@ description: "Finding the right tech stack is a context-dependent journey. There
 canonical: "https://blog.picnic.nl/why-picnic-picked-java-e53fafe0df1b"
 authors:
   - "sander-mak"
-image: "https://foojay.io/wp-content/uploads/2022/12/1_Glz2p97s8p38c_dclxg4oA-scaled.webp"
+image: "/images/posts/2022/12/why-picnic-picked-java/1_Glz2p97s8p38c_dclxg4oA-scaled.webp"
 categories:
   - "Developer Tools"
   - "Java Core"

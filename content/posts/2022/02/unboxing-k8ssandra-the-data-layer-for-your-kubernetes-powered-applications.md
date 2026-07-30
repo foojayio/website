@@ -7,7 +7,7 @@ description: "A Complimentary Live Webinar, Sponsored by DataStax Kubernetes mad
 canonical: "https://k8ssandra.io/blog/articles/unboxing-k8ssandra-the-data-layer-for-your-kubernetes-powered-applications-2/"
 authors:
   - "jeff-carpenter"
-image: "https://foojay.io/wp-content/uploads/2022/01/LF-webinar-cards-v3-ac_K8ssandra.png"
+image: "/images/posts/2022/02/unboxing-k8ssandra-the-data-layer-for-your-kubernetes-powered-applications/LF-webinar-cards-v3-ac_K8ssandra.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

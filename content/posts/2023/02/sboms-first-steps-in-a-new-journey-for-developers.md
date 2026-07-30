@@ -6,7 +6,7 @@ lastmod: "2023-02-14T10:02:29+00:00"
 description: "Software bill of materials, anyone? A year ago, developers had not heard of the 'SBOM' acronym... and now SBOM visualiser called BOM Doctor."
 authors:
   - "steve-poole"
-image: "https://foojay.io/wp-content/uploads/2023/02/Screenshot-2023-02-10-at-11.23.35.png"
+image: "/images/posts/2023/02/sboms-first-steps-in-a-new-journey-for-developers/Screenshot-2023-02-10-at-11.23.35.png"
 categories:
   - "Developer Tools"
   - "DevOps"

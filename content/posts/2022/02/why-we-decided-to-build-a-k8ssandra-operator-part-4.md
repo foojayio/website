@@ -7,7 +7,7 @@ description: "In the first, second, and third posts in this series, we’ve 
 canonical: "https://k8ssandra.io/blog/articles/why-we-decided-to-build-a-k8ssandra-operator-part-4/"
 authors:
   - "jeff-carpenter"
-image: "https://foojay.io/wp-content/uploads/2022/01/maxresdefault.jpg"
+image: "/images/posts/2022/02/why-we-decided-to-build-a-k8ssandra-operator-part-4/maxresdefault.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"

@@ -7,7 +7,7 @@ description: "Alternatives are available to configure your Spring app. I'd like 
 canonical: "https://blog.frankel.ch/multiple-ways-configure-spring/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/09/1024px-Spring_Framework_Logo_2018.svg.png"
+image: "/images/posts/2021/10/multiple-ways-configure-spring/1024px-Spring_Framework_Logo_2018.svg.png"
 categories:
   - "Kotlin"
   - "Research"

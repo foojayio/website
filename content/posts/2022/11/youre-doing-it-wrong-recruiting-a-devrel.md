@@ -7,7 +7,7 @@ description: "Hiring a developer relations/advocate is difficult. It's even hard
 canonical: "https://thenewstack.io/youre-doing-it-wrong-recruiting-a-devrel/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/02/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt2.jpg"
+image: "/images/posts/2022/11/youre-doing-it-wrong-recruiting-a-devrel/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt2.jpg"
 categories:
   - "Opinion"
 tags:

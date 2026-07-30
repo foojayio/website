@@ -7,7 +7,7 @@ description: "RAM profiling has its strengths and weaknesses. The Debugger is a 
 canonical: "https://talktotheduck.dev/memory-debugging-and-watch-annotations"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/02/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
+image: "/images/posts/2022/05/memory-debugging-and-watch-annotations/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
 categories:
   - "Tutorials"
   - "Uncategorized"

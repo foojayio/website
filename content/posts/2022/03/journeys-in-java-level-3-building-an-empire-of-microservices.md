@@ -6,7 +6,7 @@ lastmod: "2022-04-21T16:24:17+00:00"
 description: "Let’s continue our journey to learn microservice. Today we will learn to use a full-fledged MongoDB database running in a Docker container."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2022/02/unsplash-tall-stone-arch-bridge-scaled.jpeg"
+image: "/images/posts/2022/03/journeys-in-java-level-3-building-an-empire-of-microservices/unsplash-tall-stone-arch-bridge-scaled.jpeg"
 categories:
   - "Databases"
   - "Microservices"
@@ -59,7 +59,7 @@ FROM mongo
 
 #Author
 #-------
-LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bbd1ded5d5d2dddec9fbcfd3ded3ded8d0d7dec9c895d4c9dc">[email&nbsp;protected]</a>,@JMHReif"
+LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5dfd0dbdbdcd3d0c7f5c1ddd0ddd0d6ded9d0c7c69bdac7d2">[email&nbsp;protected]</a>,@JMHReif"
 
 #expose the default port
 EXPOSE 27017</pre>

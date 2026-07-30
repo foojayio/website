@@ -6,7 +6,7 @@ lastmod: "2023-03-17T09:46:46+00:00"
 description: "Discussion of the use of Map.of() and new HashMap() in Java, the difference between them, and the benefits of using Map.of()."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/03/results.png"
+image: "/images/posts/2023/03/speed-test-comparing-map-of-new-hashmap/results.png"
 categories:
   - "Java Core"
   - "Performance"

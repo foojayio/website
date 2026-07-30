@@ -6,7 +6,7 @@ lastmod: "2022-05-10T16:52:17+00:00"
 description: "In this article, we explored how the Java incubator modules can be run through command line and using IDE, such as IntelliJ IDEA."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/05/Screen-Shot-2022-05-09-at-11.43.12-PM-1024x917.png"
+image: "/images/posts/2022/05/how-to-run-the-java-incubator-module-from-the-command-line-and-intellij-idea/Screen-Shot-2022-05-09-at-11.43.12-PM-1024x917.png"
 categories:
   - "IntelliJ IDEA"
   - "Tools"

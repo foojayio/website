@@ -6,7 +6,7 @@ lastmod: "2023-03-10T11:16:47+00:00"
 description: "Quickly learn how to connect Hazelcast Viridian to a Confluent Cloud Kafka cluster, and more! - by Fawaz Ghali"
 authors:
   - "fawaz-ghali"
-image: "https://foojay.io/wp-content/uploads/2023/03/hazelcast.png"
+image: "/images/posts/2023/03/streaming-real-time-data-on-the-hazelcast-viridian-serverless/hazelcast.png"
 categories:
   - "Hazelcast"
   - "sql"

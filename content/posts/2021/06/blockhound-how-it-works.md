@@ -7,7 +7,7 @@ description: "BlockHound lets you check if a blocking call occurs in a thread wh
 canonical: "https://blog.frankel.ch/blockhound-how-it-works/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/06/pexels-pixabay-260600.jpg"
+image: "/images/posts/2021/06/blockhound-how-it-works/pexels-pixabay-260600.jpg"
 categories:
   - "Performance"
   - "Research"

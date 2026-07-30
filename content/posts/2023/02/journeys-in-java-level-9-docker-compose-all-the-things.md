@@ -6,7 +6,7 @@ lastmod: "2023-02-26T10:08:04+00:00"
 description: "In part 9 of this series, learn how to successfully create an orchestrated microservices system with Docker Compose!"
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2023/01/unsplash-bridge-waterfall-scaled.jpeg"
+image: "/images/posts/2023/02/journeys-in-java-level-9-docker-compose-all-the-things/unsplash-bridge-waterfall-scaled.jpeg"
 categories:
   - "Databases"
   - "DevOps"

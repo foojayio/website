@@ -6,7 +6,7 @@ lastmod: "2022-07-28T17:34:17+00:00"
 description: "Understand the performance potential of remote and distributed builds and explore how to improve build feedback times."
 authors:
   - "kyle-moore"
-image: "https://foojay.io/wp-content/uploads/2022/07/1_0FUueLptBTH-g9orqUngWg.png"
+image: "/images/posts/2022/07/general-build-distribution-a-game-changer-or-a-gimmick/1_0FUueLptBTH-g9orqUngWg.png"
 categories:
   - "DevOps"
   - "Performance"

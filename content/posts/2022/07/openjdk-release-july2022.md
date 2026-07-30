@@ -6,7 +6,7 @@ lastmod: "2022-07-25T13:06:00+00:00"
 description: "The next quarterly release of the OpenJDK has been made available, as scheduled, for July 2022, impacting a number of OpenJDK releases."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2022/07/image-2.png"
+image: "/images/posts/2022/07/openjdk-release-july2022/image-2.png"
 categories:
   - "Performance"
   - "Release Notes"

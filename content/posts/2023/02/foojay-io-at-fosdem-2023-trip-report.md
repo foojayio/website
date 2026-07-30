@@ -6,7 +6,7 @@ lastmod: "2023-02-07T16:00:21+00:00"
 description: "\"What if Simon Ritter's keynote at FOSDEM entitled 'After Nearly 30 Years, How Is Java So Popular?' ends up being held... in an empty room?\""
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2023/02/image-1-1024x631.png"
+image: "/images/posts/2023/02/foojay-io-at-fosdem-2023-trip-report/image-1-1024x631.png"
 categories:
   - "Events"
   - "Foojay"

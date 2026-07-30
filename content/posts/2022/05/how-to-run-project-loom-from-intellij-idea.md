@@ -6,7 +6,7 @@ lastmod: "2022-05-10T16:46:57+00:00"
 description: "JEP 425: Virtual Threads (Preview) has been proposed recently. I wanted to give it a try on my favourite IDE, this article shows you how to do that in IntelliJ IDEA"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/05/Screen-Shot-2022-05-08-at-4.59.40-AM.png"
+image: "/images/posts/2022/05/how-to-run-project-loom-from-intellij-idea/Screen-Shot-2022-05-08-at-4.59.40-AM.png"
 categories:
   - "IntelliJ IDEA"
   - "Tools"

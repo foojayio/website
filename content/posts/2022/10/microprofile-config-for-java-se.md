@@ -6,7 +6,7 @@ lastmod: "2022-10-13T16:10:32+00:00"
 description: "How can you use MicroProfile Config in a pure Java SE environment? What libraries support this, what are the supported features, etc?"
 authors:
   - "rudy-de-busscher"
-image: "https://foojay.io/wp-content/uploads/2022/09/microprofile.png"
+image: "/images/posts/2022/10/microprofile-config-for-java-se/microprofile.png"
 categories:
   - "Java Core"
   - "Microservices"

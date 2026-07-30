@@ -6,7 +6,7 @@ lastmod: "2023-01-26T15:16:18+00:00"
 description: "Java bytecode may be modified to provide functionality, profile code, or obfuscate it. We'll examine examples in this brief article."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2023/01/java-bytecode-simplified-journey-to-the-wonderland-part-3/Favicon-3-2.png"
 categories:
   - "Java Core"
 tags:

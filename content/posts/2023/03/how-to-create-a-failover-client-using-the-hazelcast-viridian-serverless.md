@@ -6,7 +6,7 @@ lastmod: "2023-03-24T15:05:49+00:00"
 description: "Learn to update a Java client to automatically connect to a secondary, failover cluster if it cannot connect to its original, primary cluster."
 authors:
   - "fawaz-ghali"
-image: "https://foojay.io/wp-content/uploads/2023/03/failover.png"
+image: "/images/posts/2023/03/how-to-create-a-failover-client-using-the-hazelcast-viridian-serverless/failover.png"
 categories:
   - "Cloud"
   - "Hazelcast"

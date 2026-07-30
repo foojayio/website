@@ -6,7 +6,7 @@ lastmod: "2023-03-22T14:45:52+00:00"
 description: "jOOQ makes SQL a \"first-class\" language in the JVM ecosystem by embedding it into Java, Kotlin, and Scala in an idiomatic way."
 authors:
   - "lukas-eder"
-image: "https://foojay.io/wp-content/uploads/2023/03/jooq.png"
+image: "/images/posts/2023/03/5-great-reasons-to-use-jooq/jooq.png"
 categories:
   - "Databases"
   - "jOOQ"

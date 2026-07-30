@@ -6,7 +6,7 @@ lastmod: "2021-09-04T08:48:37+00:00"
 description: "Let's use the New Project Wizard in IntelliJ IDEA to create a Spring Boot project with the Spring Web dependency!"
 authors:
   - "helenjoscott"
-image: "https://foojay.io/wp-content/uploads/2020/10/1200px-IntelliJ_IDEA_Logo.svg_.png"
+image: "/images/posts/2021/05/creating-a-simple-spring-boot-application-in-intellij-idea/1200px-IntelliJ_IDEA_Logo.svg_.png"
 categories:
   - "IntelliJ IDEA"
   - "Spring"

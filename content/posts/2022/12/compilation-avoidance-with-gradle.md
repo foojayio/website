@@ -7,7 +7,7 @@ description: "Learn what ABI-based compilation means for the average workflow, t
 canonical: "https://blog.gradle.org/compilation-avoidance"
 authors:
   - "amanda-martin"
-image: "https://foojay.io/wp-content/uploads/2021/10/dependency.png"
+image: "/images/posts/2022/12/compilation-avoidance-with-gradle/dependency.png"
 categories:
   - "DevOps"
   - "Java Core"

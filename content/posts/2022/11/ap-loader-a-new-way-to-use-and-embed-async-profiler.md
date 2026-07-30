@@ -6,7 +6,7 @@ lastmod: "2022-11-30T09:52:56+00:00"
 description: "Using async-profiler can be quite a hassle, especially when trying to use it in a library. The new ap-loader project tries to fix this!"
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2022/11/Untitled.png"
+image: "/images/posts/2022/11/ap-loader-a-new-way-to-use-and-embed-async-profiler/Untitled.png"
 categories:
   - "Developer Tools"
   - "Performance"

@@ -7,7 +7,7 @@ description: "Learn how to improve the API provided by third-party libraries by 
 canonical: "https://blog.frankel.ch/beautify-third-party-api-kotlin/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/12/key-g6ee02b699_1280.jpg"
+image: "/images/posts/2021/12/beautify-third-party-api-kotlin/key-g6ee02b699_1280.jpg"
 categories:
   - "Kotlin"
   - "Use Cases"

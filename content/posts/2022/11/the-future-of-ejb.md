@@ -6,7 +6,7 @@ lastmod: "2022-11-10T16:06:57+00:00"
 description: "A possible future direction for EJB is to rebase it on CDI. We would end up with just one component model in Jakarta EE."
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2022/11/beans.jpg"
+image: "/images/posts/2022/11/the-future-of-ejb/beans.jpg"
 categories:
   - "Jakarta EE"
   - "Opinion"

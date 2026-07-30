@@ -7,7 +7,7 @@ description: "16 missing features in the VS code debugger that are available in 
 canonical: "https://debugagent.com/what-are-you-missing-by-debugging-in-vs-code"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/02/why-not-vs-code.png"
+image: "/images/posts/2023/02/what-are-you-missing-by-debugging-in-vs-code/why-not-vs-code.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

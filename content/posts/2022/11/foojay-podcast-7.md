@@ -8,7 +8,7 @@ authors:
   - "bmvermeer"
   - "erikcostlow"
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/07/foojay_podcast.png"
+image: "/images/posts/2022/11/foojay-podcast-7/foojay_podcast.png"
 categories:
   - "Developer Tools"
   - "DevOps"

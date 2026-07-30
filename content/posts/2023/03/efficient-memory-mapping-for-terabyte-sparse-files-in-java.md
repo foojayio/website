@@ -6,7 +6,7 @@ lastmod: "2023-03-15T11:55:37+00:00"
 description: "Mapping large areas of memory avoids having to know in advance how much memory we need or having to resize the memory mappings while in use."
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2023/03/Screen-Shot-2023-03-06-at-11.11.24-AM-1024x480-1.png"
+image: "/images/posts/2023/03/efficient-memory-mapping-for-terabyte-sparse-files-in-java/Screen-Shot-2023-03-06-at-11.11.24-AM-1024x480-1.png"
 categories:
   - "IntelliJ IDEA"
   - "Performance"

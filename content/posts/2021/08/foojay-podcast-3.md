@@ -9,7 +9,7 @@ authors:
   - "ivar-grimstad"
   - "josh-juneau"
   - "rudy-de-busscher"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/08/foojay-podcast-3/Favicon-3-2.png"
 categories:
   - "Jakarta EE"
   - "Podcast"

@@ -7,7 +7,7 @@ description: "With changes in the Java (and the computing) ecosystem, JFR has so
 canonical: "http://hirt.se/blog/?p=1318"
 authors:
   - "hirt"
-image: "https://foojay.io/wp-content/uploads/2021/06/cropped-ddprofiling-banner.png"
+image: "/images/posts/2021/06/openjdk-and-the-future-of-production-profiling/cropped-ddprofiling-banner.png"
 categories:
   - "JDK Flight Recorder"
 tags:

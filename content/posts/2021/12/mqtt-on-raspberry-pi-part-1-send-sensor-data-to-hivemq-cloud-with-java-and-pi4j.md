@@ -7,7 +7,7 @@ description: "Get started with HiveMQ and publish the data of up to 100 devices 
 canonical: "https://www.hivemq.com/blog/mqtt-raspberrypi-part01-sensor-data-hivemqcloud-java-pi4j/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/12/hivemq-your-clusters.png"
+image: "/images/posts/2021/12/mqtt-on-raspberry-pi-part-1-send-sensor-data-to-hivemq-cloud-with-java-and-pi4j/hivemq-your-clusters.png"
 categories:
   - "Embedded"
   - "MQTT"

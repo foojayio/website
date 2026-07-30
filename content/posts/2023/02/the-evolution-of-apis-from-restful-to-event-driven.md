@@ -6,7 +6,7 @@ lastmod: "2023-02-23T08:45:55+00:00"
 description: "Transitioning from synchronous to event-driven APIs modernizes the enterprise and unlocks real-time events and information."
 authors:
   - "hari-rangarajan"
-image: "https://foojay.io/wp-content/uploads/2023/02/solace-blog-featured-image-template-event-driven-api-gears-green.jpg"
+image: "/images/posts/2023/02/the-evolution-of-apis-from-restful-to-event-driven/solace-blog-featured-image-template-event-driven-api-gears-green.jpg"
 categories:
   - "Microservices"
   - "Opinion"

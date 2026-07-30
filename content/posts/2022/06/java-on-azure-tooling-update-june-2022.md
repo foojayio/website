@@ -6,7 +6,7 @@ lastmod: "2022-06-13T07:45:13+00:00"
 description: "Introducing the new application-centric view on Azure toolkit for IntelliJ that will make the interface more user-friendly!"
 authors:
   - "jialuo-gan"
-image: "https://foojay.io/wp-content/uploads/2022/06/App-view-1.gif"
+image: "/images/posts/2022/06/java-on-azure-tooling-update-june-2022/App-view-1.gif"
 categories:
   - "Gradle"
   - "IntelliJ IDEA"

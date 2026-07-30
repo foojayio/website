@@ -6,7 +6,7 @@ lastmod: "2023-03-29T13:56:09+00:00"
 description: "In this article, we look at a discussion on Foojay's Slack comparing Java and Kotlin, showing why developers should join the platform."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/02/grid_0.webp"
+image: "/images/posts/2023/03/competing-for-the-crown-a-friendly-debate-on-the-future-of-java-and-kotlin-on-foojay-io-today/grid_0.webp"
 categories:
   - "Opinion"
 tags:

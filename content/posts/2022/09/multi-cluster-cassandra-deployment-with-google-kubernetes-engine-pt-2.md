@@ -7,7 +7,7 @@ description: "This is the second in a series of posts examining patterns for usi
 canonical: "https://k8ssandra.io/blog/tutorials/multi-cluster-cassandra-deployment-with-google-kubernetes-engine/"
 authors:
   - "jeff-carpenter"
-image: "https://foojay.io/wp-content/uploads/2022/01/k8ssandra-multi-cluster-Multiple-GKE-Clusters-no-DNS.png"
+image: "/images/posts/2022/09/multi-cluster-cassandra-deployment-with-google-kubernetes-engine-pt-2/k8ssandra-multi-cluster-Multiple-GKE-Clusters-no-DNS.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

@@ -7,7 +7,7 @@ description: "Your git fairy godmother will test and locate bugs for you with a 
 canonical: "https://talktotheduck.dev/understand-the-root-cause-of-regressions-with-git-bisect"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/07/Lightrun_-_Talk_to_the_duck_blog_-_memory_management-01-1.jpg"
+image: "/images/posts/2022/07/understand-the-root-cause-of-regressions-with-git-bisect/Lightrun_-_Talk_to_the_duck_blog_-_memory_management-01-1.jpg"
 categories:
   - "Tutorials"
 tags:

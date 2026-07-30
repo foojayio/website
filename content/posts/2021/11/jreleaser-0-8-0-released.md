@@ -6,7 +6,7 @@ lastmod: "2021-11-02T12:14:10+00:00"
 description: "JReleaser streamlines creating releases for [Java] projects, creates GitHub/GitLab/Gitea releases, while packaging binaries for Homebrew, etc."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/11/jreleaser-0-8-0-released/Favicon-3-2.png"
 categories:
   - "DevOps"
   - "Release Notes"

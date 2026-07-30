@@ -7,7 +7,7 @@ description: "I'd like to first explain why the JVM platform is a bad idea for F
 canonical: "https://blog.frankel.ch/kotlin-faas-impossible-union/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/10/pexels-alexandre-saraiva-carniato-2049755.jpg"
+image: "/images/posts/2021/11/kotlin-faas-impossible-union/pexels-alexandre-saraiva-carniato-2049755.jpg"
 categories:
   - "Kotlin"
   - "Performance"

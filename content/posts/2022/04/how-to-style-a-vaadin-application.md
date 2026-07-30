@@ -6,7 +6,7 @@ lastmod: "2022-04-05T08:00:28+00:00"
 description: "The basics of styling a Vaadin application using CSS: custom themes, override Lumo values, and selectively style views and components."
 authors:
   - "tarek-oraby"
-image: "https://foojay.io/wp-content/uploads/2022/04/ij7493vc0zx9vxhoza3p.png"
+image: "/images/posts/2022/04/how-to-style-a-vaadin-application/ij7493vc0zx9vxhoza3p.png"
 categories:
   - "Vaadin"
 tags:

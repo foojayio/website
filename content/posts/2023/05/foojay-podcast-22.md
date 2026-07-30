@@ -7,7 +7,7 @@ description: "Let's talk to volunteers from different organizations where coding
 authors:
   - "frankdelporte"
   - "igor-de-souza"
-image: "https://foojay.io/wp-content/uploads/2023/05/podcast-22-guests.png"
+image: "/images/posts/2023/05/foojay-podcast-22/podcast-22-guests.png"
 categories:
   - "Embedded"
   - "Interviews"

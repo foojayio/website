@@ -6,7 +6,7 @@ lastmod: "2022-03-21T07:05:00+00:00"
 description: "Java requires to specify types in all aspects of its code, methods, fields, interface etc, however, still, with generics a piece of code can be written generically enough so that we can fit a variety of types in it."
 authors:
   - "mainuls18"
-image: "https://foojay.io/wp-content/uploads/2022/03/hello.png"
+image: "/images/posts/2022/03/all-about-generics-part-1/hello.png"
 categories:
   - "Java Core"
 tags:

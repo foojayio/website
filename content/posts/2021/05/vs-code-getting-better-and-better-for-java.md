@@ -6,7 +6,7 @@ lastmod: "2021-05-18T07:16:39+00:00"
 description: "We have made progresses in all key areas including core language support, testing, debugging, refactoring and project management."
 authors:
   - "yaojin-yang"
-image: "https://foojay.io/wp-content/uploads/2021/05/type-hierarchy.gif"
+image: "/images/posts/2021/05/vs-code-getting-better-and-better-for-java/type-hierarchy.gif"
 categories:
   - "VS Code"
 tags:

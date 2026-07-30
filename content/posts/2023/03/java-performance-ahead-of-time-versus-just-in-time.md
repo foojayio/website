@@ -7,7 +7,7 @@ description: "The impact of the Just-In-Time (JIT) compiler should not be undere
 canonical: "https://www.azul.com/blog/jit-performance-ahead-of-time-versus-just-in-time/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/11/chart-speed-optimization-level.png"
+image: "/images/posts/2023/03/java-performance-ahead-of-time-versus-just-in-time/chart-speed-optimization-level.png"
 categories:
   - "Java Core"
   - "Performance"

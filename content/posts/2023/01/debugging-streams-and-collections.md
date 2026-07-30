@@ -6,7 +6,7 @@ lastmod: "2023-01-13T15:01:35+00:00"
 description: "Java 8 streams improved readability and provide great debugging opportunities. There are amazing tools for inspecting collections and arrays."
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/01/thumbnail-5.png"
+image: "/images/posts/2023/01/debugging-streams-and-collections/thumbnail-5.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

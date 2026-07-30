@@ -6,7 +6,7 @@ lastmod: "2021-11-16T15:04:06+00:00"
 description: "When a thread acquires a lock object, no other thread will be able to use it. Once a thread unlocks the lock, other threads acquire it again."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2021/10/Threading-432x510.png"
+image: "/images/posts/2021/11/java-thread-programming-part-5/Threading-432x510.png"
 categories:
   - "Uncategorized"
 tags:

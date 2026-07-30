@@ -6,7 +6,7 @@ lastmod: "2023-03-07T09:15:58+00:00"
 description: "The third article in a series on SBOMs, software supply chains, the government and you, introducing threat modelling and tools to help!"
 authors:
   - "dan-conn"
-image: "https://foojay.io/wp-content/uploads/2023/03/Unknown-300x260-1.jpeg"
+image: "/images/posts/2023/03/making-sboms-threats-and-modelling-them-a-piece-of-cake/Unknown-300x260-1.jpeg"
 categories:
   - "Developer Tools"
   - "Security"

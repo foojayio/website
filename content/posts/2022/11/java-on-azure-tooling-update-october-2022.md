@@ -6,7 +6,7 @@ lastmod: "2022-11-07T22:04:18+00:00"
 description: "In this update, we will introduce our new roadmap in the next few months, plus learn about Azure Functions Deployment Slot Support."
 authors:
   - "jialuo-gan"
-image: "https://foojay.io/wp-content/uploads/2022/11/Zinc-Roadmap.png"
+image: "/images/posts/2022/11/java-on-azure-tooling-update-october-2022/Zinc-Roadmap.png"
 categories:
   - "Azure"
   - "Developer Tools"

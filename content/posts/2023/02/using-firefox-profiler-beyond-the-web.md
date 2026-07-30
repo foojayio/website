@@ -6,7 +6,7 @@ lastmod: "2023-02-03T15:28:56+00:00"
 description: "Ever wondered how to use Firefox Profiler to view your own profiling data? This article gives you the foundations!"
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/01/structure2.png"
+image: "/images/posts/2023/02/using-firefox-profiler-beyond-the-web/structure2.png"
 categories:
   - "Performance"
   - "Tools"

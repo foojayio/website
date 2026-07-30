@@ -7,7 +7,7 @@ description: "We’ve been talking about migrating workloads to the cloud for a 
 canonical: "https://containerjournal.com/kubeconcnc/why-a-cloud-native-database-must-run-on-k8s/"
 authors:
   - "jeff-carpenter"
-image: "https://foojay.io/wp-content/uploads/2021/06/Databases-Postgres.jpg"
+image: "/images/posts/2022/07/why-a-cloud-native-database-must-run-on-k8s/Databases-Postgres.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"

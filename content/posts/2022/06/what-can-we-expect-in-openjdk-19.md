@@ -6,7 +6,7 @@ lastmod: "2022-06-02T08:42:36+00:00"
 description: "Although the Java 19 release is coming in September (2022-09-20), we already know what will happen in that release!"
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2022/06/what.png"
+image: "/images/posts/2022/06/what-can-we-expect-in-openjdk-19/what.png"
 categories:
   - "Java Core"
   - "JEPs"

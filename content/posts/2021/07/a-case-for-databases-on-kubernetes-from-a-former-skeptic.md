@@ -7,7 +7,7 @@ description: "Should you run a database on Kubernetes? Let's retrace the stages 
 canonical: "https://thenewstack.io/a-case-for-databases-on-kubernetes-from-a-former-skeptic/"
 authors:
   - "christopher-bradford"
-image: "https://foojay.io/wp-content/uploads/2021/07/6a7cf1a6-data-2899899_1280-1-1024x682-1.jpg"
+image: "/images/posts/2021/07/a-case-for-databases-on-kubernetes-from-a-former-skeptic/6a7cf1a6-data-2899899_1280-1-1024x682-1.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"

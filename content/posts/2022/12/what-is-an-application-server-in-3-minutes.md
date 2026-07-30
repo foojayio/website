@@ -7,7 +7,7 @@ description: "Learn the difference between application servers and web servers, 
 canonical: "https://blog.payara.fish/what-is-an-application-server-jakarta-ee"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2022/11/appserver.png"
+image: "/images/posts/2022/12/what-is-an-application-server-in-3-minutes/appserver.png"
 categories:
   - "Cloud"
   - "Jakarta EE"

@@ -6,7 +6,7 @@ lastmod: "2023-03-16T14:44:27+00:00"
 description: "AsyncGetCallTrace is the base of many profilers, but how can we test it automatically to make sure it's correct? I'll explore a layered approach."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/03/layers.png"
+image: "/images/posts/2023/03/validating-java-profiling-apis/layers.png"
 categories:
   - "Java Core"
   - "Performance"

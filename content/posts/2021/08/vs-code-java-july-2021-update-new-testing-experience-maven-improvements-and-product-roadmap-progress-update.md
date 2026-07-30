@@ -6,7 +6,7 @@ lastmod: "2021-08-16T07:28:45+00:00"
 description: "Product roadmap progress, with improved user experiences of features for testing, Maven dependency management, and project management."
 authors:
   - "nick-zhu"
-image: "https://foojay.io/wp-content/uploads/2021/08/Testing-Decoration.gif"
+image: "/images/posts/2021/08/vs-code-java-july-2021-update-new-testing-experience-maven-improvements-and-product-roadmap-progress-update/Testing-Decoration.gif"
 categories:
   - "VS Code"
 tags:

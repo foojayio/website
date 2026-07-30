@@ -7,7 +7,7 @@ description: "Not another \"break down the monolith\" article, this article is a
 canonical: "https://lightrun.com/best-practices/migrating-monoliths-to-microservices-in-practice/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/08/Monolith-to-Microservices-in-Practice-–-2.jpg"
+image: "/images/posts/2022/09/migrating-monoliths-to-microservices-in-practice/Monolith-to-Microservices-in-Practice---2.jpg"
 categories:
   - "Tutorials"
 tags:

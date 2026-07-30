@@ -7,7 +7,7 @@ description: "Most Java 17 blog posts focus on shiny new features. We’d like t
 canonical: "https://blog.picnic.nl/embracing-java-17-heres-what-we-learned-69779d95fdf2"
 authors:
   - "jakob-loehnertz"
-image: "https://foojay.io/wp-content/uploads/2022/05/1_JQzYk7gPC63LmZnhBCMb8g.png"
+image: "/images/posts/2022/05/embracing-java-17-heres-what-we-learned-at-picnic/1_JQzYk7gPC63LmZnhBCMb8g.png"
 categories:
   - "Use Cases"
 tags:

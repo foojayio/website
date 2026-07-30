@@ -7,7 +7,7 @@ description: "I’m launching a new Twitter video series that will focus on teac
 canonical: "https://talktotheduck.dev/introducing-140-second-ducklings-what-is-debugging"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/02/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
+image: "/images/posts/2022/02/what-is-debugging-in-140-seconds/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
 categories:
   - "Developer Tools"
   - "Tutorials"

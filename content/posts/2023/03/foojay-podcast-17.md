@@ -9,7 +9,7 @@ authors:
   - "frankdelporte"
   - "jakob-jenkov"
   - "thanos-stratikopoulos"
-image: "https://foojay.io/wp-content/uploads/2023/03/podcast-guests-tornadovm-1024x384-1.png"
+image: "/images/posts/2023/03/foojay-podcast-17/podcast-guests-tornadovm-1024x384-1.png"
 categories:
   - "Performance"
   - "Podcast"

@@ -6,7 +6,7 @@ lastmod: "2022-04-08T17:02:38+00:00"
 description: "In this post we're going to migrate some sample code from the `javax` namespace to `jakarta`."
 authors:
   - "helenjoscott"
-image: "https://foojay.io/wp-content/uploads/2022/03/javax-to-jakarta-migration-tool.png"
+image: "/images/posts/2022/04/migrating-from-java-ee-to-jakarta-ee-with-intellij-idea/javax-to-jakarta-migration-tool.png"
 categories:
   - "IntelliJ IDEA"
   - "Jakarta EE"

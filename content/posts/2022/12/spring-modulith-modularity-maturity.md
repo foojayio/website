@@ -7,7 +7,7 @@ description: "Spring Modulith is the successor of Oliver Drotbohm's Moduliths pr
 canonical: "https://blog.frankel.ch/spring-modulith-modularity-maturity/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/11/lockers-ge502cd01e.jpg"
+image: "/images/posts/2022/12/spring-modulith-modularity-maturity/lockers-ge502cd01e.jpg"
 categories:
   - "Microservices"
   - "Spring"

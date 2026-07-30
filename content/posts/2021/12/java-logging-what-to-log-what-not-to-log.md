@@ -7,7 +7,7 @@ description: "A pragmatic guide to Java logging—what should we log, what shoul
 canonical: "https://snyk.io/blog/java-logging-what-should-you-log-and-what-not/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/12/java-logging-what-to-log-what-not-to-log/Favicon-3-2.png"
 categories:
   - "Security"
 tags:

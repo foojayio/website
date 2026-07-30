@@ -6,7 +6,7 @@ lastmod: "2021-09-15T09:07:43+00:00"
 description: "Using streams concurrently with the parallel method can optimize performance. However, what about when we depend on the order of execution?"
 authors:
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2021/09/Screenshot-2021-03-24-at-18.57.16-1128x484-1.png"
+image: "/images/posts/2021/09/parallel-streams-java-code-quiz/Screenshot-2021-03-24-at-18.57.16-1128x484-1.png"
 categories:
   - "Books"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2023-03-25T07:22:50+00:00"
 description: "Learn how to use Firmata4j to control an Arduino board from a Raspberry Pi board or directly from your computer."
 authors:
   - "igor-de-souza"
-image: "https://foojay.io/wp-content/uploads/2023/03/Arduino_spring_featured.jpg"
+image: "/images/posts/2023/03/control-your-arduino-with-spring/Arduino_spring_featured.jpg"
 categories:
   - "Raspberry Pi"
   - "Spring"

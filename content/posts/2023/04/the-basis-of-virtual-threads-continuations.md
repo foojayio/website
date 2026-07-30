@@ -6,7 +6,7 @@ lastmod: "2023-04-28T13:45:23+00:00"
 description: "In Project Loom, \"continuation\" is delimited, a \"coroutine\", sequential code suspends or yields execution by itself, resumed by a caller."
 authors:
   - "huseyin-akdogan"
-image: "https://foojay.io/wp-content/uploads/2023/04/images.jpeg"
+image: "/images/posts/2023/04/the-basis-of-virtual-threads-continuations/images.jpeg"
 categories:
   - "Java Core"
   - "Performance"

@@ -7,7 +7,7 @@ description: "New online course is launching with the first video ready to view.
 canonical: "https://debugagent.com/debug-like-a-senior-developer"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/12/thumbnail.jpg"
+image: "/images/posts/2022/12/debug-like-a-senior-developer/thumbnail.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tools"

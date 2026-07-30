@@ -7,7 +7,7 @@ description: "I think the Java community handled this crisis poorly and needs to
 canonical: "https://betterprojectsfaster.com/guide/java-full-stack-report-2022-01-editorial"
 authors:
   - "karsten-silz"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/01/log4shell-shows-the-need-for-trustworthy-java/Favicon-3-2.png"
 categories:
   - "Security"
 tags:

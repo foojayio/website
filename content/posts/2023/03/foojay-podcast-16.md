@@ -8,7 +8,7 @@ authors:
   - "frankdelporte"
   - "miro-wengner"
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2023/03/podcast-java-20-guests-1024x576-1.png"
+image: "/images/posts/2023/03/foojay-podcast-16/podcast-java-20-guests-1024x576-1.png"
 categories:
   - "Java Core"
   - "Podcast"

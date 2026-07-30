@@ -7,7 +7,7 @@ description: "What used to take days or weeks of frustration getting the infrast
 canonical: "https://blog.payara.fish/payara-cloud-and-jakarta-ee"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2022/08/Benefits-of-Payara-Cloud-png.png"
+image: "/images/posts/2022/08/ignore-infrastructure-concentrate-on-code-with-jakarta-ee-and-payara-cloud/Benefits-of-Payara-Cloud-png.png"
 categories:
   - "Cloud"
   - "Jakarta EE"

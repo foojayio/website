@@ -6,7 +6,7 @@ lastmod: "2023-08-03T08:24:38+00:00"
 description: "This tutorial shows you how to use Git interactive rebase from the IntelliJ IDEA UI as well as the command line."
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2022/08/interactively-rebase-from-here.png"
+image: "/images/posts/2022/08/using-git-interactive-rebase/interactively-rebase-from-here.png"
 categories:
   - "Developer Tools"
   - "IntelliJ IDEA"

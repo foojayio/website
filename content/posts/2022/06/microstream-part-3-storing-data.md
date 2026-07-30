@@ -6,7 +6,7 @@ lastmod: "2022-06-22T11:12:12+00:00"
 description: "In the third article in the introductory MicroStream series, we discuss the key strategies for storing your data."
 authors:
   - "rudy-de-busscher"
-image: "https://foojay.io/wp-content/uploads/2022/06/microstream-v7.png"
+image: "/images/posts/2022/06/microstream-part-3-storing-data/microstream-v7.png"
 categories:
   - "Databases"
   - "DataEngineering"

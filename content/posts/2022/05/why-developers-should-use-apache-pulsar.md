@@ -7,7 +7,7 @@ description: "Apache Pulsar is an open source streaming platform that addresses 
 canonical: "https://www.infoworld.com/article/3619272/why-developers-should-use-apache-pulsar.html"
 authors:
   - "patrick-mcfadin"
-image: "https://foojay.io/wp-content/uploads/2022/02/data_explosion_proliferation_transmission_data_streams_volume_velocity_by_spainter_vfx_gettyimages-896319676_cso_2400x1600-100852889-large.jpg"
+image: "/images/posts/2022/05/why-developers-should-use-apache-pulsar/data_explosion_proliferation_transmission_data_streams_volume_velocity_by_spainter_vfx_gettyimages-896319676_cso_2400x1600-100852889-large.jpg"
 categories:
   - "Apache Cassandra"
   - "Apache Pulsar"

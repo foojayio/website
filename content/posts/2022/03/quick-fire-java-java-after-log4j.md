@@ -7,7 +7,7 @@ description: "Watch a 10 minute discussion on Log4j, security processes and prio
 canonical: "https://blog.payara.fish/java-after-log4j"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2022/03/quickfire.png"
+image: "/images/posts/2022/03/quick-fire-java-java-after-log4j/quickfire.png"
 categories:
   - "Payara"
   - "Security"

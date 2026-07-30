@@ -6,7 +6,7 @@ lastmod: "2023-04-25T05:31:38+00:00"
 description: "Using AsyncGetCallTrace from a separate sampler thread is possible and this article tells you why and how!"
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2023/04/couldnt-we-just-use-asyncgetcalltrace-in-a-separate-thread/Favicon-3-2.png"
 categories:
   - "Performance"
   - "Tools"

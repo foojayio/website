@@ -6,7 +6,7 @@ lastmod: "2022-04-28T11:03:35+00:00"
 description: "Virtual threads not only help to increase application throughput, they also provide a framework to refactor already existing code."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2022/04/image_1-700x273.png"
+image: "/images/posts/2022/04/thinking-about-massive-throughput-meet-virtual-threads/image_1-700x273.png"
 categories:
   - "Java Core"
   - "JDK Flight Recorder"

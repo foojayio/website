@@ -6,7 +6,7 @@ lastmod: "2022-12-15T17:29:16+00:00"
 description: "Vaadin 23.3 includes improved clustering support for high availability and rolling updates. It also includes 3 new components."
 authors:
   - "marcus-hellberg"
-image: "https://foojay.io/wp-content/uploads/2022/05/VaadinLogo_RGB_1000x310.png"
+image: "/images/posts/2022/12/vaadin-23-3-improves-kubernetes-support/VaadinLogo_RGB_1000x310.png"
 categories:
   - "Cloud"
   - "Release Notes"

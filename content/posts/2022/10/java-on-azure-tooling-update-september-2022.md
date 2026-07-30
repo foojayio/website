@@ -6,7 +6,7 @@ lastmod: "2022-10-18T08:58:48+00:00"
 description: "In this update, we will introduce the Azure Cosmos DB Support, the Azure Virtual Machine Enhancement, and Azure SDK Reference Book updates."
 authors:
   - "jialuo-gan"
-image: "https://foojay.io/wp-content/uploads/2022/10/theme.png"
+image: "/images/posts/2022/10/java-on-azure-tooling-update-september-2022/theme.png"
 categories:
   - "Azure"
   - "Developer Tools"

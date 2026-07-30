@@ -7,7 +7,7 @@ description: "Cassandra and K8s are seen as the “most logical pairing”, let�
 canonical: "https://k8ssandra.io/blog/articles/kubernetes-and-apache-cassandra-what-works-and-what-doesnt/"
 authors:
   - "patrick-mcfadin"
-image: "https://foojay.io/wp-content/uploads/2022/01/K15a-AdobeStock_459893049-1536x922-1.jpeg"
+image: "/images/posts/2022/01/kubernetes-and-apache-cassandra-what-works-and-what-doesnt/K15a-AdobeStock_459893049-1536x922-1.jpeg"
 categories:
   - "Apache Cassandra"
   - "Databases"

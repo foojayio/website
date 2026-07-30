@@ -7,7 +7,7 @@ description: "What is a strong encryption algorithm today, might be a weak algor
 canonical: "https://snyk.io/blog/10-java-security-best-practices/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/06/java-encryption-and-hashing/Favicon-3-2.png"
 categories:
   - "Security"
 tags:

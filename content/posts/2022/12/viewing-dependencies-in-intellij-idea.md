@@ -7,7 +7,7 @@ description: "In this article, we're going to take a look at different ways to v
 canonical: "https://maritvandijk.com/viewing-dependencies/"
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2022/12/dependency-details-pane.png"
+image: "/images/posts/2022/12/viewing-dependencies-in-intellij-idea/dependency-details-pane.png"
 categories:
   - "Gradle"
   - "IntelliJ IDEA"

@@ -6,7 +6,7 @@ lastmod: "2023-08-10T07:33:15+00:00"
 description: "Ever wondered what all the JDK Flight Recorder events are? Wonder no more, https://sapmachine.io/jfrevents is here to help you."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2022/12/Screenshot-2022-12-02-at-09-33-55-JFR-Event-Collection-for-JDK-19.png"
+image: "/images/posts/2022/12/jfr-event-collection/Screenshot-2022-12-02-at-09-33-55-JFR-Event-Collection-for-JDK-19.png"
 categories:
   - "JDK Flight Recorder"
   - "Performance"

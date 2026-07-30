@@ -7,7 +7,7 @@ description: "Instead of arguing about cosmetics, e.g., annotations vs. \"functi
 canonical: "https://blog.frankel.ch/on-cosmetics-vs-intrinsics-programming/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/08/spice-chiles-paprika-chili-54453.jpg"
+image: "/images/posts/2022/09/on-cosmetics-vs-intrinsics-programming/spice-chiles-paprika-chili-54453.jpg"
 categories:
   - "Opinion"
 tags:

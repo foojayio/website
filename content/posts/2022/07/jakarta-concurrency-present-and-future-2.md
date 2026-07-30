@@ -7,7 +7,7 @@ description: "Concurrency is a small fundamental spec under the Jakarta EE umbre
 canonical: "https://blog.payara.fish/jakarta-concurrency-present-and-future"
 authors:
   - "steve-millidge"
-image: "https://foojay.io/wp-content/uploads/2022/07/concurrency.png"
+image: "/images/posts/2022/07/jakarta-concurrency-present-and-future-2/concurrency.png"
 categories:
   - "Jakarta EE"
 tags:

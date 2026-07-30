@@ -7,7 +7,7 @@ description: "Posted two new videos in the \"140 Second Duckling\" series. They 
 canonical: "https://talktotheduck.dev/debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/02/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
+image: "/images/posts/2022/03/debugging-tutorial-java-return-value-intellij-jump-to-line-and-more/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

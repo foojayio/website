@@ -6,7 +6,7 @@ lastmod: "2023-02-15T08:01:53+00:00"
 description: "How to use Behaviour Driven Development to establish the requirements from users, and Event Driven Architecture to automate testing!"
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2023/02/Screen-Shot-2023-02-06-at-12.53.45-PM-1024x406-1.png"
+image: "/images/posts/2023/02/how-behaviour-driven-development-works-well-with-event-driven-architectures/Screen-Shot-2023-02-06-at-12.53.45-PM-1024x406-1.png"
 categories:
   - "Java Core"
   - "Research"

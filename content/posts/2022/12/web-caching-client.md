@@ -7,7 +7,7 @@ description: "Learn about several alternatives to cache web resources: Expiry an
 canonical: "https://blog.frankel.ch/web-caching/client/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/11/pexels-tom-fisk-3063470.jpg"
+image: "/images/posts/2022/12/web-caching-client/pexels-tom-fisk-3063470.jpg"
 categories:
   - "Performance"
 tags:

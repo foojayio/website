@@ -7,7 +7,7 @@ description: "Java is infamous for its NullPointerException: calling a method or
 canonical: "https://blog.frankel.ch/optional-nullable-type/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/04/compare-gbadd095f0.jpg"
+image: "/images/posts/2022/04/handling-null-optional-and-nullable-types/compare-gbadd095f0.jpg"
 categories:
   - "Java Core"
   - "Kotlin"

@@ -6,7 +6,7 @@ lastmod: "2022-09-21T15:13:48+00:00"
 description: "Although OpenJDK 19 is not an LTS, it is still a significant release, in my opinion. It includes several game-changing features!"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/09/cafe-g56e2bcea6_1920.jpg"
+image: "/images/posts/2022/09/the-5-most-pivotal-and-innovative-additions-to-openjdk-19/cafe-g56e2bcea6_1920.jpg"
 categories:
   - "Java Core"
 tags:

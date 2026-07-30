@@ -7,7 +7,7 @@ description: "Track thread race conditions, figure out deadlocks, and understand
 canonical: "https://debugagent.com/debugging-threads-and-asynchronous-code"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/01/thumbnail-7.png"
+image: "/images/posts/2023/02/debugging-threads-and-asynchronous-code/thumbnail-7.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

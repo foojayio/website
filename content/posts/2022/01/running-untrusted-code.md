@@ -7,7 +7,7 @@ description: "I'm afraid the deprecation of the Security Manager just added seve
 canonical: "https://blog.frankel.ch/running-untrusted-code/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/01/wolf-in-sheeps-clothing.jpg"
+image: "/images/posts/2022/01/running-untrusted-code/wolf-in-sheeps-clothing.jpg"
 categories:
   - "JEPs"
   - "Security"
@@ -114,7 +114,7 @@ PGP key:
         bits:        2048
         fingerprint: 0xF3A90E6B10E809F851AB4FC54CC08E7F47C3EC76
         create date: Wed Sep 18 02:51:23 CEST 2013
-        uids:        [Brett Wooldridge (Sonatype) &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="88eafaedfcfca6ffe7e7e4ecfae1ecefedc8efe5e9e1e4a6ebe7e5">[email&nbsp;protected]</a>&gt;]</pre>
+        uids:        [Brett Wooldridge (Sonatype) &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4f2d3d2a3b3b61382020232b3d262b282a0f28222e2623612c2022">[email&nbsp;protected]</a>&gt;]</pre>
 
 However, none of this amounts to much. Signing doesn't assert the identity of the provider. It tells that a private key with the referenced email signed it with a private key with the referenced email. Nothing prevents a malicious actor from creating another private key with the same email or a similar one.
 

@@ -6,7 +6,7 @@ lastmod: "2021-09-16T14:46:22+00:00"
 description: "Find out about Tomcat and TomEE auto-clustering in Jelastic PaaS, as well as how to get these scalable clusters up and running!"
 authors:
   - "tetiana-fydorenchyk"
-image: "https://foojay.io/wp-content/uploads/2021/08/image3.png"
+image: "/images/posts/2021/08/tomcat-tomee-clustering-automation/image3.png"
 categories:
   - "Jakarta EE"
   - "Jelastic"

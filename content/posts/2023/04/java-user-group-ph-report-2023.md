@@ -6,7 +6,7 @@ lastmod: "2023-04-19T08:11:15+00:00"
 description: "Event group report for the revitalized meetup of Java User Group PH. A meetup group focusing in Java ecosystem."
 authors:
   - "tristan-mahinay"
-image: "https://foojay.io/wp-content/uploads/2023/04/photo_2-700x340-1.jpeg"
+image: "/images/posts/2023/04/java-user-group-ph-report-2023/photo_2-700x340-1.jpeg"
 categories:
   - "Events"
   - "JUGs"

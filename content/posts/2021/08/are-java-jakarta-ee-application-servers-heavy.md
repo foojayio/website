@@ -7,7 +7,7 @@ description: "Watch a demo that shows it’s possible to have a small footprint 
 canonical: "https://www.payara.fish/dismiss-the-myths/"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2021/08/MicrosoftTeams-image-8-scaled.jpg"
+image: "/images/posts/2021/08/are-java-jakarta-ee-application-servers-heavy/MicrosoftTeams-image-8-scaled.jpg"
 categories:
   - "Videos"
 tags:

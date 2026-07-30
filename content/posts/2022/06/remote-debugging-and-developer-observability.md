@@ -7,7 +7,7 @@ description: "Connect to remote processes to solve bugs using remote debugging a
 canonical: "https://talktotheduck.dev/remote-debugging-and-developer-observability"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/03/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"
+image: "/images/posts/2022/06/remote-debugging-and-developer-observability/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Observability"

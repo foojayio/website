@@ -6,7 +6,7 @@ lastmod: "2021-09-29T11:18:14+00:00"
 description: "When we pass an object reference to a method, we are changing the object that is in the heap of the memory. Find out more in this challenge!"
 authors:
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/09/arrays-and-object-reference-java-challenge-code-quiz/Favicon-3-2.png"
 categories:
   - "Books"
 tags:

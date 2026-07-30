@@ -7,7 +7,7 @@ description: "Security is at odds with productivity and team cohesion. It doesn'
 canonical: "https://debugagent.com/internal-security"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/10/DALL·E-2022-10-11-21.48.44-hacking-into-a-system.jpg"
+image: "/images/posts/2022/11/internal-security-hardening-internal-systems/DALL-E-2022-10-11-21.48.44-hacking-into-a-system.jpg"
 categories:
   - "Security"
 tags:

@@ -7,7 +7,7 @@ description: "Allocation Pacing (AP) is a technique within the JVM of Azul Zulu 
 canonical: "https://www.azul.com/blog/memory-allocation-pacing-in-azul-zulu-prime-builds-of-openjdk-explained/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/11/allocation-paced-delays-count-smaller-1024x426-1-1.png"
+image: "/images/posts/2023/02/explained-memory-allocation-pacing-in-azul-zulu-prime-builds-of-openjdk/allocation-paced-delays-count-smaller-1024x426-1-1.png"
 categories:
   - "Java Core"
   - "Performance"

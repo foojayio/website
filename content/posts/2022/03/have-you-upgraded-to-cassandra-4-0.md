@@ -7,7 +7,7 @@ description: "If you’re a current Cassandra user, upgrading to the latest rele
 canonical: "https://jaxenter.com/cassandra-4-0-175016.html"
 authors:
   - "patrick-mcfadin"
-image: "https://foojay.io/wp-content/uploads/2022/02/shutterstock_140530141-350x233-1.jpg"
+image: "/images/posts/2022/03/have-you-upgraded-to-cassandra-4-0/shutterstock_140530141-350x233-1.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"

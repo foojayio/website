@@ -7,7 +7,7 @@ description: "Cross-site scripting (XSS) is a well-known issue and mostly utiliz
 canonical: "https://snyk.io/blog/10-java-security-best-practices/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/05/sanitize-all-input/Favicon-3-2.png"
 categories:
   - "Security"
 tags:

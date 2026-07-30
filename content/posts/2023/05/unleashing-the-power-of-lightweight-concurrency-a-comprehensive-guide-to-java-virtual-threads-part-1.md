@@ -6,7 +6,7 @@ lastmod: "2023-09-11T17:51:15+00:00"
 description: "Learn about Java Virtual Threads, how they simplify concurrent programming, how they overcome the limitations of traditional Java threads."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/05/2945feb6-1c67-4a75-9dd9-4b8d0cd1f6e5.jpeg"
+image: "/images/posts/2023/05/unleashing-the-power-of-lightweight-concurrency-a-comprehensive-guide-to-java-virtual-threads-part-1/2945feb6-1c67-4a75-9dd9-4b8d0cd1f6e5.jpeg"
 categories:
   - "Java Core"
   - "Performance"

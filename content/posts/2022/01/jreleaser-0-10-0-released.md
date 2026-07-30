@@ -6,7 +6,7 @@ lastmod: "2022-01-04T13:30:49+00:00"
 description: "JReleaser v0.10.0 is the last push towards 1.0.0. We'll concentrate on bug fixing and polishing from now on."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/01/jreleaser-0-10-0-released/Favicon-3-2.png"
 categories:
   - "DevOps"
   - "Release Notes"

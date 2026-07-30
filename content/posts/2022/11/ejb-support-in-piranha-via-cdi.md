@@ -6,7 +6,7 @@ lastmod: "2022-11-15T14:15:30+00:00"
 description: "Piranha Cloud takes a novel approach and maps Enterprise Beans annotations to equivalent functionality in CDI or other Jakarta EE APIs."
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2022/11/omnibeans-1024x363-1.png"
+image: "/images/posts/2022/11/ejb-support-in-piranha-via-cdi/omnibeans-1024x363-1.png"
 categories:
   - "Cloud"
   - "Jakarta EE"

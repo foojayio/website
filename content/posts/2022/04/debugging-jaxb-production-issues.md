@@ -7,7 +7,7 @@ description: "Failures in XML parsing can happen in production when the source d
 canonical: "https://lightrun.com/tutorials/debugging-jaxb-production-issues/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/03/Debug-JAXB-Unmarshaling.jpg"
+image: "/images/posts/2022/04/debugging-jaxb-production-issues/Debug-JAXB-Unmarshaling.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

@@ -6,7 +6,7 @@ lastmod: "2025-11-13T09:13:40+00:00"
 description: "Last month we were in the US, and this time we travel to the other side of the world as we spoke with the organizers of the Japan JUG!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/02/japan-jug-guests-1024x575-1.png"
+image: "/images/posts/2023/03/foojay-podcast-15/japan-jug-guests-1024x575-1.png"
 categories:
   - "JUGs"
   - "Podcast"

@@ -7,7 +7,7 @@ description: "How can you stream from Pulsar to Apache Cassandra, the powerful 
 canonical: "https://medium.com/building-the-open-data-stack/bring-streaming-to-apache-cassandra-with-apache-pulsar-e4f54f52767f"
 authors:
   - "cedrick-lunven"
-image: "https://foojay.io/wp-content/uploads/2022/01/1_4VRCkVXi6RRfK4pwrJkPjw.jpeg"
+image: "/images/posts/2022/05/bring-streaming-to-apache-cassandra-with-apache-pulsar/1_4VRCkVXi6RRfK4pwrJkPjw.jpeg"
 categories:
   - "Apache Cassandra"
   - "Apache Pulsar"

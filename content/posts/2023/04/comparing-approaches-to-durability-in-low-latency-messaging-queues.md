@@ -6,7 +6,7 @@ lastmod: "2023-04-26T13:18:00+00:00"
 description: "Is replicating data to a secondary system faster than sync-ing to disk? My first time benchmarking with a realistic example."
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2023/04/Screenshot-2023-04-17-at-9.23.55-AM-1024x563-1.png"
+image: "/images/posts/2023/04/comparing-approaches-to-durability-in-low-latency-messaging-queues/Screenshot-2023-04-17-at-9.23.55-AM-1024x563-1.png"
 categories:
   - "Java Core"
   - "JavaFX"

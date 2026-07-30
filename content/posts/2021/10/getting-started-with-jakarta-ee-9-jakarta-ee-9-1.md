@@ -8,7 +8,7 @@ canonical: "https://blog.payara.fish/getting-started-with-jakarta-ee-9-jakarta-e
 authors:
   - "jadon-ortlepp"
   - "rudy-de-busscher"
-image: "https://foojay.io/wp-content/uploads/2021/10/jakarta-ee-9.1.png"
+image: "/images/posts/2021/10/getting-started-with-jakarta-ee-9-jakarta-ee-9-1/jakarta-ee-9.1.png"
 categories:
   - "Jakarta EE"
 tags:

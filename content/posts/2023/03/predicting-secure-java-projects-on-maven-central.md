@@ -6,7 +6,7 @@ lastmod: "2023-03-23T14:12:58+00:00"
 description: "Next time you’re considering a new Java library, look for the Sonatype Safety Rating on Maven Central to aid in your decision making."
 authors:
   - "theresa-mammarella"
-image: "https://foojay.io/wp-content/uploads/2023/03/3Falls_Niagara.jpg"
+image: "/images/posts/2023/03/predicting-secure-java-projects-on-maven-central/3Falls_Niagara.jpg"
 categories:
   - "Developer Tools"
   - "Maven"

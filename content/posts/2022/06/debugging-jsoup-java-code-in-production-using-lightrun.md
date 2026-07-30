@@ -7,7 +7,7 @@ description: "Scraping is a fragile discipline. As a workaround, we often use a 
 canonical: "https://lightrun.com/tutorials/debugging-jsoup-java-code-in-production-using-lightrun/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/04/Debugging-JSOUP-With-Lightrun.jpg"
+image: "/images/posts/2022/06/debugging-jsoup-java-code-in-production-using-lightrun/Debugging-JSOUP-With-Lightrun.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

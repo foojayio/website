@@ -7,7 +7,7 @@ description: "If you're implementing microservices or not, chances are that you'
 canonical: "https://blog.frankel.ch/comparison-fault-tolerance-libraries/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/01/bridge-g8256e354c.jpg"
+image: "/images/posts/2022/01/comparison-fault-tolerance-libraries/bridge-g8256e354c.jpg"
 categories:
   - "Developer Tools"
   - "Microservices"

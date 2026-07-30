@@ -7,7 +7,7 @@ description: "Learn about an impressive list of JavaFX and Raspberry Pi projects
 canonical: "https://webtechie.be/post/2023-05-02-interview-paul-kocian-orangomango/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/05/3dcar-415x510-1.png"
+image: "/images/posts/2023/05/interview-with-paul-kocian-aka-orango_mango/3dcar-415x510-1.png"
 categories:
   - "Interviews"
   - "Java Core"

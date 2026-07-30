@@ -7,7 +7,7 @@ description: "In this podcast, we explore the topic of why there are so many JDK
 authors:
   - "erikcostlow"
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/10/foojay-podcast-4/Favicon-3-2.png"
 categories:
   - "Podcast"
 tags:

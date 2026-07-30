@@ -7,7 +7,7 @@ description: "An introductory run-through of setting up your database on OpenShi
 canonical: "https://dev.to/datastax/running-your-database-on-openshift-and-codeready-containers-5f94"
 authors:
   - "micksembwever"
-image: "https://foojay.io/wp-content/uploads/2021/07/65ps3ym4omipxy6bypbo.png"
+image: "/images/posts/2022/09/running-your-database-on-openshift-and-codeready-containers/65ps3ym4omipxy6bypbo.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

@@ -7,7 +7,7 @@ description: "It is more beneficial to use sealed and value class instead of enu
 canonical: "https://blog.frankel.ch/avoid-stringly-typed-kotlin/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/02/strong-50597.jpg"
+image: "/images/posts/2022/02/avoid-stringly-typed-in-kotlin/strong-50597.jpg"
 categories:
   - "Kotlin"
 tags:

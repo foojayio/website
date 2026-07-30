@@ -6,7 +6,7 @@ lastmod: "2021-11-16T15:09:12+00:00"
 description: "Tip: We can only ask the Java thread to execute a piece of code, but we cannot guarantee the execution order of multiple threads!"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2021/10/ashim-d-silva-XwfyZjfXGQE-unsplash.jpg"
+image: "/images/posts/2021/10/java-thread-programming-part-3/ashim-d-silva-XwfyZjfXGQE-unsplash.jpg"
 categories:
   - "Uncategorized"
 tags:

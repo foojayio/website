@@ -7,7 +7,7 @@ description: "Due to their asynchronous nature and production complexities debug
 canonical: "https://lightrun.com/tutorials/debugging-the-java-message-service-jms-api-using-lightrun/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/05/Debugging-JMS-messages-using-Lightrun.jpg"
+image: "/images/posts/2022/06/debugging-the-java-message-service-jms-api-using-lightrun/Debugging-JMS-messages-using-Lightrun.jpg"
 categories:
   - "IntelliJ IDEA"
   - "JMS"

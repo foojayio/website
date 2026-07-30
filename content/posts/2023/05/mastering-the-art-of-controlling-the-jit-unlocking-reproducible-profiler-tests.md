@@ -6,7 +6,7 @@ lastmod: "2023-05-19T15:18:33+00:00"
 description: "How to use the WhiteBox API and Compiler Directives to get control of the JIT for better profiling of API tests!"
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/05/tiered_states4-2000x1415-1.png"
+image: "/images/posts/2023/05/mastering-the-art-of-controlling-the-jit-unlocking-reproducible-profiler-tests/tiered_states4-2000x1415-1.png"
 categories:
   - "Performance"
 tags:

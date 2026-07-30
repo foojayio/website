@@ -6,7 +6,7 @@ lastmod: "2022-02-23T14:44:52+00:00"
 description: "I had read about git bisect a few times and figured that this time, I would use that tool to find an annoying bug."
 authors:
   - "mthmulders"
-image: "https://foojay.io/wp-content/uploads/2022/02/git-bisect-visualisation-700x459.png"
+image: "/images/posts/2022/02/use-git-bisect-to-pinpoint-a-bug/git-bisect-visualisation-700x459.png"
 categories:
   - "Developer Tools"
   - "Maven"

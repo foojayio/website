@@ -6,7 +6,7 @@ lastmod: "2023-05-22T14:04:36+00:00"
 description: "\"Wouldn’t it be great to use a Java Virtual Machine (JVM) to be 30% more performant? That is a win for both Engineering and Finance.\""
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2023/05/1672961010501.jpeg"
+image: "/images/posts/2023/05/finops-john-stuart-at-azul/1672961010501.jpeg"
 categories:
   - "FinOps"
   - "Research"

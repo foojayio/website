@@ -7,7 +7,7 @@ description: "Don’t wait until the release of Maven 5, if you are a library de
 canonical: "https://blog.frankel.ch/maven-flatten-plugin/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/01/flatten-5964529.jpg"
+image: "/images/posts/2022/01/flatten-maven-plugin/flatten-5964529.jpg"
 categories:
   - "Maven"
   - "Tools"

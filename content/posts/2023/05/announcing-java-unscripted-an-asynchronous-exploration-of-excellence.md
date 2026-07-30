@@ -6,7 +6,7 @@ lastmod: "2023-05-16T10:12:19+00:00"
 description: "\"Java Unscripted\" is an exciting interview series featuring insights from Java industry luminaries. Join us as we explore their journeys, sharing wisdom to inspire and guide the next generation of developers."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/05/1a5ed3b2-d6fe-4017-aab5-5c1919f1fa2f.jpeg"
+image: "/images/posts/2023/05/announcing-java-unscripted-an-asynchronous-exploration-of-excellence/1a5ed3b2-d6fe-4017-aab5-5c1919f1fa2f.jpeg"
 categories:
   - "Interviews"
 tags:

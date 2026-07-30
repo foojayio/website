@@ -7,7 +7,7 @@ description: "Knowing how to select, update, and remove Java dependencies from o
 canonical: "https://snyk.io/blog/best-practices-for-managing-java-dependencies/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2022/09/blog-java-depen-snyk-vuln-report-1240x1036-1.jpeg"
+image: "/images/posts/2022/09/best-practices-for-managing-java-dependencies/blog-java-depen-snyk-vuln-report-1240x1036-1.jpeg"
 categories:
   - "DevOps"
   - "Security"

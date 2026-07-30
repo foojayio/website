@@ -7,7 +7,7 @@ description: "Timefold continues OptaPlanner, open source project optimizing ope
 canonical: "https://timefold.ai/blog/2023/optaplanner-fork/"
 authors:
   - "geoffrey-de-smet"
-image: "https://foojay.io/wp-content/uploads/2023/05/timefold.png"
+image: "/images/posts/2023/05/optaplanner-continues-as-timefold/timefold.png"
 categories:
   - "Machine Learning"
   - "Press"

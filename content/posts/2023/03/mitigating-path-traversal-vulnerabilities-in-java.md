@@ -7,7 +7,7 @@ description: "Path traversal vulnerabilities are a serious threat to Java web ap
 canonical: "https://snyk.io/blog/mitigating-path-traversal-java-snyk-code/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2023/03/https___res.cloudinary.com_snyk_image_upload_v1678125740_blog-mitigating-path-traversal-snyk-code-ui.jpg"
+image: "/images/posts/2023/03/mitigating-path-traversal-vulnerabilities-in-java/https___res.cloudinary.com_snyk_image_upload_v1678125740_blog-mitigating-path-traversal-snyk-code-ui.jpg"
 categories:
   - "Security"
   - "Snyk"

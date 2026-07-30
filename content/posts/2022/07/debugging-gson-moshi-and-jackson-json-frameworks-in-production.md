@@ -7,7 +7,7 @@ description: "Parsing is a major source of production failures. Some are easy to
 canonical: "https://lightrun.com/tutorials/debugging-gson-moshi-and-jackson-json-frameworks-in-production/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/06/Debugging-JSON-API-Requests-1.png"
+image: "/images/posts/2022/07/debugging-gson-moshi-and-jackson-json-frameworks-in-production/Debugging-JSON-API-Requests-1.png"
 categories:
   - "Developer Tools"
   - "IntelliJ IDEA"

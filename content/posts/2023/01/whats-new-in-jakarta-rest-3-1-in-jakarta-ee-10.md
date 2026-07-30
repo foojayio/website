@@ -7,7 +7,7 @@ description: "The latest version of Jakarta REST is 3.1, which shipped with Jaka
 canonical: "https://blog.payara.fish/whats-new-in-jakarta-rest-3.1-in-jakarta-ee-10"
 authors:
   - "luqman-saeed"
-image: "https://foojay.io/wp-content/uploads/2020/10/payara_square_logo.jpg"
+image: "/images/posts/2023/01/whats-new-in-jakarta-rest-3-1-in-jakarta-ee-10/payara_square_logo.jpg"
 categories:
   - "Cloud"
   - "Jakarta EE"

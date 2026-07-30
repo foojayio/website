@@ -6,7 +6,7 @@ lastmod: "2021-05-24T17:14:06+00:00"
 description: "SecurityManager, foundation to build secure software, on its own is insufficient to limit users & software to the least privilege principle."
 authors:
   - "peter-firmstone"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/05/why-jep-411-will-have-a-negative-impact-on-java-security/Favicon-3-2.png"
 categories:
   - "JEPs"
   - "Security"

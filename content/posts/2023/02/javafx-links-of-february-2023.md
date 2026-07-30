@@ -6,7 +6,7 @@ lastmod: "2023-02-28T11:25:04+00:00"
 description: "A lot of game and 3D development, releases, interesting ongoing development, and so much more to read. Enjoy reading and clicking!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/02/newreleases.png"
+image: "/images/posts/2023/02/javafx-links-of-february-2023/newreleases.png"
 categories:
   - "JavaFX"
   - "Release Notes"

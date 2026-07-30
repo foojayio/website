@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:22:47+00:00"
 description: "Understanding deeply how to use a Map, equals, and hashcode in Java will be a massive help for you to create high-quality code!"
 authors:
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2021/05/map_equals.png"
+image: "/images/posts/2021/05/map-equals-hashcode-java-challenge/map_equals.png"
 categories:
   - "Tutorials"
 tags:

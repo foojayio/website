@@ -6,7 +6,7 @@ lastmod: "2022-02-03T15:28:44+00:00"
 description: "The Java GitHub Actions that rules them all! Third and final instalment of Lights, Camera, Action: GitHub Actions with Java"
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2022/01/Spidey_GitHub_Action_disco_latest.jpg"
+image: "/images/posts/2022/02/lights-camera-action-github-actions-with-java-part-3/Spidey_GitHub_Action_disco_latest.jpg"
 categories:
   - "DevOps"
   - "Foojay"

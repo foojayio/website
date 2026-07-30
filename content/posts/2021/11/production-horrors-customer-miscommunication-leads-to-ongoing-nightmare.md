@@ -7,7 +7,7 @@ description: "We can see production disasters from miles away. Bad communication
 canonical: "https://talktotheduck.dev/production-horrors-customer-miscommunication-leads-to-ongoing-nightmare"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2021/11/Lightrun-Talk-to-the-duck-Production-Horrors.jpg"
+image: "/images/posts/2021/11/production-horrors-customer-miscommunication-leads-to-ongoing-nightmare/Lightrun-Talk-to-the-duck-Production-Horrors.jpg"
 categories:
   - "DevOps"
 tags:

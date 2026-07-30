@@ -7,7 +7,7 @@ description: "Writing summaries of conference talks is probably the best way to 
 canonical: "https://blog.frankel.ch/jprime-2022/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/05/jprime_large.jpg"
+image: "/images/posts/2022/06/my-summary-of-jprime-2022/jprime_large.jpg"
 categories:
   - "Events"
   - "Trip Reports"

@@ -6,7 +6,7 @@ lastmod: "2021-10-28T17:39:34+00:00"
 description: "SKP's Agile Cheatsheet listing the most important terms in agile, devops, scrum, lean, kanban, and more."
 authors:
   - "sumith-puri"
-image: "https://foojay.io/wp-content/uploads/2021/10/images-2.jpg"
+image: "/images/posts/2021/10/skps-agile-cheatsheet-part-01/images-2.jpg"
 categories:
   - "Uncategorized"
 tags:

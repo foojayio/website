@@ -7,7 +7,7 @@ description: "Quarkus brings an exciting take to the table. Unlike Micronaut, it
 canonical: "https://blog.frankel.ch/native/quarkus/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/12/quarkus_logo_vertical_rgb_600px_default.png"
+image: "/images/posts/2021/12/native-image-quarkus/quarkus_logo_vertical_rgb_600px_default.png"
 categories:
   - "Kotlin"
   - "Performance"

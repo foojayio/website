@@ -7,7 +7,7 @@ description: "In this article, I'd like to show you how to remove annotations fo
 canonical: "https://blog.frankel.ch/annotation-free-spring/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/09/background-6181129_1280.jpg"
+image: "/images/posts/2021/09/annotation-free-spring/background-6181129_1280.jpg"
 categories:
   - "Kotlin"
   - "Research"

@@ -7,7 +7,7 @@ description: "Project Loom aims to fix issues in the current concurrency model b
 canonical: "https://developer.okta.com/blog/2022/08/26/state-of-java-project-loom"
 authors:
   - "deepu-sasidharan"
-image: "https://foojay.io/wp-content/uploads/2022/08/threads.png"
+image: "/images/posts/2022/08/what-the-heck-is-project-loom-for-java/threads.png"
 categories:
   - "Java Core"
   - "Performance"

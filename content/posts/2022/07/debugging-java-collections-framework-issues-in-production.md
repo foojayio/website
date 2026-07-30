@@ -7,7 +7,7 @@ description: "Outside of the language itself, collections are the most basic bui
 canonical: "https://lightrun.com/tutorials/debugging-java-collections-framework-issues-in-production/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/05/Lightrun-blog-hero-spring-boot-actuator-tutorial-02.jpg"
+image: "/images/posts/2022/07/debugging-java-collections-framework-issues-in-production/Lightrun-blog-hero-spring-boot-actuator-tutorial-02.jpg"
 categories:
   - "Developer Tools"
   - "IntelliJ IDEA"

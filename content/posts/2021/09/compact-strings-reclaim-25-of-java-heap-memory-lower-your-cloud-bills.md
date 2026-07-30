@@ -6,7 +6,7 @@ lastmod: "2022-02-25T21:58:06+00:00"
 description: "Learn how using compact strings can help you reclaim 25% of Java heap memory and lower your Cloud bills... very easily."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/09/compact-strings-reclaim-25-of-java-heap-memory-lower-your-cloud-bills/Favicon-3-2.png"
 categories:
   - "Java Core"
 tags:

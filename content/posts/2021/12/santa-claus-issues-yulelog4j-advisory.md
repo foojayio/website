@@ -6,7 +6,7 @@ lastmod: "2021-12-24T16:23:43+00:00"
 description: "Santa Claus has issued a security advisory for the popular holiday celebration."
 authors:
   - "erikcostlow"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/12/santa-claus-issues-yulelog4j-advisory/Favicon-3-2.png"
 categories:
   - "Foojay"
 tags:

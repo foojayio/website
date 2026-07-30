@@ -7,7 +7,7 @@ description: "CTOs and enterprise architects have long recognized the importance
 canonical: "https://thenewstack.io/unified-event-driven-architecture-for-the-cloud-native-enterprise/"
 authors:
   - "chris-latimer"
-image: "https://foojay.io/wp-content/uploads/2021/07/01d62c10-magnetar-5603793_1280-1024x682-1.jpg"
+image: "/images/posts/2022/10/unified-event-driven-architecture-for-the-cloud-native-enterprise/01d62c10-magnetar-5603793_1280-1024x682-1.jpg"
 categories:
   - "Apache Cassandra"
   - "Apache Pulsar"

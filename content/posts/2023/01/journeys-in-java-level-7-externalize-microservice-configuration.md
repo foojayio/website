@@ -6,7 +6,7 @@ lastmod: "2023-01-30T15:43:18+00:00"
 description: "Learn how to set up a service that hosts the Spring Cloud Config server and wire our Neo4j microservice as the config client service."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2023/01/unsplash-canyon-road-bridge-scaled.jpeg"
+image: "/images/posts/2023/01/journeys-in-java-level-7-externalize-microservice-configuration/unsplash-canyon-road-bridge-scaled.jpeg"
 categories:
   - "Databases"
   - "Graph"

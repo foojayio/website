@@ -7,7 +7,7 @@ description: "What’s the best way to store, protect and access your data? This
 canonical: "https://datastax.medium.com/sql-versus-nosql-the-pros-and-cons-488d4a7ba92f"
 authors:
   - "rich-edwards"
-image: "https://foojay.io/wp-content/uploads/2022/01/0_wznGd8krXaAPYmzU.png"
+image: "/images/posts/2022/04/sql-vs-nosql-pros-cons-2/0_wznGd8krXaAPYmzU.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

@@ -7,7 +7,7 @@ description: "This is the second article of the series \"How Gradle Works\". In 
 canonical: "https://blog.gradle.org/how-gradle-works-2"
 authors:
   - "bo-zhang"
-image: "https://foojay.io/wp-content/uploads/2023/03/configuration-build-script-execution.png"
+image: "/images/posts/2023/03/how-gradle-works-inside-the-daemon/configuration-build-script-execution.png"
 categories:
   - "Gradle"
   - "Java Core"

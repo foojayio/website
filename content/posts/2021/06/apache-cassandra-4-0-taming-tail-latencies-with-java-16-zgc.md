@@ -7,7 +7,7 @@ description: "Learn about improvements in Java garbage collection that Cassandra
 canonical: "https://jaxenter.com/apache-cassandra-java-174575.html"
 authors:
   - "jbellis"
-image: "https://foojay.io/wp-content/uploads/2021/06/shutterstock_1673041306-350x233-1.jpg"
+image: "/images/posts/2021/06/apache-cassandra-4-0-taming-tail-latencies-with-java-16-zgc/shutterstock_1673041306-350x233-1.jpg"
 categories:
   - "Apache Cassandra"
   - "Apache Pulsar"

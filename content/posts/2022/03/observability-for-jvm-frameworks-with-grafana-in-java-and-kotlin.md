@@ -8,7 +8,7 @@ canonical: "https://openvalue.blog/posts/2022/03/17/observability_4_jvm_framewor
 authors:
   - "christian-meyer"
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2022/03/observ_img1-700x470.png"
+image: "/images/posts/2022/03/observability-for-jvm-frameworks-with-grafana-in-java-and-kotlin/observ_img1-700x470.png"
 categories:
   - "Java Core"
   - "Kotlin"

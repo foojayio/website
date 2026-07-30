@@ -6,7 +6,7 @@ lastmod: "2022-12-22T10:10:17+00:00"
 description: "Functional programming is amazing, although I think there are a few problems that prevent it from being used more."
 authors:
   - "ties-van-de-ven"
-image: "https://foojay.io/wp-content/uploads/2022/06/chemical-scientist-test-chemistry-chemist-student.jpg"
+image: "/images/posts/2022/10/the-problem-with-functional-programming/chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Java Core"
   - "Opinion"

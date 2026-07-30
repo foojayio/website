@@ -7,7 +7,7 @@ description: "IBM makes it easier than ever to develop and run Java more cost-ef
 canonical: "https://developer.ibm.com/blogs/introducing-the-ibm-semeru-runtimes/"
 authors:
   - "mgrygles"
-image: "https://foojay.io/wp-content/uploads/2021/08/ibm-logo.png"
+image: "/images/posts/2021/08/no-cost-ibm-semeru-runtimes-for-java/ibm-logo.png"
 categories:
   - "Release Notes"
 tags:

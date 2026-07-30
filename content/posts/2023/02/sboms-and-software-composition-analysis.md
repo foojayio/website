@@ -6,7 +6,7 @@ lastmod: "2023-02-27T08:14:41+00:00"
 description: "Let's learn all about software composition analysis, how they work and why it is important for developers to get started as soon as possible!"
 authors:
   - "jamie-coleman"
-image: "https://foojay.io/wp-content/uploads/2023/02/cake-image.png"
+image: "/images/posts/2023/02/sboms-and-software-composition-analysis/cake-image.png"
 categories:
   - "Developer Tools"
   - "DevOps"

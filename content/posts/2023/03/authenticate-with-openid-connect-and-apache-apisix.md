@@ -7,7 +7,7 @@ description: "Externalizing your authentication process to a third party may be 
 canonical: "https://blog.frankel.ch/authenticate-openid-connect/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/03/eye-gd82fef23c.jpg"
+image: "/images/posts/2023/03/authenticate-with-openid-connect-and-apache-apisix/eye-gd82fef23c.jpg"
 categories:
   - "Cloud"
   - "Security"

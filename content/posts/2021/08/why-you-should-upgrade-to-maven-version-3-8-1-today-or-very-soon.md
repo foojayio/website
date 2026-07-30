@@ -7,7 +7,7 @@ description: "If you are still running on an old Maven version like 3.6.3 or bel
 canonical: "https://snyk.io/blog/why-you-should-upgrade-to-maven-version-3-8-1/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2021/08/poms.png"
+image: "/images/posts/2021/08/why-you-should-upgrade-to-maven-version-3-8-1-today-or-very-soon/poms.png"
 categories:
   - "Maven"
   - "Security"

@@ -7,7 +7,7 @@ description: "Kover is a code coverage tool for Kotlin. It's still in incubator 
 canonical: "https://lengrand.fr/kover-code-coverage-plugin-for-kotlin/"
 authors:
   - "jlengrand"
-image: "https://foojay.io/wp-content/uploads/2022/02/kover6.jpeg"
+image: "/images/posts/2022/02/kover-code-coverage-plugin-for-kotlin/kover6.jpeg"
 categories:
   - "Kotlin"
 tags:

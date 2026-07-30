@@ -7,7 +7,7 @@ description: "The last thing you need for your happily deployed application is s
 canonical: "https://snyk.io/blog/reverse-shell-attack/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2022/09/snykattack.png"
+image: "/images/posts/2022/09/controlling-your-server-with-a-reverse-shell-attack/snykattack.png"
 categories:
   - "Security"
 tags:

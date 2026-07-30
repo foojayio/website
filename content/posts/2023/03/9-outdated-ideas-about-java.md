@@ -6,7 +6,7 @@ lastmod: "2023-07-28T08:01:17+00:00"
 description: "In this article, we want to look into some false assumptions and outdated ideas about Java based on early versions."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/02/nine-outdate-ideas.jpg"
+image: "/images/posts/2023/03/9-outdated-ideas-about-java/nine-outdate-ideas.jpg"
 categories:
   - "Java Core"
   - "JBang"

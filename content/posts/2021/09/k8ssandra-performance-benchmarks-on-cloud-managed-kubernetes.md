@@ -7,7 +7,7 @@ description: "We came up with results matching our expectations: Cassandra in Ku
 canonical: "https://k8ssandra.io/blog/articles/k8ssandra-performance-benchmarks-on-cloud-managed-kubernetes/"
 authors:
   - "alexander-dejanovski"
-image: "https://foojay.io/wp-content/uploads/2021/07/ThroughputTest.png"
+image: "/images/posts/2021/09/k8ssandra-performance-benchmarks-on-cloud-managed-kubernetes/ThroughputTest.png"
 categories:
   - "Apache Cassandra"
   - "Kubernetes"

@@ -6,7 +6,7 @@ lastmod: "2022-11-22T10:57:13+00:00"
 description: "The upcoming FOSDEM 2023, 5 February 2023, will be live and everything will be in person, submit to the \"Friends of OpenJDK devroom\"!"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2022/11/image-9.png"
+image: "/images/posts/2022/11/friends-of-openjdk-at-fosdem-2023/image-9.png"
 categories:
   - "Events"
 tags:

@@ -7,7 +7,7 @@ description: "Learn everything about bookmarks in IntelliJ IDEA for 'saving' int
 canonical: "https://maritvandijk.com/using-bookmarks-in-intellij-idea-2/"
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2023/03/shortcuts.png"
+image: "/images/posts/2023/03/using-bookmarks-in-intellij-idea/shortcuts.png"
 categories:
   - "Developer Tools"
   - "IntelliJ IDEA"

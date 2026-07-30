@@ -6,7 +6,7 @@ lastmod: "2023-03-03T09:08:08+00:00"
 description: "Let's use an event-driven Hello World (a paradigm where the flow is determined by events) to step through behaviour-driven development,"
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2023/02/Screen-Shot-2023-02-20-at-4.56.42-PM-1024x241-1.png"
+image: "/images/posts/2023/03/event-driven-hello-world-program/Screen-Shot-2023-02-20-at-4.56.42-PM-1024x241-1.png"
 categories:
   - "DevOps"
   - "Microservices"

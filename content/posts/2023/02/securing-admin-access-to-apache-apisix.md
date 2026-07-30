@@ -7,7 +7,7 @@ description: "API Gateways are critical components in one's infrastructure. Here
 canonical: "https://blog.frankel.ch/secure-apisix-admin/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/02/security-g85f9e284f.jpg"
+image: "/images/posts/2023/02/securing-admin-access-to-apache-apisix/security-g85f9e284f.jpg"
 categories:
   - "DevOps"
   - "Security"

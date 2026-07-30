@@ -7,7 +7,7 @@ description: "Like in many design decisions, a cache is a trade-off. Caching is 
 canonical: "https://blog.frankel.ch/choose-cache/1/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/10/pexels-scott-webb-1544944.jpg"
+image: "/images/posts/2021/10/choosing-a-cache-1/pexels-scott-webb-1544944.jpg"
 categories:
   - "Performance"
   - "Research"

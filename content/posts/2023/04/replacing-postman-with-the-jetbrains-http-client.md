@@ -7,7 +7,7 @@ description: "How to use the JetBrains HTTP Client to replace Postman, test thir
 canonical: "https://lengrand.fr/replacing-postman-in-seconds-with-the-jetbrains-http-client/"
 authors:
   - "jlengrand"
-image: "https://foojay.io/wp-content/uploads/2023/03/headpostman.png"
+image: "/images/posts/2023/04/replacing-postman-with-the-jetbrains-http-client/headpostman.png"
 categories:
   - "IntelliJ IDEA"
   - "Kotlin"

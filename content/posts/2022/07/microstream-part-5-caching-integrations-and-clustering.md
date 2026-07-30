@@ -6,7 +6,7 @@ lastmod: "2022-07-06T07:13:35+00:00"
 description: "In this article, we discuss MicroStream caching and clustering functionality. We also indicate the available integrations."
 authors:
   - "rudy-de-busscher"
-image: "https://foojay.io/wp-content/uploads/2022/06/microstream.png"
+image: "/images/posts/2022/07/microstream-part-5-caching-integrations-and-clustering/microstream.png"
 categories:
   - "Databases"
   - "DataEngineering"

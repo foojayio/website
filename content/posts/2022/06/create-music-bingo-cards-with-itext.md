@@ -7,7 +7,7 @@ description: "This weekend we had a party and wanted to organize a music bingo. 
 canonical: "https://webtechie.be/post/2022-05-30-pdf-bingo-card-with-itext/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/05/frank.png"
+image: "/images/posts/2022/06/create-music-bingo-cards-with-itext/frank.png"
 categories:
   - "Uncategorized"
 tags:

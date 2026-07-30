@@ -6,7 +6,7 @@ lastmod: "2021-07-19T07:43:31+00:00"
 description: "Welcome to the special mid-year edition for Visual Studio Code Java updates, where we look at our product roadmap for the next few months!"
 authors:
   - "nick-zhu"
-image: "https://foojay.io/wp-content/uploads/2021/07/juneblogfoojay.png"
+image: "/images/posts/2021/07/vscode-java-roadmap-update-and-new-features/juneblogfoojay.png"
 categories:
   - "VS Code"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2023-07-11T09:37:36+00:00"
 description: "Learn how to make it easy to quickly start using deep learning and to integrate deep learning into existing Java applications."
 authors:
   - "zoran-sevarac"
-image: "https://foojay.io/wp-content/uploads/2022/07/deeplearning.png"
+image: "/images/posts/2022/07/getting-started-with-deep-learning-in-java-using-deep-netts/deeplearning.png"
 categories:
   - "Deep Netts"
   - "Machine Learning"

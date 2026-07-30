@@ -6,7 +6,7 @@ lastmod: "2022-12-15T11:06:02+00:00"
 description: "Did you know there are multiple ways you check your Java version and even get much more information than you might think, very quickly?"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/12/Screenshot-2022-12-01-at-12.23.11.png"
+image: "/images/posts/2022/12/what-java-version-are-you-running-lets-take-a-look-under-the-hood-of-the-jdk/Screenshot-2022-12-01-at-12.23.11.png"
 categories:
   - "Java Core"
   - "Tutorials"

@@ -7,7 +7,7 @@ description: "Pretty much all Java developers are familiar with Spring Pet Clini
 canonical: "https://medium.com/building-the-open-data-stack/building-a-reactive-implementation-of-spring-petclinic-in-apache-cassandra-7cd42c383291"
 authors:
   - "cedrick-lunven"
-image: "https://foojay.io/wp-content/uploads/2022/01/1_bAqotS_F1PipZLOHx_Tcww.jpeg"
+image: "/images/posts/2022/02/building-reactive-java-applications-with-spring-framework/1_bAqotS_F1PipZLOHx_Tcww.jpeg"
 categories:
   - "Apache Cassandra"
   - "Databases"

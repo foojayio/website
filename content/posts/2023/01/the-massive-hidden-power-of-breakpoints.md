@@ -7,7 +7,7 @@ description: "Learn about tracepoints (AKA logpoints) how exception breakpoints 
 canonical: "https://debugagent.com/the-massive-hidden-power-of-breakpoints"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/12/thumbnail-4.png"
+image: "/images/posts/2023/01/the-massive-hidden-power-of-breakpoints/thumbnail-4.png"
 categories:
   - "IntelliJ IDEA"
 tags:

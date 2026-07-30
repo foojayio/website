@@ -6,7 +6,7 @@ lastmod: "2023-03-02T23:31:27+00:00"
 description: "Sealed classes can help you create more robust and maintainable code by restricting the inheritance hierarchy of your classes and interfaces."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/02/Untitled.png"
+image: "/images/posts/2023/02/java-sealed-classes-in-action-building-robust-and-secure-applications/Untitled.png"
 categories:
   - "Java Core"
   - "JEPs"

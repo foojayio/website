@@ -7,7 +7,7 @@ description: "Inspecting the data in the watch quickly is key to a fast and effe
 canonical: "https://talktotheduck.dev/debugging-collections-streams-and-watch-renderers"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/03/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"
+image: "/images/posts/2022/04/debugging-collections-streams-and-watch-renderers/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

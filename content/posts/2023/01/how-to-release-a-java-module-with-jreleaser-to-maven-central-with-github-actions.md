@@ -6,7 +6,7 @@ lastmod: "2025-12-12T12:03:48+00:00"
 description: "Learn from scratch about how to get started releasing a Java module with JReleaser to Maven Central with Github Actions."
 authors:
   - "jago-de-vreede"
-image: "https://foojay.io/wp-content/uploads/2023/01/Screenshot-2023-01-13-at-21.21.28.png"
+image: "/images/posts/2023/01/how-to-release-a-java-module-with-jreleaser-to-maven-central-with-github-actions/Screenshot-2023-01-13-at-21.21.28.png"
 categories:
   - "DevOps"
   - "Maven"
@@ -56,7 +56,7 @@ You will need a GPG key to sign the artifacts, this will allow users to verify t
 --------------------------------------
 pub   rsa4096/XXXXXXXX9925B017 2022-11-17 [SC] [expires: 2026-11-17]
       C20FC085CF5B0D4D861E8CEDXXXXXXXX9925B017
-uid                 [ultimate] Jago de Vreede &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0577606164667160614568646c692b666a68">[email&nbsp;protected]</a>&gt;
+uid                 [ultimate] Jago de Vreede &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ae8fffefbf9eefffedaf7fbf3f6b4f9f5f7">[email&nbsp;protected]</a>&gt;
 sub   rsa4096/XXXXXXXXXXXXFC74 2022-11-17 [E] [expires: 2026-11-17]</pre>
 
   In this case, the id of the public key is XXXXXXXXXXXXFC74

@@ -6,7 +6,7 @@ lastmod: "2022-04-11T14:26:59+00:00"
 description: "When simple web content or responses are required, Java 18 reduces the need to search for more complicated solutions like Jetty and Netty."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2022/04/Image1-700x330.png"
+image: "/images/posts/2022/04/how-to-create-apis-with-the-java-18-jwebserver-ready-for-docker/Image1-700x330.png"
 categories:
   - "Java Core"
 tags:

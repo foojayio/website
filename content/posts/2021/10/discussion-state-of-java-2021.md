@@ -6,7 +6,7 @@ lastmod: "2021-10-25T14:07:04+00:00"
 description: "A discussion with some great folks in the Java world about the highlights of the Snyk Java Ecosystem report and current developments in Java."
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/10/discussion-state-of-java-2021/Favicon-3-2.png"
 categories:
   - "Events"
   - "Interviews"

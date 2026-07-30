@@ -9,7 +9,7 @@ authors:
   - "erikcostlow"
   - "frankdelporte"
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2022/09/FdCZjrTXEAUlyb7.jpg"
+image: "/images/posts/2022/09/foojay-podcast-5/FdCZjrTXEAUlyb7.jpg"
 categories:
   - "Java Core"
   - "Podcast"

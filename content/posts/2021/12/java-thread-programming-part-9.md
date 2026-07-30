@@ -6,7 +6,7 @@ lastmod: "2021-12-14T11:23:04+00:00"
 description: "Let's continue the discussion and share a few more thread-safe classes that we can use in our day-to-day coding!"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/12/java-thread-programming-part-9/Favicon-3-2.png"
 categories:
   - "Tutorials"
 tags:

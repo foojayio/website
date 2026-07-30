@@ -8,7 +8,7 @@ canonical: "https://blog.payara.fish/introduction-to-new-autoscale-feature-avail
 authors:
   - "jadon-ortlepp"
   - "rudy-de-busscher"
-image: "https://foojay.io/wp-content/uploads/2021/06/logo-social.png"
+image: "/images/posts/2021/06/introduction-to-new-autoscale-feature-available-in-payara-server/logo-social.png"
 categories:
   - "DataStax"
   - "Jakarta EE"

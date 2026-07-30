@@ -7,7 +7,7 @@ description: "Learn how to chop up the monolith by exposing the to-be-chopped pa
 canonical: "https://blog.frankel.ch/chopping-monolith-demo/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/05/roger_stone.jpg"
+image: "/images/posts/2022/05/chopping-monolith-demo/roger_stone.jpg"
 categories:
   - "Kotlin"
   - "Microservices"

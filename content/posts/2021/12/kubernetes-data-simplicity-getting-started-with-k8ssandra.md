@@ -7,7 +7,7 @@ description: "K8ssandra is an open-source distribution of Apache Cassandra for K
 canonical: "https://www.datastax.com/blog/2021/04/kubernetes-data-simplicity-getting-started-k8ssandra"
 authors:
   - "jeff-banks"
-image: "https://foojay.io/wp-content/uploads/2021/07/K8ssandra-Blog.png"
+image: "/images/posts/2021/12/kubernetes-data-simplicity-getting-started-with-k8ssandra/K8ssandra-Blog.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

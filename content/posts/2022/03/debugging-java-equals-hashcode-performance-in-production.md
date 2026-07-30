@@ -7,7 +7,7 @@ description: "Hashcode and equals are at the crux of many hard to nail down Java
 canonical: "https://lightrun.com/tutorials/debugging-java-equals-and-hashcode-performance-in-production/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/03/Debugging-hashCode-–-2.jpg"
+image: "/images/posts/2022/03/debugging-java-equals-hashcode-performance-in-production/Debugging-hashCode---2.jpg"
 categories:
   - "Java Core"
   - "Tutorials"

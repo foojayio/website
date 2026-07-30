@@ -6,7 +6,7 @@ lastmod: "2023-03-24T15:05:30+00:00"
 description: "Learn how to treat logs and traces as part of a scalable cloud storage repository that can be analysed with the techniques used for big data."
 authors:
   - "fawaz-ghali"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2023/03/how-to-build-and-deploy-a-real-time-cloud-based-logging-system/Favicon-3-2.png"
 categories:
   - "Cloud"
   - "Hazelcast"

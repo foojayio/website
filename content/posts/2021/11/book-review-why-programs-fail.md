@@ -7,7 +7,7 @@ description: "The book provides the theoretical infrastructure needed for the qu
 canonical: "https://talktotheduck.dev/why-programs-fail-a-book-review"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2021/11/Lightrun-Talk-to-the-duck-Book-Review-Recovered-01.jpg"
+image: "/images/posts/2021/11/book-review-why-programs-fail/Lightrun-Talk-to-the-duck-Book-Review-Recovered-01.jpg"
 categories:
   - "Book Review"
   - "Books"

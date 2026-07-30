@@ -6,7 +6,7 @@ lastmod: "2021-06-21T16:38:31+00:00"
 description: "\"Taming Thymeleaf\": step-by-step how to get started and build web applications with security, validation, internationalization, and testing."
 authors:
   - "wim-deblauwe"
-image: "https://foojay.io/wp-content/uploads/2021/06/tamingthymeleaf.png"
+image: "/images/posts/2021/06/new-book-taming-thymeleaf/tamingthymeleaf.png"
 categories:
   - "Book Announcement"
   - "Books"

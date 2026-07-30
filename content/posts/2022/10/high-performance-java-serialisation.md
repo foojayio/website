@@ -6,7 +6,7 @@ lastmod: "2022-12-07T15:22:27+00:00"
 description: "Learn the basics of serialization in an article that discusses some of the key advantages of the open source Chronicle Wire."
 authors:
   - "rob-austin"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/10/high-performance-java-serialisation/Favicon-3-2.png"
 categories:
   - "DevOps"
   - "Java Core"

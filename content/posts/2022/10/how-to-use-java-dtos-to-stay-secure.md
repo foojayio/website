@@ -7,7 +7,7 @@ description: "How DTOs are used in modern Java, how your apps can benefit, and h
 canonical: "https://snyk.io/blog/how-to-use-java-dtos/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/11/snyk-logo-2.png"
+image: "/images/posts/2022/10/how-to-use-java-dtos-to-stay-secure/snyk-logo-2.png"
 categories:
   - "Java Core"
   - "Security"

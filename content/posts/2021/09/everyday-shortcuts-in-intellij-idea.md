@@ -6,7 +6,7 @@ lastmod: "2021-09-06T07:31:41+00:00"
 description: "It's really helpful to use keyboard shortcuts because it speeds you up and keeps you in the flow of coding!"
 authors:
   - "helenjoscott"
-image: "https://foojay.io/wp-content/uploads/2020/10/1200px-IntelliJ_IDEA_Logo.svg_.png"
+image: "/images/posts/2021/09/everyday-shortcuts-in-intellij-idea/1200px-IntelliJ_IDEA_Logo.svg_.png"
 categories:
   - "IntelliJ IDEA"
 tags:

@@ -7,7 +7,7 @@ description: "The idea behind the Gateway API is to have a clean separation betw
 canonical: "https://blog.frankel.ch/kubernetes-gateway-api/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/09/shinto-shrine-gates-gd37b765bc.jpg"
+image: "/images/posts/2022/09/kubernetes-gateway-api/shinto-shrine-gates-gd37b765bc.jpg"
 categories:
   - "DevOps"
   - "Kubernetes"

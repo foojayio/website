@@ -7,7 +7,7 @@ description: "How a native memory leak in Java 17 got fixed, improving the futur
 canonical: "https://www.nickebbitt.com/blog/2022/01/26/the-story-of-a-java17-memory-leak"
 authors:
   - "nick-ebbitt"
-image: "https://foojay.io/wp-content/uploads/2022/09/twitter-java-17.png"
+image: "/images/posts/2022/09/the-story-of-a-java-17-native-memory-leak/twitter-java-17.png"
 categories:
   - "Java Core"
   - "Performance"

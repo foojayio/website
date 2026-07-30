@@ -6,7 +6,7 @@ lastmod: "2022-10-26T15:30:47+00:00"
 description: "This is a continuing attempt to refactor from Java 11 to later versions of Java, and today's topic is about two methods of the Stream API."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/10/michiel-leunens-0wIHsm2_1fc-unsplash-scaled.jpg"
+image: "/images/posts/2022/10/a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-2/michiel-leunens-0wIHsm2_1fc-unsplash-scaled.jpg"
 categories:
   - "Java Core"
 tags:

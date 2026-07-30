@@ -6,7 +6,7 @@ lastmod: "2021-10-13T08:03:36+00:00"
 description: "We are inviting all Payara Platform community users to answer a few questions about your use of the Payara Platform and ecosystem components!"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2021/10/MicrosoftTeams-image-33.jpg"
+image: "/images/posts/2021/10/payara-platform-october-2021-survey/MicrosoftTeams-image-33.jpg"
 categories:
   - "Jakarta EE"
   - "Surveys"

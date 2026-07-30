@@ -6,7 +6,7 @@ lastmod: "2022-08-08T07:39:08+00:00"
 description: "Learn how to write a GraphQL API that uses Neo4j AuraDB as a backend with Quarkus and deploy it as a native image on Heroku."
 authors:
   - "michael-simons"
-image: "https://foojay.io/wp-content/uploads/2022/08/neo4j-graphql-quarkus-graphql-ui.jpg"
+image: "/images/posts/2022/08/native-graphql-api-with-neo4j-auradb-on-heroku/neo4j-graphql-quarkus-graphql-ui.jpg"
 categories:
   - "Databases"
   - "Graph"
@@ -174,7 +174,7 @@ Before we highlight some things in the project, let's have a look what is includ
 <pre class="EnlighterJSRAW" data-enlighter-language="console"># Should print something like java version "17.0.2" 2022-01-18 LTS
 java -version
 # Clone the project
-git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5c2ccd1e5c2ccd1cdd0c78bc6cac8">[email&nbsp;protected]</a>:michael-simons/neo4j-aura-quarkus-graphql.git
+git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="583f312c183f312c302d3a763b3735">[email&nbsp;protected]</a>:michael-simons/neo4j-aura-quarkus-graphql.git
 cd neo4j-aura-quarkus-graphql
 # Start Quarkus in development mode
 ./mvnw compile quarkus:dev</pre>

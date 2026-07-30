@@ -7,7 +7,7 @@ description: "This review is about API Design Patterns by JJ Geewax from Manning
 canonical: "https://blog.frankel.ch/api-design-patterns/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/01/API_Design_Patterns_large.jpg"
+image: "/images/posts/2023/03/book-review-api-design-patterns/API_Design_Patterns_large.jpg"
 categories:
   - "Book Review"
   - "Books"

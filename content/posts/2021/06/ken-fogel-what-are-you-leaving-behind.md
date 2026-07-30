@@ -6,7 +6,7 @@ lastmod: "2021-06-08T08:19:35+00:00"
 description: "Ken talks on how software is about more than just getting things to work, why it's important to focus on longterm impact of coding decisions."
 authors:
   - "kfogel"
-image: "https://foojay.io/wp-content/uploads/2021/06/image-9-1024x276.png"
+image: "/images/posts/2021/06/ken-fogel-what-are-you-leaving-behind/image-9-1024x276.png"
 categories:
   - "Interviews"
 tags:

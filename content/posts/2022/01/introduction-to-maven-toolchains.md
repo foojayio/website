@@ -6,7 +6,7 @@ lastmod: "2022-01-25T14:32:30+00:00"
 description: "How to make sure I can build projects projects on Java 8, 11, and 17 without having to constantly switch Java runtimes?"
 authors:
   - "mthmulders"
-image: "https://foojay.io/wp-content/uploads/2022/01/toolchain-minipoll-550x510.png"
+image: "/images/posts/2022/01/introduction-to-maven-toolchains/toolchain-minipoll-550x510.png"
 categories:
   - "Maven"
 tags:

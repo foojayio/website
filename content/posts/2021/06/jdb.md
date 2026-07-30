@@ -7,7 +7,7 @@ description: "Some bugs are hard to replicate on your personal computer but easi
 canonical: "https://jfeatures.com/blog/jdb"
 authors:
   - "vipin-sharma"
-image: "https://foojay.io/wp-content/uploads/2021/06/ebook_upd.png"
+image: "/images/posts/2021/06/jdb/ebook_upd.png"
 categories:
   - "Tools"
   - "Tutorials"

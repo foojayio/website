@@ -6,7 +6,7 @@ lastmod: "2021-12-10T12:59:17+00:00"
 description: "At the University of Applied Sciences and Arts Northwestern in Switzerland, theoretical subjects are combined with programming assignments."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/06/20200226_130723-scaled.jpg"
+image: "/images/posts/2021/06/java-in-education-combining-java-with-raspberry-pi-and-the-pi4j-library/20200226_130723-scaled.jpg"
 categories:
   - "Game Development"
   - "Interviews"

@@ -6,7 +6,7 @@ lastmod: "2022-02-21T06:29:24+00:00"
 description: "As more and more companies go Agile, being able to read other's code is more important than ever. Read on for some tips on how to improve this skill."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/02/aaron-burden-6jYoil2GhVk-unsplash-scaled.jpg"
+image: "/images/posts/2022/02/7-ways-to-improve-your-code-reading-skills/aaron-burden-6jYoil2GhVk-unsplash-scaled.jpg"
 categories:
   - "Agile"
 tags:

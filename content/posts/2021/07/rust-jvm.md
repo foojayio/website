@@ -7,7 +7,7 @@ description: "Learn why and how it makes sense to develop applications using the
 canonical: "https://blog.frankel.ch/start-rust/7/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/07/rust-java.png"
+image: "/images/posts/2021/07/rust-jvm/rust-java.png"
 categories:
   - "Research"
 tags:
@@ -132,7 +132,7 @@ Now, we can start the Rust implementation. Let's create a new project:
 <pre class="EnlighterJSRAW" data-enlighter-language="raw">[package]
 name = "dummymath"
 version = "0.1.0"
-authors = ["Nicolas Frankel &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e28c8b818d8e8391a28490838c89878ecc818a">[email&nbsp;protected]</a>&gt;"]
+authors = ["Nicolas Frankel &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0ded9d3dfdcd1c3f0d6c2d1dedbd5dc9ed3d8">[email&nbsp;protected]</a>&gt;"]
 edition = "2018"
 
 [dependencies]

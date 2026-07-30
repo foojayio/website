@@ -7,7 +7,7 @@ description: "Sometimes as a developer, you run into a bug buried deep within th
 canonical: "https://medium.com/building-the-open-data-stack/how-datastax-tracked-down-a-linux-kernel-bug-with-fallout-3ca10ec1fde4"
 authors:
   - "matt-fleming"
-image: "https://foojay.io/wp-content/uploads/2022/01/1_N_gqb3PrkKgMbJHSmYeOaw.jpeg"
+image: "/images/posts/2022/06/how-datastax-tracked-down-a-linux-kernel-bug-with-fallout/1_N_gqb3PrkKgMbJHSmYeOaw.jpeg"
 categories:
   - "Apache Cassandra"
   - "Databases"
@@ -60,8 +60,8 @@ Knowing all of this and combining that knowledge with the tpstats output I decid
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">"Native-Transport-Requests-2" #173 daemon prio=5 os_prio=0 cpu=462214.94ms elapsed=19374.32s tid=0x00007efee606eb00 nid=0x385d waiting on condition  [0x00007efec18b9000]
 4   java.lang.Thread.State: TIMED_WAITING (parking)
-5 at jdk.internal.misc.Unsafe.park(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a101b0c1b54181b091f3a4b4b544a544c">[email&nbsp;protected]</a>/Native Method)
-6 at java.util.concurrent.locks.LockSupport.parkNanos(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a101b0c1b54181b091f3a4b4b544a544c">[email&nbsp;protected]</a>/LockSupport.java:357)
+5 at jdk.internal.misc.Unsafe.park(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae0ebfceba4e8ebf9efcabbbba4baa4bc">[email&nbsp;protected]</a>/Native Method)
+6 at java.util.concurrent.locks.LockSupport.parkNanos(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9bf1faedfab5f9fae8fedbaaaab5abb5ad">[email&nbsp;protected]</a>/LockSupport.java:357)
 7 at org.apache.cassandra.concurrent.SEPWorker.doWaitSpin(SEPWorker.java:268)</pre>
 
 This showed that `Native-Transport-Requests-2 `was currently in the SPINNING state and sleeping prior to checking for more work one last time before sleeping permanently. The only problem was, no matter how many times I ran jstack, this thread never*exited* `parkNanos()` which meant no other threads would ever be woken up to help process the backlog of work!{#e4a9}

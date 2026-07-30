@@ -7,7 +7,7 @@ description: "Learn how to configure K8ssandra for your development machine, and
 canonical: "https://k8ssandra.io/blog/articles/requirements-for-running-k8ssandra-for-development/"
 authors:
   - "alexander-dejanovski"
-image: "https://foojay.io/wp-content/uploads/2022/01/docker-resources-1536x885-1.png"
+image: "/images/posts/2022/01/requirements-for-running-k8ssandra-for-development/docker-resources-1536x885-1.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

@@ -6,7 +6,7 @@ lastmod: "2021-12-24T08:31:26+00:00"
 description: "Java modules have been a big discussion point before in many places. And this is now also causing some headaches in the Pi4J project..."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/12/pi4j-v2-architecture.jpg"
+image: "/images/posts/2021/12/java-modules-in-the-pi4j-project/pi4j-v2-architecture.jpg"
 categories:
   - "Embedded"
   - "Pi4J"

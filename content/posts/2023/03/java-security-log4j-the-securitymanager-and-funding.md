@@ -6,7 +6,7 @@ lastmod: "2023-04-27T13:05:55+00:00"
 description: "A demonstration of log4j exploits, which defenses people tried, and which worked. We'll cover how groups responded effectively to patch to see what was common."
 authors:
   - "erikcostlow"
-image: "https://foojay.io/wp-content/uploads/2022/03/contrast-security.png"
+image: "/images/posts/2023/03/java-security-log4j-the-securitymanager-and-funding/contrast-security.png"
 categories:
   - "Security"
   - "Videos"

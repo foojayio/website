@@ -7,7 +7,7 @@ description: "On Dec.10, 2021, a new, critical Log4j vulnerability was disclos
 canonical: "https://snyk.io/blog/log4j-rce-log4shell-vulnerability-cve-2021-4428/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/12/log4shell-critical-log4j-rce-vulnerabilty-update-to-version-2-15-0/Favicon-3-2.png"
 categories:
   - "Security"
 tags:

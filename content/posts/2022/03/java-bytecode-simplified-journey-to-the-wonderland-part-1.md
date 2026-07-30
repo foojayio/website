@@ -6,7 +6,7 @@ lastmod: "2022-08-20T07:06:31+00:00"
 description: "Today I will make an attempt to appreciate how unique the JVM is. So, let’s begin the journey to how Java works!"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/03/page-272-700x250.png"
+image: "/images/posts/2022/03/java-bytecode-simplified-journey-to-the-wonderland-part-1/page-272-700x250.png"
 categories:
   - "Java Core"
 tags:

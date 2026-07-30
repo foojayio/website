@@ -7,7 +7,7 @@ description: "The O’Reilly book, Cassandra: The Definitive Guide, features a
 canonical: "https://techcrunch.com/sponsor/datastax/how-the-world-caught-up-with-apache-cassandra/"
 authors:
   - "jeff-carpenter"
-image: "https://foojay.io/wp-content/uploads/2022/02/hero-techcrunch.png"
+image: "/images/posts/2022/09/how-the-world-caught-up-with-apache-cassandra/hero-techcrunch.png"
 categories:
   - "Apache Cassandra"
   - "Cloud"

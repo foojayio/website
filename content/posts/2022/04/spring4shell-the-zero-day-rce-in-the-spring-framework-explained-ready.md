@@ -7,7 +7,7 @@ description: "We’ll explore how remote code execution (RCE) works, explaining 
 canonical: "https://snyk.io/blog/spring4shell-zero-day-rce-spring-framework-explained/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2022/04/blog-hero-code-vulnerability-warning-1536x384-1.jpeg"
+image: "/images/posts/2022/04/spring4shell-the-zero-day-rce-in-the-spring-framework-explained-ready/blog-hero-code-vulnerability-warning-1536x384-1.jpeg"
 categories:
   - "Security"
   - "Spring"

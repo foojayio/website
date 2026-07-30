@@ -7,7 +7,7 @@ description: "In this article, I will limit the coverage of Java 17 to its langu
 canonical: "https://blog.jetbrains.com/idea/2021/09/java-17-and-intellij-idea/"
 authors:
   - "mala-gupta"
-image: "https://foojay.io/wp-content/uploads/2021/09/Java17_blog_Blog_1280x720.png"
+image: "/images/posts/2021/09/getting-started-with-java-17-and-intellij-idea/Java17_blog_Blog_1280x720.png"
 categories:
   - "IntelliJ IDEA"
   - "JEPs"

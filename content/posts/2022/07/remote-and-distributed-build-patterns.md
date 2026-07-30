@@ -6,7 +6,7 @@ lastmod: "2022-07-28T17:34:40+00:00"
 description: "Let's review build patterns leveraging remote machines, clarify the definition of remote and distributed builds, and discuss their variations."
 authors:
   - "kyle-moore"
-image: "https://foojay.io/wp-content/uploads/2022/07/1_Pxqa8hcF86VYD159umwkKw.png"
+image: "/images/posts/2022/07/remote-and-distributed-build-patterns/1_Pxqa8hcF86VYD159umwkKw.png"
 categories:
   - "DevOps"
   - "Performance"

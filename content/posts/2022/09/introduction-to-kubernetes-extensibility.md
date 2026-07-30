@@ -7,7 +7,7 @@ description: "Let's browser through several extension points in Kubernetes: the 
 canonical: "https://blog.frankel.ch/kubernetes-extensibility/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/09/water-ocean-technology-boat-wheel-ship.jpg"
+image: "/images/posts/2022/09/introduction-to-kubernetes-extensibility/water-ocean-technology-boat-wheel-ship.jpg"
 categories:
   - "DevOps"
 tags:

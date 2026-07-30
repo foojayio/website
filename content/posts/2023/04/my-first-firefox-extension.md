@@ -7,7 +7,7 @@ description: "A couple of weeks ago, I spent the weekend creating another CFP su
 canonical: "https://blog.frankel.ch/firefox-extension/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/03/mozilla-firefox.webp"
+image: "/images/posts/2023/04/my-first-firefox-extension/mozilla-firefox.webp"
 categories:
   - "Developer Tools"
   - "Tools"

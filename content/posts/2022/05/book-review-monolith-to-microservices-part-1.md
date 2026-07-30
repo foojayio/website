@@ -6,7 +6,7 @@ lastmod: "2023-03-16T10:45:08+00:00"
 description: "Do we need to do all modern development via the microservices architecture? Is it the norm, the new standard? This book argues differently."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/05/monolith-to-microservice.jpeg"
+image: "/images/posts/2022/05/book-review-monolith-to-microservices-part-1/monolith-to-microservice.jpeg"
 categories:
   - "Book Review"
   - "Books"

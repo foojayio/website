@@ -7,7 +7,7 @@ description: "The default Python's dependency management system breaks automated
 canonical: "https://blog.frankel.ch/maze-python-dependency-management/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/09/snake-g2283fc6ac.jpg"
+image: "/images/posts/2022/10/the-maze-of-python-dependency-management/snake-g2283fc6ac.jpg"
 categories:
   - "DevOps"
 tags:

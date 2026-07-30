@@ -6,7 +6,7 @@ lastmod: "2021-10-15T08:19:20+00:00"
 description: "Quickly and thoroughly learn how to simplify the development and deployment of Cloud-native SpringBoot applications on Kubernetes."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2021/10/effortless-cloud-skaffold-835x1024.png"
+image: "/images/posts/2021/10/book-review-effortless-cloud-native-app-development-using-skaffold/effortless-cloud-skaffold-835x1024.png"
 categories:
   - "Book Review"
   - "Books"

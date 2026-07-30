@@ -6,7 +6,7 @@ lastmod: "2023-02-22T11:43:42+00:00"
 description: "One subject that often evokes a lot of debate is which is the best OS to develop a Java application on. This article gives my view!"
 authors:
   - "rob-austin"
-image: "https://foojay.io/wp-content/uploads/2022/02/shutterstock_1111260050-350x233-1.jpg"
+image: "/images/posts/2023/02/is-there-a-best-os-to-develop-a-java-application-on/shutterstock_1111260050-350x233-1.jpg"
 categories:
   - "Developer Tools"
   - "Eclipse"

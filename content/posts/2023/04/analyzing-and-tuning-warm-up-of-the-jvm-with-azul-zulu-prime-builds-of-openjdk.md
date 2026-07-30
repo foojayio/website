@@ -8,7 +8,7 @@ canonical: "https://docs.azul.com/prime/analyzing-tuning-warmup"
 authors:
   - "frankdelporte"
   - "matt-van-order"
-image: "https://foojay.io/wp-content/uploads/2022/10/chart-tier-2-compile-counts-compare-1024x277-1.png"
+image: "/images/posts/2023/04/analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk/chart-tier-2-compile-counts-compare-1024x277-1.png"
 categories:
   - "DevOps"
   - "Java Core"

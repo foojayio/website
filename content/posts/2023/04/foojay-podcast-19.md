@@ -9,7 +9,7 @@ authors:
   - "lukas-eder"
   - "mthmulders"
   - "timtebeek"
-image: "https://foojay.io/wp-content/uploads/2023/04/podcast-guests-rich-and-famous-1024x577-1.png"
+image: "/images/posts/2023/04/foojay-podcast-19/podcast-guests-rich-and-famous-1024x577-1.png"
 categories:
   - "Developer Tools"
   - "Interviews"

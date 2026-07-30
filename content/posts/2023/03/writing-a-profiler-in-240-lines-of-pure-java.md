@@ -6,7 +6,7 @@ lastmod: "2023-03-30T07:14:47+00:00"
 description: "How to develop a tiny Java profiler, that can output flame graphs, in just 240 lines of pure Java, making it easy for anyone to understand."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/03/flame-2048x1504-1.png"
+image: "/images/posts/2023/03/writing-a-profiler-in-240-lines-of-pure-java/flame-2048x1504-1.png"
 categories:
   - "Performance"
   - "Tools"
@@ -358,14 +358,14 @@ Keep in my mind that the actual Node class is as follows:
                 &lt;head&gt;                                                                                                                                                                                                   
                   &lt;link rel="stylesheet" 
                    type="text/css" 
-                   href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e480d7c98288858981c9839685948ca4d0cad5cad7">[email&nbsp;protected]</a>/dist/d3-flamegraph.css"&gt;                                                                                
+                   href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="395d0a145f5558545c145e4b584951790d1708170a">[email&nbsp;protected]</a>/dist/d3-flamegraph.css"&gt;                                                                                
                 &lt;/head&gt;                                                                                                                                                                                                  
                 &lt;body&gt;                                                                                                                                                                                                   
                   &lt;div id="chart"&gt;&lt;/div&gt;                                                                                                                                                                                 
                   &lt;script type="text/javascript" 
                    src="https://d3js.org/d3.v7.js"&gt;&lt;/script&gt;                                                                                                                               
                   &lt;script type="text/javascript" 
-                   src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="690d5a440f0508040c440e1b081901295d4758475a">[email&nbsp;protected]</a>/dist/d3-flamegraph.min.js"&gt;&lt;/script&gt;                                                                             
+                   src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="25411608434944484008425744554d65110b140b16">[email&nbsp;protected]</a>/dist/d3-flamegraph.min.js"&gt;&lt;/script&gt;                                                                             
                   &lt;script type="text/javascript"&gt;                                                                                                                                                                        
                   var chart = flamegraph().width(window.innerWidth);                                                                                                                                                     
                   d3.select("#chart").datum(""");                                                                                                                                                                        

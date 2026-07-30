@@ -6,7 +6,7 @@ lastmod: "2022-06-07T09:23:49+00:00"
 description: "Continue with Part 4, where we'll look at how we get our words and how we determine if a submitted word is valid!"
 authors:
   - "gail-anderson"
-image: "https://foojay.io/wp-content/uploads/2022/05/playgame5.png"
+image: "/images/posts/2022/06/wordish-with-javafx-part-4/playgame5.png"
 categories:
   - "Game Development"
   - "Gluon"

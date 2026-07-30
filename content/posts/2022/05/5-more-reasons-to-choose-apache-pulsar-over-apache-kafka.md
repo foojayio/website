@@ -7,7 +7,7 @@ description: "Author’s note: I originally published this blog post in 2019, wh
 canonical: "https://datastax.medium.com/5-more-reasons-to-choose-apache-pulsar-over-apache-kafka-c09b259e3691"
 authors:
   - "chris-bartholomew"
-image: "https://foojay.io/wp-content/uploads/2021/06/1_Fp4f1tFBgsfvxyfXBGEpDQ.jpeg"
+image: "/images/posts/2022/05/5-more-reasons-to-choose-apache-pulsar-over-apache-kafka/1_Fp4f1tFBgsfvxyfXBGEpDQ.jpeg"
 categories:
   - "Apache Pulsar"
   - "DataStax"

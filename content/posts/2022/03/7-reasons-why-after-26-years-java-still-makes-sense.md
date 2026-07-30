@@ -6,7 +6,7 @@ lastmod: "2025-01-24T10:39:56+00:00"
 description: "After many discussions with Java developers, combined with my personal experiences with the Java community and platform, here are the key reasons why Java developers love Java after all these years! - by A N M Bazlur Rahman"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/03/brunosouza.png"
+image: "/images/posts/2022/03/7-reasons-why-after-26-years-java-still-makes-sense/brunosouza.png"
 categories:
   - "Java Beginner"
   - "Java Core"

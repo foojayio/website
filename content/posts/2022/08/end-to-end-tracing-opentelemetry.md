@@ -7,7 +7,7 @@ description: "Let's focus on tracing by following a request across an API gatewa
 canonical: "https://blog.frankel.ch/end-to-end-tracing-opentelemetry/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/08/opentelemetry-horizontal-color.png"
+image: "/images/posts/2022/08/end-to-end-tracing-opentelemetry/opentelemetry-horizontal-color.png"
 categories:
   - "DevOps"
   - "Kotlin"

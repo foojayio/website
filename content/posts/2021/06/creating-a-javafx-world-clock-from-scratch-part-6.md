@@ -6,7 +6,7 @@ lastmod: "2022-01-12T13:46:44+00:00"
 description: "Learn how to make WebService calls (RESTful) from your JavaFX application to retrieve weather data based on geographic locations."
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2021/06/JFX-World-Clock-Part-6.png"
+image: "/images/posts/2021/06/creating-a-javafx-world-clock-from-scratch-part-6/JFX-World-Clock-Part-6.png"
 categories:
   - "JavaFX"
   - "Tutorials"
@@ -149,7 +149,7 @@ After fetching the JSON response from the webservice it's time to update the UI.
         Map&lt;String, Object&gt; weatherIconInfo = weatherInfo.size() &gt; 0 ? weatherInfo.get(0) : null;
         Map&lt;String, Object&gt; tempInfo = (Map&lt;String, Object&gt;) dayForecast.get("main");
         // Load weather icon asynchronously
-        Image weatherIcon = new Image("https://openweathermap.org/img/wn/%<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="532013612b7d233d34">[email&nbsp;protected]</a>".formatted(weatherIconInfo.get("icon")), true);
+        Image weatherIcon = new Image("https://openweathermap.org/img/wn/%<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="255665175d0b554b42">[email&nbsp;protected]</a>".formatted(weatherIconInfo.get("icon")), true);
         weatherIconImageView.setImage(weatherIcon);
 
         // Apply Tooltip

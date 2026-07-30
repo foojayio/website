@@ -6,7 +6,7 @@ lastmod: "2023-06-29T06:47:46+00:00"
 description: "Kafka benchmarks aim to discuss low latency characteristics of Kafka. Instead, they appear to be configured for throughput rather than low latency."
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2023/01/Screen-Shot-2023-01-09-at-11.12.26-AM-1024x687-1.png"
+image: "/images/posts/2023/01/how-does-kafka-perform-when-you-need-low-latency/Screen-Shot-2023-01-09-at-11.12.26-AM-1024x687-1.png"
 categories:
   - "Chronicle Software"
   - "Java Core"

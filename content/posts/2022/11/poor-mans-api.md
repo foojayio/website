@@ -7,7 +7,7 @@ description: "Creating a full-fledged API requires resources, both time and mone
 canonical: "https://blog.frankel.ch/poor-man-api/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/11/jar-g19c1e6973.jpg"
+image: "/images/posts/2022/11/poor-mans-api/jar-g19c1e6973.jpg"
 categories:
   - "Agile"
   - "Databases"

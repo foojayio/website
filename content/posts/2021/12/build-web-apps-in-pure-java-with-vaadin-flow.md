@@ -6,7 +6,7 @@ lastmod: "2022-04-04T10:58:54+00:00"
 description: "In this guide, learn how to build a small but fully functional ToDo application in pure Java using Vaadin Flow."
 authors:
   - "tarek-oraby"
-image: "https://foojay.io/wp-content/uploads/2021/12/VaadinLogo_RGB_500x155.png"
+image: "/images/posts/2021/12/build-web-apps-in-pure-java-with-vaadin-flow/VaadinLogo_RGB_500x155.png"
 categories:
   - "Tutorials"
   - "Vaadin"

@@ -7,7 +7,7 @@ description: "Get started with Uber-JAR today and learn the different variants o
 canonical: "https://blog.payara.fish/what-is-a-java-uber-jar"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2022/08/Uber-Jar-01.jpeg"
+image: "/images/posts/2022/08/what-is-a-java-uber-jar-and-why-is-it-useful/Uber-Jar-01.jpeg"
 categories:
   - "Payara"
   - "Tutorials"

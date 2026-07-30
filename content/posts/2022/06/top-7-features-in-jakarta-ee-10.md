@@ -6,7 +6,7 @@ lastmod: "2022-06-28T08:36:13+00:00"
 description: "Jakarta EE is a dominant force behind all enterprise development in Java. Check out my favorite top 7 features, what are yours?"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/06/image-10.png"
+image: "/images/posts/2022/06/top-7-features-in-jakarta-ee-10/image-10.png"
 categories:
   - "Jakarta EE"
   - "Release Notes"

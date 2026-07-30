@@ -6,7 +6,7 @@ lastmod: "2023-04-10T20:40:06+00:00"
 description: "RIFE2 v1.3.0 has experimental support for GraalVM Ahead-Of-Time compilation with native-image, reducing startup time to an incredible 3ms!"
 authors:
   - "geert-bevin"
-image: "https://foojay.io/wp-content/uploads/2023/02/og-rife2graalvm-1.png"
+image: "/images/posts/2023/02/web-app-startup-in-3ms-with-rife2-and-graalvm/og-rife2graalvm-1.png"
 categories:
   - "Cloud"
   - "Performance"

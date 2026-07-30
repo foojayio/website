@@ -6,7 +6,7 @@ lastmod: "2022-07-13T15:15:11+00:00"
 description: "Create a Neo4j database, get data loaded, then build a new service that interacts with the database and provides an API for client services."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2022/07/unsplash-sunset-goldengate-bridge-scaled.jpeg"
+image: "/images/posts/2022/07/journeys-in-java-level-6-build-a-neo4j-microservice/unsplash-sunset-goldengate-bridge-scaled.jpeg"
 categories:
   - "Databases"
   - "Graph"

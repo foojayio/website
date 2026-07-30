@@ -6,7 +6,7 @@ lastmod: "2022-11-30T08:24:33+00:00"
 description: "Learn how to create huge persisted queues while retaining predictable and consistent low latency using open-source Chronicle Queue!"
 authors:
   - "per-minborg"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/11/creating-terabyte-sized-queues-with-low-latency/Favicon-3-2.png"
 categories:
   - "DevOps"
   - "Java Core"

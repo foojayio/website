@@ -6,7 +6,7 @@ lastmod: "2023-05-02T09:34:44+00:00"
 description: "While many discussions about REST focus on entities and methods, using the correct response status codes can make your API stand out."
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/04/money-2724241_1280.jpg"
+image: "/images/posts/2023/05/leverage-the-richness-of-http-status-codes/money-2724241_1280.jpg"
 categories:
   - "Opinion"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2023-01-05T21:20:18+00:00"
 description: "I decided to create two Gradle build scripts that apply to modular and non-modular Java projects. Take a look -- what do you think?"
 authors:
   - "michael-gasche"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2023/01/building-javafx-with-gradle/Favicon-3-2.png"
 categories:
   - "Eclipse"
   - "Gradle"
@@ -203,7 +203,7 @@ jlink {
         }
         if (installerType == 'deb') {
             installerOptions += [
-                '--linux-deb-maintainer', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d34333b321d3c2829283032733e35">[email&nbsp;protected]</a>'
+                '--linux-deb-maintainer', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1970777f7659786c6d6c7476377a71">[email&nbsp;protected]</a>'
             ]
         }
         if (installerType == 'rpm') {
@@ -399,7 +399,7 @@ runtime {
         }
         if (installerType == 'deb') {
             installerOptions += [
-                '--linux-deb-maintainer', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb92959d94bb9a8e8f8e9694d59893">[email&nbsp;protected]</a>'
+                '--linux-deb-maintainer', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82ebece4edc2e3f7f6f7efedace1ea">[email&nbsp;protected]</a>'
             ]
         }
         if (installerType == 'rpm') {

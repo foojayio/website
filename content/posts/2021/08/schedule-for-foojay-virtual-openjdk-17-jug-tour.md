@@ -8,7 +8,7 @@ authors:
   - "ari-waller"
   - "geertjan-wielenga"
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/08/schedule-for-foojay-virtual-openjdk-17-jug-tour/Favicon-3-2.png"
 categories:
   - "Campaigns"
   - "Events"

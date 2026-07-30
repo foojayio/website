@@ -7,7 +7,7 @@ description: "Did you know GitHub and Google Cloud have all the infrastructure a
 canonical: "https://blog.frankel.ch/authenticate-google-cloud-github/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/05/shaking-hands-g46cb6ec78.jpg"
+image: "/images/posts/2022/05/securely-authenticate-google-cloud-github/shaking-hands-g46cb6ec78.jpg"
 categories:
   - "Cloud"
   - "DevOps"

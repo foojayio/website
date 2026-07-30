@@ -7,7 +7,7 @@ description: "Don't be a victim of development trends that are \"hot\" right now
 canonical: "https://blog.payara.fish/hype-driven-development-video"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2022/01/FaceMask_mockup_Front_Mens_White.png"
+image: "/images/posts/2022/01/hype-driven-development-dont-be-a-victim/FaceMask_mockup_Front_Mens_White.png"
 categories:
   - "Videos"
 tags:

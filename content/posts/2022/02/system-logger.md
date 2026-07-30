@@ -7,7 +7,7 @@ description: "Almost all Java developers are familiar with logging frameworks li
 canonical: "https://blog.frankel.ch/system-logger/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/02/logs-g95e68d9dc.jpg"
+image: "/images/posts/2022/02/system-logger/logs-g95e68d9dc.jpg"
 categories:
   - "Java Core"
 tags:

@@ -7,7 +7,7 @@ description: "For once, I'm wondering a bit if this article can be helpful to so
 canonical: "https://blog.frankel.ch/data-files-commits-vs-pull-requests/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/08/chess-1438013-pxhere.com_.jpg"
+image: "/images/posts/2021/08/updating-data-files-commits-vs-pull-requests/chess-1438013-pxhere.com_.jpg"
 categories:
   - "DevOps"
   - "Tools"

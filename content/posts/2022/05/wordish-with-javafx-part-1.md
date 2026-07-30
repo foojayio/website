@@ -6,7 +6,7 @@ lastmod: "2022-05-24T07:52:44+00:00"
 description: "Learn about the main UI layout of a cool JavaFX game using Scene Builder, TilePane, FlowPane, controller code, iOS and Android settings!"
 authors:
   - "gail-anderson"
-image: "https://foojay.io/wp-content/uploads/2022/05/playgame5.png"
+image: "/images/posts/2022/05/wordish-with-javafx-part-1/playgame5.png"
 categories:
   - "Game Development"
   - "Java Core"

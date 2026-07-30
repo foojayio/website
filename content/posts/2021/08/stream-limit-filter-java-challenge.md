@@ -6,7 +6,7 @@ lastmod: "2021-09-03T09:38:47+00:00"
 description: "When you learn how to use streams, your Java code will be much better, and knowing how to limit and filter data with streams is crucial!"
 authors:
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2021/08/Screen-Shot-2021-06-30-at-18.27.27-1024x674-1.png"
+image: "/images/posts/2021/08/stream-limit-filter-java-challenge/Screen-Shot-2021-06-30-at-18.27.27-1024x674-1.png"
 categories:
   - "Tutorials"
 tags:

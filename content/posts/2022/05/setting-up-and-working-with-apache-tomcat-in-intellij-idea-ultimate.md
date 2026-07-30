@@ -6,7 +6,7 @@ lastmod: "2022-05-10T08:47:08+00:00"
 description: "In this article, you will learn how to quickly and efficiently set up IntelliJ IDEA Ultimate to work with Apache Tomcat."
 authors:
   - "helenjoscott"
-image: "https://foojay.io/wp-content/uploads/2022/05/tomcat-services-window.png"
+image: "/images/posts/2022/05/setting-up-and-working-with-apache-tomcat-in-intellij-idea-ultimate/tomcat-services-window.png"
 categories:
   - "Apache Tomcat"
   - "IntelliJ IDEA"

@@ -7,7 +7,7 @@ description: "“Reliability at massive scale is one of the biggest challenges w
 canonical: "https://www.datastax.com/blog/future-cloud-native-databases-begins-apache-cassandra-4"
 authors:
   - "patrick-mcfadin"
-image: "https://foojay.io/wp-content/uploads/2021/07/a6ffe0f0c744734f6c75c45ac4ab9d3bc6f4322b-1460x968-1.png"
+image: "/images/posts/2021/12/the-future-of-cloud-native-databases-begins-with-apache-cassandra-4-0/a6ffe0f0c744734f6c75c45ac4ab9d3bc6f4322b-1460x968-1.png"
 categories:
   - "Apache Cassandra"
   - "Cloud"

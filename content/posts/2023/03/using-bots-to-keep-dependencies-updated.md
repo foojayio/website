@@ -7,7 +7,7 @@ description: "Did you know bots can automatically create pull requests to keep d
 canonical: "https://maritvandijk.com/using-bots-to-keep-our-dependencies-up-to-date/"
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2023/03/Snyk-PR-1.png"
+image: "/images/posts/2023/03/using-bots-to-keep-dependencies-updated/Snyk-PR-1.png"
 categories:
   - "Dependabot"
   - "Developer Tools"

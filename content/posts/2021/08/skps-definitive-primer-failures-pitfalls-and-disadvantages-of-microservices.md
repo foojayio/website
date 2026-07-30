@@ -6,7 +6,7 @@ lastmod: "2021-10-11T14:04:44+00:00"
 description: "Pitfalls, failures, and disadvantages of microservices, a one stop reference and gateway for principal architects for decisions of go/no-go."
 authors:
   - "sumith-puri"
-image: "https://foojay.io/wp-content/uploads/2021/08/microservices.png"
+image: "/images/posts/2021/08/skps-definitive-primer-failures-pitfalls-and-disadvantages-of-microservices/microservices.png"
 categories:
   - "DevOps"
   - "Microservices"

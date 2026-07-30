@@ -6,7 +6,7 @@ lastmod: "2022-02-04T08:31:28+00:00"
 description: "One of the highlights of the Friends of OpenJDK room at FOSDEM 2021 was Marco Vermeulen, the creator of SDKMAN, talking about SDKMAN."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2022/02/bird.png"
+image: "/images/posts/2022/02/video-sdkman-explained/bird.png"
 categories:
   - "Videos"
 tags:

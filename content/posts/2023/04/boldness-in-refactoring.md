@@ -7,7 +7,7 @@ description: "\"Don't touch it, it works\" is problematic. It leads us down a ba
 canonical: "https://debugagent.com/boldness-in-refactoring"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/04/Shai_Almog_corporate_programmer_with_his_back_to_the_camera_in__c9d7c7b9-5cb5-4464-8b75-96b8ecdd3190.png"
+image: "/images/posts/2023/04/boldness-in-refactoring/Shai_Almog_corporate_programmer_with_his_back_to_the_camera_in__c9d7c7b9-5cb5-4464-8b75-96b8ecdd3190.png"
 categories:
   - "Opinion"
 tags:

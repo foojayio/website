@@ -6,7 +6,7 @@ lastmod: "2021-08-03T18:15:51+00:00"
 description: "JReleaser is a tool that streamlines creating releases for [Java] projects. It can create a GitHub/GitLab/Gitea release, and much much more!"
 authors:
   - "andres-almiray"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/08/jreleaser-0-6-0-released/Favicon-3-2.png"
 categories:
   - "DevOps"
   - "Release Notes"

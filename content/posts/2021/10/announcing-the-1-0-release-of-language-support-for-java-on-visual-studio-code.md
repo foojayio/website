@@ -6,7 +6,7 @@ lastmod: "2021-10-25T08:30:55+00:00"
 description: "We are excited to announce the 1.0 release of Language Support for Java™ by Red Hat on Visual Studio Code."
 authors:
   - "nick-zhu"
-image: "https://foojay.io/wp-content/uploads/2021/10/java17.png"
+image: "/images/posts/2021/10/announcing-the-1-0-release-of-language-support-for-java-on-visual-studio-code/java17.png"
 categories:
   - "Release Notes"
   - "VS Code"

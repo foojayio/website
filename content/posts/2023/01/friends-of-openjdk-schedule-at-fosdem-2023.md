@@ -6,7 +6,7 @@ lastmod: "2023-01-31T08:16:39+00:00"
 description: "On from good times in 2022 and 2021, we have a really great schedule with inspiring speakers for FOSDEM in Brussels, on Sunday, February 5!"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2023/01/fosdem.png"
+image: "/images/posts/2023/01/friends-of-openjdk-schedule-at-fosdem-2023/fosdem.png"
 categories:
   - "Events"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2023-01-19T08:43:02+00:00"
 description: "Check out some of the key points to consider, as well as a full code sample, when choosing to use event Loops!"
 authors:
   - "rob-austin"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/12/why-the-cool-kids-use-event-loops/Favicon-3-2.png"
 categories:
   - "Java Core"
 tags:

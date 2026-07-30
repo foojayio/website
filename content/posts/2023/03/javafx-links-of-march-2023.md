@@ -7,7 +7,7 @@ description: "Already the end of March, so time to look back at the JavaFX Links
 canonical: "https://webtechie.be/post/2023-03-31-javafx-links-of-march-2023/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/09/javafx-community.png"
+image: "/images/posts/2023/03/javafx-links-of-march-2023/javafx-community.png"
 categories:
   - "JavaFX"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2022-02-17T10:08:58+00:00"
 description: "Last weekend, FOSDEM 2022 was held, with the friends of OpenJDK putting together an awesome program on the tools and editors around OpenJDK."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/02/foojay-at-fosdem-2022-on-youtube/Favicon-3-2.png"
 categories:
   - "Events"
 tags:

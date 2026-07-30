@@ -6,7 +6,7 @@ lastmod: "2022-07-04T07:03:48+00:00"
 description: "The latest analysis and statistics show that Foojay had as much traffic over the past half year as over the whole of 2021."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2022/07/foojay2022.png"
+image: "/images/posts/2022/07/foojay-status-report-january-june-2022/foojay2022.png"
 categories:
   - "Events"
   - "Foojay"

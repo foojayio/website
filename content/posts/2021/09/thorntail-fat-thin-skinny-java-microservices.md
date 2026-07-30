@@ -6,7 +6,7 @@ lastmod: "2021-09-22T16:33:44+00:00"
 description: "Guide on how to build and deploy Thorntail (WildFly Swarm) based applications packaged as JAR and War files using Fat/Skinny/Thin approach!"
 authors:
   - "tetiana-fydorenchyk"
-image: "https://foojay.io/wp-content/uploads/2021/09/thorntail-application-1.png"
+image: "/images/posts/2021/09/thorntail-fat-thin-skinny-java-microservices/thorntail-application-1.png"
 categories:
   - "Jelastic"
   - "Microservices"

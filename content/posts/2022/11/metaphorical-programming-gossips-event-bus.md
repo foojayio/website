@@ -6,7 +6,7 @@ lastmod: "2022-11-24T08:35:33+00:00"
 description: "Using Metaphorical Programming to create an Event-Bus, a global pub-sub component to enable cross-component communication."
 authors:
   - "mhashim6"
-image: "https://foojay.io/wp-content/uploads/2022/11/gossips-interface.png"
+image: "/images/posts/2022/11/metaphorical-programming-gossips-event-bus/gossips-interface.png"
 categories:
   - "JavaFX"
   - "Kotlin"

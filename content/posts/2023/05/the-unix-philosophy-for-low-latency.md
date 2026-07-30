@@ -7,7 +7,7 @@ description: "How to realize the Unix Philosophy in Enterprise IT using Java, mi
 canonical: "https://chronicle.software/unix-philosophy-for-low-latency/"
 authors:
   - "jerry-shea"
-image: "https://foojay.io/wp-content/uploads/2022/09/Screen-Shot-2022-08-24-at-11.13.09-AM.png"
+image: "/images/posts/2023/05/the-unix-philosophy-for-low-latency/Screen-Shot-2022-08-24-at-11.13.09-AM.png"
 categories:
   - "Java Core"
   - "Performance"

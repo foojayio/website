@@ -7,7 +7,7 @@ description: "Starting in a new team can be daunting. You have to learn All The 
 canonical: "https://www.helenjoscott.com/2023/02/28/getting-started-with-intellij-idea/"
 authors:
   - "helenjoscott"
-image: "https://foojay.io/wp-content/uploads/2020/10/1200px-IntelliJ_IDEA_Logo.svg_.png"
+image: "/images/posts/2023/03/getting-started-with-intellij-idea/1200px-IntelliJ_IDEA_Logo.svg_.png"
 categories:
   - "Developer Tools"
   - "IntelliJ IDEA"

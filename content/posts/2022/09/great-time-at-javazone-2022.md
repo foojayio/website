@@ -7,7 +7,7 @@ description: "JavaZone is my favorite Java conference. I like it even more than 
 canonical: "https://debugagent.com/great-time-at-javazone-2022"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/09/2022-09-07-11.09.34-copy-1.jpg"
+image: "/images/posts/2022/09/great-time-at-javazone-2022/2022-09-07-11.09.34-copy-1.jpg"
 categories:
   - "Trip Reports"
 tags:

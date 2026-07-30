@@ -6,7 +6,7 @@ lastmod: "2021-12-21T08:08:05+00:00"
 description: "We discussed and finally solved this problem that has been bothering VS Code Java users for more than three years."
 authors:
   - "nick-zhu"
-image: "https://foojay.io/wp-content/uploads/2021/12/architecturepng.png"
+image: "/images/posts/2021/12/say-goodbye-to-project-files-in-visual-studio-code/architecturepng.png"
 categories:
   - "VS Code"
 tags:

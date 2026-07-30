@@ -6,7 +6,7 @@ lastmod: "2022-06-21T12:20:09+00:00"
 description: "Learn how to use the web application framework Hilla to create a master-detail view with a Grid to display data and a Form to edit the data."
 authors:
   - "simon-martinelli"
-image: "https://foojay.io/wp-content/uploads/2022/06/structure.png"
+image: "/images/posts/2022/06/master-detail-with-hilla/structure.png"
 categories:
   - "Hilla"
   - "Vaadin"

@@ -6,7 +6,7 @@ lastmod: "2023-05-18T15:55:42+00:00"
 description: "Hazelcast can process real-time and batch data in one platform, making it the right platform to use because it enriches your Kafka apps."
 authors:
   - "fawaz-ghali"
-image: "https://foojay.io/wp-content/uploads/2023/05/Hazelcast-Kafka.png"
+image: "/images/posts/2023/05/enriching-kafka-applications-with-contextual-data/Hazelcast-Kafka.png"
 categories:
   - "Hazelcast"
   - "Performance"
@@ -65,7 +65,7 @@ Start a Hazelcast local cluster: This will run a Hazelcast cluster in client/ser
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="731b1209161f1012000733465d415d40">[email&nbsp;protected]</a>
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d9b1b8a3bcb5bab8aaad99ecf7ebf7ea">[email&nbsp;protected]</a>
 
 hz -V
 
@@ -77,7 +77,7 @@ To add more members to your cluster, open another terminal window and rerun the 
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e088819a858c83819394cd8d818e8187858d858e94cd83858e948592a0d5ced2ced3">[email&nbsp;protected]</a>
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1c9c0dbc4cdc2c0d2d58cccc0cfc0c6c4ccc4cfd58cc2c4cfd5c4d3e1948f938f92">[email&nbsp;protected]</a>
 
 hz-mc -V
 

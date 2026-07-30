@@ -6,7 +6,7 @@ lastmod: "2021-11-15T16:17:13+00:00"
 description: "When picking a build distribution with the current version of GitHub Actions setup-java@v2 you really only have two choices: zulu or temurin."
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2021/11/distro-choice.jpg"
+image: "/images/posts/2021/11/github-actions-with-java-part-2/distro-choice.jpg"
 categories:
   - "DevOps"
   - "Microservices"

@@ -6,7 +6,7 @@ lastmod: "2022-01-13T14:58:08+00:00"
 description: "Foojay doubled in usage from the first half to the second half of the year. - by Geertjan Wielenga"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2022/01/first-half-second-half.png"
+image: "/images/posts/2022/01/foojay-status-report-july-december-2021/first-half-second-half.png"
 categories:
   - "Events"
   - "Foojay"

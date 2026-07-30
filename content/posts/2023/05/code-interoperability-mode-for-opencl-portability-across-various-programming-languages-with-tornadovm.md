@@ -6,7 +6,7 @@ lastmod: "2023-05-11T08:01:41+00:00"
 description: "Code Interoperability Mode enables TornadoVM to prototype kernels that run from multiple programming languages."
 authors:
   - "thanos-stratikopoulos"
-image: "https://foojay.io/wp-content/uploads/2023/05/TornadoVM-Code-Interoperability-Mode-1.png"
+image: "/images/posts/2023/05/code-interoperability-mode-for-opencl-portability-across-various-programming-languages-with-tornadovm/TornadoVM-Code-Interoperability-Mode-1.png"
 categories:
   - "Performance"
   - "Tools"

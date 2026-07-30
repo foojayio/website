@@ -6,7 +6,7 @@ lastmod: "2023-01-25T08:08:52+00:00"
 description: "In this article, you learn about the Modular Monolithic architecture and how you can create it using the Spring Framework and Gradle."
 authors:
   - "tristan-mahinay"
-image: "https://foojay.io/wp-content/uploads/2023/01/modular-monolithic-gradle.png"
+image: "/images/posts/2023/01/modular-monolithic-in-practice/modular-monolithic-gradle.png"
 categories:
   - "Cloud"
   - "Gradle"

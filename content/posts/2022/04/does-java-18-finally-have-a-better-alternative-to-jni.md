@@ -7,7 +7,7 @@ description: "Java 18, released last month, includes the 2nd incubator of the Fo
 canonical: "https://developer.okta.com/blog/2022/04/08/state-of-ffi-java"
 authors:
   - "deepu-sasidharan"
-image: "https://foojay.io/wp-content/uploads/2022/04/c1kwxzrhvt40nuulijge-2.png"
+image: "/images/posts/2022/04/does-java-18-finally-have-a-better-alternative-to-jni/c1kwxzrhvt40nuulijge-2.png"
 categories:
   - "Performance"
   - "Security"

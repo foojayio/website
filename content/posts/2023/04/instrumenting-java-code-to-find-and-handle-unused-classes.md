@@ -6,7 +6,7 @@ lastmod: "2023-04-08T13:27:21+00:00"
 description: "Ever wondered how to find classes and dependencies that you don't actually use? Here I describe how to implement an instrumenting Java agent."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/04/dead-code-workflow-2.png"
+image: "/images/posts/2023/04/instrumenting-java-code-to-find-and-handle-unused-classes/dead-code-workflow-2.png"
 categories:
   - "Tools"
 tags:

@@ -7,7 +7,7 @@ description: "In this article I will describe how you can benefit from such a da
 canonical: "https://hazelcast.com/blog/hazelcast-kibana-best-buddies-for-exploring-and-visualizing-data/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/10/color-1792501_1280.jpg"
+image: "/images/posts/2021/11/hazelcast-kibana-best-buddies-for-exploring-visualizing-data/color-1792501_1280.jpg"
 categories:
   - "Hazelcast"
   - "Kotlin"

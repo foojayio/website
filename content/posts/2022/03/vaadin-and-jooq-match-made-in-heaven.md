@@ -6,7 +6,7 @@ lastmod: "2022-03-10T10:03:41+00:00"
 description: "Quickly learn how easy it is to create data-centric web applications with the combination of Vaadin and jOOQ!"
 authors:
   - "simon-martinelli"
-image: "https://foojay.io/wp-content/uploads/2022/03/vqs.png"
+image: "/images/posts/2022/03/vaadin-and-jooq-match-made-in-heaven/vqs.png"
 categories:
   - "jOOQ"
   - "Vaadin"

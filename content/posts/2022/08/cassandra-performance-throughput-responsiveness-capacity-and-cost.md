@@ -7,7 +7,7 @@ description: "Azul’s Platform Prime is by far the highest throughput JVM for p
 canonical: "https://www.azul.com/blog/cassandra-performance-throughout-responsiveness-capacity-and-cost/"
 authors:
   - "gil-tene"
-image: "https://foojay.io/wp-content/uploads/2022/08/cassandra-performance-4.png"
+image: "/images/posts/2022/08/cassandra-performance-throughput-responsiveness-capacity-and-cost/cassandra-performance-4.png"
 categories:
   - "Performance"
 tags:

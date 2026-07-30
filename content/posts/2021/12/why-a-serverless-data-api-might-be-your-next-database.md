@@ -7,7 +7,7 @@ description: "Serverless data offers benefits, but market offerings are limited.
 canonical: "https://www.infoq.com/articles/serverless-data-api/"
 authors:
   - "pieter-humphrey"
-image: "https://foojay.io/wp-content/uploads/2021/07/1-stargate.jpg"
+image: "/images/posts/2021/12/why-a-serverless-data-api-might-be-your-next-database/1-stargate.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"

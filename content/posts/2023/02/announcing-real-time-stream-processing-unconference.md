@@ -6,7 +6,7 @@ lastmod: "2023-02-07T07:23:57+00:00"
 description: "Hazelcast kicks off 2023 to connect with community members and industry experts on the Future of Real-Time Stream Processing."
 authors:
   - "fawaz-ghali"
-image: "https://foojay.io/wp-content/uploads/2023/01/hz-unconf-social-2-510x510-1.jpeg"
+image: "/images/posts/2023/02/announcing-real-time-stream-processing-unconference/hz-unconf-social-2-510x510-1.jpeg"
 categories:
   - "Events"
   - "Hazelcast"

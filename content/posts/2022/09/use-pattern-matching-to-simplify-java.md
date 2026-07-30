@@ -7,7 +7,7 @@ description: "Learn from Simon Ritter how pattern matching in Java can make your
 canonical: "https://www.azul.com/blog/use-pattern-matching-to-simplify-java/"
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2022/09/pattern-matching-image-li.png"
+image: "/images/posts/2022/09/use-pattern-matching-to-simplify-java/pattern-matching-image-li.png"
 categories:
   - "Java Core"
 tags:

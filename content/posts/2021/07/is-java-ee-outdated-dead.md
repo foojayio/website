@@ -7,7 +7,7 @@ description: "Heard that Java EE is outdated? Watch this to see why that’s not
 canonical: "https://blog.payara.fish/is-java-ee-outdated-and-dead-watch-the-video"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2021/07/MicrosoftTeams-image-5-scaled.jpg"
+image: "/images/posts/2021/07/is-java-ee-outdated-dead/MicrosoftTeams-image-5-scaled.jpg"
 categories:
   - "Videos"
 tags:

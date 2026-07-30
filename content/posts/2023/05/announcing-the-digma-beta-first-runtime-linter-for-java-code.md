@@ -7,7 +7,7 @@ description: "Looking for senior Java developers to participate in the beta prog
 canonical: "https://digma.ai/blog/announcing-the-digma-beta-the-first-runtime-linter-for-java-code/"
 authors:
   - "roni-dover"
-image: "https://foojay.io/wp-content/uploads/2023/05/doppleware_a_hipster_developer_following_a_yarn_thread_connecte_0aadda36-bf51-4283-90c5-54ff5f976af7-1.png"
+image: "/images/posts/2023/05/announcing-the-digma-beta-first-runtime-linter-for-java-code/doppleware_a_hipster_developer_following_a_yarn_thread_connecte_0aadda36-bf51-4283-90c5-54ff5f976af7-1.png"
 categories:
   - "Developer Tools"
   - "IntelliJ IDEA"

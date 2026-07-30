@@ -6,7 +6,7 @@ lastmod: "2022-09-21T11:12:42+00:00"
 description: "At some point in your career, probably many points, you'll have to resolve merge conflicts. Learn how on Foojay.io!"
 authors:
   - "helenjoscott"
-image: "https://foojay.io/wp-content/uploads/2022/09/merge-feature-into-main-1.png"
+image: "/images/posts/2022/09/resolving-git-merge-conflicts-in-intellij-idea/merge-feature-into-main-1.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

@@ -6,7 +6,7 @@ lastmod: "2021-11-11T09:36:46+00:00"
 description: "Using Streams and Set Collection Factory methods with Java makes code easier to read and maintain. Take the next Java quiz to learn more."
 authors:
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/11/streams-set-distinct-java-code-quiz/Favicon-3-2.png"
 categories:
   - "Tutorials"
 tags:

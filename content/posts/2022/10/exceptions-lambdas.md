@@ -7,7 +7,7 @@ description: "Java streams don't play well with checked exceptions. To recover t
 canonical: "https://blog.frankel.ch/exceptions-lambdas/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/10/gears-3160715.jpg"
+image: "/images/posts/2022/10/exceptions-lambdas/gears-3160715.jpg"
 categories:
   - "Developer Tools"
   - "Research"

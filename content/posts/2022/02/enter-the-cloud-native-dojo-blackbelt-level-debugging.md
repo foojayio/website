@@ -7,7 +7,7 @@ description: "In this article, I want to go over three challenges we face when d
 canonical: "https://thenewstack.io/enter-the-cloud-native-dojo-blackbelt-level-debugging/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/02/Lightrun-Talk-to-the-duck-blogpost-cover-low-level-bare-metal-debugging-02.png"
+image: "/images/posts/2022/02/enter-the-cloud-native-dojo-blackbelt-level-debugging/Lightrun-Talk-to-the-duck-blogpost-cover-low-level-bare-metal-debugging-02.png"
 categories:
   - "Tutorials"
 tags:

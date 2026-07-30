@@ -6,7 +6,7 @@ lastmod: "2021-10-28T12:53:46+00:00"
 description: "Learn how to create a GitHub Action job that will build and test a Java-based project using Maven or Gradle."
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2021/10/github_smothie.jpg"
+image: "/images/posts/2021/10/github-actions-with-java-part-1/github_smothie.jpg"
 categories:
   - "DevOps"
   - "Microservices"

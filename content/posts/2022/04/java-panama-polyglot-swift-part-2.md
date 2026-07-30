@@ -6,7 +6,7 @@ lastmod: "2022-06-01T20:08:13+00:00"
 description: "Java Panama Polyglot series: quick tutorials or recipes on how to access native libraries written in other languages! Today we'll see swift!"
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2022/04/panama_duke_swift-1.png"
+image: "/images/posts/2022/04/java-panama-polyglot-swift-part-2/panama_duke_swift-1.png"
 categories:
   - "Game Development"
   - "JEPs"

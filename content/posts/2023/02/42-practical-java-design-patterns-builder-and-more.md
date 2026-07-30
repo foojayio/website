@@ -6,7 +6,7 @@ lastmod: "2023-02-27T08:28:36+00:00"
 description: "The aim of the article is to introduce my newly published book \"Practical Design Pattern for Java Developers\"."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2023/02/book_cover-414x510-1.jpeg"
+image: "/images/posts/2023/02/42-practical-java-design-patterns-builder-and-more/book_cover-414x510-1.jpeg"
 categories:
   - "Book Announcement"
   - "Books"

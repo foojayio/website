@@ -6,7 +6,7 @@ lastmod: "2022-05-26T12:17:24+00:00"
 description: "How can you, as a Java developer, execute Python script code and access 3rd party Python libraries, such as Tensorflow?"
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2022/04/python.png"
+image: "/images/posts/2022/04/java-panama-polyglot-part-3/python.png"
 categories:
   - "JEPs"
   - "Performance"

@@ -6,7 +6,7 @@ lastmod: "2021-06-21T08:29:14+00:00"
 description: "To get a general idea of what the community would like to see in JavaFX in the future, I have asked developers to share their thoughts!"
 authors:
   - "almasbaimagambetov"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/06/javafx-june-2021-community-update/Favicon-3-2.png"
 categories:
   - "JavaFX"
   - "Research"

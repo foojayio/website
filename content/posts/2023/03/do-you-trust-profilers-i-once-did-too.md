@@ -6,7 +6,7 @@ lastmod: "2023-03-03T09:08:45+00:00"
 description: "Do you trust profilers? I once did too. Here I describe why you should take the results of profilers with a grain of salt."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/02/loop.png"
+image: "/images/posts/2023/03/do-you-trust-profilers-i-once-did-too/loop.png"
 categories:
   - "JDK Flight Recorder"
   - "Performance"

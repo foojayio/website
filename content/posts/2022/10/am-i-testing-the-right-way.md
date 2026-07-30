@@ -7,7 +7,7 @@ description: "What can or should be considered the right size of a unit with reg
 authors:
   - "david-schneider"
   - "sebastian-konieczek"
-image: "https://foojay.io/wp-content/uploads/2022/06/chemical-scientist-test-chemistry-chemist-student.jpg"
+image: "/images/posts/2022/10/am-i-testing-the-right-way/chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Opinion"
   - "Testing"

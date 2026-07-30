@@ -6,7 +6,7 @@ lastmod: "2023-06-15T00:40:53+00:00"
 description: "Chronicle Threads provides high performance event loop implementations and utility functions to help with threading and concurrency."
 authors:
   - "jerry-shea"
-image: "https://foojay.io/wp-content/uploads/2023/05/chronicle-thread.png"
+image: "/images/posts/2023/05/monitoring-event-loops-for-blockages/chronicle-thread.png"
 categories:
   - "Java Core"
   - "JavaFX"

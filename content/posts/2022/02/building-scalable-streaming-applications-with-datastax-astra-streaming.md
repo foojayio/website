@@ -7,7 +7,7 @@ description: "DataStax Astra Streaming with a step-by-step tutorial that illust
 canonical: "https://medium.com/building-the-open-data-stack/building-scalable-streaming-applications-with-datastax-astra-streaming-638205733388"
 authors:
   - "jeff-davies"
-image: "https://foojay.io/wp-content/uploads/2022/01/0_Yj9vaj0to8ZAf9NJ.jpeg"
+image: "/images/posts/2022/02/building-scalable-streaming-applications-with-datastax-astra-streaming/0_Yj9vaj0to8ZAf9NJ.jpeg"
 categories:
   - "Apache Cassandra"
   - "Apache Pulsar"

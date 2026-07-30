@@ -7,7 +7,7 @@ description: "gRPC is an open source Remote Procedure Call framework; an alterna
 canonical: "https://blog.payara.fish/what-is-jakarta-rpc"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2020/10/payara_square_logo.jpg"
+image: "/images/posts/2022/11/what-is-jakarta-rpc/payara_square_logo.jpg"
 categories:
   - "Jakarta EE"
   - "Payara"

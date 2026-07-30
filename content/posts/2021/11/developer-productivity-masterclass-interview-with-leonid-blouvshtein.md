@@ -7,7 +7,7 @@ description: "Are the problems startups run into different from the ones experie
 canonical: "https://dzone.com/articles/developer-productivity-masterclass-interview"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2021/11/1638188701445.jpg"
+image: "/images/posts/2021/11/developer-productivity-masterclass-interview-with-leonid-blouvshtein/1638188701445.jpg"
 categories:
   - "DevOps"
   - "Interviews"

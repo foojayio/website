@@ -9,7 +9,7 @@ authors:
   - "frankdelporte"
   - "geertjan-wielenga"
   - "roy-wasse"
-image: "https://foojay.io/wp-content/uploads/2021/07/foojay_podcast.png"
+image: "/images/posts/2022/10/foojay-podcast-6/foojay_podcast.png"
 categories:
   - "Foojay"
   - "Podcast"

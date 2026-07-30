@@ -7,7 +7,7 @@ description: "Dig a little deeper in our exploration of Project Panama and learn
 authors:
   - "brice-dutheil"
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2021/08/panama_part2.png"
+image: "/images/posts/2021/09/project-panama-for-newbies-part-3/panama_part2.png"
 categories:
   - "Game Development"
   - "Project Panama"

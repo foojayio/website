@@ -7,7 +7,7 @@ description: "How a Java library is taking a completely new approach to understa
 canonical: "https://medium.com/better-programming/not-your-grandfathers-logs-a-java-library-s-new-approach-to-observability-ebd4a90d198d"
 authors:
   - "roni-dover"
-image: "https://foojay.io/wp-content/uploads/2023/04/kabouter.png"
+image: "/images/posts/2023/04/not-your-grandfathers-logs-a-java-librarys-new-approach-to-observability/kabouter.png"
 categories:
   - "Developer Tools"
   - "Java Core"

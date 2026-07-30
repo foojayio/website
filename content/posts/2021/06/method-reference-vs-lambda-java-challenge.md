@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:18:12+00:00"
 description: "In this Java Challenge, we will explore how lambdas and method references behave so that you can really understand how they work!"
 authors:
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2021/06/method_reference.png"
+image: "/images/posts/2021/06/method-reference-vs-lambda-java-challenge/method_reference.png"
 categories:
   - "Tutorials"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2022-10-31T16:15:26+00:00"
 description: "When I (re)started the JavaFX Links Of The Week in September, I was wondering if there would be enough material to share every week..."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/10/javafx-links-of-october/Favicon-3-2.png"
 categories:
   - "JavaFX"
 tags:

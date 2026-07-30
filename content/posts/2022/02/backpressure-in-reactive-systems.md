@@ -7,7 +7,7 @@ description: "Considering a fast data producer and a slow data consumer, backpre
 canonical: "https://blog.frankel.ch/backpressure-reactive-systems/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/03/pexels-prakhar-bansal-732183.jpg"
+image: "/images/posts/2022/02/backpressure-in-reactive-systems/pexels-prakhar-bansal-732183.jpg"
 categories:
   - "Kotlin"
 tags:

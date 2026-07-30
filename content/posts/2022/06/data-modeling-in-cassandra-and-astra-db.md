@@ -7,7 +7,7 @@ description: "What does it take to build an efficient and sound data model for 
 canonical: "https://medium.com/building-the-open-data-stack/data-modeling-in-cassandra-and-datastax-astra-db-3f89b9c133c9"
 authors:
   - "artem-chebotko"
-image: "https://foojay.io/wp-content/uploads/2022/01/0_90M63PeIIyDG3hj9.png"
+image: "/images/posts/2022/06/data-modeling-in-cassandra-and-astra-db/0_90M63PeIIyDG3hj9.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

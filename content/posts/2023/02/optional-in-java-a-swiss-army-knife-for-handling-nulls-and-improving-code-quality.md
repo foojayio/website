@@ -6,7 +6,7 @@ lastmod: "2023-02-20T12:49:55+00:00"
 description: "Optional is a Java class that provides a way to handle null values in a type-safe and efficient manner. This tutorial will cover the features and use cases of Optional in Java, with practical examples."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/02/Bazlur_Rahman_a_Swiss_Army_Knife_with_the_word_Optional_on_it_a_fbcd5137-6b73-4ed7-9c61-090471b880f4.png"
+image: "/images/posts/2023/02/optional-in-java-a-swiss-army-knife-for-handling-nulls-and-improving-code-quality/Bazlur_Rahman_a_Swiss_Army_Knife_with_the_word_Optional_on_it_a_fbcd5137-6b73-4ed7-9c61-090471b880f4.png"
 categories:
   - "Java Beginner"
   - "Java Core"

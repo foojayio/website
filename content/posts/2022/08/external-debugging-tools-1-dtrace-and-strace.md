@@ -7,7 +7,7 @@ description: "With these tools, track bugs within an application and its externa
 canonical: "https://talktotheduck.dev/external-debugging-tools-dtrace-strace"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/07/Lightrun_-_Talk_to_the_duck_blog_-_memory_management-01.jpg"
+image: "/images/posts/2022/08/external-debugging-tools-1-dtrace-and-strace/Lightrun_-_Talk_to_the_duck_blog_-_memory_management-01.jpg"
 categories:
   - "Tools"
   - "Tutorials"

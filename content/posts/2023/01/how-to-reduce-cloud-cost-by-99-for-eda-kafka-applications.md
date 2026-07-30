@@ -6,7 +6,7 @@ lastmod: "2023-01-11T13:36:39+00:00"
 description: "About 400x more instances can be run on the same hardware with Chronicle Queue for specific latency-sensitive EDA applications."
 authors:
   - "per-minborg"
-image: "https://foojay.io/wp-content/uploads/2023/01/Screen-Shot-2023-01-04-at-11.38.49-AM-1024x162-1.png"
+image: "/images/posts/2023/01/how-to-reduce-cloud-cost-by-99-for-eda-kafka-applications/Screen-Shot-2023-01-04-at-11.38.49-AM-1024x162-1.png"
 categories:
   - "Cloud"
   - "Java Core"

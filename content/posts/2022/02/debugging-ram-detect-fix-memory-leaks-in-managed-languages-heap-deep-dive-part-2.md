@@ -7,7 +7,7 @@ description: "Java and JavaScript are garbage collected languages. But memory le
 canonical: "https://talktotheduck.dev/debugging-ram-detectfix-memory-leaks-in-managed-languages-heap-deep-dive-part-2"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/01/Lightrun_-_Talk_to_the_duck_blog_-_memory_management-02.jpg"
+image: "/images/posts/2022/02/debugging-ram-detect-fix-memory-leaks-in-managed-languages-heap-deep-dive-part-2/Lightrun_-_Talk_to_the_duck_blog_-_memory_management-02.jpg"
 categories:
   - "Developer Tools"
   - "Tutorials"

@@ -6,7 +6,7 @@ lastmod: "2022-01-26T08:02:27+00:00"
 description: "While more than 26 years old, Java is still one of the top three most popular programming languages. Find out how to find out why and how!"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2022/01/azul.png"
+image: "/images/posts/2022/01/the-state-of-java-in-2022/azul.png"
 categories:
   - "Events"
   - "Payara"

@@ -7,7 +7,7 @@ description: "Dial your debugging skills to 11 by leveraging some of the lesser 
 canonical: "https://talktotheduck.dev/exception-breakpoint-that-doesnt-suck"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/03/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"
+image: "/images/posts/2022/04/exception-breakpoint-that-doesnt-suck-and-a-real-use-case-for-method-breakpoints/Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"
 categories:
   - "Tutorials"
 tags:

@@ -7,7 +7,7 @@ description: "There are challenges with Java profiling, and the need for profili
 authors:
   - "frankdelporte"
   - "hirt"
-image: "https://foojay.io/wp-content/uploads/2023/05/podcast-guests-profiling-and-performance-1024x404-1.png"
+image: "/images/posts/2023/05/foojay-podcast-23/podcast-guests-profiling-and-performance-1024x404-1.png"
 categories:
   - "DevOps"
   - "Java Core"

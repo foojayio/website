@@ -6,7 +6,7 @@ lastmod: "2022-12-16T07:34:59+00:00"
 description: "We started with an instance to host foojay.social via toot.io that provides us 200Gb of storage space to handle 250 active users."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/12/mastodon-foojay-20221215.png"
+image: "/images/posts/2022/12/foojay-on-mastodon-an-update/mastodon-foojay-20221215.png"
 categories:
   - "Developer Tools"
   - "Foojay"

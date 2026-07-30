@@ -7,7 +7,7 @@ description: "New security features are coming to the open-source data platform:
 canonical: "https://medium.com/building-the-open-data-stack/k8ssandra-ramps-up-security-features-to-match-kubernetes-best-practices-741d68ea1a0f"
 authors:
   - "jeff-banks"
-image: "https://foojay.io/wp-content/uploads/2022/01/1_qz4yqblkLUoJDL3t8xrsSg.jpeg"
+image: "/images/posts/2022/06/k8ssandra-ramps-up-security-features-to-match-kubernetes-best-practices/1_qz4yqblkLUoJDL3t8xrsSg.jpeg"
 categories:
   - "Apache Cassandra"
   - "Databases"

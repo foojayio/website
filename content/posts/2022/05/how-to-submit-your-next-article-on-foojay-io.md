@@ -8,7 +8,7 @@ authors:
   - "bazlur-rahman"
   - "frankdelporte"
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2022/04/Screen-Shot-2022-04-28-at-1.55.18-PM-1024x585.png"
+image: "/images/posts/2022/05/how-to-submit-your-next-article-on-foojay-io/Screen-Shot-2022-04-28-at-1.55.18-PM-1024x585.png"
 categories:
   - "Events"
   - "Foojay"

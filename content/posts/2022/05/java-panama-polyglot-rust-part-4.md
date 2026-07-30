@@ -6,7 +6,7 @@ lastmod: "2022-05-26T08:33:05+00:00"
 description: "By exposing native Rust functions, you can be easily accessed from Java code using Project Panama's Foreign Function Access APIs."
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/05/java-panama-polyglot-rust-part-4/Favicon-3-2.png"
 categories:
   - "JEPs"
   - "Project Panama"

@@ -6,7 +6,7 @@ lastmod: "2023-01-31T11:44:15+00:00"
 description: "Following from the first part in this series, here is the next, from speakers who will be in the Foojay room at FOSDEM, Sunday, 5 February."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2023/01/fosdem.png"
+image: "/images/posts/2023/01/more-foojay-io-fosdem-speaker-predictions-for-2023/fosdem.png"
 categories:
   - "Events"
 tags:

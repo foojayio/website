@@ -7,7 +7,7 @@ description: "Learn today how you can modernize and reduce costs with blazing pe
 canonical: "https://www.datastax.com/blog/fast-jms-apache-pulsar"
 authors:
   - "chris-bartholomew"
-image: "https://foojay.io/wp-content/uploads/2021/07/intro-fast-jms-for-apache-pulsar-thumbnail.png"
+image: "/images/posts/2021/12/fast-jms-for-apache-pulsar-modernize-and-reduce-costs-with-blazing-performance/intro-fast-jms-for-apache-pulsar-thumbnail.png"
 categories:
   - "Apache Pulsar"
   - "DataStax"

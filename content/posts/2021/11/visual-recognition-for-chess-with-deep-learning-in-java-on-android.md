@@ -7,7 +7,7 @@ description: "Learn about Deep Netts, a lightweight Java-native library, easy to
 authors:
   - "krasimir-topchiyski"
   - "zoran-sevarac"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/11/visual-recognition-for-chess-with-deep-learning-in-java-on-android/Favicon-3-2.png"
 categories:
   - "Deep Netts"
   - "Machine Learning"

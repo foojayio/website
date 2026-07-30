@@ -7,7 +7,7 @@ description: "Learn about Kotlin context receivers to be able to pass additional
 canonical: "https://blog.frankel.ch/kotlin-context-receivers/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/05/hand-g44f04ca75.jpg"
+image: "/images/posts/2022/05/kotlins-context-receivers/hand-g44f04ca75.jpg"
 categories:
   - "Kotlin"
 tags:

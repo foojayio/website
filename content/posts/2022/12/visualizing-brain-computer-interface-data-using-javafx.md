@@ -6,7 +6,7 @@ lastmod: "2022-12-09T09:49:32+00:00"
 description: "Learn about JavaFX and Brain-Computer Interfaces: data collected non-invasively (head wraps with cables) and invasively (brain implants)."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/11/trinity-skyline.png"
+image: "/images/posts/2022/12/visualizing-brain-computer-interface-data-using-javafx/trinity-skyline.png"
 categories:
   - "JavaFX"
   - "Research"

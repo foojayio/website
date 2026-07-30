@@ -7,7 +7,7 @@ description: "Standard Java methods hashcode & equals are crucial to performance
 canonical: "https://talktotheduck.dev/hashcode-and-equals-debugging-performance"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2021/11/Lightrun-Talk-to-the-duck-Time-Travel-Debuggers-01.jpg"
+image: "/images/posts/2022/01/hashcode-and-equals-debugging-performance/Lightrun-Talk-to-the-duck-Time-Travel-Debuggers-01.jpg"
 categories:
   - "Performance"
 tags:

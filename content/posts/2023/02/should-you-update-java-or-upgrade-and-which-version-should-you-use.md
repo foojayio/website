@@ -7,7 +7,7 @@ description: "Keeping your Java environment stable requires discerning which upd
 canonical: "https://www.azul.com/blog/should-you-update-java-or-upgrade/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/02/LTS-versus-STS.jpg"
+image: "/images/posts/2023/02/should-you-update-java-or-upgrade-and-which-version-should-you-use/LTS-versus-STS.jpg"
 categories:
   - "DevOps"
   - "Java Core"

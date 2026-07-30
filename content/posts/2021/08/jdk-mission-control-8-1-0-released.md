@@ -7,7 +7,7 @@ description: "The latest release of JDK Mission Control was released! It may tak
 canonical: "http://hirt.se/blog/?p=1361"
 authors:
   - "hirt"
-image: "https://foojay.io/wp-content/uploads/2021/08/image-1.png"
+image: "/images/posts/2021/08/jdk-mission-control-8-1-0-released/image-1.png"
 categories:
   - "Performance"
   - "Release Notes"

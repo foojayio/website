@@ -7,7 +7,7 @@ description: "Let’s learn about the new K8ssandra Operator that simplifies dep
 canonical: "https://medium.com/building-the-open-data-stack/deploying-to-multiple-kubernetes-clusters-with-the-k8ssandra-operator-f7562bee1841"
 authors:
   - "jeff-dinoto"
-image: "https://foojay.io/wp-content/uploads/2022/01/0_cYkNr7XdB-MsJiu5.png"
+image: "/images/posts/2022/02/deploying-to-multiple-kubernetes-clusters-with-the-k8ssandra-operator/0_cYkNr7XdB-MsJiu5.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

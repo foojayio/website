@@ -6,7 +6,7 @@ lastmod: "2021-11-23T10:10:55+00:00"
 description: "Can we create as many Java threads as we want? I will try to come up with an answer via an exercise, so bear with me!"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/11/java-thread-programming-part-7/Favicon-3-2.png"
 categories:
   - "Tutorials"
 tags:

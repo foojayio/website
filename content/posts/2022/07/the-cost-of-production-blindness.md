@@ -7,7 +7,7 @@ description: "Cloud rose to fame on the banner of cutting costs but with its tre
 canonical: "https://lightrun.com/best-practices/the-cost-of-production-blindness/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/07/Cost-Saving-with-Lightrun.png"
+image: "/images/posts/2022/07/the-cost-of-production-blindness/Cost-Saving-with-Lightrun.png"
 categories:
   - "Opinion"
   - "Performance"

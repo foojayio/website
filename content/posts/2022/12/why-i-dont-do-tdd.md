@@ -7,7 +7,7 @@ description: "Test Driven Development puts emphasis on unit over integration tes
 canonical: "https://debugagent.com/why-i-dont-do-tdd"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/11/Kempelen_chess1.jpg"
+image: "/images/posts/2022/12/why-i-dont-do-tdd/Kempelen_chess1.jpg"
 categories:
   - "Testing"
 tags:

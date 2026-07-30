@@ -6,7 +6,7 @@ lastmod: "2022-10-06T06:28:26+00:00"
 description: "Learn what we learned after five years of developing and supporting low latency microservices."
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2022/02/shutterstock_1111260050-350x233-1.jpg"
+image: "/images/posts/2022/10/low-latency-microservices-a-retrospective/shutterstock_1111260050-350x233-1.jpg"
 categories:
   - "Developer Tools"
   - "DevOps"

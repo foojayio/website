@@ -6,7 +6,7 @@ lastmod: "2023-03-21T10:29:49+00:00"
 description: "Today is Java 20 release day! It's been six months since Java 19 was released, and so it's time for another fresh wave of Java features."
 authors:
   - "hanno-embregts"
-image: "https://foojay.io/wp-content/uploads/2023/03/package-just-for-you.jpg"
+image: "/images/posts/2023/03/its-java-20-release-day-heres-whats-new/package-just-for-you.jpg"
 categories:
   - "Java Core"
   - "JEPs"

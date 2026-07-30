@@ -7,7 +7,7 @@ description: "In this article, we take a look at how to get started developing R
 canonical: "https://blog.payara.fish/getting-started-with-jakarta-ee-10-jakarta-rest"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2020/10/payara_square_logo.jpg"
+image: "/images/posts/2023/04/getting-started-with-jakarta-ee-10-jakarta-rest/payara_square_logo.jpg"
 categories:
   - "Jakarta EE"
   - "Payara"

@@ -7,7 +7,7 @@ description: "Time to spruce up your GitHub! In this article, I want to highligh
 canonical: "https://blog.frankel.ch/beautify-github-repo/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/04/sylvester-g44a15a609.jpg"
+image: "/images/posts/2022/04/how-to-beautify-your-github-repo/sylvester-g44a15a609.jpg"
 categories:
   - "Developer Tools"
 tags:

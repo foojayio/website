@@ -6,7 +6,7 @@ lastmod: "2022-12-14T16:53:18+00:00"
 description: "This article explains why we chose JSF to build the Eclipse starter for Jakarta and why it deserves more love and attention!"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/12/Screen-Shot-2022-12-12-at-10.49.06-AM.png"
+image: "/images/posts/2022/12/why-did-we-choose-jakarta-faces-for-the-ui-of-the-eclipse-starter-for-jakarta-ee/Screen-Shot-2022-12-12-at-10.49.06-AM.png"
 categories:
   - "Java Core"
 tags:

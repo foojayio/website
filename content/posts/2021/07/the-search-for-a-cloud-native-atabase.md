@@ -8,7 +8,7 @@ canonical: "https://k8ssandra.io/blog/articles/the-search-for-a-cloud-native-dat
 authors:
   - "cedrick-lunven"
   - "jeff-carpenter"
-image: "https://foojay.io/wp-content/uploads/2021/07/cncf-landscape-db_hu725d4d7b3d105a5db9f2db4c635f96d6_353693_800x0_resize_catmullrom_2.png"
+image: "/images/posts/2021/07/the-search-for-a-cloud-native-atabase/cncf-landscape-db_hu725d4d7b3d105a5db9f2db4c635f96d6_353693_800x0_resize_catmullrom_2.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

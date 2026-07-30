@@ -6,7 +6,7 @@ lastmod: "2021-10-11T08:08:55+00:00"
 description: "Tip: Never underestimate the danger of a partial implementation (even if it is just a logging implementation)."
 authors:
   - "jaroslav-bachorik"
-image: "https://foojay.io/wp-content/uploads/2021/10/pic1-700x416.png"
+image: "/images/posts/2021/10/the-costs-of-hidden-logging/pic1-700x416.png"
 categories:
   - "JDK Flight Recorder"
   - "Performance"

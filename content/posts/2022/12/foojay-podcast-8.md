@@ -6,7 +6,7 @@ lastmod: "2025-11-13T09:20:13+00:00"
 description: "Let's virtually travel to a Java User Group (JUG) to learn how they organize their events and learn from their experiences!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/12/foojay-podcast-8/Favicon-3-2.png"
 categories:
   - "Foojay"
   - "JUGs"

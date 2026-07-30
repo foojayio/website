@@ -6,7 +6,7 @@ lastmod: "2022-10-25T12:54:51+00:00"
 description: "Let's dive into detail about the different ways to serialize Java objects and compare how well they work."
 authors:
   - "per-minborg"
-image: "https://foojay.io/wp-content/uploads/2022/10/Screen-Shot-2022-10-17-at-3.32.37-PM.png"
+image: "/images/posts/2022/10/why-the-fastest-way-of-serializing-a-java-field-is-not-serializing-it-at-all/Screen-Shot-2022-10-17-at-3.32.37-PM.png"
 categories:
   - "DevOps"
   - "Java Core"

@@ -6,7 +6,7 @@ lastmod: "2021-11-17T21:21:14+00:00"
 description: "SKP's Agile Cheat - Sheet that Lists the Most Important Terminologies in Agile, Scrum, Lean, Kanban and SAFe."
 authors:
   - "sumith-puri"
-image: "https://foojay.io/wp-content/uploads/2021/10/agileglossary.jpg"
+image: "/images/posts/2021/11/skps-agile-cheatsheet-part-02/agileglossary.jpg"
 categories:
   - "Tutorials"
 tags:

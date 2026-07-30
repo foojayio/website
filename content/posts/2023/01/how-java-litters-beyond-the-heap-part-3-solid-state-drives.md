@@ -6,7 +6,7 @@ lastmod: "2023-01-27T10:57:10+00:00"
 description: "Explore how solid-state drives (SSDs), the default storage medium for on-disk data, use garbage collection."
 authors:
   - "denis-magda"
-image: "https://foojay.io/wp-content/uploads/2023/01/ssd_image5-700x359-1.png"
+image: "/images/posts/2023/01/how-java-litters-beyond-the-heap-part-3-solid-state-drives/ssd_image5-700x359-1.png"
 categories:
   - "Databases"
   - "Tutorials"

@@ -6,7 +6,7 @@ lastmod: "2023-01-27T10:55:42+00:00"
 description: "Let’s create a simple Java application and see how the application generates garbage at the relational database level."
 authors:
   - "denis-magda"
-image: "https://foojay.io/wp-content/uploads/2022/11/image1.png"
+image: "/images/posts/2022/11/how-java-litters-beyond-the-heap-relational-databases/image1.png"
 categories:
   - "Databases"
   - "Tutorials"

@@ -6,7 +6,7 @@ lastmod: "2022-04-20T07:16:46+00:00"
 description: "I prefer the command line for my daily work, using the combination of git, sed, grep, bash commands etc. makes recurring tasks easier."
 authors:
   - "michael-hunger"
-image: "https://foojay.io/wp-content/uploads/2022/02/coffee-mill.jpg"
+image: "/images/posts/2022/02/hand-ground-coffee-command-line-tools-for-java/coffee-mill.jpg"
 categories:
   - "Developer Tools"
   - "JShell"

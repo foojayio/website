@@ -7,7 +7,7 @@ description: "Java has maintained its popularity for such a long period of time:
 canonical: "https://debugagent.com/the-reason-java-is-still-popular"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/09/DALL·E-2022-09-20-19.49.55-steaming-coffee-cups-as-far-as-the-eye-can-see-epic-photo.jpg"
+image: "/images/posts/2022/10/the-reason-java-is-still-popular/DALL-E-2022-09-20-19.49.55-steaming-coffee-cups-as-far-as-the-eye-can-see-epic-photo.jpg"
 categories:
   - "Java Core"
   - "Opinion"

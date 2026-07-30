@@ -7,7 +7,7 @@ description: "Java enums can contain much more than just a list of definitions, 
 canonical: "https://webtechie.be/post/2023-03-22-hidden-beauties-of-java-enums/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/04/enumspic.png"
+image: "/images/posts/2023/04/hidden-beauties-of-java-enums/enumspic.png"
 categories:
   - "Java Beginner"
   - "JBang"

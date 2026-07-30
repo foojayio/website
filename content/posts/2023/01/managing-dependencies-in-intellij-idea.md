@@ -7,7 +7,7 @@ description: "Learn the different ways in which we can view our project's depend
 canonical: "https://maritvandijk.com/managing-dependencies-in-intellij-idea/"
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2023/01/mvnrepository-maven.png"
+image: "/images/posts/2023/01/managing-dependencies-in-intellij-idea/mvnrepository-maven.png"
 categories:
   - "Gradle"
   - "IntelliJ IDEA"

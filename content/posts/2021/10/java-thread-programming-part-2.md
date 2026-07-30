@@ -6,7 +6,7 @@ lastmod: "2021-11-16T15:08:22+00:00"
 description: "Let's see an example of where we can use Threads. Let's assume we are building a web server that returns the most used words in a website."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2021/10/Screen-Shot-2021-09-30-at-9.30.24-PM-635x510.png"
+image: "/images/posts/2021/10/java-thread-programming-part-2/Screen-Shot-2021-09-30-at-9.30.24-PM-635x510.png"
 categories:
   - "Uncategorized"
 tags:

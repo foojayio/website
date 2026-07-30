@@ -7,7 +7,7 @@ description: "Today Azul announces the general availability of Azul Zulu Builds 
 canonical: "https://www.azul.com/blog/reduce-java-application-startup-and-warmup-times-with-crac/"
 authors:
   - "pavel"
-image: "https://foojay.io/wp-content/uploads/2023/05/image-1-1024x306-1.png"
+image: "/images/posts/2023/05/reduce-java-application-startup-and-warmup-times-with-crac/image-1-1024x306-1.png"
 categories:
   - "CRaC"
   - "Performance"

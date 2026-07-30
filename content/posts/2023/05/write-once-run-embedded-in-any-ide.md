@@ -6,7 +6,7 @@ lastmod: "2023-05-16T13:34:20+00:00"
 description: "Having written many Java GUI applications, I thought it would be cool to run them embedded in IntelliJ IDEA, Eclipse and NetBeans."
 authors:
   - "anthony-goubard"
-image: "https://foojay.io/wp-content/uploads/2023/05/feature-image-applet-runner2.png"
+image: "/images/posts/2023/05/write-once-run-embedded-in-any-ide/feature-image-applet-runner2.png"
 categories:
   - "Developer Tools"
   - "Eclipse"

@@ -6,7 +6,7 @@ lastmod: "2022-12-01T15:04:23+00:00"
 description: "Another month has passed and this is a summary of the Links Of The Week that were published on jfx-central.com during November!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/05/Screen-Shot-2021-05-17-at-12.15.51-AM.png"
+image: "/images/posts/2022/12/javafx-links-of-november/Screen-Shot-2021-05-17-at-12.15.51-AM.png"
 categories:
   - "JavaFX"
 tags:

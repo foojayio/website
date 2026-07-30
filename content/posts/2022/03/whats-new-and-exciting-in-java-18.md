@@ -6,7 +6,7 @@ lastmod: "2022-03-22T07:31:56+00:00"
 description: "Java 18 is here and in this article we explore the most important changes and, in my humble opinion, this release is an important one!"
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/03/whats-new-and-exciting-in-java-18/Favicon-3-2.png"
 categories:
   - "Release Notes"
 tags:

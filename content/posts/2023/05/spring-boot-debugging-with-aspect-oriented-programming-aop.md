@@ -7,7 +7,7 @@ description: "Does your app fail CI tests \"sometimes\"? Does it display flaky b
 canonical: "https://debugagent.com/spring-boot-debugging-with-aspect-oriented-programming-aop"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/04/Spring-Boot-Debugging-with-AOP.jpg"
+image: "/images/posts/2023/05/spring-boot-debugging-with-aspect-oriented-programming-aop/Spring-Boot-Debugging-with-AOP.jpg"
 categories:
   - "Java Core"
   - "Spring"

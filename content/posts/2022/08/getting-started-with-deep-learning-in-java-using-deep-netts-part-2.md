@@ -6,7 +6,7 @@ lastmod: "2023-07-11T09:37:04+00:00"
 description: "For more complex deep learning challenges, more data, and need better performance, take a look at Deep Netts Professional Edition."
 authors:
   - "zoran-sevarac"
-image: "https://foojay.io/wp-content/uploads/2021/08/deepnetts.png"
+image: "/images/posts/2022/08/getting-started-with-deep-learning-in-java-using-deep-netts-part-2/deepnetts.png"
 categories:
   - "Deep Netts"
   - "Machine Learning"

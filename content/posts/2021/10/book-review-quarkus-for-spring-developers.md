@@ -6,7 +6,7 @@ lastmod: "2021-10-14T09:23:37+00:00"
 description: "Shift your Spring skills to leverage the “supersonic subatomic” Quarkus framework, opportunity for developers to learn two frameworks at once."
 authors:
   - "erikcostlow"
-image: "https://foojay.io/wp-content/uploads/2021/10/quarkus-book-340x510.png"
+image: "/images/posts/2021/10/book-review-quarkus-for-spring-developers/quarkus-book-340x510.png"
 categories:
   - "Book Review"
   - "Books"

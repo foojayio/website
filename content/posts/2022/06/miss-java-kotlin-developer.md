@@ -7,7 +7,7 @@ description: "I miss some features in Java that would improve my code's readabil
 canonical: "https://blog.frankel.ch/miss-in-java-kotlin-developer/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/06/cat-g641127bfa.jpg"
+image: "/images/posts/2022/06/miss-java-kotlin-developer/cat-g641127bfa.jpg"
 categories:
   - "Java Core"
   - "Kotlin"

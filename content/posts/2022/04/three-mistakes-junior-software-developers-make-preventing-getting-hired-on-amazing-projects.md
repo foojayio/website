@@ -6,7 +6,7 @@ lastmod: "2022-04-06T08:05:45+00:00"
 description: "From experience, I have seen three big mistakes every junior software developer makes that could easily be solved."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/04/hired.png"
+image: "/images/posts/2022/04/three-mistakes-junior-software-developers-make-preventing-getting-hired-on-amazing-projects/hired.png"
 categories:
   - "Opinion"
 tags:

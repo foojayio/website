@@ -6,7 +6,7 @@ lastmod: "2023-01-26T09:16:07+00:00"
 description: "An introduction into GetStackTrace, AsyncGetCallTrace, and the history and specification of AsyncGetStackTrace."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/01/java-coffee-cup-on-fire-without-marks-asgst-asgct.png"
+image: "/images/posts/2023/01/asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm/java-coffee-cup-on-fire-without-marks-asgst-asgct.png"
 categories:
   - "JEPs"
   - "Performance"

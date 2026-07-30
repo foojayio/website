@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:16:36+00:00"
 description: "In this challenge, we explore important key methods when we work with a Java Stream so that it becomes clear for you what they do."
 authors:
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2021/07/neo.png"
+image: "/images/posts/2021/07/neo-stream-search-java-challenge/neo.png"
 categories:
   - "Tutorials"
 tags:

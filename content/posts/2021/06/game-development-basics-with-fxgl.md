@@ -6,7 +6,7 @@ lastmod: "2021-06-17T08:48:30+00:00"
 description: "Learn the fundamental concepts of FXGL to abstract away complex details that are present in modern games and help simplify development."
 authors:
   - "almasbaimagambetov"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/06/game-development-basics-with-fxgl/Favicon-3-2.png"
 categories:
   - "Game Development"
   - "JavaFX"

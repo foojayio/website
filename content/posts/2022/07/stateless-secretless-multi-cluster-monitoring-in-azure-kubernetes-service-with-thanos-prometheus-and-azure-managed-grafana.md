@@ -6,7 +6,7 @@ lastmod: "2022-07-27T08:36:47+00:00"
 description: "For cloud native engineers facing the challenge of observing multiple Azure Kubernetes Clusters and needing a flexible, stateless solution!"
 authors:
   - "alessandro-vozza"
-image: "https://foojay.io/wp-content/uploads/2022/07/cover.png"
+image: "/images/posts/2022/07/stateless-secretless-multi-cluster-monitoring-in-azure-kubernetes-service-with-thanos-prometheus-and-azure-managed-grafana/cover.png"
 categories:
   - "Developer Tools"
 tags:
@@ -72,7 +72,7 @@ metadata:
   name: letsencrypt-prod
 spec:
   acme:
-    email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9bfef6faf2f7dbfef6faf2f7b5f8f4f6">[email&nbsp;protected]</a>
+    email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="57323a363e3b17323a363e3b7934383a">[email&nbsp;protected]</a>
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-prod

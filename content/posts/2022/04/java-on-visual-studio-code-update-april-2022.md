@@ -6,7 +6,7 @@ lastmod: "2022-04-25T08:16:19+00:00"
 description: "Java 18 support, inlay hints for parameter names, new language server status UX, lambda expression support in debugging and more!"
 authors:
   - "nick-zhu"
-image: "https://foojay.io/wp-content/uploads/2022/04/lambda.gif"
+image: "/images/posts/2022/04/java-on-visual-studio-code-update-april-2022/lambda.gif"
 categories:
   - "Release Notes"
   - "VS Code"

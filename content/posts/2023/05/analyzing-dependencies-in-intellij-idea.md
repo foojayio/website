@@ -7,7 +7,7 @@ description: "Let's look at analyzing dependencies in IntelliJ IDEA. Where does 
 canonical: "https://maritvandijk.com/analyzing-dependencies/"
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2023/05/drop-focus-1.png"
+image: "/images/posts/2023/05/analyzing-dependencies-in-intellij-idea/drop-focus-1.png"
 categories:
   - "Gradle"
   - "IntelliJ IDEA"

@@ -7,7 +7,7 @@ description: "Read all about how K8ssandra is an open source project with the mi
 canonical: "https://k8ssandra.io/blog/articles/why-k8ssandra/"
 authors:
   - "jeff-carpenter"
-image: "https://foojay.io/wp-content/uploads/2022/01/k8ssandra-origins_hu35f5216de9cbbd9648d0415154067777_35353_727x210_fit_catmullrom_2.png"
+image: "/images/posts/2022/01/why-k8ssandra/k8ssandra-origins_hu35f5216de9cbbd9648d0415154067777_35353_727x210_fit_catmullrom_2.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

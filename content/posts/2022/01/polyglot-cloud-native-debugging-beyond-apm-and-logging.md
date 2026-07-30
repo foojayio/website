@@ -7,7 +7,7 @@ description: "Continuous observability can facilitate a new generation of applic
 canonical: "https://talktotheduck.dev/polyglot-cloud-native-debugging-beyond-apm-and-logging"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/01/Lightrun_-_Talk_to_the_duck_blog_-_memory_management-03.jpg"
+image: "/images/posts/2022/01/polyglot-cloud-native-debugging-beyond-apm-and-logging/Lightrun_-_Talk_to_the_duck_blog_-_memory_management-03.jpg"
 categories:
   - "Cloud"
   - "Developer Tools"

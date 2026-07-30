@@ -6,7 +6,7 @@ lastmod: "2022-07-09T19:42:01+00:00"
 description: "Learn about jextract, which can generate Java binding code that represents native functions or variables (symbols) from C libraries."
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2022/06/Screen-Shot-2022-06-06-at-3.03.47-PM.png"
+image: "/images/posts/2022/06/building-project-panamas-jextract-tool-by-yourself/Screen-Shot-2022-06-06-at-3.03.47-PM.png"
 categories:
   - "Developer Tools"
   - "JEPs"
@@ -99,7 +99,7 @@ Of course if you choose to make environment variables persistent you'll need to 
 
 After setting up JDK 19 you can fork / clone the GitHub project `jextract` with the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ddbab4a99dbab4a9b5a8bff3beb2b0">[email&nbsp;protected]</a>:openjdk/jextract.git
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e5828c91a5828c918d9087cb868a88">[email&nbsp;protected]</a>:openjdk/jextract.git
 cd jextract</pre>
 
 **Note:** It is preferable that you fork the project and then clone your fork of the project. That way you can provide pull requests whenever you find a bug to fix or a proposed enhancement to the project. But if you just want to build from master branch or a previous branch you can simply clone `jextract`'s main repo as shown below:

@@ -7,7 +7,7 @@ description: "Let's see the preview and incubator JEPs in Java 20, as well as ma
 canonical: "https://blogs.oracle.com/javamagazine/post/java-20-gems-jdks"
 authors:
   - "mohamed-taman"
-image: "https://foojay.io/wp-content/uploads/2023/04/Medium.jpeg"
+image: "/images/posts/2023/05/hidden-and-not-so-hidden-gems-in-java-20/Medium.jpeg"
 categories:
   - "Java Core"
   - "JEPs"

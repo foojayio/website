@@ -7,7 +7,7 @@ description: "Kafka is horizontally scalable, fault-tolerant, runs in production
 canonical: "https://www.azul.com/blog/the-practical-roi-of-running-kafka-on-azul-platform-prime/"
 authors:
   - "john-ceccarelli"
-image: "https://foojay.io/wp-content/uploads/2022/05/blog-image-platform-prime.png"
+image: "/images/posts/2022/05/getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime/blog-image-platform-prime.png"
 categories:
   - "Kafka"
   - "Performance"

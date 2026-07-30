@@ -6,7 +6,7 @@ lastmod: "2023-02-03T13:40:05+00:00"
 description: "In this update, we will introduce the brand new getting started experience with the Azure toolkit for IntelliJ... and more!"
 authors:
   - "jialuo-gan"
-image: "https://foojay.io/wp-content/uploads/2022/07/July-Update-2022-for-Twitter.png"
+image: "/images/posts/2022/07/java-on-azure-tooling-update-july-2022/July-Update-2022-for-Twitter.png"
 categories:
   - "Azure"
   - "Eclipse"

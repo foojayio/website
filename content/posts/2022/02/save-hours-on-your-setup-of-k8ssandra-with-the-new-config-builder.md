@@ -7,7 +7,7 @@ description: "Setting up K8ssandra in your workflow just got a whole lot easier.
 canonical: "https://k8ssandra.io/blog/announcements/release/save-hours-on-your-setup-of-k8ssandra-with-the-new-config-builder/"
 authors:
   - "matt-overstreet"
-image: "https://foojay.io/wp-content/uploads/2022/01/K17.jpeg"
+image: "/images/posts/2022/02/save-hours-on-your-setup-of-k8ssandra-with-the-new-config-builder/K17.jpeg"
 categories:
   - "Apache Cassandra"
   - "Databases"

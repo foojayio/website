@@ -7,7 +7,7 @@ description: "The VSCode ecosystem has matured, and lots of plugins are availabl
 canonical: "https://blog.frankel.ch/take-vscode-spin/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/06/VSCodium_Logo.png"
+image: "/images/posts/2022/07/taking-vscodium-for-a-spin/VSCodium_Logo.png"
 categories:
   - "VS Code"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2022-09-20T09:19:07+00:00"
 description: "Learn how to devise a way of creating an object-creation-free, light-weighted mapper with rudimentary lookup capability."
 authors:
   - "per-minborg"
-image: "https://foojay.io/wp-content/uploads/2022/09/intmapper.png"
+image: "/images/posts/2022/09/did-you-know-you-can-create-mappers-without-creating-underlying-objects-in-java/intmapper.png"
 categories:
   - "DevOps"
   - "Java Core"

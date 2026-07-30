@@ -6,7 +6,7 @@ lastmod: "2022-07-14T07:41:37+00:00"
 description: "Learn about common threats, vulnerabilities, and misconfiguration including the recently disclosed issues in Log4j."
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2022/03/Lightrun-blog-hero-Lightrun-For-Application-Security-Detecting-Investigating-and-Verifying-Fixes-for-Security-Incidents-Using-Lightrun-01-scaled-1.jpg"
+image: "/images/posts/2022/03/security-warning-your-java-attack-surface-just-got-bigger/Lightrun-blog-hero-Lightrun-For-Application-Security-Detecting-Investigating-and-Verifying-Fixes-for-Security-Incidents-Using-Lightrun-01-scaled-1.jpg"
 categories:
   - "Security"
   - "Videos"

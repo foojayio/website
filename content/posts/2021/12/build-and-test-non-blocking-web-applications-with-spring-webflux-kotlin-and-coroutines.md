@@ -6,7 +6,7 @@ lastmod: "2021-12-09T14:06:34+00:00"
 description: "In this article, we will develop a simple RESTful API using Spring WebFlux and aim to leverage the special Kotlin extensions in Spring."
 authors:
   - "bjorn-vdlaan"
-image: "https://foojay.io/wp-content/uploads/2021/11/ken-suarez-4IxPVkFGJGI-unsplash-scaled.jpg"
+image: "/images/posts/2021/12/build-and-test-non-blocking-web-applications-with-spring-webflux-kotlin-and-coroutines/ken-suarez-4IxPVkFGJGI-unsplash-scaled.jpg"
 categories:
   - "Kotlin"
   - "Spring"

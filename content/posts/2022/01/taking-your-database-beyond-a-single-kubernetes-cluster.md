@@ -7,7 +7,7 @@ description: "Running a database (or indeed any application) across multiple reg
 canonical: "https://datastax.medium.com/taking-your-database-beyond-a-single-kubernetes-cluster-6933d7492013"
 authors:
   - "christopher-bradford"
-image: "https://foojay.io/wp-content/uploads/2022/01/0_ntxtNVffHhl99weW.jpg"
+image: "/images/posts/2022/01/taking-your-database-beyond-a-single-kubernetes-cluster/0_ntxtNVffHhl99weW.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"

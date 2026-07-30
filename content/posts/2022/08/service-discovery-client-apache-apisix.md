@@ -7,7 +7,7 @@ description: "Most modern infrastructures are dynamic. Servers are cattle, not p
 canonical: "https://blog.frankel.ch/own-service-discovery-client-apisix/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/07/pexels-3996179.jpg"
+image: "/images/posts/2022/08/service-discovery-client-apache-apisix/pexels-3996179.jpg"
 categories:
   - "DevOps"
   - "Microservices"

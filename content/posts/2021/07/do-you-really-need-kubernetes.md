@@ -7,7 +7,7 @@ description: "Whether or not you need Kubernetes depends on many different facto
 canonical: "https://blog.payara.fish/do-you-need-kubernetes"
 authors:
   - "rudy-de-busscher"
-image: "https://foojay.io/wp-content/uploads/2021/07/21_d3cvM_400x400.png"
+image: "/images/posts/2021/07/do-you-really-need-kubernetes/21_d3cvM_400x400.png"
 categories:
   - "Kubernetes"
 tags:

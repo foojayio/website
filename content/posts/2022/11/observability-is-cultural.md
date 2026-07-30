@@ -7,7 +7,7 @@ description: "To leverage observability, we need a significant shift in our corp
 canonical: "https://debugagent.com/observability-is-cultural"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/10/DALL·E-2022-09-27-07.37.13-all-seeing-eye-in-the-sky.jpg"
+image: "/images/posts/2022/11/observability-is-cultural/DALL-E-2022-09-27-07.37.13-all-seeing-eye-in-the-sky.jpg"
 categories:
   - "Developer Tools"
   - "Observability"

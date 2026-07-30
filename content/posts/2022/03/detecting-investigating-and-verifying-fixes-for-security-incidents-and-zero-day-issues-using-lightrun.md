@@ -7,7 +7,7 @@ description: "Learn about major milestones in app security: finding the issue, e
 canonical: "https://lightrun.com/security/lightrun-for-application-security-detecting-investigating-and-verifying-fixes-for-security-incidents-using-lightrun/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2022/03/Lightrun-blog-hero-Lightrun-For-Application-Security-Detecting-Investigating-and-Verifying-Fixes-for-Security-Incidents-Using-Lightrun-01-scaled-1.jpg"
+image: "/images/posts/2022/03/detecting-investigating-and-verifying-fixes-for-security-incidents-and-zero-day-issues-using-lightrun/Lightrun-blog-hero-Lightrun-For-Application-Security-Detecting-Investigating-and-Verifying-Fixes-for-Security-Incidents-Using-Lightrun-01-scaled-1.jpg"
 categories:
   - "Security"
 tags:

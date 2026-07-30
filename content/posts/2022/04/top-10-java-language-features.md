@@ -6,7 +6,7 @@ lastmod: "2022-04-12T17:23:55+00:00"
 description: "Let's explore ten Java programming features used frequently by developers in their day-to-day programming jobs."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/04/Top-10-Java-Language-features.png"
+image: "/images/posts/2022/04/top-10-java-language-features/Top-10-Java-Language-features.png"
 categories:
   - "Java Core"
 tags:

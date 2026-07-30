@@ -6,7 +6,7 @@ lastmod: "2022-11-23T12:38:13+00:00"
 description: "While having a class that directly extends Throwable is surprising, it is allowed and is also useful for providing additional information."
 authors:
   - "peter-lawrey"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2022/11/unusual-java-stacktrace-extends-throwable/Favicon-3-2.png"
 categories:
   - "Developer Tools"
   - "Java Core"

@@ -9,7 +9,7 @@ authors:
   - "gail-anderson"
   - "johan-vos"
   - "pedro-vieira"
-image: "https://foojay.io/wp-content/uploads/2022/12/podcast-javafx-guests-1024x393.png"
+image: "/images/posts/2022/12/foojay-podcast-9/podcast-javafx-guests-1024x393.png"
 categories:
   - "JavaFX"
   - "Podcast"

@@ -6,7 +6,7 @@ lastmod: "2022-05-31T07:23:08+00:00"
 description: "The JavaFX controller code maintains game state and responds to user input with appropriate updates to the UI."
 authors:
   - "gail-anderson"
-image: "https://foojay.io/wp-content/uploads/2022/05/playgame5.png"
+image: "/images/posts/2022/05/wordish-with-javafx-part-3/playgame5.png"
 categories:
   - "Game Development"
   - "Gluon"

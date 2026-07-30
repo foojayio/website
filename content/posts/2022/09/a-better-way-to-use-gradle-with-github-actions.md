@@ -7,7 +7,7 @@ description: "To enhance the experience of building Gradle projects on GitHub Ac
 canonical: "https://blog.gradle.org/gh-actions"
 authors:
   - "daz-deboer"
-image: "https://foojay.io/wp-content/uploads/2022/09/189988848-386c3d6b-d93d-4b4b-8c76-3f62a13ba3bf.png"
+image: "/images/posts/2022/09/a-better-way-to-use-gradle-with-github-actions/189988848-386c3d6b-d93d-4b4b-8c76-3f62a13ba3bf.png"
 categories:
   - "DevOps"
   - "Gradle"

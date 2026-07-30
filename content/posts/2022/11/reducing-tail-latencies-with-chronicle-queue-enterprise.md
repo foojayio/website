@@ -6,7 +6,7 @@ lastmod: "2022-11-09T15:08:08+00:00"
 description: "Fed up with pauses at the high percentiles in your application? You may want to consider Chronicle Queue Enterprise!"
 authors:
   - "jerry-shea"
-image: "https://foojay.io/wp-content/uploads/2022/10/Screen-Shot-2022-10-31-at-11.20.54-AM.png"
+image: "/images/posts/2022/11/reducing-tail-latencies-with-chronicle-queue-enterprise/Screen-Shot-2022-10-31-at-11.20.54-AM.png"
 categories:
   - "Developer Tools"
   - "DevOps"

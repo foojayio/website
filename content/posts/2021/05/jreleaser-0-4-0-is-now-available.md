@@ -6,7 +6,7 @@ lastmod: "2021-11-30T10:30:53+00:00"
 description: "JReleaser streamlines releases for Homebrew, Snapcraft, Docker, Chocolatey, JBang, Twitter, SdkMan, Zulip, Gitter, Slack, Teams, etc."
 authors:
   - "andres-almiray"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/05/jreleaser-0-4-0-is-now-available/Favicon-3-2.png"
 categories:
   - "Release Notes"
 tags:

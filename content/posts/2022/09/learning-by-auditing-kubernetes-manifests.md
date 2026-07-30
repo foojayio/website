@@ -7,7 +7,7 @@ description: "Find out about Checkov, which scans cloud infrastructure configura
 canonical: "https://blog.frankel.ch/learning-auditing-kubernetes-manifests/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2022/07/20211006091437_large.jpg"
+image: "/images/posts/2022/09/learning-by-auditing-kubernetes-manifests/20211006091437_large.jpg"
 categories:
   - "DevOps"
   - "Research"

@@ -6,7 +6,7 @@ lastmod: "2023-11-30T07:39:38+00:00"
 description: "CRaC is an OpenJDK project developed by Azul to solve the problem of \"slow\" startup times of the JVM in a microservice environment."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2022/12/crac-momentum-blog-hero.jpg"
+image: "/images/posts/2023/02/how-to-run-a-java-application-with-crac-in-a-docker-container/crac-momentum-blog-hero.jpg"
 categories:
   - "Cloud"
   - "CRaC"

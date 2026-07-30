@@ -6,7 +6,7 @@ lastmod: "2021-06-23T16:34:34+00:00"
 description: "Eclipse Collections 11.0: Set operations union, intersect, difference, symmetricDifference, isSubsetOf, isProperSubsetOf, cartesianProduct."
 authors:
   - "sirisha-pratha"
-image: "https://foojay.io/wp-content/uploads/2021/06/foojay-2-featured.png"
+image: "/images/posts/2021/06/primitive-set-operations-in-eclipse-collections-part-2/foojay-2-featured.png"
 categories:
   - "Eclipse"
   - "Use Cases"

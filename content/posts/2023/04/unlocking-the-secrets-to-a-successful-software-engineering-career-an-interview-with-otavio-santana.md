@@ -6,7 +6,7 @@ lastmod: "2023-04-03T14:17:26+00:00"
 description: "Discover insights from Otavio Santana on the importance of open-source contributions, mentorship, and simplicity in software engineering, as he shares valuable advice for developers at all career stages."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/04/Otavio-Santana-.png"
+image: "/images/posts/2023/04/unlocking-the-secrets-to-a-successful-software-engineering-career-an-interview-with-otavio-santana/Otavio-Santana-.png"
 categories:
   - "Interviews"
 tags:

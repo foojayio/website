@@ -6,7 +6,7 @@ lastmod: "2023-01-27T11:15:31+00:00"
 description: "We started with a small instance to see who wants to join and from here on we will see where this journey will bring us..."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2022/11/foojay-social-home.png"
+image: "/images/posts/2022/11/foojay-mastodon-service-here-it-is/foojay-social-home.png"
 categories:
   - "Developer Tools"
   - "Foojay"

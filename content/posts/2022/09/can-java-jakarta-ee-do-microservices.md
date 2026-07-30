@@ -7,7 +7,7 @@ description: "In this myth-busting webinar, Steve Millidge (founder of Payara), 
 canonical: "https://www.payara.fish/dismiss-the-myths/"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2022/08/javaeedoms.png"
+image: "/images/posts/2022/09/can-java-jakarta-ee-do-microservices/javaeedoms.png"
 categories:
   - "Jakarta EE"
   - "Microservices"
