@@ -360,6 +360,17 @@ public class ConvertPosts {
                 attrContent(doc, "meta[property=article:modified_time]"),
                 d.date);
 
+        // Co-locate this post's images under a dir mirroring its file path,
+        // e.g. content/posts/2026/07/my-post.md -> images/posts/2026/07/my-post/.
+        // Needs the publish date (for the bucket), so it's computed here.
+        String imageSubpath = OUTPUT_DIR.relativize(bucketDirFor(d))
+                .resolve(d.slug).toString().replace(java.io.File.separatorChar, '/');
+
+        // Pull the hero (og:image) local too, so it isn't hotlinked from the
+        // WordPress site that goes away at cutover. Non-foojay images are left as-is.
+        String localHero = HtmlToMarkdown.localizeImage(d.image, MD_OPTS, imageSubpath);
+        if (localHero != null) d.image = localHero;
+
         d.authors = authorSlugs(doc);
         if (d.authors.isEmpty()) {
             // Last resort: slugify the JSON-LD author name. Note this may not match
@@ -375,10 +386,6 @@ public class ConvertPosts {
         Element content = doc.selectFirst(SELECTOR_ARTICLE_CONTENT);
         if (content != null) {
             content.select(SELECTOR_CONTENT_NOISE).remove();
-            // Co-locate this post's images under a dir mirroring its file path,
-            // e.g. content/posts/2026/07/my-post.md -> images/posts/2026/07/my-post/.
-            String imageSubpath = OUTPUT_DIR.relativize(bucketDirFor(d))
-                    .resolve(d.slug).toString().replace(java.io.File.separatorChar, '/');
             HtmlToMarkdown.Result r = HtmlToMarkdown.convert(content, MD_OPTS, imageSubpath);
             d.body = r.markdown;
             d.jdoodle = r.jdoodle;
