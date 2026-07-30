@@ -1,0 +1,15 @@
+---
+title: "Shrey Batra"
+avatar: "/images/author/s/shrey-batra.jpg"
+avatarFull: "/images/author/s/shrey-batra-full.jpg"
+bio: "Head of Eng @ HROne | Founder @ Cosmocloud (Acquired) | Ex-LinkedIn | MongoDB Champion | Book Author | Patent Holder"
+bluesky: ""
+mastodon: ""
+linkedin: "https://www.linkedin.com/in/shreybatra/"
+github: ""
+youtube: ""
+website: ""
+aliases:
+  - "/today/author/shrey-batra/"
+frozen: false
+---
