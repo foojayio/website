@@ -1,0 +1,10 @@
+{{- /* Make root-relative image paths (e.g. the localized /images/pages/... the
+       conversion scripts produce) honour the baseURL subpath. Hugo's relURL
+       only prefixes the subpath when the path does NOT already start with "/",
+       so we strip the leading slash first. External/absolute/data URLs are left
+       untouched. */ -}}
+{{- $dest := .Destination -}}
+{{- if not (or (hasPrefix $dest "http://") (hasPrefix $dest "https://") (hasPrefix $dest "//") (hasPrefix $dest "data:")) -}}
+  {{- $dest = $dest | strings.TrimPrefix "/" | relURL -}}
+{{- end -}}
+<img src="{{ $dest }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy">

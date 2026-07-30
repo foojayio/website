@@ -1,0 +1,8 @@
+{{- /* Same baseURL-subpath handling as render-image, for links. Root-relative
+       internal links get the subpath; external/absolute/anchor/mailto links are
+       left untouched. */ -}}
+{{- $dest := .Destination -}}
+{{- if not (or (hasPrefix $dest "http://") (hasPrefix $dest "https://") (hasPrefix $dest "//") (hasPrefix $dest "mailto:") (hasPrefix $dest "#") (hasPrefix $dest "data:")) -}}
+  {{- $dest = $dest | strings.TrimPrefix "/" | relURL -}}
+{{- end -}}
+<a href="{{ $dest }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }} rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>

@@ -1,18 +1,14 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS org.jsoup:jsoup:1.17.2
-//DEPS com.vladsch.flexmark:flexmark-html2md-converter:0.64.8
+//SOURCES HtmlToMarkdown.java
 //JAVA 17+
 
-import com.vladsch.flexmark.html2md.converter.FlexmarkHtmlConverter;
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -43,32 +39,15 @@ public class ConvertPages {
 
     static final String BASE_URL = "https://foojay.io";
     static final Path OUTPUT_DIR = Path.of("content/pages");
-    static final Path PAGE_IMAGE_DIR = Path.of("static/images/pages");
-    static final String PAGE_IMAGE_URL_PREFIX = "/images/pages/";
-    static final String USER_AGENT = "foojay-hugo-migration-bot/1.0";
     static final int REQUEST_TIMEOUT_MS = 20_000;
     static final int POLITE_DELAY_MS = 250;
 
-    // Body images hosted on foojay.io die at cutover, so they are pulled local.
-    // Third-party images (youtube thumbs, badges, ...) are left untouched.
-    static final Pattern IMAGE_HREF = Pattern.compile("(?i)\\.(jpe?g|png|gif|webp|svg|avif)(?:[?#].*)?$");
-    static final String LOCAL_HOST_SUFFIX = "foojay.io";
-
-    // Interactive widgets embedded in page bodies. Detected here so the layout
-    // only loads their (heavier) scripts on the pages that actually use them.
-    // JDoodle: <div data-pym-src="https://www.jdoodle.com/plugin" ...> runnable snippets.
-    static final String SELECTOR_JDOODLE = "[data-pym-src]";
-    // EnlighterJS: <pre class="EnlighterJSRAW"> / <code class="EnlighterJSRAW"> code blocks.
-    static final String SELECTOR_ENLIGHTERJS = "pre.EnlighterJSRAW, code.EnlighterJSRAW";
-
-    // Block-level elements kept as raw HTML (Hugo renders them via unsafe
-    // goldmark) instead of being flattened to Markdown, because their
-    // tag/class/attributes are load-bearing: EnlighterJS needs pre.EnlighterJSRAW,
-    // JDoodle needs data-pym-src, and video embeds need their <iframe>.
-    static final String SELECTOR_PRESERVE =
-            "pre.EnlighterJSRAW, [data-pym-src], iframe, figure.wp-block-embed, .wp-block-embed";
-    static final String PRESERVE_TOKEN = "PRESERVEDHTMLBLOCKZZ";
-    static final String PRESERVE_TOKEN_END = "ZZEND";
+    // Body conversion (image localization + widget detection + HTML->Markdown)
+    // is shared with ConvertPosts.java via HtmlToMarkdown.java. Pages keep their
+    // images under static/images/pages/.
+    static final HtmlToMarkdown.Options MD_OPTS = new HtmlToMarkdown.Options(
+            Path.of("static/images/pages"), "/images/pages/", "foojay.io",
+            "foojay-hugo-migration-bot/1.0", REQUEST_TIMEOUT_MS);
 
     // Verified against foojay.io's live block-theme markup (2026-07): every Page
     // wraps its body in a single .about__content-wrapper (the theme reuses one
