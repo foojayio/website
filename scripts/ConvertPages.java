@@ -188,6 +188,8 @@ public class ConvertPages {
         fm.append(d.bodyHtml).append("\n");
 
         Files.writeString(f, fm.toString());
+
+        System.out.println("Done: " + d.title);
     }
 
     /** Mirrors the legacy path as nested directories, e.g.

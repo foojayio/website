@@ -1,9 +1,14 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 avatar: ""
+avatarFull: ""
 bio: ""
-twitter: ""
+bluesky: ""
+mastodon: ""
 linkedin: ""
+github: ""
+youtube: ""
+twitter: ""
 website: ""
 aliases: []
 ---

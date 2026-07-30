@@ -2,12 +2,16 @@
 <div class="layout-with-sidebar">
   <div class="content-col">
     <div class="author-profile">
-      {{ if .Params.avatar }}<img class="author-avatar" src="{{ .Params.avatar }}" alt="{{ .Title }}">{{ end }}
+      {{ $avatar := or .Params.avatarFull .Params.avatar }}
+      {{ if $avatar }}<img class="author-avatar" src="{{ $avatar }}" alt="{{ .Title }}">{{ end }}
       <h1>{{ .Title }}</h1>
       <p class="author-bio">{{ .Params.bio }}</p>
       <ul class="author-social">
-        {{ with .Params.twitter }}<li><a href="{{ . }}">Twitter/X</a></li>{{ end }}
+        {{ with .Params.bluesky }}<li><a href="{{ . }}" rel="me">Bluesky</a></li>{{ end }}
+        {{ with .Params.mastodon }}<li><a href="{{ . }}" rel="me">Mastodon</a></li>{{ end }}
         {{ with .Params.linkedin }}<li><a href="{{ . }}">LinkedIn</a></li>{{ end }}
+        {{ with .Params.github }}<li><a href="{{ . }}">GitHub</a></li>{{ end }}
+        {{ with .Params.youtube }}<li><a href="{{ . }}">YouTube</a></li>{{ end }}
         {{ with .Params.website }}<li><a href="{{ . }}">Website</a></li>{{ end }}
       </ul>
     </div>

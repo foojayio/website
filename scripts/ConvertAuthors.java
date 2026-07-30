@@ -2,21 +2,47 @@
 //DEPS org.jsoup:jsoup:1.17.2
 //JAVA 17+
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * Converts foojay.io author profile pages (/today/author/<slug>/) into Hugo
  * content markdown files under content/authors/.
+ *
+ * Why a markdown file per author (and not a data/authors.yaml)? Authors are
+ * first-class pages: each keeps its legacy URL (/today/author/<slug>/ via
+ * aliases), renders a profile page listing that author's articles
+ * (themes/foojay/layouts/authors/single.html), and is referenced by posts via
+ * their `author:` slug. A Hugo data file produces no pages and no URLs, so it
+ * can't carry any of that. Content files are the correct model here.
+ *
+ * Files are bucketed by the first letter of the slug
+ * (content/authors/a/<slug>.md, .../b/..., non-letters -> _) purely to keep the
+ * directory browsable, exactly like posts are bucketed by publish date. The
+ * permalink is slug-only (see hugo.toml), so the subdirectory has NO effect on
+ * the URL. author<->post linking uses the base filename, not the path, so it is
+ * unaffected too.
+ *
+ * Avatars are pulled LOCAL: the remote WordPress/Gravatar image is downloaded
+ * into static/images/author/<letter>/<slug>.<ext> and the frontmatter `avatar:`
+ * points at the site-absolute path. This keeps the static site self-contained
+ * so nothing hotlinks the WP install that goes away at cutover.
+ *
+ * All authors are collected by paginating the sorted index
+ * (/today/author/page/N/?posts_per_page=9&sort_by=name_asc). Past the final
+ * page the site keeps returning that same last page, so pagination stops as
+ * soon as a page contributes no new author URLs.
  *
  * Usage:
  *   jbang scripts/ConvertAuthors.java
@@ -26,25 +52,33 @@ import java.util.regex.Pattern;
  * conventions, not verified against the site's actual raw HTML/class names.
  * Tune SELECTOR_* below against a couple of real author pages first.
  *
- * Idempotent: re-running updates existing content/authors/<slug>.md files.
- * Respects `frozen: true` in an author's frontmatter to skip overwriting
- * hand-edited profiles.
+ * Idempotent: re-running updates existing author files (found by slug wherever
+ * they live, so a file that moved buckets isn't duplicated) and reuses an
+ * already-downloaded avatar. Respects `frozen: true` to skip hand-edited
+ * profiles (checked before any network fetch).
  */
 public class ConvertAuthors {
 
     static final String BASE_URL = "https://foojay.io";
-    static final String AUTHOR_INDEX_PATH = "/today/author/";
     static final Path OUTPUT_DIR = Path.of("content/authors");
+    static final Path IMAGE_DIR = Path.of("static/images/author");
+    static final String AVATAR_URL_PREFIX = "/images/author/";
     static final int REQUEST_TIMEOUT_MS = 20_000;
     static final int POLITE_DELAY_MS = 250;
+    static final int MAX_AUTHOR_PAGES = 500; // safety cap; real count is ~38
+    static final String USER_AGENT = "foojay-hugo-migration-bot/1.0";
 
+    // Verified against foojay.io's live author-card markup (2026-07).
     static final String SELECTOR_AUTHOR_INDEX_LINKS = "a[href*=/today/author/]";
-    static final String SELECTOR_AVATAR = "img.avatar, .author-avatar img, article img";
-    static final String SELECTOR_BIO = ".author-bio, .author-description, article p";
-    static final String SELECTOR_SOCIAL_LINKS = ".author-social a, .social-links a";
+    static final String SELECTOR_AVATAR = ".author-card__avatar-box img, img.avatar";
+    static final String SELECTOR_BIO = ".author-card__description";
+    static final String SELECTOR_SOCIAL_LINKS = ".author-card__social-list a";
+
+    static final Pattern AUTHOR_SLUG = Pattern.compile("/today/author/([^/]+)/?$");
 
     public static void main(String[] args) throws Exception {
         Files.createDirectories(OUTPUT_DIR);
+        Files.createDirectories(IMAGE_DIR);
 
         String singleUrl = null;
         for (int i = 0; i < args.length; i++) {
@@ -52,9 +86,11 @@ public class ConvertAuthors {
         }
 
         if (singleUrl != null) {
-            AuthorData d = scrapeAuthor(singleUrl);
+            String slug = slugFromUrl(singleUrl);
+            AuthorData d = scrapeAuthor(singleUrl, slug);
+            localizeAvatars(d);
             writeAuthor(d);
-            System.out.println("Wrote " + d.slug + ".md (single-author test run)");
+            System.out.println("Wrote " + bucketFor(d.slug) + "/" + d.slug + ".md (single-author test run), avatar=" + d.avatar);
             return;
         }
 
@@ -63,12 +99,14 @@ public class ConvertAuthors {
 
         int written = 0, skipped = 0, failed = 0;
         for (String url : authorUrls) {
+            String slug = slugFromUrl(url);
+            if (isFrozen(slug)) {
+                skipped++;
+                continue;
+            }
             try {
-                AuthorData d = scrapeAuthor(url);
-                if (isFrozen(d.slug)) {
-                    skipped++;
-                    continue;
-                }
+                AuthorData d = scrapeAuthor(url, slug);
+                localizeAvatars(d);
                 writeAuthor(d);
                 written++;
                 Thread.sleep(POLITE_DELAY_MS);
@@ -80,56 +118,226 @@ public class ConvertAuthors {
         System.out.printf("Done. written=%d skipped(frozen)=%d failed=%d%n", written, skipped, failed);
     }
 
+    /**
+     * Walks the sorted author index page by page. Stops when a page yields no
+     * author URL not already seen -- which is exactly what happens once we run
+     * past the last real page, since the site then keeps serving that final
+     * page verbatim.
+     */
     static Set<String> collectAuthorUrls() throws IOException {
         Set<String> urls = new LinkedHashSet<>();
-        Document doc = Jsoup.connect(BASE_URL + AUTHOR_INDEX_PATH)
-                .userAgent("foojay-hugo-migration-bot/1.0")
-                .timeout(REQUEST_TIMEOUT_MS)
-                .get();
-        for (Element a : doc.select(SELECTOR_AUTHOR_INDEX_LINKS)) {
-            String href = a.absUrl("href");
-            Matcher m = Pattern.compile("/today/author/([^/]+)/?$").matcher(href);
-            if (m.find()) {
-                urls.add(BASE_URL + "/today/author/" + m.group(1) + "/");
+        for (int page = 1; page <= MAX_AUTHOR_PAGES; page++) {
+            String pageUrl = (page == 1)
+                    ? BASE_URL + "/today/author/?posts_per_page=9&sort_by=name_asc"
+                    : BASE_URL + "/today/author/page/" + page + "/?posts_per_page=9&sort_by=name_asc";
+
+            int before = urls.size();
+            try {
+                Document doc = Jsoup.connect(pageUrl)
+                        .userAgent(USER_AGENT)
+                        .timeout(REQUEST_TIMEOUT_MS)
+                        .get();
+                for (Element a : doc.select(SELECTOR_AUTHOR_INDEX_LINKS)) {
+                    Matcher m = AUTHOR_SLUG.matcher(a.absUrl("href"));
+                    if (m.find()) {
+                        String slug = m.group(1);
+                        if ("page".equals(slug)) continue; // pagination links, not authors
+                        urls.add(BASE_URL + "/today/author/" + slug + "/");
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("  author index page " + page + " failed: " + e.getMessage());
+                break;
             }
+
+            int added = urls.size() - before;
+            System.out.printf("  page %d: +%d new (total %d)%n", page, added, urls.size());
+            if (added == 0) break; // past the last page: no new authors -> done
+            sleepPolite();
         }
         return urls;
     }
 
-    static AuthorData scrapeAuthor(String url) throws IOException {
+    static AuthorData scrapeAuthor(String url, String slug) throws IOException {
         Document doc = Jsoup.connect(url)
-                .userAgent("foojay-hugo-migration-bot/1.0")
+                .userAgent(USER_AGENT)
                 .timeout(REQUEST_TIMEOUT_MS)
                 .get();
 
         AuthorData d = new AuthorData();
-        Matcher m = Pattern.compile("/today/author/([^/]+)/?$").matcher(url);
-        d.slug = m.find() ? m.group(1) : slugify(url);
+        d.slug = slug;
 
         d.name = firstNonBlank(
                 textOrNull(doc.selectFirst("h1")),
                 metaContent(doc, "og:title"),
                 doc.title());
 
-        Element avatar = doc.selectFirst(SELECTOR_AVATAR);
-        d.avatar = avatar != null ? avatar.absUrl("src") : "";
+        d.avatar = bestAvatarUrl(doc.selectFirst(SELECTOR_AVATAR));
 
         Element bio = doc.selectFirst(SELECTOR_BIO);
         d.bio = bio != null ? bio.text() : "";
 
         for (Element a : doc.select(SELECTOR_SOCIAL_LINKS)) {
-            String href = a.absUrl("href");
-            if (href.contains("twitter.com") || href.contains("x.com")) d.twitter = href;
-            else if (href.contains("linkedin.com")) d.linkedin = href;
-            else if (!href.isBlank() && d.website == null) d.website = href;
+            classifySocial(d, a.absUrl("href"));
         }
 
         return d;
     }
 
+    /**
+     * Routes a social link to the right AuthorData field. foojay's author-card
+     * links are icon-only (SVG, no text), so the platform is inferred from the
+     * host. First link of each kind wins; anything unrecognised becomes the
+     * website. youtube is checked before mastodon because both use /@handle.
+     */
+    static void classifySocial(AuthorData d, String href) {
+        if (href == null || href.isBlank()) return;
+        String h = href.toLowerCase(Locale.ROOT);
+        if (h.contains("bsky.app") || h.contains("bluesky")) { if (d.bluesky == null) d.bluesky = href; }
+        else if (h.contains("linkedin.com")) { if (d.linkedin == null) d.linkedin = href; }
+        else if (h.contains("github.com")) { if (d.github == null) d.github = href; }
+        else if (h.contains("youtube.com") || h.contains("youtu.be")) { if (d.youtube == null) d.youtube = href; }
+        else if (isMastodon(h)) { if (d.mastodon == null) d.mastodon = href; }
+        else if (d.website == null) d.website = href;
+    }
+
+    static boolean isMastodon(String lowerHref) {
+        // instance domains vary (foojay.social, fosstodon.org, mastodon.social, ...);
+        // the reliable shared signals are a mastodon/fosstodon host, a .social
+        // host, or the /@handle path convention.
+        return lowerHref.contains("mastodon")
+                || lowerHref.contains("fosstodon")
+                || lowerHref.contains(".social/")
+                || lowerHref.contains("/@");
+    }
+
+    /**
+     * The largest avatar URL the img exposes: the highest-density/width
+     * candidate from srcset (foojay serves a 192x192 at 2x), else src.
+     */
+    static String bestAvatarUrl(Element img) {
+        if (img == null) return "";
+        String srcset = img.attr("srcset");
+        String best = null;
+        double bestScore = -1;
+        for (String candidate : srcset.split(",")) {
+            String[] tok = candidate.trim().split("\\s+");
+            if (tok[0].isBlank()) continue;
+            double score = 1;
+            if (tok.length > 1 && tok[1].matches("\\d+(\\.\\d+)?[wx]")) {
+                score = Double.parseDouble(tok[1].substring(0, tok[1].length() - 1));
+            }
+            if (score > bestScore && tok[0].startsWith("http")) {
+                bestScore = score;
+                best = tok[0];
+            }
+        }
+        return best != null ? best : img.absUrl("src");
+    }
+
+    /**
+     * Pulls the avatar local in two versions:
+     *   avatar      -> the URL as served (foojay's 192x192 thumbnail)
+     *   avatarFull  -> the same URL with the WordPress "-WxH" size suffix
+     *                  stripped, i.e. the full-size original upload
+     * Both land in the author's letter bucket. If stripping the suffix changes
+     * nothing (no sized thumbnail), avatarFull just mirrors avatar.
+     */
+    static void localizeAvatars(AuthorData d) throws IOException {
+        if (d.avatar == null || d.avatar.isBlank()) {
+            d.avatar = "";
+            d.avatarFull = "";
+            return;
+        }
+        String bucket = bucketFor(d.slug);
+        String remoteThumb = d.avatar;
+        String remoteFull = stripWpSize(remoteThumb);
+
+        d.avatar = localizeOne(remoteThumb, d.slug, bucket);
+        d.avatarFull = remoteFull.equals(remoteThumb)
+                ? d.avatar
+                : localizeOne(remoteFull, d.slug + "-full", bucket);
+    }
+
+    /**
+     * Localizes one remote image to static/images/author/<bucket>/<baseName>.<ext>.
+     * Reuses an already-downloaded file (moving it into the right bucket if an
+     * older run left it elsewhere); otherwise downloads it. Falls back to the
+     * remote URL if the download fails so the profile still renders.
+     */
+    static String localizeOne(String remoteUrl, String baseName, String bucket) throws IOException {
+        Path bucketDir = IMAGE_DIR.resolve(bucket);
+        Path existing = findExistingAvatar(baseName);
+        if (existing != null) {
+            Path canonical = bucketDir.resolve(existing.getFileName());
+            if (!existing.equals(canonical)) {
+                Files.createDirectories(bucketDir);
+                Files.move(existing, canonical, StandardCopyOption.REPLACE_EXISTING);
+            }
+            return AVATAR_URL_PREFIX + bucket + "/" + canonical.getFileName();
+        }
+        return downloadAvatar(remoteUrl, baseName, bucket);
+    }
+
+    static String downloadAvatar(String remoteUrl, String baseName, String bucket) {
+        if (remoteUrl == null || remoteUrl.isBlank()) return "";
+        try {
+            Connection.Response res = Jsoup.connect(remoteUrl)
+                    .userAgent(USER_AGENT)
+                    .timeout(REQUEST_TIMEOUT_MS)
+                    .ignoreContentType(true)
+                    .maxBodySize(0)
+                    .execute();
+            String ext = extensionFor(remoteUrl, res.contentType());
+            Path bucketDir = IMAGE_DIR.resolve(bucket);
+            Files.createDirectories(bucketDir);
+            Files.write(bucketDir.resolve(baseName + ext), res.bodyAsBytes());
+            return AVATAR_URL_PREFIX + bucket + "/" + baseName + ext;
+        } catch (IOException e) {
+            System.err.println("  avatar download failed for " + baseName + ": " + e.getMessage() + " (keeping remote URL)");
+            return remoteUrl;
+        }
+    }
+
+    /** Removes a WordPress "-WxH" size suffix (e.g. -192x192) before the file extension. */
+    static String stripWpSize(String url) {
+        return url.replaceFirst("-\\d+x\\d+(?=\\.[A-Za-z0-9]+(?:[?#].*)?$)", "");
+    }
+
+    /** Recursively locates a previously downloaded avatar for baseName, wherever it lives. */
+    static Path findExistingAvatar(String baseName) {
+        if (!Files.isDirectory(IMAGE_DIR)) return null;
+        try (Stream<Path> s = Files.walk(IMAGE_DIR)) {
+            return s.filter(Files::isRegularFile)
+                    .filter(p -> stripExtension(p.getFileName().toString()).equals(baseName))
+                    .findFirst().orElse(null);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    static String extensionFor(String url, String contentType) {
+        if (contentType != null) {
+            String ct = contentType.toLowerCase(Locale.ROOT);
+            if (ct.contains("png")) return ".png";
+            if (ct.contains("gif")) return ".gif";
+            if (ct.contains("webp")) return ".webp";
+            if (ct.contains("svg")) return ".svg";
+            if (ct.contains("jpeg") || ct.contains("jpg")) return ".jpg";
+        }
+        String clean = url.replaceAll("[?#].*$", "").toLowerCase(Locale.ROOT);
+        int dot = clean.lastIndexOf('.');
+        int slash = clean.lastIndexOf('/');
+        if (dot > slash && dot < clean.length() - 1) {
+            String ext = clean.substring(dot);
+            if (ext.matches("\\.(png|gif|webp|svg|jpe?g)")) return ext.equals(".jpeg") ? ".jpg" : ext;
+        }
+        return ".jpg";
+    }
+
     static boolean isFrozen(String slug) {
-        Path f = OUTPUT_DIR.resolve(slug + ".md");
-        if (!Files.exists(f)) return false;
+        Path f = findExistingAuthorFile(slug);
+        if (f == null) return false;
         try {
             return Files.readString(f).contains("frozen: true");
         } catch (IOException e) {
@@ -138,20 +346,72 @@ public class ConvertAuthors {
     }
 
     static void writeAuthor(AuthorData d) throws IOException {
+        String bucket = bucketFor(d.slug);
+        Path bucketDir = OUTPUT_DIR.resolve(bucket);
+        Path target = bucketDir.resolve(d.slug + ".md");
+
         StringBuilder fm = new StringBuilder();
         fm.append("---\n");
         fm.append("title: ").append(yamlString(d.name)).append("\n");
         fm.append("avatar: ").append(yamlString(d.avatar)).append("\n");
+        fm.append("avatarFull: ").append(yamlString(d.avatarFull)).append("\n");
         fm.append("bio: ").append(yamlString(d.bio)).append("\n");
-        fm.append("twitter: ").append(yamlString(d.twitter)).append("\n");
+        fm.append("bluesky: ").append(yamlString(d.bluesky)).append("\n");
+        fm.append("mastodon: ").append(yamlString(d.mastodon)).append("\n");
         fm.append("linkedin: ").append(yamlString(d.linkedin)).append("\n");
+        fm.append("github: ").append(yamlString(d.github)).append("\n");
+        fm.append("youtube: ").append(yamlString(d.youtube)).append("\n");
         fm.append("website: ").append(yamlString(d.website)).append("\n");
         fm.append("aliases:\n");
         fm.append("  - ").append(yamlString("/today/author/" + d.slug + "/")).append("\n");
         fm.append("frozen: false\n");
         fm.append("---\n");
 
-        Files.writeString(OUTPUT_DIR.resolve(d.slug + ".md"), fm.toString());
+        Path existing = findExistingAuthorFile(d.slug);
+        Files.createDirectories(bucketDir);
+        Files.writeString(target, fm.toString());
+        if (existing != null && !existing.equals(target)) {
+            Files.delete(existing); // relocate: don't leave a stale copy in the old location
+        }
+
+        System.out.println("Done author: " + d.slug);
+    }
+
+    /** Recursively locates an existing author markdown file for slug, wherever it lives. */
+    static Path findExistingAuthorFile(String slug) {
+        if (!Files.isDirectory(OUTPUT_DIR)) return null;
+        String target = slug + ".md";
+        try (Stream<Path> s = Files.walk(OUTPUT_DIR)) {
+            return s.filter(Files::isRegularFile)
+                    .filter(p -> p.getFileName().toString().equals(target))
+                    .findFirst().orElse(null);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    static String bucketFor(String slug) {
+        if (slug == null || slug.isEmpty()) return "_";
+        char c = Character.toLowerCase(slug.charAt(0));
+        return (c >= 'a' && c <= 'z') ? String.valueOf(c) : "_";
+    }
+
+    static String slugFromUrl(String url) {
+        Matcher m = AUTHOR_SLUG.matcher(url);
+        return m.find() ? m.group(1) : slugify(url);
+    }
+
+    static String stripExtension(String filename) {
+        int dot = filename.lastIndexOf('.');
+        return dot > 0 ? filename.substring(0, dot) : filename;
+    }
+
+    static void sleepPolite() {
+        try {
+            Thread.sleep(POLITE_DELAY_MS);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     static String metaContent(Document doc, String property) {
@@ -169,7 +429,7 @@ public class ConvertAuthors {
     }
 
     static String slugify(String s) {
-        return s.toLowerCase().replaceAll("[^a-z0-9]+", "-").replaceAll("^-+|-+$", "");
+        return s.toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9]+", "-").replaceAll("^-+|-+$", "");
     }
 
     static String yamlString(String s) {
@@ -179,6 +439,16 @@ public class ConvertAuthors {
     }
 
     static class AuthorData {
-        String slug, name, avatar, bio, twitter, linkedin, website;
+        String slug;
+        String name;
+        String avatar;
+        String avatarFull;
+        String bio;
+        String bluesky;
+        String mastodon;
+        String linkedin;
+        String github;
+        String youtube;
+        String website;
     }
 }

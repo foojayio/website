@@ -344,7 +344,8 @@ public class ConvertPosts {
         Path out = findExistingPostFile(d.slug).orElseGet(() -> bucketDirFor(d).resolve(d.slug + ".md"));
         Files.createDirectories(out.getParent());
         Files.writeString(out, fm.toString());
-        if (verbose) System.out.println("Wrote " + out);
+
+        System.out.println("Done post: " + d.title);
     }
 
     // ---- small utils --------------------------------------------------
