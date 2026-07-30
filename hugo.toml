@@ -1,4 +1,5 @@
-baseURL = "https://foojay.io/"
+baseURL = "https://foojayio.github.io/website/"
+#"https://foojay.io/"
 languageCode = "en-us"
 title = "foojay.io - Friends of OpenJDK"
 theme = "foojay"
