@@ -2,7 +2,7 @@
 //DEPS org.jsoup:jsoup:1.17.2
 //DEPS com.fasterxml.jackson.core:jackson-databind:2.17.1
 //SOURCES HtmlToMarkdown.java
-//JAVA 17+
+//JAVA 21+
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,6 +20,12 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -34,7 +40,11 @@ import java.util.stream.Stream;
  *   jbang scripts/ConvertPosts.java --max-pages 5         (cap listing pages -- quick test)
  *   jbang scripts/ConvertPosts.java --days 14             (only posts published in the last 14 days)
  *   jbang scripts/ConvertPosts.java --since 2026-01-01    (only posts published on/after a date)
+ *   jbang scripts/ConvertPosts.java --concurrency 12      (posts scraped per page in parallel; default 8)
  *   jbang scripts/ConvertPosts.java --url https://foojay.io/today/some-post/   (single post)
+ *
+ * Each listing page's posts are scraped + converted concurrently on virtual
+ * threads (see crawlAndConvert), bounded by --concurrency to stay polite.
  *
  * The --days/--since flags are handy for a small, recent test set; pair them
  * with --max-pages to bound how many listing pages get fetched (date-filtering
@@ -77,8 +87,12 @@ public class ConvertPosts {
     static final String LISTING_PATH = "/today/";
     static final Path OUTPUT_DIR = Path.of("content/posts");
     static final int REQUEST_TIMEOUT_MS = 20_000;
-    static final int POLITE_DELAY_MS = 250; // be a good citizen against your own site
     static final int MAX_EMPTY_PAGES = 2;   // with --days/--since: stop after this many consecutive out-of-window pages
+    // Posts on a listing page are scraped + converted concurrently on virtual
+    // threads. This bounds how many requests hit the site at once -- a courtesy
+    // to your own server, and enough to hide network latency. Override with
+    // --concurrency N.
+    static final int DEFAULT_CONCURRENCY = 8;
 
     // Body conversion (image localization + widget detection + HTML->Markdown)
     // is shared with ConvertPages.java via HtmlToMarkdown.java. Posts keep their
@@ -130,6 +144,7 @@ public class ConvertPosts {
         Integer maxPages = null;
         String singleUrl = null;
         OffsetDateTime cutoff = null; // only convert posts published on/after this
+        int concurrency = DEFAULT_CONCURRENCY;
         for (int i = 0; i < args.length; i++) {
             if ("--max-pages".equals(args[i]) && i + 1 < args.length) {
                 maxPages = Integer.parseInt(args[++i]);
@@ -139,6 +154,8 @@ public class ConvertPosts {
                 cutoff = OffsetDateTime.now().minusDays(Long.parseLong(args[++i]));
             } else if ("--since".equals(args[i]) && i + 1 < args.length) {
                 cutoff = LocalDate.parse(args[++i]).atStartOfDay().atOffset(ZoneOffset.UTC);
+            } else if ("--concurrency".equals(args[i]) && i + 1 < args.length) {
+                concurrency = Math.max(1, Integer.parseInt(args[++i]));
             }
         }
 
@@ -153,7 +170,7 @@ public class ConvertPosts {
             System.out.println("Only converting posts published on/after " + cutoff.toLocalDate() + ".");
         }
 
-        int[] r = crawlAndConvert(cutoff, maxPages);
+        int[] r = crawlAndConvert(cutoff, maxPages, concurrency);
         // writePost() files each post under content/posts/<year>/<month>/<slug>.md.
         System.out.printf("Done. written=%d skipped(frozen)=%d failed=%d%n", r[0], r[1], r[2]);
     }
@@ -164,6 +181,13 @@ public class ConvertPosts {
      * Walks the /today/ section-blog feed, scraping and converting each post.
      * Returns {written, skippedFrozen, failed}.
      *
+     * The listing crawl (following pagination) stays sequential, but each page's
+     * posts -- the network-heavy part: fetch + image downloads + write -- are
+     * scraped and converted concurrently on virtual threads, since posts are
+     * independent (distinct output file and image directory). A Semaphore caps how
+     * many requests run at once (--concurrency); each page is a barrier so the
+     * cutoff bookkeeping below stays correct.
+     *
      * With a cutoff (--days / --since) only posts *published* on/after it are
      * written; older ones are skipped. We don't stop at the first old post: the
      * feed is ordered by the card's display date, which can differ from the
@@ -172,59 +196,102 @@ public class ConvertPosts {
      * MAX_EMPTY_PAGES consecutive listing pages with nothing in-window. Pair with
      * --max-pages to hard-cap the number of listing pages fetched for a quick test.
      */
-    static int[] crawlAndConvert(OffsetDateTime cutoff, Integer maxPages)
+    static int[] crawlAndConvert(OffsetDateTime cutoff, Integer maxPages, int concurrency)
             throws IOException, InterruptedException {
-        int written = 0, skippedFrozen = 0, failed = 0, emptyPages = 0;
-        Set<String> seen = new LinkedHashSet<>();
-        String pageUrl = BASE_URL + LISTING_PATH;
-        int page = 1;
+        AtomicInteger written = new AtomicInteger();
+        AtomicInteger skippedFrozen = new AtomicInteger();
+        AtomicInteger failed = new AtomicInteger();
+        Set<String> seen = new HashSet<>();
+        Semaphore gate = new Semaphore(concurrency); // bound concurrent requests
 
-        while (pageUrl != null) {
-            System.out.println("Listing page " + page + ": " + pageUrl);
-            Document doc = fetch(pageUrl);
+        try (ExecutorService pool = Executors.newVirtualThreadPerTaskExecutor()) {
+            String pageUrl = BASE_URL + LISTING_PATH;
+            int page = 1;
+            int emptyPages = 0;
 
-            boolean sawPost = false, anyInWindow = false;
-            for (Element a : doc.select(SELECTOR_LISTING_POST_LINKS)) {
-                String href = a.absUrl("href");
-                if (!isLikelyPostUrl(href)) continue;
-                String url = stripTrailingSlash(href) + "/";
-                if (!seen.add(url)) continue;
-                try {
-                    PostData data = scrapePost(url);
-                    sawPost = true;
-                    if (cutoff != null && isOlderThan(data.date, cutoff)) {
-                        continue; // published before the window -- skip, keep crawling
-                    }
-                    anyInWindow = true;
-                    if (isFrozen(data.slug)) {
-                        skippedFrozen++;
-                    } else {
-                        writePost(data, false);
-                        written++;
-                    }
-                    Thread.sleep(POLITE_DELAY_MS);
-                } catch (Exception e) {
-                    System.err.println("FAILED: " + url + " -> " + e.getMessage());
-                    failed++;
+            while (pageUrl != null) {
+                System.out.println("Listing page " + page + ": " + pageUrl);
+                Document doc = fetch(pageUrl);
+
+                List<String> pageUrls = new ArrayList<>();
+                for (Element a : doc.select(SELECTOR_LISTING_POST_LINKS)) {
+                    String href = a.absUrl("href");
+                    if (!isLikelyPostUrl(href)) continue;
+                    String url = stripTrailingSlash(href) + "/";
+                    if (seen.add(url)) pageUrls.add(url);
                 }
-            }
 
-            if (cutoff != null && sawPost && !anyInWindow) {
-                if (++emptyPages >= MAX_EMPTY_PAGES) {
-                    System.out.println("No in-window posts for " + emptyPages + " pages; stopping crawl.");
-                    break;
+                List<Future<Boolean>> futures = new ArrayList<>();
+                for (String url : pageUrls) {
+                    futures.add(pool.submit(
+                            () -> handlePost(url, cutoff, gate, written, skippedFrozen, failed)));
                 }
-            } else {
-                emptyPages = 0;
-            }
+                boolean anyInWindow = awaitAnyInWindow(futures);
 
-            Element next = doc.selectFirst(SELECTOR_PAGINATION_NEXT);
-            pageUrl = next != null ? next.absUrl("href") : null;
-            page++;
-            if (maxPages != null && page > maxPages) break;
-            Thread.sleep(POLITE_DELAY_MS);
+                if (cutoff != null && !pageUrls.isEmpty() && !anyInWindow) {
+                    if (++emptyPages >= MAX_EMPTY_PAGES) {
+                        System.out.println("No in-window posts for " + emptyPages + " pages; stopping crawl.");
+                        break;
+                    }
+                } else {
+                    emptyPages = 0;
+                }
+
+                Element next = doc.selectFirst(SELECTOR_PAGINATION_NEXT);
+                pageUrl = next != null ? next.absUrl("href") : null;
+                page++;
+                if (maxPages != null && page > maxPages) break;
+            }
         }
-        return new int[]{written, skippedFrozen, failed};
+        return new int[]{written.get(), skippedFrozen.get(), failed.get()};
+    }
+
+    /** Waits for all of a page's post tasks and reports whether any was in-window. */
+    static boolean awaitAnyInWindow(List<Future<Boolean>> futures) throws InterruptedException {
+        boolean any = false;
+        for (Future<Boolean> f : futures) {
+            try {
+                if (Boolean.TRUE.equals(f.get())) any = true;
+            } catch (ExecutionException ignored) {
+                // handlePost already logged and counted the failure
+            }
+        }
+        return any;
+    }
+
+    /**
+     * Scrapes and converts one post. Returns true if it was within the
+     * --days/--since window (or there is no cutoff), false if it was skipped as
+     * out-of-window or failed. Safe to run concurrently: it writes a distinct
+     * file and its own image directory. The gate bounds concurrent requests.
+     */
+    static boolean handlePost(String url, OffsetDateTime cutoff, Semaphore gate,
+                              AtomicInteger written, AtomicInteger skippedFrozen, AtomicInteger failed) {
+        try {
+            gate.acquire();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return false;
+        }
+        try {
+            PostData data = scrapePost(url);
+            if (cutoff != null && isOlderThan(data.date, cutoff)) {
+                return false; // published before the window -- skip
+            }
+            if (isFrozen(data.slug)) {
+                skippedFrozen.incrementAndGet();
+            } else {
+                writePost(data, false);
+                written.incrementAndGet();
+            }
+            return true;
+        } catch (Exception e) {
+            System.err.println("FAILED: " + url + " -> " + e.getMessage());
+            failed.incrementAndGet();
+            return false;
+        } finally {
+            gate.release();
+        }
     }
 
     /** True if an ISO-8601 date string is strictly before the cutoff. Unknown or
