@@ -8,7 +8,7 @@ aliases:
 frozen: false
 ---
 
-![Azul](/images/pages/2025/02/Frame-4.svg)  
+![Azul](/images/pages/community-support/Frame-4.svg)  
 
 ### Azul
 
