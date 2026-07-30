@@ -1,0 +1,15 @@
+{{/* EnlighterJS syntax highlighting for legacy WordPress code blocks
+     (<pre class="EnlighterJSRAW"> / <code class="EnlighterJSRAW">).
+
+     The JS + CSS are vendored from the foojay WordPress plugin (EnlighterJS
+     3.6.0, MPL 2.0) into themes/foojay/static/vendor/enlighterjs/ because the
+     originals were served from wp-content and disappear at cutover. The init
+     config below is copied verbatim from the live site (theme "dracula", etc.).
+
+     Loaded only on pages whose frontmatter has `enlighterjs: true`, which
+     ConvertPages.java sets when it finds EnlighterJSRAW blocks. */}}
+<link rel="stylesheet" href="{{ "vendor/enlighterjs/enlighterjs.min.css" | relURL }}">
+<script src="{{ "vendor/enlighterjs/enlighterjs.min.js" | relURL }}"></script>
+<script>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"scroll","linenumbers":true,"theme":"dracula","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>

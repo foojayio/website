@@ -54,5 +54,10 @@
   {{ partial "footer.html" . }}
 
   <script src="{{ "js/nav.js" | relURL }}" defer></script>
+
+  {{/* Interactive widgets migrated from WordPress — loaded only on the pages
+       that use them (flags set by the conversion scripts). */}}
+  {{ if .Params.enlighterjs }}{{ partial "enlighterjs.html" . }}{{ end }}
+  {{ if .Params.jdoodle }}{{ partial "jdoodle.html" . }}{{ end }}
 </body>
 </html>

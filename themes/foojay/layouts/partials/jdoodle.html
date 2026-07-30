@@ -1,0 +1,10 @@
+{{/* JDoodle runnable code snippets. Each snippet in the body is a
+     <div data-pym-src="https://www.jdoodle.com/plugin" ...>; the pym loader
+     below finds them and swaps in an interactive iframe.
+
+     The script stays hosted on jdoodle.com (it is not a WordPress asset), so it
+     keeps working after the WordPress site is retired — nothing to vendor.
+
+     Loaded only on pages whose frontmatter has `jdoodle: true`, which
+     ConvertPages.java sets when it finds a [data-pym-src] element. */}}
+<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" defer></script>

@@ -1,11 +1,14 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS org.jsoup:jsoup:1.17.2
+//DEPS com.vladsch.flexmark:flexmark-html2md-converter:0.64.8
 //JAVA 17+
 
+import com.vladsch.flexmark.html2md.converter.FlexmarkHtmlConverter;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -57,6 +60,15 @@ public class ConvertPages {
     static final String SELECTOR_JDOODLE = "[data-pym-src]";
     // EnlighterJS: <pre class="EnlighterJSRAW"> / <code class="EnlighterJSRAW"> code blocks.
     static final String SELECTOR_ENLIGHTERJS = "pre.EnlighterJSRAW, code.EnlighterJSRAW";
+
+    // Block-level elements kept as raw HTML (Hugo renders them via unsafe
+    // goldmark) instead of being flattened to Markdown, because their
+    // tag/class/attributes are load-bearing: EnlighterJS needs pre.EnlighterJSRAW,
+    // JDoodle needs data-pym-src, and video embeds need their <iframe>.
+    static final String SELECTOR_PRESERVE =
+            "pre.EnlighterJSRAW, [data-pym-src], iframe, figure.wp-block-embed, .wp-block-embed";
+    static final String PRESERVE_TOKEN = "PRESERVEDHTMLBLOCKZZ";
+    static final String PRESERVE_TOKEN_END = "ZZEND";
 
     // Verified against foojay.io's live block-theme markup (2026-07): every Page
     // wraps its body in a single .about__content-wrapper (the theme reuses one
@@ -183,13 +195,56 @@ public class ConvertPages {
             localizeImages(content);
             d.jdoodle = !content.select(SELECTOR_JDOODLE).isEmpty();
             d.enlighterjs = !content.select(SELECTOR_ENLIGHTERJS).isEmpty();
-            d.bodyHtml = content.html();
+            d.body = htmlToMarkdown(content);
         } else {
-            d.bodyHtml = "";
+            d.body = "";
             System.err.println("  WARNING: no content matched for " + url);
         }
 
         return d;
+    }
+
+    // ---- html -> markdown ------------------------------------------------
+
+    /**
+     * Converts the page body to Markdown. Load-bearing HTML blocks (EnlighterJS
+     * code, JDoodle snippets, video embeds -- see SELECTOR_PRESERVE) are swapped
+     * out for placeholder tokens first, so the converter can't flatten away the
+     * classes/attributes they depend on, then restored verbatim afterwards.
+     * Hugo renders the restored raw HTML via goldmark's unsafe mode.
+     */
+    static String htmlToMarkdown(Element content) {
+        List<String> preserved = new ArrayList<>();
+        for (Element el : outermostMatches(content, SELECTOR_PRESERVE)) {
+            String token = PRESERVE_TOKEN + preserved.size() + PRESERVE_TOKEN_END;
+            preserved.add(el.outerHtml());
+            el.replaceWith(new Element("p").text(token)); // block-level placeholder
+        }
+
+        String md = FlexmarkHtmlConverter.builder().build().convert(content.html()).trim();
+
+        for (int i = 0; i < preserved.size(); i++) {
+            md = md.replace(PRESERVE_TOKEN + i + PRESERVE_TOKEN_END,
+                    "\n\n" + preserved.get(i) + "\n\n");
+        }
+        return md.trim();
+    }
+
+    /** Matched elements that are not themselves nested inside another match. */
+    static List<Element> outermostMatches(Element root, String selector) {
+        Elements matches = root.select(selector);
+        List<Element> outermost = new ArrayList<>();
+        for (Element el : matches) {
+            boolean nested = false;
+            for (Node p = el.parent(); p != null; p = p.parent()) {
+                if (matches.contains(p)) {
+                    nested = true;
+                    break;
+                }
+            }
+            if (!nested) outermost.add(el);
+        }
+        return outermost;
     }
 
     // ---- image localization ---------------------------------------------
@@ -300,7 +355,7 @@ public class ConvertPages {
         fm.append("  - ").append(yamlString(d.relPath)).append("\n");
         fm.append("frozen: false\n");
         fm.append("---\n\n");
-        fm.append(d.bodyHtml).append("\n");
+        fm.append(d.body).append("\n");
 
         Files.writeString(f, fm.toString());
 
@@ -356,7 +411,7 @@ public class ConvertPages {
     }
 
     static class PageData {
-        String url, relPath, title, description, canonical, bodyHtml;
+        String url, relPath, title, description, canonical, body;
         boolean jdoodle, enlighterjs;
     }
 }
