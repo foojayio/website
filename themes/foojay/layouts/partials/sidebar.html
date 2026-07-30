@@ -18,7 +18,7 @@
         <li><a href="{{ .Page.Permalink }}">{{ .Page.Title }} <span class="count">{{ .Count }}</span></a></li>
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "/today/" | relURL }}">All categories</a>
+    <a class="view-all" href="{{ "today/" | relURL }}">All categories</a>
   </section>
 
   <section class="widget widget-authors">
@@ -28,17 +28,17 @@
         <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "/today/author/" | relURL }}">View all authors</a>
+    <a class="view-all" href="{{ "today/author/" | relURL }}">View all authors</a>
   </section>
 
   <section class="widget widget-jugs">
     <h4>Java User Groups</h4>
     <ul>
-      {{ range first 8 .Site.Data.jugs }}
+      {{ range first 8 hugo.Data.jugs }}
         <li><a href="https://www.meetup.com/{{ .slug }}/">{{ .name }}</a></li>
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "/all-events/" | relURL }}">Full event calendar</a>
+    <a class="view-all" href="{{ "all-events/" | relURL }}">Full event calendar</a>
   </section>
 
 </aside>

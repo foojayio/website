@@ -5,10 +5,11 @@
           opened in a new tab (target="_blank" + safe rel). Relative links,
           anchors, mailto: and foojay.io / *.foojay.io stay in the same tab. */ -}}
 {{- $dest := .Destination -}}
-{{- $u := urls.Parse $dest -}}
-{{- $host := $u.Host -}}
-{{- $external := and (ne $host "") (not (or (eq $host "foojay.io") (strings.HasSuffix $host ".foojay.io"))) -}}
-{{- if not (or (hasPrefix $dest "http://") (hasPrefix $dest "https://") (hasPrefix $dest "//") (hasPrefix $dest "mailto:") (hasPrefix $dest "#") (hasPrefix $dest "data:")) -}}
+{{- $isAbs := or (hasPrefix $dest "http://") (hasPrefix $dest "https://") (hasPrefix $dest "//") -}}
+{{- /* External = absolute and not a foojay.io URL. String check (not urls.Parse,
+       which errors on malformed destinations found in migrated content). */ -}}
+{{- $external := and $isAbs (not (in $dest "foojay.io")) -}}
+{{- if not (or $isAbs (hasPrefix $dest "mailto:") (hasPrefix $dest "#") (hasPrefix $dest "data:")) -}}
   {{- $dest = $dest | strings.TrimPrefix "/" | relURL -}}
 {{- end -}}
 <a href="{{ $dest }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text | safeHTML }}</a>

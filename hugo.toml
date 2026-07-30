@@ -1,6 +1,6 @@
 baseURL = "https://foojayio.github.io/website/"
 #"https://foojay.io/"
-languageCode = "en-us"
+locale = "en-us"
 title = "foojay.io - Friends of OpenJDK"
 theme = "foojay"
 enableRobotsTXT = true

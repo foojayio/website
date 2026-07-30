@@ -8,7 +8,7 @@
 </div>
 
 <div class="content-col full-width">
-  {{ $data := .Site.Data.events }}
+  {{ $data := hugo.Data.events }}
   {{ if $data }}
     <p class="events-updated">Last updated: {{ $data.generatedAt }}</p>
     {{ range $data.groups }}

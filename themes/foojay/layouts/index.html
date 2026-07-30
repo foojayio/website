@@ -14,7 +14,7 @@
       {{ end }}
     </div>
 
-    <p class="section-more"><a class="btn btn--ghost" href="{{ "/today/" | relURL }}">View all articles</a></p>
+    <p class="section-more"><a class="btn btn--ghost" href="{{ "today/" | relURL }}">View all articles</a></p>
   </div>
 
   {{ partial "sidebar.html" . }}
@@ -29,7 +29,7 @@
         <h2>Podcasts</h2>
         <p>Catch up on the most recent episodes and stay updated with the latest OpenJDK innovations.</p>
       </div>
-      <a class="more" href="{{ "/today/category/podcast/" | relURL }}">More podcasts &rarr;</a>
+      <a class="more" href="{{ "today/category/podcast/" | relURL }}">More podcasts &rarr;</a>
     </div>
     <div class="post-grid">
       {{ range first 4 . }}{{ partial "post-card.html" . }}{{ end }}
@@ -45,7 +45,7 @@
         <h2>Getting started with Java</h2>
         <p>Is Java your first language, or are you coming from another one? Let friends of OpenJDK help you get up and running.</p>
       </div>
-      <a class="more" href="{{ "/java-quick-start/" | relURL }}">Quick Start guide &rarr;</a>
+      <a class="more" href="{{ "java-quick-start/" | relURL }}">Quick Start guide &rarr;</a>
     </div>
     <div class="post-grid">
       {{ range first 4 (where $posts "Params.categories" "intersect" (slice "Java Beginner" "java-beginner")) }}
@@ -62,7 +62,7 @@
         <h2>More blog categories</h2>
         <p>Explore the full breadth of what the community writes about.</p>
       </div>
-      <a class="more" href="{{ "/today/" | relURL }}">View more &rarr;</a>
+      <a class="more" href="{{ "today/" | relURL }}">View more &rarr;</a>
     </div>
     <div class="chip-row chip-row--lg">
       {{ range first 14 .Site.Taxonomies.categories.ByCount }}

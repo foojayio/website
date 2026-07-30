@@ -3,7 +3,7 @@
   <article class="post-single">
     {{ with .Params.categories }}
     <div class="post-categories post-categories--top">
-      {{ range first 2 . }}<a href="{{ printf "/today/category/%s/" (. | urlize) | relURL }}">{{ . }}</a>{{ end }}
+      {{ range first 2 . }}<a href="{{ printf "today/category/%s/" (. | urlize) | relURL }}">{{ . }}</a>{{ end }}
     </div>
     {{ end }}
 
@@ -23,7 +23,7 @@
 
     {{ with .Params.tags }}
     <div class="post-tags">
-      {{ range . }}<a href="{{ printf "/today/tag/%s/" (. | urlize) | relURL }}">#{{ . }}</a>{{ end }}
+      {{ range . }}<a href="{{ printf "today/tag/%s/" (. | urlize) | relURL }}">#{{ . }}</a>{{ end }}
     </div>
     {{ end }}
 

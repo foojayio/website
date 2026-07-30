@@ -1,7 +1,7 @@
 {{/* On-site search does not exist yet (flagged in CLAUDE.md). Until it does,
      `searchAction` in hugo.toml can point anywhere — the default is the
      /search/ stub; set it to a Google/Kagi endpoint for an interim search. */}}
-<form class="site-search" role="search" action="{{ .Site.Params.searchAction | default (relURL "/search/") }}">
+<form class="site-search" role="search" action="{{ .Site.Params.searchAction | default (relURL "search/") }}">
   {{ with .Site.Params.searchExtraQuery }}<input type="hidden" name="{{ .name }}" value="{{ .value }}">{{ end }}
   <label>
     <span class="u-sr">Search foojay.io</span>
