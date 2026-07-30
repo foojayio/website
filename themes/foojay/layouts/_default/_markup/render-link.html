@@ -1,8 +1,14 @@
-{{- /* Same baseURL-subpath handling as render-image, for links. Root-relative
-       internal links get the subpath; external/absolute/anchor/mailto links are
-       left untouched. */ -}}
+{{- /* Link render hook. Two jobs:
+       1. Root-relative internal links get the baseURL subpath (relURL only
+          prefixes it when the path doesn't already start with "/").
+       2. Links to any host other than foojay.io are treated as external and
+          opened in a new tab (target="_blank" + safe rel). Relative links,
+          anchors, mailto: and foojay.io / *.foojay.io stay in the same tab. */ -}}
 {{- $dest := .Destination -}}
+{{- $u := urls.Parse $dest -}}
+{{- $host := $u.Host -}}
+{{- $external := and (ne $host "") (not (or (eq $host "foojay.io") (strings.HasSuffix $host ".foojay.io"))) -}}
 {{- if not (or (hasPrefix $dest "http://") (hasPrefix $dest "https://") (hasPrefix $dest "//") (hasPrefix $dest "mailto:") (hasPrefix $dest "#") (hasPrefix $dest "data:")) -}}
   {{- $dest = $dest | strings.TrimPrefix "/" | relURL -}}
 {{- end -}}
-<a href="{{ $dest }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }} rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>
+<a href="{{ $dest }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text | safeHTML }}</a>
