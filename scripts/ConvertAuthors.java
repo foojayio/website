@@ -353,6 +353,11 @@ public class ConvertAuthors {
         StringBuilder fm = new StringBuilder();
         fm.append("---\n");
         fm.append("title: ").append(yamlString(d.name)).append("\n");
+        // Pin the URL slug to the legacy WordPress author slug (the filename).
+        // Without this, hugo.toml's `:slug` permalink token falls back to the
+        // TITLE (e.g. "Carl Dea" -> carl-dea instead of carldea), changing the
+        // author URL and breaking the slug that posts reference.
+        fm.append("slug: ").append(yamlString(d.slug)).append("\n");
         fm.append("avatar: ").append(yamlString(d.avatar)).append("\n");
         fm.append("avatarFull: ").append(yamlString(d.avatarFull)).append("\n");
         fm.append("bio: ").append(yamlString(d.bio)).append("\n");
@@ -362,8 +367,8 @@ public class ConvertAuthors {
         fm.append("github: ").append(yamlString(d.github)).append("\n");
         fm.append("youtube: ").append(yamlString(d.youtube)).append("\n");
         fm.append("website: ").append(yamlString(d.website)).append("\n");
-        fm.append("aliases:\n");
-        fm.append("  - ").append(yamlString("/today/author/" + d.slug + "/")).append("\n");
+        // No aliases: `slug` above already makes the permalink the legacy
+        // /today/author/<slug>/ URL, so a self-referential alias would be redundant.
         fm.append("frozen: false\n");
         fm.append("---\n");
 

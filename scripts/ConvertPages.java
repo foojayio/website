@@ -171,141 +171,19 @@ public class ConvertPages {
         Element content = doc.selectFirst(SELECTOR_ARTICLE_CONTENT);
         if (content != null) {
             content.select(SELECTOR_CONTENT_NOISE).remove();
-            localizeImages(content);
-            d.jdoodle = !content.select(SELECTOR_JDOODLE).isEmpty();
-            d.enlighterjs = !content.select(SELECTOR_ENLIGHTERJS).isEmpty();
-            d.body = htmlToMarkdown(content);
+            // Co-locate this page's images under a dir mirroring its own path,
+            // e.g. /java-quick-start/hello-world/ -> images/pages/java-quick-start/hello-world/.
+            String imageSubpath = d.relPath.replaceAll("^/+|/+$", "");
+            HtmlToMarkdown.Result r = HtmlToMarkdown.convert(content, MD_OPTS, imageSubpath);
+            d.body = r.markdown;
+            d.jdoodle = r.jdoodle;
+            d.enlighterjs = r.enlighterjs;
         } else {
             d.body = "";
             System.err.println("  WARNING: no content matched for " + url);
         }
 
         return d;
-    }
-
-    // ---- html -> markdown ------------------------------------------------
-
-    /**
-     * Converts the page body to Markdown. Load-bearing HTML blocks (EnlighterJS
-     * code, JDoodle snippets, video embeds -- see SELECTOR_PRESERVE) are swapped
-     * out for placeholder tokens first, so the converter can't flatten away the
-     * classes/attributes they depend on, then restored verbatim afterwards.
-     * Hugo renders the restored raw HTML via goldmark's unsafe mode.
-     */
-    static String htmlToMarkdown(Element content) {
-        List<String> preserved = new ArrayList<>();
-        for (Element el : outermostMatches(content, SELECTOR_PRESERVE)) {
-            String token = PRESERVE_TOKEN + preserved.size() + PRESERVE_TOKEN_END;
-            preserved.add(el.outerHtml());
-            el.replaceWith(new Element("p").text(token)); // block-level placeholder
-        }
-
-        String md = FlexmarkHtmlConverter.builder().build().convert(content.html()).trim();
-
-        for (int i = 0; i < preserved.size(); i++) {
-            md = md.replace(PRESERVE_TOKEN + i + PRESERVE_TOKEN_END,
-                    "\n\n" + preserved.get(i) + "\n\n");
-        }
-        return md.trim();
-    }
-
-    /** Matched elements that are not themselves nested inside another match. */
-    static List<Element> outermostMatches(Element root, String selector) {
-        Elements matches = root.select(selector);
-        List<Element> outermost = new ArrayList<>();
-        for (Element el : matches) {
-            boolean nested = false;
-            for (Node p = el.parent(); p != null; p = p.parent()) {
-                if (matches.contains(p)) {
-                    nested = true;
-                    break;
-                }
-            }
-            if (!nested) outermost.add(el);
-        }
-        return outermost;
-    }
-
-    // ---- image localization ---------------------------------------------
-
-    /**
-     * Downloads every foojay-hosted image referenced in the body into
-     * static/images/pages/ and rewrites the reference to the local path.
-     * Covers both <img src>/srcset and <a href> lightbox links to image files.
-     * Third-party images (kept working after cutover) are left as-is.
-     */
-    static void localizeImages(Element content) {
-        for (Element img : content.select("img[src]")) {
-            String local = localizeImage(img.absUrl("src"));
-            if (local != null) {
-                img.attr("src", local);
-                // srcset points at WordPress-sized variants that vanish at cutover;
-                // drop it so the browser just uses the localized src.
-                img.removeAttr("srcset");
-                img.removeAttr("sizes");
-            }
-        }
-        for (Element a : content.select("a[href]")) {
-            String href = a.absUrl("href");
-            if (IMAGE_HREF.matcher(href).find()) {
-                String local = localizeImage(href);
-                if (local != null) a.attr("href", local);
-            }
-        }
-    }
-
-    /**
-     * Localizes one image URL, returning its new site-absolute path, or null to
-     * leave the reference unchanged (not a foojay-hosted image, or the download
-     * failed). The WordPress uploads subpath is preserved under images/pages/ so
-     * filenames from different upload folders can't collide. Idempotent: an
-     * already-downloaded file is not fetched again.
-     */
-    static String localizeImage(String absoluteUrl) {
-        String rel = pageImageRelPath(absoluteUrl);
-        if (rel == null) return null;
-        Path out = PAGE_IMAGE_DIR.resolve(rel);
-        try {
-            if (!Files.exists(out)) {
-                Connection.Response res = Jsoup.connect(absoluteUrl)
-                        .userAgent(USER_AGENT)
-                        .timeout(REQUEST_TIMEOUT_MS)
-                        .ignoreContentType(true)
-                        .maxBodySize(0)
-                        .execute();
-                Files.createDirectories(out.getParent());
-                Files.write(out, res.bodyAsBytes());
-            }
-            return PAGE_IMAGE_URL_PREFIX + rel;
-        } catch (IOException e) {
-            System.err.println("  image download failed: " + absoluteUrl + " -> " + e.getMessage());
-            return null;
-        }
-    }
-
-    /**
-     * Maps a foojay-hosted image URL to its relative path under images/pages/,
-     * or null if it shouldn't be localized. Uses the WordPress uploads subpath
-     * (e.g. .../uploads/2025/05/foo.jpg -> 2025/05/foo.jpg) when present, else
-     * the URL path minus its leading slash.
-     */
-    static String pageImageRelPath(String absoluteUrl) {
-        if (absoluteUrl == null || absoluteUrl.isBlank() || absoluteUrl.startsWith("data:")) return null;
-        URI uri;
-        try {
-            uri = URI.create(absoluteUrl);
-        } catch (IllegalArgumentException e) {
-            return null;
-        }
-        String host = uri.getHost();
-        if (host == null || !host.endsWith(LOCAL_HOST_SUFFIX)) return null; // only foojay-hosted
-        String path = uri.getPath();
-        if (path == null || path.isBlank()) return null;
-
-        int uploads = path.indexOf("/uploads/");
-        String rel = uploads >= 0 ? path.substring(uploads + "/uploads/".length()) : path.replaceFirst("^/+", "");
-        rel = rel.replaceAll("\\.\\.(?:/|$)", ""); // defensive: no path traversal
-        return rel.isBlank() ? null : rel;
     }
 
     static boolean isFrozen(String relPath) {

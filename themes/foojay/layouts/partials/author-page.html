@@ -1,0 +1,4 @@
+{{- /* slug (string) in -> author Page (or nil) out. Looks the slug up in the
+       cached author index, so it's O(1) and independent of how author files are
+       foldered (bucketed by first letter). */ -}}
+{{- return index (partialCached "author-index.html" "authors") . -}}

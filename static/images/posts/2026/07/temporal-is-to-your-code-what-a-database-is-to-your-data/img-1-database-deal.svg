@@ -1,0 +1,61 @@
+<svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace">
+  <defs>
+    <pattern id="grid1" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#DCE4EC" stroke-width="1"/>
+    </pattern>
+    <marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1E2A3A"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="420" fill="#EEF2F6"/>
+  <rect width="900" height="420" fill="url(#grid1)"/>
+
+  <text x="40" y="52" font-size="13" letter-spacing="3" fill="#8FA3B8">FIG. 1</text>
+  <text x="40" y="80" font-size="20" font-weight="bold" fill="#1E2A3A">THE DEAL THE DATABASE MADE</text>
+
+  <!-- LEFT: before -->
+  <text x="60" y="130" font-size="12" letter-spacing="2" fill="#8FA3B8">BEFORE · EVERY APP, ITS OWN WAY</text>
+
+  <!-- scattered files, tilted -->
+  <g transform="translate(70,150)">
+    <g transform="rotate(-8 60 40)">
+      <rect x="20" y="20" width="90" height="64" rx="4" fill="#FFFFFF" stroke="#C4574E" stroke-width="1.5" stroke-dasharray="5 3"/>
+      <text x="65" y="48" font-size="11" fill="#C4574E" text-anchor="middle">orders.dat</text>
+      <text x="65" y="66" font-size="10" fill="#8FA3B8" text-anchor="middle">locking?</text>
+    </g>
+    <g transform="rotate(6 190 80)">
+      <rect x="140" y="55" width="96" height="64" rx="4" fill="#FFFFFF" stroke="#C4574E" stroke-width="1.5" stroke-dasharray="5 3"/>
+      <text x="188" y="83" font-size="11" fill="#C4574E" text-anchor="middle">users.idx</text>
+      <text x="188" y="101" font-size="10" fill="#8FA3B8" text-anchor="middle">recovery?</text>
+    </g>
+    <g transform="rotate(-4 90 160)">
+      <rect x="45" y="130" width="100" height="64" rx="4" fill="#FFFFFF" stroke="#C4574E" stroke-width="1.5" stroke-dasharray="5 3"/>
+      <text x="95" y="158" font-size="11" fill="#C4574E" text-anchor="middle">ledger.tmp</text>
+      <text x="95" y="176" font-size="10" fill="#8FA3B8" text-anchor="middle">consistency?</text>
+    </g>
+    <!-- crash bolt -->
+    <path d="M 250 15 L 232 48 L 246 48 L 228 84" fill="none" stroke="#C4574E" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <!-- middle arrow: the deal -->
+  <line x1="380" y1="240" x2="500" y2="240" stroke="#1E2A3A" stroke-width="2" marker-end="url(#arr1)"/>
+  <text x="440" y="222" font-size="11" fill="#1E2A3A" text-anchor="middle">declare what you want</text>
+  <text x="440" y="264" font-size="11" fill="#E8A13D" text-anchor="middle" font-weight="bold">it survives — guaranteed</text>
+
+  <!-- RIGHT: database cylinder -->
+  <text x="560" y="130" font-size="12" letter-spacing="2" fill="#8FA3B8">AFTER · ONE PLATFORM, ONE GUARANTEE</text>
+  <g transform="translate(600,150)">
+    <path d="M 30 30 A 90 26 0 0 1 210 30 L 210 160 A 90 26 0 0 1 30 160 Z" fill="#FFFFFF" stroke="#1E2A3A" stroke-width="2"/>
+    <ellipse cx="120" cy="30" rx="90" ry="26" fill="#FFFFFF" stroke="#1E2A3A" stroke-width="2"/>
+    <path d="M 30 75 A 90 26 0 0 0 210 75" fill="none" stroke="#8FA3B8" stroke-width="1.5"/>
+    <path d="M 30 120 A 90 26 0 0 0 210 120" fill="none" stroke="#8FA3B8" stroke-width="1.5"/>
+    <text x="120" y="112" font-size="13" fill="#1E2A3A" text-anchor="middle" font-weight="bold">DATABASE</text>
+    <text x="120" y="150" font-size="10" fill="#8FA3B8" text-anchor="middle">atomicity · durability · recovery</text>
+    <!-- commit tick: signature amber checkpoint -->
+    <circle cx="210" cy="30" r="14" fill="#E8A13D"/>
+    <path d="M 203 30 L 208 36 L 218 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <text x="450" y="398" font-size="11" fill="#8FA3B8" text-anchor="middle">Nobody writes their own transaction log anymore.</text>
+</svg>

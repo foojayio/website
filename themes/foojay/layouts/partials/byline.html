@@ -1,11 +1,14 @@
-{{/* Resolves a post's `author:` slug to its author page.
-     Direct GetPage lookup — the previous version scanned every author page for
-     every card, which is O(posts x authors) on a 1000+ post site. */}}
-{{ with .Params.author }}
-  {{ $author := site.GetPage (printf "/authors/%s" .) }}
-  {{ if $author }}
+{{/* Renders a post's author byline. Posts can have multiple authors
+     (`authors:` list); falls back to the legacy single `author:` slug so
+     not-yet-reconverted posts still show a byline. */}}
+{{ $authors := .Params.authors }}
+{{ if and (not $authors) .Params.author }}{{ $authors = slice .Params.author }}{{ end }}
+{{ range $i, $slug := $authors }}
+  {{- if $i }}<span class="byline-sep">, </span>{{ end -}}
+  {{- $author := partial "author-page.html" $slug -}}
+  {{- if $author -}}
     <a class="byline" href="{{ $author.Permalink }}">{{ $author.Title }}</a>
-  {{ else }}
-    <span class="byline">{{ . }}</span>
-  {{ end }}
+  {{- else -}}
+    <span class="byline">{{ $slug }}</span>
+  {{- end -}}
 {{ end }}

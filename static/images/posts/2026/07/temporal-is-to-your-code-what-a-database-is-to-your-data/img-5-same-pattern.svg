@@ -1,0 +1,63 @@
+<svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace">
+  <defs>
+    <pattern id="grid5" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#DCE4EC" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="420" fill="#EEF2F6"/>
+  <rect width="900" height="420" fill="url(#grid5)"/>
+
+  <text x="40" y="52" font-size="13" letter-spacing="3" fill="#8FA3B8">FIG. 5</text>
+  <text x="40" y="80" font-size="20" font-weight="bold" fill="#1E2A3A">THE SAME PATTERN, ELSEWHERE IN THE STACK</text>
+
+  <!-- Tile 1: Virtual memory -->
+  <g transform="translate(60,120)">
+    <rect x="0" y="0" width="180" height="190" rx="8" fill="#FFFFFF" stroke="#8FA3B8" stroke-width="1.5"/>
+    <text x="90" y="30" font-size="12" font-weight="bold" fill="#1E2A3A" text-anchor="middle">VIRTUAL MEMORY</text>
+    <!-- pages swapping -->
+    <rect x="40" y="52" width="44" height="30" rx="3" fill="#EEF2F6" stroke="#1E2A3A"/>
+    <rect x="96" y="52" width="44" height="30" rx="3" fill="#DCE4EC" stroke="#8FA3B8" stroke-dasharray="3 3"/>
+    <rect x="40" y="92" width="44" height="30" rx="3" fill="#DCE4EC" stroke="#8FA3B8" stroke-dasharray="3 3"/>
+    <rect x="96" y="92" width="44" height="30" rx="3" fill="#EEF2F6" stroke="#1E2A3A"/>
+    <text x="90" y="150" font-size="9.5" fill="#8FA3B8" text-anchor="middle">pretends RAM</text>
+    <text x="90" y="164" font-size="9.5" fill="#8FA3B8" text-anchor="middle">is infinite</text>
+  </g>
+
+  <!-- Tile 2: GC -->
+  <g transform="translate(260,120)">
+    <rect x="0" y="0" width="180" height="190" rx="8" fill="#FFFFFF" stroke="#8FA3B8" stroke-width="1.5"/>
+    <text x="90" y="30" font-size="12" font-weight="bold" fill="#1E2A3A" text-anchor="middle">GARBAGE COLLECTION</text>
+    <text x="90" y="88" font-size="13" fill="#C4574E" text-anchor="middle" text-decoration="line-through">free(ptr);</text>
+    <text x="90" y="118" font-size="13" fill="#3E7C6F" text-anchor="middle">// handled</text>
+    <text x="90" y="150" font-size="9.5" fill="#8FA3B8" text-anchor="middle">memory bugs,</text>
+    <text x="90" y="164" font-size="9.5" fill="#8FA3B8" text-anchor="middle">off your plate</text>
+  </g>
+
+  <!-- Tile 3: K8s -->
+  <g transform="translate(460,120)">
+    <rect x="0" y="0" width="180" height="190" rx="8" fill="#FFFFFF" stroke="#8FA3B8" stroke-width="1.5"/>
+    <text x="90" y="30" font-size="12" font-weight="bold" fill="#1E2A3A" text-anchor="middle">KUBERNETES</text>
+    <rect x="30" y="60" width="34" height="34" rx="5" fill="#EEF2F6" stroke="#1E2A3A"/>
+    <rect x="73" y="60" width="34" height="34" rx="5" fill="#EEF2F6" stroke="#1E2A3A"/>
+    <rect x="116" y="60" width="34" height="34" rx="5" fill="#EEF2F6" stroke="#C4574E" stroke-dasharray="4 3"/>
+    <path d="M 133 100 C 133 116 100 116 96 104" fill="none" stroke="#3E7C6F" stroke-width="2"/>
+    <path d="M 96 104 L 94 112 M 96 104 L 104 105" stroke="#3E7C6F" stroke-width="2" fill="none"/>
+    <text x="90" y="150" font-size="9.5" fill="#8FA3B8" text-anchor="middle">"keep 3 running"</text>
+    <text x="90" y="164" font-size="9.5" fill="#8FA3B8" text-anchor="middle">self-healing infra</text>
+  </g>
+
+  <!-- Tile 4: Temporal -->
+  <g transform="translate(660,120)">
+    <rect x="0" y="0" width="180" height="190" rx="8" fill="#FFFFFF" stroke="#3E7C6F" stroke-width="2.5"/>
+    <text x="90" y="30" font-size="12" font-weight="bold" fill="#3E7C6F" text-anchor="middle">TEMPORAL</text>
+    <path d="M 30 84 L 66 84 L 66 68 L 108 68 L 108 84 L 150 84" fill="none" stroke="#1E2A3A" stroke-width="2"/>
+    <circle cx="150" cy="84" r="11" fill="#E8A13D"/>
+    <path d="M 145 84 L 149 88 L 156 78" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="90" y="120" font-size="10" fill="#1E2A3A" text-anchor="middle">runs to completion</text>
+    <text x="90" y="150" font-size="9.5" fill="#8FA3B8" text-anchor="middle">self-healing</text>
+    <text x="90" y="164" font-size="9.5" fill="#8FA3B8" text-anchor="middle">execution</text>
+  </g>
+
+  <text x="450" y="360" font-size="11" fill="#8FA3B8" text-anchor="middle">Hard, error-prone concern → dedicated platform → guarantee.</text>
+</svg>

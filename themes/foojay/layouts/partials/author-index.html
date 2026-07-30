@@ -1,0 +1,9 @@
+{{- /* Returns a map { <slug> : <author Page> } for every author profile,
+       keyed by filename (the slug posts reference). Bucketing of the author
+       files (content/authors/<letter>/…) doesn't matter here. Call via
+       partialCached so the map is built once per site build, not per lookup. */ -}}
+{{- $m := dict -}}
+{{- range where site.RegularPages "Section" "authors" -}}
+  {{- $m = merge $m (dict .File.ContentBaseName .) -}}
+{{- end -}}
+{{- return $m -}}

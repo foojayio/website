@@ -1,6 +1,7 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS org.jsoup:jsoup:1.17.2
 //DEPS com.fasterxml.jackson.core:jackson-databind:2.17.1
+//SOURCES HtmlToMarkdown.java
 //JAVA 17+
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -14,7 +15,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -27,32 +30,45 @@ import java.util.stream.Stream;
  * markdown files under content/posts/.
  *
  * Usage:
- *   jbang scripts/ConvertPosts.java
- *   jbang scripts/ConvertPosts.java --max-pages 5        (quick test run)
- *   jbang scripts/ConvertPosts.java --url https://foojay.io/today/some-post/   (single post, for tuning selectors)
+ *   jbang scripts/ConvertPosts.java                       (full crawl)
+ *   jbang scripts/ConvertPosts.java --max-pages 5         (cap listing pages -- quick test)
+ *   jbang scripts/ConvertPosts.java --days 14             (only posts published in the last 14 days)
+ *   jbang scripts/ConvertPosts.java --since 2026-01-01    (only posts published on/after a date)
+ *   jbang scripts/ConvertPosts.java --url https://foojay.io/today/some-post/   (single post)
  *
- * IMPORTANT - selector tuning:
- * This script was written without direct access to foojay.io's raw HTML/theme
- * markup (the environment it was authored in could not fetch raw HTML). The
- * selectors below are best-effort based on standard WordPress + Yoast SEO
- * conventions (which the site's meta tags confirm it uses) plus common related-
- * posts plugin markup. Run with --url against a couple of real posts first and
- * adjust the SELECTORS block below if fields come back empty.
+ * The --days/--since flags are handy for a small, recent test set; pair them
+ * with --max-pages to bound how many listing pages get fetched (date-filtering
+ * has to fetch each post to read its publish date). See crawlAndConvert().
+ *
+ * SELECTORS:
+ * The SELECTOR_* constants were verified against foojay.io's live markup
+ * (2026-07): posts are a block/custom theme (no WordPress `entry-content`), the
+ * body is in .article__main-content, the chronological feed is section.section-blog,
+ * and authors are in the post's .article__author block. Re-check with --url if the
+ * theme changes; scrapePost() logs a WARNING when the content selector matches nothing.
+ *
+ * BODY CONVERSION:
+ * The body is converted to Markdown by HtmlToMarkdown.java (shared with
+ * ConvertPages.java via `//SOURCES`), which also pulls foojay-hosted images local
+ * (co-located per post under static/images/posts/<year>/<month>/<slug>/) and flags
+ * the JDoodle / EnlighterJS widgets so the theme only loads their scripts where used.
+ *
+ * AUTHORS:
+ * A post can have several authors, so frontmatter carries an `authors:` list of
+ * slugs (see authorSlugs()); the theme resolves each to its author page.
  *
  * IDEMPOTENCY:
- * Re-running this script updates existing content/posts/<year>/<month>/<slug>.md
- * files rather than duplicating them, so it's safe to schedule/re-run repeatedly
- * during the WP -> Hugo trial period. If a post's frontmatter has `frozen: true`
- * (set by hand once someone has hand-edited the converted file), the script
- * leaves it alone instead of overwriting it.
+ * Re-running updates existing content/posts/<year>/<month>/<slug>.md files rather
+ * than duplicating them, so it's safe to re-run repeatedly during the WP -> Hugo
+ * trial period. A post whose frontmatter has `frozen: true` (set by hand after a
+ * manual edit) is left untouched.
  *
  * FILE LAYOUT:
- * Posts are filed under content/posts/<year>/<month>/<slug>.md, bucketed by
- * the post's *original* publish date (not the date the script runs) so the
- * file doesn't move around on re-runs. This is purely a repo-organization
- * choice for keeping a directory of 1000+ posts browsable -- it has no effect
- * on the public URL, which stays /today/<slug>/ via the permalinks config in
- * hugo.toml regardless of where the file lives.
+ * Posts are filed under content/posts/<year>/<month>/<slug>.md, bucketed by the
+ * post's *original* publish date so the file doesn't move around on re-runs. This
+ * is purely a repo-organization choice for browsability; the public URL stays
+ * /today/<slug>/ via the `slug` frontmatter + hugo.toml permalinks, wherever the
+ * file lives.
  */
 public class ConvertPosts {
 
@@ -62,14 +78,44 @@ public class ConvertPosts {
     static final Path OUTPUT_DIR = Path.of("content/posts");
     static final int REQUEST_TIMEOUT_MS = 20_000;
     static final int POLITE_DELAY_MS = 250; // be a good citizen against your own site
+    static final int MAX_EMPTY_PAGES = 2;   // with --days/--since: stop after this many consecutive out-of-window pages
 
-    // Best-effort CSS selectors -- adjust after testing against a live post.
-    static final String SELECTOR_LISTING_POST_LINKS = "article a.post-card-title, h2 a, h3 a";
+    // Body conversion (image localization + widget detection + HTML->Markdown)
+    // is shared with ConvertPages.java via HtmlToMarkdown.java. Posts keep their
+    // images under static/images/posts/.
+    static final HtmlToMarkdown.Options MD_OPTS = new HtmlToMarkdown.Options(
+            Path.of("static/images/posts"), "/images/posts/", "foojay.io",
+            "foojay-hugo-migration-bot/1.0", REQUEST_TIMEOUT_MS);
+
+    // Verified against foojay.io's live listing (2026-07): the /today/ page has
+    // featured / "most viewed" / podcast blocks up top that are NOT in date order,
+    // then the real chronological feed in <section class="section-blog"> (dates
+    // strictly descending, same container on /today/page/N/). We scope to that
+    // section so those out-of-order featured cards don't pollute the crawl (and
+    // so the newest-first cutoff logic holds); isLikelyPostUrl() then drops any
+    // taxonomy/pagination/author links. Pagination is a.next (…page/N/).
+    static final String SELECTOR_LISTING_POST_LINKS = "section.section-blog a[href*=/today/]";
     static final String SELECTOR_PAGINATION_NEXT = "a.next, a[rel=next]";
-    static final String SELECTOR_ARTICLE_CONTENT = "div.entry-content, article .entry-content, .post-content";
+    // Verified against foojay.io's live post markup (2026-07): the body lives in
+    // .article__main-content, which also holds the <h1> and the date/read-time
+    // meta -- those are stripped as noise below (they're already in frontmatter).
+    static final String SELECTOR_ARTICLE_CONTENT = ".article__main-content, div.entry-content, article .entry-content, .post-content";
+    // Chrome injected into the body that isn't article content:
+    //   .article__table            - the collapsible "Table of Contents" widget
+    //   .section-teaser / .teaser / .homepage-today__guide
+    //                              - "Sponsored Content" promo cards / CTAs
+    //   .article__details/tags/... - the title/date/read-time/author meta
+    static final String SELECTOR_CONTENT_NOISE =
+            "h1, .article__details, .article__tags, .article__author, .article-stats-container,"
+            + " .article__table, .section-teaser, .teaser, .homepage-today__guide, script, style";
     static final String SELECTOR_CATEGORY_LINKS = "a[href*=/today/category/]";
     static final String SELECTOR_TAG_LINKS = "a[href*=/today/tag/]";
-    static final String SELECTOR_AUTHOR_LINK = "a[rel=author], a[href*=/today/author/]";
+    // Authors: scope to the post's own author bio block(s). A bare
+    // a[href*=/today/author/] also matches the nav "Authors" link (slug "authors")
+    // and the related-post cards' author links -- both wrong. A post can carry
+    // more than one author, so this yields a list.
+    static final String SELECTOR_AUTHOR_LINKS = ".article__author a[href*=/today/author/]";
+    static final Pattern AUTHOR_SLUG_IN_HREF = Pattern.compile("/today/author/([^/]+)/");
     static final String SELECTOR_RELATED_POSTS = "div.related-posts a, aside.related a, .jp-relatedposts a, .related_post a";
     static final String SELECTOR_FEATURED_IMAGE_FALLBACK = "article img, .entry-content img";
 
@@ -80,11 +126,16 @@ public class ConvertPosts {
 
         Integer maxPages = null;
         String singleUrl = null;
+        OffsetDateTime cutoff = null; // only convert posts published on/after this
         for (int i = 0; i < args.length; i++) {
             if ("--max-pages".equals(args[i]) && i + 1 < args.length) {
                 maxPages = Integer.parseInt(args[++i]);
             } else if ("--url".equals(args[i]) && i + 1 < args.length) {
                 singleUrl = args[++i];
+            } else if ("--days".equals(args[i]) && i + 1 < args.length) {
+                cutoff = OffsetDateTime.now().minusDays(Long.parseLong(args[++i]));
+            } else if ("--since".equals(args[i]) && i + 1 < args.length) {
+                cutoff = LocalDate.parse(args[++i]).atStartOfDay().atOffset(ZoneOffset.UTC);
             }
         }
 
@@ -95,34 +146,32 @@ public class ConvertPosts {
             return;
         }
 
-        List<String> postUrls = collectPostUrls(maxPages);
-        System.out.println("Found " + postUrls.size() + " post URLs.");
-
-        int written = 0, skippedFrozen = 0, failed = 0;
-        for (String url : postUrls) {
-            try {
-                PostData data = scrapePost(url);
-                if (isFrozen(data.slug)) {
-                    skippedFrozen++;
-                    continue;
-                }
-                writePost(data, false);
-                written++;
-                Thread.sleep(POLITE_DELAY_MS);
-            } catch (Exception e) {
-                System.err.println("FAILED: " + url + " -> " + e.getMessage());
-                failed++;
-            }
+        if (cutoff != null) {
+            System.out.println("Only converting posts published on/after " + cutoff.toLocalDate() + ".");
         }
-        // NOTE: writePost() below resolves each post's path under
-        // content/posts/<year>/<month>/<slug>.md.
-        System.out.printf("Done. written=%d skipped(frozen)=%d failed=%d%n", written, skippedFrozen, failed);
+
+        int[] r = crawlAndConvert(cutoff, maxPages);
+        // writePost() files each post under content/posts/<year>/<month>/<slug>.md.
+        System.out.printf("Done. written=%d skipped(frozen)=%d failed=%d%n", r[0], r[1], r[2]);
     }
 
     // ---- Listing crawl --------------------------------------------------
 
-    static List<String> collectPostUrls(Integer maxPages) throws IOException, InterruptedException {
-        List<String> urls = new ArrayList<>();
+    /**
+     * Walks the /today/ section-blog feed, scraping and converting each post.
+     * Returns {written, skippedFrozen, failed}.
+     *
+     * With a cutoff (--days / --since) only posts *published* on/after it are
+     * written; older ones are skipped. We don't stop at the first old post: the
+     * feed is ordered by the card's display date, which can differ from the
+     * publish date (a post published weeks ago but re-featured sits up top), so
+     * recent posts aren't strictly contiguous. Instead the crawl stops after
+     * MAX_EMPTY_PAGES consecutive listing pages with nothing in-window. Pair with
+     * --max-pages to hard-cap the number of listing pages fetched for a quick test.
+     */
+    static int[] crawlAndConvert(OffsetDateTime cutoff, Integer maxPages)
+            throws IOException, InterruptedException {
+        int written = 0, skippedFrozen = 0, failed = 0, emptyPages = 0;
         Set<String> seen = new LinkedHashSet<>();
         String pageUrl = BASE_URL + LISTING_PATH;
         int page = 1;
@@ -131,12 +180,39 @@ public class ConvertPosts {
             System.out.println("Listing page " + page + ": " + pageUrl);
             Document doc = fetch(pageUrl);
 
-            Elements links = doc.select(SELECTOR_LISTING_POST_LINKS);
-            for (Element a : links) {
+            boolean sawPost = false, anyInWindow = false;
+            for (Element a : doc.select(SELECTOR_LISTING_POST_LINKS)) {
                 String href = a.absUrl("href");
-                if (isLikelyPostUrl(href)) {
-                    seen.add(stripTrailingSlash(href) + "/");
+                if (!isLikelyPostUrl(href)) continue;
+                String url = stripTrailingSlash(href) + "/";
+                if (!seen.add(url)) continue;
+                try {
+                    PostData data = scrapePost(url);
+                    sawPost = true;
+                    if (cutoff != null && isOlderThan(data.date, cutoff)) {
+                        continue; // published before the window -- skip, keep crawling
+                    }
+                    anyInWindow = true;
+                    if (isFrozen(data.slug)) {
+                        skippedFrozen++;
+                    } else {
+                        writePost(data, false);
+                        written++;
+                    }
+                    Thread.sleep(POLITE_DELAY_MS);
+                } catch (Exception e) {
+                    System.err.println("FAILED: " + url + " -> " + e.getMessage());
+                    failed++;
                 }
+            }
+
+            if (cutoff != null && sawPost && !anyInWindow) {
+                if (++emptyPages >= MAX_EMPTY_PAGES) {
+                    System.out.println("No in-window posts for " + emptyPages + " pages; stopping crawl.");
+                    break;
+                }
+            } else {
+                emptyPages = 0;
             }
 
             Element next = doc.selectFirst(SELECTOR_PAGINATION_NEXT);
@@ -145,8 +221,18 @@ public class ConvertPosts {
             if (maxPages != null && page > maxPages) break;
             Thread.sleep(POLITE_DELAY_MS);
         }
-        urls.addAll(seen);
-        return urls;
+        return new int[]{written, skippedFrozen, failed};
+    }
+
+    /** True if an ISO-8601 date string is strictly before the cutoff. Unknown or
+     *  unparseable dates return false so a post is kept rather than stopping the crawl. */
+    static boolean isOlderThan(String isoDate, OffsetDateTime cutoff) {
+        if (isoDate == null || isoDate.isBlank()) return false;
+        try {
+            return OffsetDateTime.parse(isoDate, DateTimeFormatter.ISO_DATE_TIME).isBefore(cutoff);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     static boolean isLikelyPostUrl(String href) {
@@ -169,17 +255,20 @@ public class ConvertPosts {
         d.url = stripTrailingSlash(url) + "/";
         d.slug = lastPathSegment(d.url);
 
-        d.title = firstNonBlank(
+        d.title = stripSiteSuffix(firstNonBlank(
                 metaContent(doc, "og:title"),
                 textOrNull(doc.selectFirst("h1")),
-                doc.title());
+                doc.title()));
 
         d.description = firstNonBlank(
                 attrContent(doc, "meta[name=description]"),
                 metaContent(doc, "og:description"));
 
-        d.canonical = attrHref(doc, "link[rel=canonical]");
-        if (d.canonical == null) d.canonical = d.url;
+        // Only keep a canonical when it points to a DIFFERENT site (cross-posted
+        // content). A self-canonical is redundant -- Hugo/the theme already emit
+        // <link rel=canonical> to the page's own permalink.
+        String canon = attrHref(doc, "link[rel=canonical]");
+        d.canonical = (canon != null && !canon.contains("foojay.io")) ? canon : "";
 
         d.image = firstNonBlank(
                 metaContent(doc, "og:image"),
@@ -191,16 +280,39 @@ public class ConvertPosts {
                 textOf(ld, "datePublished"),
                 attrContent(doc, "meta[property=article:published_time]"));
 
-        d.authorSlug = firstNonBlank(
-                slugFromAuthorLink(doc),
-                slugify(textOf(ld, "author", "name")));
+        // Recorded as `lastmod` when present and different from the publish date.
+        d.dateModified = firstNonBlank(
+                textOf(ld, "dateModified"),
+                attrContent(doc, "meta[property=article:modified_time]"),
+                d.date);
+
+        d.authors = authorSlugs(doc);
+        if (d.authors.isEmpty()) {
+            // Last resort: slugify the JSON-LD author name. Note this may not match
+            // an author page's slug exactly (e.g. "Carl Dea" -> carl-dea vs carldea).
+            String fallback = slugify(textOf(ld, "author", "name"));
+            if (fallback != null && !fallback.isBlank()) d.authors.add(fallback);
+        }
 
         d.categories = linksToNames(doc, SELECTOR_CATEGORY_LINKS, "/today/category/");
         d.tags = linksToNames(doc, SELECTOR_TAG_LINKS, "/today/tag/");
         d.relatedSlugs = relatedPostSlugs(doc);
 
         Element content = doc.selectFirst(SELECTOR_ARTICLE_CONTENT);
-        d.bodyHtml = content != null ? content.html() : "";
+        if (content != null) {
+            content.select(SELECTOR_CONTENT_NOISE).remove();
+            // Co-locate this post's images under a dir mirroring its file path,
+            // e.g. content/posts/2026/07/my-post.md -> images/posts/2026/07/my-post/.
+            String imageSubpath = OUTPUT_DIR.relativize(bucketDirFor(d))
+                    .resolve(d.slug).toString().replace(java.io.File.separatorChar, '/');
+            HtmlToMarkdown.Result r = HtmlToMarkdown.convert(content, MD_OPTS, imageSubpath);
+            d.body = r.markdown;
+            d.jdoodle = r.jdoodle;
+            d.enlighterjs = r.enlighterjs;
+        } else {
+            d.body = "";
+            System.err.println("  WARNING: no content matched for " + url);
+        }
 
         return d;
     }
@@ -252,13 +364,14 @@ public class ConvertPosts {
         return cur != null && cur.isTextual() ? cur.asText() : null;
     }
 
-    static String slugFromAuthorLink(Document doc) {
-        Element a = doc.selectFirst(SELECTOR_AUTHOR_LINK);
-        if (a == null) return null;
-        String href = a.absUrl("href");
-        if (href.isBlank()) href = a.attr("href");
-        Matcher m = Pattern.compile("/today/author/([^/]+)/?").matcher(href);
-        return m.find() ? m.group(1) : slugify(a.text());
+    /** All author slugs credited on the post, in order, de-duplicated. */
+    static List<String> authorSlugs(Document doc) {
+        LinkedHashSet<String> slugs = new LinkedHashSet<>();
+        for (Element a : doc.select(SELECTOR_AUTHOR_LINKS)) {
+            Matcher m = AUTHOR_SLUG_IN_HREF.matcher(a.absUrl("href"));
+            if (m.find() && !m.group(1).isBlank()) slugs.add(m.group(1));
+        }
+        return new ArrayList<>(slugs);
     }
 
     static List<String> linksToNames(Document doc, String selector, String pathMarker) {
@@ -324,10 +437,20 @@ public class ConvertPosts {
         StringBuilder fm = new StringBuilder();
         fm.append("---\n");
         fm.append("title: ").append(yamlString(d.title)).append("\n");
+        // Pin the URL slug to the original WordPress slug (the filename). Without
+        // this, hugo.toml's `:slug` permalink token falls back to the TITLE, which
+        // would change every post's URL. URLs are load-bearing -- keep the legacy one.
+        fm.append("slug: ").append(yamlString(d.slug)).append("\n");
         fm.append("date: ").append(yamlString(d.date)).append("\n");
+        if (d.dateModified != null && !d.dateModified.isBlank() && !d.dateModified.equals(d.date)) {
+            fm.append("lastmod: ").append(yamlString(d.dateModified)).append("\n");
+        }
         fm.append("description: ").append(yamlString(d.description)).append("\n");
-        fm.append("canonical: ").append(yamlString(d.canonical)).append("\n");
-        fm.append("author: ").append(yamlString(d.authorSlug)).append("\n");
+        if (!d.canonical.isBlank()) {
+            fm.append("canonical: ").append(yamlString(d.canonical)).append("\n");
+        }
+        fm.append("authors:\n");
+        for (String a : d.authors) fm.append("  - ").append(yamlString(a)).append("\n");
         fm.append("image: ").append(yamlString(d.image)).append("\n");
         fm.append("categories:\n");
         for (String c : d.categories) fm.append("  - ").append(yamlString(c)).append("\n");
@@ -335,11 +458,13 @@ public class ConvertPosts {
         for (String t : d.tags) fm.append("  - ").append(yamlString(t)).append("\n");
         fm.append("related_posts:\n");
         for (String r : d.relatedSlugs) fm.append("  - ").append(yamlString(r)).append("\n");
-        fm.append("aliases:\n");
-        fm.append("  - ").append(yamlString(URI(d.url).getPath())).append("\n");
+        if (d.jdoodle) fm.append("jdoodle: true\n");
+        if (d.enlighterjs) fm.append("enlighterjs: true\n");
+        // No aliases: `slug` above already makes the permalink the legacy
+        // /today/<slug>/ URL, so a self-referential alias would be redundant.
         fm.append("frozen: false\n");
         fm.append("---\n\n");
-        fm.append(d.bodyHtml).append("\n");
+        fm.append(d.body).append("\n");
 
         Path out = findExistingPostFile(d.slug).orElseGet(() -> bucketDirFor(d).resolve(d.slug + ".md"));
         Files.createDirectories(out.getParent());
@@ -392,6 +517,13 @@ public class ConvertPosts {
         return "";
     }
 
+    /** Drops a trailing site-name suffix ("… | foojay", "… - foojay.io") that the
+     *  WordPress/Yoast <title>/og:title tags append. */
+    static String stripSiteSuffix(String title) {
+        if (title == null) return "";
+        return title.replaceAll("(?i)\\s*[|\\-–]\\s*foojay(\\.io)?\\s*$", "").strip();
+    }
+
     static String lastPathSegment(String urlWithTrailingSlash) {
         String path = URI(urlWithTrailingSlash).getPath();
         String[] parts = path.split("/");
@@ -416,7 +548,9 @@ public class ConvertPosts {
     }
 
     static class PostData {
-        String url, slug, title, description, canonical, image, date, authorSlug, bodyHtml;
+        String url, slug, title, description, canonical, image, date, dateModified, body;
+        boolean jdoodle, enlighterjs;
+        List<String> authors = new ArrayList<>();
         List<String> categories = new ArrayList<>();
         List<String> tags = new ArrayList<>();
         List<String> relatedSlugs = new ArrayList<>();

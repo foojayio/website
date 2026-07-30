@@ -8,7 +8,7 @@ aliases:
 frozen: false
 ---
 
-![](/images/pages/2026/05/Foojay-and-Java-Duke-with-weblink.png)  
+![](/images/pages/who-we-are/Foojay-and-Java-Duke-with-weblink.png)  
 Foojay - **F** riends **O** f **O** pen**J**DK - is the integrated dashboard for all things Java: a central resource for daily information, curated highlights and categorized reference material for the Java community.
 
 Rather than one single blog or one vendor's view, Foojay collates news, technical deep-dives, release data and community voices into one place - free, vendor-neutral and created by the Java community.
@@ -40,5 +40,5 @@ Logo
 ----
 
 The logos are stored in this [GitHub repository](https://github.com/foojayio/foojay-logo) in various formats.  
-![](/images/pages/2026/05/foojay_logo-1024x341.png)  
-![](/images/pages/2026/05/foojay_podcast.png)
+![](/images/pages/who-we-are/foojay_logo-1024x341.png)  
+![](/images/pages/who-we-are/foojay_podcast.png)

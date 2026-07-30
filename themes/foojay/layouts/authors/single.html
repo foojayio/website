@@ -6,18 +6,21 @@
       <h1>{{ .Title }}</h1>
       {{ with .Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}
       <ul class="author-social">
-        {{ with .Params.bluesky }}<li><a href="{{ . }}" rel="me">Bluesky</a></li>{{ end }}
-        {{ with .Params.mastodon }}<li><a href="{{ . }}" rel="me">Mastodon</a></li>{{ end }}
-        {{ with .Params.linkedin }}<li><a href="{{ . }}">LinkedIn</a></li>{{ end }}
-        {{ with .Params.github }}<li><a href="{{ . }}">GitHub</a></li>{{ end }}
-        {{ with .Params.youtube }}<li><a href="{{ . }}">YouTube</a></li>{{ end }}
-        {{ with .Params.twitter }}<li><a href="{{ . }}">Twitter/X</a></li>{{ end }}
-        {{ with .Params.website }}<li><a href="{{ . }}">Website</a></li>{{ end }}
+        {{ with .Params.bluesky }}<li><a href="{{ . }}" rel="me" target="_blank">Bluesky</a></li>{{ end }}
+        {{ with .Params.mastodon }}<li><a href="{{ . }}" rel="me" target="_blank">Mastodon</a></li>{{ end }}
+        {{ with .Params.linkedin }}<li><a href="{{ . }}" target="_blank">LinkedIn</a></li>{{ end }}
+        {{ with .Params.github }}<li><a href="{{ . }}" target="_blank">GitHub</a></li>{{ end }}
+        {{ with .Params.youtube }}<li><a href="{{ . }}" target="_blank">YouTube</a></li>{{ end }}
+        {{ with .Params.twitter }}<li><a href="{{ . }}" target="_blank">Twitter/X</a></li>{{ end }}
+        {{ with .Params.website }}<li><a href="{{ . }}" target="_blank">Website</a></li>{{ end }}
       </ul>
     </div>
 
     {{ $slug := .File.ContentBaseName }}
-    {{ $written := where (where site.RegularPages "Section" "posts") "Params.author" $slug }}
+    {{ $posts := where site.RegularPages "Section" "posts" }}
+    {{/* Posts credit authors as an `authors:` list; older ones may still use a
+         single `author:` slug -- match both and de-dupe. */}}
+    {{ $written := where $posts "Params.authors" "intersect" (slice $slug) | union (where $posts "Params.author" $slug) }}
     <div class="section-head"><h2>{{ len $written }} article{{ if ne (len $written) 1 }}s{{ end }}</h2></div>
     <div class="post-grid">
       {{ range $written }}{{ partial "post-card.html" . }}{{ end }}

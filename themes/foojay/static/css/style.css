@@ -802,3 +802,18 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
    on the dark surface — set params.logoDark to supply an alternate file, or
    uncomment this to invert the single asset.
    :root[data-theme="dark"] .logo__img { filter: invert(1) hue-rotate(180deg); } */
+
+/* --- Preserved WordPress inline image formatting (floats, resized, galleries) ---
+   ConvertPosts/ConvertPages keep these as raw HTML instead of Markdown so the
+   float / dimensions / caption / gallery grid survive. */
+.prose .alignleft { float: left; margin: 0.3rem 1.4rem 1rem 0; }
+.prose .alignright { float: right; margin: 0.3rem 0 1rem 1.4rem; }
+.prose .aligncenter { display: block; margin-inline: auto; }
+.prose figure.alignleft, .prose figure.alignright { max-width: 50%; }
+.prose figure { margin: 1.5rem 0; }
+.prose figure img, .prose img.alignleft, .prose img.alignright { height: auto; max-width: 100%; }
+.prose figcaption, .prose .wp-element-caption { font-size: 0.85em; opacity: 0.72; text-align: center; margin-top: 0.4rem; }
+.prose .wp-block-gallery { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.5rem 0; padding: 0; list-style: none; }
+.prose .wp-block-gallery figure { flex: 1 1 45%; margin: 0; }
+.prose .wp-block-gallery img { width: 100%; height: auto; }
+.prose figure::after { content: ""; display: block; clear: both; }

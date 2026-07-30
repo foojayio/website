@@ -1,0 +1,69 @@
+<svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace">
+  <defs>
+    <pattern id="grid2" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#DCE4EC" stroke-width="1"/>
+    </pattern>
+    <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8FA3B8"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="420" fill="#EEF2F6"/>
+  <rect width="900" height="420" fill="url(#grid2)"/>
+
+  <text x="40" y="52" font-size="13" letter-spacing="3" fill="#8FA3B8">FIG. 2</text>
+  <text x="40" y="80" font-size="20" font-weight="bold" fill="#1E2A3A">THE PRE-DATABASE ERA, REPLAYED</text>
+
+  <!-- LEFT: the mess -->
+  <text x="60" y="122" font-size="12" letter-spacing="2" fill="#8FA3B8">HAND-ROLLED</text>
+
+  <g>
+    <rect x="60" y="140" width="120" height="46" rx="4" fill="#FFFFFF" stroke="#C4574E" stroke-width="1.5"/>
+    <text x="120" y="167" font-size="11" fill="#1E2A3A" text-anchor="middle">Kafka / SQS</text>
+
+    <rect x="230" y="140" width="120" height="46" rx="4" fill="#FFFFFF" stroke="#C4574E" stroke-width="1.5"/>
+    <text x="290" y="167" font-size="11" fill="#1E2A3A" text-anchor="middle">Quartz / cron</text>
+
+    <rect x="60" y="240" width="120" height="46" rx="4" fill="#FFFFFF" stroke="#C4574E" stroke-width="1.5"/>
+    <text x="120" y="260" font-size="11" fill="#1E2A3A" text-anchor="middle">status column</text>
+    <text x="120" y="276" font-size="10" fill="#C4574E" text-anchor="middle">PROCESSING…</text>
+
+    <rect x="230" y="240" width="120" height="46" rx="4" fill="#FFFFFF" stroke="#C4574E" stroke-width="1.5"/>
+    <text x="290" y="260" font-size="11" fill="#1E2A3A" text-anchor="middle">retry loops</text>
+    <text x="290" y="276" font-size="10" fill="#C4574E" text-anchor="middle">did this run?</text>
+
+    <!-- tangled connections -->
+    <path d="M 180 163 C 205 163 205 163 230 163" fill="none" stroke="#8FA3B8" stroke-width="1.5" marker-end="url(#arr2)"/>
+    <path d="M 120 186 C 120 215 290 210 290 240" fill="none" stroke="#8FA3B8" stroke-width="1.5" marker-end="url(#arr2)"/>
+    <path d="M 290 186 C 290 215 120 210 120 240" fill="none" stroke="#8FA3B8" stroke-width="1.5" marker-end="url(#arr2)"/>
+    <path d="M 180 263 C 205 263 205 263 230 263" fill="none" stroke="#8FA3B8" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr2)"/>
+    <path d="M 350 163 C 385 175 385 240 350 258" fill="none" stroke="#8FA3B8" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr2)"/>
+  </g>
+
+  <!-- slack bubble -->
+  <g transform="translate(70,318)">
+    <rect x="0" y="0" width="286" height="40" rx="8" fill="#FFFFFF" stroke="#8FA3B8" stroke-width="1"/>
+    <path d="M 26 40 L 20 52 L 38 40 Z" fill="#FFFFFF" stroke="#8FA3B8" stroke-width="1"/>
+    <text x="143" y="24" font-size="10.5" fill="#1E2A3A" text-anchor="middle">"why is order 48291 stuck in PROCESSING?"</text>
+  </g>
+
+  <!-- divider -->
+  <line x1="450" y1="115" x2="450" y2="380" stroke="#8FA3B8" stroke-width="1" stroke-dasharray="2 6"/>
+
+  <!-- RIGHT: Temporal -->
+  <text x="510" y="122" font-size="12" letter-spacing="2" fill="#8FA3B8">DURABLE EXECUTION</text>
+
+  <rect x="510" y="150" width="330" height="150" rx="8" fill="#FFFFFF" stroke="#3E7C6F" stroke-width="2"/>
+  <text x="675" y="185" font-size="14" font-weight="bold" fill="#3E7C6F" text-anchor="middle">TEMPORAL</text>
+  <line x1="535" y1="202" x2="815" y2="202" stroke="#DCE4EC" stroke-width="1.5"/>
+  <text x="675" y="230" font-size="11" fill="#1E2A3A" text-anchor="middle">queues · timers · retries · state</text>
+  <text x="675" y="252" font-size="11" fill="#1E2A3A" text-anchor="middle">one platform, underneath your code</text>
+  <!-- commit tick -->
+  <circle cx="840" cy="150" r="14" fill="#E8A13D"/>
+  <path d="M 833 150 L 838 156 L 848 144" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g transform="translate(510,318)">
+    <rect x="0" y="0" width="330" height="40" rx="6" fill="#1E2A3A"/>
+    <text x="165" y="24" font-size="11" fill="#EEF2F6" text-anchor="middle">plain Java · runs to completion</text>
+  </g>
+</svg>

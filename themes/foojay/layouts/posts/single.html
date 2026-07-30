@@ -27,8 +27,10 @@
     </div>
     {{ end }}
 
-    {{ with .Params.author }}
-      {{ $author := site.GetPage (printf "/authors/%s" .) }}
+    {{ $authors := .Params.authors }}
+    {{ if and (not $authors) .Params.author }}{{ $authors = slice .Params.author }}{{ end }}
+    {{ range $authors }}
+      {{ $author := partial "author-page.html" . }}
       {{ with $author }}
       <section class="author-callout">
         {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" src="{{ . }}" alt="" loading="lazy">{{ end }}

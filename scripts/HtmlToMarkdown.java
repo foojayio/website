@@ -46,10 +46,21 @@ public final class HtmlToMarkdown {
     public static final String SELECTOR_ENLIGHTERJS = "pre.EnlighterJSRAW, code.EnlighterJSRAW";
 
     // Block-level elements kept as raw HTML instead of being flattened to
-    // Markdown, because their tag/class/attributes are load-bearing: EnlighterJS
-    // needs pre.EnlighterJSRAW, JDoodle needs data-pym-src, embeds need <iframe>.
-    private static final String SELECTOR_PRESERVE =
-            "pre.EnlighterJSRAW, [data-pym-src], iframe, figure.wp-block-embed, .wp-block-embed";
+    // Markdown, because Markdown can't represent what makes them special:
+    //   - pre.EnlighterJSRAW / [data-pym-src] / iframe / .wp-block-embed
+    //       widgets & embeds whose tag/class/attributes are load-bearing
+    //   - floated images (align left/right), resized / smaller images
+    //     (is-resized, size-medium/thumbnail) and galleries -- Markdown's
+    //     ![](...) drops the float, the dimensions, the <figcaption> and the
+    //     gallery grid, so these keep their original WordPress HTML.
+    // (The image src inside them is still localized first, in localizeImages.)
+    private static final String SELECTOR_PRESERVE = String.join(", ",
+            "pre.EnlighterJSRAW", "[data-pym-src]", "iframe",
+            "figure.wp-block-embed", ".wp-block-embed",
+            "figure.alignleft", "figure.alignright", "img.alignleft", "img.alignright",
+            "figure.is-resized", "img.is-resized",
+            "figure.size-medium", "figure.size-thumbnail", "img.size-medium", "img.size-thumbnail",
+            ".wp-block-gallery", "figure.gallery", ".gallery");
     private static final String PRESERVE_TOKEN = "PRESERVEDHTMLBLOCKZZ";
     private static final String PRESERVE_TOKEN_END = "ZZEND";
 
@@ -60,15 +71,15 @@ public final class HtmlToMarkdown {
 
     /** Where and how to localize images. */
     public static final class Options {
-        final Path imageDir;          // e.g. static/images/pages
-        final String imageUrlPrefix;  // e.g. /images/pages/
+        final Path imageBaseDir;      // base, e.g. static/images/pages
+        final String imageUrlPrefix;  // base URL, e.g. /images/pages/
         final String localHostSuffix; // only localize images on this host, e.g. foojay.io
         final String userAgent;
         final int timeoutMs;
 
-        public Options(Path imageDir, String imageUrlPrefix, String localHostSuffix,
+        public Options(Path imageBaseDir, String imageUrlPrefix, String localHostSuffix,
                        String userAgent, int timeoutMs) {
-            this.imageDir = imageDir;
+            this.imageBaseDir = imageBaseDir;
             this.imageUrlPrefix = imageUrlPrefix;
             this.localHostSuffix = localHostSuffix;
             this.userAgent = userAgent;
@@ -89,9 +100,16 @@ public final class HtmlToMarkdown {
         }
     }
 
-    /** Localizes images, detects widgets, converts prose to Markdown. Mutates content. */
-    public static Result convert(Element content, Options opts) {
-        localizeImages(content, opts);
+    /**
+     * Localizes images, detects widgets, converts prose to Markdown. Mutates content.
+     *
+     * itemSubpath is the content item's own path (e.g. "java-quick-start/hello-world"
+     * for a page, "2026/07/my-post" for a post). Its images are co-located under
+     * imageBaseDir/itemSubpath/ -- one image directory per content item, mirroring
+     * the content tree, so a page and its images are managed together.
+     */
+    public static Result convert(Element content, Options opts, String itemSubpath) {
+        localizeImages(content, opts, itemSubpath);
         boolean jdoodle = !content.select(SELECTOR_JDOODLE).isEmpty();
         boolean enlighterjs = !content.select(SELECTOR_ENLIGHTERJS).isEmpty();
         String markdown = toMarkdown(content);
@@ -143,14 +161,14 @@ public final class HtmlToMarkdown {
     // ---- image localization ---------------------------------------------
 
     /**
-     * Downloads every foojay-hosted image referenced in the body into the
-     * configured image dir and rewrites the reference to the local path. Covers
-     * both <img src>/srcset and <a href> lightbox links to image files.
-     * Third-party images (kept working after cutover) are left as-is.
+     * Downloads every foojay-hosted image referenced in the body into this item's
+     * own image directory (imageBaseDir/itemSubpath/) and rewrites the reference
+     * to the local path. Covers both <img src>/srcset and <a href> lightbox links
+     * to image files. Third-party images (kept working after cutover) are left as-is.
      */
-    static void localizeImages(Element content, Options opts) {
+    static void localizeImages(Element content, Options opts, String itemSubpath) {
         for (Element img : content.select("img[src]")) {
-            String local = localizeImage(img.absUrl("src"), opts);
+            String local = localizeImage(img.absUrl("src"), opts, itemSubpath);
             if (local != null) {
                 img.attr("src", local);
                 // srcset points at WordPress-sized variants that vanish at cutover;
@@ -162,23 +180,25 @@ public final class HtmlToMarkdown {
         for (Element a : content.select("a[href]")) {
             String href = a.absUrl("href");
             if (IMAGE_HREF.matcher(href).find()) {
-                String local = localizeImage(href, opts);
+                String local = localizeImage(href, opts, itemSubpath);
                 if (local != null) a.attr("href", local);
             }
         }
     }
 
     /**
-     * Localizes one image URL, returning its new site-absolute path, or null to
-     * leave the reference unchanged (not a foojay-hosted image, or the download
-     * failed). The WordPress uploads subpath is preserved so filenames from
-     * different upload folders can't collide. Idempotent: an already-downloaded
-     * file is not fetched again.
+     * Localizes one image URL into this item's image directory, returning its new
+     * site-absolute path, or null to leave the reference unchanged (not a
+     * foojay-hosted image, or the download failed). Idempotent: an already-
+     * downloaded file is not fetched again.
      */
-    static String localizeImage(String absoluteUrl, Options opts) {
-        String rel = imageRelPath(absoluteUrl, opts.localHostSuffix);
-        if (rel == null) return null;
-        Path out = opts.imageDir.resolve(rel);
+    static String localizeImage(String absoluteUrl, Options opts, String itemSubpath) {
+        String filename = localImageFilename(absoluteUrl, opts.localHostSuffix);
+        if (filename == null) return null;
+        String rel = (itemSubpath == null || itemSubpath.isBlank())
+                ? filename
+                : itemSubpath + "/" + filename;
+        Path out = opts.imageBaseDir.resolve(rel);
         try {
             if (!Files.exists(out)) {
                 Connection.Response res = Jsoup.connect(absoluteUrl)
@@ -198,12 +218,12 @@ public final class HtmlToMarkdown {
     }
 
     /**
-     * Maps a foojay-hosted image URL to its relative path under the image dir,
-     * or null if it shouldn't be localized. Uses the WordPress uploads subpath
-     * (e.g. .../uploads/2025/05/foo.jpg -> 2025/05/foo.jpg) when present, else
-     * the URL path minus its leading slash.
+     * The filename to store a foojay-hosted image under (its basename, sanitized),
+     * or null if it shouldn't be localized (not foojay-hosted, data:, or blank).
+     * Co-location per content item means the WP upload folders don't matter -- the
+     * basename is enough, and collisions within a single page are vanishingly rare.
      */
-    static String imageRelPath(String absoluteUrl, String localHostSuffix) {
+    static String localImageFilename(String absoluteUrl, String localHostSuffix) {
         if (absoluteUrl == null || absoluteUrl.isBlank() || absoluteUrl.startsWith("data:")) return null;
         URI uri;
         try {
@@ -216,9 +236,8 @@ public final class HtmlToMarkdown {
         String path = uri.getPath();
         if (path == null || path.isBlank()) return null;
 
-        int uploads = path.indexOf("/uploads/");
-        String rel = uploads >= 0 ? path.substring(uploads + "/uploads/".length()) : path.replaceFirst("^/+", "");
-        rel = rel.replaceAll("\\.\\.(?:/|$)", ""); // defensive: no path traversal
-        return rel.isBlank() ? null : rel;
+        String name = path.substring(path.lastIndexOf('/') + 1);
+        name = name.replaceAll("[^A-Za-z0-9._-]", "-"); // filesystem-safe, no traversal
+        return name.isBlank() || name.equals(".") ? null : name;
     }
 }
