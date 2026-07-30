@@ -25,9 +25,11 @@ public class ValidateFrontmatter {
         List<String> problems = new ArrayList<>();
         Set<String> postSlugs = new HashSet<>();
 
+        // Posts live under content/posts/<year>/<month>/<slug>.md, so this
+        // needs to walk recursively rather than list the top-level dir.
         Path postsDir = Path.of("content/posts");
         if (Files.isDirectory(postsDir)) {
-            try (Stream<Path> files = Files.list(postsDir)) {
+            try (Stream<Path> files = Files.walk(postsDir)) {
                 files.filter(p -> p.toString().endsWith(".md") && !p.getFileName().toString().equals("_index.md"))
                      .forEach(p -> postSlugs.add(stripExt(p.getFileName().toString())));
             }
@@ -76,7 +78,7 @@ public class ValidateFrontmatter {
         List<String> problems = new ArrayList<>();
         if (!Files.isDirectory(postsDir)) return problems;
 
-        try (Stream<Path> files = Files.list(postsDir)) {
+        try (Stream<Path> files = Files.walk(postsDir)) {
             for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
                 if (file.getFileName().toString().equals("_index.md")) continue;
                 Map<String, Object> fm = readFrontmatter(file);

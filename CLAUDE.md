@@ -65,6 +65,13 @@ IntelliJ's terminal, read this before making changes.
 - **URLs are load-bearing**: every converted post/author/page keeps its
   legacy path (`aliases:` + explicit `url:` for pages) — don't restructure
   URLs without adding an alias.
+- **Posts are filed by publish date, not flat**: `content/posts/<year>/<month>/<slug>.md`,
+  bucketed by the post's original publish date (parsed in `ConvertPosts.java`'s
+  `bucketDirFor()`), purely to keep a 1000+-post directory browsable. This has
+  no effect on the URL (`hugo.toml`'s permalinks are slug-only). `isFrozen()`
+  and `writePost()` look up a post's existing file by slug recursively
+  (`findExistingPostFile()`) so it stays put across re-runs even if date
+  parsing is imperfect.
 - **`related_posts` is manual**, chosen by the author — never replace it
   with an automated tag-similarity algorithm.
 - Posts are contributed via PR (see `CONTRIBUTING.md`); the repo is public.

@@ -6,7 +6,7 @@ site during a trial/transition period, then cut over once it's solid.
 
 ## Structure
 
-- `content/posts/` — blog posts (from `/today/`)
+- `content/posts/` — blog posts (from `/today/`), filed under `<year>/<month>/<slug>.md` by original publish date (repo organization only — URLs stay `/today/<slug>/` via the permalinks config)
 - `content/authors/` — author profile pages
 - `content/pages/` — everything else (About, Java Quick Start tree, etc.), mirroring the legacy URL structure as directories
 - `content/all-events.md` — JUG events calendar page (reads `data/events.json`)

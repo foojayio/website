@@ -5,8 +5,12 @@ automatic preview URL per PR, so please preview locally before opening one.
 
 ## 1. Create your post
 
+Posts are filed under `content/posts/<year>/<month>/` by publish date, to keep
+a directory of 1000+ posts browsable. This is just repo organization — it has
+no effect on the URL, which is always `/today/your-post-slug/`.
+
 ```bash
-hugo new content/posts/your-post-slug.md
+hugo new content/posts/2026/07/your-post-slug.md
 ```
 
 This uses `archetypes/posts.md` and fills in the required frontmatter fields:

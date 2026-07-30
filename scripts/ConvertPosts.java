@@ -14,10 +14,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Converts foojay.io WordPress blog posts under /today/ into Hugo content
@@ -37,11 +40,19 @@ import java.util.stream.Collectors;
  * adjust the SELECTORS block below if fields come back empty.
  *
  * IDEMPOTENCY:
- * Re-running this script updates existing content/posts/<slug>.md files rather
- * than duplicating them, so it's safe to schedule/re-run repeatedly during the
- * WP -> Hugo trial period. If a post's frontmatter has `frozen: true` (set by
- * hand once someone has hand-edited the converted file), the script leaves it
- * alone instead of overwriting it.
+ * Re-running this script updates existing content/posts/<year>/<month>/<slug>.md
+ * files rather than duplicating them, so it's safe to schedule/re-run repeatedly
+ * during the WP -> Hugo trial period. If a post's frontmatter has `frozen: true`
+ * (set by hand once someone has hand-edited the converted file), the script
+ * leaves it alone instead of overwriting it.
+ *
+ * FILE LAYOUT:
+ * Posts are filed under content/posts/<year>/<month>/<slug>.md, bucketed by
+ * the post's *original* publish date (not the date the script runs) so the
+ * file doesn't move around on re-runs. This is purely a repo-organization
+ * choice for keeping a directory of 1000+ posts browsable -- it has no effect
+ * on the public URL, which stays /today/<slug>/ via the permalinks config in
+ * hugo.toml regardless of where the file lives.
  */
 public class ConvertPosts {
 
@@ -103,6 +114,8 @@ public class ConvertPosts {
                 failed++;
             }
         }
+        // NOTE: writePost() below resolves each post's path under
+        // content/posts/<year>/<month>/<slug>.md.
         System.out.printf("Done. written=%d skipped(frozen)=%d failed=%d%n", written, skippedFrozen, failed);
     }
 
@@ -269,13 +282,39 @@ public class ConvertPosts {
     }
 
     static boolean isFrozen(String slug) {
-        Path f = OUTPUT_DIR.resolve(slug + ".md");
-        if (!Files.exists(f)) return false;
+        Optional<Path> existing = findExistingPostFile(slug);
+        if (existing.isEmpty()) return false;
         try {
-            String content = Files.readString(f);
-            return content.contains("frozen: true");
+            return Files.readString(existing.get()).contains("frozen: true");
         } catch (IOException e) {
             return false;
+        }
+    }
+
+    /** Recursively looks for content/posts/**&#47;<slug>.md so a post already
+     *  filed under its year/month keeps living there on re-runs, even if this
+     *  run's date parsing landed on a slightly different bucket. */
+    static Optional<Path> findExistingPostFile(String slug) {
+        if (!Files.isDirectory(OUTPUT_DIR)) return Optional.empty();
+        try (Stream<Path> files = Files.walk(OUTPUT_DIR)) {
+            return files.filter(p -> p.getFileName().toString().equals(slug + ".md")).findFirst();
+        } catch (IOException e) {
+            return Optional.empty();
+        }
+    }
+
+    /** Bucket directory for a post: content/posts/<year>/<month>/, derived from
+     *  the post's original publish date. Falls back to "undated/" (logged) if
+     *  the date couldn't be parsed, so nothing silently gets lost. */
+    static Path bucketDirFor(PostData d) {
+        try {
+            OffsetDateTime dt = OffsetDateTime.parse(d.date, DateTimeFormatter.ISO_DATE_TIME);
+            String year = String.format("%04d", dt.getYear());
+            String month = String.format("%02d", dt.getMonthValue());
+            return OUTPUT_DIR.resolve(year).resolve(month);
+        } catch (Exception e) {
+            System.err.println("WARN: could not parse date '" + d.date + "' for " + d.slug + ", filing under posts/undated/");
+            return OUTPUT_DIR.resolve("undated");
         }
     }
 
@@ -302,7 +341,8 @@ public class ConvertPosts {
         fm.append("---\n\n");
         fm.append(d.bodyHtml).append("\n");
 
-        Path out = OUTPUT_DIR.resolve(d.slug + ".md");
+        Path out = findExistingPostFile(d.slug).orElseGet(() -> bucketDirFor(d).resolve(d.slug + ".md"));
+        Files.createDirectories(out.getParent());
         Files.writeString(out, fm.toString());
         if (verbose) System.out.println("Wrote " + out);
     }
