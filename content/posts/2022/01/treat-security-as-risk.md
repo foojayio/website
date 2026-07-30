@@ -12,6 +12,9 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "are-java-security-updates-important"
+  - "avoid-java-serialization"
 enlighterjs: true
 frozen: false
 ---

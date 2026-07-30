@@ -14,6 +14,10 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "7-ways-to-contribute-to-openjdk"
+  - "are-java-security-updates-important"
+  - "am-i-testing-the-right-way"
+  - "openjdk-january-2026-critical-patch-update-and-patch-set-update-released"
 enlighterjs: true
 frozen: false
 ---

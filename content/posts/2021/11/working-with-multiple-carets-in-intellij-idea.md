@@ -11,6 +11,10 @@ categories:
   - "IntelliJ IDEA"
 tags:
 related_posts:
+  - "creating-a-simple-spring-boot-application-in-intellij-idea"
+  - "generating-code-with-intellij-idea"
+  - "beginning-javafx-with-intellij"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 enlighterjs: true
 frozen: false
 ---

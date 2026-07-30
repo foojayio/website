@@ -15,6 +15,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "a-fresh-look-at-embedded-java"
+  - "azul-brings-java-from-edge-to-cloud"
+  - "wordish-with-javafx-part-5"
+  - "wordish-with-javafx-part-4"
 enlighterjs: true
 frozen: false
 ---

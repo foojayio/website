@@ -13,6 +13,10 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "can-java-jakarta-ee-do-microservices"
+  - "deploying-spring-boot-applications-on-kubernetes"
+  - "do-you-really-need-kubernetes"
+  - "monolith-vs-microservices-2025"
 frozen: false
 ---
 

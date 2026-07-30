@@ -14,6 +14,9 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "foojay-podcast-7"
+  - "how-to-create-sboms-in-java-with-maven-and-gradle"
+  - "how-to-publish-a-java-maven-project-to-the-maven-central-repository"
 frozen: false
 ---
 

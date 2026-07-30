@@ -14,6 +14,9 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "connecting-resilience-to-performance-in-relation-to-openjdk"
+  - "the-impact-of-the-eu-dora-act-on-non-eu-financial-organizations"
+  - "consequences-of-dora-on-java-and-openjdk-with-azul"
 frozen: false
 ---
 

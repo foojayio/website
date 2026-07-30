@@ -15,6 +15,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "quarkus-unpacked-insights-from-the-foojay-podcast"
+  - "bringing-raspberry-pi-development-to-quarkus-with-the-quarkus-pi4j-extension"
+  - "crafting-your-own-railway-display-with-java"
+  - "a-fresh-look-at-embedded-java"
 enlighterjs: true
 frozen: false
 ---

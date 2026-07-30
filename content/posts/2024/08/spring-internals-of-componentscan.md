@@ -13,6 +13,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "how-to-improve-your-spring-boot-skills"
+  - "spring-ai-how-to-write-genai-applications-with-java"
+  - "spring-internals-of-restclient"
 enlighterjs: true
 frozen: false
 ---

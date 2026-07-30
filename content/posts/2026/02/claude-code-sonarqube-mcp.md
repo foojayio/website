@@ -13,6 +13,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
+  - "context-is-code-a-tour-of-apm-and-agentrc"
+  - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
+  - "enterprise-java-quality-gates-ai"
 frozen: false
 ---
 

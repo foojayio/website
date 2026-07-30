@@ -11,6 +11,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "jedi-lambda-join-java-challenge"
+  - "asynchronous-completablefuture-san-francisco-adventure-java-challenge"
+  - "daemon-thread-java-code-quiz"
+  - "function-calculation-java-challenge"
 enlighterjs: true
 frozen: false
 ---

@@ -13,6 +13,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "chronicle-wire-object-marshalling"
+  - "creating-terabyte-sized-queues-with-low-latency"
+  - "did-you-know-you-can-create-mappers-without-creating-underlying-objects-in-java"
+  - "building-custom-solutions-vs-buy-and-build-software"
 frozen: false
 ---
 

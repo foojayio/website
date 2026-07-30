@@ -13,6 +13,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "abstracting-data-access-in-java-with-the-dao-pattern"
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "ai-powered-code-review-assistant-automated-code-analysis-with-spring-ai-and-mongodb"
+  - "atlas-online-archive-efficiently-manage-the-data-lifecycle"
 enlighterjs: true
 frozen: false
 ---

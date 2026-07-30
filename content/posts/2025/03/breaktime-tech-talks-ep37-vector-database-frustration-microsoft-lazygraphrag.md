@@ -19,6 +19,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "intro-to-rag-foundations-of-retrieval-augmented-generation-part-2"
+  - "jc-ai-newsletter-9"
+  - "intro-to-rag-foundations-of-retrieval-augmented-generation-part-1"
+  - "genai-blood-sweat-and-tears-loading-data-to-pinecone"
 frozen: false
 ---
 

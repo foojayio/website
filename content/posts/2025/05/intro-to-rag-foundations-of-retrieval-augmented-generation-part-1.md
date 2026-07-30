@@ -13,6 +13,10 @@ categories:
   - "Machine Learning"
 tags:
 related_posts:
+  - "intro-to-rag-foundations-of-retrieval-augmented-generation-part-1"
+  - "ai-powered-chat-application-using-ibm-watsonx-ai-and-spring-ai"
+  - "breaktime-tech-talks-ep37-vector-database-frustration-microsoft-lazygraphrag"
+  - "building-simple-home-assistant-langchain4j-raspberry-pi"
 frozen: false
 ---
 

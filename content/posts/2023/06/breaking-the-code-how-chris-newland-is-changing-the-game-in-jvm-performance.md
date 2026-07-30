@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "foojay-all-about-java-and-the-openjdk-i-programmer"
+  - "foojay-a-place-for-friends-of-openjdk-adt-magazine"
+  - "transitioning-to-java-my-first-book"
+  - "the-curious-case-of-different-runtimes-with-different-training-data-jit"
 frozen: false
 ---
 
@@ -99,7 +103,7 @@ If you want to specialize in Java performance, then I have two pieces of advice:
 
 #### **Bazlur: You've developed a number of open-source JVM tools that have been widely used and contributed to. For individuals interested in joining and contributing to these projects, could you provide a brief guide on how they can get started?**
 
-**Chris:** Please talk to me first 🙂 Drop me an email at [\[email protected\]](/cdn-cgi/l/email-protection#cfaca7bda6bc8faca7bda6bca1aab8a3aea1abe1aca0a2) with your idea before submitting a PR because I might already be working on something similar or taking the tools in a different direction.
+**Chris:** Please talk to me first 🙂 Drop me an email at [\[email protected\]](/cdn-cgi/l/email-protection#06656e746f7546656e746f756863716a6768622865696b) with your idea before submitting a PR because I might already be working on something similar or taking the tools in a different direction.
 
 *** ** * ** ***
 

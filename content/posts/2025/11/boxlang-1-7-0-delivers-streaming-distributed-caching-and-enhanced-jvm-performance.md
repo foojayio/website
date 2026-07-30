@@ -13,6 +13,7 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "foojay-podcast-76"
 enlighterjs: true
 frozen: false
 ---
@@ -187,7 +188,7 @@ About Ortus Solutions {#h2-8-about-ortus-solutions}
 
 Ortus Solutions, Corp.  
 
-📧 [\[email protected\]](/cdn-cgi/l/email-protection#7910171f1639160b0d0c0a0a16150c0d1016170a571a1614)  
+📧 [\[email protected\]](/cdn-cgi/l/email-protection#b1d8dfd7def1dec3c5c4c2c2deddc4c5d8dedfc29fd2dedc)  
 
 🌍 [www.ortussolutions.com](https://www.ortussolutions.com)  
 

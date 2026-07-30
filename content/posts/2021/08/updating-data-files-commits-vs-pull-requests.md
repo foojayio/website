@@ -13,6 +13,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "whats-new-in-actions-setup-java-5-4-and-5-5-signature-verification-kona-jdk-and-a-better-maven-experience"
+  - "lights-camera-action-github-actions-with-java-part-3"
+  - "github-actions-with-java-part-2"
+  - "github-actions-with-java-part-1"
 enlighterjs: true
 frozen: false
 ---

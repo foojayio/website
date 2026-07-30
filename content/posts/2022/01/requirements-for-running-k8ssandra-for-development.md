@@ -17,6 +17,9 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "why-k8ssandra"
+  - "kubernetes-data-simplicity-getting-started-with-k8ssandra"
+  - "simplify-migrating-from-kafka-to-pulsar-with-kafka-connect-support"
 enlighterjs: true
 frozen: false
 ---

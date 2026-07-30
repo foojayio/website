@@ -16,6 +16,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "pi4j-v-2-released"
+  - "installing-java-with-sdkman-on-raspberry-pi"
+  - "foojay-podcast-2"
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
 enlighterjs: true
 frozen: false
 ---

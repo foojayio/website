@@ -15,6 +15,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "how-java-litters-beyond-the-heap-relational-databases"
+  - "how-java-litters-beyond-the-heap-part-2-distributed-databases"
+  - "how-java-litters-beyond-the-heap-part-3-solid-state-drives"
+  - "from-spring-boot-to-jakarta-ee-11-how-payara-starter-eases-the-transition"
 enlighterjs: true
 frozen: false
 ---

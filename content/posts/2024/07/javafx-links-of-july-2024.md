@@ -15,6 +15,10 @@ categories:
   - "JBang"
 tags:
 related_posts:
+  - "javafx-links-of-june-2024"
+  - "javafx-links-of-may-2024"
+  - "javafx-links-of-april-2024"
+  - "javafx-links-of-june-2026"
 frozen: false
 ---
 

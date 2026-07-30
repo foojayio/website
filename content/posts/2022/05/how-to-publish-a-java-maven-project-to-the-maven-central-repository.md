@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "faster-maven-builds-1"
+  - "faster-maven-builds-part-2"
+  - "fixing-vulnerabilities-in-maven-projects"
+  - "enterprise-java-quality-gates-ai"
 enlighterjs: true
 frozen: false
 ---
@@ -162,7 +166,7 @@ As you can see, the first tags are just general project information:
     &lt;developers&gt;
         &lt;developer&gt;
             &lt;name&gt;Tobias Briones&lt;/name&gt;
-            &lt;email&gt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="50343526103d312438233f3624273122357e353e37393e353522">[email&nbsp;protected]</a>&lt;/email&gt;
+            &lt;email&gt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="76121300361b17021e0519100201170413581318111f18131304">[email&nbsp;protected]</a>&lt;/email&gt;
             &lt;organization&gt;Tobias Briones&lt;/organization&gt;
             &lt;organizationUrl&gt;https://mathsoftware.engineer&lt;/organizationUrl&gt;
         &lt;/developer&gt;

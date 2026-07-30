@@ -11,6 +11,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "abstracting-data-access-in-java-with-the-dao-pattern"
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "aggregation-optimization-in-mongodb-a-case-study-from-the-field-part-1"
+  - "aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2"
 frozen: false
 ---
 

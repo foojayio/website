@@ -13,6 +13,10 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "examining-the-switch-statement-and-the-factory-pattern-in-three-jvm-languages"
+  - "exposed-kotlin-orm-complete-guide"
+  - "jc-ai-newsletter-15"
+  - "jc-ai-newsletter-13"
 enlighterjs: true
 frozen: false
 ---

@@ -14,6 +14,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "blockhound-how-it-works"
+  - "securing-microservices-with-auth0-and-microprofile-in-kubernetes"
 enlighterjs: true
 frozen: false
 ---

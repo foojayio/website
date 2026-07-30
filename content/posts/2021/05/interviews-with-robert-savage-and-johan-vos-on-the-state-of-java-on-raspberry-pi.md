@@ -15,6 +15,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "template-to-get-started-with-pi4j-and-javafx-on-raspberry-pi"
+  - "using-the-raspberry-pi-sense-hat-with-pi4j-drivers"
+  - "the-javafx-revival"
+  - "pi4j-welcomes-java-21-on-the-raspberry-pi"
 frozen: false
 ---
 

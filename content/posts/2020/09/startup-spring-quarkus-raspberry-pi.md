@@ -13,6 +13,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "azul-zulu-openjdk-15-on-raspberry-pi"
+  - "optimizing-java-for-the-cloud-native-era-with-quarkus"
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
+  - "electronics-quarkus-qute-on-raspberry-pi"
 enlighterjs: true
 frozen: false
 ---

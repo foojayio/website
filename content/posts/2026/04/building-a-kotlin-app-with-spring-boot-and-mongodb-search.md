@@ -14,6 +14,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "abstracting-data-access-in-java-with-the-dao-pattern"
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "atlas-online-archive-efficiently-manage-the-data-lifecycle"
+  - "atlas-searching-with-the-java-driver"
 enlighterjs: true
 frozen: false
 ---
@@ -171,7 +175,7 @@ To establish our connection, we need to follow these steps. First, update the ap
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.application.name=Airbnb Searcher
 
-spring.data.mongodb.uri=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5929382a2a193a352c2a2d3c2b69773a352c2a2d3c2b773436373e363d3b77373c2d">[email&nbsp;protected]</a>/
+spring.data.mongodb.uri=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="433322303003202f3630372631736d202f36303726316d2e2c2d242c27216d2d2637">[email&nbsp;protected]</a>/
 
 spring.data.mongodb.database=sample_airbnb</pre>
 

@@ -12,6 +12,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "top-most-detected-issues-in-java-projects"
+  - "builders-withers-and-records-javas-path-to-immutability"
+  - "building-for-failure-best-practices-for-easy-production-debugging"
+  - "make-the-life-of-your-developer-clients-easier-with-smart-builders"
 enlighterjs: true
 frozen: false
 ---

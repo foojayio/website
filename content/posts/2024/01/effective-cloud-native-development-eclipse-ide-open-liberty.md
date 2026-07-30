@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "effective-cloud-native-development-open-liberty-vs-code"
+  - "keeping-pace-with-java-using-eclipse-ide"
+  - "new-to-java-some-resources"
+  - "effective-cloud-native-java-app-development-with-open-liberty-in-intellij-idea"
 frozen: false
 ---
 

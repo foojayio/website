@@ -14,6 +14,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "foojay-podcast-19"
+  - "foojay-podcast-47"
+  - "why-this-jcon-europe-talk-is-unmissable-part-1"
+  - "foojay-podcast-88"
 frozen: false
 ---
 

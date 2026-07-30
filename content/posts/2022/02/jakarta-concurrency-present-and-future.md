@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "are-java-jakarta-ee-application-servers-heavy"
+  - "do-java-jakarta-ee-standards-matter"
+  - "evolution-of-microservices"
+  - "ejb-support-in-piranha-via-cdi"
 enlighterjs: true
 frozen: false
 ---

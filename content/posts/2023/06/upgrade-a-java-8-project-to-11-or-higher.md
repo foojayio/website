@@ -12,6 +12,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "9-outdated-ideas-about-java"
+  - "what-java-version-are-you-running-lets-take-a-look-under-the-hood-of-the-jdk"
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "new-between-quarters-security-updates-for-java-what-cspus-mean-for-your-release-pipeline"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
+  - "what-is-debugging-in-140-seconds"
+  - "the-basics-of-breakpoints-you-might-not-know"
+  - "exception-breakpoint-that-doesnt-suck-and-a-real-use-case-for-method-breakpoints"
 frozen: false
 ---
 

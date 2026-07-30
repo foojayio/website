@@ -13,6 +13,9 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "are-java-security-updates-important"
+  - "jep-411-what-it-means-for-javas-security-model"
+  - "secure-code-review-best-practices-part-1"
 enlighterjs: true
 frozen: false
 ---

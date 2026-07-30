@@ -14,6 +14,10 @@ categories:
   - "Machine Learning"
 tags:
 related_posts:
+  - "coderabbit-tutorial-for-java-developers"
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "7-habits-of-highly-effective-java-coding"
+  - "5-things-you-probably-didnt-know-about-java-concurrency"
 frozen: false
 ---
 

@@ -12,6 +12,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "increase-readability-and-reduce-complexity-with-javas-pattern-matching"
+  - "my-final-take-on-gradle-vs-maven"
+  - "top-security-flaws-hiding-in-your-code-right-now-and-how-to-fix-them"
+  - "we-all-grow-older-but-do-our-projects-really-have-to-openrewrite"
 frozen: false
 ---
 

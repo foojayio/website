@@ -14,6 +14,10 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "schedule-for-foojay-virtual-openjdk-17-jug-tour"
+  - "building-openjdk-from-github-sources-on-64-bit-raspberry-pi"
+  - "64-bit-raspbian-os-on-raspberry-pi-4-with-usb-boot"
+  - "a-fresh-look-at-embedded-java"
 enlighterjs: true
 frozen: false
 ---

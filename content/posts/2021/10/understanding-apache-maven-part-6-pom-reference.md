@@ -11,6 +11,9 @@ categories:
   - "Maven"
 tags:
 related_posts:
+  - "understanding-apache-maven-part-3-maven-coordinates-pom-inheritance"
+  - "understanding-apache-maven-part-4-maven-lifecycle"
+  - "understanding-apache-maven-part-5-dependencies-in-maven"
 frozen: false
 ---
 

@@ -151,10 +151,10 @@ Copy/paste the following statements into the CQLSH prompt and press enter:
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">CREATE KEYSPACE medusa_test  WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 USE medusa_test;
 CREATE TABLE users (email TEXT PRIMARY KEY, name TEXT, state TEXT);
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="690805000a0c290c11080419050c470a0604">[email&nbsp;protected]</a>', 'Alice Smith', 'TX');
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="41232e23012439202c312d246f222e2c">[email&nbsp;protected]</a>', 'Bob Jones', 'VA');
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="80e3e1f2efecc0e5f8e1edf0ece5aee3efed">[email&nbsp;protected]</a>', 'Carol Jackson', 'CA');
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="385c594e515c785d40595548545d165b5755">[email&nbsp;protected]</a>', 'David Yang', 'NV');</pre>
+INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3a2afaaa0a683a6bba2aeb3afa6eda0acae">[email&nbsp;protected]</a>', 'Alice Smith', 'TX');
+INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2d0ddd0f2d7cad3dfc2ded79cd1dddf">[email&nbsp;protected]</a>', 'Bob Jones', 'VA');
+INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="056664776a6945607d64687569602b666a68">[email&nbsp;protected]</a>', 'Carol Jackson', 'CA');
+INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3b5f5a4d525f7b5e435a564b575e15585456">[email&nbsp;protected]</a>', 'David Yang', 'NV');</pre>
 
 Check that the rows were properly inserted:
 
@@ -162,10 +162,10 @@ Check that the rows were properly inserted:
 
  email             | name          | state
 -------------------+---------------+-------
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7b1a1712181e3b1e031a160b171e55181416">[email&nbsp;protected]</a> |   Alice Smith |    TX
-   <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89ebe6ebc9ecf1e8e4f9e5eca7eae6e4">[email&nbsp;protected]</a> |     Bob Jones |    VA
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e98d889f808da98c91888499858cc78a8684">[email&nbsp;protected]</a> |    David Yang |    NV
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5c3f3d2e33301c39243d312c3039723f3331">[email&nbsp;protected]</a> | Carol Jackson |    CA
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="63020f0a000623061b020e130f064d000c0e">[email&nbsp;protected]</a> |   Alice Smith |    TX
+   <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="23414c4163465b424e534f460d404c4e">[email&nbsp;protected]</a> |     Bob Jones |    VA
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ce8edfae5e8cce9f4ede1fce0e9a2efe3e1">[email&nbsp;protected]</a> |    David Yang |    NV
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0d3d1c2dfdcf0d5c8d1ddc0dcd59ed3dfdd">[email&nbsp;protected]</a> | Carol Jackson |    CA
 
 (4 rows)</pre>
 
@@ -220,10 +220,10 @@ Check that you can read the data from the previously truncated table:
 
  email             | name          | state
 -------------------+---------------+-------
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="12737e7b717752776a737f627e773c717d7f">[email&nbsp;protected]</a> |   Alice Smith |    TX
-   <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e5878a87a5809d8488958980cb868a88">[email&nbsp;protected]</a> |     Bob Jones |    VA
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8eeaeff8e7eaceebf6efe3fee2eba0ede1e3">[email&nbsp;protected]</a> |    David Yang |    NV
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1f7c7e6d70735f7a677e726f737a317c7072">[email&nbsp;protected]</a> | Carol Jackson |    CA
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1b0bdb8b2b491b4a9b0bca1bdb4ffb2bebc">[email&nbsp;protected]</a> |   Alice Smith |    TX
+   <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="61030e03210419000c110d044f020e0c">[email&nbsp;protected]</a> |     Bob Jones |    VA
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cfabaeb9a6ab8faab7aea2bfa3aae1aca0a2">[email&nbsp;protected]</a> |    David Yang |    NV
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe9d9f8c9192be9b869f938e929bd09d9193">[email&nbsp;protected]</a> | Carol Jackson |    CA
 
 (4 rows)</pre>
 
@@ -232,4 +232,4 @@ You've successfully restored your lost data in just a few commands!
 Many backends available {#many-backends-available}
 --------------------------------------------------
 
-MinIO, while being an obvious choice in the Kubernetes world, is not the only S3 compatible backend that K8ssandra can use. K8ssandra has supported AWS S3 and Google Cloud Storage as Medusa backends since 1.0.0. There are also a wide variety of solutions that can run on-prem (including CEPH, Cloudian, Riak S2, and Dell EMC ECS) or in cloud environments (including IBM Cloud Object Storage, and OVHcloud Object Storage). See the [K8ssandra backup/restore documentation](https://docs.k8ssandra.io/tasks/backup-restore/) for more detailed instructions and [let us know](/cdn-cgi/l/email-protection#9bf0a3e8e8faf5ffe9fab6eee8fee9e8dbfcf4f4fcf7fefce9f4eeebe8b5f8f4f6) if you have questions, we love to help! If you are looking to learn Cassandra, or want to see how backups are handled on a Cassandra managed service, please head over to the [Astra DB](https://astra.dev/3q5iv9v) website and try the free tier.
+MinIO, while being an obvious choice in the Kubernetes world, is not the only S3 compatible backend that K8ssandra can use. K8ssandra has supported AWS S3 and Google Cloud Storage as Medusa backends since 1.0.0. There are also a wide variety of solutions that can run on-prem (including CEPH, Cloudian, Riak S2, and Dell EMC ECS) or in cloud environments (including IBM Cloud Object Storage, and OVHcloud Object Storage). See the [K8ssandra backup/restore documentation](https://docs.k8ssandra.io/tasks/backup-restore/) for more detailed instructions and [let us know](/cdn-cgi/l/email-protection#ff94c78c8c9e919b8d9ed28a8c9a8d8cbf98909098939a988d908a8f8cd19c9092) if you have questions, we love to help! If you are looking to learn Cassandra, or want to see how backups are handled on a Cassandra managed service, please head over to the [Astra DB](https://astra.dev/3q5iv9v) website and try the free tier.

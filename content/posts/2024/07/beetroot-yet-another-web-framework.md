@@ -12,6 +12,9 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "building-javafx-with-gradle"
+  - "getting-started-with-rife2-java-web-framework-v1-0-0"
+  - "creating-executables-for-javafx-applications"
 enlighterjs: true
 frozen: false
 ---

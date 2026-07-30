@@ -12,6 +12,9 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "the-try-block-in-rust"
+  - "feedback-from-calling-rust-from-python"
+  - "error-handling"
 enlighterjs: true
 frozen: false
 ---
@@ -129,7 +132,7 @@ Now, we can start the Rust implementation. Let's create a new project:
 <pre class="EnlighterJSRAW" data-enlighter-language="raw">[package]
 name = "dummymath"
 version = "0.1.0"
-authors = ["Nicolas Frankel &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c0aea9a3afaca1b380a6b2a1aeaba5aceea3a8">[email&nbsp;protected]</a>&gt;"]
+authors = ["Nicolas Frankel &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e28c8b818d8e8391a28490838c89878ecc818a">[email&nbsp;protected]</a>&gt;"]
 edition = "2018"
 
 [dependencies]

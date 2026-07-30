@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "java-testing-with-vs-code"
+  - "junit-5-testing-basics"
+  - "junit-5-introduction"
+  - "soft-assertions-testing-kindly"
 enlighterjs: true
 frozen: false
 ---

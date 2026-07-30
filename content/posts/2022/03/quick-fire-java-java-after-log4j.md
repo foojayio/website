@@ -14,6 +14,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "java-logging-what-to-log-what-not-to-log"
+  - "log4j-isnt-killing-java"
+  - "java-where-the-wild-code-isnt"
+  - "security-warning-your-java-attack-surface-just-got-bigger"
 frozen: false
 ---
 

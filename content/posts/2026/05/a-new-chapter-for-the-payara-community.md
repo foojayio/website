@@ -12,6 +12,10 @@ categories:
   - "Payara"
 tags:
 related_posts:
+  - "whats-new-in-the-january-2026-payara-platform-release"
+  - "scalable-enterprise-java-for-the-cloud"
+  - "jakarta-data-makes-persistence-a-breeze"
+  - "goodbye-payara-community-6-on-to-the-next-chapter-with-payara-community-7"
 frozen: false
 ---
 

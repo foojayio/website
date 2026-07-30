@@ -13,6 +13,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "faster-maven-builds-1"
+  - "fixing-vulnerabilities-in-maven-projects"
+  - "understanding-apache-maven-part-8-maven-plugins"
+  - "effective-cloud-native-java-app-development-with-open-liberty-in-intellij-idea"
 enlighterjs: true
 frozen: false
 ---

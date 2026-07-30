@@ -13,6 +13,10 @@ categories:
   - "Jakarta EE"
 tags:
 related_posts:
+  - "2021-jakarta-ee-developer-survey"
+  - "are-java-jakarta-ee-application-servers-heavy"
+  - "can-java-jakarta-ee-do-microservices"
+  - "getting-started-with-jakarta-ee-9-context-and-dependency-injection-cdi"
 enlighterjs: true
 frozen: false
 ---

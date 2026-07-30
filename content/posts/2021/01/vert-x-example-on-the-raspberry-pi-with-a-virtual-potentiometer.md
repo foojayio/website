@@ -12,6 +12,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
+  - "controlling-electronics-with-jbang-on-the-raspberry-pi"
+  - "template-to-get-started-with-pi4j-and-javafx-on-raspberry-pi"
+  - "java-modules-in-the-pi4j-project"
 enlighterjs: true
 frozen: false
 ---

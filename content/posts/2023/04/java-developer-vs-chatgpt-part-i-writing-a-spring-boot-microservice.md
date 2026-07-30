@@ -14,6 +14,9 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "creating-scalable-openai-gpt-applications-in-java"
+  - "getting-started-with-deep-learning-in-java-using-deep-netts"
+  - "deep-learning-in-java-for-nuclear-physics-using-deep-netts"
 enlighterjs: true
 frozen: false
 ---

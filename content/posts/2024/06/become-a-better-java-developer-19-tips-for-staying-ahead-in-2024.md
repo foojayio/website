@@ -12,6 +12,10 @@ categories:
   - "Observability"
 tags:
 related_posts:
+  - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
+  - "couch-to-fully-observed-code-with-spring-boot-3-2-micrometer-tracing-and-digma"
+  - "effective-coding-with-java-observability"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 frozen: false
 ---
 

@@ -10,6 +10,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "abstracting-data-access-in-java-with-the-dao-pattern"
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "aggregation-optimization-in-mongodb-a-case-study-from-the-field-part-1"
+  - "aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2"
 enlighterjs: true
 frozen: false
 ---
@@ -28,7 +32,7 @@ In this tutorial, you'll:
 
 You can find all the code presented in this tutorial in the GitHub repository:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="75121c0135121c011d00175b161a18">[email&nbsp;protected]</a>:soujava/mongodb-ai-planning-pattern.git</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e19170a3e19170a160b1c501d1113">[email&nbsp;protected]</a>:soujava/mongodb-ai-planning-pattern.git</pre>
 
 Prerequisites {#h2-0-prerequisites}
 -----------------------------------

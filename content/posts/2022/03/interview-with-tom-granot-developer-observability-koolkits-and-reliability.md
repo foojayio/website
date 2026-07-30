@@ -13,6 +13,10 @@ categories:
   - "Kubernetes"
 tags:
 related_posts:
+  - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
+  - "the-debugger-checklist-part-ii"
+  - "what-is-debugging-in-140-seconds"
+  - "warm-up-fast-run-lean-vertical-scaling-for-java-on-kubernetes-with-azul-prime-and-kedify"
 frozen: false
 ---
 

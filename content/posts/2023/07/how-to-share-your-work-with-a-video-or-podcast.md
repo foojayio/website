@@ -15,6 +15,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "foojay-podcast-26"
+  - "foojay-podcast-25"
+  - "foojay-podcast-24"
+  - "quarkus-unpacked-insights-from-the-foojay-podcast"
 frozen: false
 ---
 

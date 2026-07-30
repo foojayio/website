@@ -11,6 +11,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "spring-ai-agents-no-second-runtime"
+  - "ai-found-the-bugs-whos-patching-your-eol-java-code"
+  - "building-java-containers-without-a-dockerfile-azul-zulu-and-paketo-buildpacks"
+  - "did-ai-just-break-software-security-for-ever"
 frozen: false
 ---
 

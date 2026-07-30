@@ -15,6 +15,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"
+  - "extending-third-party-apis-in-different-languages"
+  - "measuring-time-and-duration-in-kotlin"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
 frozen: false
 ---
 

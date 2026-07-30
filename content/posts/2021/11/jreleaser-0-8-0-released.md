@@ -12,6 +12,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "jreleaser-looking-for-translation-contributions"
+  - "jreleaser-0-7-0-released"
+  - "jreleaser-0-6-0-released"
+  - "jreleaser-0-10-0-released"
 frozen: false
 ---
 

@@ -11,6 +11,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "creating-mobile-apps-with-javafx-part-1"
+  - "cross-platform-development-in-java-with-gluon-and-graalvm"
+  - "native-applications-for-multiple-devices-from-a-single-javafx-project-with-gluon-mobile-and-github-actions"
+  - "creating-a-javafx-world-clock-from-scratch-part-4"
 enlighterjs: true
 frozen: false
 ---

@@ -13,6 +13,10 @@ categories:
   - "Events"
 tags:
 related_posts:
+  - "foojay-podcast-24"
+  - "foojay-podcast-46"
+  - "java-conferences-2025"
+  - "to-brussels-canada-and-back"
 frozen: false
 ---
 

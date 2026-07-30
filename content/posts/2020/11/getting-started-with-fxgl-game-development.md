@@ -14,6 +14,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "foojay-podcast-25"
+  - "creating-a-snake-game-with-javafx-fxgl-in-three-pair-programming-sessions"
+  - "first-experiments-with-java-on-the-lattepanda-iota"
+  - "javafx-links-of-november-2025"
 enlighterjs: true
 frozen: false
 ---

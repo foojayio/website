@@ -13,6 +13,10 @@ categories:
   - "Trip Reports"
 tags:
 related_posts:
+  - "foojay-at-fosdem-2022-on-youtube"
+  - "friends-of-openjdk-at-fosdem-2022"
+  - "friends-of-openjdk-at-fosdem-2021"
+  - "press-the-easy-button-organize-a-virtual-conference-schedule-with-a-graph-database"
 enlighterjs: true
 frozen: false
 ---

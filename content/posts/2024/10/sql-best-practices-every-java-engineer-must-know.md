@@ -12,6 +12,9 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "effective-java-logging"
+  - "calling-microservices-in-java"
+  - "smarter-logging-in-spring-boot-with-aop"
 enlighterjs: true
 frozen: false
 ---
@@ -31,12 +34,12 @@ Indexes can significantly improve query performance by allowing the database to 
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT * FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c7d70755c7b717d7570327f7371">[email&nbsp;protected]</a>';</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT * FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2e4f42476e49434f4742004d4143">[email&nbsp;protected]</a>';</pre>
 
 🟢 **Good Practice**:
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE INDEX idx_users_email ON users (email);
-SELECT name, email FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="62030e0b22050f030b0e4c010d0f">[email&nbsp;protected]</a>';</pre>
+SELECT name, email FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c4d40456c4b414d4540024f4341">[email&nbsp;protected]</a>';</pre>
 
 This creates an index on the `email` column of the `users` table, speeding up searches based on email.
 
@@ -64,7 +67,7 @@ This creates a function-based index on the uppercase version of the last_name co
 In PostgreSQL, these are called expression indexes. Here's an example:
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE INDEX idx_lower_email ON users (LOWER(email)); 
-SELECT * FROM users WHERE LOWER(email) = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a7f796f784a6f726b677a666f24696567">[email&nbsp;protected]</a>';</pre>
+SELECT * FROM users WHERE LOWER(email) = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a4f495f487a5f425b574a565f14595557">[email&nbsp;protected]</a>';</pre>
 
 This creates an expression index on the lowercase version of the email column, optimizing case-insensitive email searches.
 

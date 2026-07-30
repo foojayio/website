@@ -15,6 +15,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "adelphi-apache-cassandra-testing-goes-cloud-native"
+  - "tombstones-and-ghost-data-dont-have-to-be-scary"
 enlighterjs: true
 frozen: false
 ---
@@ -253,7 +257,7 @@ Our main "dashboard.html" template is then as follows:
 &lt;head&gt;  
   &lt;meta charset="utf-8" /&gt;  
   &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
-  &lt;link href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1b3bebea5a2a5a3b0a191e4ffe1ffe1fcb3b4a5b0e2">[email&nbsp;protected]</a>/dist/css/bootstrap.min.css" rel="stylesheet"    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" /&gt;  
+  &lt;link href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="61030e0e15121513001121544f514f514c0304150052">[email&nbsp;protected]</a>/dist/css/bootstrap.min.css" rel="stylesheet"    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" /&gt;  
   &lt;title&gt;Avengers Status Dashboard&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;  
@@ -276,7 +280,7 @@ Our main "dashboard.html" template is then as follows:
     &lt;/div&gt;    
   &lt;/div&gt;  
 &lt;/div&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="24464b4b50575056455464110a140a14094641504517">[email&nbsp;protected]</a>/dist/js/bootstrap.bundle.min.js"    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"    crossorigin="anonymous"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a6865657e797e786b7a4a3f243a243a27686f7e6b39">[email&nbsp;protected]</a>/dist/js/bootstrap.bundle.min.js"    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"    crossorigin="anonymous"&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</pre>
 

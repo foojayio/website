@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "a-short-primer-on-java-debugging-internals"
+  - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
+  - "java-profiling-overview"
+  - "custom-events-in-the-blocky-world-using-jfr-in-minecraft"
 enlighterjs: true
 frozen: false
 ---

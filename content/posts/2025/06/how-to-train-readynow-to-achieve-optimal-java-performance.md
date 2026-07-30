@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
+  - "faster-java-warmup-crac-versus-readynow"
+  - "how-readynow-improves-java-warmup-time"
+  - "superfast-application-startup-java-on-crac"
 enlighterjs: true
 frozen: false
 ---

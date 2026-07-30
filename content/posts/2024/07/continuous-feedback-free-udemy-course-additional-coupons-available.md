@@ -11,6 +11,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "become-a-better-java-developer-19-tips-for-staying-ahead-in-2024"
+  - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
+  - "couch-to-fully-observed-code-with-spring-boot-3-2-micrometer-tracing-and-digma"
 frozen: false
 ---
 

@@ -15,6 +15,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "new-user-interface-for-jfx-central-the-home-for-all-javafx-information-part-1"
+  - "book-review-frontend-development-with-javafx-and-kotlin"
+  - "creating-cad-applications-with-java-and-javafx"
+  - "javafx-links-of-november-2025"
 frozen: false
 ---
 

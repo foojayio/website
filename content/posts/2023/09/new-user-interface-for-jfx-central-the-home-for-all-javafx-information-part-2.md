@@ -12,6 +12,9 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "new-user-interface-for-jfx-central-the-home-for-all-javafx-information-part-1"
+  - "beginning-javafx-with-intellij"
+  - "creating-a-javafx-world-clock-from-scratch-part-1"
 frozen: false
 ---
 

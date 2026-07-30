@@ -15,6 +15,9 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "consequences-of-dora-on-java-and-openjdk-with-azul"
+  - "java-where-the-wild-code-isnt"
+  - "the-impact-of-the-eu-dora-act-on-non-eu-financial-organizations"
 frozen: false
 ---
 

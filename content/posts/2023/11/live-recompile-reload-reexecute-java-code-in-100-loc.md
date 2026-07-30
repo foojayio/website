@@ -12,6 +12,9 @@ categories:
   - "JShell"
 tags:
 related_posts:
+  - "java-21-jep-445-unnamed-classes-and-instance-main-methods"
+  - "class-loader-hierarchies"
+  - "dissection-of-joeffice-open-source-office-suite-in-java"
 enlighterjs: true
 frozen: false
 ---

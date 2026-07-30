@@ -12,6 +12,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "java-on-azure-tooling-update-july-2022"
 frozen: false
 ---
 

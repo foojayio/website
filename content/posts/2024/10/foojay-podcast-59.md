@@ -15,6 +15,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "foojay-podcast-58"
+  - "foojay-podcast-57"
+  - "foojay-podcast-56"
+  - "foojay-podcast-88"
 frozen: false
 ---
 

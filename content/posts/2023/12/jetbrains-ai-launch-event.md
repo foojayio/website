@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "analyzing-dependencies-in-intellij-idea"
+  - "beginning-javafx-with-intellij"
+  - "observing-java-applications-running-via-docker-compose-using-opentelemetry"
+  - "foojay-podcast-91"
 frozen: false
 ---
 

@@ -14,6 +14,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
+  - "bringing-raspberry-pi-development-to-quarkus-with-the-quarkus-pi4j-extension"
+  - "controlling-a-led-strip-with-pi4j-and-jbang"
+  - "controlling-electronics-with-jbang-on-the-raspberry-pi"
 enlighterjs: true
 frozen: false
 ---

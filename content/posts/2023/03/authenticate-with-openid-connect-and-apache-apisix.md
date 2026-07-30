@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "apisix-api-gateway"
+  - "kubernetes-gateway-api"
+  - "poor-mans-api"
+  - "introducing-bx-jwt-enterprise-grade-json-web-tokens-for-boxlang"
 enlighterjs: true
 frozen: false
 ---

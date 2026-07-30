@@ -13,6 +13,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "java-serialization-filtering-prevent-0-day-security-vulnerabilities"
+  - "is-it-time-to-go-back-to-the-monolith"
+  - "what-are-you-missing-by-debugging-in-vs-code"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 frozen: false
 ---
 

@@ -11,6 +11,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "foojay-podcast-54"
+  - "video-series-javafx-in-action-part-3"
+  - "javafx-links-of-december-2024"
+  - "javafx-links-of-october-2024"
 frozen: false
 ---
 

@@ -11,6 +11,10 @@ categories:
   - "Interviews"
 tags:
 related_posts:
+  - "42-practical-java-design-patterns-builder-and-more"
+  - "developer-productivity-masterclass-interview-with-leonid-blouvshtein"
+  - "a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-1"
+  - "from-law-degree-to-java-champion-geertjan-wielenga-on-the-success-of-java-and-navigating-the-software-industry"
 frozen: false
 ---
 

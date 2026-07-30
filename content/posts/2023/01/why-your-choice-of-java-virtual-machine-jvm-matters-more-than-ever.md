@@ -13,6 +13,9 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
+  - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
+  - "best-practice-comparative-evaluation-of-jdk-setups-azul-zulu-prime-vs-openjdk"
 frozen: false
 ---
 

@@ -13,6 +13,9 @@ categories:
   - "Trip Reports"
 tags:
 related_posts:
+  - "time-zone-and-currency-database-in-jdk"
+  - "creating-a-javafx-world-clock-from-scratch-part-5"
+  - "hard-things-computer-science"
 frozen: false
 ---
 

@@ -12,6 +12,9 @@ categories:
   - "Foojay"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "7-functional-programming-techniques-in-java-a-primer"
 frozen: false
 ---
 

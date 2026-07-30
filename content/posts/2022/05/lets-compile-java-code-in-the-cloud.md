@@ -13,6 +13,9 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "increasing-event-streaming-with-kafka-and-azul"
+  - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
+  - "introducing-the-openjdk-coordinated-restore-at-checkpoint-project"
 frozen: false
 ---
 

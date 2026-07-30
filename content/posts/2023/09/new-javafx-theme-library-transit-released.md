@@ -13,6 +13,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "beginning-javafx-with-intellij"
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
+  - "a-quick-look-at-faces-jsf-4-0-in-jakarta-ee-10"
+  - "first-experiments-with-java-on-the-lattepanda-iota"
 frozen: false
 ---
 

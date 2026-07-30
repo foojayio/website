@@ -11,6 +11,9 @@ categories:
   - "Events"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "managing-dependencies-in-intellij-idea"
+  - "are-java-security-updates-important"
 frozen: false
 ---
 

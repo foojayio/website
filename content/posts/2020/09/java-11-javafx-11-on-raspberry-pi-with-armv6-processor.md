@@ -13,6 +13,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "a-fresh-look-at-embedded-java"
+  - "first-experiments-with-java-on-the-lattepanda-iota"
+  - "javafx-links-of-november-2025"
+  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
 enlighterjs: true
 frozen: false
 ---

@@ -15,6 +15,9 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "debugger-godmode-hacking-a-jvm-application-with-the-debugger"
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
 enlighterjs: true
 frozen: false
 ---

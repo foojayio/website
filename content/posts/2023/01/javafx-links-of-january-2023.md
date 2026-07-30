@@ -11,6 +11,9 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "javafx-links-of-december"
+  - "javafx-links-of-november"
+  - "javafx-links-of-october"
 frozen: false
 ---
 

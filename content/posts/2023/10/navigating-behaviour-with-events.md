@@ -13,6 +13,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "automatically-creating-microservices-architecture-diagrams"
+  - "billions-of-messages-tcp-ip"
+  - "building-custom-solutions-vs-buy-and-build-software"
+  - "when-not-to-use-event-driven-architecture-eda"
 frozen: false
 ---
 

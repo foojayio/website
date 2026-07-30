@@ -12,6 +12,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "the-evolution-of-bugs"
+  - "debugging-as-a-process-of-isolating-assumptions"
+  - "cant-reproduce-a-bug"
 frozen: false
 ---
 

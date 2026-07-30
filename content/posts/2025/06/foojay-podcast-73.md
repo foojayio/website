@@ -18,6 +18,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "foojay-podcast-72"
+  - "foojay-podcast-71"
+  - "foojay-podcast-70"
+  - "receiving-mails-in-java-with-imap-or-pop3"
 frozen: false
 ---
 

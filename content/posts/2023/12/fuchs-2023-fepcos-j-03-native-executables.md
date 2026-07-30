@@ -13,6 +13,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "native-image-micronaut"
+  - "native-spring-boot"
+  - "fuchs-2023-fepcos-j-02"
+  - "fuchs-2024-fepcos-j-multithreaded-server"
 enlighterjs: true
 frozen: false
 ---

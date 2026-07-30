@@ -12,6 +12,10 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "learn-how-to-develop-event-driven-architectures"
+  - "unified-event-driven-architecture-for-the-cloud-native-enterprise"
+  - "why-the-cool-kids-use-event-loops"
+  - "dive-into-the-openjdk-top-10-reads-on-foojay-io"
 frozen: false
 ---
 

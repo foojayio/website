@@ -13,6 +13,9 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
+  - "debugging-ram-detect-fix-memory-leaks-in-managed-languages-heap-deep-dive-part-2"
+  - "demystifying-memory-management-in-modern-programming-languages"
 frozen: false
 ---
 

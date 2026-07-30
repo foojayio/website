@@ -14,6 +14,9 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "modular-monolithic-in-practice"
+  - "openrewrite-automatic-code-refactoring-and-maintenance-part-2"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
 frozen: false
 ---
 

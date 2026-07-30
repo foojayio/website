@@ -12,6 +12,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "builders-withers-and-records-javas-path-to-immutability"
+  - "code-reviews-with-ai-a-developer-guide"
+  - "building-for-failure-best-practices-for-easy-production-debugging"
+  - "ai-driven-testing-best-practices"
 enlighterjs: true
 frozen: false
 ---

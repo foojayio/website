@@ -13,6 +13,10 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "book-review-why-programs-fail"
+  - "high-performance-java-serialisation"
+  - "how-does-kafka-perform-when-you-need-low-latency"
+  - "stochastic-ai-agility-breaking-cycles-of-debt"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "log4j-isnt-killing-java"
+  - "log4shell-leak4j"
+  - "system-logger"
+  - "jurassic-jdk-migrate-or-extinct"
 enlighterjs: true
 frozen: false
 ---

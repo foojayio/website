@@ -14,6 +14,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "foojay-podcast-90"
+  - "foojay-podcast-78"
+  - "java-26-whats-new"
+  - "faster-java-warmup-crac-versus-readynow"
 frozen: false
 ---
 

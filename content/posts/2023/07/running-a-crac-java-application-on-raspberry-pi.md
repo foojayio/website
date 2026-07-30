@@ -13,6 +13,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "azul-provides-the-crac-in-aws-snapstart-builds"
+  - "how-to-run-a-java-application-with-crac-in-a-docker-container"
+  - "introducing-the-openjdk-coordinated-restore-at-checkpoint-project"
+  - "demo-application-with-crac-and-loading-data-in-memory"
 enlighterjs: true
 frozen: false
 ---
@@ -295,7 +299,7 @@ Fix 2: Replace Zulu with a Dev Version {#h2-9-fix-2-replace-zulu-with-a-dev-vers
 
 As it turns out, the current Zulu version 17.0.7 with CRaC doesn't support this Linux kernel. Luckily, Sergey could provide me a dev-version of Zulu with changes that will be part of the next release in July. First, I needed to upload them to my Raspberry Pi.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% scp zulu17.42.21-dev-20230613095837-jdk17.0.7-linux-aarch64.tar.gz <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="472435262407767075697671697669767372">[email&nbsp;protected]</a>:/home/crac/</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% scp zulu17.42.21-dev-20230613095837-jdk17.0.7-linux-aarch64.tar.gz <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b6d5c4d7d5f6878184988780988798878283">[email&nbsp;protected]</a>:/home/crac/</pre>
 
 And then installed in the `/opt/` directory as described above.
 

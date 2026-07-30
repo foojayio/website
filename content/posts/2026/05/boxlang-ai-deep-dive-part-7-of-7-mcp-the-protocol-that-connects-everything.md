@@ -15,6 +15,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
+  - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
+  - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
+  - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
 enlighterjs: true
 frozen: false
 ---
@@ -362,7 +366,7 @@ println( "Middleware       : #config.middlewareCount#" )
 
 // Run — the agent orchestrates across internal tools, KB, and memory automatically
 response = supportAgent.run(
-    "Customer <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d4b5b8bdb7b194b1acb5b9a4b8b1fab7bbb9">[email&nbsp;protected]</a> says order #ORD-78291 arrived damaged. Resolve this.",
+    "Customer <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="76171a1f151336130e171b061a135815191b">[email&nbsp;protected]</a> says order #ORD-78291 arrived damaged. Resolve this.",
     {},
     { userId: "support-agent-maria", conversationId: "ticket-45892" }
 )
@@ -383,7 +387,7 @@ Get Started {#h2-17-get-started}
 --------------------------------
 
 <pre class="EnlighterJSRAW" data-enlighter-language="java"># CommandBox / Web applications
-install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="63011b4e020a23504d534d53">[email&nbsp;protected]</a>
+install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="13716b3e727a53203d233d23">[email&nbsp;protected]</a>
 
 # OS / CLI applications
 install-bx-module bx-ai

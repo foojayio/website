@@ -15,6 +15,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "vert-x-example-on-the-raspberry-pi-with-a-virtual-potentiometer"
+  - "electronics-quarkus-qute-on-raspberry-pi"
+  - "spectacular-java-projects-on-the-raspberry-pi"
+  - "crafting-your-own-railway-display-with-java"
 enlighterjs: true
 frozen: false
 ---

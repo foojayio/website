@@ -15,6 +15,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "are-critical-vulnerabilities-lurking-in-your-java-ecosystem"
+  - "how-to-create-sboms-in-java-with-maven-and-gradle"
+  - "making-sboms-threats-and-modelling-them-a-piece-of-cake"
+  - "sboms-and-software-composition-analysis"
 enlighterjs: true
 frozen: false
 ---

@@ -14,6 +14,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "controlling-a-led-strip-with-pi4j-and-jbang"
+  - "controlling-electronics-with-jbang-on-the-raspberry-pi"
+  - "evolutions-in-the-pi4j-library-by-tom-aarts-and-robert-von-burg"
+  - "foojay-podcast-55"
 enlighterjs: true
 frozen: false
 ---

@@ -14,6 +14,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "9-outdated-ideas-about-java"
+  - "state-jvm-desktop-frameworks-jetpack-compose-for-desktop"
+  - "starting-docker-desktop-with-spring-boot"
+  - "first-experiments-with-java-on-the-lattepanda-iota"
 enlighterjs: true
 frozen: false
 ---

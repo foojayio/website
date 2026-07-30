@@ -13,6 +13,10 @@ categories:
   - "Kubernetes"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "apisix-api-gateway"
+  - "back-to-basics-accessing-kubernetes-pods"
+  - "dry-your-apache-apisix-config"
 enlighterjs: true
 frozen: false
 ---

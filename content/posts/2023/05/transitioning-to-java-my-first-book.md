@@ -16,6 +16,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "42-practical-java-design-patterns-builder-and-more"
+  - "new-book-fxgl-17-learn-javafx-game-and-app-development"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "first-experiments-with-java-on-the-lattepanda-iota"
 frozen: false
 ---
 

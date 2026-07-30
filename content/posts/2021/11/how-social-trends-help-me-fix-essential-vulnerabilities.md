@@ -13,6 +13,9 @@ categories:
   - "Snyk"
 tags:
 related_posts:
+  - "avoid-java-serialization"
+  - "fix-java-security-issues-while-coding-in-intellij-idea"
+  - "fixing-vulnerabilities-in-maven-projects"
 frozen: false
 ---
 

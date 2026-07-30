@@ -14,6 +14,10 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "java-panama-polyglot-part-3"
+  - "java-panama-polyglot-swift-part-2"
+  - "does-java-18-finally-have-a-better-alternative-to-jni"
+  - "project-panama-for-newbies-part-1"
 enlighterjs: true
 frozen: false
 ---

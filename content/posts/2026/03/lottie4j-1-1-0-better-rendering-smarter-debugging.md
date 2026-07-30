@@ -11,6 +11,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "introducing-lottie4j-a-javafx-library-to-parse-and-play-lottie-animation-files"
+  - "javafx-links-of-february-2024"
+  - "javafx-links-of-february-2023"
+  - "hidden-beauties-of-java-enums"
 enlighterjs: true
 frozen: false
 ---

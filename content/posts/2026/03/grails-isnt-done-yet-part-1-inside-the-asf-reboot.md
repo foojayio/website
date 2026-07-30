@@ -15,6 +15,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "7-new-vulnerabilities-in-jackson-in-one-day-this-is-what-ai-assisted-security-research-looks-like"
+  - "ai-found-the-bugs-whos-patching-your-eol-java-code"
+  - "did-ai-just-break-software-security-for-ever"
+  - "foojay-podcast-95"
 frozen: false
 ---
 

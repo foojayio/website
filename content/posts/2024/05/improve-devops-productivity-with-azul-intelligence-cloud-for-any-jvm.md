@@ -14,6 +14,9 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "moving-security-into-the-jvm"
+  - "log4j-isnt-killing-java"
+  - "java-where-the-wild-code-isnt"
 frozen: false
 ---
 

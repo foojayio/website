@@ -12,6 +12,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "do-you-trust-profilers-i-once-did-too"
+  - "asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm"
+  - "java-profiling-overview"
+  - "using-async-profiler-and-jattach-programmatically-with-ap-loader"
 enlighterjs: true
 frozen: false
 ---

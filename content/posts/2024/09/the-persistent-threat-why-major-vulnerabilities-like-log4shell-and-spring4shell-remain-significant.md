@@ -13,6 +13,9 @@ categories:
   - "Snyk"
 tags:
 related_posts:
+  - "are-java-security-updates-important"
+  - "preventing-cross-site-scripting-xss-in-java-applications-with-snyk-code"
+  - "getting-started-with-snyk-for-secure-java-development"
 frozen: false
 ---
 

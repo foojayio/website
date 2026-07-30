@@ -16,6 +16,9 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "book-review-practical-design-patterns-for-java-developers"
+  - "book-review-quarkus-for-spring-developers"
+  - "book-review-seriously-good-software"
 frozen: false
 ---
 

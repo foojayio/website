@@ -12,6 +12,9 @@ categories:
   - "Books"
 tags:
 related_posts:
+  - "book-review-seriously-good-software"
+  - "book-review-java-by-comparison"
+  - "book-review-quarkus-for-spring-developers"
 frozen: false
 ---
 

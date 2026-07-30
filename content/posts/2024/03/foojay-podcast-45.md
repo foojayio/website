@@ -18,6 +18,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "java-22-whats-new"
+  - "foojay-podcast-28"
+  - "foojay-podcast-4"
+  - "where-production-policy-belongs-building-eliya-in-public"
 frozen: false
 ---
 

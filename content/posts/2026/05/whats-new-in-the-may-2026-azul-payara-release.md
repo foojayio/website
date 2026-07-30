@@ -14,6 +14,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "whats-new-in-the-january-2026-payara-platform-release"
+  - "goodbye-payara-community-6-on-to-the-next-chapter-with-payara-community-7"
+  - "jakarta-data-makes-persistence-a-breeze"
+  - "from-spring-boot-to-jakarta-ee-11-how-payara-starter-eases-the-transition"
 frozen: false
 ---
 

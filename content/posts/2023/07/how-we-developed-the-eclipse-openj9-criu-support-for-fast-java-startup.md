@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "azul-provides-the-crac-in-aws-snapstart-builds"
+  - "foojay-podcast-17"
+  - "how-to-run-a-java-application-with-crac-in-a-docker-container"
+  - "five-java-developer-must-haves"
 frozen: false
 ---
 

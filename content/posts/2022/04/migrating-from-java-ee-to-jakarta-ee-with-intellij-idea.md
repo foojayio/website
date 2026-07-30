@@ -13,6 +13,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "2021-jakarta-ee-developer-survey"
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs"
 enlighterjs: true
 frozen: false
 ---

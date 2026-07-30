@@ -11,6 +11,10 @@ categories:
   - "AI"
 tags:
 related_posts:
+  - "spring-ai-agents-no-second-runtime"
+  - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
+  - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
+  - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
 enlighterjs: true
 frozen: false
 ---

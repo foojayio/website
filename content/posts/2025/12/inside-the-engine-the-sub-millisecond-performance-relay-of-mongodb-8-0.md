@@ -12,6 +12,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb"
+  - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"
+  - "building-rest-apis-in-java-with-spring-boot"
 enlighterjs: true
 frozen: false
 ---

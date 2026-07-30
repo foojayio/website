@@ -13,6 +13,10 @@ categories:
   - "Java Beginner"
 tags:
 related_posts:
+  - "foojay-developer-certification-measure-skills"
+  - "42-practical-java-design-patterns-builder-and-more"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 frozen: false
 ---
 

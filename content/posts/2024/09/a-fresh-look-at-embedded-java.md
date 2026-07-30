@@ -15,6 +15,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "foojay-podcast-55"
+  - "foojay-podcast-2"
+  - "running-a-crac-java-application-on-raspberry-pi"
+  - "foojay-podcast-83"
 frozen: false
 ---
 

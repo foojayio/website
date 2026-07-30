@@ -14,6 +14,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "do-java-jakarta-ee-standards-matter"
+  - "do-you-really-need-kubernetes"
+  - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"
+  - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
 frozen: false
 ---
 

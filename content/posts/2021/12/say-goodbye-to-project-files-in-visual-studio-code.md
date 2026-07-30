@@ -11,6 +11,9 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "announcing-the-1-0-release-of-language-support-for-java-on-visual-studio-code"
+  - "vs-code-java-september-2021-update"
+  - "vs-code-java-august-updates-springone-updates-ux-improvements-community-feedback"
 frozen: false
 ---
 

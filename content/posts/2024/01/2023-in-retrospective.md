@@ -12,6 +12,9 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "2022-in-retrospective"
+  - "apisix-api-gateway"
+  - "kubernetes-gateway-api"
 frozen: false
 ---
 

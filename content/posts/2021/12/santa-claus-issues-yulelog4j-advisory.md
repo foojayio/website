@@ -11,6 +11,9 @@ categories:
   - "Foojay"
 tags:
 related_posts:
+  - "java-where-the-wild-code-isnt"
+  - "light-up-your-christmas-tree-with-java-and-raspberry-pi"
+  - "creating-a-javafx-world-clock-from-scratch-part-1"
 frozen: false
 ---
 

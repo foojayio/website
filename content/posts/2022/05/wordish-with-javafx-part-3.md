@@ -16,6 +16,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "wordish-with-javafx-part-1"
+  - "wordish-with-javafx-part-2"
+  - "creating-a-javafx-world-clock-from-scratch-part-1"
+  - "the-javafx-revival"
 enlighterjs: true
 frozen: false
 ---

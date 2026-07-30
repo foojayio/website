@@ -13,6 +13,10 @@ categories:
   - "TornadoVM"
 tags:
 related_posts:
+  - "this-dependency-update-looked-exactly-like-an-account-takeover"
+  - "tornadoinsight-compatibility-with-tornadovm-sdk-2-0-configuration-guide"
+  - "how-to-publish-a-java-maven-project-to-maven-central-using-jreleaser-and-github-actions-2025-guide"
+  - "foojay-podcast-82"
 enlighterjs: true
 frozen: false
 ---

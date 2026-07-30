@@ -13,6 +13,10 @@ categories:
   - "Testcontainers"
 tags:
 related_posts:
+  - "testing-and-local-development-made-simpler-with-testcontainers-desktop-app"
+  - "spring-6-1-restclient"
+  - "how-to-create-sboms-in-java-with-maven-and-gradle"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 enlighterjs: true
 frozen: false
 ---

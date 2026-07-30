@@ -14,6 +14,10 @@ categories:
   - "Pi4J"
 tags:
 related_posts:
+  - "template-to-get-started-with-pi4j-and-javafx-on-raspberry-pi"
+  - "the-javafx-revival"
+  - "javafx-links-of-november-2025"
+  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
 enlighterjs: true
 frozen: false
 ---

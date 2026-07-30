@@ -14,6 +14,10 @@ categories:
   - "Trip Reports"
 tags:
 related_posts:
+  - "foojay-podcast-32-philippines-jug"
+  - "jugph-continuing-the-connection-with-the-java-enthusiasts"
+  - "jug-ph-meetup-4-and-5"
+  - "ai4devs-schedule-published"
 frozen: false
 ---
 

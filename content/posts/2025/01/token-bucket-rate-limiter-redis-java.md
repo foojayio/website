@@ -14,6 +14,10 @@ categories:
   - "Redis"
 tags:
 related_posts:
+  - "rate-limiting-with-redis-an-essential-guide"
+  - "fixed-window-counter-rate-limiter-redis-java"
+  - "sliding-window-counter-rate-limiter-redis-java"
+  - "sliding-window-log-rate-limiter-redis-java"
 enlighterjs: true
 frozen: false
 ---

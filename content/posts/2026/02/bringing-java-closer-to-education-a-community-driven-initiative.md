@@ -14,6 +14,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
+  - "cracking-code-and-conventions-an-exclusive-interview-with-nicolas-frankel"
+  - "ensuring-safe-and-reliable-ai-interactions-with-llm-guardrails"
+  - "foojay-developer-certification-measure-skills"
 frozen: false
 ---
 

@@ -14,6 +14,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "chopping-monolith"
+  - "chopping-monolith-demo"
+  - "apisix-api-gateway"
+  - "jc-ai-newsletter-8"
 frozen: false
 ---
 

@@ -14,6 +14,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "why-developers-should-use-apache-pulsar"
+  - "bring-streaming-to-apache-cassandra-with-apache-pulsar"
+  - "full-stream-ahead-astra-streaming-powered-by-apache-pulsar"
+  - "why-pulsar-beats-kafka-for-a-scalable-distributed-data-architecture"
 frozen: false
 ---
 

@@ -12,6 +12,9 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "are-java-security-updates-important"
+  - "7-functional-programming-techniques-in-java-a-primer"
 frozen: false
 ---
 

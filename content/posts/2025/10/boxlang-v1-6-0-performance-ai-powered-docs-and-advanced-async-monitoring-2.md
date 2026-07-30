@@ -12,6 +12,9 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "foojay-podcast-76"
+  - "javafx-links-of-september-2025"
+  - "12-lessons-learned-from-doing-the-one-billion-row-challenge"
 enlighterjs: true
 frozen: false
 ---

@@ -13,6 +13,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "a-simple-service-with-spring-boot"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "how-gradle-works-inside-the-daemon"
 frozen: false
 ---
 

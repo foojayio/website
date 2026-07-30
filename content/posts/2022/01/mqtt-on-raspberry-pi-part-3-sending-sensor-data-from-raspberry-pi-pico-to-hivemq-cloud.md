@@ -14,6 +14,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "mqtt-on-raspberry-pi-part-1-send-sensor-data-to-hivemq-cloud-with-java-and-pi4j"
+  - "mqtt-on-raspberry-pi-part-2-using-mqtt-and-raspberry-pi-to-visualize-sensor-data-on-a-tilesfx-dashboard"
+  - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"
+  - "a-fresh-look-at-embedded-java"
 enlighterjs: true
 frozen: false
 ---

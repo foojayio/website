@@ -17,6 +17,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "increasing-event-streaming-with-kafka-and-azul"
+  - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
+  - "when-speed-matters-real-time-stream-processing-with-hazelcast-and-redpanda"
+  - "micrometer-prometheus-in-spring-boot-kafka-burger-orders"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,10 @@ categories:
   - "JShell"
 tags:
 related_posts:
+  - "creating-a-javafx-world-clock-from-scratch-part-6"
+  - "closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j"
+  - "first-experiments-with-java-on-the-lattepanda-iota"
+  - "javafx-links-of-november-2025"
 enlighterjs: true
 frozen: false
 ---
@@ -142,13 +146,13 @@ Do the following to check to make sure:
 
 You should see something like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1872796e797e60367a796b7d58292936283621">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="99f3f8eff8ffe1b7faf6f7edebf6f5ead9a8a8b7a9b7a0">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bdd7dccbdcdbc593dbc5d0d1fd8c8c938d9384">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2943485f484f51074e5b485941404a5a69181807190710">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b7ddd6c1d6d1cf99dad2d3ded6f786869987998e">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c4aea5b2a5a2bceab7b3adaaa384f5f5eaf4eafd">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="88e2e9fee9eef0a6ffedeac8b9b9a6b8a6b1">[email&nbsp;protected]</a></pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c2a8a3b4a3a4baeca0a3b1a782f3f3ecf2ecfb">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="076d667166617f296468697375686b744736362937293e">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fd979c8b9c9b85d39b859091bdccccd3cdd3c4">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae0ebfcebecf2a4edf8ebfae2e3e9f9cabbbba4baa4b3">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dab0bbacbbbca2f4b7bfbeb3bb9aebebf4eaf4e3">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c161d0a1d1a04520f0b15121b3c4d4d524c5245">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e646f786f687620796b6c4e3f3f203e2037">[email&nbsp;protected]</a></pre>
 
 If you don't see the modules shown above, you probably downloaded just the JDK itself (not containing JavaFX's modules). (Head over to Azul to download Zulu builds with JavaFX here: <https://www.azul.com/downloads/?package=jdk-fx>.)
 

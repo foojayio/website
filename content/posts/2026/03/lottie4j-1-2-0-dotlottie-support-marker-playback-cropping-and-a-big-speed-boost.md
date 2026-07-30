@@ -10,6 +10,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "lottie4j-meets-lottiefiles"
+  - "closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j"
+  - "lottie4j-1-1-0-better-rendering-smarter-debugging"
+  - "introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music"
 enlighterjs: true
 frozen: false
 ---

@@ -11,6 +11,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "foojay-podcast-5"
+  - "openjdk-19-released"
+  - "what-the-heck-is-project-loom-for-java"
+  - "what-can-we-expect-in-openjdk-19"
 enlighterjs: true
 frozen: false
 ---

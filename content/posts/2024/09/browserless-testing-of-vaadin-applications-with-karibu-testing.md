@@ -12,6 +12,9 @@ categories:
   - "Vaadin"
 tags:
 related_posts:
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
+  - "book-review-modern-frontends-with-htmx"
+  - "build-web-apps-in-pure-java-with-vaadin-flow"
 enlighterjs: true
 frozen: false
 ---
@@ -137,7 +140,7 @@ As we want to test a protected view we first login and then navigate to the view
 
     @BeforeEach
     public void login() {
-        login("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fa8993979594ba979b888e93949f969693d49992">[email&nbsp;protected]</a>", "", List.of(Role.ADMIN));
+        login("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94e7fdf9fbfad4f9f5e6e0fdfaf1f8f8fdbaf7fc">[email&nbsp;protected]</a>", "", List.of(Role.ADMIN));
 
         UI.getCurrent().navigate(ClubsView.class);
     }

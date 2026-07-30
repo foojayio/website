@@ -16,6 +16,10 @@ categories:
   - "Machine Learning"
 tags:
 related_posts:
+  - "coderabbit-tutorial-for-java-developers"
+  - "how-coderabbits-agentic-code-validation-helps-with-code-reviews"
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "5-things-you-probably-didnt-know-about-java-concurrency"
 frozen: false
 ---
 

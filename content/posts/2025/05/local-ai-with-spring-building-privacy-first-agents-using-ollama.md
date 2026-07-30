@@ -12,6 +12,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "calling-gemma-with-ollama-testcontainers-and-langchain4j"
+  - "code-reviews-with-ai-a-developer-guide"
+  - "building-local-llm-ai-powered-applications-with-quarkus-ollama-and-testcontainers"
 enlighterjs: true
 frozen: false
 ---

@@ -13,6 +13,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "beginning-javafx-with-intellij"
+  - "creating-a-javafx-world-clock-from-scratch-part-1"
+  - "creating-cad-applications-with-java-and-javafx"
+  - "introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music"
 frozen: false
 ---
 

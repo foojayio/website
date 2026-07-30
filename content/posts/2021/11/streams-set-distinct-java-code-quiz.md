@@ -11,6 +11,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "arrays-and-object-reference-java-challenge-code-quiz"
+  - "daemon-thread-java-code-quiz"
+  - "exception-chaos-java-code-quiz"
 enlighterjs: true
 frozen: false
 ---

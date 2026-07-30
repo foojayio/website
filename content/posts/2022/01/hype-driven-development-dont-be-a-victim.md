@@ -12,6 +12,9 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "apple-silicon-with-zulu-openjdk-and-intellij-idea"
 frozen: false
 ---
 

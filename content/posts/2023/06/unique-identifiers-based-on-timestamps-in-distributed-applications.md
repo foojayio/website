@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "the-more-you-say-the-less-people-remember"
+  - "peter-lawrey-latency-performance"
+  - "automatically-creating-microservices-architecture-diagrams"
+  - "virtual-thread-pinning-field-guide"
 enlighterjs: true
 frozen: false
 ---

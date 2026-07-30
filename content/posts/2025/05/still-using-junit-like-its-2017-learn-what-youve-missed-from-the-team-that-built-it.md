@@ -12,6 +12,10 @@ categories:
   - "Events"
 tags:
 related_posts:
+  - "foojay-podcast-70"
+  - "java-conferences-2025"
+  - "foojay-podcast-53"
+  - "foojay-podcast-52"
 frozen: false
 ---
 

@@ -25,6 +25,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+  - "optimizing-java-for-the-cloud-native-era-with-quarkus"
+  - "quarkus-a-runtime-and-framework-for-cloud-native-java"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 frozen: false
 ---
 

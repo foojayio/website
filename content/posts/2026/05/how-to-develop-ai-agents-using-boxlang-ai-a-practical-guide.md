@@ -17,6 +17,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
+  - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
+  - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
+  - "boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything"
 enlighterjs: true
 frozen: false
 ---
@@ -519,8 +523,8 @@ Every memory operation accepts `userId` and `conversationId` to route each read/
 When you pass `userId` and `conversationId` through `agent.run()` options, they flow automatically to all memory operations --- no explicit wiring needed:
 
 <pre class="EnlighterJSRAW" data-enlighter-language="java">// Same agent instance, fully isolated per user
-agent.run( "My order is late.", {}, { userId: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="73121f1a101633160b121e031f165d101c1e">[email&nbsp;protected]</a>", conversationId: "ticket-101" } )
-agent.run( "I need a refund.",  {}, { userId: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="63010c0123061b020e130f064d000c0e">[email&nbsp;protected]</a>",   conversationId: "ticket-102" } )
+agent.run( "My order is late.", {}, { userId: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82e3eeebe1e7c2e7fae3eff2eee7ace1edef">[email&nbsp;protected]</a>", conversationId: "ticket-101" } )
+agent.run( "I need a refund.",  {}, { userId: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="93f1fcf1d3f6ebf2fee3fff6bdf0fcfe">[email&nbsp;protected]</a>",   conversationId: "ticket-102" } )
 </pre>
 
 No per-user agent factories. No thread-local hacks. One instance handles thousands of concurrent users safely.

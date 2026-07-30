@@ -13,6 +13,10 @@ categories:
   - "Books"
 tags:
 related_posts:
+  - "book-announcement-openjdk-migration-guide-for-dummies"
+  - "book-review-api-design-patterns"
+  - "book-review-effortless-cloud-native-app-development-using-skaffold"
+  - "foojay-podcast-67"
 frozen: false
 ---
 

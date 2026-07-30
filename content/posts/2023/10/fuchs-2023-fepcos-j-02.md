@@ -13,6 +13,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "fuchs-2023-fepcos-j-01"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "building-robust-ai-applications-with-langchain4j-guardrails-and-spring-boot"
 enlighterjs: true
 frozen: false
 ---

@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "a-short-history-of-ajax-and-ssr"
+  - "server-side-rendering-with-spring-boot"
+  - "augmenting-the-client-with-vue-js"
+  - "web-caching-server"
 enlighterjs: true
 frozen: false
 ---
@@ -66,8 +70,8 @@ It's similar to Vue's setup.
 
 Here's the code on the HTML side:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="83e2fbeaecf0c3b2adb4">[email&nbsp;protected]</a>/dist/axios.min.js"&gt;&lt;/script&gt; &lt;!--1--&gt;
-&lt;script th:src="@{/webjars/alpinejs/dist/cdn.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0d1dcc0d9ded5dac3f0839e81849e81">[email&nbsp;protected]</a>/dist/cdn.min.js" defer&gt;&lt;/script&gt; &lt;!--2--&gt;
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b2a332224380b7a657c">[email&nbsp;protected]</a>/dist/axios.min.js"&gt;&lt;/script&gt; &lt;!--1--&gt;
+&lt;script th:src="@{/webjars/alpinejs/dist/cdn.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d5c514d545358574e7d0e130c09130c">[email&nbsp;protected]</a>/dist/cdn.min.js" defer&gt;&lt;/script&gt; &lt;!--2--&gt;
 &lt;script th:src="@{/alpine.js}" src="../static/alpine.js"&gt;&lt;/script&gt;  &lt;!--3--&gt;
 &lt;script th:inline="javascript"&gt;
 /*&lt;![CDATA[*/

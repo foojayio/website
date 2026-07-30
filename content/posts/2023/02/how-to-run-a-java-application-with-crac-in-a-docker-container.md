@@ -15,6 +15,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "azul-provides-the-crac-in-aws-snapstart-builds"
+  - "java-performance-ahead-of-time-versus-just-in-time"
+  - "are-java-security-updates-important"
+  - "five-java-developer-must-haves"
 enlighterjs: true
 frozen: false
 ---

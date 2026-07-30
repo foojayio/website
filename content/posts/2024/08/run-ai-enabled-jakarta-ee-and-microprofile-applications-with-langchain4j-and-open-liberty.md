@@ -17,6 +17,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "building-simple-home-assistant-langchain4j-raspberry-pi"
+  - "calling-gemma-with-ollama-testcontainers-and-langchain4j"
+  - "foojay-podcast-47"
+  - "spring-ai-agents-no-second-runtime"
 enlighterjs: true
 frozen: false
 ---

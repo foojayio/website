@@ -14,6 +14,10 @@ categories:
   - "Student"
 tags:
 related_posts:
+  - "bringing-java-closer-to-education-a-community-driven-initiative"
+  - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
+  - "foojay-podcast-85"
+  - "java-in-education-combining-java-with-raspberry-pi-and-the-pi4j-library"
 frozen: false
 ---
 

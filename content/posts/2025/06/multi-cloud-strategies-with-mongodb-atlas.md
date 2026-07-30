@@ -13,6 +13,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "testing-mongodb-atlas-search-java-apps-using-testcontainers"
+  - "understanding-bson-a-beginners-guide-to-mongodbs-data-format"
+  - "java-concurrency-best-practices-for-mongodb"
+  - "building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb"
 frozen: false
 ---
 

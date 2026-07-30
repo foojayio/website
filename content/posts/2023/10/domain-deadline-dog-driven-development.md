@@ -12,6 +12,9 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "hard-things-computer-science"
+  - "how-to-share-your-work-with-a-video-or-podcast"
+  - "the-anatomy-of-a-jvm"
 frozen: false
 ---
 

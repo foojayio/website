@@ -12,6 +12,7 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "whats-new-in-the-july-2026-azul-payara-release"
 frozen: false
 ---
 
@@ -95,7 +96,7 @@ See more detailed overview of the fixes and improvements in the Release Notes:
 
 Don't forget to update your Payara Platform to the new version! You can [Download the Payara Community Edition here](https://www.payara.fish/downloads/payara-platform-community-edition/), or request the Payara Enterprise Edition [via this form.](https://www.payara.fish/page/payara-enterprise-downloads/)
 
-As usual: if you have any questions, feedback or suggestions, please post them in the comments below or email us at [\[email protected\]](/cdn-cgi/l/email-protection#fa999597978f94938e83ba8a9b839b889bd49c938992)
+As usual: if you have any questions, feedback or suggestions, please post them in the comments below or email us at [\[email protected\]](/cdn-cgi/l/email-protection#61020e0c0c140f081518211100180013004f07081209)
 
 Original blog can be found here, reused with thanks and permission: <https://blog.payara.fish/whats-new-in-payara-platform-october-2020>
 

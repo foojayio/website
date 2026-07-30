@@ -16,6 +16,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "the-more-you-say-the-less-people-remember"
+  - "automatically-creating-microservices-architecture-diagrams"
+  - "challenges-when-developing-a-gui-for-fix"
+  - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
 frozen: false
 ---
 

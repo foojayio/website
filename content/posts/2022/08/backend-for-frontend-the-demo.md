@@ -12,6 +12,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "backend-for-front-end"
+  - "a-simple-service-with-spring-boot"
+  - "annotation-free-spring"
+  - "service-discovery-client-apache-apisix"
 enlighterjs: true
 frozen: false
 ---

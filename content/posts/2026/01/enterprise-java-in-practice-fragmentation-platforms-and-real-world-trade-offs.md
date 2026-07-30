@@ -16,6 +16,10 @@ categories:
   - "Surveys"
 tags:
 related_posts:
+  - "ignore-infrastructure-concentrate-on-code-with-jakarta-ee-and-payara-cloud"
+  - "how-to-kickstart-your-jakarta-ee-11-projects-with-payara-starter"
+  - "new-features-in-jakarta-ee-11-with-examples"
+  - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
 frozen: false
 ---
 

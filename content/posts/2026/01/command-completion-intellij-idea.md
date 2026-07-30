@@ -14,6 +14,10 @@ categories:
   - "Kotlin"
 tags:
 related_posts:
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "7-habits-of-highly-effective-java-coding"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
 frozen: false
 ---
 

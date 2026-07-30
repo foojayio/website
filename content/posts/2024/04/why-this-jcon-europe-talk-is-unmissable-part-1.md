@@ -12,6 +12,9 @@ categories:
   - "Events"
 tags:
 related_posts:
+  - "devops-for-developers-introduction-version-control"
+  - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"
+  - "effectively-bridging-the-devops-rd-gap-without-sacrificing-reliability"
 frozen: false
 ---
 

@@ -15,6 +15,9 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "the-impact-of-the-digital-operational-resilience-act-dora-on-java-investment-with-azul"
+  - "are-java-security-updates-important"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
 frozen: false
 ---
 

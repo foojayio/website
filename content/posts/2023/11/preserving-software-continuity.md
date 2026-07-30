@@ -15,6 +15,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "the-more-you-say-the-less-people-remember"
+  - "6-considerations-when-building-high-performance-java-microservices-with-eda"
+  - "automatically-creating-microservices-architecture-diagrams"
+  - "strategies-for-managing-state-in-chronicle-services"
 frozen: false
 ---
 

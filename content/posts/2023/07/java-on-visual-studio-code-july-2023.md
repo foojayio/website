@@ -12,6 +12,9 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "foojay-podcast-12"
+  - "java-on-visual-studio-code-june-2023"
+  - "java-on-visual-studio-code-may-2023"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "are-java-jakarta-ee-application-servers-heavy"
+  - "can-java-jakarta-ee-do-microservices"
+  - "do-java-jakarta-ee-standards-matter"
+  - "easy-jakarta-ee-integration-testing"
 frozen: false
 ---
 

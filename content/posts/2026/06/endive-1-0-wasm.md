@@ -12,6 +12,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "a-new-generation-of-java-libraries-is-born-wasm-becomes-the-implementation-detail"
+  - "foojay-podcast-98"
+  - "playing-with-wasm-on-docker"
+  - "rust-jvm"
 enlighterjs: true
 frozen: false
 ---

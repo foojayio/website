@@ -12,6 +12,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "foojay-podcast-13"
+  - "foojay-podcast-10"
+  - "foojay-podcast-8"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 frozen: false
 ---
 

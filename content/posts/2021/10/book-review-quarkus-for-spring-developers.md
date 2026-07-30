@@ -12,6 +12,9 @@ categories:
   - "Books"
 tags:
 related_posts:
+  - "book-review-help-your-boss-help-you"
+  - "book-review-java-by-comparison"
+  - "book-review-seriously-good-software"
 frozen: false
 ---
 

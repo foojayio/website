@@ -14,6 +14,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "announcing-bx-ldap-enterprise-ldap-for-boxlang"
+  - "boxlang-1-7-0-delivers-streaming-distributed-caching-and-enhanced-jvm-performance"
+  - "boxlang-couchbase-module-enterprise-caching-distributed-locking-and-ai-vector-memory"
+  - "boxlang-redis-has-landed-enterprise-grade-caching-pub-sub-and-distributed-locking"
 enlighterjs: true
 frozen: false
 ---
@@ -39,7 +43,7 @@ bx-couchbase introduces a complete cache provider with replication, fault tolera
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cache("default").set("user:123", {
     name: "Alice Smith",
-    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e584898c8680a5809d8488958980cb868a88">[email&nbsp;protected]</a>",
+    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="22434e4b414762475a434f524e470c414d4f">[email&nbsp;protected]</a>",
     role: "admin"
 } )
 

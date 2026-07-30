@@ -13,6 +13,10 @@ categories:
   - "Maven"
 tags:
 related_posts:
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "7-ways-to-improve-your-code-reading-skills"
+  - "this-dependency-update-looked-exactly-like-an-account-takeover"
 frozen: false
 ---
 

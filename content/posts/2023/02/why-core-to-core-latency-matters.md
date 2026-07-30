@@ -11,6 +11,8 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "how-does-kafka-perform-when-you-need-low-latency"
+  - "how-object-reuse-can-reduce-latency-and-improve-performance"
 frozen: false
 ---
 

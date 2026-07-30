@@ -12,6 +12,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "azul-zulu-april-2026-quarterly-update-released"
+  - "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"
+  - "openjdk-january-2026-critical-patch-update-and-patch-set-update-released"
+  - "should-you-update-java-or-upgrade-and-which-version-should-you-use"
 frozen: false
 ---
 

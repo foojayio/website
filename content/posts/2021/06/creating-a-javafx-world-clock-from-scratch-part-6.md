@@ -12,6 +12,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "first-experiments-with-java-on-the-lattepanda-iota"
+  - "javafx-links-of-november-2025"
+  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
+  - "foojay-podcast-83"
 enlighterjs: true
 frozen: false
 ---
@@ -145,7 +149,7 @@ After fetching the JSON response from the webservice it's time to update the UI.
         Map&lt;String, Object&gt; weatherIconInfo = weatherInfo.size() &gt; 0 ? weatherInfo.get(0) : null;
         Map&lt;String, Object&gt; tempInfo = (Map&lt;String, Object&gt;) dayForecast.get("main");
         // Load weather icon asynchronously
-        Image weatherIcon = new Image("https://openweathermap.org/img/wn/%<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f1c2f5d17411f0108">[email&nbsp;protected]</a>".formatted(weatherIconInfo.get("icon")), true);
+        Image weatherIcon = new Image("https://openweathermap.org/img/wn/%<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="532013612b7d233d34">[email&nbsp;protected]</a>".formatted(weatherIconInfo.get("icon")), true);
         weatherIconImageView.setImage(weatherIcon);
 
         // Apply Tooltip

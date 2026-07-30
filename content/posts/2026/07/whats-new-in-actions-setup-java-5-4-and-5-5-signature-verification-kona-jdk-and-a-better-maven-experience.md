@@ -11,6 +11,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "foojay-podcast-81"
+  - "a-better-way-to-use-gradle-with-github-actions"
+  - "building-secure-ci-cd-pipelines-with-github-actions-for-your-java-application"
+  - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"
 enlighterjs: true
 frozen: false
 ---
@@ -32,7 +36,7 @@ Here's an uncomfortable truth about most CI pipelines: the JDK that compiles and
 
 v5.5.0 adds **detached GPG signature verification** for downloaded JDK archives:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b7c4d2c3c2c79addd6c1d6f7c18299829987">[email&nbsp;protected]</a>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="691a0c1d1c194403081f08291f5c475c4759">[email&nbsp;protected]</a>
   with:
     distribution: 'temurin'
     java-version: '21'
@@ -46,7 +50,7 @@ A few important details:
 * **Fail fast, not silently:** If you set `verify-signature: true` for a distribution that doesn't support it yet, the action **fails** rather than pretending it verified something. No false sense of security.
 * **Bring your own key:** If you mirror JDKs internally or want to pin to a specific trusted key, supply your own with `verify-signature-public-key`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2251475657520f484354436254170c170c12">[email&nbsp;protected]</a>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="552630212025783f3423341523607b607b65">[email&nbsp;protected]</a>
   with:
     distribution: 'temurin'
     java-version: '21'
@@ -64,7 +68,7 @@ Tencent Kona JDK {#h2-1-tencent-kona-jdk}
 
 `actions/setup-java` now speaks **Tencent Kona JDK** natively:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4132243534316c2b2037200137746f746f71">[email&nbsp;protected]</a>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8abbdacada8f5b2b9aeb998aeedf6edf6e8">[email&nbsp;protected]</a>
   with:
     distribution: 'kona'
     java-version: '21'</pre>
@@ -83,13 +87,13 @@ By default, every call to `setup-java` sets `JAVA_HOME` and updates `PATH`, so t
 Sometimes you need a specific JDK available to *one* step (say, a tool that must run on Java 17) without disturbing the main Java version your build uses. Enter `set-default: false`:
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Main build JDK
-- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="483b2d3c3d386522293e29083e7d667d6678">[email&nbsp;protected]</a>
+- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5724322322277a3d36213617216279627967">[email&nbsp;protected]</a>
   with:
     distribution: 'temurin'
     java-version: '21'
 
 # An extra JDK, available but NOT the default
-- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4330263736336e292235220335766d766d73">[email&nbsp;protected]</a>
+- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bfccdacbcacf92d5dec9deffc98a918a918f">[email&nbsp;protected]</a>
   with:
     distribution: 'temurin'
     java-version: '17'
@@ -115,7 +119,7 @@ Smarter version files: auto-detect the distribution {#h2-3-smarter-version-files
 
 SDKMAN identifiers carry a vendor suffix --- `-tem` for Temurin, `-zulu` for Zulu, and so on. The action now maps that suffix to a distribution automatically:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d2a1b7a6a7a2ffb8b3a4b392a4e7fce7fce2">[email&nbsp;protected]</a>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3340564746431e595245527345061d061d03">[email&nbsp;protected]</a>
   with:
     java-version-file: '.sdkmanrc'</pre>
 
@@ -135,7 +139,7 @@ Several changes in these releases target one of the most common Java build tools
 
 Maven loves to print a line for *every* artifact it downloads. On a cold cache that's hundreds of noisy lines burying the output you actually care about. `setup-java` now sets `--no-transfer-progress` (`-ntp`) in the `MAVEN_ARGS` environment variable by default:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2e5d4b5a5b5e03444f584f6e581b001b001e">[email&nbsp;protected]</a>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="493a2c3d3c396423283f28093f7c677c6779">[email&nbsp;protected]</a>
   with:
     distribution: 'temurin'
     java-version: '21'
@@ -147,7 +151,7 @@ Details worth knowing:
 * Any **existing** `MAVEN_ARGS` value is preserved, not clobbered.
 * Want the progress back? Set `show-download-progress: true`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6310061716134e090215022315564d564d53">[email&nbsp;protected]</a>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="daa9bfaeafaaf7b0bbacbb9aaceff4eff4ea">[email&nbsp;protected]</a>
   with:
     distribution: 'temurin'
     java-version: '21'
@@ -176,7 +180,7 @@ Three more things from that release deserve a callout:
 
 * **Free GraalVM Community distribution** (`graalvm-community`): install GraalVM Community Edition builds (stable JDK 17+) directly, no license gymnastics required.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f68593828386db9c978097b680c3d8c3d8c6">[email&nbsp;protected]</a>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4e3d2b3a3b3e63242f382f0e387b607b607e">[email&nbsp;protected]</a>
   with: 
     distribution: 'graalvm-community'
     java-version: '21'</pre>
@@ -198,14 +202,14 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Java (verified, from .sdkmanrc)
-        uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ae9ffeeefeab7f0fbecfbdaecafb4afb4aa">[email&nbsp;protected]</a>
+        uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3142544544411c5b5047507147041f041f01">[email&nbsp;protected]</a>
         with:
           java-version-file: '.sdkmanrc'   # e.g. java=21.0.5-tem
           verify-signature: true            # fail if the JDK signature is bad
           cache: maven
 
       - name: Add a Java 17 toolchain (not the default)
-        uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0774627372772a6d66716647713229322937">[email&nbsp;protected]</a>
+        uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6211071617124f080314032214574c574c52">[email&nbsp;protected]</a>
         with:
           distribution: 'temurin'
           java-version: '17'

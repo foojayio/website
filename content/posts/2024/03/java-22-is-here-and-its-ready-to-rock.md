@@ -14,6 +14,10 @@ categories:
   - "Records"
 tags:
 related_posts:
+  - "foojay-podcast-45"
+  - "java-22-whats-new"
+  - "java-21-is-available-today-and-its-quite-the-update"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 enlighterjs: true
 frozen: false
 ---

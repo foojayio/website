@@ -12,6 +12,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "the-debugger-checklist-part-ii"
+  - "secure-code-review-best-practices-part-1"
 frozen: false
 ---
 

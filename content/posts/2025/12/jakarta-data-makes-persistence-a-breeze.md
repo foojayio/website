@@ -14,6 +14,10 @@ categories:
   - "Java Beginner"
 tags:
 related_posts:
+  - "whats-new-in-the-january-2026-payara-platform-release"
+  - "goodbye-payara-community-6-on-to-the-next-chapter-with-payara-community-7"
+  - "a-new-chapter-for-the-payara-community"
+  - "whats-new-in-the-may-2026-azul-payara-release"
 frozen: false
 ---
 

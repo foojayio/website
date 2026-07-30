@@ -13,6 +13,10 @@ categories:
   - "Payara"
 tags:
 related_posts:
+  - "goodbye-payara-community-6-on-to-the-next-chapter-with-payara-community-7"
+  - "leading-the-way-payara-platform-community-7-beta-now-fully-jakarta-ee-11-certified"
+  - "whats-new-in-the-may-2026-azul-payara-release"
+  - "jakarta-data-makes-persistence-a-breeze"
 frozen: false
 ---
 

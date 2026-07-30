@@ -13,6 +13,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
+  - "spring-boot-migration-and-the-cra-when-good-enough-isnt"
+  - "ai-found-the-bugs-whos-patching-your-eol-java-code"
+  - "foojay-podcast-95"
 frozen: false
 ---
 

@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "apisix-api-gateway"
+  - "how-to-secure-your-web-apps-with-an-api-gateway"
+  - "backend-for-front-end"
+  - "backend-for-frontend-the-demo"
 enlighterjs: true
 frozen: false
 ---

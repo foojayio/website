@@ -12,6 +12,9 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "much-ado-about-nothing-in-java"
+  - "null-safety-kotlin-vs-java"
+  - "avoiding-nullpointerexception"
 enlighterjs: true
 frozen: false
 ---

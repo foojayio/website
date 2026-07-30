@@ -12,6 +12,10 @@ categories:
   - "JDK Flight Recorder"
 tags:
 related_posts:
+  - "a-closer-look-at-jfr-streaming"
+  - "jfr-timestamps-and-system-nanotime"
+  - "jfr-event-collection"
+  - "java-profiling-overview"
 enlighterjs: true
 frozen: false
 ---

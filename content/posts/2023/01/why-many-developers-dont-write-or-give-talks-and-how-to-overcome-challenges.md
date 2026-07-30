@@ -11,6 +11,9 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "book-review-help-your-boss-help-you"
+  - "book-review-learn-javafx-game-and-app-development-with-fxgl-17"
+  - "book-review-effortless-cloud-native-app-development-using-skaffold"
 frozen: false
 ---
 

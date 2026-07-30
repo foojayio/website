@@ -11,6 +11,10 @@ categories:
   - "Interviews"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "announcing-java-unscripted-an-asynchronous-exploration-of-excellence"
+  - "debugging-the-technical-interview-methods-and-cheating"
+  - "interview-with-a-java-champion-reflections-on-a-storied-career-and-insights-for-the-next-generation"
 frozen: false
 ---
 

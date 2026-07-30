@@ -12,6 +12,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "creating-mobile-apps-with-javafx-part-2"
+  - "creating-mobile-apps-with-javafx-part-3"
+  - "virtual-foojay-openjdk-17-jug-tour"
+  - "the-javafx-revival"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,10 @@ categories:
   - "IntelliJ IDEA"
 tags:
 related_posts:
+  - "lntellij-idea-selectively-commit-changes-to-a-file"
+  - "intellij-idea-changelists-and-git-staging"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+  - "introducing-the-boxlang-ide-plugin-for-intellij"
 frozen: false
 ---
 

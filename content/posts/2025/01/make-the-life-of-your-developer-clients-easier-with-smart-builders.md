@@ -12,6 +12,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "7-ways-to-contribute-to-openjdk"
+  - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 enlighterjs: true
 frozen: false
 ---
@@ -147,7 +151,7 @@ Analyzing the code above, we can see that the developer must call the setters to
         Notification notification = new Notification();
         notification.setTitle("New message");
         notification.setMessage("Hello, world!");
-        notification.setRecipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d0babfb8beb4bfb590a3a9a3a4b5bdfeb3bfbd">[email&nbsp;protected]</a>");
+        notification.setRecipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e545156505a515b7e4d474d4a5b53105d5153">[email&nbsp;protected]</a>");
         notification.setHighPriority(true);
         notification.setType(Notification.Type.INFO);
         notification.setAttachment("/path/to/attachment.txt");
@@ -247,7 +251,7 @@ Let's update the `NotificationProgram` that creates a `Notification` object:
 <pre class="EnlighterJSRAW" data-enlighter-language="java">public class NotificationProgram {
 
     public static void main(String[] args) {
-        Notification notification = new Notification("New message", "Hello, world!", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2f454047414b404a6f5c565c5b4a42014c4042">[email&nbsp;protected]</a>");
+        Notification notification = new Notification("New message", "Hello, world!", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="12787d7a7c767d7752616b6166777f3c717d7f">[email&nbsp;protected]</a>");
         notification.setHighPriority(true);
         notification.setType(Notification.Type.INFO);
         notification.setAttachment("/path/to/attachment.txt");
@@ -344,7 +348,7 @@ Now, let's update the `NotificationProgram` that creates a `Notification` object
         Notification notification = new Notification(
                 "New message",
                 "Hello, world!",
-                "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="98f2f7f0f6fcf7fdd8ebe1ebecfdf5b6fbf7f5">[email&nbsp;protected]</a>",
+                "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="244e4b4c4a404b4164575d575041490a474b49">[email&nbsp;protected]</a>",
                 true,
                 Notification.Type.INFO,
                 "/path/to/attachment.txt");
@@ -428,13 +432,13 @@ Let's update the `NotificationProgram` that creates a `Notification` object:
                 new Notification(
                         "New message",
                         "Hello, world!",
-                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dfb5b0b7b1bbb0ba9faca6acabbab2f1bcb0b2">[email&nbsp;protected]</a>");
+                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="68020700060c070d281b111b1c0d05460b0705">[email&nbsp;protected]</a>");
 
         var notificationWithCustomOptionalValues =
                 new Notification(
                         "Another message",
                         "Oh no! Something wrong happened",
-                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="98f2f7f0f6fcf7fdd8ebe1ebecfdf5b6fbf7f5">[email&nbsp;protected]</a>",
+                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cda7a2a5a3a9a2a88dbeb4beb9a8a0e3aea2a0">[email&nbsp;protected]</a>",
                         true,
                         Notification.Type.ERROR,
                         "/path/to/attachment.txt");
@@ -520,14 +524,14 @@ Let's update the `NotificationProgram` that creates a `Notification` object:
                         Notification.Type.GENERAL,
                         "General Notification",
                         "This is a general notification",
-                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dab0b5b2b4beb5bf9aa9a3a9aebfb7f4b9b5b7">[email&nbsp;protected]</a>");
+                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4e242126202a212b0e3d373d3a2b23602d2123">[email&nbsp;protected]</a>");
 
         var highPrioryInfoNotification = Notification
                 .createHighPriorityNotification(
                         Notification.Type.INFO,
                         "High Priority Info Notification",
                         "This is a high priority info notification",
-                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c161314121813193c0f050f081911521f1311">[email&nbsp;protected]</a>");
+                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="056f6a6d6b616a6045767c767160682b666a68">[email&nbsp;protected]</a>");
     }
 }</pre>
 
@@ -658,7 +662,7 @@ Let's see the flexibility that the Builder pattern provides to developers:
         var generalNotification = Notification.builder()
                 .title("Hello")
                 .message("Hello World")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86ece9eee8e2e9e3c6f5fff5f2e3eba8e5e9eb">[email&nbsp;protected]</a>")
+                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4d272225232922280d3e343e392820632e2220">[email&nbsp;protected]</a>")
                 .build();
 
         // do something with generalNotification
@@ -666,7 +670,7 @@ Let's see the flexibility that the Builder pattern provides to developers:
         var highPriorityInfoNotificationWithAttachment = Notification.builder()
                 .title("Hello")
                 .message("Hello World")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="43292c2b2d272c2603303a3037262e6d202c2e">[email&nbsp;protected]</a>")
+                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="107a7f787e747f755063696364757d3e737f7d">[email&nbsp;protected]</a>")
                 .type(Type.INFO)
                 .highPriority(true)
                 .attachment("attachment.pdf")
@@ -687,7 +691,7 @@ Before to add the builder solution in the `Notification` class, developers whose
 <pre class="EnlighterJSRAW" data-enlighter-language="java">public class NotificationProgram {
     public static void main(String[] args) {
         var anotherNotification = Notification.builder()
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ea808582848e858faa9993999e8f87c4898587">[email&nbsp;protected]</a>")
+                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="85efeaedebe1eae0c5f6fcf6f1e0e8abe6eae8">[email&nbsp;protected]</a>")
                 .build();
     }
 }</pre>
@@ -986,7 +990,7 @@ public class NotificationProgram {
         var generalNotification = Notification.builder()
                 .title("Another title")
                 .message("Another message")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="42282d2a2c262d2702313b3136272f6c212d2f">[email&nbsp;protected]</a>")
+                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e141116101a111b3e0d070d0a1b13501d1113">[email&nbsp;protected]</a>")
                 .build();
 
         // do something with generalNotification
@@ -994,7 +998,7 @@ public class NotificationProgram {
         var highPriorityWarningNotification = Notification.builder()
                 .title("Warning title")
                 .message("Attention people!")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="117b7e797f757e7451626865747c3f727e7c">[email&nbsp;protected]</a>")
+                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff959097919b909abf8c868b9a92d19c9092">[email&nbsp;protected]</a>")
                 .addMore()
                 .highPriority(true)
                 .type(Notification.Type.WARNING)
@@ -1005,7 +1009,7 @@ public class NotificationProgram {
         var highPriorityErrorNotificationWithAttachment = Notification.builder()
                 .title("Warning title")
                 .message("Attention people!")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b7ddd8dfd9d3d8d2f7c4cec3d2da99d4d8da">[email&nbsp;protected]</a>")
+                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a2c8cdcaccc6cdc7e2d1dbd6c7cf8cc1cdcf">[email&nbsp;protected]</a>")
                 .addMore()
                 .type(Notification.Type.ERROR)
                 .attachment("error.log")

@@ -12,6 +12,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
+  - "jurassic-jdk-migrate-or-extinct"
+  - "quarkus-unpacked-insights-from-the-foojay-podcast"
+  - "your-tls-stack-is-lying-about-zero-copy"
 enlighterjs: true
 frozen: false
 ---

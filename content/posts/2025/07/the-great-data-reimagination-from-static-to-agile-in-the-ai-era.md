@@ -13,6 +13,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"
+  - "clean-and-modular-java-a-hexagonal-architecture-approach"
+  - "data-modeling-for-java-developers-structuring-with-postgresql-and-mongodb"
+  - "how-to-identify-the-underlying-causes-of-connection-timeout-errors-for-mongodb-with-java"
 frozen: false
 ---
 

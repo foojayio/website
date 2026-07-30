@@ -16,6 +16,10 @@ categories:
   - "Testing"
 tags:
 related_posts:
+  - "explore-project-structure-with-intellij-ideas-dependency-matrix"
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "working-unfamiliar-codebase"
 frozen: false
 ---
 

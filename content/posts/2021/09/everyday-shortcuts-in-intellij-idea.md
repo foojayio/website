@@ -11,6 +11,10 @@ categories:
   - "IntelliJ IDEA"
 tags:
 related_posts:
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "javafx-gluon-status-update-dual-screen-on-raspberry-pi-sample-intellij-new-javafx-project-wizard"
+  - "creating-a-javafx-world-clock-from-scratch-part-1"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 frozen: false
 ---
 

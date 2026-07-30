@@ -12,6 +12,10 @@ categories:
   - "Events"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "7-ways-to-improve-your-code-reading-skills"
+  - "8-best-practices-to-prevent-sql-injection-attacks"
+  - "7-ways-to-contribute-to-openjdk"
 frozen: false
 ---
 

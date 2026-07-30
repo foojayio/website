@@ -13,6 +13,10 @@ categories:
   - "Kafka"
 tags:
 related_posts:
+  - "effective-coding-with-java-observability"
+  - "journeys-in-java-level-10-service-discovery-with-eureka"
+  - "observability-is-cultural"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 frozen: false
 ---
 

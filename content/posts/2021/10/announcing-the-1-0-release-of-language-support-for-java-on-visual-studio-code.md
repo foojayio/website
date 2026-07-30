@@ -12,6 +12,9 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "java-testing-with-vs-code"
+  - "vs-code-getting-better-and-better-for-java"
+  - "vs-code-java-august-updates-springone-updates-ux-improvements-community-feedback"
 frozen: false
 ---
 

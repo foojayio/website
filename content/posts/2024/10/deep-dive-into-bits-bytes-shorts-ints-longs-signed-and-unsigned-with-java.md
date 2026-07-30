@@ -16,6 +16,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
+  - "controlling-electronics-with-jbang-on-the-raspberry-pi"
+  - "java-17-on-the-raspberry-pi"
+  - "reading-the-temperature-humidity-and-pressure-from-a-bme280-sensor-with-java-pi4j-i2c-spi-and-jbang"
 enlighterjs: true
 frozen: false
 ---

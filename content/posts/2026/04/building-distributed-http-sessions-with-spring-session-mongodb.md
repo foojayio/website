@@ -14,6 +14,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "abstracting-data-access-in-java-with-the-dao-pattern"
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "atlas-searching-with-the-java-driver"
+  - "beyond-keywords-optimizing-vector-search-with-filters-and-caching-part-2"
 enlighterjs: true
 frozen: false
 ---

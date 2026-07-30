@@ -17,6 +17,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "foojay-podcast-30"
+  - "foojay-podcast-29"
+  - "foojay-podcast-28"
+  - "foojay-podcast-84"
 frozen: false
 ---
 

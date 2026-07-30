@@ -14,6 +14,9 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "java-on-azure-tooling-update-july-2022"
+  - "java-on-azure-tooling-update-june-2022"
+  - "azure-toolkit-for-intellij-april-2022-update"
 frozen: false
 ---
 

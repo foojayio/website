@@ -11,6 +11,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "azul-brings-java-from-edge-to-cloud"
+  - "java-for-desktop-applications-part-1"
+  - "presenting-xpipe"
+  - "jdkmon-your-friendly-jdk-distribution-updater"
 enlighterjs: true
 frozen: false
 ---

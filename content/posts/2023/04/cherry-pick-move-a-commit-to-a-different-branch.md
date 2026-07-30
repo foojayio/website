@@ -13,6 +13,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "managing-dependencies-in-intellij-idea"
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "more-free-shells-for-your-java-ide"
 frozen: false
 ---
 

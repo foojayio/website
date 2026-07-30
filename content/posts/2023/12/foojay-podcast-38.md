@@ -18,6 +18,10 @@ categories:
   - "Testcontainers"
 tags:
 related_posts:
+  - "foojay-podcast-37"
+  - "foojay-podcast-36"
+  - "foojay-podcast-35"
+  - "jc-ai-newsletter-16"
 frozen: false
 ---
 

@@ -12,6 +12,10 @@ categories:
   - "Scala"
 tags:
 related_posts:
+  - "making-sboms-threats-and-modelling-them-a-piece-of-cake"
+  - "sboms-and-software-composition-analysis"
+  - "handling-security-vulnerabilities-in-spring-boot"
+  - "creating-sboms-with-the-snyk-cli"
 frozen: false
 ---
 

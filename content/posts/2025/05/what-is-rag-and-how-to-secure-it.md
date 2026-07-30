@@ -14,6 +14,10 @@ categories:
   - "Snyk"
 tags:
 related_posts:
+  - "java-serialization-filtering-prevent-0-day-security-vulnerabilities"
+  - "log4shell-critical-log4j-rce-vulnerabilty-update-to-version-2-15-0"
+  - "minimizing-security-risks-in-java-application-development"
+  - "foojay-podcast-7"
 enlighterjs: true
 frozen: false
 ---

@@ -19,6 +19,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "7-ways-to-improve-your-code-reading-skills"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "9-outdated-ideas-about-java"
 frozen: false
 ---
 

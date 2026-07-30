@@ -15,6 +15,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "continuous-production-profiling-and-diagnostics"
+  - "external-debugging-tools-1-dtrace-and-strace"
+  - "using-java-flight-recorder-and-mission-control-part-1"
+  - "using-async-profiler-and-jattach-programmatically-with-ap-loader"
 frozen: false
 ---
 

@@ -12,6 +12,9 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "operator-overloading-in-java"
+  - "the-reason-java-is-still-popular"
+  - "java-string-templates-today"
 enlighterjs: true
 frozen: false
 ---

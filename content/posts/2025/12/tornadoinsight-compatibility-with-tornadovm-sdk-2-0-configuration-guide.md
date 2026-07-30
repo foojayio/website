@@ -13,6 +13,10 @@ categories:
   - "TornadoVM"
 tags:
 related_posts:
+  - "build-and-run-tornadovm-with-intellij-idea"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+  - "introducing-the-boxlang-ide-plugin-for-intellij"
+  - "foojay-podcast-91"
 enlighterjs: true
 frozen: false
 ---

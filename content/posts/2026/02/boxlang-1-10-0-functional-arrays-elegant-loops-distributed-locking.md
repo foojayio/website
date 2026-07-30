@@ -183,7 +183,7 @@ combined = names.zip( ages, cities )
 
 // Real-world: combine headers with data
 headers = [ "Name", "Email", "Role" ]
-values = [ "Alice", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5435383d373114312c35392438317a373b39">[email&nbsp;protected]</a>", "Admin" ]
+values = [ "Alice", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="41202d282224012439202c312d246f222e2c">[email&nbsp;protected]</a>", "Admin" ]
 record = headers.zip( values )</pre>
 
 ### Elegant Loop Destructuring Syntax {#h3-2-elegant-loop-destructuring-syntax}
@@ -193,7 +193,7 @@ BoxLang 1.10.0 introduces destructuring syntax `for` for loops, eliminating verb
 <pre class="EnlighterJSRAW" data-enlighter-language="java">// Struct iteration with key and value
 userData = {
     name: "Alice",
-    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc9d90959f99bc99849d918c9099d29f9391">[email&nbsp;protected]</a>",
+    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cbaaa7a2a8ae8baeb3aaa6bba7aee5a8a4a6">[email&nbsp;protected]</a>",
     role: "admin"
 }
 

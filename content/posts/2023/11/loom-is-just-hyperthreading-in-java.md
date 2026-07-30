@@ -11,6 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "foojay-podcast-14"
+  - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
+  - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
+  - "virtual-thread-pinning-field-guide"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "preparing-to-move-away-from-twitter"
+  - "lets-start-a-java-mastodon-community-for-friends-of-openjdk"
+  - "java-mastodon-service-the-feedback"
+  - "foojay-mastodon-service-here-it-is"
 frozen: false
 ---
 

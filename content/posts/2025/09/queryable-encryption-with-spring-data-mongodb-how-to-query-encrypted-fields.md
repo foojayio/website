@@ -14,6 +14,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "clean-and-modular-java-a-hexagonal-architecture-approach"
+  - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"
+  - "domain-driven-design-in-java-a-practical-guide"
+  - "how-to-identify-the-underlying-causes-of-connection-timeout-errors-for-mongodb-with-java"
 enlighterjs: true
 frozen: false
 ---

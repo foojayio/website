@@ -14,6 +14,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "the-art-of-performance-tuning-why-saving-30-in-the-cloud-means-nothing-if-your-code-wastes-1000x-more"
+  - "foojay-podcast-83"
+  - "foojay-podcast-82"
+  - "foojay-podcast-81"
 frozen: false
 ---
 

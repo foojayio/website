@@ -12,6 +12,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "java-11-javafx-11-on-raspberry-pi-with-armv6-processor"
+  - "azul-enhances-readynow-to-solve-javas-warmup-problem-simplify-operations-and-optimize-cloud-costs"
+  - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
+  - "developer-productivity-masterclass-interview-with-leonid-blouvshtein"
 frozen: false
 ---
 

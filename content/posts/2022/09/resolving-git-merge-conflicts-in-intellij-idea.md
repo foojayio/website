@@ -12,6 +12,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "a-better-way-to-use-gradle-with-github-actions"
+  - "debugging-collections-streams-and-watch-renderers"
+  - "more-free-shells-for-your-java-ide"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Kubernetes"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "kubernetes-gateway-api"
+  - "back-to-basics-accessing-kubernetes-pods"
+  - "creating-a-kubernetes-operator-in-java"
 frozen: false
 ---
 

@@ -14,6 +14,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "glassfish-embedded-a-simple-way-to-run-jakarta-ee-apps"
+  - "foojay-podcast-51"
+  - "the-future-of-ejb"
+  - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
 frozen: false
 ---
 

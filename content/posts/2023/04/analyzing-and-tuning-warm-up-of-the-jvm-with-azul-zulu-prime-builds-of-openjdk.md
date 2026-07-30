@@ -15,6 +15,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "best-practice-comparative-evaluation-of-jdk-setups-azul-zulu-prime-vs-openjdk"
+  - "get-your-jdk-as-easily-as-possible"
+  - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
+  - "new-between-quarters-security-updates-for-java-what-cspus-mean-for-your-release-pipeline"
 frozen: false
 ---
 

@@ -12,6 +12,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "manifold-vs-lombok-enhancing-java-with-property-support"
+  - "operator-overloading-in-java"
+  - "the-reason-java-is-still-popular"
 enlighterjs: true
 frozen: false
 ---

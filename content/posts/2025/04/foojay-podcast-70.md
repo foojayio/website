@@ -14,6 +14,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "disco-api-helping-you-to-find-any-openjdk-distribution"
+  - "foojay-podcast-69"
+  - "foojay-podcast-68"
+  - "foojay-podcast-67"
 frozen: false
 ---
 

@@ -11,6 +11,9 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "contributing-to-openjdk-mission-control"
+  - "starting-a-javafx-project-with-gluon-tools"
+  - "why-i-love-intellij-idea-for-java-development"
 frozen: false
 ---
 

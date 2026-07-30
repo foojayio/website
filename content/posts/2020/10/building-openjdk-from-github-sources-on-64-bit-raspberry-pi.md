@@ -11,6 +11,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "crafting-your-own-railway-display-with-java"
+  - "a-fresh-look-at-embedded-java"
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
+  - "controlling-electronics-with-jbang-on-the-raspberry-pi"
 enlighterjs: true
 frozen: false
 ---

@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "a-fresh-look-at-embedded-java"
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "a-better-way-to-use-gradle-with-github-actions"
+  - "poor-mans-api"
 enlighterjs: true
 frozen: false
 ---

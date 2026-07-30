@@ -13,6 +13,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "mongodb-schemas-in-java"
+  - "run-an-atlas-cluster-locally-in-minutes"
+  - "queryable-encryption-with-spring-data-mongodb-how-to-query-encrypted-fields"
+  - "understanding-bson-a-beginners-guide-to-mongodbs-data-format"
 enlighterjs: true
 frozen: false
 ---

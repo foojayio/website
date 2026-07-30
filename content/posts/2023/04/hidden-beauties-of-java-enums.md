@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "new-section-added-to-foojay-io-java-quick-start"
+  - "learning-java-as-a-first-language"
+  - "welcome-to-vs-code-for-java"
+  - "tornadovm-for-risc-v-accelerators"
 enlighterjs: true
 frozen: false
 ---

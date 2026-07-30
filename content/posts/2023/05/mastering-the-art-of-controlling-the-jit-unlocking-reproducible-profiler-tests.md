@@ -11,6 +11,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "validating-java-profiling-apis"
+  - "asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm"
+  - "do-you-trust-profilers-i-once-did-too"
+  - "how-is-leyden-improving-java-performance-part-3-of-3"
 enlighterjs: true
 frozen: false
 ---

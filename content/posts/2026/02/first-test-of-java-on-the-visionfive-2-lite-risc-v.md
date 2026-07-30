@@ -11,6 +11,10 @@ categories:
   - "Embedded"
 tags:
 related_posts:
+  - "first-experiments-with-java-on-the-lattepanda-iota"
+  - "first-test-of-java-on-the-orange-pi-arm-and-risc-v"
+  - "java-on-single-board-computers-x86-vs-arm-vs-risc-v"
+  - "java-on-raspberry-pi-5-with-pi4j"
 enlighterjs: true
 frozen: false
 ---

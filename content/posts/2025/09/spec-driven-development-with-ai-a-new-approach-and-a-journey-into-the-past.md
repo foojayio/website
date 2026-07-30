@@ -12,6 +12,10 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "5-great-reasons-to-use-jooq"
+  - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"
+  - "a-quick-look-at-faces-jsf-4-0-in-jakarta-ee-10"
+  - "a-short-history-of-ajax-and-ssr"
 enlighterjs: true
 frozen: false
 ---

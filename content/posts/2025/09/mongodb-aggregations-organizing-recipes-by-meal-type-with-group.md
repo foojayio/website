@@ -12,6 +12,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"
+  - "data-modeling-for-java-developers-structuring-with-postgresql-and-mongodb"
+  - "mongodb-acid-transactions-with-java"
+  - "mongodb-aggregation-framework-a-beginners-guide"
 enlighterjs: true
 frozen: false
 ---

@@ -14,6 +14,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "foojay-podcast-45"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "42-practical-java-design-patterns-builder-and-more"
+  - "where-production-policy-belongs-building-eliya-in-public"
 enlighterjs: true
 frozen: false
 ---

@@ -14,6 +14,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
+  - "controlling-a-led-strip-with-pi4j-and-jbang"
+  - "interviews-with-robert-savage-and-johan-vos-on-the-state-of-java-on-raspberry-pi"
+  - "pi4j-welcomes-java-21-on-the-raspberry-pi"
 frozen: false
 ---
 

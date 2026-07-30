@@ -11,6 +11,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "custom-controls-in-javafx-part-ii"
+  - "custom-controls-in-javafx-part-iii"
+  - "custom-controls-in-javafx-part-iv"
+  - "azul-brings-java-from-edge-to-cloud"
 enlighterjs: true
 frozen: false
 ---

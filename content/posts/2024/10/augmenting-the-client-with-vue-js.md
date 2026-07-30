@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "a-short-history-of-ajax-and-ssr"
+  - "server-side-rendering-with-spring-boot"
+  - "cracking-code-and-conventions-an-exclusive-interview-with-nicolas-frankel"
+  - "augmenting-the-client-with-alpine-js"
 enlighterjs: true
 frozen: false
 ---
@@ -78,7 +82,7 @@ If you're used to developing APIs, you're familiar with the `body()` function; i
 
 Here's the code on the HTML side:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="54352c3d3b2714657a63">[email&nbsp;protected]</a>/dist/axios.min.js"&gt;&lt;/script&gt; &lt;!--1--&gt;
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="43223b2a2c3003726d74">[email&nbsp;protected]</a>/dist/axios.min.js"&gt;&lt;/script&gt; &lt;!--1--&gt;
 &lt;script th:src="@{/webjars/vue/dist/vue.global.js}" src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"&gt;&lt;/script&gt; &lt;!--2--&gt;
 &lt;script th:src="@{/vue.js}" src="../static/vue.js"&gt;&lt;/script&gt;             &lt;!--3--&gt;
 &lt;script th:inline="javascript"&gt;

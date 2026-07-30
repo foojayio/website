@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "cloud-myth-ahead-of-time-compilation-will-save-you-money"
+  - "startup-spring-quarkus-raspberry-pi"
+  - "the-anatomy-of-a-jvm"
 frozen: false
 ---
 

@@ -12,6 +12,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "top-most-detected-issues-in-java-projects"
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "12-lessons-learned-from-doing-the-one-billion-row-challenge"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 enlighterjs: true
 frozen: false
 ---
@@ -95,7 +99,7 @@ With this approach though, we face potential issues in terms of readability and 
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">public Person(String name, int age, String id, String phoneNumber, String email, Person parent1, Person parent2) { ... }
 
-Person person = new Person("Antonio", 15, 1445678, "+34 666 77 88 99", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="04656a706b6a6d6b44617c65697468612a676b69">[email&nbsp;protected]</a>", juan, carla);
+Person person = new Person("Antonio", 15, 1445678, "+34 666 77 88 99", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5938372d36373036193c21383429353c773a3634">[email&nbsp;protected]</a>", juan, carla);
 </pre>
 
 In case we add more mandatory properties, as we see above, we need to add more parameters to the constructor and this will impact the existing code making us modify it on every call to the constructor.

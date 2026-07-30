@@ -15,6 +15,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "project-panama-for-newbies-part-1"
+  - "project-panama-for-newbies-part-2"
+  - "java-panama-polyglot-part1"
+  - "java-panama-polyglot-rust-part-4"
 enlighterjs: true
 frozen: false
 ---
@@ -95,7 +99,7 @@ Of course if you choose to make environment variables persistent you'll need to 
 
 After setting up JDK 19 you can fork / clone the GitHub project `jextract` with the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7f18160b3f18160b170a1d511c1012">[email&nbsp;protected]</a>:openjdk/jextract.git
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ddbab4a99dbab4a9b5a8bff3beb2b0">[email&nbsp;protected]</a>:openjdk/jextract.git
 cd jextract</pre>
 
 **Note:** It is preferable that you fork the project and then clone your fork of the project. That way you can provide pull requests whenever you find a bug to fix or a proposed enhancement to the project. But if you just want to build from master branch or a previous branch you can simply clone `jextract`'s main repo as shown below:

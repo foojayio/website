@@ -13,6 +13,10 @@ categories:
   - "Jakarta EE"
 tags:
 related_posts:
+  - "payara-platform-october-2021-survey"
+  - "are-java-jakarta-ee-application-servers-heavy"
+  - "do-java-jakarta-ee-standards-matter"
+  - "enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs"
 enlighterjs: true
 frozen: false
 ---

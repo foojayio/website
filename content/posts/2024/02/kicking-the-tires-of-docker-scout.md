@@ -12,6 +12,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "dockerizing-a-java-26-project-with-docker-init"
 enlighterjs: true
 frozen: false
 ---
@@ -66,7 +70,7 @@ This is the result:
     packages        │ 272
 ## Packages and Vulnerabilities
    0C     1H     0M     0L  org.yaml/snakeyaml 1.33
-pkg:maven/org.yaml/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1b2afa0aaa4b8a0acad81f0eff2f2">[email&nbsp;protected]</a>
+pkg:maven/org.yaml/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="70031e111b1509111d1c30415e4343">[email&nbsp;protected]</a>
     ✗ HIGH CVE-2022-1471 [Improper Input Validation]
       https://scout.docker.com/v/CVE-2022-1471
       Affected range : &lt;=1.33
@@ -74,7 +78,7 @@ pkg:maven/org.yaml/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" da
       CVSS Score     : 8.3
       CVSS Vector    : CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:L
    0C     1H     0M     0L  io.netty/netty-handler 4.1.100.Final
-pkg:maven/io.netty/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="59373c2d2d20743138373d353c2b196d776877686969771f30373835">[email&nbsp;protected]</a>
+pkg:maven/io.netty/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4cac1d0d0dd89ccc5cac0c8c1d6e4908a958a9594948ae2cdcac5c8">[email&nbsp;protected]</a>
     ✗ HIGH CVE-2023-4586 [OWASP Top Ten 2017 Category A9 - Using Components with Known Vulnerabilities]
       https://scout.docker.com/v/CVE-2023-4586
       Affected range : &gt;=4.1.0

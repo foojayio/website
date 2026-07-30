@@ -11,6 +11,10 @@ categories:
   - "Debugging"
 tags:
 related_posts:
+  - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
+  - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
+  - "book-review-practical-design-patterns-for-java-developers"
+  - "is-jdwps-onjcmd-feature-worth-using"
 frozen: false
 ---
 

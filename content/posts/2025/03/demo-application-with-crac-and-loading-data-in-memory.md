@@ -13,6 +13,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "how-to-run-a-java-application-with-crac-in-a-docker-container"
+  - "introducing-the-openjdk-coordinated-restore-at-checkpoint-project"
+  - "running-a-crac-java-application-on-raspberry-pi"
+  - "java-21-on-raspberry-pi-zero-2-is-back-in-business"
 enlighterjs: true
 frozen: false
 ---

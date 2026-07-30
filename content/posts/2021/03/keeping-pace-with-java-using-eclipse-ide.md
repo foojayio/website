@@ -12,6 +12,10 @@ categories:
   - "Sealed Classes"
 tags:
 related_posts:
+  - "foojay-podcast-12"
+  - "effective-cloud-native-development-eclipse-ide-open-liberty"
+  - "write-once-run-embedded-in-any-ide"
+  - "the-visitor-pattern-revisited-using-data-oriented-programming-techniques"
 frozen: false
 ---
 

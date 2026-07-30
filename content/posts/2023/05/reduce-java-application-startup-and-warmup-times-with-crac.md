@@ -14,6 +14,9 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "how-to-run-a-java-application-with-crac-in-a-docker-container"
+  - "azul-provides-the-crac-in-aws-snapstart-builds"
+  - "superfast-application-startup-java-on-crac"
 frozen: false
 ---
 

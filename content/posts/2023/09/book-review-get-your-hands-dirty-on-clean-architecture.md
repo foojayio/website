@@ -17,6 +17,9 @@ categories:
   - "Testing"
 tags:
 related_posts:
+  - "book-review-help-your-boss-help-you"
+  - "book-review-openjdk-migration-for-dummies-2"
+  - "book-review-learn-javafx-game-and-app-development-with-fxgl-17"
 frozen: false
 ---
 

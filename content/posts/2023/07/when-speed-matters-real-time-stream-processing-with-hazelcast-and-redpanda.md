@@ -14,6 +14,10 @@ categories:
   - "Streaming"
 tags:
 related_posts:
+  - "boosting-similarity-search-with-real-time-stream-processing"
+  - "hazelcast-from-embedded-to-client-server"
+  - "hazelcast-kibana-best-buddies-for-exploring-visualizing-data"
+  - "building-real-time-applications-to-process-wikimedia-streams-using-kafka-and-hazelcast"
 enlighterjs: true
 frozen: false
 ---
@@ -199,7 +203,7 @@ if __name__ == "__main__":
 Start a Hazelcast local cluster. This will run a Hazelcast cluster in client/server mode and an instance of Management Center running on your local network.
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7f171e051a131c1e0c0b3f4a514c514e">[email&nbsp;protected]</a>
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="345c554e51585755474074011a071a05">[email&nbsp;protected]</a>
 hz -V</pre>
 
 Now that we understand what we are going to build, and have prerequisites set up, let's jump right into the solution.

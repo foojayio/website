@@ -12,6 +12,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "foojay-podcast-44"
+  - "controlling-led-strips-with-java-and-jbang"
+  - "controlling-electronics-with-jbang-on-the-raspberry-pi"
+  - "java-on-raspberry-pi-5-with-pi4j"
 enlighterjs: true
 frozen: false
 ---

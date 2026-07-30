@@ -11,6 +11,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "quarkus-a-runtime-and-framework-for-cloud-native-java"
+  - "optimizing-java-for-the-cloud-native-era-with-quarkus"
+  - "not-a-lucid-web3-dream-anymore-x402-erc-8004-a2a-and-the-next-wave-of-ai-commerce"
+  - "foojay-podcast-87"
 frozen: false
 ---
 

@@ -13,6 +13,9 @@ categories:
   - "JShell"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "hand-ground-coffee-command-line-tools-for-java"
+  - "learn-javafx-with-jshell-in-60-seconds"
 enlighterjs: true
 frozen: false
 ---

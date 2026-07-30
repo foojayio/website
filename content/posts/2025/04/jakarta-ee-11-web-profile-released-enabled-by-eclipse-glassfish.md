@@ -12,6 +12,10 @@ categories:
   - "Jakarta EE"
 tags:
 related_posts:
+  - "glassfish-embedded-a-simple-way-to-run-jakarta-ee-apps"
+  - "ejb-support-in-piranha-via-cdi"
+  - "glassfish-is-rolling-forward-whats-new"
+  - "how-to-upgrade-to-jakarta-ee-10-and-glassfish-7-its-much-easier-than-you-think"
 frozen: false
 ---
 

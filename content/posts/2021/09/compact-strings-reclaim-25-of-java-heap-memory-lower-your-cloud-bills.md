@@ -11,6 +11,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "real-world-stream-collector"
+  - "project-panama-for-newbies-part-1"
+  - "confusing-java-strings"
 enlighterjs: true
 frozen: false
 ---

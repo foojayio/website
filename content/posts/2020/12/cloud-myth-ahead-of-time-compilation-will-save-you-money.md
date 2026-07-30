@@ -12,6 +12,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "why-a-serverless-data-api-might-be-your-next-database"
+  - "is-java-jakarta-ee-cloud-native"
+  - "how-to-bring-your-java-microservices-to-the-cloud"
+  - "enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs"
 frozen: false
 ---
 

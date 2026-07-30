@@ -18,6 +18,10 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "ai-newsletter-1"
+  - "jc-ai-newsletter-2"
+  - "do-we-understand-the-value-of-ai-knowledge"
+  - "book-review-tidy-first"
 frozen: false
 ---
 

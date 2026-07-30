@@ -12,6 +12,10 @@ categories:
   - "Developer Tools"
 tags:
 related_posts:
+  - "poor-mans-api"
+  - "kubernetes-gateway-api"
+  - "real-world-stream-collector"
+  - "a-short-history-of-ajax-and-ssr"
 enlighterjs: true
 frozen: false
 ---

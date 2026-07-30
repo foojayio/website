@@ -13,6 +13,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "writing-a-profiler-from-scratch-introduction"
+  - "do-you-trust-profilers-i-once-did-too"
+  - "validating-java-profiling-apis"
+  - "using-async-profiler-and-jattach-programmatically-with-ap-loader"
 enlighterjs: true
 frozen: false
 ---
@@ -354,14 +358,14 @@ Keep in my mind that the actual Node class is as follows:
                 &lt;head&gt;                                                                                                                                                                                                   
                   &lt;link rel="stylesheet" 
                    type="text/css" 
-                   href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6703544a010b060a024a001506170f275349564954">[email&nbsp;protected]</a>/dist/d3-flamegraph.css"&gt;                                                                                
+                   href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e480d7c98288858981c9839685948ca4d0cad5cad7">[email&nbsp;protected]</a>/dist/d3-flamegraph.css"&gt;                                                                                
                 &lt;/head&gt;                                                                                                                                                                                                  
                 &lt;body&gt;                                                                                                                                                                                                   
                   &lt;div id="chart"&gt;&lt;/div&gt;                                                                                                                                                                                 
                   &lt;script type="text/javascript" 
                    src="https://d3js.org/d3.v7.js"&gt;&lt;/script&gt;                                                                                                                               
                   &lt;script type="text/javascript" 
-                   src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e480d7c98288858981c9839685948ca4d0cad5cad7">[email&nbsp;protected]</a>/dist/d3-flamegraph.min.js"&gt;&lt;/script&gt;                                                                             
+                   src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="690d5a440f0508040c440e1b081901295d4758475a">[email&nbsp;protected]</a>/dist/d3-flamegraph.min.js"&gt;&lt;/script&gt;                                                                             
                   &lt;script type="text/javascript"&gt;                                                                                                                                                                        
                   var chart = flamegraph().width(window.innerWidth);                                                                                                                                                     
                   d3.select("#chart").datum(""");                                                                                                                                                                        

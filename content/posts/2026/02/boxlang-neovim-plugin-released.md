@@ -13,6 +13,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
+  - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
+  - "boxlang-1-14-0-query-transformers-take-full-control-of-your-query-results"
+  - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
 enlighterjs: true
 frozen: false
 ---
@@ -93,7 +97,7 @@ class UserService {
      * Safe navigation with elvis operator
      */
     public function getEmail() {
-        return this.user?.email ?: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="741a1b591119151d1834110c15190418115a171b19">[email&nbsp;protected]</a>";
+        return this.user?.email ?: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f89697d59d95999194b89d80999588949dd69b9795">[email&nbsp;protected]</a>";
     }
 }</pre>
 

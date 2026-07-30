@@ -13,6 +13,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "apisix-api-gateway"
+  - "geo-routing-with-apache-apisix"
+  - "apache-apisix-loves-rust"
+  - "dry-your-apache-apisix-config"
 enlighterjs: true
 frozen: false
 ---

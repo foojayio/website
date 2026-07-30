@@ -15,6 +15,10 @@ categories:
   - "TornadoVM"
 tags:
 related_posts:
+  - "foojay-podcast-81"
+  - "foojay-podcast-80"
+  - "foojay-podcast-79"
+  - "foojay-podcast-78"
 frozen: false
 ---
 

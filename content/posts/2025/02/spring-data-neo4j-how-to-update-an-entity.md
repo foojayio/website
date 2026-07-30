@@ -15,6 +15,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "building-a-fullstack-imdb-clone-with-a-java-backend-using-sparkjava-and-neo4j"
+  - "how-to-run-neo4j-on-kubernetes"
+  - "journeys-in-java-level-6-build-a-neo4j-microservice"
+  - "visualization-of-the-message-flow-between-business-functions-with-vaadin-and-neo4j"
 enlighterjs: true
 frozen: false
 ---

@@ -13,6 +13,9 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "java-on-azure-tooling-update-october-2022"
+  - "java-on-azure-tooling-update-september-2022"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
 frozen: false
 ---
 

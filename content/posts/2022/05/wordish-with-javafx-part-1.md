@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "game-development-basics-with-fxgl"
+  - "creating-a-javafx-world-clock-from-scratch-part-1"
+  - "custom-controls-in-javafx-part-i"
+  - "the-javafx-revival"
 enlighterjs: true
 frozen: false
 ---

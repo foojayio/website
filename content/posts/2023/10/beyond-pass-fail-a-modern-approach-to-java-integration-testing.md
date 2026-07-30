@@ -13,6 +13,9 @@ categories:
   - "Observability"
 tags:
 related_posts:
+  - "announcing-the-digma-beta-first-runtime-linter-for-java-code"
+  - "effective-coding-with-java-observability"
+  - "foojay-podcast-29"
 enlighterjs: true
 frozen: false
 ---

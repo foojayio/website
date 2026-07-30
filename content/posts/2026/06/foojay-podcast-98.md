@@ -12,6 +12,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "a-new-generation-of-java-libraries-is-born-wasm-becomes-the-implementation-detail"
+  - "foojay-podcast-97"
+  - "foojay-podcast-96"
+  - "foojay-podcast-95"
 frozen: false
 ---
 

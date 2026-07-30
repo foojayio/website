@@ -14,6 +14,9 @@ categories:
   - "JEPs"
 tags:
 related_posts:
+  - "9-outdated-ideas-about-java"
+  - "deserialization-exploits-in-java-why-should-i-care"
+  - "do-you-trust-profilers-i-once-did-too"
 enlighterjs: true
 frozen: false
 ---

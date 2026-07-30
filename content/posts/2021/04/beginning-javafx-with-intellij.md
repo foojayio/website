@@ -12,6 +12,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "a-javafx-app-on-zulufx-in-60-seconds"
+  - "creating-a-javafx-world-clock-from-scratch-part-1"
+  - "creating-mobile-apps-with-javafx-part-1"
+  - "jdkmon-your-friendly-jdk-distribution-updater"
 enlighterjs: true
 frozen: false
 ---

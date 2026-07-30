@@ -15,6 +15,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "bring-streaming-to-apache-cassandra-with-apache-pulsar"
+  - "streaming-real-time-data-on-the-hazelcast-viridian-serverless"
 enlighterjs: true
 frozen: false
 ---
@@ -47,7 +51,7 @@ If you have macOS \& Homebrew, you can install Hazelcast using the following com
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e088819a858c83819394a0d5ced2ced1">[email&nbsp;protected]</a></pre>
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="325a5348575e5153414672071c001c03">[email&nbsp;protected]</a></pre>
 
 Check if Hazelcast is installed:
 
@@ -75,7 +79,7 @@ To install Management Center, use one of the following methods, depending on you
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="99f1f8e3fcf5faf8eaedb4f4f8f7f8fefcf4fcf7edb4fafcf7edfcebd9acb7abb7a8">[email&nbsp;protected]</a></pre>
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="91f9f0ebf4fdf2f0e2e5bcfcf0fff0f6f4fcf4ffe5bcf2f4ffe5f4e3d1a4bfa3bfa0">[email&nbsp;protected]</a></pre>
 
 Check that Management Center is installed:
 

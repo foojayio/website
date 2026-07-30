@@ -14,6 +14,10 @@ categories:
   - "Testing"
 tags:
 related_posts:
+  - "fantastic-jvms-and-where-to-find-them"
+  - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
+  - "increasing-event-streaming-with-kafka-and-azul"
+  - "new-between-quarters-security-updates-for-java-what-cspus-mean-for-your-release-pipeline"
 frozen: false
 ---
 

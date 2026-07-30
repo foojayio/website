@@ -12,6 +12,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "rust-jvm"
+  - "apache-apisix-loves-rust"
+  - "java-panama-polyglot-rust-part-4"
+  - "feedback-from-calling-rust-from-python"
 frozen: false
 ---
 

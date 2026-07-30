@@ -15,6 +15,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "automatically-creating-microservices-architecture-diagrams"
+  - "building-custom-solutions-vs-buy-and-build-software"
+  - "challenges-when-developing-a-gui-for-fix"
+  - "the-high-availability-features-of-microservices-using-chronicle-services"
 frozen: false
 ---
 

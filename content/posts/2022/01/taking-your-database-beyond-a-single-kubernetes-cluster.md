@@ -18,6 +18,9 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "kubernetes-and-apache-cassandra-what-works-and-what-doesnt"
+  - "developing-an-enterprise-level-apache-cassandra-sink-connector-for-apache-pulsar"
 frozen: false
 ---
 

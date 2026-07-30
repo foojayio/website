@@ -14,6 +14,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "did-ai-just-break-software-security-for-ever"
+  - "foojay-podcast-95"
+  - "ai-found-the-bugs-whos-patching-your-eol-java-code"
+  - "spring-boot-migration-and-the-cra-when-good-enough-isnt"
 frozen: false
 ---
 

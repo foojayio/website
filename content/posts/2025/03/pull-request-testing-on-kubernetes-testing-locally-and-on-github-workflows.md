@@ -13,6 +13,10 @@ categories:
   - "Testing"
 tags:
 related_posts:
+  - "my-final-take-on-gradle-vs-maven"
+  - "my-first-steps-with-playwright"
+  - "pull-request-testing-on-kubernetes-working-with-github-actions-and-gke"
+  - "rust-jvm"
 enlighterjs: true
 frozen: false
 ---

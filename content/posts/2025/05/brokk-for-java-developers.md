@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "indexing-all-of-wikipedia-on-a-laptop"
+  - "java-logging-what-to-log-what-not-to-log"
+  - "data-modeling-in-cassandra-and-astra-db"
+  - "foojay-podcast-27"
 frozen: false
 ---
 

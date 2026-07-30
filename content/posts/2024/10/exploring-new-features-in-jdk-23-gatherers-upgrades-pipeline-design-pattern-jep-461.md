@@ -13,6 +13,10 @@ categories:
   - "JDK 23"
 tags:
 related_posts:
+  - "exploring-new-features-in-jdk-23-builder-pattern-simplicity-with-jep-455-primitive-types-in-patterns-instanceof-and-switch-preview"
+  - "exploring-new-features-in-jdk-23-factory-pattern-with-flexible-constructor-bodies-with-jep-482"
+  - "exploring-new-features-in-jdk-23-null-object-pattern-to-avoid-null-pointer-exception-with-jep-455"
+  - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
 enlighterjs: true
 frozen: false
 ---

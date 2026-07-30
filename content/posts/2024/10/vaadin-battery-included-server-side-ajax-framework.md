@@ -12,6 +12,9 @@ categories:
   - "Vaadin"
 tags:
 related_posts:
+  - "browserless-testing-of-vaadin-applications-with-karibu-testing"
+  - "video-vaadin-drag-drop-support-its-so-easy"
+  - "enterprise-java-application-development-with-jakarta-ee-and-vaadin"
 enlighterjs: true
 frozen: false
 ---

@@ -13,6 +13,9 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "game-development-basics-with-fxgl"
+  - "getting-started-with-fxgl-game-development"
+  - "high-performance-rendering-in-javafx"
 frozen: false
 ---
 

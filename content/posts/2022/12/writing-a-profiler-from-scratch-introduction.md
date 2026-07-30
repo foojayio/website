@@ -13,6 +13,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
+  - "a-flavour-of-tornadovm-on-apple-m1-pro"
+  - "using-java-flight-recorder-and-mission-control-part-2"
+  - "writing-a-profiler-from-scratch-the-profiling-loop"
 enlighterjs: true
 frozen: false
 ---

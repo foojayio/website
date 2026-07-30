@@ -11,6 +11,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "ai-found-the-bugs-whos-patching-your-eol-java-code"
+  - "did-ai-just-break-software-security-for-ever"
+  - "grails-isnt-done-yet-part-1-inside-the-asf-reboot"
+  - "foojay-podcast-95"
 frozen: false
 ---
 

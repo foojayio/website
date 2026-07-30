@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "project-panama-for-newbies-part-1"
+  - "project-panama-for-newbies-part-2"
+  - "project-panama-for-newbies-part-3"
+  - "is-there-a-best-os-to-develop-a-java-application-on"
 enlighterjs: true
 frozen: false
 ---

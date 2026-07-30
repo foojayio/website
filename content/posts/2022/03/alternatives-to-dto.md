@@ -11,6 +11,10 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "create-a-crud-ui-in-pure-java"
+  - "get-your-jdk-as-easily-as-possible"
+  - "blockhound-how-it-works"
+  - "the-right-feature-at-the-right-place"
 enlighterjs: true
 frozen: false
 ---

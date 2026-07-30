@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "concurrency-in-java-and-how-it-compares-with-other-modern-programming-languages"
+  - "demystifying-memory-management-in-modern-programming-languages"
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "blockhound-how-it-works"
+  - "chopping-monolith"
+  - "competing-for-the-crown-a-friendly-debate-on-the-future-of-java-and-kotlin-on-foojay-io-today"
 enlighterjs: true
 frozen: false
 ---

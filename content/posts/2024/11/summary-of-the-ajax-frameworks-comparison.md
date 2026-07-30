@@ -12,6 +12,10 @@ categories:
   - "Vaadin"
 tags:
 related_posts:
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "guide-lazyinitializationexception"
+  - "a-list-of-cache-providers"
+  - "foojay-podcast-41"
 frozen: false
 ---
 

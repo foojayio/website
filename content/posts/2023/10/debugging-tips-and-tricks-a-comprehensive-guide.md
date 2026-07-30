@@ -13,6 +13,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "eliminating-bugs-using-the-tong-motion-approach"
+  - "the-evolution-of-bugs"
+  - "debugging-as-a-process-of-isolating-assumptions"
 frozen: false
 ---
 

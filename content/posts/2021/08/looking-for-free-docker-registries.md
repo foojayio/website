@@ -12,6 +12,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "starting-docker-desktop-with-spring-boot"
+  - "dockerizing-a-java-26-project-with-docker-init"
+  - "official-azul-zulu-openjdk-images-now-available-on-docker-hub"
+  - "run-a-java-lambda-function-from-a-docker-image"
 frozen: false
 ---
 

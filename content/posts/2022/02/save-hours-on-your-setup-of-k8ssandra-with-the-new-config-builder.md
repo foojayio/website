@@ -17,6 +17,8 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "how-to-put-a-database-in-kubernetes"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "first-experiments-with-java-on-the-lattepanda-iota"
+  - "foojay-podcast-55"
+  - "hardware-acceleration-for-java-tornadovm-can-do-it"
+  - "startup-spring-quarkus-raspberry-pi"
 frozen: false
 ---
 

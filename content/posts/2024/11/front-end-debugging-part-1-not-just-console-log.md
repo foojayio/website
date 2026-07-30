@@ -13,6 +13,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "front-end-debugging-part-2-console-log-to-the-max"
+  - "debugging-kubernetes-part-1-an-introduction"
+  - "debugging-tips-and-tricks-a-comprehensive-guide"
 enlighterjs: true
 frozen: false
 ---

@@ -11,6 +11,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "42-practical-java-design-patterns-builder-and-more"
+  - "5-great-reasons-to-use-jooq"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "9-outdated-ideas-about-java"
 frozen: false
 ---
 

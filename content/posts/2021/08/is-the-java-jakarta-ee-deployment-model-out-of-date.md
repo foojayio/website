@@ -13,6 +13,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs"
+  - "new-features-in-jakarta-ee-11-with-examples"
+  - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
+  - "issues-with-old-glassfish-server-upgrade-to-eclipse-glassfish"
 frozen: false
 ---
 

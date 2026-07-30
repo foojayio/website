@@ -13,6 +13,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "apisix-api-gateway"
+  - "authenticate-with-openid-connect-and-apache-apisix"
+  - "back-to-basics-accessing-kubernetes-pods"
+  - "when-not-to-write-an-apache-apisix-plugin"
 enlighterjs: true
 frozen: false
 ---

@@ -18,6 +18,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "10-best-practises-for-jakarta-ee-performance-optimization"
+  - "do-java-jakarta-ee-standards-matter"
+  - "easy-jakarta-ee-integration-testing"
+  - "foojay-podcast-62"
 frozen: false
 ---
 

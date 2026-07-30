@@ -18,6 +18,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "azul-provides-the-crac-in-aws-snapstart-builds"
+  - "a-list-of-cache-providers"
+  - "a-simple-service-with-spring-boot"
 frozen: false
 ---
 

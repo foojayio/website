@@ -12,6 +12,10 @@ categories:
   - "JDK Flight Recorder"
 tags:
 related_posts:
+  - "a-closer-look-at-jfr-streaming"
+  - "using-java-flight-recorder-and-mission-control-part-2"
+  - "using-java-flight-recorder-and-mission-control-part-3"
+  - "java-native-memory-allocation-ffm-api"
 enlighterjs: true
 frozen: false
 ---

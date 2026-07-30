@@ -15,6 +15,9 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "foojay-podcast-2"
+  - "foojay-podcast-3"
+  - "blockhound-how-it-works"
 frozen: false
 ---
 

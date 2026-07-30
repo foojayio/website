@@ -11,6 +11,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music"
+  - "closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j"
+  - "lottie4j-meets-lottiefiles"
+  - "lottie4j-1-2-0-dotlottie-support-marker-playback-cropping-and-a-big-speed-boost"
 enlighterjs: true
 frozen: false
 ---

@@ -11,6 +11,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "gang-of-four-design-patterns-using-core-java-part-01"
+  - "evolution-of-java-memory-architecture-post-java-7-0"
+  - "java-roots-1-java-memory-architecture"
+  - "boxlang-ai-deep-dive-part-2-of-7-building-a-production-grade-ai-tool-ecosystem"
 frozen: false
 ---
 

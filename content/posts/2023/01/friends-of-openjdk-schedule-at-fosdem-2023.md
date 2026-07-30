@@ -11,6 +11,9 @@ categories:
   - "Events"
 tags:
 related_posts:
+  - "foojay-io-fosdem-speaker-predictions-for-2023"
+  - "friends-of-openjdk-at-fosdem-2022"
+  - "video-sdkman-explained"
 frozen: false
 ---
 

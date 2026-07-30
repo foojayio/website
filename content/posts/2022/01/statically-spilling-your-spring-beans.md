@@ -11,6 +11,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "a-simple-service-with-spring-boot"
+  - "a-walk-to-lazy-fetching-with-hibernate-and-spring-data-jpa"
+  - "annotation-free-spring"
+  - "jurassic-jdk-migrate-or-extinct"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
+  - "couch-to-fully-observed-code-with-spring-boot-3-2-micrometer-tracing-and-digma"
+  - "how-to-detect-cache-misses-using-observability"
+  - "microservices-design-principles-for-well-crafted-architecture"
 frozen: false
 ---
 

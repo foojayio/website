@@ -14,6 +14,9 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "embracing-java-17-heres-what-we-learned-at-picnic"
+  - "the-quest-to-the-os-java-native-memory-foojay-today"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
 frozen: false
 ---
 

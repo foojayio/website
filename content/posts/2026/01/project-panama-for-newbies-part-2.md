@@ -12,6 +12,10 @@ categories:
   - "Project Panama"
 tags:
 related_posts:
+  - "project-panama-for-newbies-part-1"
+  - "project-panama-for-newbies-part-3"
+  - "project-panama-for-newbies-part-4"
+  - "java-panama-polyglot-part1"
 enlighterjs: true
 frozen: false
 ---

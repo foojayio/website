@@ -12,6 +12,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "get-your-jdk-as-easily-as-possible"
+  - "how-to-run-a-java-application-with-crac-in-a-docker-container"
+  - "introducing-the-openjdk-coordinated-restore-at-checkpoint-project"
+  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 enlighterjs: true
 frozen: false
 ---

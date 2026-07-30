@@ -12,6 +12,9 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "java-development-with-vs-code-on-the-raspberry-pi"
+  - "say-goodbye-to-project-files-in-visual-studio-code"
+  - "java-on-visual-studio-code-update-january-2022"
 frozen: false
 ---
 

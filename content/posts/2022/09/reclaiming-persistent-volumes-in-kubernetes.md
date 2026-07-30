@@ -17,6 +17,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "kubernetes-gateway-api"
+  - "apisix-api-gateway"
+  - "aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2"
 enlighterjs: true
 frozen: false
 ---

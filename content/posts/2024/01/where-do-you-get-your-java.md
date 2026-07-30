@@ -13,6 +13,10 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "are-java-security-updates-important"
+  - "book-review-openjdk-migration-for-dummies-3"
+  - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
+  - "jurassic-jdk-migrate-or-extinct"
 frozen: false
 ---
 

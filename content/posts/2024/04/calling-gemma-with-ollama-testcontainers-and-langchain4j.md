@@ -13,6 +13,10 @@ categories:
   - "Machine Learning"
 tags:
 related_posts:
+  - "quick-start-with-machine-learning-in-java"
+  - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
+  - "faster-integration-tests-with-reusable-testcontainers"
+  - "bring-ai-into-your-jakarta-ee-apps-with-langchain4j-cdi"
 enlighterjs: true
 frozen: false
 ---

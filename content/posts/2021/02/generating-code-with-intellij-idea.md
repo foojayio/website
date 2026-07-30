@@ -12,6 +12,10 @@ categories:
   - "IntelliJ IDEA"
 tags:
 related_posts:
+  - "apple-silicon-with-zulu-openjdk-and-intellij-idea"
+  - "intellij-idea-made-me-lazy"
+  - "live-templates-in-intellij-idea"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 enlighterjs: true
 frozen: false
 ---

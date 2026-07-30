@@ -12,6 +12,9 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "video-if-i-decide-to-stay-with-oracle-java-what-issues-will-i-face"
+  - "cloud-cost-optimization-is-hard-java-can-help"
+  - "mastering-the-challenges-of-openjdk-migration"
 frozen: false
 ---
 

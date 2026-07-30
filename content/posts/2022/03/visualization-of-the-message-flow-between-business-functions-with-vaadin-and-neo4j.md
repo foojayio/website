@@ -13,6 +13,10 @@ categories:
   - "Vaadin"
 tags:
 related_posts:
+  - "build-web-apps-in-pure-java-with-vaadin-flow"
+  - "create-a-crud-ui-in-pure-java"
+  - "new-book-practical-vaadin"
+  - "breaktime-tech-talks-ep39-why-embedding-models-should-match-advice-for-starting-a-blog"
 enlighterjs: true
 frozen: false
 ---

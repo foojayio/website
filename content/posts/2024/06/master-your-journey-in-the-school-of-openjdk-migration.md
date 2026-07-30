@@ -14,6 +14,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "book-announcement-openjdk-migration-guide-for-dummies"
+  - "mastering-the-challenges-of-openjdk-migration"
+  - "book-review-openjdk-migration-for-dummies"
 frozen: false
 ---
 

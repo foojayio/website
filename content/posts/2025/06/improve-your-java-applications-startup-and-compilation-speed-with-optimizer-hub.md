@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "faster-java-warmup-crac-versus-readynow"
+  - "how-readynow-improves-java-warmup-time"
+  - "how-to-train-readynow-to-achieve-optimal-java-performance"
+  - "superfast-application-startup-java-on-crac"
 frozen: false
 ---
 

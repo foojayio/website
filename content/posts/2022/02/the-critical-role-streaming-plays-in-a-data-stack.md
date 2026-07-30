@@ -15,6 +15,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "why-developers-should-use-apache-pulsar"
 frozen: false
 ---
 

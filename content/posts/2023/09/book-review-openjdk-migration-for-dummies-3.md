@@ -13,6 +13,10 @@ categories:
   - "OpenJDK Migration"
 tags:
 related_posts:
+  - "book-announcement-openjdk-migration-guide-for-dummies"
+  - "book-review-openjdk-migration-for-dummies-2"
+  - "is-openjdk-just-a-drop-in-replacement"
+  - "where-production-policy-belongs-building-eliya-in-public"
 frozen: false
 ---
 

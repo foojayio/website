@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "five-java-developer-must-haves"
+  - "how-we-developed-the-eclipse-openj9-criu-support-for-fast-java-startup"
+  - "where-do-you-get-your-java"
+  - "how-is-leyden-improving-java-performance-part-2-of-3"
 frozen: false
 ---
 

@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"
+  - "a-simple-service-with-spring-boot"
+  - "a-walk-to-lazy-fetching-with-hibernate-and-spring-data-jpa"
 enlighterjs: true
 frozen: false
 ---

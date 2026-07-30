@@ -12,6 +12,9 @@ categories:
   - "Books"
 tags:
 related_posts:
+  - "book-review-modern-frontends-with-htmx"
+  - "foojay-podcast-67"
+  - "book-review-effortless-cloud-native-app-development-using-skaffold-2"
 frozen: false
 ---
 

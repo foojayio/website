@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "a-fresh-look-at-embedded-java"
+  - "azul-brings-java-from-edge-to-cloud"
+  - "getting-a-single-value-from-a-devices-state-in-home-assistant"
 frozen: false
 ---
 

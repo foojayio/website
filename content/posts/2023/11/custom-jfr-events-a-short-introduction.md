@@ -12,6 +12,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "a-closer-look-at-jfr-streaming"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm"
+  - "custom-events-in-the-blocky-world-using-jfr-in-minecraft"
 enlighterjs: true
 frozen: false
 ---

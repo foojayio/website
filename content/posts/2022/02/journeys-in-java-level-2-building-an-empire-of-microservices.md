@@ -13,6 +13,10 @@ categories:
   - "Neo4J"
 tags:
 related_posts:
+  - "building-microservices-spring-boot-fat-uber-jar"
+  - "book-review-quarkus-for-spring-developers"
+  - "building-reactive-java-applications-with-spring-framework"
+  - "journeys-in-java-level-6-build-a-neo4j-microservice"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "we-all-grow-older-but-do-our-projects-really-have-to-openrewrite"
+  - "exhaustive-junit5-testing-with-combinations-permutations-and-products"
+  - "jtest-roll-your-own-junit-like-testing-framework"
+  - "foojay-podcast-99"
 enlighterjs: true
 frozen: false
 ---

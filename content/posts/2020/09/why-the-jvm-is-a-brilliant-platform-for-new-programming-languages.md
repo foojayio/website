@@ -11,6 +11,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "java-panama-polyglot-part-3"
+  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
+  - "jurassic-jdk-migrate-or-extinct"
+  - "quarkus-unpacked-insights-from-the-foojay-podcast"
 frozen: false
 ---
 

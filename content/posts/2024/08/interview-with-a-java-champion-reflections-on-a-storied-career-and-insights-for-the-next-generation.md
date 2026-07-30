@@ -11,6 +11,10 @@ categories:
   - "Interviews"
 tags:
 related_posts:
+  - "discovering-the-secrets-to-success-an-exclusive-interview-with-java-champion-michael-p-redlich"
+  - "unlocking-the-secrets-to-a-successful-software-engineering-career-an-interview-with-otavio-santana"
+  - "navigating-the-challenges-of-modern-software-development-an-exclusive-interview-with-shai-almog"
+  - "announcing-java-unscripted-an-asynchronous-exploration-of-excellence"
 frozen: false
 ---
 

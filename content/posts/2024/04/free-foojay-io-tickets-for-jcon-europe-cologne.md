@@ -13,6 +13,9 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "foojay-io-at-fosdem-2023-trip-report"
+  - "springone-tlv-world-tour-trip-report"
+  - "trip-report-dubai-jug-2nd-meetup"
 frozen: false
 ---
 

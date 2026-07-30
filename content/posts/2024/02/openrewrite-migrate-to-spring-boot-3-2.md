@@ -17,6 +17,9 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "openrewrite-automatic-code-refactoring-and-maintenance"
+  - "openrewrite-automatic-code-refactoring-and-maintenance-part-2"
+  - "we-all-grow-older-but-do-our-projects-really-have-to-openrewrite"
 enlighterjs: true
 frozen: false
 ---

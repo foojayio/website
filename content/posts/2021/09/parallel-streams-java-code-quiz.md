@@ -11,6 +11,8 @@ categories:
   - "Books"
 tags:
 related_posts:
+  - "transitioning-to-java-my-first-book"
+  - "arrays-and-object-reference-java-challenge-code-quiz"
 enlighterjs: true
 frozen: false
 ---

@@ -11,6 +11,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
+  - "boxlang-v1-13-0-compatibility-concurrency-and-formatter-maturity"
+  - "runtime-code-analysis-in-the-age-of-vibe-coding"
+  - "the-curious-case-of-different-runtimes-with-different-training-data-jit"
 frozen: false
 ---
 

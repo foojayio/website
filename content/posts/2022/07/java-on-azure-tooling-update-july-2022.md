@@ -16,6 +16,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "java-on-azure-tooling-update-june-2022"
+  - "azure-toolkit-for-intellij-april-2022-update"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "abstracting-data-access-in-java-with-the-dao-pattern"
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "beyond-keywords-hybrid-search-with-atlas-and-vector-search-part-3"
+  - "beyond-keywords-implementing-semantic-search-in-java-with-spring-data-part-1"
 enlighterjs: true
 frozen: false
 ---

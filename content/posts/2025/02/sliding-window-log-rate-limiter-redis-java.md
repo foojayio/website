@@ -16,6 +16,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "fixed-window-counter-rate-limiter-redis-java"
+  - "token-bucket-rate-limiter-redis-java"
+  - "rate-limiting-with-redis-an-essential-guide"
+  - "sliding-window-counter-rate-limiter-redis-java"
 enlighterjs: true
 frozen: false
 ---

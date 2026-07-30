@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "what-should-i-know-about-garbage-collection-as-a-java-developer"
+  - "what-does-a-modern-jvm-look-like-and-how-does-it-work"
+  - "superfast-application-startup-java-on-crac"
+  - "the-curious-case-of-different-runtimes-with-different-training-data-jit"
 frozen: false
 ---
 

@@ -12,6 +12,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "server-side-rendering-with-spring-boot"
+  - "book-review-modern-frontends-with-htmx"
+  - "example-java-application-with-embedded-jetty-and-a-htmx-website"
+  - "jc-ai-newsletter-8"
 frozen: false
 ---
 

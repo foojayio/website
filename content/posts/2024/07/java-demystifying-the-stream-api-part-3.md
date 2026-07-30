@@ -13,6 +13,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "java-functional-programming"
+  - "java-functional-programming-fx-part2"
+  - "7-functional-programming-techniques-in-java-a-primer"
 enlighterjs: true
 frozen: false
 ---

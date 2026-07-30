@@ -11,6 +11,10 @@ categories:
   - "Maven"
 tags:
 related_posts:
+  - "fixing-vulnerabilities-in-maven-projects"
+  - "faster-maven-builds-1"
+  - "understanding-apache-maven-part-1-the-basics"
+  - "enterprise-java-quality-gates-ai"
 enlighterjs: true
 frozen: false
 ---

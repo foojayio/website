@@ -14,6 +14,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "pi4j-v-2-released"
+  - "controlling-electronics-with-jbang-on-the-raspberry-pi"
+  - "java-in-education-combining-java-with-raspberry-pi-and-the-pi4j-library"
+  - "pi4j-welcomes-java-21-on-the-raspberry-pi"
 frozen: false
 ---
 

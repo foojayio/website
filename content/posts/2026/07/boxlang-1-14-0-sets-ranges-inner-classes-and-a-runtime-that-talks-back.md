@@ -14,6 +14,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
+  - "boxlang-1-14-0-introducing-inner-classes"
+  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
+  - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
 enlighterjs: true
 frozen: false
 ---
@@ -258,9 +262,9 @@ This one changes how you think about object creation. In BoxLang 1.14.0, importe
 import models.User
 
 // These three forms are equivalent
-u1 = new User( "Bob", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="791b161b391c01181409151c571a1614">[email&nbsp;protected]</a>" )
-u2 = User.init( "Bob", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="debcb1bc9ebba6bfb3aeb2bbf0bdb1b3">[email&nbsp;protected]</a>" )
-u3 = User( "Bob", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e98b868ba98c91888499858cc78a8684">[email&nbsp;protected]</a>" )      // class reference called as function
+u1 = new User( "Bob", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a1815183a1f021b170a161f54191517">[email&nbsp;protected]</a>" )
+u2 = User.init( "Bob", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90f2fff2d0f5e8f1fde0fcf5bef3fffd">[email&nbsp;protected]</a>" )
+u3 = User( "Bob", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81e3eee3c1e4f9e0ecf1ede4afe2eeec">[email&nbsp;protected]</a>" )      // class reference called as function
 </pre>
 
 Where this becomes genuinely powerful is functional programming. Because class references are now callable objects, you can pass them directly to higher-order functions:

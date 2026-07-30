@@ -12,6 +12,9 @@ categories:
   - "Foojay"
 tags:
 related_posts:
+  - "managing-dependencies-in-intellij-idea"
+  - "firefox-profiler-beyond-the-web"
+  - "are-java-security-updates-important"
 frozen: false
 ---
 

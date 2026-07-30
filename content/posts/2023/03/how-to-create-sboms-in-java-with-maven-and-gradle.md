@@ -14,6 +14,9 @@ categories:
   - "Snyk"
 tags:
 related_posts:
+  - "sboms-first-steps-in-a-new-journey-for-developers"
+  - "sboms-and-software-composition-analysis"
+  - "making-sboms-threats-and-modelling-them-a-piece-of-cake"
 enlighterjs: true
 frozen: false
 ---
@@ -115,7 +118,7 @@ You can configure the CycloneDX plugin in different ways. In this case, I bound 
 
 All dependencies, both direct and transitive, are mentioned in the SBOM individually like below. The `jackson-databind` package, in this case, was transitively included in my application via `sprint-boot-starter-web`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;component type="library" bom-ref="pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="305a51535b435f5e1d5451445152595e5470021e01031e04">[email&nbsp;protected]</a>?type=jar"&gt;
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;component type="library" bom-ref="pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff959e9c948c9091d29b9e8b9e9d96919bbfcdd1ceccd1cb">[email&nbsp;protected]</a>?type=jar"&gt;
  &lt;publisher&gt;FasterXML&lt;/publisher&gt;
  &lt;group&gt;com.fasterxml.jackson.core&lt;/group&gt;
  &lt;name&gt;jackson-databind&lt;/name&gt;
@@ -136,7 +139,7 @@ All dependencies, both direct and transitive, are mentioned in the SBOM individu
      &lt;id&gt;Apache-2.0&lt;/id&gt;
    &lt;/license&gt;
  &lt;/licenses&gt;
- &lt;purl&gt;pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="147e75777f677b7a3970756075767d7a7054263a25273a20">[email&nbsp;protected]</a>?type=jar&lt;/purl&gt;
+ &lt;purl&gt;pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb919a9890889495d69f9a8f9a9992959fbbc9d5cac8d5cf">[email&nbsp;protected]</a>?type=jar&lt;/purl&gt;
  &lt;externalReferences&gt;&lt;reference type="vcs"&gt;&lt;url&gt;http://github.com/FasterXML/jackson-databind&lt;/url&gt;&lt;/reference&gt;&lt;reference type="website"&gt;&lt;url&gt;http://fasterxml.com/&lt;/url&gt;&lt;/reference&gt;&lt;reference type="distribution"&gt;&lt;url&gt;https://oss.sonatype.org/service/local/staging/deploy/maven2/&lt;/url&gt;&lt;/reference&gt;&lt;/externalReferences&gt;
 &lt;/component&gt;</pre>
 

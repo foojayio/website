@@ -13,6 +13,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "building-microservices-spring-boot-fat-uber-jar"
+  - "chopping-monolith"
+  - "easy-jakarta-ee-integration-testing"
+  - "book-review-monolith-to-microservices-part-1"
 frozen: false
 ---
 

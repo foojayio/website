@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "a-better-way-to-use-gradle-with-github-actions"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "enterprise-java-quality-gates-ai"
 frozen: false
 ---
 

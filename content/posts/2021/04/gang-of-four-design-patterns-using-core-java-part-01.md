@@ -12,6 +12,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "gof-design-patterns-using-java-part-02"
+  - "boxlang-ai-deep-dive-part-2-of-7-building-a-production-grade-ai-tool-ecosystem"
+  - "jc-ai-newsletter-15"
+  - "jc-ai-newsletter-13"
 enlighterjs: true
 frozen: false
 ---

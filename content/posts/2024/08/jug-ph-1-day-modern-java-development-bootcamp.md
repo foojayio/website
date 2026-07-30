@@ -15,6 +15,10 @@ categories:
   - "Student"
 tags:
 related_posts:
+  - "jmanc-2024-trip-report"
+  - "springone-tlv-world-tour-trip-report"
+  - "trip-report-dubai-jug-2nd-meetup"
+  - "jug-ph-1h-2024-meetups"
 frozen: false
 ---
 

@@ -13,6 +13,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "welcome-to-vs-code-for-java"
+  - "controlling-electronics-with-jbang-on-the-raspberry-pi"
+  - "java-in-education-combining-java-with-raspberry-pi-and-the-pi4j-library"
 frozen: false
 ---
 

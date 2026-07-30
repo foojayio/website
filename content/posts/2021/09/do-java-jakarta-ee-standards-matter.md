@@ -13,6 +13,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "can-java-jakarta-ee-do-microservices"
+  - "foojay-podcast-3"
+  - "getting-started-with-jakarta-ee-9-hello-world"
+  - "enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs"
 frozen: false
 ---
 

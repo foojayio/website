@@ -13,6 +13,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "are-java-jakarta-ee-application-servers-heavy"
+  - "can-java-jakarta-ee-do-microservices"
+  - "cloud-myth-ahead-of-time-compilation-will-save-you-money"
+  - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
 frozen: false
 ---
 

@@ -15,6 +15,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "join-slack-com-t-foojay-signup"
+  - "how-to-submit-your-next-article-on-foojay-io"
+  - "azul-datadog-datastax-jfrog-payara-and-snyk-form-inaugural-foojay-advisory-board"
+  - "foojay-podcast-67"
 frozen: false
 ---
 

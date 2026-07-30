@@ -12,6 +12,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "9-outdated-ideas-about-java"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 enlighterjs: true
 frozen: false
 ---

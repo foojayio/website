@@ -12,6 +12,10 @@ categories:
   - "LangChain4j"
 tags:
 related_posts:
+  - "book-review-developing-apps-with-gpt-4-and-chatgpt"
+  - "building-simple-home-assistant-langchain4j-raspberry-pi"
+  - "building-local-llm-ai-powered-applications-with-quarkus-ollama-and-testcontainers"
+  - "calling-gemma-with-ollama-testcontainers-and-langchain4j"
 enlighterjs: true
 frozen: false
 ---

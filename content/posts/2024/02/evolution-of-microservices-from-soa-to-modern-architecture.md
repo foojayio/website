@@ -11,6 +11,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "automatically-creating-microservices-architecture-diagrams"
+  - "azul-provides-the-crac-in-aws-snapstart-builds"
+  - "book-review-monolith-to-microservices-part-1"
+  - "how-to-identify-dependencies-in-your-codebase-during-microservices-migration"
 frozen: false
 ---
 

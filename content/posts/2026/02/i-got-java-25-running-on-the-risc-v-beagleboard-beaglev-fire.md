@@ -11,6 +11,10 @@ categories:
   - "Embedded"
 tags:
 related_posts:
+  - "first-test-of-java-on-the-orange-pi-arm-and-risc-v"
+  - "java-on-single-board-computers-x86-vs-arm-vs-risc-v"
+  - "first-test-of-java-on-beagleboards-arm-and-risc-v"
+  - "first-test-of-java-on-banana-pi-arm-and-risc-v-plus-a-blinking-led-with-pi4j"
 enlighterjs: true
 frozen: false
 ---

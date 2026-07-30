@@ -14,6 +14,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "building-microservices-spring-boot-fat-uber-jar"
+  - "can-java-jakarta-ee-do-microservices"
+  - "why-developers-should-use-apache-pulsar"
 frozen: false
 ---
 

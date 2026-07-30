@@ -11,6 +11,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "enterprise-java-quality-gates-ai"
+  - "lights-camera-action-github-actions-with-java-part-3"
+  - "devops-101-part-iii-package-management"
+  - "devops-101-part-ii-container-registries"
 frozen: false
 ---
 

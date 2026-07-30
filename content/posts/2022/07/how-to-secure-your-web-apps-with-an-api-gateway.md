@@ -13,6 +13,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "kotlin-delegation"
+  - "a-list-of-cache-providers"
+  - "system-architecture-move-authentication-to-the-api-gateway"
 enlighterjs: true
 frozen: false
 ---

@@ -14,6 +14,9 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "spring-6-1-restclient"
+  - "how-to-improve-your-spring-boot-skills"
+  - "creating-a-simple-spring-boot-application-in-intellij-idea"
 enlighterjs: true
 frozen: false
 ---

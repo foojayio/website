@@ -11,6 +11,9 @@ categories:
   - "Events"
 tags:
 related_posts:
+  - "java-thread-programming-part-1"
+  - "understanding-apache-maven-part-1-the-basics"
+  - "concurrency-in-java-and-how-it-compares-with-other-modern-programming-languages"
 frozen: false
 ---
 

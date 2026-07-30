@@ -14,6 +14,10 @@ categories:
   - "NetBeans"
 tags:
 related_posts:
+  - "write-once-run-embedded-in-any-ide"
+  - "hand-ground-coffee-command-line-tools-for-java"
+  - "12-text-tools-for-developers"
+  - "lntellij-idea-selectively-commit-changes-to-a-file"
 frozen: false
 ---
 

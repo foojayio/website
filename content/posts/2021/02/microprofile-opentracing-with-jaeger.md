@@ -13,6 +13,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"
+  - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
+  - "run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty"
+  - "how-to-bring-your-java-microservices-to-the-cloud"
 frozen: false
 ---
 

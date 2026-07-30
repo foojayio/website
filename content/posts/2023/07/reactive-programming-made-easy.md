@@ -14,6 +14,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+  - "foojay-podcast-91"
+  - "tornadoinsight-compatibility-with-tornadovm-sdk-2-0-configuration-guide"
+  - "checking-out-junie-a-coding-agent-by-jetbrains"
 frozen: false
 ---
 

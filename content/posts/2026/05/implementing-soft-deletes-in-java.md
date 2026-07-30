@@ -11,6 +11,10 @@ categories:
   - "Databases"
 tags:
 related_posts:
+  - "contrast-security-joins-foojay-advisory-board-to-accelerate-java-developer-community-growth-raise-security-perspective-pr-news"
+  - "foojay-all-about-java-and-the-openjdk-i-programmer"
+  - "foojay-announces-initial-companies-making-up-its-advisory-board-sd-times"
+  - "foojay-a-place-for-friends-of-openjdk-adt-magazine"
 enlighterjs: true
 frozen: false
 ---
@@ -53,7 +57,7 @@ What we want to do is to change the schema of the users collection from its curr
     "$oid": "59b99dddcfa9a34dcd788604"
   },
   "name": "Thoros of Myr",
-  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="631302160f3c08021a062304020e060c05170b110c0d4d0610">[email&nbsp;protected]</a>",
+  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aedecfdbc2f1c5cfd7cbeec9cfc3cbc1c8dac6dcc1c080cbdd">[email&nbsp;protected]</a>",
   "password": "$2b$12$bkA1MM3UEwZ4N0VpCQY68eMY8HKTHWtk2xI2QnG4MuW5UWHlBrF8G"
 }</pre>
 
@@ -64,7 +68,7 @@ To something that includes a flag regarding the deletion:
     "$oid": "59b99dddcfa9a34dcd788604"
   },
   "name": "Thoros of Myr",
-  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f28293879ead99938b97b295939f979d94869a809d9cdc9781">[email&nbsp;protected]</a>",
+  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="710110041d2e1a1008143116101c141e170519031e1f5f1402">[email&nbsp;protected]</a>",
   "password": "$2b$12$bkA1MM3UEwZ4N0VpCQY68eMY8HKTHWtk2xI2QnG4MuW5UWHlBrF8G",
   "deletedAt": null
 }</pre>
@@ -385,7 +389,7 @@ When using this method we need to make sure to also cascade deletions into relat
     "$oid": "5a9427648b0beebeb69579e7"
   },
   "name": "Mercedes Tyler",
-  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f8959d8a9b9d9c9d8ba78c81949d8ab89e99939d9f95999194d69b9795">[email&nbsp;protected]</a>",
+  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f19c94839294959482ae85889d9483b197909a94969c90989ddf929e9c">[email&nbsp;protected]</a>",
   "movie_id": {
     "$oid": "573a1390f29313caabcd4323"
   },

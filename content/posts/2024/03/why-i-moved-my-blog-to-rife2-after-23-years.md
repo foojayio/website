@@ -14,6 +14,10 @@ categories:
   - "RIFE2"
 tags:
 related_posts:
+  - "getting-started-with-rife2-java-web-framework-v1-0-0"
+  - "web-app-startup-in-3ms-with-rife2-and-graalvm"
+  - "introducing-bld-a-new-pure-java-build-system"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 frozen: false
 ---
 

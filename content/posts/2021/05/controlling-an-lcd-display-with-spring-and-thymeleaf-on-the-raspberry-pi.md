@@ -13,6 +13,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "foojay-podcast-55"
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
+  - "pi4j-welcomes-java-21-on-the-raspberry-pi"
+  - "a-fresh-look-at-embedded-java"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "a-simple-service-with-spring-boot"
+  - "annotation-free-spring"
+  - "better-error-handling-for-your-spring-boot-rest-apis"
+  - "minimize-costs-by-utilizing-cloud-storage-with-spring-data-eclipse-store"
 enlighterjs: true
 frozen: false
 ---

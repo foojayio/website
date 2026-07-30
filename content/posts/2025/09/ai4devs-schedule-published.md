@@ -11,6 +11,10 @@ categories:
   - "Conference"
 tags:
 related_posts:
+  - "research-measuring-energy-consumption-in-programming-languages-for-ai-applications"
+  - "jc-ai-newsletter-4"
+  - "2023-software-conferences-in-the-philippines"
+  - "spring-ai-agents-no-second-runtime"
 frozen: false
 ---
 

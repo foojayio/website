@@ -14,6 +14,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
+  - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
+  - "intro-to-the-boxlang-formatter"
 frozen: false
 ---
 

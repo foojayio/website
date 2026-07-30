@@ -12,6 +12,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "best-practices-for-deploying-mongodb-in-kubernetes"
+  - "building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb"
+  - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"
+  - "building-an-ai-semantic-movie-recommender-with-vector-search"
 frozen: false
 ---
 

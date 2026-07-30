@@ -11,6 +11,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "5-great-reasons-to-use-jooq"
+  - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "sboms-and-software-composition-analysis"
 frozen: false
 ---
 

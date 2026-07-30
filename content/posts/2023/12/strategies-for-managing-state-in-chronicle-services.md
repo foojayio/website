@@ -17,6 +17,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "6-considerations-when-building-high-performance-java-microservices-with-eda"
+  - "automatically-creating-microservices-architecture-diagrams"
+  - "billions-of-messages-tcp-ip"
+  - "preserving-software-continuity"
 frozen: false
 ---
 

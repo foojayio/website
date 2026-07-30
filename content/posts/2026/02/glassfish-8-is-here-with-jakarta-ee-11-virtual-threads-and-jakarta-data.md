@@ -14,6 +14,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "glassfish-8-0-2-released"
+  - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
+  - "glassfish-is-rolling-forward-whats-new"
+  - "glassfish-embedded-a-simple-way-to-run-jakarta-ee-apps"
 frozen: false
 ---
 

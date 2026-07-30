@@ -12,6 +12,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "how-behaviour-driven-development-works-well-with-event-driven-architectures"
+  - "the-evolution-of-apis-from-restful-to-event-driven"
+  - "learn-how-to-develop-event-driven-architectures"
+  - "event-driven-architecture-and-change-data-capture-made-easy"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "fuchs-2024-fepcos-j-multithreaded-server"
+  - "fuchs-2023-fepcos-j-02"
+  - "fuchs-2024-video-fepcos_j-client-server-application-in-java"
+  - "fuchs-2023-fepcos-j-03-native-executables"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,9 @@ categories:
   - "Trip Reports"
 tags:
 related_posts:
+  - "serverless-is-the-new-timeshare"
+  - "migrating-monoliths-to-microservices-in-practice"
+  - "effectively-bridging-the-devops-rd-gap-without-sacrificing-reliability"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "foojay-podcast-68"
+  - "java-24-rolls-out-today-find-out-why-its-aptly-named"
+  - "java-24-whats-new"
+  - "are-java-security-updates-important"
 frozen: false
 ---
 

@@ -12,6 +12,10 @@ categories:
   - "Observability"
 tags:
 related_posts:
+  - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
+  - "effective-coding-with-java-observability"
+  - "foojay-podcast-29"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 frozen: false
 ---
 

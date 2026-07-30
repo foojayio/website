@@ -12,6 +12,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
+  - "foojay-podcast-83"
+  - "azul-brings-java-from-edge-to-cloud"
+  - "foojay-podcast-9"
 frozen: false
 ---
 

@@ -12,10 +12,14 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "javafx-links-of-july-2024"
+  - "javafx-links-of-june-2024"
+  - "javafx-links-of-may-2024"
+  - "javafx-links-of-june-2026"
 frozen: false
 ---
 
-Here is the overview of the JavaFX LinksOfTheMonth of August 2024, published on [jfx-central.com](https://www.jfx-central.com/) during this month. Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via links@jfx-central.com.
+Here is the overview of the JavaFX LinksOfTheMonth of August 2024, published on [jfx-central.com](https://www.jfx-central.com/) during this month. Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
 
 Core {#h2-0-core}
 -----------------

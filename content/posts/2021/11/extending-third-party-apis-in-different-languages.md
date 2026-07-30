@@ -13,6 +13,10 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "kotlin-delegation"
+  - "annotation-free-spring"
+  - "debugging-tutorial-1-introduction-conditional-breakpoints-set-value"
+  - "foojay-podcast-53"
 enlighterjs: true
 frozen: false
 ---

@@ -11,6 +11,10 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "vs-code-getting-better-and-better-for-java"
+  - "vs-code-java-july-2021-update-new-testing-experience-maven-improvements-and-product-roadmap-progress-update"
+  - "vs-code-java-august-updates-springone-updates-ux-improvements-community-feedback"
+  - "effective-cloud-native-development-open-liberty-vs-code"
 frozen: false
 ---
 

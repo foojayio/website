@@ -13,6 +13,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "blockhound-how-it-works"
+  - "chopping-monolith"
+  - "how-to-beautify-your-github-repo"
+  - "running-your-database-on-openshift-and-codeready-containers"
 enlighterjs: true
 frozen: false
 ---

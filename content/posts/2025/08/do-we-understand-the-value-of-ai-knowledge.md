@@ -14,6 +14,10 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "ai-newsletter-1"
+  - "jc-ai-newsletter-2"
+  - "foojay-podcast-65"
+  - "book-review-tidy-first"
 frozen: false
 ---
 

@@ -12,6 +12,10 @@ categories:
   - "Kotlin"
 tags:
 related_posts:
+  - "kotlin-delegation"
+  - "an-example-of-overengineering-keep-it-wet"
+  - "a-simple-service-with-spring-boot"
+  - "replacing-postman-with-the-jetbrains-http-client"
 enlighterjs: true
 frozen: false
 ---

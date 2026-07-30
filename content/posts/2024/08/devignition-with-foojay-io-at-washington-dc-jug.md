@@ -13,6 +13,9 @@ categories:
   - "Events"
 tags:
 related_posts:
+  - "foojay-podcast-49"
+  - "foojay-podcast-50"
+  - "foojay-podcast-51"
 frozen: false
 ---
 

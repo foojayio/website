@@ -11,6 +11,9 @@ categories:
   - "Events"
 tags:
 related_posts:
+  - "trip-report-dubai-jug-2nd-meetup"
+  - "report-of-my-small-tour-deurope"
+  - "springone-tlv-world-tour-trip-report"
 frozen: false
 ---
 

@@ -15,6 +15,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "5-minute-azure-survey-java-ee-jakarta-ee-and-microprofile"
+  - "are-java-jakarta-ee-application-servers-heavy"
+  - "new-features-in-jakarta-ee-11-with-examples"
 frozen: false
 ---
 

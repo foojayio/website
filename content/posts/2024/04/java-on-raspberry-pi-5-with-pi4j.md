@@ -15,6 +15,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "controlling-electronics-with-jbang-on-the-raspberry-pi"
+  - "java-in-education-combining-java-with-raspberry-pi-and-the-pi4j-library"
+  - "reading-the-temperature-humidity-and-pressure-from-a-bme280-sensor-with-java-pi4j-i2c-spi-and-jbang"
+  - "pi4j-welcomes-java-21-on-the-raspberry-pi"
 frozen: false
 ---
 

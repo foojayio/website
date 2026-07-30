@@ -11,6 +11,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "java-bytecode-simplified-journey-to-the-wonderland-part-1"
+  - "what-is-jvm-bytecode"
+  - "hardware-acceleration-for-java-tornadovm-can-do-it"
+  - "java-bytecode-simplified-journey-to-the-wonderland-part-3"
 enlighterjs: true
 frozen: false
 ---

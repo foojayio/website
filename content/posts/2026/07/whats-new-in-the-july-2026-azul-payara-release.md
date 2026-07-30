@@ -13,6 +13,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "issues-with-old-glassfish-server-upgrade-to-eclipse-glassfish"
+  - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"
+  - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
+  - "payara-cloud-hackathon-is-open-for-sign-ups"
 frozen: false
 ---
 

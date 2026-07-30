@@ -14,6 +14,10 @@ categories:
   - "Vaadin"
 tags:
 related_posts:
+  - "browserless-testing-of-vaadin-applications-with-karibu-testing"
+  - "build-web-apps-in-pure-java-with-vaadin-flow"
+  - "crafting-your-own-railway-display-with-java"
+  - "foojay-podcast-41"
 enlighterjs: true
 frozen: false
 ---
@@ -147,7 +151,7 @@ public abstract class KaribuTest {
     @Autowired
     protected ApplicationContext ctx;
     // Default user and role
-    private String username = "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4f25202721612b202a0f3b2a3c3b612c2022">[email&nbsp;protected]</a>";
+    private String username = "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f05000701410b000a2f1b0a1c1b410c0002">[email&nbsp;protected]</a>";
     private String name = "John Doe";
     private String role = Roles.ADMIN;
     private OAuth2AuthenticationToken oAuth2AuthenticationToken;

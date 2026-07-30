@@ -14,6 +14,10 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "quick-start-with-machine-learning-in-java"
+  - "visual-recognition-for-chess-with-deep-learning-in-java-on-android"
+  - "deep-learning-in-java-for-drug-discovery"
+  - "foojay-podcast-56"
 enlighterjs: true
 frozen: false
 ---

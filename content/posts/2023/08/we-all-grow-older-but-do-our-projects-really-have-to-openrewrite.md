@@ -13,6 +13,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "foojay-podcast-19"
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "everyday-shortcuts-in-intellij-idea"
+  - "fix-java-security-issues-while-coding-in-intellij-idea"
+  - "intellij-idea-beyond-the-basics"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 enlighterjs: true
 frozen: false
 ---

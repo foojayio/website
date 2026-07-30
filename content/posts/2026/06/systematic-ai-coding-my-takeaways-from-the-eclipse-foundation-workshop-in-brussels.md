@@ -12,6 +12,10 @@ categories:
   - "Events"
 tags:
 related_posts:
+  - "foojay-podcast-99"
+  - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
+  - "agentic-was-everywhere-at-money20-20-amsterdam-once-i-started-looking"
+  - "ai-gives-time-not-confidence-developer-productivity-toolkit"
 frozen: false
 ---
 

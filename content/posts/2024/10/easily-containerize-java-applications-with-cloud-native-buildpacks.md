@@ -14,6 +14,9 @@ categories:
   - "Kubernetes"
 tags:
 related_posts:
+  - "container-awareness-for-java"
+  - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
+  - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"
 enlighterjs: true
 frozen: false
 ---

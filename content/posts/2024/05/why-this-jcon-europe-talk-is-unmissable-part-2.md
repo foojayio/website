@@ -12,6 +12,9 @@ categories:
   - "Jakarta EE"
 tags:
 related_posts:
+  - "free-foojay-io-tickets-for-jcon-europe-cologne"
+  - "foojay-podcast-48"
+  - "why-this-jcon-europe-talk-is-unmissable-part-1"
 frozen: false
 ---
 

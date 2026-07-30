@@ -12,6 +12,10 @@ categories:
   - "Neo4J"
 tags:
 related_posts:
+  - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"
+  - "skps-definitive-primer-failures-pitfalls-and-disadvantages-of-microservices"
+  - "book-review-quarkus-for-spring-developers"
+  - "journeys-in-java-level-10-service-discovery-with-eureka"
 enlighterjs: true
 frozen: false
 ---

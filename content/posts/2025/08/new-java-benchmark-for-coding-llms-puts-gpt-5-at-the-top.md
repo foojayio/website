@@ -15,6 +15,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "brokk-for-java-developers"
+  - "5-things-you-probably-didnt-know-about-java-concurrency"
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "6-considerations-when-building-high-performance-java-microservices-with-eda"
 frozen: false
 ---
 

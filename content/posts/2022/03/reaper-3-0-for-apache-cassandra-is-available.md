@@ -14,6 +14,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "debugging-ram-java-garbage-collection-java-heap-deep-dive-part-1"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "virtual-tour-is-the-biggest-project-yet-for-the-new-java-community-platform-foojay-dzone"
+  - "fast-jms-for-apache-pulsar-modernize-and-reduce-costs-with-blazing-performance"
 frozen: false
 ---
 

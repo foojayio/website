@@ -19,6 +19,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
+  - "boxlang-1-14-0-query-transformers-take-full-control-of-your-query-results"
+  - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
+  - "boxlang-1-14-0-introducing-inner-classes"
 enlighterjs: true
 frozen: false
 ---
@@ -334,10 +338,10 @@ The compiler now emits a clear validation error when an inner class is declared 
 Remote methods (marked` access="remote"`) now automatically deserialize JSON string arguments into `Struct` or `Array` values when the argument type is declared as such.
 
 <pre class="EnlighterJSRAW" data-enlighter-language="java">remote function saveUser( required struct userData ) {
-    // Called via HTTP with userData={"name":"Alice","email":"<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="debfb2b7bdbb9ebba6bfb3aeb2bbf0bdb1b3">[email&nbsp;protected]</a>"}
+    // Called via HTTP with userData={"name":"Alice","email":"<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bddcd1d4ded8fdd8c5dcd0cdd1d893ded2d0">[email&nbsp;protected]</a>"}
     // userData is automatically deserialized to a BoxLang Struct:
     writeOutput( userData.name )   // Alice
-    writeOutput( userData.email )  // <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a5b5653595f7a5f425b574a565f14595557">[email&nbsp;protected]</a>
+    writeOutput( userData.email )  // <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="63020f0a000623061b020e130f064d000c0e">[email&nbsp;protected]</a>
 }
 </pre>
 

@@ -15,6 +15,9 @@ categories:
   - "Snyk"
 tags:
 related_posts:
+  - "github-actions-with-java-part-1"
+  - "github-actions-with-java-part-2"
+  - "lights-camera-action-github-actions-with-java-part-3"
 enlighterjs: true
 frozen: false
 ---
@@ -150,7 +153,7 @@ Since we only want to release the package when the build job and both security j
          java-version: 17
      - name: Set Git user
        run: |
-         git config user.email "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1a7d727b796e737574695a7868737b746c7f68777f7f68347476">[email&nbsp;protected]</a>"
+         git config user.email "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="284f40494b5c4147465b684a5a4149465e4d5a454d4d5a064644">[email&nbsp;protected]</a>"
          git config user.name "GitHub Actions"
      - name: Publish JAR
        run: mvn -B release:prepare release:perform -DskipTests

@@ -13,6 +13,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "8-best-practices-to-prevent-sql-injection-attacks"
+  - "are-critical-vulnerabilities-lurking-in-your-java-ecosystem"
+  - "avoid-java-serialization"
 enlighterjs: true
 frozen: false
 ---

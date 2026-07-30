@@ -13,6 +13,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+  - "java-on-azure-tooling-update-july-2022"
+  - "github-actions-with-java-part-2"
+  - "debugging-tutorial-1-introduction-conditional-breakpoints-set-value"
 enlighterjs: true
 frozen: false
 ---
@@ -87,13 +91,13 @@ Given this history for a file, consisting of the important change as well as a c
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">❯ git log
 commit 301b7eca0eb57737e160f5d2d16208f65c4156d6 (HEAD -&gt; master)
-Author: Benjamin Muskalla &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="294b445c5a4248454548694e5b484d454c074a4644">[email&nbsp;protected]</a>&gt;
+Author: Benjamin Muskalla &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2a48475f59414b46464b6a4d584b4e464f04494547">[email&nbsp;protected]</a>&gt;
 Date:   Tue Jan 12 11:38:40 2021 +0100
 
     Reformat all source files
 
 commit bd3fca50ee1659e740e2f6744d95e737418f1f40
-Author: Benjamin Muskalla &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d1f10080e161c11111c3d1a0f1c191118531e1210">[email&nbsp;protected]</a>&gt;
+Author: Benjamin Muskalla &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="680a051d1b0309040409280f1a090c040d460b0705">[email&nbsp;protected]</a>&gt;
 Date:   Tue Jan 12 11:38:12 2021 +0100
 
     Important change</pre>

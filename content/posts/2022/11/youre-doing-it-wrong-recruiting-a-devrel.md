@@ -12,6 +12,9 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "book-review-help-your-boss-help-you"
+  - "discuss-problem-not-solution"
+  - "book-review-java-by-comparison"
 frozen: false
 ---
 

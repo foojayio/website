@@ -15,6 +15,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "better-error-handling-for-your-spring-boot-rest-apis"
+  - "new-book-taming-thymeleaf"
+  - "controlling-an-lcd-display-with-spring-and-thymeleaf-on-the-raspberry-pi"
+  - "foojay-podcast-67"
 frozen: false
 ---
 

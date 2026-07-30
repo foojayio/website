@@ -13,6 +13,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "jep-411-what-it-means-for-javas-security-model"
+  - "why-jep-411-will-have-a-negative-impact-on-java-security"
+  - "log4shell-leak4j"
+  - "quick-fire-java-java-after-log4j"
 enlighterjs: true
 frozen: false
 ---
@@ -110,7 +114,7 @@ PGP key:
         bits:        2048
         fingerprint: 0xF3A90E6B10E809F851AB4FC54CC08E7F47C3EC76
         create date: Wed Sep 18 02:51:23 CEST 2013
-        uids:        [Brett Wooldridge (Sonatype) &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4022322534346e372f2f2c24322924272500272d21292c6e232f2d">[email&nbsp;protected]</a>&gt;]</pre>
+        uids:        [Brett Wooldridge (Sonatype) &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="88eafaedfcfca6ffe7e7e4ecfae1ecefedc8efe5e9e1e4a6ebe7e5">[email&nbsp;protected]</a>&gt;]</pre>
 
 However, none of this amounts to much. Signing doesn't assert the identity of the provider. It tells that a private key with the referenced email signed it with a private key with the referenced email. Nothing prevents a malicious actor from creating another private key with the same email or a similar one.
 

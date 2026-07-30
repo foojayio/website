@@ -11,6 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "liquid-glass-material-3-and-a-lot-of-plumbing"
+  - "metal-and-skins"
+  - "navigating-the-challenges-of-modern-software-development-an-exclusive-interview-with-shai-almog"
+  - "production-horrors-handling-disasters-public-debrief"
 enlighterjs: true
 frozen: false
 ---

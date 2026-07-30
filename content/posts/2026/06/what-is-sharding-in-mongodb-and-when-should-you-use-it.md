@@ -11,6 +11,9 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "contrast-security-joins-foojay-advisory-board-to-accelerate-java-developer-community-growth-raise-security-perspective-pr-news"
+  - "foojay-all-about-java-and-the-openjdk-i-programmer"
+  - "foojay-announces-initial-companies-making-up-its-advisory-board-sd-times"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "transitioning-to-java-my-first-book"
+  - "building-javafx-with-gradle"
+  - "javafx-templates-for-desktop-applications"
+  - "creating-a-javafx-world-clock-from-scratch-part-3"
 enlighterjs: true
 frozen: false
 ---
@@ -132,7 +136,7 @@ Verify external modules located in file:///Users/cdea/projects/worldclock/.bach/
 Verified 3 external modules
 Build 1 main module: worldclock
   javac    --module worldclock --module-version 17-bach --module-source-path worldclock=src/main/java --module-path .bach/e[...]
-  jar      --create --file .bach/workspace/modules/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d0a120f11191e11121e163d4c4a501f1c1e1553171c0f">[email&nbsp;protected]</a> -C .bach/workspace/classes-main-16/worldclock . -[...]
+  jar      --create --file .bach/workspace/modules/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9ced6cbd5dddad5d6dad2f9888e94dbd8dad197d3d8cb">[email&nbsp;protected]</a> -C .bach/workspace/classes-main-16/worldclock . -[...]
 Assemble custom runtime image
   jlink    --add-modules worldclock --module-path .bach/workspace/modules:.bach/external-modules --launcher worldclock=worl[...]
 Build took 3.739s

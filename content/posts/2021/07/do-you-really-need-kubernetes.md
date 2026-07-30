@@ -12,6 +12,10 @@ categories:
   - "Kubernetes"
 tags:
 related_posts:
+  - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"
+  - "creating-a-kubernetes-operator-in-java"
+  - "securing-microservices-with-auth0-and-microprofile-in-kubernetes"
+  - "warm-up-fast-run-lean-vertical-scaling-for-java-on-kubernetes-with-azul-prime-and-kedify"
 frozen: false
 ---
 

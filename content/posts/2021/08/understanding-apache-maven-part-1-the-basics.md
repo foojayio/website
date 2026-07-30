@@ -12,6 +12,9 @@ categories:
   - "Maven"
 tags:
 related_posts:
+  - "understanding-apache-maven-part-2-pom-hierarchy"
+  - "a-simple-service-with-spring-boot"
+  - "getting-started-with-jakarta-ee-9-hello-world"
 frozen: false
 ---
 

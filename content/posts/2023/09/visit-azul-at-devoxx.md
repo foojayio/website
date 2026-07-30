@@ -13,6 +13,9 @@ categories:
   - "Events"
 tags:
 related_posts:
+  - "book-announcement-openjdk-migration-guide-for-dummies"
+  - "is-openjdk-just-a-drop-in-replacement"
+  - "foojay-podcast-28"
 frozen: false
 ---
 

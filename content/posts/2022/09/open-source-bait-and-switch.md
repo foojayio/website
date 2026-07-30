@@ -12,6 +12,9 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "effectively-bridging-the-devops-rd-gap-without-sacrificing-reliability"
+  - "fail-fast-best-strategy-for-reliable-software"
+  - "debugging-gson-moshi-and-jackson-json-frameworks-in-production"
 frozen: false
 ---
 

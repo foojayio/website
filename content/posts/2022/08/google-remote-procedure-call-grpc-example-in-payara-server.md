@@ -15,6 +15,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "a-simple-service-with-spring-boot"
+  - "easy-jakarta-ee-integration-testing"
 enlighterjs: true
 frozen: false
 ---

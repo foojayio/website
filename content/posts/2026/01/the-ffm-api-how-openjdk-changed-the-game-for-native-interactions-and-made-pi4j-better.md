@@ -13,6 +13,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "foojay-podcast-83"
+  - "project-panama-for-newbies-part-4"
+  - "writing-c-code-in-java"
+  - "project-panama-for-newbies-part-1"
 enlighterjs: true
 frozen: false
 ---

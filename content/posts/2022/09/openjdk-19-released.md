@@ -12,6 +12,9 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "foojay-podcast-5"
+  - "what-the-heck-is-project-loom-for-java"
+  - "what-can-we-expect-in-openjdk-19"
 frozen: false
 ---
 

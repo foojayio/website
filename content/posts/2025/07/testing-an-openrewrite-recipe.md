@@ -12,6 +12,10 @@ categories:
   - "OpenRewrite"
 tags:
 related_posts:
+  - "are-critical-vulnerabilities-lurking-in-your-java-ecosystem"
+  - "authoring-an-openrewrite-recipe"
+  - "foojay-podcast-12"
+  - "foojay-podcast-19"
 enlighterjs: true
 frozen: false
 ---

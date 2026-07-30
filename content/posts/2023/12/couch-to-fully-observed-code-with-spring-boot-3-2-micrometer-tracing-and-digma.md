@@ -15,6 +15,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
+  - "digma-apache-apisix-and-openvalue-sponsor-foojay-io-at-jfall-2023"
+  - "effective-coding-with-java-observability"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 frozen: false
 ---
 

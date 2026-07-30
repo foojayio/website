@@ -18,6 +18,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "how-to-use-java-dtos-to-stay-secure"
+  - "best-practices-for-managing-java-dependencies"
+  - "java-security-log4j-the-securitymanager-and-funding"
+  - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
 frozen: false
 ---
 

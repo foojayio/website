@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "pitest-do-you-test-your-tests"
+  - "we-all-grow-older-but-do-our-projects-really-have-to-openrewrite"
+  - "spring-6-1-restclient"
+  - "tornadovm-for-risc-v-accelerators"
 enlighterjs: true
 frozen: false
 ---

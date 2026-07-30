@@ -14,6 +14,9 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "5-things-you-probably-didnt-know-about-java-concurrency"
+  - "6-considerations-when-building-high-performance-java-microservices-with-eda"
+  - "7-functional-programming-techniques-in-java-a-primer"
 frozen: false
 ---
 

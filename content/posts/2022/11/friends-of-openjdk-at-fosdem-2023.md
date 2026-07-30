@@ -11,6 +11,9 @@ categories:
   - "Events"
 tags:
 related_posts:
+  - "foojay-at-fosdem-2022-on-youtube"
+  - "friends-of-openjdk-at-fosdem-2022"
+  - "friends-of-openjdk-at-fosdem-2021"
 frozen: false
 ---
 

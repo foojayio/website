@@ -13,6 +13,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "building-java-microservices-with-the-repository-pattern"
+  - "building-rest-apis-in-java-with-spring-boot"
+  - "building-systems-that-know-why-they-exist-when-data-logic-and-intent-finally-align"
+  - "clean-and-modular-java-a-hexagonal-architecture-approach"
 enlighterjs: true
 frozen: false
 ---

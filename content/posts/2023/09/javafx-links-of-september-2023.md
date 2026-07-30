@@ -12,6 +12,10 @@ categories:
   - "JDK21"
 tags:
 related_posts:
+  - "javafx-links-of-august-2023"
+  - "javafx-links-of-july-2023"
+  - "javafx-links-of-june-2023"
+  - "javafx-links-of-june-2026"
 frozen: false
 ---
 

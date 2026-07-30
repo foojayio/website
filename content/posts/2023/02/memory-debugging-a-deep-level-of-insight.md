@@ -12,6 +12,9 @@ categories:
   - "IntelliJ IDEA"
 tags:
 related_posts:
+  - "debugging-streams-and-collections"
+  - "the-massive-hidden-power-of-breakpoints"
+  - "debugging-program-control-flow"
 frozen: false
 ---
 

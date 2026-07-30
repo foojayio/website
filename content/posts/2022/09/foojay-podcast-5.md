@@ -18,6 +18,10 @@ categories:
   - "Sealed Classes"
 tags:
 related_posts:
+  - "what-the-heck-is-project-loom-for-java"
+  - "what-can-we-expect-in-openjdk-19"
+  - "thinking-about-massive-throughput-meet-virtual-threads"
+  - "foojay-podcast-92"
 frozen: false
 ---
 

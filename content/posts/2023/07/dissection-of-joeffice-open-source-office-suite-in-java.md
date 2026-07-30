@@ -13,6 +13,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "write-once-run-embedded-in-any-ide"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "deep-learning-in-java-for-drug-discovery"
+  - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
 frozen: false
 ---
 

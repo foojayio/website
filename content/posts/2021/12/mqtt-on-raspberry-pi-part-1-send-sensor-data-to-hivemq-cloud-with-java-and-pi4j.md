@@ -15,6 +15,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "building-openjdk-from-github-sources-on-64-bit-raspberry-pi"
+  - "controlling-an-lcd-display-with-spring-and-thymeleaf-on-the-raspberry-pi"
+  - "creating-a-snake-game-with-javafx-fxgl-in-three-pair-programming-sessions"
+  - "mqtt-on-raspberry-pi-part-2-using-mqtt-and-raspberry-pi-to-visualize-sensor-data-on-a-tilesfx-dashboard"
 enlighterjs: true
 frozen: false
 ---

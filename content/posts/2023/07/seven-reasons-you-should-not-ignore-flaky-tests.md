@@ -12,6 +12,10 @@ categories:
   - "Testing"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "9-outdated-ideas-about-java"
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "three-key-elements-to-incorporate-into-your-flaky-test-remediation-approach"
 frozen: false
 ---
 

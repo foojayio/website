@@ -11,6 +11,9 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "jreleaser-0-7-0-released"
+  - "jreleaser-0-6-0-released"
+  - "jreleaser-0-5-0-released"
 frozen: false
 ---
 

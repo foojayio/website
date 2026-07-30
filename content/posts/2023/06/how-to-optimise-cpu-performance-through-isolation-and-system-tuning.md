@@ -12,6 +12,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "the-more-you-say-the-less-people-remember"
+  - "automatically-creating-microservices-architecture-diagrams"
+  - "building-custom-solutions-vs-buy-and-build-software"
+  - "how-is-leyden-improving-java-performance-part-3-of-3"
 frozen: false
 ---
 

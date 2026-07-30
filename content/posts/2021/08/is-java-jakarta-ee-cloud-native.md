@@ -14,6 +14,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
+  - "ignore-infrastructure-concentrate-on-code-with-jakarta-ee-and-payara-cloud"
+  - "how-to-bring-your-java-microservices-to-the-cloud"
+  - "enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs"
 frozen: false
 ---
 

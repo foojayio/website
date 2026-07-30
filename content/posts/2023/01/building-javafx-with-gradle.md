@@ -13,6 +13,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "a-better-way-to-use-gradle-with-github-actions"
+  - "compilation-avoidance-with-gradle"
+  - "introducing-gradle-test-suites"
+  - "creating-a-javafx-world-clock-from-scratch-part-4"
 enlighterjs: true
 frozen: false
 ---
@@ -199,7 +203,7 @@ jlink {
         }
         if (installerType == 'deb') {
             installerOptions += [
-                '--linux-deb-maintainer', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="036a6d656c43627677766e6c2d606b">[email&nbsp;protected]</a>'
+                '--linux-deb-maintainer', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d34333b321d3c2829283032733e35">[email&nbsp;protected]</a>'
             ]
         }
         if (installerType == 'rpm') {
@@ -395,7 +399,7 @@ runtime {
         }
         if (installerType == 'deb') {
             installerOptions += [
-                '--linux-deb-maintainer', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="355c5b535a7554404140585a1b565d">[email&nbsp;protected]</a>'
+                '--linux-deb-maintainer', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb92959d94bb9a8e8f8e9694d59893">[email&nbsp;protected]</a>'
             ]
         }
         if (installerType == 'rpm') {

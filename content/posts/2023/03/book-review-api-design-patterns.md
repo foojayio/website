@@ -14,6 +14,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "book-review-practical-design-patterns-for-java-developers"
+  - "book-review-seriously-good-software"
+  - "book-review-help-your-boss-help-you"
+  - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
 frozen: false
 ---
 

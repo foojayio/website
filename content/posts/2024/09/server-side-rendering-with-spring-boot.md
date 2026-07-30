@@ -12,6 +12,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "a-short-history-of-ajax-and-ssr"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "9-outdated-ideas-about-java"
+  - "augmenting-the-client-with-alpine-js"
 enlighterjs: true
 frozen: false
 ---

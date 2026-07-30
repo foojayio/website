@@ -17,6 +17,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "journeys-in-java-level-9-docker-compose-all-the-things"
+  - "journeys-in-java-level-8-add-mongodb-to-spring-cloud-config"
+  - "journeys-in-java-level-7-externalize-microservice-configuration"
+  - "spring-boot-api-documentation-redocusaurus"
 enlighterjs: true
 frozen: false
 ---

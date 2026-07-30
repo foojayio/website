@@ -13,6 +13,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "starting-apache-kafka-on-windows-10-kafka-v3-4"
+  - "clean-shutdown-of-spring-boot-applications"
+  - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
+  - "micrometer-prometheus-in-spring-boot-kafka-burger-orders"
 enlighterjs: true
 frozen: false
 ---

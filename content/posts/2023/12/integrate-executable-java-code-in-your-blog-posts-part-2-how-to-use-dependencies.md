@@ -12,6 +12,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "integrate-executable-java-code-in-your-blog-posts"
+  - "how-to-submit-your-next-article-on-foojay-io"
+  - "join-slack-com-t-foojay-signup"
+  - "interview-with-gokul-chandrasekaran-the-creator-of-jdoodle"
 jdoodle: true
 enlighterjs: true
 frozen: false

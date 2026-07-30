@@ -13,6 +13,9 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "boxlang-1-7-0-delivers-streaming-distributed-caching-and-enhanced-jvm-performance"
+  - "boxlang-v1-6-0-performance-ai-powered-docs-and-advanced-async-monitoring-2"
+  - "foojay-podcast-76"
 enlighterjs: true
 frozen: false
 ---
@@ -85,7 +88,7 @@ The Redis module works seamlessly with BoxLang's standard caching approaches:
 userData = {
     userID: 123,
     name: "John Doe",
-    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="573d383f3917322f363a273b327934383a">[email&nbsp;protected]</a>",
+    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d0babfb8be90b5a8b1bda0bcb5feb3bfbd">[email&nbsp;protected]</a>",
     preferences: { theme: "dark", language: "en" }
 };
 
@@ -432,4 +435,4 @@ Ready to unlock bx-ldap and other premium modules? Choose your plan:
 
 Need help choosing the right plan or have questions? **Contact us directly:**
 
-[📧 **\[email protected\]**](/cdn-cgi/l/email-protection#2b42454d446b494453474a454c054244 "📧 **info@boxlang.io**")
+[📧 **\[email protected\]**](/cdn-cgi/l/email-protection#e48d8a828ba4868b9c88858a83ca8d8b "📧 **info@boxlang.io**")

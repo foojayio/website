@@ -15,6 +15,9 @@ categories:
   - "Kotlin"
 tags:
 related_posts:
+  - "new-user-interface-for-jfx-central-the-home-for-all-javafx-information-part-2"
+  - "book-review-learn-javafx-game-and-app-development-with-fxgl-17"
+  - "foojay-podcast-25"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "automatically-creating-microservices-architecture-diagrams"
+  - "challenges-when-developing-a-gui-for-fix"
+  - "chronicle-fix-designed-not-to-skip-a-message-even-if-your-data-centre-fails"
+  - "reducing-tail-latencies-with-chronicle-queue-enterprise"
 frozen: false
 ---
 

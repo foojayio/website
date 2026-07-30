@@ -13,6 +13,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "when-not-to-use-event-driven-architecture-eda"
+  - "unified-event-driven-architecture-for-the-cloud-native-enterprise"
+  - "why-developers-should-use-apache-pulsar"
+  - "full-stream-ahead-astra-streaming-powered-by-apache-pulsar"
 frozen: false
 ---
 

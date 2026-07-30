@@ -13,6 +13,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "can-java-jakarta-ee-do-microservices"
+  - "do-java-jakarta-ee-standards-matter"
+  - "easy-jakarta-ee-integration-testing"
+  - "enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs"
 frozen: false
 ---
 

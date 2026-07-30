@@ -12,6 +12,10 @@ categories:
   - "Vaadin"
 tags:
 related_posts:
+  - "build-web-apps-in-pure-java-with-vaadin-flow"
+  - "delegation-vs-inheritance-in-graphical-user-interfaces"
+  - "new-book-practical-vaadin"
+  - "securing-vaadin-applications-with-microsoft-entra"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,10 @@ categories:
   - "Foojay"
 tags:
 related_posts:
+  - "foojay-podcast-6"
+  - "foojay-a-place-for-friends-of-openjdk"
+  - "how-to-submit-your-next-article-on-foojay-io"
+  - "foojay-mastodon-service-here-it-is"
 frozen: false
 ---
 

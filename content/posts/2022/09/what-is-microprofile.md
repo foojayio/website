@@ -14,6 +14,9 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "can-java-jakarta-ee-do-microservices"
+  - "evolution-of-microservices"
+  - "microprofile-metrics-with-prometheus-and-grafana"
 frozen: false
 ---
 

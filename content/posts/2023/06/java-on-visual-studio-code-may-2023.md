@@ -13,6 +13,9 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "say-goodbye-to-project-files-in-visual-studio-code"
+  - "two-million-java-developers-on-visual-studio-code-november-2022-update"
+  - "boldness-in-refactoring"
 frozen: false
 ---
 

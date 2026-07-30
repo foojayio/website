@@ -14,6 +14,10 @@ categories:
   - "DataStax"
 tags:
 related_posts:
+  - "full-stream-ahead-astra-streaming-powered-by-apache-pulsar"
+  - "why-developers-should-use-apache-pulsar"
+  - "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "bring-streaming-to-apache-cassandra-with-apache-pulsar"
 frozen: false
 ---
 

@@ -12,6 +12,10 @@ categories:
   - "Testing"
 tags:
 related_posts:
+  - "foojay-podcast-26"
+  - "seven-reasons-you-should-not-ignore-flaky-tests"
+  - "why-i-prefer-trunk-based-development"
+  - "testbox-7-real-time-feedback-a-browser-based-ide-and-modern-testing-workflows-on-the-jvm"
 frozen: false
 ---
 

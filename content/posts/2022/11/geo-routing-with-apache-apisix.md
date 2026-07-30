@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "chopping-monolith"
+  - "blockhound-how-it-works"
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "dry-your-apache-apisix-config"
 enlighterjs: true
 frozen: false
 ---

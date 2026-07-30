@@ -14,6 +14,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "issues-with-old-glassfish-server-upgrade-to-eclipse-glassfish"
+  - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
+  - "getting-started-with-apache-camel-on-jakarta-ee-10"
+  - "exploring-java-records-in-a-jakarta-ee-context"
 enlighterjs: true
 frozen: false
 ---

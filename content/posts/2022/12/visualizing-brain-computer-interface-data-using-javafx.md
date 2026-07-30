@@ -14,6 +14,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "beginning-javafx-with-intellij"
+  - "creating-cad-applications-with-java-and-javafx"
+  - "high-performance-rendering-in-javafx"
+  - "wordish-with-javafx-part-5"
 frozen: false
 ---
 

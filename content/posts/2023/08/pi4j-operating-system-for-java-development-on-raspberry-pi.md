@@ -16,6 +16,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "controlling-electronics-with-jbang-on-the-raspberry-pi"
+  - "java-17-on-the-raspberry-pi"
+  - "java-in-education-combining-java-with-raspberry-pi-and-the-pi4j-library"
+  - "first-test-of-java-on-banana-pi-arm-and-risc-v-plus-a-blinking-led-with-pi4j"
 frozen: false
 ---
 

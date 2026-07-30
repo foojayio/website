@@ -13,6 +13,9 @@ categories:
   - "Surveys"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "transitioning-to-java-my-first-book"
+  - "42-practical-java-design-patterns-builder-and-more"
 frozen: false
 ---
 

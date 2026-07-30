@@ -11,6 +11,9 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-1"
+  - "announcing-sustainability-for-java-developers-a-new-collaborative-guide-from-the-foojay-io-community"
+  - "5-things-you-probably-didnt-know-about-java-concurrency"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,10 @@ categories:
   - "Vaadin"
 tags:
 related_posts:
+  - "build-web-apps-in-pure-java-with-vaadin-flow"
+  - "create-a-crud-ui-in-pure-java"
+  - "hilla-1-0-a-new-frontend-framework-for-springboot"
+  - "securing-vaadin-applications-with-microsoft-entra"
 enlighterjs: true
 frozen: false
 ---

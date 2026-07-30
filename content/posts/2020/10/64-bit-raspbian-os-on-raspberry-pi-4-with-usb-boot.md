@@ -13,6 +13,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "using-the-raspberry-pi-sense-hat-with-pi4j-drivers"
+  - "bringing-raspberry-pi-development-to-quarkus-with-the-quarkus-pi4j-extension"
+  - "java-21-on-raspberry-pi-zero-2-is-back-in-business"
+  - "demo-application-with-crac-and-loading-data-in-memory"
 enlighterjs: true
 frozen: false
 ---

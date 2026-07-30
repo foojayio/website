@@ -12,6 +12,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+  - "prevent-ldap-injection-in-java-with-springboot"
+  - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
+  - "spring-i-o-2026-field-notes-from-barcelona"
 enlighterjs: true
 frozen: false
 ---

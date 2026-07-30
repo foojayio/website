@@ -12,6 +12,9 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
+  - "introducing-the-openjdk-coordinated-restore-at-checkpoint-project"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
 enlighterjs: true
 frozen: false
 ---

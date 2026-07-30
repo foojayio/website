@@ -13,6 +13,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "relearning-java-thread-primitives"
+  - "boldness-in-refactoring"
+  - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"
+  - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
 enlighterjs: true
 frozen: false
 ---
@@ -241,7 +245,7 @@ User.builder("Name", "/cdn-cgi/l/email-protection")
 
 That is just the start... The schema includes a date. Dates are a painful prospect in JSON, the standardization is poor and fraught with issues. The schema also includes a gender field which is effectively an enum. This is all converted to type-safe semantics using common Java classes such as LocalDate:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">User u = User.builder("Name", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8cdc5c9c1c4e8ccc7c5c9c1c686cbc7c5">[email&nbsp;protected]</a>")
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">User u = User.builder("Name", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="51343c30383d11353e3c30383f7f323e3c">[email&nbsp;protected]</a>")
        .withDate_of_birth(LocalDate.of(1999, 10, 11))
        .withGender(User.Gender.male)
        .build();</pre>

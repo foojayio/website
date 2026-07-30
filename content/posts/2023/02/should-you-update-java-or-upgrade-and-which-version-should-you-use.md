@@ -14,6 +14,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "foojay-podcast-4"
+  - "foojay-podcast-5"
+  - "are-java-security-updates-important"
+  - "azul-zulu-july-2026-quarterly-update-released"
 frozen: false
 ---
 

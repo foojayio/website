@@ -13,6 +13,10 @@ categories:
   - "nosql"
 tags:
 related_posts:
+  - "microstream-part-1-what-is-it"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "microstream-part-5-caching-integrations-and-clustering"
 enlighterjs: true
 frozen: false
 ---

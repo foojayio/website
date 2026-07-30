@@ -14,6 +14,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
+  - "kafka-vs-chronicle-for-microservices-which-is-750-times-faster"
+  - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "achieving-high-throughput-without-sacrificing-latency"
 frozen: false
 ---
 

@@ -11,6 +11,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "video-series-javafx-in-action-part-5"
+  - "video-series-javafx-in-action-part-4"
+  - "video-series-javafx-in-action-part-3"
+  - "video-series-javafx-in-action-part-2"
 frozen: false
 ---
 

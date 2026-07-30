@@ -14,6 +14,9 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "why-java-8-is-a-ticking-time-bomb-hiding-within-your-organization"
+  - "mastering-the-challenges-of-openjdk-migration"
+  - "are-critical-vulnerabilities-lurking-in-your-java-ecosystem"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "game-development-basics-with-fxgl"
+  - "getting-started-with-fxgl-game-development"
+  - "high-performance-rendering-in-javafx"
+  - "introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music"
 frozen: false
 ---
 

@@ -15,6 +15,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "42-practical-java-design-patterns-builder-and-more"
+  - "7-ways-to-improve-your-code-reading-skills"
+  - "book-review-learn-javafx-game-and-app-development-with-fxgl-17"
+  - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
 frozen: false
 ---
 

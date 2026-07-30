@@ -12,6 +12,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "configuring-spring-boot-to-build-a-docker-image-with-azul-zulu-and-debug-options"
+  - "containerizing-spring-boot-applications-with-jib"
+  - "crafting-your-own-railway-display-with-java"
+  - "creating-a-simple-spring-boot-application-in-intellij-idea"
 enlighterjs: true
 frozen: false
 ---

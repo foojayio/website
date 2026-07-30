@@ -12,6 +12,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "a-simple-service-with-spring-boot"
+  - "book-review-why-programs-fail"
+  - "general-build-distribution-a-game-changer-or-a-gimmick"
 frozen: false
 ---
 

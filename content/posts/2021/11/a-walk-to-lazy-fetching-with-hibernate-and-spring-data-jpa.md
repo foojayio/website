@@ -11,6 +11,9 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "a-simple-service-with-spring-boot"
+  - "annotation-free-spring"
+  - "better-error-handling-for-your-spring-boot-rest-apis"
 enlighterjs: true
 frozen: false
 ---

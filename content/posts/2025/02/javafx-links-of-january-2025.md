@@ -12,6 +12,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "javafx-links-of-december-2024"
+  - "javafx-links-of-november-2024"
+  - "javafx-links-of-october-2024"
+  - "javafx-links-of-june-2026"
 frozen: false
 ---
 
@@ -19,7 +23,7 @@ frozen: false
 
 Did we miss anything? Is there anything you want to have included in one of the next overviews?
 
-Let us know via links@jfx-central.com.
+Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
 
 Core {#h2-0-core}
 -----------------

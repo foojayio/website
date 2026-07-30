@@ -12,6 +12,10 @@ categories:
   - "Testing"
 tags:
 related_posts:
+  - "unit-testing-supabase-in-kotlin"
+  - "api-mocking-essential-and-redundant"
+  - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
+  - "faster-integration-tests-with-reusable-testcontainers"
 enlighterjs: true
 frozen: false
 ---

@@ -13,6 +13,9 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "blockhound-how-it-works"
+  - "chopping-monolith"
+  - "a-simple-service-with-spring-boot"
 enlighterjs: true
 frozen: false
 ---

@@ -16,6 +16,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "6-considerations-when-building-high-performance-java-microservices-with-eda"
+  - "7-habits-of-highly-effective-java-coding"
+  - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
 frozen: false
 ---
 

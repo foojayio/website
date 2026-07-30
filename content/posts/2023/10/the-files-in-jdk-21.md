@@ -12,6 +12,10 @@ categories:
   - "JDK21"
 tags:
 related_posts:
+  - "foojay-podcast-28"
+  - "java-21-is-available-today-and-its-quite-the-update"
+  - "preparing-for-jdk-21-a-comprehensive-overview-of-key-features-and-enhancements"
+  - "jurassic-jdk-migrate-or-extinct"
 frozen: false
 ---
 

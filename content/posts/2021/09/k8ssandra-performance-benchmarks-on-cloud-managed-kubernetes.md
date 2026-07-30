@@ -13,6 +13,9 @@ categories:
   - "Kubernetes"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "apache-cassandra-4-0-taming-tail-latencies-with-java-16-zgc"
+  - "running-your-database-on-openshift-and-codeready-containers"
 enlighterjs: true
 frozen: false
 ---

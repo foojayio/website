@@ -15,6 +15,9 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "introducing-the-openjdk-coordinated-restore-at-checkpoint-project"
+  - "java-performance-ahead-of-time-versus-just-in-time"
+  - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
 frozen: false
 ---
 

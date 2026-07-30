@@ -12,6 +12,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "apisix-api-gateway"
+  - "authenticate-with-openid-connect-and-apache-apisix"
+  - "canary-releases-with-apache-apisix"
+  - "renovate-alternative-dependabot"
 frozen: false
 ---
 

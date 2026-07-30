@@ -14,6 +14,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "how-we-developed-the-eclipse-openj9-criu-support-for-fast-java-startup"
+  - "azul-provides-the-crac-in-aws-snapstart-builds"
+  - "springboot-3-2-crac"
+  - "how-to-run-a-java-application-with-crac-in-a-docker-container"
 frozen: false
 ---
 

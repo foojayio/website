@@ -12,6 +12,9 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "a-closer-look-at-jfr-streaming"
 enlighterjs: true
 frozen: false
 ---

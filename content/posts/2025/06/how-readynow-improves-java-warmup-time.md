@@ -12,6 +12,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "faster-java-warmup-crac-versus-readynow"
+  - "superfast-application-startup-java-on-crac"
+  - "azul-brings-java-from-edge-to-cloud"
+  - "the-anatomy-of-a-jvm"
 enlighterjs: true
 frozen: false
 ---

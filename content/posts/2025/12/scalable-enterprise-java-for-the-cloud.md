@@ -16,6 +16,10 @@ categories:
   - "Payara"
 tags:
 related_posts:
+  - "whats-new-in-the-july-2026-azul-payara-release"
+  - "aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2"
+  - "a-new-chapter-for-the-payara-community"
+  - "whats-new-in-the-january-2026-payara-platform-release"
 frozen: false
 ---
 

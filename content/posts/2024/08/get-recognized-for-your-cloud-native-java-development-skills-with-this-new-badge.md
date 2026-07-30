@@ -19,6 +19,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty"
+  - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
+  - "foojay-podcast-38"
+  - "whats-new-in-the-july-2026-azul-payara-release"
 frozen: false
 ---
 

@@ -13,6 +13,9 @@ categories:
   - "Kubernetes"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "book-review-effortless-cloud-native-app-development-using-skaffold"
+  - "book-review-effortless-cloud-native-app-development-using-skaffold-2"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "chopping-monolith"
+  - "chopping-monolith-demo"
+  - "migrating-monoliths-to-microservices-in-practice"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 frozen: false
 ---
 

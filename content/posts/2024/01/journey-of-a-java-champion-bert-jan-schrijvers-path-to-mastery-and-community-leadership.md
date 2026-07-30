@@ -11,6 +11,10 @@ categories:
   - "Interviews"
 tags:
 related_posts:
+  - "interview-with-gokul-chandrasekaran-the-creator-of-jdoodle"
+  - "unlocking-java-wisdom-a-conversation-with-oracle-ace-simon-martinelli"
+  - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
+  - "interview-with-a-java-champion-reflections-on-a-storied-career-and-insights-for-the-next-generation"
 frozen: false
 ---
 

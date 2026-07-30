@@ -15,6 +15,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "foojay-podcast-9"
+  - "book-review-learn-javafx-game-and-app-development-with-fxgl-17"
+  - "porting-an-existing-javafx-app-to-ios"
+  - "wordish-with-javafx-part-4"
 frozen: false
 ---
 

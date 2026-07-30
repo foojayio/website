@@ -12,6 +12,10 @@ categories:
   - "Jakarta EE"
 tags:
 related_posts:
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "can-java-jakarta-ee-do-microservices"
+  - "issues-with-old-glassfish-server-upgrade-to-eclipse-glassfish"
 enlighterjs: true
 frozen: false
 ---

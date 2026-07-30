@@ -12,6 +12,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "secure-your-api-with-these-16-practices-with-apache-apisix-part-1"
+  - "apisix-api-gateway"
+  - "authenticate-with-openid-connect-and-apache-apisix"
+  - "how-to-secure-your-web-apps-with-an-api-gateway"
 enlighterjs: true
 frozen: false
 ---

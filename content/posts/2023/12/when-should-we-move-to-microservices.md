@@ -11,6 +11,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "is-it-time-to-go-back-to-the-monolith"
+  - "devops-for-developers-introduction-version-control"
+  - "why-i-dont-do-tdd"
+  - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"
 frozen: false
 ---
 

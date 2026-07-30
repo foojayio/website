@@ -12,6 +12,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "sboms-first-steps-in-a-new-journey-for-developers"
+  - "sboms-and-software-composition-analysis"
+  - "java-where-the-wild-code-isnt"
+  - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
 frozen: false
 ---
 

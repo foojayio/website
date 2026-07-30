@@ -14,6 +14,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "foojay-podcast-9"
+  - "game-development-basics-with-fxgl"
+  - "visualizing-brain-computer-interface-data-using-javafx"
+  - "foojay-podcast-25"
 frozen: false
 ---
 

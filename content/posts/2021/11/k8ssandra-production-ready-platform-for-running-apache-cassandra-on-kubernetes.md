@@ -17,6 +17,9 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "adelphi-apache-cassandra-testing-goes-cloud-native"
+  - "kubernetes-data-simplicity-getting-started-with-k8ssandra"
 frozen: false
 ---
 

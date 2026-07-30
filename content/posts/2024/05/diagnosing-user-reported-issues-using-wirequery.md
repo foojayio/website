@@ -13,6 +13,9 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "continuous-production-profiling-and-diagnostics"
+  - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
+  - "configuring-spring-boot-to-build-a-docker-image-with-azul-zulu-and-debug-options"
 enlighterjs: true
 frozen: false
 ---
@@ -50,7 +53,7 @@ Do take note, however, that in real world applications, the user is probably bet
 
 To get started, first clone the WireQuery repository and start the server:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e2858b96a2858b968a9780cc818d8f">[email&nbsp;protected]</a>:wirequery/wirequery.git
+<pre class="EnlighterJSRAW" data-enlighter-language="bash">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e59574a7e59574a564b5c105d5153">[email&nbsp;protected]</a>:wirequery/wirequery.git
 cd wirequery
 docker-compose up</pre>
 

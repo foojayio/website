@@ -15,6 +15,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "viewing-dependencies-in-intellij-idea"
+  - "migrating-from-java-ee-to-jakarta-ee-with-intellij-idea"
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
 frozen: false
 ---
 

@@ -11,6 +11,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "are-java-security-updates-important"
+  - "avoid-java-serialization"
+  - "optional-in-java-a-swiss-army-knife-for-handling-nulls-and-improving-code-quality"
 enlighterjs: true
 frozen: false
 ---

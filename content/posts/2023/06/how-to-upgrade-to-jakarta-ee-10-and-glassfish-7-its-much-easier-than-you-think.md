@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "omnifish-announces-enterprise-support-for-eclipse-glassfish"
+  - "ejb-support-in-piranha-via-cdi"
+  - "omnifish-jakarta-ee-survey-2022"
+  - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
 frozen: false
 ---
 

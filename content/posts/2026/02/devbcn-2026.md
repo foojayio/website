@@ -15,6 +15,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "spring-ai-agents-no-second-runtime"
+  - "jc-ai-newsletter-16"
+  - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
+  - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
 frozen: false
 ---
 

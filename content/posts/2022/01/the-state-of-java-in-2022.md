@@ -13,6 +13,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "are-java-jakarta-ee-application-servers-heavy"
+  - "azul-datadog-datastax-jfrog-payara-and-snyk-form-inaugural-foojay-advisory-board"
+  - "whats-new-in-the-july-2026-azul-payara-release"
 frozen: false
 ---
 

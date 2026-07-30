@@ -12,6 +12,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "apisix-api-gateway"
+  - "advanced-url-rewriting-with-apache-apisix"
+  - "apache-apisix-loves-rust"
+  - "implementing-the-idempotency-key-specification-on-apache-apisix"
 enlighterjs: true
 frozen: false
 ---

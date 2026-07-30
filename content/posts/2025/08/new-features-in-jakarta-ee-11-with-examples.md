@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "10-best-practises-for-jakarta-ee-performance-optimization"
+  - "are-java-jakarta-ee-application-servers-heavy"
+  - "a-simple-service-with-spring-boot"
+  - "book-review-persistence-best-practices-for-java-applications"
 enlighterjs: true
 frozen: false
 ---

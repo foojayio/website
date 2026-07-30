@@ -14,6 +14,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "annotation-free-spring"
+  - "a-simple-service-with-spring-boot"
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "observability-for-jvm-frameworks-with-grafana-in-java-and-kotlin"
 enlighterjs: true
 frozen: false
 ---

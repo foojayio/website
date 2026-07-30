@@ -14,6 +14,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "testing-mongodb-atlas-search-java-apps-using-testcontainers"
+  - "understanding-bson-a-beginners-guide-to-mongodbs-data-format"
+  - "mongodb-aggregation-framework-a-beginners-guide"
+  - "true-to-production-testing-java-apps"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,9 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "java-where-the-wild-code-isnt"
+  - "are-java-security-updates-important"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
 frozen: false
 ---
 

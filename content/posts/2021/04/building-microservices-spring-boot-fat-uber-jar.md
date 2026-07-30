@@ -14,6 +14,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "clean-shutdown-of-spring-boot-applications"
+  - "containerizing-spring-boot-applications-with-jib"
+  - "controlling-an-lcd-display-with-spring-and-thymeleaf-on-the-raspberry-pi"
 frozen: false
 ---
 

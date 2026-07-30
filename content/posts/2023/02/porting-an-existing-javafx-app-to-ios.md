@@ -12,6 +12,9 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "native-applications-for-multiple-devices-from-a-single-javafx-project-with-gluon-mobile-and-github-actions"
+  - "starting-a-javafx-project-with-gluon-tools"
+  - "cross-platform-development-in-java-with-gluon-and-graalvm"
 enlighterjs: true
 frozen: false
 ---

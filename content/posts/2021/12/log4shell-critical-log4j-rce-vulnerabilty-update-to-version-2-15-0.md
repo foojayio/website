@@ -12,6 +12,9 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "the-costs-of-hidden-logging"
+  - "java-logging-what-to-log-what-not-to-log"
+  - "java-where-the-wild-code-isnt"
 frozen: false
 ---
 

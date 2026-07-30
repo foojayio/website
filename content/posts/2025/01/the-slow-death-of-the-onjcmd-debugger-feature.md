@@ -12,6 +12,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "is-jdwps-onjcmd-feature-worth-using"
+  - "level-up-your-java-debugging-skills-with-on-demand-debugging"
+  - "where-production-policy-belongs-building-eliya-in-public"
+  - "official-azul-zulu-openjdk-images-now-available-on-docker-hub"
 frozen: false
 ---
 

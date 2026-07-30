@@ -18,6 +18,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "minimize-costs-by-utilizing-cloud-storage-with-spring-data-eclipse-store"
+  - "microstream-part-1-what-is-it"
+  - "microstream-part-2-configure-the-storage-manager"
+  - "announcing-cloud-native-boxlang-for-5-month"
 enlighterjs: true
 frozen: false
 ---

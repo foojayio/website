@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"
+  - "azul-brings-java-from-edge-to-cloud"
+  - "azul-enhances-readynow-to-solve-javas-warmup-problem-simplify-operations-and-optimize-cloud-costs"
+  - "azul-provides-the-crac-in-aws-snapstart-builds"
 frozen: false
 ---
 

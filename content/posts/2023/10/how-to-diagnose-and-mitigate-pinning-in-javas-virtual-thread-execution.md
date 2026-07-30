@@ -11,6 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "web-crawling-in-java-a-tale-of-classical-threads-and-virtual-threads"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
+  - "virtual-thread-pinning-field-guide"
 enlighterjs: true
 frozen: false
 ---

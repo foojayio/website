@@ -11,6 +11,10 @@ categories:
   - "Agile"
 tags:
 related_posts:
+  - "unlocking-scrum-a-software-engineers-journey-part-1"
+  - "patterns-for-the-design-of-microservices-part-1"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "stochastic-ai-agility-breaking-cycles-of-debt"
 frozen: false
 ---
 

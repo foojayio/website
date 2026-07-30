@@ -13,6 +13,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "chronicle-queue-storing-1tb-in-virtual-memory-on-a-128gb-machine"
+  - "creating-terabyte-sized-queues-with-low-latency"
+  - "did-you-know-you-can-create-mappers-without-creating-underlying-objects-in-java"
+  - "comparing-approaches-to-durability-in-low-latency-messaging-queues"
 enlighterjs: true
 frozen: false
 ---

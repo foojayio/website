@@ -14,6 +14,9 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "software-testing-as-a-debugging-tool"
+  - "debugging-streams-with-peek"
+  - "dtrace-revisited-advanced-debugging-techniques"
 frozen: false
 ---
 

@@ -14,6 +14,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "sustainability-starts-with-your-runtime-meet-a-green-jvm"
+  - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
+  - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"
+  - "azul-brings-java-from-edge-to-cloud"
 frozen: false
 ---
 

@@ -12,6 +12,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "automatically-creating-microservices-architecture-diagrams"
+  - "book-review-monolith-to-microservices-part-1"
+  - "book-review-quarkus-for-spring-developers"
+  - "intro-to-the-boxlang-formatter"
 enlighterjs: true
 frozen: false
 ---

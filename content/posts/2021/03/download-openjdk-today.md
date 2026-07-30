@@ -11,6 +11,9 @@ categories:
   - "Foojay"
 tags:
 related_posts:
+  - "how-to-submit-your-next-article-on-foojay-io"
+  - "join-slack-com-t-foojay-signup"
+  - "foojay-status-report-january-june-2022"
 frozen: false
 ---
 

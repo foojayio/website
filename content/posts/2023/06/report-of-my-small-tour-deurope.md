@@ -11,6 +11,9 @@ categories:
   - "Trip Reports"
 tags:
 related_posts:
+  - "foojay-podcast-14"
+  - "a-short-primer-on-java-debugging-internals"
+  - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
 frozen: false
 ---
 

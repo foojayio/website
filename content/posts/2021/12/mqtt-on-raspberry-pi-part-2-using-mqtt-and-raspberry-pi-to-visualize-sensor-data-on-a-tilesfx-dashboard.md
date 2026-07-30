@@ -15,6 +15,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "mqtt-on-raspberry-pi-part-1-send-sensor-data-to-hivemq-cloud-with-java-and-pi4j"
+  - "building-openjdk-from-github-sources-on-64-bit-raspberry-pi"
+  - "controlling-an-lcd-display-with-spring-and-thymeleaf-on-the-raspberry-pi"
+  - "mqtt-on-raspberry-pi-part-3-sending-sensor-data-from-raspberry-pi-pico-to-hivemq-cloud"
 enlighterjs: true
 frozen: false
 ---

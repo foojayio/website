@@ -15,6 +15,8 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "context-is-code-a-tour-of-apm-and-agentrc"
+  - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
 frozen: false
 ---
 

@@ -15,6 +15,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "java-24-rolls-out-today-find-out-why-its-aptly-named"
+  - "foojay-podcast-68"
+  - "9-outdated-ideas-about-java"
+  - "java-23-whats-new"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "how-readynow-improves-java-warmup-time"
+  - "faster-java-warmup-crac-versus-readynow"
+  - "how-to-train-readynow-to-achieve-optimal-java-performance"
+  - "what-should-i-know-about-garbage-collection-as-a-java-developer"
 frozen: false
 ---
 

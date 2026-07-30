@@ -12,6 +12,9 @@ categories:
   - "Vaadin"
 tags:
 related_posts:
+  - "5-great-reasons-to-use-jooq"
+  - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
 enlighterjs: true
 frozen: false
 ---

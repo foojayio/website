@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "a-simple-service-with-spring-boot"
+  - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"
+  - "better-error-handling-for-your-spring-boot-rest-apis"
+  - "the-new-jdbcclient-introduced-in-spring-framework-6-1"
 enlighterjs: true
 frozen: false
 ---

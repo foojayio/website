@@ -11,6 +11,9 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "2023-in-retrospective"
+  - "2022-in-retrospective"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
 frozen: false
 ---
 

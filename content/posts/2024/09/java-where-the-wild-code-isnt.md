@@ -11,6 +11,9 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "are-java-security-updates-important"
+  - "fix-java-security-issues-while-coding-in-intellij-idea"
+  - "fixing-vulnerabilities-in-maven-projects"
 frozen: false
 ---
 

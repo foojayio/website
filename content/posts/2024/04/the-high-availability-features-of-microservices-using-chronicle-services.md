@@ -13,6 +13,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "6-considerations-when-building-high-performance-java-microservices-with-eda"
+  - "achieving-high-throughput-without-sacrificing-latency"
+  - "automatically-creating-microservices-architecture-diagrams"
+  - "microservices-architecture-navigating-the-buzz"
 frozen: false
 ---
 

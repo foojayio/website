@@ -13,6 +13,10 @@ categories:
   - "Neo4J"
 tags:
 related_posts:
+  - "journeys-in-java-level-1-building-an-empire-of-microservices"
+  - "journeys-in-java-level-2-building-an-empire-of-microservices"
+  - "journeys-in-java-level-3-building-an-empire-of-microservices"
+  - "journeys-in-java-level-6-build-a-neo4j-microservice"
 enlighterjs: true
 frozen: false
 ---
@@ -71,7 +75,7 @@ FROM openjdk:11
 
 #Author
 #-------
-LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="18727d7676717e7d6a586c707d707d7b73747d6a6b36776a7f">[email&nbsp;protected]</a>,@JMHReif"
+LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a606f6464636c6f784a7e626f626f6961666f78792465786d">[email&nbsp;protected]</a>,@JMHReif"
 
 #Copy jar and expose entrypoints
 #--------------------------------

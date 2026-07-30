@@ -12,6 +12,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "jdkmon-your-friendly-jdk-distribution-updater"
+  - "jdb"
+  - "introducing-the-boxlang-ide-plugin-for-intellij"
+  - "indexing-all-of-wikipedia-on-a-laptop"
 enlighterjs: true
 frozen: false
 ---

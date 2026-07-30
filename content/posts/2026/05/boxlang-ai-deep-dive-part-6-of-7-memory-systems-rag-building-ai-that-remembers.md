@@ -17,6 +17,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
+  - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
+  - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
+  - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
 enlighterjs: true
 frozen: false
 ---

@@ -14,6 +14,10 @@ categories:
   - "nosql"
 tags:
 related_posts:
+  - "book-review-quarkus-for-spring-developers"
+  - "visualization-of-the-message-flow-between-business-functions-with-vaadin-and-neo4j"
+  - "journeys-in-java-level-1-building-an-empire-of-microservices"
+  - "time-machine-a-look-back-at-java-sessions-from-nodes-2022"
 enlighterjs: true
 frozen: false
 ---
@@ -170,7 +174,7 @@ Before we highlight some things in the project, let's have a look what is includ
 <pre class="EnlighterJSRAW" data-enlighter-language="console"># Should print something like java version "17.0.2" 2022-01-18 LTS
 java -version
 # Clone the project
-git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8aede3fecaede3fee2ffe8a4e9e5e7">[email&nbsp;protected]</a>:michael-simons/neo4j-aura-quarkus-graphql.git
+git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5c2ccd1e5c2ccd1cdd0c78bc6cac8">[email&nbsp;protected]</a>:michael-simons/neo4j-aura-quarkus-graphql.git
 cd neo4j-aura-quarkus-graphql
 # Start Quarkus in development mode
 ./mvnw compile quarkus:dev</pre>

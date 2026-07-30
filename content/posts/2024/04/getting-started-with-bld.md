@@ -15,6 +15,9 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "introducing-bld-a-new-pure-java-build-system"
+  - "spring-boot-local-development-enhancements-lets-compose"
+  - "why-i-moved-my-blog-to-rife2-after-23-years"
 enlighterjs: true
 frozen: false
 ---

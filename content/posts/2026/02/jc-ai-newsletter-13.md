@@ -24,6 +24,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "jc-ai-newsletter-15"
+  - "jc-ai-newsletter-14"
+  - "jc-ai-newsletter-8"
+  - "jc-ai-newsletter-6"
 frozen: false
 ---
 

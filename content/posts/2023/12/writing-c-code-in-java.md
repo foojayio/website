@@ -12,6 +12,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "java-panama-polyglot-part1"
+  - "java-panama-polyglot-swift-part-2"
+  - "java-panama-polyglot-part-3"
+  - "java-native-memory-allocation-ffm-api"
 enlighterjs: true
 frozen: false
 ---

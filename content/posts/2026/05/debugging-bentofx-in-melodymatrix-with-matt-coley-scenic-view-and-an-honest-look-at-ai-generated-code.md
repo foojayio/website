@@ -11,6 +11,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "video-series-javafx-in-action-part-6"
+  - "javafx-links-of-october-2025"
+  - "foojay-podcast-54"
+  - "melodymatrix-v1-0-0-released-shipping-a-javafx-app-with-jdeploy-github-actions-and-auto-update"
 frozen: false
 ---
 

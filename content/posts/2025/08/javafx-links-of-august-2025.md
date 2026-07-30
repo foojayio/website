@@ -11,12 +11,16 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "javafx-links-of-july-2025"
+  - "javafx-links-of-june-2025"
+  - "javafx-links-of-may-2025"
+  - "javafx-links-of-april-2025"
 frozen: false
 ---
 
 Here are the links shared on [jfx-central.com](https://www.jfx-central.com/links) in the August summary.
 
-Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via links@jfx-central.com.
+Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
 
 Core {#h2-0-core}
 -----------------

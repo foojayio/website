@@ -13,6 +13,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "6-considerations-when-building-high-performance-java-microservices-with-eda"
+  - "backend-for-frontend-the-demo"
+  - "jc-ai-newsletter-8"
+  - "chopping-the-monolith-in-a-smarter-way"
 frozen: false
 ---
 

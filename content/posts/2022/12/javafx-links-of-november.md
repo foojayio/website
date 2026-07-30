@@ -11,6 +11,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "javafx-links-of-november"
+  - "javafx-links-of-october"
+  - "a-javafx-app-on-zulufx-in-60-seconds"
+  - "javafx-links-of-june-2026"
 frozen: false
 ---
 

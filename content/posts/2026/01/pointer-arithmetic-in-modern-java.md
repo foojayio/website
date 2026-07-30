@@ -12,6 +12,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "everything-bad-in-java-is-good-for-you"
+  - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
+  - "does-java-18-finally-have-a-better-alternative-to-jni"
+  - "handling-jdk-and-gc-options-dynamically-in-elasticsearch"
 enlighterjs: true
 frozen: false
 ---

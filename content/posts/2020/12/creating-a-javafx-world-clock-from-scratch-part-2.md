@@ -12,6 +12,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "javafx-links-of-november-2025"
+  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
+  - "new-video-series-javafx-in-action-part-1"
+  - "javafx-links-of-june-2026"
 enlighterjs: true
 frozen: false
 ---

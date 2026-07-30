@@ -17,6 +17,10 @@ categories:
   - "Project Panama"
 tags:
 related_posts:
+  - "indexing-all-of-wikipedia-on-a-laptop"
+  - "foojay-podcast-55"
+  - "foojay-podcast-54"
+  - "foojay-podcast-47"
 frozen: false
 ---
 

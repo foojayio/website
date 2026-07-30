@@ -20,6 +20,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "why-java-8-is-a-ticking-time-bomb-hiding-within-your-organization"
+  - "how-organizations-became-stuck-on-outdated-java-versions"
+  - "foojay-podcast-62"
+  - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
 frozen: false
 ---
 

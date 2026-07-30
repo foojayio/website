@@ -11,6 +11,10 @@ categories:
   - "Foojay"
 tags:
 related_posts:
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "own-your-pixels-native-fidelity-on-your-schedule"
+  - "using-the-raspberry-pi-sense-hat-with-pi4j-drivers"
+  - "ai-found-the-bugs-whos-patching-your-eol-java-code"
 frozen: false
 ---
 

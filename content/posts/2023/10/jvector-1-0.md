@@ -13,6 +13,9 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "adelphi-apache-cassandra-testing-goes-cloud-native"
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "announcing-the-astra-service-broker-tradeoff-free-cassandra-in-kubernetes"
 frozen: false
 ---
 

@@ -14,6 +14,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "whats-new-in-the-may-2026-azul-payara-release"
+  - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
+  - "whats-new-in-the-january-2026-payara-platform-release"
+  - "from-spring-boot-to-jakarta-ee-11-how-payara-starter-eases-the-transition"
 frozen: false
 ---
 

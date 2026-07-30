@@ -13,6 +13,10 @@ categories:
   - "Observability"
 tags:
 related_posts:
+  - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
+  - "boldness-in-refactoring"
+  - "book-review-why-programs-fail"
+  - "introducing-the-boxlang-spring-boot-starter-dynamic-jvm-templating-for-spring"
 enlighterjs: true
 frozen: false
 ---

@@ -17,6 +17,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "whats-new-in-the-july-2026-azul-payara-release"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "virtual-thread-pinning-field-guide"
+  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 enlighterjs: true
 frozen: false
 ---
@@ -204,14 +208,14 @@ feedItems = [
         "link" : "https://myblog.com/getting-started-boxlang",
         "description" : "Learn the basics of BoxLang in this comprehensive guide",
         "publishedDate" : now(),
-        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="20444556454c4f504552604d59424c4f470e434f4d">[email&nbsp;protected]</a>"
+        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1470716271787b64716654796d76787b733a777b79">[email&nbsp;protected]</a>"
     },
     {
         "title" : "Building REST APIs with BoxLang",
         "link" : "https://myblog.com/rest-apis-boxlang",
         "description" : "Create powerful REST APIs using BoxLang",
         "publishedDate" : dateAdd( "d", -1, now() ),
-        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="badedfccdfd6d5cadfc8fad7c3d8d6d5dd94d9d5d7">[email&nbsp;protected]</a>"
+        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="67030211020b08170215270a1e050b08004904080a">[email&nbsp;protected]</a>"
     }
 ];
 
@@ -252,7 +256,7 @@ episodes = [
         "link" : "https://podcast.boxlang.io/episode-1",
         "description" : "Introduction to BoxLang and what makes it special",
         "publishedDate" : now(),
-        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bfcfd0dbdcdecccbffddd0c7d3ded1d891d6d0">[email&nbsp;protected]</a>",
+        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5f2f303b3c3e2c2b1f3d3027333e3138713630">[email&nbsp;protected]</a>",
         // iTunes episode metadata
         "itunesTitle" : "Welcome to BoxLang",
         "itunesDuration" : "00:42: 15",

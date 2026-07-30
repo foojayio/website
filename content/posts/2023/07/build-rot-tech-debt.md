@@ -14,6 +14,10 @@ categories:
   - "Maven"
 tags:
 related_posts:
+  - "how-to-create-sboms-in-java-with-maven-and-gradle"
+  - "building-javafx-with-gradle"
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "enterprise-java-quality-gates-ai"
 frozen: false
 ---
 

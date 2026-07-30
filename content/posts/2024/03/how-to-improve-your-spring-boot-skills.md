@@ -14,6 +14,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "a-simple-service-with-spring-boot"
+  - "better-error-handling-for-your-spring-boot-rest-apis"
+  - "clean-shutdown-of-spring-boot-applications"
+  - "how-to-detect-cache-misses-using-observability"
 enlighterjs: true
 frozen: false
 ---

@@ -15,6 +15,9 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "patterns-for-the-design-of-microservices-part-1"
+  - "patterns-for-the-design-of-microservices-part-2"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
 frozen: false
 ---
 

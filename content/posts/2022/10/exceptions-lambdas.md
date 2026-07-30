@@ -13,6 +13,10 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "5-things-you-probably-didnt-know-about-java-concurrency"
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "a-simple-service-with-spring-boot"
+  - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
 enlighterjs: true
 frozen: false
 ---

@@ -13,6 +13,10 @@ categories:
   - "Kubernetes"
 tags:
 related_posts:
+  - "azul-brings-java-from-edge-to-cloud"
+  - "azuls-high-performance-java-platform-achieves-historic-first-with-10000-customer-jvms-collaborating-and-sharing-performance-optimizations-cutting-cloud-costs-by-20"
+  - "fantastic-jvms-and-where-to-find-them"
+  - "java-warmup-and-the-scaling-loop-problem"
 enlighterjs: true
 frozen: false
 ---

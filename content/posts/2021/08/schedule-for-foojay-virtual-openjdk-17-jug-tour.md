@@ -16,6 +16,9 @@ categories:
   - "Pi4J"
 tags:
 related_posts:
+  - "project-panama-for-newbies-part-1"
+  - "project-panama-for-newbies-part-2"
+  - "virtual-foojay-openjdk-17-jug-tour"
 frozen: false
 ---
 

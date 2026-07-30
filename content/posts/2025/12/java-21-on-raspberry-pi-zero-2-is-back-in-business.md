@@ -15,6 +15,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "azul-zulu-openjdk-15-on-raspberry-pi"
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
+  - "controlling-a-led-strip-with-pi4j-and-jbang"
+  - "foojay-podcast-55"
 enlighterjs: true
 frozen: false
 ---

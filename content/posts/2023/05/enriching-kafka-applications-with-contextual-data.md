@@ -13,6 +13,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "hazelcast-kibana-best-buddies-for-exploring-visualizing-data"
+  - "hazelcast-from-embedded-to-client-server"
+  - "how-to-get-started-with-the-hazelcast-viridian-serverless"
 enlighterjs: true
 frozen: false
 ---
@@ -62,7 +65,7 @@ Start a Hazelcast local cluster: This will run a Hazelcast cluster in client/ser
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1b9b0abb4bdb2b0a2a591e4ffe3ffe2">[email&nbsp;protected]</a>
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="731b1209161f1012000733465d415d40">[email&nbsp;protected]</a>
 
 hz -V
 
@@ -74,7 +77,7 @@ To add more members to your cluster, open another terminal window and rerun the 
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8be3eaf1eee7e8eaf8ffa6e6eae5eaeceee6eee5ffa6e8eee5ffeef9cbbea5b9a5b8">[email&nbsp;protected]</a>
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e088819a858c83819394cd8d818e8187858d858e94cd83858e948592a0d5ced2ced3">[email&nbsp;protected]</a>
 
 hz-mc -V
 

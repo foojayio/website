@@ -14,6 +14,9 @@ categories:
   - "Project Panama"
 tags:
 related_posts:
+  - "quick-start-with-machine-learning-in-java"
+  - "visual-recognition-for-chess-with-deep-learning-in-java-on-android"
+  - "java-developer-vs-chatgpt-part-i-writing-a-spring-boot-microservice"
 frozen: false
 ---
 

@@ -19,6 +19,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "5-great-reasons-to-use-jooq"
+  - "introduction-to-maven-toolchains"
+  - "foojay-io-at-fosdem-2023-trip-report"
+  - "foojay-podcast-81"
 frozen: false
 ---
 

@@ -14,6 +14,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "foojay-podcast-84"
+  - "foojay-podcast-83"
+  - "foojay-podcast-82"
+  - "foojay-podcast-81"
 frozen: false
 ---
 

@@ -17,6 +17,9 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "creating-a-kubernetes-operator-in-java"
+  - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"
 frozen: false
 ---
 

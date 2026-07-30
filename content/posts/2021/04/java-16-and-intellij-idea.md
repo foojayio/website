@@ -13,6 +13,10 @@ categories:
   - "Records"
 tags:
 related_posts:
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+  - "exploring-java-records-in-a-jakarta-ee-context"
+  - "java-on-azure-tooling-update-july-2022"
+  - "debugging-tutorial-1-introduction-conditional-breakpoints-set-value"
 enlighterjs: true
 frozen: false
 ---

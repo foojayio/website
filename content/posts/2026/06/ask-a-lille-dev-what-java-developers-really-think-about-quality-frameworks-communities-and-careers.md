@@ -15,6 +15,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "quarkus-unpacked-insights-from-the-foojay-podcast"
+  - "spring-ai-agents-no-second-runtime"
+  - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
+  - "foojay-podcast-91"
 frozen: false
 ---
 

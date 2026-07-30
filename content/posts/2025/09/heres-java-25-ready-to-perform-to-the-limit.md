@@ -13,6 +13,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "java-24-rolls-out-today-find-out-why-its-aptly-named"
+  - "java-23-has-arrived-and-it-brings-a-truckload-of-changes"
+  - "java-22-is-here-and-its-ready-to-rock"
+  - "java-21-is-available-today-and-its-quite-the-update"
 enlighterjs: true
 frozen: false
 ---

@@ -17,6 +17,10 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "java-on-visual-studio-code-update-april-2022"
+  - "java-on-visual-studio-code-update-february-2022"
+  - "java-testing-with-vs-code"
+  - "introducing-the-boxlang-ide-plugin-for-intellij"
 enlighterjs: true
 frozen: false
 ---

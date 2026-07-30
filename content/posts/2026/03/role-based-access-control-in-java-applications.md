@@ -13,6 +13,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "abstracting-data-access-in-java-with-the-dao-pattern"
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "atlas-searching-with-the-java-driver"
+  - "best-practices-for-deploying-mongodb-in-kubernetes"
 enlighterjs: true
 frozen: false
 ---
@@ -103,7 +107,7 @@ Below, let's try to imagine a simple document representing a user
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
 &nbsp;&nbsp;"_id": "user-123",
-&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="482924212b2d082d30292538242d662b2725">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="32535e5b515772574a535f425e571c515d5f">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;"roles": ["CUSTOMER"],
 &nbsp;&nbsp;"status": "ACTIVE"
 }</pre>

@@ -16,6 +16,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "blockhound-how-it-works"
+  - "chopping-monolith"
+  - "how-to-beautify-your-github-repo"
+  - "renovate-for-everything"
 enlighterjs: true
 frozen: false
 ---
@@ -50,7 +54,7 @@ Here's a sum-up of my understanding:
 In the end, I ended up with the following Renovate runner configuration:
 
 <pre class="EnlighterJSRAW" data-enlighter-language="yaml">variables:
-  RENOVATE_GIT_AUTHOR: Renovate Bot &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6a08051e2a180f04051c0b1e0f44090507">[email&nbsp;protected]</a>&gt;
+  RENOVATE_GIT_AUTHOR: Renovate Bot &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2d4f42596d5f4843425b4c5948034e4240">[email&nbsp;protected]</a>&gt;
   RENOVATE_REQUIRE_CONFIG: optional
 
 include:

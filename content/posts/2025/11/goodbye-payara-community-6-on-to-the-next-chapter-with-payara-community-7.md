@@ -13,6 +13,10 @@ categories:
   - "Payara"
 tags:
 related_posts:
+  - "whats-new-in-the-january-2026-payara-platform-release"
+  - "whats-new-in-the-may-2026-azul-payara-release"
+  - "jakarta-data-makes-persistence-a-breeze"
+  - "leading-the-way-payara-platform-community-7-beta-now-fully-jakarta-ee-11-certified"
 frozen: false
 ---
 

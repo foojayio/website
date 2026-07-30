@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "book-review-quarkus-for-spring-developers"
+  - "build-a-status-dashboard-using-spring-boot-and-astra-db"
+  - "building-microservices-spring-boot-fat-uber-jar"
+  - "optimizing-java-for-the-cloud-native-era-with-quarkus"
 enlighterjs: true
 frozen: false
 ---

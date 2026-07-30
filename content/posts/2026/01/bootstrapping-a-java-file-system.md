@@ -12,6 +12,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "semantic-versioning-your-java-libraries"
+  - "7-habits-of-highly-effective-java-coding"
+  - "9-best-java-profilers-to-use-in-2024"
+  - "9-outdated-ideas-about-java"
 frozen: false
 ---
 

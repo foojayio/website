@@ -11,6 +11,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "creating-mobile-apps-with-javafx-part-1"
+  - "custom-controls-in-javafx-part-i"
+  - "creating-a-javafx-world-clock-from-scratch-part-1"
+  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
 enlighterjs: true
 frozen: false
 ---
@@ -91,13 +95,13 @@ OpenJDK 64-Bit Server VM Zulu14.29+23-CA (build 14.0.2+12, mixed mode, sharing)
 # Verify JavaFX Modules are included in Zulu's Open JDK
 $ java --list-modules
 ...
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b3d9d2c5d2d5cb9dd1d2c0d6f382879d839d81">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3a9a2b5a2a5bbeda0acadb7b1acafb083f2f7edf3edf1">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="056f647364637d2b637d68694534312b352b37">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aec4cfd8cfc8d680c9dccfdec6c7cdddee9f9a809e809c">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dfb5bea9beb9a7f1b2babbb6be9feeebf1eff1ed">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cfa5aeb9aea9b7e1bcb8a6a1a88ffefbe1ffe1fd">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cda7acbbacabb5e3baa8af8dfcf9e3fde3ff">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="264c475047405e084447554366171208160814">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="107a71667176683e737f7e64627f7c635021243e203e22">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe949f889f9886d098869392becfcad0ced0cc">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b313a2d3a3d23753c293a2b333238281b6a6f756b7569">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b1dbd0c7d0d7c99fdcd4d5d8d0f180859f819f83">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3a9a2b5a2a5bbedb0b4aaada483f2f7edf3edf1">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b414a5d4a4d53055c4e496b1a1f051b0519">[email&nbsp;protected]</a>
 ...</pre>
 
 <br />

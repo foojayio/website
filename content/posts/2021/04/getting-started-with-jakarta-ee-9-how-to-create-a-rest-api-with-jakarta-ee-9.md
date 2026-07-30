@@ -13,6 +13,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "build-flexible-jakarta-ee-applications-with-apache-couchdb-nosql-database"
+  - "can-java-jakarta-ee-do-microservices"
+  - "do-java-jakarta-ee-standards-matter"
+  - "is-java-jakarta-ee-cloud-native"
 enlighterjs: true
 frozen: false
 ---

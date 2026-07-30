@@ -13,6 +13,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "5-minute-azure-survey-java-ee-jakarta-ee-and-microprofile"
+  - "fantastic-jvms-and-where-to-find-them"
+  - "kubernetes-data-simplicity-getting-started-with-k8ssandra"
 frozen: false
 ---
 

@@ -14,6 +14,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "research-measuring-energy-consumption-in-programming-languages-for-ai-applications"
+  - "jc-ai-newsletter-4"
+  - "ai4devs-schedule-published"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 enlighterjs: true
 frozen: false
 ---

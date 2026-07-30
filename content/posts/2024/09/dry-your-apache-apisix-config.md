@@ -12,6 +12,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "poor-mans-api"
+  - "kubernetes-gateway-api"
+  - "apache-apisix-loves-rust"
+  - "implementing-the-idempotency-key-specification-on-apache-apisix"
 enlighterjs: true
 frozen: false
 ---

@@ -16,6 +16,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "simplify-migrating-from-kafka-to-pulsar-with-kafka-connect-support"
+  - "why-developers-should-use-apache-pulsar"
+  - "evolution-of-microservices"
+  - "bring-streaming-to-apache-cassandra-with-apache-pulsar"
 frozen: false
 ---
 

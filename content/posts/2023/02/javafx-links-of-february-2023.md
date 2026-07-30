@@ -12,6 +12,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "javafx-links-of-january-2023"
+  - "javafx-links-of-december"
+  - "javafx-links-of-november"
+  - "javafx-links-of-june-2026"
 frozen: false
 ---
 

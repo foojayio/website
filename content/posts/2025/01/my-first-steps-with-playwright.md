@@ -12,6 +12,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "2024-in-retrospective-nicolas-frankel"
+  - "blockhound-how-it-works"
+  - "chopping-monolith"
+  - "localize-apps-with-ai"
 enlighterjs: true
 frozen: false
 ---

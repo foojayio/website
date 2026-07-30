@@ -12,6 +12,10 @@ categories:
   - "Kotlin"
 tags:
 related_posts:
+  - "exposed-kotlin-orm-complete-guide"
+  - "checking-out-junie-a-coding-agent-by-jetbrains"
+  - "duplicate-finder-for-text-requirements"
+  - "how-does-it-feel-to-test-a-compiler"
 enlighterjs: true
 frozen: false
 ---

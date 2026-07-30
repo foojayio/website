@@ -12,6 +12,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
+  - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"
+  - "easily-containerize-java-applications-with-cloud-native-buildpacks"
+  - "exploring-cost-effective-solutions-for-stateful-rest-services"
 frozen: false
 ---
 

@@ -11,6 +11,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "soprano-ofnullable-stream-java-challenge"
+  - "daemon-thread-java-code-quiz"
+  - "function-calculation-java-challenge"
+  - "stream-limit-filter-java-challenge"
 enlighterjs: true
 frozen: false
 ---

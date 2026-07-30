@@ -12,6 +12,9 @@ categories:
   - "Books"
 tags:
 related_posts:
+  - "book-review-help-your-boss-help-you"
+  - "book-review-seriously-good-software"
+  - "openjdk-vs-openjfx-release-cycles"
 enlighterjs: true
 frozen: false
 ---

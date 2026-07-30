@@ -15,6 +15,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "pi4j-v-2-released"
+  - "java-17-on-the-raspberry-pi"
+  - "building-openjdk-from-github-sources-on-64-bit-raspberry-pi"
+  - "a-fresh-look-at-embedded-java"
 frozen: false
 ---
 

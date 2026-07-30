@@ -11,6 +11,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "changes-included-in-release-24-08-of-azul-zing-builds-of-openjdk"
+  - "javafinder-keeping-track-of-java-inventories"
+  - "time-zone-and-currency-database-in-jdk"
+  - "java-on-azure-tooling-update-july-2022"
 frozen: false
 ---
 

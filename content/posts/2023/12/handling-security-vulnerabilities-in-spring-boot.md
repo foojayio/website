@@ -14,6 +14,9 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "better-error-handling-for-your-spring-boot-rest-apis"
+  - "a-simple-service-with-spring-boot"
+  - "clean-shutdown-of-spring-boot-applications"
 enlighterjs: true
 frozen: false
 ---

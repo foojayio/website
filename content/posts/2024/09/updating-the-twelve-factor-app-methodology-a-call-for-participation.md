@@ -12,6 +12,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"
+  - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
+  - "run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty"
+  - "boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework-🧵"
 frozen: false
 ---
 

@@ -14,6 +14,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "production-horrors-handling-disasters-public-debrief"
+  - "book-review-why-programs-fail"
+  - "the-debugger-checklist-part-ii"
+  - "modernize-legacy-code-in-production-rebuild-your-airplane-midflight-without-crashing"
 frozen: false
 ---
 

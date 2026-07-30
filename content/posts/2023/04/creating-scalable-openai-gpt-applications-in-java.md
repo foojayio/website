@@ -15,6 +15,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "from-assembler-to-chat-gpt-steve-poole-on-the-shifting-landscape-of-programming"
+  - "visual-recognition-for-chess-with-deep-learning-in-java-on-android"
+  - "getting-started-with-deep-learning-in-java-using-deep-netts"
 enlighterjs: true
 frozen: false
 ---

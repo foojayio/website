@@ -12,6 +12,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "keywords-meet-vectors-hybrid-search-on-mongodb"
+  - "multi-cloud-strategies-with-mongodb-atlas"
+  - "mongodb-schemas-in-java"
+  - "mongodb-aggregations-organizing-recipes-by-meal-type-with-group"
 frozen: false
 ---
 

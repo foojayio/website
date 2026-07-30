@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "a-glance-into-jfr-class-and-method-tagging"
+  - "soft-assertions-testing-kindly"
+  - "custom-events-in-the-blocky-world-using-jfr-in-minecraft"
+  - "custom-jfr-events-a-short-introduction"
 enlighterjs: true
 frozen: false
 ---

@@ -13,6 +13,10 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "first-experiments-with-java-on-the-lattepanda-iota"
+  - "javafx-links-of-november-2025"
+  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
+  - "foojay-podcast-83"
 enlighterjs: true
 frozen: false
 ---

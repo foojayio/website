@@ -13,6 +13,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "building-for-failure-best-practices-for-easy-production-debugging"
+  - "effective-coding-with-java-observability"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 enlighterjs: true
 frozen: false
 ---

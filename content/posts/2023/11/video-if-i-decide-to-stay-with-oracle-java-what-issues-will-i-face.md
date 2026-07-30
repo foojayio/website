@@ -13,6 +13,9 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "are-java-security-updates-important"
+  - "java-where-the-wild-code-isnt"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
 frozen: false
 ---
 

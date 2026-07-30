@@ -14,6 +14,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "atlas-searching-with-the-java-driver"
+  - "best-practices-for-deploying-mongodb-in-kubernetes"
+  - "building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb"
 enlighterjs: true
 frozen: false
 ---
@@ -33,7 +37,7 @@ In this tutorial, you'll:
 
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/behavior-driven-development-mongodb):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e69677a4e69677a667b6c206d6163">[email&nbsp;protected]</a>:soujava/behavior-driven-development-mongodb.git</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="55323c2115323c213d20377b363a38">[email&nbsp;protected]</a>:soujava/behavior-driven-development-mongodb.git</pre>
 
 Prerequisites {#h2-0-prerequisites}
 -----------------------------------

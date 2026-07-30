@@ -11,6 +11,10 @@ categories:
   - "Interviews"
 tags:
 related_posts:
+  - "three-mistakes-junior-software-developers-make-preventing-getting-hired-on-amazing-projects"
+  - "why-your-choice-of-java-virtual-machine-jvm-matters-more-than-ever"
+  - "interviews-with-robert-savage-and-johan-vos-on-the-state-of-java-on-raspberry-pi"
+  - "interview-with-a-java-champion-reflections-on-a-storied-career-and-insights-for-the-next-generation"
 frozen: false
 ---
 

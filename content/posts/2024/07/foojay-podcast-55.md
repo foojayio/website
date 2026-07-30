@@ -21,6 +21,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "foojay-podcast-2"
+  - "controlling-a-led-strip-with-pi4j-and-jbang"
+  - "java-on-raspberry-pi-5-with-pi4j"
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
 frozen: false
 ---
 

@@ -12,6 +12,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"
+  - "immutable-records"
+  - "automatically-creating-microservices-architecture-diagrams"
+  - "become-a-better-java-developer-19-tips-for-staying-ahead-in-2024"
 enlighterjs: true
 frozen: false
 ---

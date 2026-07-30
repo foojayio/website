@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "everyday-shortcuts-in-intellij-idea"
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 frozen: false
 ---
 

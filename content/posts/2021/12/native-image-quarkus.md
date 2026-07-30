@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "book-review-quarkus-for-spring-developers"
+  - "native-spring-boot"
+  - "native-image-micronaut"
+  - "optimizing-java-for-the-cloud-native-era-with-quarkus"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,9 @@ categories:
   - "Books"
 tags:
 related_posts:
+  - "book-review-api-design-patterns"
+  - "book-review-designing-apis-with-swagger-and-openapi"
+  - "book-review-effortless-cloud-native-app-development-using-skaffold"
 frozen: false
 ---
 

@@ -16,6 +16,9 @@ categories:
   - "sql"
 tags:
 related_posts:
+  - "the-serverless-database-you-really-want"
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "data-modeling-in-cassandra-and-astra-db"
 frozen: false
 ---
 

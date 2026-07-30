@@ -20,6 +20,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "why-i-prefer-trunk-based-development"
+  - "foojay-podcast-25"
+  - "foojay-podcast-24"
+  - "enterprise-java-quality-gates-ai"
 frozen: false
 ---
 

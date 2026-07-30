@@ -17,6 +17,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "adelphi-apache-cassandra-testing-goes-cloud-native"
+  - "nosql-use-cases-when-to-use-a-non-relational-database"
+  - "running-your-database-on-openshift-and-codeready-containers"
 enlighterjs: true
 frozen: false
 ---

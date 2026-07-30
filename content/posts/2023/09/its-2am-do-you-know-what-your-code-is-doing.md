@@ -12,6 +12,9 @@ categories:
   - "Observability"
 tags:
 related_posts:
+  - "is-openjdk-just-a-drop-in-replacement"
+  - "cant-reproduce-a-bug"
+  - "building-for-failure-best-practices-for-easy-production-debugging"
 frozen: false
 ---
 

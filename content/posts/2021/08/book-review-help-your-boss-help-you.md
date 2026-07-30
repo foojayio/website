@@ -12,6 +12,9 @@ categories:
   - "Books"
 tags:
 related_posts:
+  - "book-review-seriously-good-software"
+  - "book-review-java-by-comparison"
+  - "new-to-java-some-resources"
 frozen: false
 ---
 

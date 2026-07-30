@@ -12,6 +12,10 @@ categories:
   - "OpenJDK Migration"
 tags:
 related_posts:
+  - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
+  - "a-glance-into-jfr-class-and-method-tagging"
+  - "where-do-you-get-your-java"
+  - "the-files-in-jdk-21"
 enlighterjs: true
 frozen: false
 ---
@@ -121,14 +125,14 @@ curl -fsSLO https://github.com/asymmsystems/eliya-jdk/releases/download/eliya-jd
 # Fetch the signing key, then cross-check its fingerprint 
 # against at least one independent channel before trusting it
 gpg --keyserver keys.openpgp.org --recv-keys 076DE547397A5D27EECEE0B307A90689B71A158F
-gpg --fingerprint <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0b6e6762726a4b6a78726666257872787f6e6678">[email&nbsp;protected]</a>
+gpg --fingerprint <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8cdc4c1d1c9e8c9dbd1c5c586dbd1dbdccdc5db">[email&nbsp;protected]</a>
 # Expected: 076D E547 397A 5D27 EECE  E0B3 07A9 0689 B71A 158F
 
 # Verify the signature on the checksums file, 
 # then verify the checksum on the tarball:
 gpg --verify SHA256SUMS.txt.asc SHA256SUMS.txt
 sha256sum -c SHA256SUMS.txt --ignore-missing
-# Expected: "Good signature from "Eliya Releases (Asymm Systems) &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="20454c495941604153594d4d0e53595354454d53">[email&nbsp;protected]</a>&gt;"" + "OK" on the tarball checksum.</pre>
+# Expected: "Good signature from "Eliya Releases (Asymm Systems) &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8feae3e6f6eecfeefcf6e2e2a1fcf6fcfbeae2fc">[email&nbsp;protected]</a>&gt;"" + "OK" on the tarball checksum.</pre>
 
 The full multi-channel verification ceremony is documented at [verify download](https://asymm.systems/product/eliya/user-guide/verify-download) page.
 

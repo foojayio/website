@@ -10,6 +10,10 @@ categories:
   - "Jakarta EE"
 tags:
 related_posts:
+  - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
+  - "glassfish-is-rolling-forward-whats-new"
+  - "glassfish-embedded-a-simple-way-to-run-jakarta-ee-apps"
+  - "how-to-upgrade-to-jakarta-ee-10-and-glassfish-7-its-much-easier-than-you-think"
 frozen: false
 ---
 

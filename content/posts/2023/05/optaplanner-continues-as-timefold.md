@@ -13,6 +13,10 @@ categories:
   - "Press"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "9-outdated-ideas-about-java"
+  - "jc-ai-newsletter-16"
 frozen: false
 ---
 

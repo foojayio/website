@@ -15,6 +15,9 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "consequences-of-dora-on-java-and-openjdk-with-azul"
+  - "the-impact-of-the-digital-operational-resilience-act-dora-on-java-investment-with-azul"
+  - "connecting-resilience-to-performance-in-relation-to-openjdk"
 frozen: false
 ---
 

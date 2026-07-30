@@ -14,6 +14,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "kubernetes-data-simplicity-getting-started-with-k8ssandra"
+  - "k8ssandra-production-ready-platform-for-running-apache-cassandra-on-kubernetes"
+  - "connect-stateful-workloads-across-kubernetes-clusters"
+  - "running-your-database-on-openshift-and-codeready-containers"
 enlighterjs: true
 frozen: false
 ---
@@ -149,10 +153,10 @@ Copy/paste the following statements into the CQLSH prompt and press enter:
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">CREATE KEYSPACE medusa_test  WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 USE medusa_test;
 CREATE TABLE users (email TEXT PRIMARY KEY, name TEXT, state TEXT);
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bedfd2d7dddbfedbc6dfd3ced2db90ddd1d3">[email&nbsp;protected]</a>', 'Alice Smith', 'TX');
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bbd9d4d9fbdec3dad6cbd7de95d8d4d6">[email&nbsp;protected]</a>', 'Bob Jones', 'VA');
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="432022312c2f03263b222e332f266d202c2e">[email&nbsp;protected]</a>', 'Carol Jackson', 'CA');
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9efaffe8f7fadefbe6fff3eef2fbb0fdf1f3">[email&nbsp;protected]</a>', 'David Yang', 'NV');</pre>
+INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4425282d272104213c25293428216a272b29">[email&nbsp;protected]</a>', 'Alice Smith', 'TX');
+INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff9d909dbf9a879e928f939ad19c9092">[email&nbsp;protected]</a>', 'Bob Jones', 'VA');
+INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a2c1c3d0cdcee2c7dac3cfd2cec78cc1cdcf">[email&nbsp;protected]</a>', 'Carol Jackson', 'CA');
+INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c585d4a55587c59445d514c5059125f5351">[email&nbsp;protected]</a>', 'David Yang', 'NV');</pre>
 
 Check that the rows were properly inserted:
 
@@ -160,10 +164,10 @@ Check that the rows were properly inserted:
 
  email             | name          | state
 -------------------+---------------+-------
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e6878a8f8583a6839e878b968a83c885898b">[email&nbsp;protected]</a> |   Alice Smith |    TX
-   <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6d0f020f2d08150c001d0108430e0200">[email&nbsp;protected]</a> |     Bob Jones |    VA
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b3f3a2d323f1b3e233a362b373e75383436">[email&nbsp;protected]</a> |    David Yang |    NV
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2e4d4f5c41426e4b564f435e424b004d4143">[email&nbsp;protected]</a> | Carol Jackson |    CA
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6a7aaafa5a386a3bea7abb6aaa3e8a5a9ab">[email&nbsp;protected]</a> |   Alice Smith |    TX
+   <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bedcd1dcfedbc6dfd3ced2db90ddd1d3">[email&nbsp;protected]</a> |     Bob Jones |    VA
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="debabfa8b7ba9ebba6bfb3aeb2bbf0bdb1b3">[email&nbsp;protected]</a> |    David Yang |    NV
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89eae8fbe6e5c9ecf1e8e4f9e5eca7eae6e4">[email&nbsp;protected]</a> | Carol Jackson |    CA
 
 (4 rows)</pre>
 
@@ -221,10 +225,10 @@ Check that you can read the data from the previously truncated table:
 
  email             | name          | state
 -------------------+---------------+-------
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7514191c161035100d14180519105b161a18">[email&nbsp;protected]</a> |   Alice Smith |    TX
-   <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ec8e838eac89948d819c8089c28f8381">[email&nbsp;protected]</a> |     Bob Jones |    VA
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8aca9bea1ac88adb0a9a5b8a4ade6aba7a5">[email&nbsp;protected]</a> |    David Yang |    NV
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dfbcbeadb0b39fbaa7beb2afb3baf1bcb0b2">[email&nbsp;protected]</a> | Carol Jackson |    CA
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d5c51545e587d58455c504d5158135e5250">[email&nbsp;protected]</a> |   Alice Smith |    TX
+   <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="10727f72507568717d607c753e737f7d">[email&nbsp;protected]</a> |     Bob Jones |    VA
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="167277607f7256736e777b667a733875797b">[email&nbsp;protected]</a> |    David Yang |    NV
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e6d6f7c61624e6b766f637e626b206d6163">[email&nbsp;protected]</a> | Carol Jackson |    CA
 
 (4 rows)</pre>
 

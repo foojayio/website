@@ -13,6 +13,9 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "why-picnic-picked-java"
+  - "embracing-java-17-heres-what-we-learned-at-picnic"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
 enlighterjs: true
 frozen: false
 ---

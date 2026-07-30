@@ -13,6 +13,9 @@ categories:
   - "Streaming"
 tags:
 related_posts:
+  - "real-time-stream-processing-with-hazelcast-and-streamnative"
+  - "hazelcast-from-embedded-to-client-server"
+  - "hazelcast-kibana-best-buddies-for-exploring-visualizing-data"
 frozen: false
 ---
 

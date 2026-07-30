@@ -14,6 +14,9 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "a-simple-service-with-spring-boot"
+  - "annotation-free-spring"
 enlighterjs: true
 frozen: false
 ---

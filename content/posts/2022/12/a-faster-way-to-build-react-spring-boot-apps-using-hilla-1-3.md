@@ -12,6 +12,10 @@ categories:
   - "Hilla"
 tags:
 related_posts:
+  - "hilla-1-3-faster-react-spring-boot-development"
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
+  - "build-web-apps-in-pure-java-with-vaadin-flow"
+  - "master-detail-with-hilla"
 enlighterjs: true
 frozen: false
 ---

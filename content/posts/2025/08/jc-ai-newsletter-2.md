@@ -19,6 +19,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "ai-newsletter-1"
+  - "speed-up-your-spring-batch-with-native-image-and-graalvm"
+  - "spring-boot-kafka-streams-event-routing-testing"
+  - "spring-boot-local-development-enhancements-lets-compose"
 frozen: false
 ---
 

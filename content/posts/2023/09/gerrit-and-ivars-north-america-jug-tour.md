@@ -13,6 +13,9 @@ categories:
   - "JUGs"
 tags:
 related_posts:
+  - "book-review-openjdk-migration-for-dummies-2"
+  - "get-your-jdk-as-easily-as-possible"
+  - "how-to-run-a-java-application-with-crac-in-a-docker-container"
 frozen: false
 ---
 

@@ -11,6 +11,10 @@ categories:
   - "JEPs"
 tags:
 related_posts:
+  - "your-tls-stack-is-lying-about-zero-copy"
+  - "banned-threadlocal-java-scoped-values"
+  - "java-for-scripting"
+  - "project-panama-for-newbies-part-2"
 enlighterjs: true
 frozen: false
 ---

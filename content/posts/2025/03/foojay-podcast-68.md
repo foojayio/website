@@ -16,6 +16,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "java-24-rolls-out-today-find-out-why-its-aptly-named"
+  - "java-24-whats-new"
+  - "foojay-podcast-57"
+  - "foojay-podcast-45"
 frozen: false
 ---
 

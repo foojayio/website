@@ -14,6 +14,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "fuchs-2024-fepcos-j-multithreaded-server"
+  - "fuchs-2023-fepcos-j-02"
+  - "fuchs-2023-fepcos-j-01"
+  - "fuchs2024-fepcos-j-java-server-and-rust-client"
 frozen: false
 ---
 

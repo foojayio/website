@@ -17,6 +17,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "whats-new-in-the-july-2026-azul-payara-release"
+  - "shaping-jakarta-agentic-ai-together-watch-the-open-conversation"
+  - "bring-ai-into-your-jakarta-ee-apps-with-langchain4j-cdi"
+  - "how-to-kickstart-your-jakarta-ee-11-projects-with-payara-starter"
 enlighterjs: true
 frozen: false
 ---

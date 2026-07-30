@@ -14,6 +14,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "9-outdated-ideas-about-java"
+  - "java-where-the-wild-code-isnt"
+  - "migrating-browser-based-java-applets-to-icedtea-web-using-jnlp"
+  - "effective-cloud-native-java-app-development-with-open-liberty-in-intellij-idea"
 enlighterjs: true
 frozen: false
 ---

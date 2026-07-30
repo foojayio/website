@@ -15,6 +15,9 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "consequences-of-dora-on-java-and-openjdk-with-azul"
+  - "improve-devops-productivity-with-azul-intelligence-cloud-for-any-jvm"
+  - "java-flight-recording-and-analysis-with-azul-mission-control"
 enlighterjs: true
 frozen: false
 ---

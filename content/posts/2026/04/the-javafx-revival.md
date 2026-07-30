@@ -10,6 +10,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "beginning-javafx-with-intellij"
+  - "book-review-learn-javafx-game-and-app-development-with-fxgl-17"
+  - "foojay-podcast-9"
+  - "foojay-podcast-25"
 frozen: false
 ---
 

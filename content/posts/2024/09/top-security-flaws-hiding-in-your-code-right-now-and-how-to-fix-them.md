@@ -13,6 +13,9 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "ensuring-the-right-usage-of-java-21-new-features"
+  - "increase-readability-and-reduce-complexity-with-javas-pattern-matching"
+  - "top-most-detected-issues-in-java-projects"
 enlighterjs: true
 frozen: false
 ---

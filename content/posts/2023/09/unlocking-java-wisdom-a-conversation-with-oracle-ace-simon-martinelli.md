@@ -11,6 +11,10 @@ categories:
   - "Interviews"
 tags:
 related_posts:
+  - "interview-with-a-java-champion-reflections-on-a-storied-career-and-insights-for-the-next-generation"
+  - "journey-of-a-java-champion-bert-jan-schrijvers-path-to-mastery-and-community-leadership"
+  - "cracking-code-and-conventions-an-exclusive-interview-with-nicolas-frankel"
+  - "resilience-in-coding-miro-wengner-on-thriving-in-the-software-industry"
 frozen: false
 ---
 

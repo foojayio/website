@@ -14,6 +14,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"
+  - "foojay-podcast-49"
+  - "foojay-podcast-58"
+  - "foojay-podcast-74"
 enlighterjs: true
 frozen: false
 ---

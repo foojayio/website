@@ -16,6 +16,9 @@ categories:
   - "sql"
 tags:
 related_posts:
+  - "patterns-for-the-design-of-microservices-part-1"
+  - "chronicle-services-building-fast-microservices-with-java"
+  - "6-considerations-when-building-high-performance-java-microservices-with-eda"
 frozen: false
 ---
 

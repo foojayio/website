@@ -11,6 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "7-habits-of-highly-effective-java-coding"
+  - "does-language-still-matter-in-the-age-of-ai-yes-but-the-tradeoff-has-changed"
+  - "effective-coding-with-java-observability"
+  - "hard-things-computer-science"
 enlighterjs: true
 frozen: false
 ---

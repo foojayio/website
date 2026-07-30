@@ -11,6 +11,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "skps-agile-cheatsheet-part-01"
+  - "skps-agile-cheatsheet-part-02"
+  - "how-to-bring-your-java-microservices-to-the-cloud"
 frozen: false
 ---
 

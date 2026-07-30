@@ -13,6 +13,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "a-list-of-cache-providers"
+  - "authenticate-with-openid-connect-and-apache-apisix"
 enlighterjs: true
 frozen: false
 ---

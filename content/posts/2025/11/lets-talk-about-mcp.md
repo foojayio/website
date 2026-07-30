@@ -12,6 +12,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
+  - "the-5-knights-of-the-mcp-apocalypse"
+  - "your-new-ai-powered-coding-buddy-a-guide-to-sonarqube-mcp-server-on-intellij-🤖"
+  - "ai-newsletter-1"
 frozen: false
 ---
 

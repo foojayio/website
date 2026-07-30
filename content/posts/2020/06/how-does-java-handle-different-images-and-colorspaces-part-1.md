@@ -11,6 +11,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "learning-java-as-a-first-language"
+  - "running-single-file-java-source-code-without-compiling-part-1"
+  - "fantastic-jvms-and-where-to-find-them"
+  - "highlights-of-changes-to-the-core-java-platform"
 enlighterjs: true
 frozen: false
 ---

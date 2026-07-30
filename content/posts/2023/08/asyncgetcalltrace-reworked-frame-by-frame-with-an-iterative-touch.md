@@ -14,6 +14,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
+  - "class-loader-hierarchies"
+  - "foojay-podcast-14"
+  - "validating-java-profiling-apis"
 enlighterjs: true
 frozen: false
 ---

@@ -13,6 +13,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "foojay-webinar-live-stream-javas-place-in-the-ai-revolution"
+  - "deep-learning-in-java-for-drug-discovery"
+  - "deep-learning-in-java-for-nuclear-physics-using-deep-netts"
+  - "foojay-podcast-29"
 frozen: false
 ---
 

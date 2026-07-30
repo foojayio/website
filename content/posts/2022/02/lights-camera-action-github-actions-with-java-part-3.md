@@ -13,6 +13,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "devops-101-part-i-ci-cd"
+  - "jenkins-cluster-continuous-integration-delivery-in-jelastic-paas"
+  - "what-is-gitops-what-are-its-benefits"
+  - "whats-new-in-actions-setup-java-5-4-and-5-5-signature-verification-kona-jdk-and-a-better-maven-experience"
 enlighterjs: true
 frozen: false
 ---

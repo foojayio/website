@@ -13,6 +13,10 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "effective-cloud-native-development-open-liberty-vs-code"
+  - "what-are-you-missing-by-debugging-in-vs-code"
+  - "java-testing-with-vs-code"
+  - "java-development-with-vs-code-on-the-raspberry-pi"
 frozen: false
 ---
 

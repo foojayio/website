@@ -14,6 +14,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "building-a-fullstack-imdb-clone-with-a-java-backend-using-sparkjava-and-neo4j"
+  - "native-graphql-api-with-neo4j-auradb-on-heroku"
+  - "faster-integration-tests-with-reusable-testcontainers"
+  - "running-your-database-on-openshift-and-codeready-containers"
 enlighterjs: true
 frozen: false
 ---

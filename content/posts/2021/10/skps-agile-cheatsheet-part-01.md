@@ -11,6 +11,9 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "devops-101-part-i-ci-cd"
+  - "psa-the-risks-of-remote-jdwp-debugging"
 frozen: false
 ---
 

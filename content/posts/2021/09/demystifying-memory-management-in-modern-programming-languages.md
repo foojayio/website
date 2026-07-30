@@ -12,6 +12,9 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "demystifying-jvm-memory-management"
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "concurrency-in-java-and-how-it-compares-with-other-modern-programming-languages"
 frozen: false
 ---
 

@@ -15,6 +15,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "using-ai-to-create-jfr-event-descriptions"
+  - "state-of-open-source-and-free-ai-a-fosdem-recap"
+  - "springboot-3-2-crac"
+  - "jurassic-jdk-migrate-or-extinct"
 enlighterjs: true
 frozen: false
 ---

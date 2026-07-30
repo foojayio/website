@@ -110,7 +110,7 @@ The RV2 was more challenging, as expected with RISC-V hardware.
 #### Java Installation
 
 SDKMAN doesn't yet have RISC-V support to install Java. I made a [GitHub issue](https://github.com/sdkman/sdkman-cli-native/issues/367) and [first pull request](https://github.com/sdkman/sdkman-candidates/pull/74#event-21926242644), and will try to get this moving. I hope this will help more Java developers to experiment with RISC-V.
-![SDKMAN exotic architectures](/images/2026/sbc/sdkman-exotic.png) ![](/images/posts/2026/01/first-test-of-java-on-the-orange-pi-arm-and-risc-v/sdkman-exotic.png)
+![SDKMAN exotic architectures](/images/posts/2026/01/first-test-of-java-on-the-orange-pi-arm-and-risc-v/sdkman-exotic.png) ![](/images/posts/2026/01/first-test-of-java-on-the-orange-pi-arm-and-risc-v/sdkman-exotic.png)
 
 For now, the Ubuntu repositories are the way to go:
 

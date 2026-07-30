@@ -13,6 +13,10 @@ categories:
   - "Trip Reports"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "7-ways-to-improve-your-code-reading-skills"
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "jug-ph-1h-2024-meetups"
 frozen: false
 ---
 

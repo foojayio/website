@@ -12,6 +12,10 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "chopping-monolith"
+  - "foojay-on-mastodon-an-update"
+  - "blockhound-how-it-works"
+  - "why-i-moved-my-blog-to-rife2-after-23-years"
 frozen: false
 ---
 

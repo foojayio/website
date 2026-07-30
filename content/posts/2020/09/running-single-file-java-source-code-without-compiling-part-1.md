@@ -12,6 +12,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "learning-java-as-a-first-language"
+  - "fantastic-jvms-and-where-to-find-them"
+  - "highlights-of-changes-to-the-core-java-platform"
+  - "how-does-java-handle-different-images-and-colorspaces-part-3-introducing-the-bufferedimage"
 enlighterjs: true
 frozen: false
 ---

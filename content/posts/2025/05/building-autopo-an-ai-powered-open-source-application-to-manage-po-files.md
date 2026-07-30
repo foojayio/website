@@ -13,6 +13,10 @@ categories:
   - "LangChain4j"
 tags:
 related_posts:
+  - "langchain4j-musings"
+  - "localize-apps-with-ai"
+  - "managing-distributed-applications-in-kubernetes-using-cilium-and-istio-with-helm-and-operator-for-deployment"
+  - "12-lessons-learned-from-doing-the-one-billion-row-challenge"
 enlighterjs: true
 frozen: false
 ---
@@ -73,7 +77,7 @@ I use English text as the keys in the `.po` files (and, in turn, in the resource
 To keep the translation templates up to date, I use a simple script that uses gettext to extract all translatable strings from the Java source code and update the `.pot` template file whenever new strings are added or existing ones are changed:
 
 <pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#!/bin/sh
-xgettext -ktr -L Java -o po/autopo.pot --copyright-holder='Your copyright info' <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="705d5d1d031719145d120517035d111414021503034d1d15301508111d001c155e131f1d">[email&nbsp;protected]</a> --no-location $(find ../ -name "*.java" -not -path "*/.idea/*" -not -name "*Test.java") –from-code=UTF-8</pre>
+xgettext -ktr -L Java -o po/autopo.pot --copyright-holder='Your copyright info' <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e4c9c98997838d80c986918397c985808096819797d98981a4819c8589948881ca878b89">[email&nbsp;protected]</a> --no-location $(find ../ -name "*.java" -not -path "*/.idea/*" -not -name "*Test.java") –from-code=UTF-8</pre>
 
 Introducing Zanata {#h2-3-introducing-zanata}
 ---------------------------------------------

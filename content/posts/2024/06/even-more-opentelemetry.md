@@ -12,6 +12,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
+  - "couch-to-fully-observed-code-with-spring-boot-3-2-micrometer-tracing-and-digma"
+  - "effective-coding-with-java-observability"
+  - "not-a-lucid-web3-dream-anymore-x402-erc-8004-a2a-and-the-next-wave-of-ai-commerce"
 enlighterjs: true
 frozen: false
 ---

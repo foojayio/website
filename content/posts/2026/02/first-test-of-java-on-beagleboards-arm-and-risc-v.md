@@ -11,6 +11,10 @@ categories:
   - "Embedded"
 tags:
 related_posts:
+  - "first-test-of-java-on-banana-pi-arm-and-risc-v-plus-a-blinking-led-with-pi4j"
+  - "i-got-java-25-running-on-the-risc-v-beagleboard-beaglev-fire"
+  - "first-test-of-java-on-the-visionfive-2-lite-risc-v"
+  - "java-on-single-board-computers-x86-vs-arm-vs-risc-v"
 enlighterjs: true
 frozen: false
 ---
@@ -121,7 +125,7 @@ This board proved challenging due to my Raspberry Pi habits. I initially created
 
 Default username and password are `beagle:temppwd`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d4b6b1b5b3b8b194e5e4fae5e6e4fae5e4fae5e5">[email&nbsp;protected]</a>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ceacabafa9a2ab8efffee0fffcfee0fffee0ffff">[email&nbsp;protected]</a>
 Ubuntu 23.04
 
 BeagleBoard.org Ubuntu 23.04 Console Image 2023-10-19

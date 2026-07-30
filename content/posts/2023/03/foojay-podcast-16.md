@@ -15,6 +15,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "42-practical-java-design-patterns-builder-and-more"
+  - "book-review-practical-design-patterns-for-java-developers"
+  - "thinking-about-massive-throughput-meet-virtual-threads"
+  - "openjdk-january-2026-critical-patch-update-and-patch-set-update-released"
 frozen: false
 ---
 

@@ -14,6 +14,9 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "video-series-javafx-in-action-part-2"
+  - "new-video-series-javafx-in-action-part-1"
+  - "new-user-interface-for-jfx-central-the-home-for-all-javafx-information-part-2"
 frozen: false
 ---
 

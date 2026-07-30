@@ -14,6 +14,9 @@ categories:
   - "Observability"
 tags:
 related_posts:
+  - "observability-is-cultural"
+  - "remote-debugging-and-developer-observability"
+  - "observability-for-jvm-frameworks-with-grafana-in-java-and-kotlin"
 enlighterjs: true
 frozen: false
 ---

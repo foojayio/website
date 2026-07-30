@@ -13,6 +13,9 @@ categories:
   - "OpenJDK Migration"
 tags:
 related_posts:
+  - "book-announcement-openjdk-migration-guide-for-dummies"
+  - "is-openjdk-just-a-drop-in-replacement"
+  - "mastering-the-challenges-of-openjdk-migration"
 frozen: false
 ---
 

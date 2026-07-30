@@ -13,6 +13,8 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "understanding-bson-a-beginners-guide-to-mongodbs-data-format"
+  - "testing-mongodb-atlas-search-java-apps-using-testcontainers"
 enlighterjs: true
 frozen: false
 ---

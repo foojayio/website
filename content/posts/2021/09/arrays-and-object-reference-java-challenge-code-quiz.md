@@ -11,6 +11,9 @@ categories:
   - "Books"
 tags:
 related_posts:
+  - "asynchronous-completablefuture-san-francisco-adventure-java-challenge"
+  - "daemon-thread-java-code-quiz"
+  - "transitioning-to-java-my-first-book"
 enlighterjs: true
 frozen: false
 ---

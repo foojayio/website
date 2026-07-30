@@ -12,6 +12,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "5-things-you-probably-didnt-know-about-java-concurrency"
+  - "a-fresh-look-at-embedded-java"
 frozen: false
 ---
 

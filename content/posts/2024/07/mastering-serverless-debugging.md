@@ -13,6 +13,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "why-is-kubernetes-debugging-so-problematic"
+  - "debugging-kubernetes-part-1-an-introduction"
+  - "software-testing-as-a-debugging-tool"
 frozen: false
 ---
 

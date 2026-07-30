@@ -11,6 +11,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "asynchronous-completablefuture-san-francisco-adventure-java-challenge"
+  - "daemon-thread-java-code-quiz"
+  - "stream-limit-filter-java-challenge"
+  - "neo-stream-search-java-challenge"
 enlighterjs: true
 frozen: false
 ---

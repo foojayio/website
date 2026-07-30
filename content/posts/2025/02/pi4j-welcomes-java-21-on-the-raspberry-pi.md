@@ -13,6 +13,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
+  - "controlling-electronics-with-jbang-on-the-raspberry-pi"
+  - "evolutions-in-the-pi4j-library-by-tom-aarts-and-robert-von-burg"
+  - "interview-frank-delporte-foojay-raspberry-pi-community-manager"
+  - "java-on-raspberry-pi-5-with-pi4j"
 frozen: false
 ---
 

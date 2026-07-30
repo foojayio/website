@@ -14,6 +14,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
+  - "apple-silicon-with-zulu-openjdk-and-intellij-idea"
+  - "are-java-security-updates-important"
+  - "new-between-quarters-security-updates-for-java-what-cspus-mean-for-your-release-pipeline"
 frozen: false
 ---
 

@@ -12,6 +12,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "controlling-an-lcd-display-with-spring-and-thymeleaf-on-the-raspberry-pi"
+  - "vert-x-example-on-the-raspberry-pi-with-a-virtual-potentiometer"
+  - "electronics-micronaut-velocity-with-raspberry-pi"
+  - "using-the-raspberry-pi-sense-hat-with-pi4j-drivers"
 enlighterjs: true
 frozen: false
 ---

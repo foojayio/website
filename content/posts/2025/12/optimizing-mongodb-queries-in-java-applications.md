@@ -13,6 +13,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "best-practices-for-deploying-mongodb-in-kubernetes"
+  - "beyond-keywords-hybrid-search-with-atlas-and-vector-search-part-3"
+  - "building-systems-that-know-why-they-exist-when-data-logic-and-intent-finally-align"
 enlighterjs: true
 frozen: false
 ---
@@ -107,7 +111,7 @@ This pattern stays consistent with standard Java configuration approaches. You c
 
 Many teams also rely on the explain plan built into MongoDB. Unlike relational databases where explain plans often feel abstract, MongoDB's explain output presents actionable information about index usage, examined documents, and winning plans. The two most important metrics are \`nReturned\` and \`totalDocsExamined\`. If the latter is significantly larger than the former, your query is scanning more documents than necessary. This indicates a missing or misaligned index. The explain plan is also helpful when confirming that compound indexes match your query pattern correctly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.users.find({ email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1b0bdb8b2b491b4a9b0bca1bdb4ffb2bebc">[email&nbsp;protected]</a>" }).explain("executionStats");</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.users.find({ email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="57363b3e343217322f363a273b327934383a">[email&nbsp;protected]</a>" }).explain("executionStats");</pre>
 
 The \`executionStats\` mode gives the most practical insights because it includes execution time and the number of index keys scanned. Use this mode when validating a new index or comparing similar queries side by side.
 

@@ -13,6 +13,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "what-is-debugging-in-140-seconds"
+  - "debugging-ram-detect-fix-memory-leaks-in-managed-languages-heap-deep-dive-part-2"
+  - "get-started-with-allocation-profiling"
 frozen: false
 ---
 

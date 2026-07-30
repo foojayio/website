@@ -12,6 +12,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "what-is-debugging-in-140-seconds"
+  - "the-debugger-checklist-part-ii"
+  - "spring-boot-performance-workshop-with-vlad-mihalcea"
+  - "get-started-with-allocation-profiling"
 frozen: false
 ---
 

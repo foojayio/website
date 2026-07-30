@@ -12,6 +12,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "apisix-api-gateway"
+  - "backend-for-frontend-the-demo"
+  - "canary-releases-with-apache-apisix"
+  - "free-tier-api-with-apache-apisix"
 enlighterjs: true
 frozen: false
 ---

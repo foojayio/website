@@ -12,6 +12,9 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "more-foojay-io-fosdem-speaker-predictions-for-2023"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "are-java-security-updates-important"
 frozen: false
 ---
 

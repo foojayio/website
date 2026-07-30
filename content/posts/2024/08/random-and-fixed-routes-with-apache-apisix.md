@@ -12,6 +12,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "poor-mans-api"
+  - "kubernetes-gateway-api"
+  - "advanced-url-rewriting-with-apache-apisix"
+  - "dry-your-apache-apisix-config"
 enlighterjs: true
 frozen: false
 ---

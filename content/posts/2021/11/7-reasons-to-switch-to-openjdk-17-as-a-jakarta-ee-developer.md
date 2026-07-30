@@ -13,6 +13,9 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "are-java-jakarta-ee-application-servers-heavy"
+  - "automatic-wildfly-clustering-managed-domain-scaling-containers"
+  - "can-java-jakarta-ee-do-microservices"
 frozen: false
 ---
 

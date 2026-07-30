@@ -13,6 +13,9 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "do-java-jakarta-ee-standards-matter"
+  - "can-java-jakarta-ee-do-microservices"
+  - "are-java-jakarta-ee-application-servers-heavy"
 frozen: false
 ---
 

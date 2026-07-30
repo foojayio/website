@@ -11,6 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "own-your-pixels-native-fidelity-on-your-schedule"
+  - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
+  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
+  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
 enlighterjs: true
 frozen: false
 ---
@@ -55,7 +59,7 @@ raised.setUIID("RaisedButton");
 row.add(raised);
 form.add(row);
 
-TextField tf = new TextField("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="97fff2fbfbf8d7f2eff6fae7fbf2b9f4f8fa">[email&nbsp;protected]</a>");
+TextField tf = new TextField("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d4bcb1b8b8bb94b1acb5b9a4b8b1fab7bbb9">[email&nbsp;protected]</a>");
 form.add(tf);
 
 Container toggles = new Container(BoxLayout.x());

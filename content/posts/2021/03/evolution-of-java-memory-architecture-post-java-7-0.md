@@ -11,6 +11,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "java-roots-1-java-memory-architecture"
+  - "optimizing-the-garbage-collector-when-migrating-cloud-workloads"
+  - "explained-memory-allocation-pacing-in-azul-zulu-prime-builds-of-openjdk"
+  - "spring-boot-performance-workshop-with-vlad-mihalcea"
 frozen: false
 ---
 

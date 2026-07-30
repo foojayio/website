@@ -1,0 +1,112 @@
+---
+title: "Book review: \"Tidy first?\""
+slug: "book-review-tidy-first"
+date: "2024-01-26T18:30:35+00:00"
+lastmod: "2024-01-27T11:18:35+00:00"
+description: "Very useful insights, and the small bite-sized sections made it an enjoyable, educative read."
+authors:
+  - "simon-verhoeven"
+image: "https://foojay.io/wp-content/uploads/2024/01/tidyfirst.jpeg"
+categories:
+  - "Book Review"
+tags:
+related_posts:
+  - "book-review-api-design-patterns"
+  - "book-review-designing-apis-with-swagger-and-openapi"
+  - "book-review-effortless-cloud-native-app-development-using-skaffold"
+  - "book-review-persistence-best-practices-for-java-applications"
+frozen: false
+---
+
+![Tidy first](https://learning.oreilly.com/library/cover/9781098151232/250w/)
+
+price: €39.99 for the eBook  
+
+publication date: October 2023  
+
+publisher: O'Reilly Media, Inc.  
+
+pages: 99  
+
+ISBN: 9781098151249
+
+Kent Beck, who certainly is not an unknown name in the software development world, recently published this book, which is based upon his newsletter with the same name.
+
+In this book, which is the start of a new series, we dive into the world of tidyings which are small changes that do not alter the behaviour of our applications.
+
+These are similar to refactorings, but smaller in scope and impact, or as described in the book "cute, fuzzy little refactorings that nobody could possibly hate on".
+
+The "?" in the title is certainly not an error, it's not a how-to book but it offers us premises to makes us think and his insights are shared to help us define a framework.
+
+About the book {#h2-0-about-the-book}
+-------------------------------------
+
+This book is the start of a new series, and we start with tidying which he calls "the Pringles of software design" to facilitate future (behavioural) changes.
+
+It is split into 3 sections:
+
+* *Tidyings* what are they?
+* *Managing* if \& when do them?
+* *Theory*: why should we do it?
+
+### Tidyings {#h3-1-tidyings}
+
+Here Beck starts us of with some sample tidyings that make behavioural changes (features) in the future easier.
+
+These small, easily reversible changes that do not need to be preemptively approved, and increase our enjoyment and productivity while coding.
+
+We're walked through 15 examples, some of which may seem quite obvious but it never hurts to think about them, and what they actually mean.
+
+Some examples:
+
+* reading order
+* extract helpers
+* new interface, old implementation
+* ...
+
+### Managing {#h3-2-managing}
+
+Here we dive into the more ephemeral question of: should we tidy up, and if so: when?
+
+Like everyone else (hopefully), I like seeing clean code. But as the saying goes "beauty is in the eye of the beholder". There is only so much time we can spend on tidying, since after all we also need to focus on the added value.
+
+Ken Beck is not dogmatic in his opinion, and approaches these questions from a trade-off point of view and gives us possible approaches.
+
+He provides us with insights to help us think about:
+
+* when to tidy: before behavior changes, after behavioral changes, later, or never
+* when to stop tidying
+* whether or not to combine structural changes and behavioral changes
+* when and how to batch
+
+And as always align with your team.
+
+### Theory {#h3-3-theory}
+
+This was my favourite section. We've diven into the what \& when, but what's the why? Which is certainly a question one can expect when tidying.
+
+Often there can be certain challenges if one cannot properly convey the reasoning for this activity, after all why are you doing this? What's the value for the product owner?
+
+And here's where we dive into metaphors from the financial market \& option trading to help explain the different offered forms of value:
+
+* optionality
+* time/value of money
+* coupling \& cohesion
+* capability of dealing with uncertainty and change
+* reversible changes
+* ...
+
+He does a magnificent job of clearly conveying these concepts, which helps us bridge certain gaps.
+
+My thoughts {#h2-4-my-thoughts}
+-------------------------------
+
+The book contains some very useful insights, and the small bite-sized sections made it an enjoyable, educative read whilst sipping some tea.
+
+While the "what" section might contain a lot of "obvious" things, a refresher never hurts and they are always approached from multiple angles.
+
+This also makes it an easier recommendation, compared to certain more opiniated books.
+
+The "when" \& "why" section are where the real meat was for me.
+
+In the finalle, Ken put a lot of effort into the value (or lack thereof) of doing these changes and gives insights into bridging certain gaps/phrasing towards business-owners to discuss the buy-in.

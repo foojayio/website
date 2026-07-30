@@ -12,6 +12,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "best-practices-for-deploying-mongodb-in-kubernetes"
+  - "beyond-keywords-hybrid-search-with-atlas-and-vector-search-part-3"
+  - "building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb"
 frozen: false
 ---
 

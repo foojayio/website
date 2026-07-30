@@ -13,6 +13,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "book-review-monolith-to-microservices-part-1"
+  - "building-microservices-spring-boot-fat-uber-jar"
+  - "the-right-feature-at-the-right-place"
 enlighterjs: true
 frozen: false
 ---

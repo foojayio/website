@@ -12,6 +12,9 @@ categories:
   - "Books"
 tags:
 related_posts:
+  - "book-announcement-openjdk-migration-guide-for-dummies"
+  - "book-review-openjdk-migration-for-dummies-2"
+  - "book-review-openjdk-migration-for-dummies"
 frozen: false
 ---
 

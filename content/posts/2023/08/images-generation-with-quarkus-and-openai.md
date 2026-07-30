@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "book-review-quarkus-for-spring-developers"
+  - "native-graphql-api-with-neo4j-auradb-on-heroku"
+  - "native-image-quarkus"
+  - "why-we-moved-our-timefold-java-worker-pods-from-amd-to-arm64"
 enlighterjs: true
 frozen: false
 ---

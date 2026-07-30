@@ -13,6 +13,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "foojay-podcast-78"
+  - "foojay-podcast-28"
+  - "azuls-high-performance-java-platform-achieves-historic-first-with-10000-customer-jvms-collaborating-and-sharing-performance-optimizations-cutting-cloud-costs-by-20"
+  - "improve-devops-productivity-with-azul-intelligence-cloud-for-any-jvm"
 frozen: false
 ---
 

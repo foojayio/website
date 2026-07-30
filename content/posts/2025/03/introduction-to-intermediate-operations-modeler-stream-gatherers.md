@@ -11,6 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "exploring-new-features-in-jdk-23-gatherers-upgrades-pipeline-design-pattern-jep-461"
+  - "foojay-podcast-68"
+  - "java-24-whats-new"
+  - "exploring-new-features-in-jdk-23-just-write-and-run-prototyping-with-jep-477-not-only-for-beginners"
 enlighterjs: true
 frozen: false
 ---

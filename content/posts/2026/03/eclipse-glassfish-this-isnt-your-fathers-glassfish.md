@@ -11,6 +11,10 @@ categories:
   - "Jakarta EE"
 tags:
 related_posts:
+  - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
+  - "issues-with-old-glassfish-server-upgrade-to-eclipse-glassfish"
+  - "whats-new-in-the-july-2026-azul-payara-release"
+  - "glassfish-8-0-2-released"
 frozen: false
 ---
 

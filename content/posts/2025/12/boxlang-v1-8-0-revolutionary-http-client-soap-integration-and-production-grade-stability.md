@@ -184,7 +184,7 @@ println( "Status: #result.statusCode#" );
 result = http( "https://api.example.com/users" )
     .post()
     .header( "Content-Type", "application/json" )
-    .body( { name : "John Doe", email : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a7cdc8cfc9e7c2dfc6cad7cbc289c4c8ca">[email&nbsp;protected]</a>" } )
+    .body( { name : "John Doe", email : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef85808781af8a978e829f838ac18c8082">[email&nbsp;protected]</a>" } )
     .send();
 
 // Transform response inline
@@ -612,7 +612,7 @@ Ready to experience revolutionary HTTP capabilities, SOAP integration, and rock-
 **Upgrade to BoxLang 1.8.0 today!**
 
 <pre class="EnlighterJSRAW" data-enlighter-language="java"># Update with CommandBox
-box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5d7dacdd9d4dbd2f5849b8d9b85">[email&nbsp;protected]</a>
+box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9dfff2e5f1fcf3faddacb3a5b3ad">[email&nbsp;protected]</a>
 
 # Or download from boxlang.io
 https://boxlang.io/download</pre>

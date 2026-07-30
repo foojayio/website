@@ -13,6 +13,10 @@ categories:
   - "Java Beginner"
 tags:
 related_posts:
+  - "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"
+  - "using-the-azul-zulu-docker-official-images-from-simple-pull-to-lean-container"
+  - "the-road-to-docker-official-images-for-java-the-azul-zulu-story"
+  - "new-between-quarters-security-updates-for-java-what-cspus-mean-for-your-release-pipeline"
 enlighterjs: true
 frozen: false
 ---

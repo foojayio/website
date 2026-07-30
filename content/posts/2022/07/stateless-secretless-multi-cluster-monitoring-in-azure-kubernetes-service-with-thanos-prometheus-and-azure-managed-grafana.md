@@ -11,6 +11,10 @@ categories:
   - "Developer Tools"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "book-review-effortless-cloud-native-app-development-using-skaffold"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 enlighterjs: true
 frozen: false
 ---
@@ -68,7 +72,7 @@ metadata:
   name: letsencrypt-prod
 spec:
   acme:
-    email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="096c64686065496c64686065276a6664">[email&nbsp;protected]</a>
+    email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9bfef6faf2f7dbfef6faf2f7b5f8f4f6">[email&nbsp;protected]</a>
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-prod

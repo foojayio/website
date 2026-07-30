@@ -14,6 +14,9 @@ categories:
   - "JUGs"
 tags:
 related_posts:
+  - "the-story-of-a-java-17-native-memory-leak"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
 frozen: false
 ---
 

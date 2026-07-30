@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "why-home-assistant"
+  - "why-i-love-intellij-idea-for-java-development"
+  - "run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty"
+  - "getting-a-single-value-from-a-devices-state-in-home-assistant"
 frozen: false
 ---
 

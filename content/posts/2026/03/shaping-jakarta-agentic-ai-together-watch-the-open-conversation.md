@@ -16,6 +16,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "bring-ai-into-your-jakarta-ee-apps-with-langchain4j-cdi"
+  - "boost-developer-productivity-with-payara-server-maven-plugin-ai-agent"
+  - "whats-new-in-the-july-2026-azul-payara-release"
+  - "jurassic-jdk-migrate-or-extinct"
 frozen: false
 ---
 

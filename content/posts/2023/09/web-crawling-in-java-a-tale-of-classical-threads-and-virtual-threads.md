@@ -12,6 +12,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "42-practical-java-design-patterns-builder-and-more"
+  - "5-great-reasons-to-use-jooq"
+  - "virtual-thread-pinning-field-guide"
 enlighterjs: true
 frozen: false
 ---

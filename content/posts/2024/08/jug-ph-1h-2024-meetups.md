@@ -14,6 +14,10 @@ categories:
   - "Trip Reports"
 tags:
 related_posts:
+  - "jug-ph-1-day-modern-java-development-bootcamp"
+  - "jmanc-2024-trip-report"
+  - "springone-tlv-world-tour-trip-report"
+  - "jug-ph-meetup-4-and-5"
 frozen: false
 ---
 

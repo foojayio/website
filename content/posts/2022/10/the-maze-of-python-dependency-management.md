@@ -12,6 +12,9 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "controlling-electronics-with-jbang-on-the-raspberry-pi"
+  - "continuous-production-profiling-and-diagnostics"
 enlighterjs: true
 frozen: false
 ---

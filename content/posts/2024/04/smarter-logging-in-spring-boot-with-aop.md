@@ -11,6 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "aspect-oriented-programming-aop"
+  - "microservices-design-principles-for-well-crafted-architecture"
+  - "evolution-of-microservices-from-soa-to-modern-architecture"
+  - "building-a-declarative-api-with-spring-aop-and-spel"
 enlighterjs: true
 frozen: false
 ---

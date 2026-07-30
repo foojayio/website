@@ -12,6 +12,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "7-ways-to-contribute-to-openjdk"
+  - "effective-java-logging"
 enlighterjs: true
 frozen: false
 ---

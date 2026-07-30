@@ -12,6 +12,9 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "better-error-handling-for-your-spring-boot-rest-apis"
+  - "for-the-record"
+  - "generating-code-with-intellij-idea"
 enlighterjs: true
 frozen: false
 ---

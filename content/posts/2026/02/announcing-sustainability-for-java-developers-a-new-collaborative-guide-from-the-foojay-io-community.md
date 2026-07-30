@@ -18,6 +18,10 @@ categories:
   - "Books"
 tags:
 related_posts:
+  - "transitioning-to-java-my-first-book"
+  - "42-practical-java-design-patterns-builder-and-more"
+  - "5-great-reasons-to-use-jooq"
+  - "kotlin-delegation"
 frozen: false
 ---
 

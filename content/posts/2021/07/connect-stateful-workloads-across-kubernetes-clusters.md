@@ -16,6 +16,10 @@ categories:
   - "Kubernetes"
 tags:
 related_posts:
+  - "kubernetes-data-simplicity-getting-started-with-k8ssandra"
+  - "backing-up-k8ssandra-with-minio"
+  - "k8ssandra-production-ready-platform-for-running-apache-cassandra-on-kubernetes"
+  - "running-your-database-on-openshift-and-codeready-containers"
 frozen: false
 ---
 

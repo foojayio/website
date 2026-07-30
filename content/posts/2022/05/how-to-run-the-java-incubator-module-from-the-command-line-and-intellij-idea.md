@@ -12,6 +12,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "how-to-run-project-loom-from-intellij-idea"
+  - "setting-up-and-working-with-apache-tomcat-in-intellij-idea-ultimate"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 enlighterjs: true
 frozen: false
 ---

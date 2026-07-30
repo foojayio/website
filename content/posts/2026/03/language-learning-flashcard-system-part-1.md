@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "abstracting-data-access-in-java-with-the-dao-pattern"
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "atlas-searching-with-the-java-driver"
+  - "best-practices-for-deploying-mongodb-in-kubernetes"
 enlighterjs: true
 frozen: false
 ---
@@ -151,7 +155,7 @@ Then run your application again.
 
 Finally, if we provide a URI, the app starts:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MONGODB_URI=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="265647555551495442665f4953540b454a5355524354084b49484149424408484352">[email&nbsp;protected]</a>/srsapp ./mvnw spring-boot:run</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MONGODB_URI=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1b1a0b2b2b6aeb3a581b8aeb4b3eca2adb4b2b5a4b3efacaeafa6aea5a3efafa4b5">[email&nbsp;protected]</a>/srsapp ./mvnw spring-boot:run</pre>
 
 And you should see in the log messages from org.mongodb.driver.client
 

@@ -15,6 +15,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "bring-streaming-to-apache-cassandra-with-apache-pulsar"
+  - "the-critical-role-streaming-plays-in-a-data-stack"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "apisix-api-gateway"
+  - "back-to-basics-accessing-kubernetes-pods"
+  - "backend-for-frontend-the-demo"
+  - "spring-boot-api-documentation-redocusaurus"
 frozen: false
 ---
 

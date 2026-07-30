@@ -16,6 +16,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "foojay-podcast-14"
+  - "continuous-production-profiling-and-diagnostics"
+  - "contributing-to-openjdk-mission-control"
+  - "virtual-thread-pinning-field-guide"
 frozen: false
 ---
 

@@ -12,6 +12,10 @@ categories:
   - "Developer Tools"
 tags:
 related_posts:
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "7-ways-to-contribute-to-openjdk"
+  - "a-closer-look-at-jfr-streaming"
+  - "boxlang-neovim-plugin-released"
 enlighterjs: true
 frozen: false
 ---

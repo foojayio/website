@@ -16,6 +16,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "7-ways-to-improve-your-code-reading-skills"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "analyzing-dependencies-in-intellij-idea"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 frozen: false
 ---
 

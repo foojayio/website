@@ -11,6 +11,10 @@ categories:
   - "Interviews"
 tags:
 related_posts:
+  - "from-assembler-to-chat-gpt-steve-poole-on-the-shifting-landscape-of-programming"
+  - "discovering-the-secrets-to-success-an-exclusive-interview-with-java-champion-michael-p-redlich"
+  - "navigating-the-challenges-of-modern-software-development-an-exclusive-interview-with-shai-almog"
+  - "interview-with-a-java-champion-reflections-on-a-storied-career-and-insights-for-the-next-generation"
 frozen: false
 ---
 

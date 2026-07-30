@@ -12,6 +12,9 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "building-simple-home-assistant-langchain4j-raspberry-pi"
+  - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
+  - "getting-started-with-intellij-idea"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "how-to-identify-the-underlying-causes-of-connection-timeout-errors-for-mongodb-with-java"
+  - "java-virtual-threads-in-action-optimizing-mongodb-operation"
+  - "understanding-bson-a-beginners-guide-to-mongodbs-data-format"
+  - "clean-and-modular-java-a-hexagonal-architecture-approach"
 enlighterjs: true
 frozen: false
 ---
@@ -151,7 +155,7 @@ Depending on the modelling technique chosen, the documents inside in the collect
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
   _id: ObjectId("60d5ec9f4b1a8e2a1c8f7a1"), 
   name: "J.K. Rowling",
-  email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="701a1b021f071c191e17301508111d001c155e131f1d">[email&nbsp;protected]</a>",
+  email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3953524b564e5550575e795c41585449555c175a5654">[email&nbsp;protected]</a>",
   nationality: "British",
   books: [
     ObjectId("60d5ec9f4b1a8e2a1c8f7a2"), 

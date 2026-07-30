@@ -12,6 +12,10 @@ categories:
   - "Webinar"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "7-ways-to-contribute-to-openjdk"
+  - "9-outdated-ideas-about-java"
+  - "azul-brings-java-from-edge-to-cloud"
 frozen: false
 ---
 

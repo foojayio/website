@@ -11,6 +11,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "speed-up-your-spring-batch-with-native-image-and-graalvm"
+  - "web-app-startup-in-3ms-with-rife2-and-graalvm"
+  - "cross-platform-development-in-java-with-gluon-and-graalvm"
+  - "cross-platform-development-in-java-with-gluon-and-graalvm-part-2"
 enlighterjs: true
 frozen: false
 ---
@@ -203,7 +207,7 @@ jobs:
           ./mvnw -Pnative package
 
       - name: Archive Release
-        uses: thedoctor0/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="23594a530e51464f4642504663130d140d16">[email&nbsp;protected]</a>
+        uses: thedoctor0/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aed4c7de83dccbc2cbcfddcbee9e8099809b">[email&nbsp;protected]</a>
         with:
           type: 'zip'
           filename: "raffle-${{ matrix.platform }}.zip"

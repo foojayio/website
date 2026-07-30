@@ -16,6 +16,9 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "testing-and-local-development-made-simpler-with-testcontainers-desktop-app"
+  - "faster-integration-tests-with-reusable-testcontainers"
+  - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
 frozen: false
 ---
 

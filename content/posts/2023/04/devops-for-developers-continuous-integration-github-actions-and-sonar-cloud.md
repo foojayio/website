@@ -13,6 +13,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "devops-for-developers-introduction-version-control"
+  - "java-serialization-filtering-prevent-0-day-security-vulnerabilities"
+  - "is-it-time-to-go-back-to-the-monolith"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 enlighterjs: true
 frozen: false
 ---
@@ -221,7 +225,7 @@ void testActivateAccount() throws Exception {
     final String activationKey = "some activation key";
     User user = new User();
     user.setLogin("activate-account");
-    user.setEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="debfbdaab7a8bfaabbf3bfbdbdb1abb0aa9ebba6bfb3aeb2bbf0bdb1b3">[email&nbsp;protected]</a>");
+    user.setEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef8e8c9b86998e9b8ac28e8c8c809a819baf8a978e829f838ac18c8082">[email&nbsp;protected]</a>");
     user.setPassword(RandomStringUtils.randomAlphanumeric(60));
     user.setActivated(false);
     user.setActivationKey(activationKey);

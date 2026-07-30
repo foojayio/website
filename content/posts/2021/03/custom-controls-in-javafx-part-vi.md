@@ -11,6 +11,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "custom-controls-in-javafx-part-vii"
+  - "custom-controls-in-javafx-part-v"
+  - "custom-controls-in-javafx-part-iv"
+  - "custom-controls-in-javafx-part-iii"
 enlighterjs: true
 frozen: false
 ---

@@ -13,6 +13,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "ai4devs-schedule-published"
+  - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
+  - "are-java-security-updates-important"
+  - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"
 frozen: false
 ---
 

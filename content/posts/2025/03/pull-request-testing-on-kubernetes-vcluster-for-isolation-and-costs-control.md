@@ -13,6 +13,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "how-to-beautify-your-github-repo"
+  - "is-it-time-to-go-back-to-the-monolith"
+  - "langchain4j-musings"
+  - "my-final-take-on-gradle-vs-maven"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "the-maze-of-python-dependency-management"
+  - "java-panama-polyglot-part-3"
+  - "compiling-java-code-executing-bytecode"
+  - "python-magic-methods-part-1"
 enlighterjs: true
 frozen: false
 ---

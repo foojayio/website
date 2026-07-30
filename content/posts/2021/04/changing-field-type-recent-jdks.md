@@ -11,6 +11,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
+  - "avoid-the-trojan-horse-in-your-pom-xml-sonarqube-advanced-security-part-3"
+  - "spring-remote-code-execution-vulnerability"
+  - "java-thread-programming-part-2"
 enlighterjs: true
 frozen: false
 ---

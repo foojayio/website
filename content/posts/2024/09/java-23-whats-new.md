@@ -15,6 +15,9 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "java-22-whats-new"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "java-where-the-wild-code-isnt"
 enlighterjs: true
 frozen: false
 ---

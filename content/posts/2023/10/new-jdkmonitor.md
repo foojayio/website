@@ -11,6 +11,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "device-monitoring-with-javafx-and-fxgl"
+  - "book-review-openjdk-migration-for-dummies-2"
+  - "gerrit-and-ivars-north-america-jug-tour"
+  - "indexing-all-of-wikipedia-on-a-laptop"
 frozen: false
 ---
 

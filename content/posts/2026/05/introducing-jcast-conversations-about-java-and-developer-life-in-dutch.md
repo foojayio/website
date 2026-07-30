@@ -13,6 +13,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "quarkus-unpacked-insights-from-the-foojay-podcast"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+  - "foojay-podcast-92"
+  - "optimizing-the-garbage-collector-when-migrating-cloud-workloads"
 frozen: false
 ---
 

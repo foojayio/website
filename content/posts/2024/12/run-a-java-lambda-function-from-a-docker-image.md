@@ -14,6 +14,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "azul-provides-the-crac-in-aws-snapstart-builds"
+  - "exceptions-lambdas"
+  - "method-reference-vs-lambda-java-challenge"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 enlighterjs: true
 frozen: false
 ---

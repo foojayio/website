@@ -16,6 +16,10 @@ categories:
   - "Student"
 tags:
 related_posts:
+  - "controlling-an-lcd-display-with-spring-and-thymeleaf-on-the-raspberry-pi"
+  - "vert-x-example-on-the-raspberry-pi-with-a-virtual-potentiometer"
+  - "blink-a-led-on-raspberry-pi-with-vaadin"
+  - "foojay-podcast-40"
 frozen: false
 ---
 

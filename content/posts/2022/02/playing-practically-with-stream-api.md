@@ -11,6 +11,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "book-review-java-by-comparison"
+  - "journeys-in-java-level-1-building-an-empire-of-microservices"
+  - "debugging-streams-and-collections"
 enlighterjs: true
 frozen: false
 ---

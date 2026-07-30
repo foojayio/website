@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "creating-a-snake-game-with-javafx-fxgl-in-three-pair-programming-sessions"
+  - "the-javafx-revival"
+  - "wordish-with-javafx-part-5"
+  - "wordish-with-javafx-part-4"
 enlighterjs: true
 frozen: false
 ---
@@ -193,7 +197,7 @@ To build the Windows version of the application, Visual Studio is required, whic
 * [egor-tensin/vs-shell](https://github.com/egor-tensin/vs-shell): GitHub action to setup the Visual Studio shell environment.
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- name: Add msbuild to PATH
-  uses: microsoft/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0774627372772a6a7465726e6b6347713629372935">[email&nbsp;protected]</a>
+  uses: microsoft/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b283e2f2e2b763628392e32373f1b2d6a756b7569">[email&nbsp;protected]</a>
 - name: Visual Studio shell
   uses: egor-tensin/vs-shell@v1</pre>
 

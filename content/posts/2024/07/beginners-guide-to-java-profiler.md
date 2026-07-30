@@ -17,6 +17,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "debugger-godmode-hacking-a-jvm-application-with-the-debugger"
+  - "debug-unresponsive-apps"
+  - "debug-without-breakpoints"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 enlighterjs: true
 frozen: false
 ---

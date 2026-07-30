@@ -14,6 +14,10 @@ categories:
   - "Jakarta EE"
 tags:
 related_posts:
+  - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
+  - "whats-new-in-the-july-2026-azul-payara-release"
+  - "enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs"
+  - "bring-ai-into-your-jakarta-ee-apps-with-langchain4j-cdi"
 enlighterjs: true
 frozen: false
 ---

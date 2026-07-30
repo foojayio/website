@@ -13,6 +13,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "foojay-podcast-71"
+  - "foojay-podcast-68"
+  - "foojay-podcast-57"
+  - "openjdk-january-2026-critical-patch-update-and-patch-set-update-released"
 frozen: false
 ---
 

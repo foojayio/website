@@ -18,6 +18,10 @@ categories:
   - "Testing"
 tags:
 related_posts:
+  - "debug-like-a-senior-developer"
+  - "a-short-primer-on-java-debugging-internals"
+  - "package-checker-find-fix-vulnerabilities-with-intellij-idea-ultimate"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 frozen: false
 ---
 

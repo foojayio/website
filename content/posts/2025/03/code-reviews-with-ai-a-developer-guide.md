@@ -13,6 +13,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "boldness-in-refactoring"
+  - "book-review-get-your-hands-dirty-on-clean-architecture"
+  - "debug-like-a-senior-developer"
 frozen: false
 ---
 

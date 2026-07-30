@@ -38,7 +38,7 @@ With this announcement, Foojay also announces its first event, which will be at 
 *** ** * ** ***
 
 ***F*** ***oojay**
-[Foojay](https://foojay.io/), a place for Friends of OpenJDK, is a fast-growing community focused around the OpenJDK, providing tips and insights for Java developers, and user-focused Java and OpenJDK technical dashboards with free information on all things Java. A dedicated blogging area is available on Foojay to anyone who has thoughts or code to share on topics relevant to the Java ecosystem. To contribute, send a mail to [\[email protected\]](/cdn-cgi/l/email-protection#a1c9c4cdcdcee1c7cececbc0d88fc8ce).* *Follow us on Twitter [@foojayio](https://twitter.com/foojayio).*
+[Foojay](https://foojay.io/), a place for Friends of OpenJDK, is a fast-growing community focused around the OpenJDK, providing tips and insights for Java developers, and user-focused Java and OpenJDK technical dashboards with free information on all things Java. A dedicated blogging area is available on Foojay to anyone who has thoughts or code to share on topics relevant to the Java ecosystem. To contribute, send a mail to [\[email protected\]](/cdn-cgi/l/email-protection#fb939e979794bb9d9494919a82d59294).* *Follow us on Twitter [@foojayio](https://twitter.com/foojayio).*
 
 ***Azul**
 [Azul](https://www.azul.com/) is the largest company 100% focused on Java and the Java Virtual Machine (JVM), providing the world's most trusted open source Java enterprise platform. Azul's Java runtimes power Microsoft Azure; the cloud infrastructure of companies like Bazaarvoice, Priceline, and Workday; and the operations and products of Avaya, BMW, Credit Suisse, Deutsche Telekom, LG, Mastercard, Mizuho, and Software AG. Azul's customers include 27% of the Fortune 100, 50% of Forbes Top 10 World's Most Valuable Brands, and all 10 of the world's Top 10 financial trading companies. Azul solutions are available for developers, ISVs, enterprises with on-prem and cloud deployments, as well as for OEMs building embedded and IoT devices. Follow us on Twitter [@AzulSystems](https://twitter.com/azulsystems).*
@@ -60,6 +60,6 @@ With this announcement, Foojay also announces its first event, which will be at 
 **Media Contact**   
 
 David Oro  
-[\[email protected\]](/cdn-cgi/l/email-protection#ef8e959a83af809d80889d809a9fc18c8082)  
+[\[email protected\]](/cdn-cgi/l/email-protection#b6d7ccc3daf6d9c4d9d1c4d9c3c698d5d9db)  
 
 +1-707-558-8585

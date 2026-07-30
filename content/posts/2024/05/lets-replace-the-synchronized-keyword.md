@@ -13,6 +13,10 @@ categories:
   - "JDK21"
 tags:
 related_posts:
+  - "benchmark-jdbc-connectors-and-java-21-virtual-threads"
+  - "how-to-diagnose-and-mitigate-pinning-in-javas-virtual-thread-execution"
+  - "web-crawling-in-java-a-tale-of-classical-threads-and-virtual-threads"
+  - "relearning-java-thread-primitives"
 enlighterjs: true
 frozen: false
 ---

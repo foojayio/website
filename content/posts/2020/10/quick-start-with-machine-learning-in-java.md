@@ -12,6 +12,9 @@ categories:
   - "Machine Learning"
 tags:
 related_posts:
+  - "visual-recognition-for-chess-with-deep-learning-in-java-on-android"
+  - "deep-learning-in-java-for-drug-discovery"
+  - "deep-learning-in-java-for-nuclear-physics-using-deep-netts"
 enlighterjs: true
 frozen: false
 ---

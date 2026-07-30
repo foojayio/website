@@ -11,6 +11,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "java-thread-programming-part-9"
+  - "java-thread-programming-part-8"
+  - "java-thread-programming-part-7"
+  - "java-thread-programming-part-11"
 enlighterjs: true
 frozen: false
 ---

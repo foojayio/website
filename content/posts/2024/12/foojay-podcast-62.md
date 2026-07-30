@@ -14,6 +14,10 @@ categories:
   - "Project Panama"
 tags:
 related_posts:
+  - "run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty"
+  - "foojay-podcast-61"
+  - "foojay-podcast-60"
+  - "foojay-podcast-47"
 frozen: false
 ---
 

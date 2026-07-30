@@ -12,6 +12,9 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "evolution-of-microservices"
+  - "how-to-bring-your-java-microservices-to-the-cloud"
+  - "microprofile-metrics-with-prometheus-and-grafana"
 enlighterjs: true
 frozen: false
 ---

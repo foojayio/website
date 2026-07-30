@@ -15,6 +15,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "automatically-creating-microservices-architecture-diagrams"
+  - "billions-of-messages-tcp-ip"
+  - "building-custom-solutions-vs-buy-and-build-software"
+  - "intro-to-the-boxlang-formatter"
 frozen: false
 ---
 

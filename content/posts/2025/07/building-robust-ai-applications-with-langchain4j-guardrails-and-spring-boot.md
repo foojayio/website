@@ -15,6 +15,10 @@ categories:
   - "Machine Learning"
 tags:
 related_posts:
+  - "ai-powered-chat-application-using-ibm-watsonx-ai-and-spring-ai"
+  - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
+  - "ai-driven-testing-best-practices"
+  - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"
 enlighterjs: true
 frozen: false
 ---
@@ -923,7 +927,7 @@ Demo {#h2-12-demo}
 ------------------
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Clone the project
-git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="01666875416668756974632f626e6c">[email&nbsp;protected]</a>:rokon12/guardrails-demo.git
+git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81e6e8f5c1e6e8f5e9f4e3afe2eeec">[email&nbsp;protected]</a>:rokon12/guardrails-demo.git
 cd guardrails-demo
 
 # Set your OpenAI API key

@@ -12,6 +12,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "what-the-heck-is-project-loom-for-java"
+  - "an-introduction-to-scoped-values-in-java"
+  - "thinking-about-massive-throughput-meet-virtual-threads"
+  - "virtual-thread-pinning-field-guide"
 enlighterjs: true
 frozen: false
 ---

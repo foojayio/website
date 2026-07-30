@@ -13,6 +13,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "changes-included-in-release-24-08-of-azul-zing-builds-of-openjdk"
+  - "indexing-all-of-wikipedia-on-a-laptop"
+  - "new-jdkmonitor"
+  - "javafinder-keeping-track-of-java-inventories"
 frozen: false
 ---
 

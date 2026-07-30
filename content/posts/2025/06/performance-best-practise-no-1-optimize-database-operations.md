@@ -14,6 +14,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "a-dissection-of-java-jdbc-to-postgresql-connections"
+  - "a-dissection-of-java-jdbc-to-postgresql-connections-part-2-batching"
+  - "a-list-of-cache-providers"
 enlighterjs: true
 frozen: false
 ---

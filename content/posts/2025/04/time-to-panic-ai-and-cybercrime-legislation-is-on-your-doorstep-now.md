@@ -11,6 +11,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "crowd-publishing-the-10x-java-dev-book"
+  - "foojay-podcast-50"
+  - "foojay-podcast-7"
+  - "announcing-java-unscripted-an-asynchronous-exploration-of-excellence"
 frozen: false
 ---
 

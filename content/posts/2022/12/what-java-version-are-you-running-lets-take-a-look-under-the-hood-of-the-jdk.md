@@ -12,6 +12,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "best-practice-comparative-evaluation-of-jdk-setups-azul-zulu-prime-vs-openjdk"
+  - "jdb"
+  - "virtual-thread-pinning-field-guide"
 enlighterjs: true
 frozen: false
 ---

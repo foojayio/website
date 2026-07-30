@@ -11,6 +11,9 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "foojay-podcast-23"
+  - "breaking-the-code-how-chris-newland-is-changing-the-game-in-jvm-performance"
+  - "java-profiling-overview"
 frozen: false
 ---
 

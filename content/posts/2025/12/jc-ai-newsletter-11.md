@@ -18,6 +18,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "jc-ai-newsletter-14"
+  - "jc-ai-newsletter-8"
+  - "jc-ai-newsletter-2"
+  - "spring-ai-agents-no-second-runtime"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
+  - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
+  - "class-loader-hierarchies"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 enlighterjs: true
 frozen: false
 ---

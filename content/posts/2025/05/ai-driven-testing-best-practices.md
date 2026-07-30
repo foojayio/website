@@ -12,6 +12,10 @@ categories:
   - "Testing"
 tags:
 related_posts:
+  - "increase-readability-and-reduce-complexity-with-javas-pattern-matching"
+  - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"
+  - "foojay-podcast-49"
+  - "foojay-podcast-58"
 enlighterjs: true
 frozen: false
 ---

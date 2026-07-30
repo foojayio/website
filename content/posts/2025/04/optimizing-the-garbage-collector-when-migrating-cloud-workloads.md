@@ -16,6 +16,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "running-javafx-applications-on-arm-with-azul-zulu"
+  - "achieving-high-throughput-without-sacrificing-latency"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
 frozen: false
 ---
 

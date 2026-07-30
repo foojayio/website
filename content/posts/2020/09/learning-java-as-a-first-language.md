@@ -12,6 +12,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "running-single-file-java-source-code-without-compiling-part-1"
+  - "fantastic-jvms-and-where-to-find-them"
+  - "highlights-of-changes-to-the-core-java-platform"
+  - "how-does-java-handle-different-images-and-colorspaces-part-3-introducing-the-bufferedimage"
 frozen: false
 ---
 

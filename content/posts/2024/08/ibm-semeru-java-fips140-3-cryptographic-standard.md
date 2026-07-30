@@ -12,6 +12,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "where-do-you-get-your-java"
+  - "semeru-v11-beyond-oct-2024"
+  - "start-using-java-21"
+  - "pseudorandom-number-generator"
 frozen: false
 ---
 

@@ -13,6 +13,9 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "foojay-podcast-6"
+  - "how-to-use-java-dtos-to-stay-secure"
+  - "a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-1"
 enlighterjs: true
 frozen: false
 ---

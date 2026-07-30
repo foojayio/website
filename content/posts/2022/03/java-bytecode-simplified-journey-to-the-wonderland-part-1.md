@@ -11,6 +11,9 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "java-bytecode-simplified-journey-to-the-wonderland-part-2"
+  - "compiling-java-code-executing-bytecode"
+  - "what-is-jvm-bytecode"
 enlighterjs: true
 frozen: false
 ---

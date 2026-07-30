@@ -11,6 +11,8 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "skps-agile-cheatsheet-part-01"
+  - "skps-agile-cheatsheet-part-03"
 frozen: false
 ---
 

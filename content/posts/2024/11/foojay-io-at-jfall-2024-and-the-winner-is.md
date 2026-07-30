@@ -12,6 +12,9 @@ categories:
   - "Foojay"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "java-where-the-wild-code-isnt"
+  - "foojay-podcast-58"
 frozen: false
 ---
 

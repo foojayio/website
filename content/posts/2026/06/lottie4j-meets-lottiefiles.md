@@ -11,6 +11,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "introducing-lottie4j-a-javafx-library-to-parse-and-play-lottie-animation-files"
+  - "testing-lottie4j-javafx-animations-in-github-actions-with-javafx-26-headless"
+  - "lottie4j-1-2-0-dotlottie-support-marker-playback-cropping-and-a-big-speed-boost"
+  - "lottie4j-1-1-0-better-rendering-smarter-debugging"
 frozen: false
 ---
 

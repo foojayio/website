@@ -11,15 +11,19 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "javafx-links-of-april-2025"
+  - "javafx-links-of-march-2025"
+  - "javafx-links-of-february-2025"
+  - "javafx-links-of-january-2025"
 frozen: false
 ---
 
-Here is the overview of the JavaFX LinksOfTheMonth of April 2025. You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via links@jfx-central.com.
+Here is the overview of the JavaFX LinksOfTheMonth of April 2025. You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
 
 Core {#h2-0-core}
 -----------------
 
-* From the links@jfx-central.com mailing list: "*The first Early Access (EA) build of JavaFX with the Windows Direct3D 12 rendering pipeline is [now available](https://jdk.java.net/javafxdirect3d12/). ... At this stage D3D12 backend is feature-complete, however optimization and performance have not been the focus yet. There?s still a number of improvements and adjustments that must be made in order to match/surpass D3D backend. Notable areas known to us which need improvements are the 3D pipeline and cases where color blending is used - they will work but they will be (much) slower than D3D. Please keep that in mind when testing. ... We look forward to your feedback.*"
+* From the [\[email protected\]](/cdn-cgi/l/email-protection) mailing list: "*The first Early Access (EA) build of JavaFX with the Windows Direct3D 12 rendering pipeline is [now available](https://jdk.java.net/javafxdirect3d12/). ... At this stage D3D12 backend is feature-complete, however optimization and performance have not been the focus yet. There?s still a number of improvements and adjustments that must be made in order to match/surpass D3D backend. Notable areas known to us which need improvements are the 3D pipeline and cases where color blending is used - they will work but they will be (much) slower than D3D. Please keep that in mind when testing. ... We look forward to your feedback.*"
 
 Applications {#h2-1-applications}
 ---------------------------------

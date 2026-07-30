@@ -12,6 +12,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "building-simple-home-assistant-langchain4j-raspberry-pi"
+  - "getting-a-single-value-from-a-devices-state-in-home-assistant"
+  - "the-home-assistant-model"
+  - "why-home-assistant"
 enlighterjs: true
 frozen: false
 ---

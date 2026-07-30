@@ -13,6 +13,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "the-basics-of-breakpoints-you-might-not-know"
+  - "what-is-debugging-in-140-seconds"
+  - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
+  - "get-started-with-allocation-profiling"
 enlighterjs: true
 frozen: false
 ---

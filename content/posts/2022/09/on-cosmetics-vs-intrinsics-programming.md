@@ -12,6 +12,10 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "blockhound-how-it-works"
+  - "chopping-monolith"
+  - "foojay-podcast-20"
 enlighterjs: true
 frozen: false
 ---

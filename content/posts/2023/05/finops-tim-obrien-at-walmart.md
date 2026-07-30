@@ -12,6 +12,7 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "finops-john-stuart-at-azul"
 frozen: false
 ---
 

@@ -11,6 +11,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "transitioning-to-java-my-first-book"
+  - "journeys-in-java-level-9-docker-compose-all-the-things"
+  - "virtual-thread-pinning-field-guide"
+  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 enlighterjs: true
 frozen: false
 ---

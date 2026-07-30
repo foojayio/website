@@ -13,6 +13,10 @@ categories:
   - "Interviews"
 tags:
 related_posts:
+  - "debugging-tutorial-1-introduction-conditional-breakpoints-set-value"
+  - "book-review-why-programs-fail"
+  - "java-logging-what-to-log-what-not-to-log"
+  - "jc-ai-newsletter-16"
 frozen: false
 ---
 

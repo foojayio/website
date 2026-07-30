@@ -13,6 +13,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "a-closer-look-at-jfr-streaming"
+  - "async-file-io-with-java-and-io_uring"
 enlighterjs: true
 frozen: false
 ---

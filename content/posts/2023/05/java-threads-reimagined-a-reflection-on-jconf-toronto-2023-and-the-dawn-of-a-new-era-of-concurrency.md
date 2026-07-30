@@ -12,6 +12,10 @@ categories:
   - "Trip Reports"
 tags:
 related_posts:
+  - "5-things-you-probably-didnt-know-about-java-concurrency"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "an-introduction-to-scoped-values-in-java"
+  - "2023-software-conferences-in-the-philippines"
 frozen: false
 ---
 

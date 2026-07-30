@@ -11,12 +11,16 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "javafx-links-of-november-2025"
+  - "javafx-links-of-october-2025"
+  - "javafx-links-of-september-2025"
+  - "javafx-links-of-august-2025"
 frozen: false
 ---
 
 Here is the final JavaFX LinksOfTheMonth for 2025... Thank you all for sharing your knowledge and experience with JavaFX. And we hope to see even more in the next year!
 
-You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via links@jfx-central.com.
+You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
 
 Core {#h2-0-core}
 -----------------

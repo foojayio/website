@@ -181,7 +181,7 @@ As discussed earlier, the main cluster DemoCluster contains the latest data as p
 
 Connection string:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongodb+srv://Username:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7929180a0a0e160b1d391d1c14161a150c0a0d1c0b57181b1a1d4f571416171e161d1b57171c0d">[email&nbsp;protected]</a>/</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongodb+srv://Username:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d4d7c6e6e6a726f795d797870727e71686e69786f337c7f7e792b337072737a72797f33737869">[email&nbsp;protected]</a>/</pre>
 
 In this scenario, after archiving aged data, you can see only 2186 documents for the movies collection with data less than 10 years old.  
 ![MongoCompass – only latest data available on main cluster after online archive setup. Aged data can be accessed through separate federated database instances as discussed in the Federated Databases tab.](/images/posts/2026/03/atlas-online-archive-efficiently-manage-the-data-lifecycle/Screenshot-2026-03-10-at-2.07.50-PM.png)

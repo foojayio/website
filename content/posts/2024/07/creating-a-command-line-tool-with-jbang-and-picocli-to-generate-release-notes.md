@@ -11,6 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
+  - "charting-the-course-of-java-an-insightful-conversation-with-java-champion-sebastian-daschner"
+  - "competing-for-the-crown-a-friendly-debate-on-the-future-of-java-and-kotlin-on-foojay-io-today"
+  - "java-for-scripting"
 enlighterjs: true
 frozen: false
 ---

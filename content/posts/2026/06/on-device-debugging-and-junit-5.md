@@ -11,6 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "own-your-pixels-native-fidelity-on-your-schedule"
+  - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
+  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
+  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
 enlighterjs: true
 frozen: false
 ---
@@ -225,7 +229,7 @@ class EmailValidatorTest {
 
     @Test
     void acceptsCommonAddress() {
-        assertTrue(new EmailValidator().isValid("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c5aba4a8a085a0bda4a8b5a9a0eba6aaa8">[email&nbsp;protected]</a>"));
+        assertTrue(new EmailValidator().isValid("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="92fcf3fff7d2f7eaf3ffe2fef7bcf1fdff">[email&nbsp;protected]</a>"));
     }
 }</pre>
 

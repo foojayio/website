@@ -13,6 +13,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "jdkmon-your-friendly-jdk-distribution-updater"
+  - "jdkmon-17-0-23-released"
+  - "jdkmon-17-0-18-released"
+  - "introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music"
 frozen: false
 ---
 

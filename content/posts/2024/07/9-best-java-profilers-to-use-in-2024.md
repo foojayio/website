@@ -12,6 +12,9 @@ categories:
   - "Profiler"
 tags:
 related_posts:
+  - "a-short-primer-on-java-debugging-internals"
+  - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
+  - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
 frozen: false
 ---
 

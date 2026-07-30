@@ -12,6 +12,10 @@ categories:
   - "Maven"
 tags:
 related_posts:
+  - "transitioning-to-java-my-first-book"
+  - "5-great-reasons-to-use-jooq"
+  - "42-practical-java-design-patterns-builder-and-more"
+  - "enterprise-java-quality-gates-ai"
 enlighterjs: true
 frozen: false
 ---

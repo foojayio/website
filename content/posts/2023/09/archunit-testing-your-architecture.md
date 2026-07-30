@@ -13,6 +13,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "load-testing-shoot-your-application-with-gatling"
+  - "pitest-do-you-test-your-tests"
+  - "spring-6-1-restclient"
+  - "foojay-podcast-99"
 enlighterjs: true
 frozen: false
 ---

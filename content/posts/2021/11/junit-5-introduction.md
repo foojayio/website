@@ -12,6 +12,9 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "book-review-seriously-good-software"
+  - "java-testing-with-vs-code"
+  - "generating-code-with-intellij-idea"
 frozen: false
 ---
 

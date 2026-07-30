@@ -15,6 +15,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
+  - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
+  - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
+  - "boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything"
 enlighterjs: true
 frozen: false
 ---
@@ -430,7 +434,7 @@ Get Started {#h2-16-get-started}
 --------------------------------
 
 <pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Install via CommandBox
-install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="14766c39757d54273a243a24">[email&nbsp;protected]</a>
+install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b3d1cb9ed2daf3809d839d83">[email&nbsp;protected]</a>
 
 # Or for OS/CLI applications
 install-bx-module bx-ai

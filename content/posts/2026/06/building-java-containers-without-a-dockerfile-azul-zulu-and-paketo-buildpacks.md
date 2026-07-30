@@ -11,6 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"
+  - "using-the-azul-zulu-docker-official-images-from-simple-pull-to-lean-container"
+  - "the-road-to-docker-official-images-for-java-the-azul-zulu-story"
+  - "configuring-spring-boot-to-build-a-docker-image-with-azul-zulu-and-debug-options"
 enlighterjs: true
 frozen: false
 ---

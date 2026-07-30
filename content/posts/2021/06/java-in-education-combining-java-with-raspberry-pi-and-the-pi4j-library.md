@@ -16,6 +16,10 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "a-fresh-look-at-embedded-java"
+  - "using-the-raspberry-pi-sense-hat-with-pi4j-drivers"
+  - "first-experiments-with-java-on-the-lattepanda-iota"
+  - "javafx-links-of-november-2025"
 frozen: false
 ---
 

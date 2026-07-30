@@ -13,6 +13,10 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "glassfish-is-rolling-forward-whats-new"
+  - "ejb-support-in-piranha-via-cdi"
+  - "glassfish-embedded-a-simple-way-to-run-jakarta-ee-apps"
+  - "issues-with-old-glassfish-server-upgrade-to-eclipse-glassfish"
 frozen: false
 ---
 

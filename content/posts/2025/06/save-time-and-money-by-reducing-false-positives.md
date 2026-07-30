@@ -13,6 +13,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "42-practical-java-design-patterns-builder-and-more"
+  - "5-great-reasons-to-use-jooq"
 frozen: false
 ---
 

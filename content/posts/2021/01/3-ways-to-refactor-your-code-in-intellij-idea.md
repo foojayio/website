@@ -12,6 +12,10 @@ categories:
   - "IntelliJ IDEA"
 tags:
 related_posts:
+  - "beginning-javafx-with-intellij"
+  - "creating-a-simple-spring-boot-application-in-intellij-idea"
+  - "creating-a-javafx-world-clock-from-scratch-part-1"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 enlighterjs: true
 frozen: false
 ---

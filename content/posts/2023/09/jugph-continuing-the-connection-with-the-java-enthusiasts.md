@@ -12,6 +12,10 @@ categories:
   - "JUGs"
 tags:
 related_posts:
+  - "java-user-group-ph-report-2023"
+  - "friends-of-openjdk-at-fosdem-2023"
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "jug-ph-meetup-4-and-5"
 frozen: false
 ---
 

@@ -13,6 +13,9 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "book-review-monolith-to-microservices-part-1"
+  - "book-review-monolith-to-microservices-part-2"
+  - "building-microservices-spring-boot-fat-uber-jar"
 enlighterjs: true
 frozen: false
 ---

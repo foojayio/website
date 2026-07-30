@@ -12,6 +12,9 @@ categories:
   - "Foojay"
 tags:
 related_posts:
+  - "foojay-status-report-july-december-2021"
+  - "foojay-status-report-january-june-2021"
+  - "how-to-submit-your-next-article-on-foojay-io"
 frozen: false
 ---
 

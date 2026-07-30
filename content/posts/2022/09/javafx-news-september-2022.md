@@ -11,6 +11,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "beginning-javafx-with-intellij"
+  - "wordish-with-javafx-part-5"
+  - "new-java-javafx-library-fxskins-released"
+  - "javafx-links-of-june-2026"
 frozen: false
 ---
 

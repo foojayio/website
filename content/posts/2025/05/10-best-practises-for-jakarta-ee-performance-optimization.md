@@ -15,6 +15,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "ejb-support-in-piranha-via-cdi"
+  - "glassfish-embedded-a-simple-way-to-run-jakarta-ee-apps"
+  - "glassfish-is-rolling-forward-whats-new"
+  - "issues-with-old-glassfish-server-upgrade-to-eclipse-glassfish"
 frozen: false
 ---
 

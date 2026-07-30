@@ -13,6 +13,9 @@ categories:
   - "Observability"
 tags:
 related_posts:
+  - "great-time-at-javazone-2022"
+  - "open-source-bait-and-switch"
+  - "serverless-is-the-new-timeshare"
 frozen: false
 ---
 

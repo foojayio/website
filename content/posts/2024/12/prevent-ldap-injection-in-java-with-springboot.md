@@ -15,6 +15,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "top-security-flaws-hiding-in-your-code-right-now-and-how-to-fix-them"
+  - "a-simple-service-with-spring-boot"
+  - "springboot-3-2-crac"
+  - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
 enlighterjs: true
 frozen: false
 ---

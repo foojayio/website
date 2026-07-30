@@ -12,6 +12,10 @@ categories:
   - "Surveys"
 tags:
 related_posts:
+  - "omnifish-announces-enterprise-support-for-eclipse-glassfish"
+  - "ejb-support-in-piranha-via-cdi"
+  - "the-future-of-ejb"
+  - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
 frozen: false
 ---
 

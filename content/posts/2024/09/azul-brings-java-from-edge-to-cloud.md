@@ -17,6 +17,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "azul-zulu-openjdk-15-on-raspberry-pi"
+  - "running-javafx-applications-on-arm-with-azul-zulu"
+  - "changes-included-in-release-24-02-of-azul-zing-builds-of-openjdk"
+  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
 frozen: false
 ---
 

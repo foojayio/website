@@ -19,6 +19,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "effective-cloud-native-development-open-liberty-vs-code"
+  - "effective-cloud-native-development-eclipse-ide-open-liberty"
+  - "getting-started-with-intellij-idea"
+  - "whats-new-in-the-july-2026-azul-payara-release"
 frozen: false
 ---
 

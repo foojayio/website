@@ -11,6 +11,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "daemon-thread-java-code-quiz"
+  - "method-reference-vs-lambda-java-challenge"
+  - "asynchronous-completablefuture-san-francisco-adventure-java-challenge"
+  - "function-calculation-java-challenge"
 enlighterjs: true
 frozen: false
 ---

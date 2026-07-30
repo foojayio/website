@@ -11,6 +11,10 @@ categories:
   - "Trip Reports"
 tags:
 related_posts:
+  - "foojay-io-at-fosdem-2023-trip-report"
+  - "springone-tlv-world-tour-trip-report"
+  - "trip-report-dubai-jug-2nd-meetup"
+  - "2023-software-conferences-in-the-philippines"
 frozen: false
 ---
 

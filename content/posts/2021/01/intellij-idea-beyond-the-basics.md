@@ -11,6 +11,10 @@ categories:
   - "IntelliJ IDEA"
 tags:
 related_posts:
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+  - "foojay-podcast-91"
+  - "java-on-azure-tooling-update-july-2022"
+  - "debugging-collections-streams-and-watch-renderers"
 frozen: false
 ---
 

@@ -12,6 +12,9 @@ categories:
   - "Kotlin"
 tags:
 related_posts:
+  - "kotlin-delegation"
+  - "annotation-free-spring"
+  - "blockhound-how-it-works"
 frozen: false
 ---
 

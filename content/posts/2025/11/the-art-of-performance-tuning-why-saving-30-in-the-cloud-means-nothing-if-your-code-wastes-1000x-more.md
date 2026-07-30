@@ -15,6 +15,10 @@ categories:
   - "Profiler"
 tags:
 related_posts:
+  - "12-lessons-learned-from-doing-the-one-billion-row-challenge"
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "azul-brings-java-from-edge-to-cloud"
+  - "become-a-better-java-developer-19-tips-for-staying-ahead-in-2024"
 enlighterjs: true
 frozen: false
 ---

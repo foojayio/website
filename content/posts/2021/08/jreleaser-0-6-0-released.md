@@ -12,6 +12,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "jreleaser-0-10-0-released"
+  - "jreleaser-0-9-0-released"
+  - "jreleaser-0-8-0-released"
+  - "jreleaser-0-7-0-released"
 frozen: false
 ---
 

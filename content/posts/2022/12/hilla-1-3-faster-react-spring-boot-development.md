@@ -13,6 +13,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "master-detail-with-hilla"
+  - "hilla-1-3-faster-react-spring-boot-development"
+  - "hilla-1-0-a-new-frontend-framework-for-springboot"
+  - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"
 frozen: false
 ---
 

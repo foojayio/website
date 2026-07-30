@@ -12,6 +12,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "we-all-grow-older-but-do-our-projects-really-have-to-openrewrite"
+  - "openrewrite-automatic-code-refactoring-and-maintenance"
+  - "foojay-developer-certification-measure-skills"
+  - "foojay-podcast-19"
 frozen: false
 ---
 

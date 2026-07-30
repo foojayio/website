@@ -12,6 +12,10 @@ categories:
   - "Kotlin"
 tags:
 related_posts:
+  - "kotlin-delegation"
+  - "comparison-fault-tolerance-libraries"
+  - "building-command-line-interfaces-with-kotlin-using-picocli"
+  - "exposed-kotlin-orm-complete-guide"
 enlighterjs: true
 frozen: false
 ---

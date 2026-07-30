@@ -12,6 +12,9 @@ categories:
   - "Foojay"
 tags:
 related_posts:
+  - "how-to-submit-your-next-article-on-foojay-io"
+  - "friends-of-openjdk-at-fosdem-2022"
+  - "getting-started-with-java-17-and-intellij-idea"
 frozen: false
 ---
 

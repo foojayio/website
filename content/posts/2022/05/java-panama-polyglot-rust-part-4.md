@@ -13,6 +13,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "java-panama-polyglot-part1"
+  - "java-panama-polyglot-swift-part-2"
+  - "java-panama-polyglot-part-3"
+  - "project-panama-for-newbies-part-1"
 enlighterjs: true
 frozen: false
 ---

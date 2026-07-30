@@ -15,6 +15,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "wordish-with-javafx-part-5"
+  - "creating-cad-applications-with-java-and-javafx"
+  - "visualizing-brain-computer-interface-data-using-javafx"
+  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
 frozen: false
 ---
 

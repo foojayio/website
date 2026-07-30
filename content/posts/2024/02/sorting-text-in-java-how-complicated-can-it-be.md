@@ -12,6 +12,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "playing-practically-with-stream-api"
+  - "did-you-know-you-can-create-mappers-without-creating-underlying-objects-in-java"
+  - "confusing-java-strings"
 enlighterjs: true
 frozen: false
 ---

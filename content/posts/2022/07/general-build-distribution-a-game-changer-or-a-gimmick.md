@@ -12,6 +12,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "remote-and-distributed-build-patterns"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "evolution-of-microservices"
+  - "compilation-avoidance-with-gradle"
 frozen: false
 ---
 

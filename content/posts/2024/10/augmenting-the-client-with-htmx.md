@@ -12,6 +12,9 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "a-short-history-of-ajax-and-ssr"
+  - "augmenting-the-client-with-vue-js"
+  - "augmenting-the-client-with-alpine-js"
 enlighterjs: true
 frozen: false
 ---
@@ -57,7 +60,7 @@ Here is how I integrate Thymeleaf and HTMX in the POM:
 
 The code on the HTML side is straightforward :
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:src="@{/webjars/htmx.org/dist/htmx.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="650d11081d4b0a170225544b5c">[email&nbsp;protected]</a>/dist/htmx.min.js"&gt;&lt;/script&gt; &lt;!--1--&gt;</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:src="@{/webjars/htmx.org/dist/htmx.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bad2ced7c294d5c8ddfa8b9483">[email&nbsp;protected]</a>/dist/htmx.min.js"&gt;&lt;/script&gt; &lt;!--1--&gt;</pre>
 
 1. Add the HTMX dependency
 

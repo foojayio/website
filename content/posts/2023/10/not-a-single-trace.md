@@ -13,6 +13,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "the-systemic-process-of-debugging"
+  - "eliminating-bugs-using-the-tong-motion-approach"
+  - "its-2am-do-you-know-what-your-code-is-doing"
 frozen: false
 ---
 

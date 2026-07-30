@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "a-simple-service-with-spring-boot"
+  - "are-java-jakarta-ee-application-servers-heavy"
+  - "can-java-jakarta-ee-do-microservices"
+  - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
 frozen: false
 ---
 

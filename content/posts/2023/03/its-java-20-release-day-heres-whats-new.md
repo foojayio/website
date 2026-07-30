@@ -15,6 +15,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "foojay-podcast-16"
+  - "what-the-heck-is-project-loom-for-java"
+  - "an-introduction-to-scoped-values-in-java"
+  - "virtual-thread-pinning-field-guide"
 enlighterjs: true
 frozen: false
 ---

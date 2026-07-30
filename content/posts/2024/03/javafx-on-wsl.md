@@ -14,6 +14,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "beginning-javafx-with-intellij"
+  - "building-javafx-with-gradle"
+  - "creating-a-javafx-world-clock-from-scratch-part-1"
 enlighterjs: true
 frozen: false
 ---

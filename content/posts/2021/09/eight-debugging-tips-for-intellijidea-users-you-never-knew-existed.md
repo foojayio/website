@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "beginning-javafx-with-intellij"
+  - "creating-a-simple-spring-boot-application-in-intellij-idea"
+  - "debugging-tutorial-1-introduction-conditional-breakpoints-set-value"
 frozen: false
 ---
 

@@ -12,6 +12,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "smarter-logging-in-spring-boot-with-aop"
+  - "logging-best-practices-revisited"
+  - "how-to-build-and-deploy-a-real-time-cloud-based-logging-system"
+  - "system-logger"
 enlighterjs: true
 frozen: false
 ---

@@ -13,6 +13,9 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "great-time-at-javazone-2022"
+  - "what-is-debugging-in-140-seconds"
 enlighterjs: true
 frozen: false
 ---

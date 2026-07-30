@@ -13,6 +13,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "the-reason-java-is-still-popular"
+  - "great-time-at-javazone-2022"
+  - "open-source-bait-and-switch"
 frozen: false
 ---
 

@@ -14,6 +14,10 @@ categories:
   - "Payara"
 tags:
 related_posts:
+  - "a-simple-service-with-spring-boot"
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "are-java-jakarta-ee-application-servers-heavy"
+  - "enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs"
 frozen: false
 ---
 

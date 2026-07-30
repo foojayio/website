@@ -12,6 +12,10 @@ categories:
   - "Foojay"
 tags:
 related_posts:
+  - "lets-start-a-java-mastodon-community-for-friends-of-openjdk"
+  - "foojay-podcast-6"
+  - "foojay-a-place-for-friends-of-openjdk-adt-magazine"
+  - "foojay-mastodon-service-here-it-is"
 frozen: false
 ---
 

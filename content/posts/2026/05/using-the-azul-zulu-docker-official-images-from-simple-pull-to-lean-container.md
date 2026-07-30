@@ -14,6 +14,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"
+  - "the-road-to-docker-official-images-for-java-the-azul-zulu-story"
+  - "building-java-containers-without-a-dockerfile-azul-zulu-and-paketo-buildpacks"
+  - "official-azul-zulu-openjdk-images-now-available-on-docker-hub"
 enlighterjs: true
 frozen: false
 ---

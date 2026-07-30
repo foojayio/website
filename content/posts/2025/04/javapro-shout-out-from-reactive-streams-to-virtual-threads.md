@@ -12,6 +12,10 @@ categories:
   - "JavaPro"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "9-outdated-ideas-about-java"
+  - "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"
 frozen: false
 ---
 

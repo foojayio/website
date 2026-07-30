@@ -12,6 +12,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "apache-apisix-loves-rust"
+  - "advanced-url-rewriting-with-apache-apisix"
+  - "api-versioning"
+  - "health-check-response-format-for-http-apis"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "my-final-take-on-gradle-vs-maven"
+  - "build-rot-tech-debt"
+  - "predicting-secure-java-projects-on-maven-central"
+  - "enterprise-java-quality-gates-ai"
 frozen: false
 ---
 

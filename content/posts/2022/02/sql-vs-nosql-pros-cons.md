@@ -16,6 +16,9 @@ categories:
   - "sql"
 tags:
 related_posts:
+  - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "book-review-java-by-comparison"
 frozen: false
 ---
 

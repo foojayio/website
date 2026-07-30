@@ -13,6 +13,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "deploying-to-multiple-kubernetes-clusters-with-the-k8ssandra-operator"
+  - "do-you-really-need-kubernetes"
+  - "warm-up-fast-run-lean-vertical-scaling-for-java-on-kubernetes-with-azul-prime-and-kedify"
+  - "jc-ai-newsletter-16"
 frozen: false
 ---
 

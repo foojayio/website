@@ -13,6 +13,10 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "foojay-podcast-10"
+  - "foojay-podcast-9"
+  - "foojay-podcast-8"
+  - "quarkus-unpacked-insights-from-the-foojay-podcast"
 frozen: false
 ---
 

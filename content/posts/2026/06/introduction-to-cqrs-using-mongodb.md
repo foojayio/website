@@ -10,6 +10,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "abstracting-data-access-in-java-with-the-dao-pattern"
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "ai-powered-code-review-assistant-automated-code-analysis-with-spring-ai-and-mongodb"
+  - "apache-cassandra-4-0-taming-tail-latencies-with-java-16-zgc"
 enlighterjs: true
 frozen: false
 ---
@@ -30,7 +34,7 @@ In this tutorial, you'll:
 
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/helidon-mongodb-cqrs):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="15727c6155727c617d60773b767a78">[email&nbsp;protected]</a>:soujava/helidon-mongodb-cqrs.git</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2a4d435e6a4d435e425f4804494547">[email&nbsp;protected]</a>:soujava/helidon-mongodb-cqrs.git</pre>
 
 Prerequisites {#h2-0-prerequisites}
 -----------------------------------

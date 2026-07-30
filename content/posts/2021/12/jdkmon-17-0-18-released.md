@@ -12,6 +12,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "java-where-the-wild-code-isnt"
+  - "are-java-security-updates-important"
+  - "fix-java-security-issues-while-coding-in-intellij-idea"
+  - "jdkmon-17-0-23-released"
 frozen: false
 ---
 

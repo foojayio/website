@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "analyzing-dependencies-in-intellij-idea"
+  - "how-to-publish-a-java-maven-project-to-maven-central-using-jreleaser-and-github-actions-2025-guide"
 frozen: false
 ---
 

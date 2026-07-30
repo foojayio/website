@@ -14,6 +14,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "book-review-effortless-cloud-native-app-development-using-skaffold"
+  - "container-awareness-for-java"
+  - "announcing-cloud-native-boxlang-for-5-month"
 frozen: false
 ---
 

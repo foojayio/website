@@ -13,6 +13,10 @@ categories:
   - "Testcontainers"
 tags:
 related_posts:
+  - "book-review-developing-apps-with-gpt-4-and-chatgpt"
+  - "building-simple-home-assistant-langchain4j-raspberry-pi"
+  - "foojay-podcast-47"
+  - "foojay-podcast-56"
 enlighterjs: true
 frozen: false
 ---

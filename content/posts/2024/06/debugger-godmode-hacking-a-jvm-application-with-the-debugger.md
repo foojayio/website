@@ -18,6 +18,9 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "a-short-primer-on-java-debugging-internals"
+  - "boldness-in-refactoring"
+  - "debug-like-a-senior-developer"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "can-java-jakarta-ee-do-microservices"
+  - "effortless-updates-zero-migration"
+  - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"
+  - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
 frozen: false
 ---
 

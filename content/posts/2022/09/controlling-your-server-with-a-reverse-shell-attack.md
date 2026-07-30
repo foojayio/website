@@ -12,6 +12,9 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "are-java-security-updates-important"
+  - "java-where-the-wild-code-isnt"
+  - "security-warning-your-java-attack-surface-just-got-bigger"
 enlighterjs: true
 frozen: false
 ---

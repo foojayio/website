@@ -11,6 +11,10 @@ categories:
   - "Interviews"
 tags:
 related_posts:
+  - "42-practical-java-design-patterns-builder-and-more"
+  - "debugging-threads-and-asynchronous-code"
+  - "interview-with-tom-granot-developer-observability-koolkits-and-reliability"
+  - "java-in-education-combining-java-with-raspberry-pi-and-the-pi4j-library"
 frozen: false
 ---
 

@@ -14,6 +14,10 @@ categories:
   - "Vaadin"
 tags:
 related_posts:
+  - "build-web-apps-in-pure-java-with-vaadin-flow"
+  - "create-a-crud-ui-in-pure-java"
+  - "delegation-vs-inheritance-in-graphical-user-interfaces"
+  - "crafting-your-own-railway-display-with-java"
 enlighterjs: true
 frozen: false
 ---

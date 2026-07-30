@@ -14,6 +14,10 @@ categories:
   - "Machine Learning"
 tags:
 related_posts:
+  - "foojay-podcast-29"
+  - "getting-started-with-deep-learning-in-java-using-deep-netts"
+  - "getting-started-with-deep-learning-in-java-using-deep-netts-part-2"
+  - "visual-recognition-for-chess-with-deep-learning-in-java-on-android"
 frozen: false
 ---
 

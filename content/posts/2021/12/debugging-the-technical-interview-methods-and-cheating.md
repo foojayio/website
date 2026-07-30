@@ -12,6 +12,10 @@ categories:
   - "Interviews"
 tags:
 related_posts:
+  - "the-debugger-checklist-part-i"
+  - "the-debugger-checklist-part-ii"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "video-series-javafx-in-action-part-4"
 frozen: false
 ---
 

@@ -13,6 +13,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "new-javafx-theme-library-transit-released"
+  - "new-java-javafx-library-fxskins-released"
+  - "starting-a-javafx-project-with-gluon-tools"
+  - "first-experiments-with-java-on-the-lattepanda-iota"
 frozen: false
 ---
 

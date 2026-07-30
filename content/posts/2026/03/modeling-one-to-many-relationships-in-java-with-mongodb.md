@@ -13,6 +13,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "abstracting-data-access-in-java-with-the-dao-pattern"
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "atlas-online-archive-efficiently-manage-the-data-lifecycle"
+  - "atlas-searching-with-the-java-driver"
 enlighterjs: true
 frozen: false
 ---
@@ -299,7 +303,7 @@ public class EmbeddedExample {
 
 &nbsp;&nbsp;&nbsp;&nbsp;public void run() {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 1. Build the author as an embedded User object
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User alice = new User("alice", "Alice Johnson", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0c1ccc9c3c5e0c5d8c1cdd0ccc58ec3cfcd">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User alice = new User("alice", "Alice Johnson", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dabbb6b3b9bf9abfa2bbb7aab6bff4b9b5b7">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Java developer and MongoDB enthusiast.");
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 2. Build the post with the embedded author and comments
@@ -353,7 +357,7 @@ The resulting MongoDB document looks like this:
 &nbsp;&nbsp;"author": {
 &nbsp;&nbsp;&nbsp;&nbsp;"username": "alice",
 &nbsp;&nbsp;&nbsp;&nbsp;"display_name": "Alice Johnson",
-&nbsp;&nbsp;&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d9b8b5b0babc99bca1b8b4a9b5bcf7bab6b4">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94f5f8fdf7f1d4f1ecf5f9e4f8f1baf7fbf9">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;&nbsp;&nbsp;"bio": "Java developer and MongoDB enthusiast."
 &nbsp;&nbsp;},
 &nbsp;&nbsp;"published_at": ISODate("2025-01-01T00:00:00Z"),
@@ -521,11 +525,11 @@ public class ReferencedExample {
 
 &nbsp;&nbsp;&nbsp;&nbsp;public void run() {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 1. Insert users into the users collection
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User alice = new User("alice", "Alice Johnson", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0c6d60656f694c69746d617c6069226f6361">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User alice = new User("alice", "Alice Johnson", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="690805000a0c290c11080419050c470a0604">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Java developer and MongoDB enthusiast.");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User bob = new User("bob", "Bob Smith", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="70121f12301508111d001c155e131f1d">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User bob = new User("bob", "Bob Smith", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="83e1ece1c3e6fbe2eef3efe6ade0ecee">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Backend engineer who loves databases.");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User carol = new User("carol", "Carol Williams", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d2b1b3a0bdbe92b7aab3bfa2beb7fcb1bdbf">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User carol = new User("carol", "Carol Williams", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="593a382b3635193c21383429353c773a3634">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Full-stack developer and tech blogger.");
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;usersCollection.insertMany(Arrays.asList(alice, bob, carol));
 
@@ -615,7 +619,7 @@ The resulting MongoDB documents span three collections:
 &nbsp;&nbsp;"_id": ObjectId("uuu"),
 &nbsp;&nbsp;"username": "alice",
 &nbsp;&nbsp;"display_name": "Alice Johnson",
-&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="197875707a7c597c61787469757c377a7674">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1c0cdc8c2c4e1c4d9c0ccd1cdc48fc2cecc">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;"bio": "Java developer and MongoDB enthusiast.",
 &nbsp;&nbsp;"joined_at": ISODate("...")
 },
@@ -623,7 +627,7 @@ The resulting MongoDB documents span three collections:
 &nbsp;&nbsp;"_id": ObjectId("uuu2"),
 &nbsp;&nbsp;"username": "bob",
 &nbsp;&nbsp;"display_name": "Bob Smith",
-&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e7858885a7829f868a978b82c984888a">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e3818c81a3869b828e938f86cd808c8e">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;"bio": "Java developer and MongoDB enthusiast.",
 &nbsp;&nbsp;"joined_at": ISODate("...")
 }]

@@ -11,6 +11,7 @@ categories:
   - "Azure"
 tags:
 related_posts:
+  - "java-on-azure-tooling-update-july-2022"
 enlighterjs: true
 frozen: false
 ---

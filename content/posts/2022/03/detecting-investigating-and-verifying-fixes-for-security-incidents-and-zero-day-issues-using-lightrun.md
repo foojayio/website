@@ -12,6 +12,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "what-is-debugging-in-140-seconds"
+  - "the-debugger-checklist-part-ii"
+  - "psa-the-risks-of-remote-jdwp-debugging"
 frozen: false
 ---
 

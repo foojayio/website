@@ -26,7 +26,7 @@ Contrast Secure Code Platform is the only platform on the market that embeds int
 
 **About Foojay:**
 
-Foojay, a place for Friends of OpenJDK, is a fast-growing community focused around the OpenJDK, providing tips and insights for Java developers, and user-focused Java and OpenJDK technical dashboards with free information on all things Java. A dedicated blogging area is available on Foojay to anyone who has thoughts or code to share on topics relevant to the Java ecosystem. To contribute, send a mail to [\[email protected\]](/cdn-cgi/l/email-protection#3b535e5757547b5d5454515a42155254). Follow us on Twitter @foojayio.
+Foojay, a place for Friends of OpenJDK, is a fast-growing community focused around the OpenJDK, providing tips and insights for Java developers, and user-focused Java and OpenJDK technical dashboards with free information on all things Java. A dedicated blogging area is available on Foojay to anyone who has thoughts or code to share on topics relevant to the Java ecosystem. To contribute, send a mail to [\[email protected\]](/cdn-cgi/l/email-protection#81e9e4ededeec1e7eeeeebe0f8afe8ee). Follow us on Twitter @foojayio.
 
 **About Contrast Security:**
 
@@ -37,4 +37,4 @@ Contrast Security secures the code that global business relies on. It is the ind
 Public Relations Manager  
 
 Contrast Security  
-[\[email protected\]](/cdn-cgi/l/email-protection#08787a486b67667c7a697b7c7b6d6b7d7a617c71266b6765)
+[\[email protected\]](/cdn-cgi/l/email-protection#5b2b291b3834352f293a282f283e382e29322f2275383436)

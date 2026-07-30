@@ -14,6 +14,10 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "jdkmon-your-friendly-jdk-distribution-updater"
+  - "java-on-azure-tooling-update-july-2022"
+  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
+  - "foojay-podcast-83"
 frozen: false
 ---
 

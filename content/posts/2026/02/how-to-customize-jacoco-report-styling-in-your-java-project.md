@@ -12,6 +12,10 @@ categories:
   - "Testing"
 tags:
 related_posts:
+  - "kover-code-coverage-plugin-for-kotlin"
+  - "pitest-do-you-test-your-tests"
+  - "how-to-find-dead-code-in-your-java-services"
+  - "embracing-java-17-heres-what-we-learned-at-picnic"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "a-closer-look-at-jfr-streaming"
+  - "asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm"
+  - "a-glance-into-jfr-class-and-method-tagging"
 enlighterjs: true
 frozen: false
 ---

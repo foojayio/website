@@ -12,6 +12,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "devops-101-part-i-ci-cd"
+  - "devops-for-developers-introduction-version-control"
+  - "discuss-problem-not-solution"
+  - "stochastic-ai-agility-breaking-cycles-of-debt"
 frozen: false
 ---
 

@@ -14,6 +14,10 @@ categories:
   - "Maven"
 tags:
 related_posts:
+  - "7-habits-of-highly-effective-java-coding"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "9-outdated-ideas-about-java"
+  - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"
 enlighterjs: true
 frozen: false
 ---
@@ -48,7 +52,7 @@ You will need a GPG key to sign the artifacts, this will allow users to verify t
 --------------------------------------
 pub   rsa4096/XXXXXXXX9925B017 2022-11-17 [SC] [expires: 2026-11-17]
       C20FC085CF5B0D4D861E8CEDXXXXXXXX9925B017
-uid                 [ultimate] Jago de Vreede &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="225047464341564746624f434b4e0c414d4f">[email&nbsp;protected]</a>&gt;
+uid                 [ultimate] Jago de Vreede &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="93e1f6f7f2f0e7f6f7d3fef2faffbdf0fcfe">[email&nbsp;protected]</a>&gt;
 sub   rsa4096/XXXXXXXXXXXXFC74 2022-11-17 [E] [expires: 2026-11-17]</pre>
 
   In this case, the id of the public key is XXXXXXXXXXXXFC74

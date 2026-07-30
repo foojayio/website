@@ -13,6 +13,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "get-your-jdk-as-easily-as-possible"
+  - "jdkmon-your-friendly-jdk-distribution-updater"
+  - "jdkmon-17-0-18-released"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 frozen: false
 ---
 

@@ -12,6 +12,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "a-closer-look-at-jfr-streaming"
+  - "using-java-flight-recorder-and-mission-control-part-2"
+  - "using-java-flight-recorder-and-mission-control-part-3"
+  - "where-production-policy-belongs-building-eliya-in-public"
 enlighterjs: true
 frozen: false
 ---

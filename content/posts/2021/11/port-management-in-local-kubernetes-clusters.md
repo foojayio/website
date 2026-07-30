@@ -14,6 +14,9 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "ci-cd-workflow-for-spring-boot-applications-on-kubernetes-via-skaffold"
+  - "creating-a-kubernetes-operator-in-java"
 enlighterjs: true
 frozen: false
 ---

@@ -13,6 +13,10 @@ categories:
   - "Neo4J"
 tags:
 related_posts:
+  - "building-microservices-spring-boot-fat-uber-jar"
+  - "book-review-effortless-cloud-native-app-development-using-skaffold-2"
+  - "building-reactive-java-applications-with-spring-framework"
+  - "journeys-in-java-level-6-build-a-neo4j-microservice"
 enlighterjs: true
 frozen: false
 ---
@@ -55,7 +59,7 @@ FROM mongo
 
 #Author
 #-------
-LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cda7a8a3a3a4aba8bf8db9a5a8a5a8aea6a1a8bfbee3a2bfaa">[email&nbsp;protected]</a>,@JMHReif"
+LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bbd1ded5d5d2dddec9fbcfd3ded3ded8d0d7dec9c895d4c9dc">[email&nbsp;protected]</a>,@JMHReif"
 
 #expose the default port
 EXPOSE 27017</pre>

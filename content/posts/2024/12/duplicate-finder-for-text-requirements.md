@@ -12,6 +12,10 @@ categories:
   - "Kotlin"
 tags:
 related_posts:
+  - "profile-intellij-idea-with-its-own-profiler"
+  - "get-started-with-allocation-profiling"
+  - "beginners-guide-to-java-profiler"
+  - "duplicate-finder-for-documentation"
 enlighterjs: true
 frozen: false
 ---

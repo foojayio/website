@@ -15,6 +15,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "5-things-you-probably-didnt-know-about-java-concurrency"
+  - "a-flavour-of-tornadovm-on-apple-m1-pro"
 frozen: false
 ---
 

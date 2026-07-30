@@ -12,6 +12,9 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "choosing-a-cache-1"
+  - "container-awareness-for-java"
+  - "contributing-to-openjdk-mission-control"
 frozen: false
 ---
 

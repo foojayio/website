@@ -14,6 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "getting-started-with-rife2-java-web-framework-v1-0-0"
+  - "web-app-startup-in-3ms-with-rife2-and-graalvm"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "why-i-moved-my-blog-to-rife2-after-23-years"
 enlighterjs: true
 frozen: false
 ---

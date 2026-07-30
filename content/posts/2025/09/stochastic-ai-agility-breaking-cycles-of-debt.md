@@ -15,6 +15,10 @@ categories:
   - "Opinion"
 tags:
 related_posts:
+  - "ai-newsletter-1"
+  - "jc-ai-newsletter-2"
+  - "jc-ai-newsletter-3"
+  - "jc-ai-newsletter-4"
 frozen: false
 ---
 

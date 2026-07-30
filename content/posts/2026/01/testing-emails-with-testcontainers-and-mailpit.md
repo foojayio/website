@@ -14,6 +14,10 @@ categories:
   - "Testing"
 tags:
 related_posts:
+  - "browserless-testing-of-vaadin-applications-with-karibu-testing"
+  - "foojay-podcast-36"
+  - "foojay-podcast-46"
+  - "foojay-podcast-53"
 enlighterjs: true
 frozen: false
 ---
@@ -88,8 +92,8 @@ class EmailServiceTest {
   @Test
   void shouldSendAndVerifyEmail() {
     var msg = new SimpleMailMessage();
-    msg.setFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc92938e998c9085bc91859d8c8cd29f9391">[email&nbsp;protected]</a>");
-    msg.setTo("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="295c5a4c5b694c51484459454c074a4644">[email&nbsp;protected]</a>");
+    msg.setFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7b1514091e0b17023b16021a0b0b55181416">[email&nbsp;protected]</a>");
+    msg.setTo("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="473234223507223f262a372b226924282a">[email&nbsp;protected]</a>");
     msg.setSubject("Welcome");
     msg.setText("Hello!");
 
@@ -123,8 +127,8 @@ class PlainEmailTest {
     Session session = Session.getInstance(props);
 
     MimeMessage message = new MimeMessage(session);
-    message.setFrom(new InternetAddress("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4a392f242e2f380a2f322b273a262f64292527">[email&nbsp;protected]</a>"));
-    message.setRecipient(RecipientType.TO, new InternetAddress("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="027067616b726b676c7642677a636f726e672c616d6f">[email&nbsp;protected]</a>"));
+    message.setFrom(new InternetAddress("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c4b7a1aaa0a1b684a1bca5a9b4a8a1eaa7aba9">[email&nbsp;protected]</a>"));
+    message.setRecipient(RecipientType.TO, new InternetAddress("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0d2c5c3c9d0c9c5ced4e0c5d8c1cdd0ccc58ec3cfcd">[email&nbsp;protected]</a>"));
     message.setSubject("Test Subject");
     message.setText("Hello, this is a test email!");
 
@@ -153,8 +157,8 @@ void shouldVerifyEmailSent() {
       .hasMessages()
       .hasMessageCount(1)
       .hasMessageWithSubject("Welcome")
-      .hasMessageTo("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90e5e3f5e2d0f5e8f1fde0fcf5bef3fffd">[email&nbsp;protected]</a>")
-      .hasMessageFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4729283522372b3e072a3e2637376924282a">[email&nbsp;protected]</a>");
+      .hasMessageTo("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef9a9c8a9daf8a978e829f838ac18c8082">[email&nbsp;protected]</a>")
+      .hasMessageFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="305e5f4255405c49705d495140401e535f5d">[email&nbsp;protected]</a>");
 }</pre>
 
 You can also assert details of a specific message:
@@ -166,8 +170,8 @@ void shouldVerifyMessageDetails() {
   assertThat(mailpit)
       .firstMessage()
       .hasSubject("Order Confirmation")
-      .isFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5cad7c1c0d7d6e5d6cdcad58bc6cac8">[email&nbsp;protected]</a>")
-      .hasRecipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ccafb9bfb8a3a1a9be8ca9b4ada1bca0a9e2afa3a1">[email&nbsp;protected]</a>")
+      .isFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b8d7cadcddcacbf8cbd0d7c896dbd7d5">[email&nbsp;protected]</a>")
+      .hasRecipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c5f494f485351594e7c59445d514c5059125f5351">[email&nbsp;protected]</a>")
       .hasNoAttachments()
       .hasSnippetContaining("Thank you");
 }</pre>
@@ -186,7 +190,7 @@ void shouldWaitForAsyncEmail() {
       .withPollInterval(Duration.ofSeconds(1))
       .awaitMessage()
       .withSubject("Password Reset")
-      .to("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b4c1c7d1c6f4d1ccd5d9c4d8d19ad7dbd9">[email&nbsp;protected]</a>")
+      .to("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="770204120537120f161a071b125914181a">[email&nbsp;protected]</a>")
       .isPresent();
 }</pre>
 

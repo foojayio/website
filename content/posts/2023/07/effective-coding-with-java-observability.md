@@ -12,6 +12,9 @@ categories:
   - "Observability"
 tags:
 related_posts:
+  - "announcing-the-digma-beta-first-runtime-linter-for-java-code"
+  - "boldness-in-refactoring"
+  - "java-developer-vs-chatgpt-part-i-writing-a-spring-boot-microservice"
 enlighterjs: true
 frozen: false
 ---

@@ -12,6 +12,9 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "foojay-podcast-36"
+  - "foojay-podcast-46"
+  - "foojay-podcast-53"
 enlighterjs: true
 frozen: false
 ---

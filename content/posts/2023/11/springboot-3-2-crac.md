@@ -14,6 +14,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "running-a-crac-java-application-on-raspberry-pi"
+  - "how-to-run-a-java-application-with-crac-in-a-docker-container"
+  - "azul-provides-the-crac-in-aws-snapstart-builds"
+  - "openjdk-january-2026-critical-patch-update-and-patch-set-update-released"
 enlighterjs: true
 frozen: false
 ---

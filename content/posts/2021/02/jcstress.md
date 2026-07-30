@@ -12,6 +12,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "indexing-all-of-wikipedia-on-a-laptop"
+  - "new-jdkmonitor"
+  - "disco-api-helping-you-to-find-any-openjdk-distribution"
+  - "debugging-openjdk-tests-in-vscode-without-losing-your-mind"
 enlighterjs: true
 frozen: false
 ---

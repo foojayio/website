@@ -12,6 +12,8 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "teeing-java-api"
+  - "lets-use-optional-to-fix-method-contracts"
 enlighterjs: true
 frozen: false
 ---

@@ -13,6 +13,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "how-to-submit-your-next-article-on-foojay-io"
+  - "how-to-add-an-event-to-the-foojay-event-calendar"
+  - "join-slack-com-t-foojay-signup"
+  - "interview-with-gokul-chandrasekaran-the-creator-of-jdoodle"
 jdoodle: true
 enlighterjs: true
 frozen: false

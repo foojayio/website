@@ -15,6 +15,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "can-java-jakarta-ee-do-microservices"
+  - "cloud-myth-ahead-of-time-compilation-will-save-you-money"
+  - "enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs"
 frozen: false
 ---
 

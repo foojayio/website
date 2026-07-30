@@ -13,6 +13,9 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "sboms-first-steps-in-a-new-journey-for-developers"
+  - "how-to-create-sboms-in-java-with-maven-and-gradle"
+  - "solarwinds-hack-and-the-executive-order-of-cybersecurity-what-does-this-mean-for-us"
 frozen: false
 ---
 

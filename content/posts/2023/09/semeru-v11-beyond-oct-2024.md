@@ -12,6 +12,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "how-we-developed-the-eclipse-openj9-criu-support-for-fast-java-startup"
+  - "are-java-security-updates-important"
+  - "disco-api-helping-you-to-find-any-openjdk-distribution"
+  - "java-tips-01-writing-shebang-scripts-in-pure-java"
 frozen: false
 ---
 

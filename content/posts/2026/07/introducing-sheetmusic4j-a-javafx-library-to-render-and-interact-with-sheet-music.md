@@ -12,6 +12,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "foojay-podcast-54"
+  - "melodymatrix-v1-0-0-released-shipping-a-javafx-app-with-jdeploy-github-actions-and-auto-update"
+  - "introducing-lottie4j-a-javafx-library-to-parse-and-play-lottie-animation-files"
+  - "closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j"
 enlighterjs: true
 frozen: false
 ---

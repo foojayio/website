@@ -21,6 +21,10 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "java-on-visual-studio-code-update-december-2022"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "deep-learning-in-java-for-nuclear-physics-using-deep-netts"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 frozen: false
 ---
 

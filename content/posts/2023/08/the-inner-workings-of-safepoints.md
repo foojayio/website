@@ -11,6 +11,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
+  - "class-loader-hierarchies"
+  - "foojay-podcast-14"
+  - "foojay-podcast-92"
 enlighterjs: true
 frozen: false
 ---

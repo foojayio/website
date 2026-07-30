@@ -12,6 +12,9 @@ categories:
   - "Maven"
 tags:
 related_posts:
+  - "understanding-apache-maven-part-4-maven-lifecycle"
+  - "understanding-apache-maven-part-5-dependencies-in-maven"
+  - "understanding-apache-maven-part-6-pom-reference"
 frozen: false
 ---
 

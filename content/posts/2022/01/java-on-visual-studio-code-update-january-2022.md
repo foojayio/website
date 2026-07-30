@@ -11,6 +11,9 @@ categories:
   - "VS Code"
 tags:
 related_posts:
+  - "say-goodbye-to-project-files-in-visual-studio-code"
+  - "vs-code-java-september-2021-update"
+  - "java-17-on-the-raspberry-pi"
 frozen: false
 ---
 

@@ -11,6 +11,10 @@ categories:
   - "Interviews"
 tags:
 related_posts:
+  - "announcing-java-unscripted-an-asynchronous-exploration-of-excellence"
+  - "decoding-success-an-industry-experts-guide-to-thriving-in-software-development-and-security"
+  - "discovering-the-secrets-to-success-an-exclusive-interview-with-java-champion-michael-p-redlich"
+  - "interview-with-a-java-champion-reflections-on-a-storied-career-and-insights-for-the-next-generation"
 frozen: false
 ---
 

@@ -12,6 +12,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "git-archeology"
+  - "ci-cd-workflow-for-spring-boot-applications-on-kubernetes-via-skaffold"
+  - "jenkins-cluster-continuous-integration-delivery-in-jelastic-paas"
+  - "whats-new-in-actions-setup-java-5-4-and-5-5-signature-verification-kona-jdk-and-a-better-maven-experience"
 enlighterjs: true
 frozen: false
 ---

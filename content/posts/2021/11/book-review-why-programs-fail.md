@@ -13,6 +13,10 @@ categories:
   - "Books"
 tags:
 related_posts:
+  - "the-debugger-checklist-part-ii"
+  - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
+  - "production-horrors-handling-disasters-public-debrief"
+  - "foojay-podcast-67"
 frozen: false
 ---
 

@@ -14,6 +14,9 @@ categories:
   - "Foojay"
 tags:
 related_posts:
+  - "how-to-add-an-event-to-the-foojay-event-calendar"
+  - "foojay-all-about-java-and-the-openjdk-i-programmer"
+  - "foojay-a-place-for-friends-of-openjdk-adt-magazine"
 frozen: false
 ---
 

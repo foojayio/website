@@ -16,6 +16,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "java-where-the-wild-code-isnt"
+  - "are-java-security-updates-important"
+  - "quarkus-unpacked-insights-from-the-foojay-podcast"
 enlighterjs: true
 frozen: false
 ---

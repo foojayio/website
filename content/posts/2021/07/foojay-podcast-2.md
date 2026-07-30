@@ -15,6 +15,9 @@ categories:
   - "Podcast"
 tags:
 related_posts:
+  - "foojay-podcast-1"
+  - "foojay-podcast-3"
+  - "building-openjdk-from-github-sources-on-64-bit-raspberry-pi"
 frozen: false
 ---
 

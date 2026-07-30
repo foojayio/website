@@ -12,6 +12,9 @@ categories:
   - "Maven"
 tags:
 related_posts:
+  - "understanding-apache-maven-part-8-maven-plugins"
+  - "understanding-apache-maven-part-7-configuring-apache-maven"
+  - "understanding-apache-maven-part-6-pom-reference"
 frozen: false
 ---
 

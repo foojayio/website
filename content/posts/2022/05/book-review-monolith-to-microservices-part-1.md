@@ -13,6 +13,10 @@ categories:
   - "Microservices"
 tags:
 related_posts:
+  - "chopping-monolith"
+  - "building-microservices-spring-boot-fat-uber-jar"
+  - "journeys-in-java-level-1-building-an-empire-of-microservices"
+  - "book-review-monolith-to-microservices-part-2"
 frozen: false
 ---
 

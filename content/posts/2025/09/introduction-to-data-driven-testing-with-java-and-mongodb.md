@@ -13,6 +13,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "java-virtual-threads-in-action-optimizing-mongodb-operation"
+  - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"
+  - "building-rest-apis-in-java-with-spring-boot"
+  - "clean-and-modular-java-a-hexagonal-architecture-approach"
 enlighterjs: true
 frozen: false
 ---
@@ -30,7 +34,7 @@ In this tutorial, you'll:
 
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/data-driven-test-mongodb):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb8c829fab8c829f839e89c5888486">[email&nbsp;protected]</a>:soujava/data-driven-test-mongodb.git</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="197e706d597e706d716c7b377a7674">[email&nbsp;protected]</a>:soujava/data-driven-test-mongodb.git</pre>
 
 Prerequisites {#h2-0-prerequisites}
 -----------------------------------

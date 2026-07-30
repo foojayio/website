@@ -12,6 +12,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "a-list-of-cache-providers"
+  - "poor-mans-api"
+  - "kubernetes-gateway-api"
+  - "real-world-stream-collector"
 frozen: false
 ---
 

@@ -11,6 +11,9 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "junit-5-introduction"
+  - "junit-5-testing-basics"
+  - "java-testing-with-vs-code"
 enlighterjs: true
 frozen: false
 ---

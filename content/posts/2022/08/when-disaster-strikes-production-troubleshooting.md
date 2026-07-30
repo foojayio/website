@@ -13,6 +13,10 @@ categories:
   - "sql"
 tags:
 related_posts:
+  - "debugging-java-equals-hashcode-performance-in-production"
+  - "debugging-jaxb-production-issues"
+  - "debugging-jsoup-java-code-in-production-using-lightrun"
+  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 frozen: false
 ---
 

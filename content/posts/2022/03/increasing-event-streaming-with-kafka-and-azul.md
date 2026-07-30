@@ -15,6 +15,9 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "java-where-the-wild-code-isnt"
+  - "demystifying-jvm-memory-management"
 enlighterjs: true
 frozen: false
 ---

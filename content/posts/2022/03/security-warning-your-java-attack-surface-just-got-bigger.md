@@ -12,6 +12,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "5-tips-to-create-secure-docker-images-for-java-applications"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "are-java-security-updates-important"
+  - "quick-fire-java-java-after-log4j"
 frozen: false
 ---
 

@@ -15,6 +15,9 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "vaadin-and-jooq-match-made-in-heaven"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
 enlighterjs: true
 frozen: false
 ---

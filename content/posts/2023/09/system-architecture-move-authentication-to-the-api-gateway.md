@@ -13,6 +13,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "apache-apisix-loves-rust"
+  - "apisix-api-gateway"
+  - "authenticate-with-openid-connect-and-apache-apisix"
+  - "poor-mans-api"
 enlighterjs: true
 frozen: false
 ---

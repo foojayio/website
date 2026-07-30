@@ -106,7 +106,7 @@ bx:ldap
     action="modify"
     connection="myLdap"
     dn="uid=jdoe,ou=users,dc=example,dc=org"
-    attributes={ "mail" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89e7ecfeece4e8e0e5c9ecf1e8e4f9e5eca7eae6e4">[email&nbsp;protected]</a>" }
+    attributes={ "mail" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="254b40524048444c4965405d44485549400b464a48">[email&nbsp;protected]</a>" }
     modifyType="replace";
 
 // Explicitly close when done
@@ -194,7 +194,7 @@ newUser = {
     "cn" : "John Doe",
     "sn" : "Doe",
     "uid" : "jdoe",
-    "mail" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86ece9eee8a8e2e9e3c6e3fee7ebf6eae3a8e5e9eb">[email&nbsp;protected]</a>",
+    "mail" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5f35303731713b303a1f3a273e322f333a713c3032">[email&nbsp;protected]</a>",
     "userPassword" : "SecurePassword123",
     "telephoneNumber" : "+1-555-0123"
 };
@@ -309,6 +309,6 @@ Ready to unlock bx-ldap and other premium modules? Choose your plan:
 
 Need help choosing the right plan or have questions? **Contact us directly:**
 
-[📧 \[email protected\]](/cdn-cgi/l/email-protection#fc95929a93bc9e9384909d929bd29593 "📧 info@boxlang.io")
+[📧 \[email protected\]](/cdn-cgi/l/email-protection#0a63646c654a686572666b646d246365 "📧 info@boxlang.io")
 
 **Ready to supercharge your LDAP integration?** Get started with bx-ldap today and experience enterprise-grade directory access in BoxLang!

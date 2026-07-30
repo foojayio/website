@@ -14,6 +14,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "project-panama-for-newbies-part-1"
+  - "towards-continuous-performance-regression-testing"
+  - "java-panama-polyglot-swift-part-2"
 enlighterjs: true
 frozen: false
 ---

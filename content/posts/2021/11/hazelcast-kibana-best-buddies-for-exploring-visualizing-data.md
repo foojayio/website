@@ -14,6 +14,9 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "kotlin-delegation"
+  - "blockhound-how-it-works"
+  - "streaming-real-time-data-on-the-hazelcast-viridian-serverless"
 enlighterjs: true
 frozen: false
 ---

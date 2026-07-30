@@ -13,6 +13,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "write-once-run-embedded-in-any-ide"
+  - "a-javafx-app-on-zulufx-in-60-seconds"
+  - "sorting-text-in-java-how-complicated-can-it-be"
+  - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
 frozen: false
 ---
 

@@ -11,6 +11,10 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "3-ways-to-refactor-your-code-in-intellij-idea"
+  - "7-functional-programming-techniques-in-java-a-primer"
+  - "which-is-the-fastest-jvm-openjdk-or-graalvm"
 enlighterjs: true
 frozen: false
 ---

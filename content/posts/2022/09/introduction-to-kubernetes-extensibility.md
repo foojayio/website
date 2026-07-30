@@ -12,6 +12,10 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
+  - "kubernetes-gateway-api"
+  - "apisix-api-gateway"
+  - "fearless-distroless"
 enlighterjs: true
 frozen: false
 ---

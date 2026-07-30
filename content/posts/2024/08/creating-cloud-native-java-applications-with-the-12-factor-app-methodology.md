@@ -17,6 +17,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty"
+  - "effective-cloud-native-java-app-development-with-open-liberty-in-intellij-idea"
+  - "effective-cloud-native-development-open-liberty-vs-code"
+  - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"
 frozen: false
 ---
 

@@ -11,6 +11,9 @@ categories:
   - "Java Core"
 tags:
 related_posts:
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "5-things-you-probably-didnt-know-about-java-concurrency"
+  - "java-bytecode-simplified-journey-to-the-wonderland-part-1"
 enlighterjs: true
 frozen: false
 ---

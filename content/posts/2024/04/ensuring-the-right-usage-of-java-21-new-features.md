@@ -13,6 +13,10 @@ categories:
   - "JDK21"
 tags:
 related_posts:
+  - "building-gdocweb-with-java-21-spring-boot-3-x-and-beyond"
+  - "benchmark-jdbc-connectors-and-java-21-virtual-threads"
+  - "revolutionising-java-collections-the-advent-of-sequenced-collections-in-java-21"
+  - "sonarqube-part-4-ai-code-assurance"
 enlighterjs: true
 frozen: false
 ---

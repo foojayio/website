@@ -12,6 +12,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "breaking-the-code-how-chris-newland-is-changing-the-game-in-jvm-performance"
+  - "mastering-the-art-of-controlling-the-jit-unlocking-reproducible-profiler-tests"
+  - "7-reasons-why-after-26-years-java-still-makes-sense"
+  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 enlighterjs: true
 frozen: false
 ---

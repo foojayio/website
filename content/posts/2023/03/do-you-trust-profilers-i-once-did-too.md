@@ -12,6 +12,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "foojay-podcast-14"
+  - "writing-a-profiler-from-scratch-introduction"
+  - "writing-a-profiler-from-scratch-the-profiling-loop"
+  - "couldnt-we-just-use-asyncgetcalltrace-in-a-separate-thread"
 enlighterjs: true
 frozen: false
 ---

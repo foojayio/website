@@ -17,6 +17,10 @@ categories:
   - "Uncategorized"
 tags:
 related_posts:
+  - "installing-java-with-sdkman-on-raspberry-pi"
+  - "video-sdkman-explained"
+  - "disco-api-helping-you-to-find-any-openjdk-distribution"
+  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 enlighterjs: true
 frozen: false
 ---

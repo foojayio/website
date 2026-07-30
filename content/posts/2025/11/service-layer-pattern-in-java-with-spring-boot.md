@@ -13,6 +13,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "agents-meet-databases-the-future-of-agentic-architectures"
+  - "best-practices-for-deploying-mongodb-in-kubernetes"
+  - "beyond-keywords-implementing-semantic-search-in-java-with-spring-data-part-1"
+  - "beyond-keywords-optimizing-vector-search-with-filters-and-caching-part-2"
 enlighterjs: true
 frozen: false
 ---
@@ -419,9 +423,9 @@ Best practices {#h2-18-best-practices}
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
 
 public void createUser_duplicateEmail_throwsException() {
-&nbsp;&nbsp;&nbsp;&nbsp;when(userRepository.existsByEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a6d2c3d5d2e6c3dec7cbd6cac388c5c9cb">[email&nbsp;protected]</a>")).thenReturn(true);
+&nbsp;&nbsp;&nbsp;&nbsp;when(userRepository.existsByEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ccb8a9bfb88ca9b4ada1bca0a9e2afa3a1">[email&nbsp;protected]</a>")).thenReturn(true);
 &nbsp;&nbsp;&nbsp;&nbsp;assertThrows(DuplicateEmailException.class, () -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userService.createUser("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b3f2e383f0b2e332a263b272e65282426">[email&nbsp;protected]</a>", "Test User");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userService.createUser("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="592d3c2a2d193c21383429353c773a3634">[email&nbsp;protected]</a>", "Test User");
 &nbsp;&nbsp;&nbsp;&nbsp;});
 }</pre>
 

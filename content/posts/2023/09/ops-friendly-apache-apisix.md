@@ -12,6 +12,9 @@ categories:
   - "DevOps"
 tags:
 related_posts:
+  - "poor-mans-api"
+  - "kubernetes-gateway-api"
+  - "apache-apisix-loves-rust"
 enlighterjs: true
 frozen: false
 ---

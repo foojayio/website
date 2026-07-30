@@ -17,6 +17,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
+  - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
+  - "boxlang-1-14-0-query-transformers-take-full-control-of-your-query-results"
+  - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
 enlighterjs: true
 frozen: false
 ---
@@ -345,7 +349,7 @@ CLI error messages now provide clearer context and actionable information when B
 BoxLang 1.11.0 is a drop-in upgrade. No code changes are required to benefit from the performance improvements.
 
 <pre class="EnlighterJSRAW" data-enlighter-language="java"># CommandBox
-box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7614190e1a17181136475847475846">[email&nbsp;protected]</a>
+box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f99b96819598979eb9c8d7c8c8d7c9">[email&nbsp;protected]</a>
 
 # BVM
 bvm install 1.11.0 &amp;&amp; bvm use 1.11.0

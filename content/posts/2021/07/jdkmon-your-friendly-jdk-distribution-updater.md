@@ -12,6 +12,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "azul-brings-java-from-edge-to-cloud"
+  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
+  - "foojay-podcast-83"
+  - "java-for-desktop-applications-part-1"
 frozen: false
 ---
 

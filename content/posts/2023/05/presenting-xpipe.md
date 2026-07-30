@@ -12,6 +12,10 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "beginning-javafx-with-intellij"
+  - "building-javafx-with-gradle"
+  - "creating-a-javafx-world-clock-from-scratch-part-1"
+  - "azul-brings-java-from-edge-to-cloud"
 enlighterjs: true
 frozen: false
 ---

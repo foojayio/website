@@ -13,6 +13,10 @@ categories:
   - "Surveys"
 tags:
 related_posts:
+  - "why-java-developers-continue-to-rely-on-jakarta-ee"
+  - "whats-new-in-the-july-2026-azul-payara-release"
+  - "jurassic-jdk-migrate-or-extinct"
+  - "glassfish-8-0-2-released"
 frozen: false
 ---
 

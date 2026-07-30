@@ -11,6 +11,10 @@ categories:
   - "Interviews"
 tags:
 related_posts:
+  - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
+  - "interview-frank-delporte-foojay-raspberry-pi-community-manager"
+  - "interview-with-tom-granot-developer-observability-koolkits-and-reliability"
+  - "from-assembler-to-chat-gpt-steve-poole-on-the-shifting-landscape-of-programming"
 frozen: false
 ---
 

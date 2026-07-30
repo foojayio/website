@@ -13,6 +13,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "beetroot-yet-another-web-framework"
+  - "book-review-persistence-best-practices-for-java-applications"
+  - "book-review-quarkus-for-spring-developers"
+  - "book-review-effortless-cloud-native-app-development-using-skaffold-2"
 frozen: false
 ---
 

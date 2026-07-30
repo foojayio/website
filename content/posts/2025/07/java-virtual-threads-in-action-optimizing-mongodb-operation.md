@@ -14,6 +14,10 @@ categories:
   - "Mongo"
 tags:
 related_posts:
+  - "how-to-identify-the-underlying-causes-of-connection-timeout-errors-for-mongodb-with-java"
+  - "understanding-bson-a-beginners-guide-to-mongodbs-data-format"
+  - "java-concurrency-best-practices-for-mongodb"
+  - "clean-and-modular-java-a-hexagonal-architecture-approach"
 enlighterjs: true
 frozen: false
 ---
@@ -22,7 +26,7 @@ Virtual threads have become one of the most popular resources in Java and are tr
 
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/mongodb-virtual-threads):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86e1eff2c6e1eff2eef3e4a8e5e9eb">[email&nbsp;protected]</a>:soujava/mongodb-virtual-threads.git
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81e6e8f5c1e6e8f5e9f4e3afe2eeec">[email&nbsp;protected]</a>:soujava/mongodb-virtual-threads.git
 </pre>
 
 Prerequisites {#h2-0-prerequisites}

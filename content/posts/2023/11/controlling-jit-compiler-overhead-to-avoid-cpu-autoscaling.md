@@ -15,6 +15,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "changes-included-in-the-stable-release-23-08-of-azul-zulu-prime-builds-of-openjdk"
+  - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
+  - "explained-memory-allocation-pacing-in-azul-zulu-prime-builds-of-openjdk"
+  - "changes-included-in-release-24-02-of-azul-zing-builds-of-openjdk"
 enlighterjs: true
 frozen: false
 ---

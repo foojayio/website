@@ -14,6 +14,9 @@ categories:
   - "JavaFX"
 tags:
 related_posts:
+  - "new-book-fxgl-17-learn-javafx-game-and-app-development"
+  - "creating-a-snake-game-with-javafx-fxgl-in-three-pair-programming-sessions"
+  - "getting-started-with-fxgl-game-development"
 frozen: false
 ---
 

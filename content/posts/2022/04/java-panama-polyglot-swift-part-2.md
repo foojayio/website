@@ -14,6 +14,10 @@ categories:
   - "Project Panama"
 tags:
 related_posts:
+  - "foojay-all-about-java-and-the-openjdk-i-programmer"
+  - "7-ways-to-contribute-to-openjdk"
+  - "5-things-you-probably-didnt-know-about-java-concurrency"
+  - "project-panama-for-newbies-part-4"
 enlighterjs: true
 frozen: false
 ---

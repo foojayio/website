@@ -12,6 +12,10 @@ categories:
   - "Java Beginner"
 tags:
 related_posts:
+  - "guide-lazyinitializationexception"
+  - "are-java-security-updates-important"
+  - "boldness-in-refactoring"
+  - "building-custom-solutions-vs-buy-and-build-software"
 frozen: false
 ---
 
