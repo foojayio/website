@@ -53,7 +53,11 @@ in `build-deploy.yml`) and `content/search.md` loads that index client-side.
 exists after a real build. To test locally:
 
 ```bash
-hugo
+# --baseURL override matters: hugo.toml's baseURL is the real GitHub Pages
+# URL (.../website/), but `serve` serves public/ at the root of
+# localhost:3000 with no such subpath -- without the override every asset
+# and internal link 404s.
+hugo --baseURL "http://localhost:3000/"
 npx pagefind --site public
 npx serve public
 ```
