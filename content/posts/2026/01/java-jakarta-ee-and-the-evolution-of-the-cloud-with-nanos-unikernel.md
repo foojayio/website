@@ -6,7 +6,7 @@ lastmod: "2026-01-06T21:40:18+00:00"
 description: "Nanos shows that cloud-native can exist without adding complexity, and can be secure, faster, lighter, safer, more efficient, and more cost-effective."
 authors:
   - "angelo-rubini"
-image: "https://foojay.io/wp-content/uploads/2026/01/vms-vs-unikernels.png"
+image: "/images/posts/2026/01/java-jakarta-ee-and-the-evolution-of-the-cloud-with-nanos-unikernel/vms-vs-unikernels.png"
 categories:
   - "Cloud"
   - "DevOps"

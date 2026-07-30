@@ -6,7 +6,7 @@ lastmod: "2026-05-14T17:09:41+00:00"
 description: "In this article, you will build a code review assistant API. Developers submit code snippets through a REST endpoint. The system embeds the submitted code with Spring AI and searches a library of known anti-patterns stored as vectors in MongoDB Atlas. It then sends the code along with matched patterns to an LLM for structured review feedback. Every submission and its findings are stored in MongoDB, and aggregation pipelines surface trends over time."
 authors:
   - "farhan-chowdhury"
-image: "https://foojay.io/wp-content/uploads/2026/05/Screenshot-2026-05-08-at-3.02.20-PM.png"
+image: "/images/posts/2026/05/ai-powered-code-review-assistant-automated-code-analysis-with-spring-ai-and-mongodb/Screenshot-2026-05-08-at-3.02.20-PM.png"
 categories:
   - "AI"
   - "Java"

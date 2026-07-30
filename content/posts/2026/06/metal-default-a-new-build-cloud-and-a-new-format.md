@@ -7,7 +7,7 @@ description: "The iOS Metal renderer is now the default, the new Build Cloud con
 canonical: "https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/06/metal-default-new-build-cloud-and-a-new-format.jpg"
+image: "/images/posts/2026/06/metal-default-a-new-build-cloud-and-a-new-format/metal-default-new-build-cloud-and-a-new-format.jpg"
 categories:
   - "Java"
 tags:

@@ -5,7 +5,7 @@ date: "2025-12-19T13:36:28+00:00"
 description: "In this article you’ll learn Why CVEs record that a vulnerability exists, not that a usable fix exists How vulnerabilities are often discovered and fixed - by Steve Poole"
 authors:
   - "steve-poole"
-image: "https://foojay.io/wp-content/uploads/2025/12/banner2.png"
+image: "/images/posts/2025/12/the-real-mechanics-of-vulnerabilities-in-an-upstream-downstream-topsy-turvy-eol-world/banner2.png"
 categories:
   - "Java"
   - "Security"

@@ -5,7 +5,7 @@ date: "2026-07-03T08:31:27+00:00"
 description: "I pointed a scanner I have been building at an old Spring project, and it flagged javax.activation. The bump was 1.1-rev-1 to 1.1.1. Prior releases - by Muhammad Usman"
 authors:
   - "muhammad-usman"
-image: "https://foojay.io/wp-content/uploads/2026/07/marshal-foojay-featured.png"
+image: "/images/posts/2026/07/this-dependency-update-looked-exactly-like-an-account-takeover/marshal-foojay-featured.png"
 categories:
   - "Gradle"
   - "Java"

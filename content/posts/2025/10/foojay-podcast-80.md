@@ -6,7 +6,7 @@ lastmod: "2025-11-13T08:35:29+00:00"
 description: "This is part 2 of the interviews recorded on September 19th, 2025, at the first AI4Devs conference in Amsterdam. In Part 1, we explored many AI-related - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/10/thumnail-aidevs-part-2.jpg"
+image: "/images/posts/2025/10/foojay-podcast-80/thumnail-aidevs-part-2.jpg"
 categories:
   - "Conference"
   - "Podcast"

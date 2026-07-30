@@ -6,7 +6,7 @@ lastmod: "2025-01-29T09:18:04+00:00"
 description: "The data encryption and security market continues to evolve as organizations face increasing demands for data protection while maintaining operational efficiency."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2022/06/chemical-scientist-test-chemistry-chemist-student.jpg"
+image: "/images/posts/2025/01/encryption-and-data-security-market-analysis-market-analysis-2025/chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Developer Tools"
 tags:

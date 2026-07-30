@@ -6,7 +6,7 @@ lastmod: "2026-06-24T06:32:24+00:00"
 description: "Most developers using AI tools are still guessing. The Eclipse Foundation's first AI Coding Workshop in Brussels was built to change that. It's a brand - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/06/eclipse-ai-brussels-jonas-scaled.jpg"
+image: "/images/posts/2026/06/systematic-ai-coding-my-takeaways-from-the-eclipse-foundation-workshop-in-brussels/eclipse-ai-brussels-jonas-scaled.jpg"
 categories:
   - "AI"
   - "Events"

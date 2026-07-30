@@ -6,7 +6,7 @@ lastmod: "2025-12-10T10:24:43+00:00"
 description: "The BoxLang team is excited to announce BoxLang 1.8.0, a massive release that revolutionizes HTTP capabilities, introduces comprehensive SOAP/WSDL - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2025/10/BoxLang-Logo-Dark.png"
+image: "/images/posts/2025/12/boxlang-v1-8-0-revolutionary-http-client-soap-integration-and-production-grade-stability/BoxLang-Logo-Dark.png"
 categories:
   - "Uncategorized"
 tags:
@@ -184,7 +184,7 @@ println( "Status: #result.statusCode#" );
 result = http( "https://api.example.com/users" )
     .post()
     .header( "Content-Type", "application/json" )
-    .body( { name : "John Doe", email : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef85808781af8a978e829f838ac18c8082">[email&nbsp;protected]</a>" } )
+    .body( { name : "John Doe", email : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e3898c8b8da3869b828e938f86cd808c8e">[email&nbsp;protected]</a>" } )
     .send();
 
 // Transform response inline
@@ -612,7 +612,7 @@ Ready to experience revolutionary HTTP capabilities, SOAP integration, and rock-
 **Upgrade to BoxLang 1.8.0 today!**
 
 <pre class="EnlighterJSRAW" data-enlighter-language="java"># Update with CommandBox
-box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9dfff2e5f1fcf3faddacb3a5b3ad">[email&nbsp;protected]</a>
+box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="680a07100409060f285946504658">[email&nbsp;protected]</a>
 
 # Or download from boxlang.io
 https://boxlang.io/download</pre>

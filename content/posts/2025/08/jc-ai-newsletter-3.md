@@ -6,7 +6,7 @@ lastmod: "2025-10-14T05:40:57+00:00"
 description: "The current newsletter vol.3, brings a collection of valuable articles focusing on challenges that are commonly reported through reported breakthroughs in the field of artificial intelligence."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2025/07/ai-insider-1.png"
+image: "/images/posts/2025/08/jc-ai-newsletter-3/ai-insider-1.png"
 categories:
   - "AI"
   - "Cloud"

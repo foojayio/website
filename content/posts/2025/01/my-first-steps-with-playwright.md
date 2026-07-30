@@ -7,7 +7,7 @@ description: "In my previous company, I developed a batch job that tracked metri
 canonical: "https://blog.frankel.ch/first-steps-playwright/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/01/playwright-logo.png"
+image: "/images/posts/2025/01/my-first-steps-with-playwright/playwright-logo.png"
 categories:
   - "Tutorials"
 tags:

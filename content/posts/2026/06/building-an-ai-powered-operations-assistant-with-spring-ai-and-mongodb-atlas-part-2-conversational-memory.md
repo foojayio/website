@@ -6,7 +6,7 @@ lastmod: "2026-06-10T19:23:48+00:00"
 description: "This is the second article in a three-part series. Part 1 covered the RAG foundation — loading runbooks into a vector store and wiring them to a language model. Part 3 will introduce stateful workflow checkpointing with pause and resume."
 authors:
   - "matteo-rossi"
-image: "https://foojay.io/wp-content/uploads/2026/05/1070125507.png"
+image: "/images/posts/2026/06/building-an-ai-powered-operations-assistant-with-spring-ai-and-mongodb-atlas-part-2-conversational-memory/1070125507.png"
 categories:
   - "AI"
   - "Databases"

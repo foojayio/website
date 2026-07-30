@@ -7,7 +7,7 @@ description: "Alpine is very similar to Vue, with the notable difference of the 
 canonical: "https://blog.frankel.ch/ajax-ssr/4/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/09/mountains-6486093.jpg"
+image: "/images/posts/2024/10/augmenting-the-client-with-alpine-js/mountains-6486093.jpg"
 categories:
   - "Developer Tools"
   - "Spring"
@@ -70,8 +70,8 @@ It's similar to Vue's setup.
 
 Here's the code on the HTML side:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b2a332224380b7a657c">[email&nbsp;protected]</a>/dist/axios.min.js"&gt;&lt;/script&gt; &lt;!--1--&gt;
-&lt;script th:src="@{/webjars/alpinejs/dist/cdn.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d5c514d545358574e7d0e130c09130c">[email&nbsp;protected]</a>/dist/cdn.min.js" defer&gt;&lt;/script&gt; &lt;!--2--&gt;
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="34554c5d5b4774051a03">[email&nbsp;protected]</a>/dist/axios.min.js"&gt;&lt;/script&gt; &lt;!--1--&gt;
+&lt;script th:src="@{/webjars/alpinejs/dist/cdn.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f59499859c9b909f86b5c6dbc4c1dbc4">[email&nbsp;protected]</a>/dist/cdn.min.js" defer&gt;&lt;/script&gt; &lt;!--2--&gt;
 &lt;script th:src="@{/alpine.js}" src="../static/alpine.js"&gt;&lt;/script&gt;  &lt;!--3--&gt;
 &lt;script th:inline="javascript"&gt;
 /*&lt;![CDATA[*/

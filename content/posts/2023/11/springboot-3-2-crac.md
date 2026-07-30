@@ -6,7 +6,7 @@ lastmod: "2024-02-06T12:23:02+00:00"
 description: "To test the new support for CRaC in SpringBoot 3.2, let's use the SpringBoot Petclinic demo."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2023/11/StartWithManualCheckpoint-700x441-1.png"
+image: "/images/posts/2023/11/springboot-3-2-crac/StartWithManualCheckpoint-700x441-1.png"
 categories:
   - "CRaC"
   - "Java"

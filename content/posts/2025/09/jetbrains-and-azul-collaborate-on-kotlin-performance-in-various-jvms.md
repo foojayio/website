@@ -7,7 +7,7 @@ description: "On May 20, JetBrains and Azul announced a strategic technical col
 canonical: "https://www.azul.com/blog/jetbrains-and-azul-collaborate-on-kotlin-performance-in-various-jvms/"
 authors:
   - "jiri-holusa"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/09/jetbrains-and-azul-collaborate-on-kotlin-performance-in-various-jvms/Favicon-3-2.png"
 categories:
   - "Developer Tools"
   - "Events"

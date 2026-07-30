@@ -6,7 +6,7 @@ lastmod: "2025-09-15T14:24:46+00:00"
 description: "I hope my research paper helps the community understand not only the importance of proper language platform selection, but also hardware choice considerations."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2025/09/20250915_ArticleLogo.png"
+image: "/images/posts/2025/09/research-measuring-energy-consumption-in-programming-languages-for-ai-applications/20250915_ArticleLogo.png"
 categories:
   - "AI"
   - "Arm"

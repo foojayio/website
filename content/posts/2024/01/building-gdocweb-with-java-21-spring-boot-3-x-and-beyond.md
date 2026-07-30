@@ -7,7 +7,7 @@ description: "Explore the journey of building gdocweb: a developer's insight int
 canonical: "https://debugagent.com/building-gdocweb-with-java-21-spring-boot-3x-and-beyond#heading-java-21-and-spring-boot-3x-innovation-and-maturity"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/01/DALL·E-2024-01-15-18.35.19-A-blog-post-header-image-visually-explaining-the-creation-of-gdocweb-a-Google-Docs-to-website-converter-tool.-The-image-should-depict-a-flow-of-ele.jpg"
+image: "/images/posts/2024/01/building-gdocweb-with-java-21-spring-boot-3-x-and-beyond/DALL-E-2024-01-15-18.35.19-A-blog-post-header-image-visually-explaining-the-creation-of-gdocweb-a-Google-Docs-to-website-converter-tool.-The-image-should-depict-a-flow-of-ele.jpg"
 categories:
   - "Java Core"
   - "Spring"

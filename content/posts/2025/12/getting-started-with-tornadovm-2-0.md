@@ -6,7 +6,7 @@ lastmod: "2025-12-22T17:37:05+00:00"
 description: "Starting with TornadoVM 2.0, installing and using TornadoVM is easier than ever. The project now provides prebuilt SDKs for multiple operating systems, - by Thanos Stratikopoulos"
 authors:
   - "thanos-stratikopoulos"
-image: "https://foojay.io/wp-content/uploads/2024/02/tornado-insight.webp"
+image: "/images/posts/2025/12/getting-started-with-tornadovm-2-0/tornado-insight.webp"
 categories:
   - "Maven"
   - "Tools"

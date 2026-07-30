@@ -7,7 +7,7 @@ description: "Recently, I mentioned how I refactored the script that kept my Git
 canonical: "https://blog.frankel.ch/raspberry-pi-github-action/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/03/pexels-alessandro-oliverio-1472443.jpg"
+image: "/images/posts/2024/04/using-my-new-raspberry-pi-to-run-an-existing-github-action/pexels-alessandro-oliverio-1472443.jpg"
 categories:
   - "DevOps"
   - "Raspberry Pi"

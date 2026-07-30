@@ -6,7 +6,7 @@ lastmod: "2026-02-19T08:42:51+00:00"
 description: "We're excited to announce the release of the BoxLang NeoVim Plugin - a comprehensive syntax highlighting solution designed specifically for BoxLang - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/02/boxlang-neovim.jpg"
+image: "/images/posts/2026/02/boxlang-neovim-plugin-released/boxlang-neovim.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"
@@ -97,7 +97,7 @@ class UserService {
      * Safe navigation with elvis operator
      */
     public function getEmail() {
-        return this.user?.email ?: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f89697d59d95999194b89d80999588949dd69b9795">[email&nbsp;protected]</a>";
+        return this.user?.email ?: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b3dddc9ed6ded2dadff3d6cbd2dec3dfd69dd0dcde">[email&nbsp;protected]</a>";
     }
 }</pre>
 

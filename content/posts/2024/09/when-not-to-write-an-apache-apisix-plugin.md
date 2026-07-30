@@ -7,7 +7,7 @@ description: "Practical alternatives to writing a custom plugin, offering soluti
 canonical: "https://blog.frankel.ch/when-write-apisix-plugin/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/08/man-5723449.jpg"
+image: "/images/posts/2024/09/when-not-to-write-an-apache-apisix-plugin/man-5723449.jpg"
 categories:
   - "DevOps"
 tags:

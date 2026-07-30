@@ -6,7 +6,7 @@ lastmod: "2024-03-06T13:01:42+00:00"
 description: "Dive into the Microservices Design Principles with our in-depth guide to creating modular, scalable, and resilient software systems."
 authors:
   - "abo-saad-muaath"
-image: "https://foojay.io/wp-content/uploads/2024/02/microservices-part2-1.jpeg"
+image: "/images/posts/2024/03/microservices-design-principles-for-well-crafted-architecture/microservices-part2-1.jpeg"
 categories:
   - "Microservices"
 tags:

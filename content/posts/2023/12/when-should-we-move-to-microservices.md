@@ -6,7 +6,7 @@ lastmod: "2023-12-28T14:08:29+00:00"
 description: "Avoid the small monolith antipattern. When do Microservices make sense? Avoid a solution worse than the problem, understand the tradeoffs."
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/03/When-Should-we-Migrate-to-Microservices.jpg"
+image: "/images/posts/2023/12/when-should-we-move-to-microservices/When-Should-we-Migrate-to-Microservices.jpg"
 categories:
   - "Microservices"
 tags:

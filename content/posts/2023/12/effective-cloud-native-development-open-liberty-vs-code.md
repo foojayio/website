@@ -7,7 +7,7 @@ description: "Liberty Tools for Visual Studio Code enables fast, easy and effici
 canonical: "https://developer.ibm.com/articles/awb-effective-cloud-native-development-open-liberty-vs-code/"
 authors:
   - "grace-jansen"
-image: "https://foojay.io/wp-content/uploads/2023/11/VSCodeLibertyTools2.png"
+image: "/images/posts/2023/12/effective-cloud-native-development-open-liberty-vs-code/VSCodeLibertyTools2.png"
 categories:
   - "Developer Tools"
   - "Tools"

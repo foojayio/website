@@ -7,7 +7,7 @@ description: "Learn how to use buildpacks to containerize a Java application eas
 canonical: "https://developer.ibm.com/articles/awb-containerizing-java-apps-with-cloud-native-buildpacks/"
 authors:
   - "grace-jansen"
-image: "https://foojay.io/wp-content/uploads/2024/09/buildpacks-700x251.png"
+image: "/images/posts/2024/10/easily-containerize-java-applications-with-cloud-native-buildpacks/buildpacks-700x251.png"
 categories:
   - "Cloud"
   - "Developer Tools"

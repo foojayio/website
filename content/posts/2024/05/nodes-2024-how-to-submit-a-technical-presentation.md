@@ -6,7 +6,7 @@ lastmod: "2024-05-16T09:06:07+00:00"
 description: "Technical events are a great way to learn new things, connect with people, and share knowledge with others."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2024/05/unsplash-tell-stories.jpg"
+image: "/images/posts/2024/05/nodes-2024-how-to-submit-a-technical-presentation/unsplash-tell-stories.jpg"
 categories:
   - "Conference"
   - "Events"

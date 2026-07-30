@@ -7,7 +7,7 @@ description: "Here's Java 25, ready to perform to the limit. It introduces stabl
 canonical: "https://hanno.codes/2025/09/16/heres-java-25"
 authors:
   - "hanno-embregts"
-image: "https://foojay.io/wp-content/uploads/2025/09/performance.jpg"
+image: "/images/posts/2025/09/heres-java-25-ready-to-perform-to-the-limit/performance.jpg"
 categories:
   - "Java"
   - "Java Core"

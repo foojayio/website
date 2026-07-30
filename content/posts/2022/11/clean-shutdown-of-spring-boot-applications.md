@@ -6,7 +6,7 @@ lastmod: "2023-08-28T12:48:39+00:00"
 description: "Article discusses and presents five ways to shutdown Spring Boot apps cleanly. It provides inline code samples and link to GitHub."
 authors:
   - "sumith-puri"
-image: "https://foojay.io/wp-content/uploads/2021/11/1280px-Spring_Framework_Logo_2018.svg.png"
+image: "/images/posts/2022/11/clean-shutdown-of-spring-boot-applications/1280px-Spring_Framework_Logo_2018.svg.png"
 categories:
   - "Cloud"
   - "Spring"

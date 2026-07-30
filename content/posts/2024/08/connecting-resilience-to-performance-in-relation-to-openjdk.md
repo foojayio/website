@@ -7,7 +7,7 @@ description: "Given the requirements of the DORA Act, which mandates strong oper
 authors:
   - "geertjan-wielenga"
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2024/07/dora.png"
+image: "/images/posts/2024/08/connecting-resilience-to-performance-in-relation-to-openjdk/dora.png"
 categories:
   - "EU DORA Act"
   - "Java Core"

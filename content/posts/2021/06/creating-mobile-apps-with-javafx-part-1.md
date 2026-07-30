@@ -6,7 +6,7 @@ lastmod: "2022-07-26T08:11:59+00:00"
 description: "In this three-part series, I’ll show how to use JavaFX for mobile development, using the same code targeting Google Play and Apple App stores."
 authors:
   - "gail-anderson"
-image: "https://foojay.io/wp-content/uploads/2021/06/TiltMaze-android-small.png"
+image: "/images/posts/2021/06/creating-mobile-apps-with-javafx-part-1/TiltMaze-android-small.png"
 categories:
   - "Game Development"
   - "JavaFX"

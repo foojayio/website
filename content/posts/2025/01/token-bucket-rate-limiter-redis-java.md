@@ -7,7 +7,7 @@ description: "Learn how to implement the Token Bucket rate-limiting algorithm us
 canonical: "https://raphaeldelio.com/2025/01/13/token-bucket-rate-limiter-redis-java/"
 authors:
   - "raphael-delio"
-image: "https://foojay.io/wp-content/uploads/2025/01/Redis_Video_RateLimiterImplementations_Part3_YoutubeThumbnail.png"
+image: "/images/posts/2025/01/token-bucket-rate-limiter-redis-java/Redis_Video_RateLimiterImplementations_Part3_YoutubeThumbnail.png"
 categories:
   - "Databases"
   - "Java"

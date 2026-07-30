@@ -6,7 +6,7 @@ lastmod: "2025-08-05T07:38:32+00:00"
 description: "You no longer need a cloud account to try MongoDB Atlas features. Spin up a fully compatible local cluster in seconds, with no login, no credit card, and no friction."
 authors:
   - "arekborucki"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/08/run-an-atlas-cluster-locally-in-minutes/mongologo.png"
 categories:
   - "Java"
   - "Mongo"

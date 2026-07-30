@@ -7,7 +7,7 @@ description: "Maven 4 is approaching its release, bringing many improvements to 
 authors:
   - "frankdelporte"
   - "mthmulders"
-image: "https://foojay.io/wp-content/uploads/2025/11/episode-81-maven-4.jpg"
+image: "/images/posts/2025/11/foojay-podcast-81/episode-81-maven-4.jpg"
 categories:
   - "Gradle"
   - "Maven"

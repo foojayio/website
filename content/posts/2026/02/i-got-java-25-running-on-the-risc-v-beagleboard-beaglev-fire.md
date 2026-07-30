@@ -6,7 +6,7 @@ description: "After my initial struggles with the BeagleV-Fire in a previous vid
 canonical: "https://webtechie.be/post/2026-02-13-java-25-runs-on-riscv-beagleboard-beaglev-fire/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/02/java-on-beaglev-fire.jpg"
+image: "/images/posts/2026/02/i-got-java-25-running-on-the-risc-v-beagleboard-beaglev-fire/java-on-beaglev-fire.jpg"
 categories:
   - "Embedded"
 tags:

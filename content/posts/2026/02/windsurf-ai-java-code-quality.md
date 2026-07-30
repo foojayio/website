@@ -6,7 +6,7 @@ lastmod: "2026-02-16T09:35:10+00:00"
 description: "Boost your Windsurf AI Java coding! 🚀 Learn how to use Skills and MCP to connect SonarQube directly to your IDE for high quality code. 💻✨"
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2026/02/Gemini_Generated_Image_4dpizc4dpizc4dpi.png"
+image: "/images/posts/2026/02/windsurf-ai-java-code-quality/Gemini_Generated_Image_4dpizc4dpizc4dpi.png"
 categories:
   - "AI"
   - "GenAI"

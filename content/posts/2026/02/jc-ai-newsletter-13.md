@@ -6,7 +6,7 @@ lastmod: "2026-02-05T21:12:14+00:00"
 description: "Two weeks have passed, and it is time to present a new collection of readings that may shape developments, utilization or ideas in the field of artificial - by Miro Wengner"
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2025/07/ai-insider.png"
+image: "/images/posts/2026/02/jc-ai-newsletter-13/ai-insider.png"
 categories:
   - "AI"
   - "Data Engineering"

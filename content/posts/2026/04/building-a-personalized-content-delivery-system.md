@@ -6,7 +6,7 @@ lastmod: "2026-04-23T15:10:47+00:00"
 description: "Recommendation engines have a reputation for requiring specialized ML infrastructure: matrix factorization pipelines, training jobs, and model serving layers. That is one way to do it, but not the only way. If your data already lives in MongoDB and your application runs on Spring Boot, you can build a practical recommendation system using tools you already have. MongoDB aggregation pipelines handle the scoring math server-side, and Atlas Vector Search adds semantic matching without a separate vector database."
 authors:
   - "farhan-chowdhury"
-image: "https://foojay.io/wp-content/uploads/2026/04/Screenshot-2026-04-17-at-1.21.56-PM.png"
+image: "/images/posts/2026/04/building-a-personalized-content-delivery-system/Screenshot-2026-04-17-at-1.21.56-PM.png"
 categories:
   - "AI"
   - "Databases"

@@ -7,7 +7,7 @@ description: "Fleet-level advantages achieved for cloud-native Java applications
 canonical: "https://www.azul.com/newsroom/azuls-high-performance-java-platform-achieves-historic-first-with-10000-customer-jvms-collaborating-and-sharing-performance-optimizations-cutting-cloud-costs-by-20/"
 authors:
   - "john-ceccarelli"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/09/azuls-high-performance-java-platform-achieves-historic-first-with-10000-customer-jvms-collaborating-and-sharing-performance-optimizations-cutting-cloud-costs-by-20/Favicon-3-2.png"
 categories:
   - "Performance"
   - "Release Notes"

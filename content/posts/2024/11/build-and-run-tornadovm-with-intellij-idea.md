@@ -6,7 +6,7 @@ lastmod: "2024-11-20T19:08:15+00:00"
 description: "Learn how to build TornadoVM with IntelliJ, and run the unit-tests or other Java programs from the IDE."
 authors:
   - "thanos-stratikopoulos"
-image: "https://foojay.io/wp-content/uploads/2024/11/Run-Tests.png"
+image: "/images/posts/2024/11/build-and-run-tornadovm-with-intellij-idea/Run-Tests.png"
 categories:
   - "IntelliJ IDEA"
   - "Tools"

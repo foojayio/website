@@ -5,7 +5,7 @@ date: "2026-05-29T15:43:47+00:00"
 description: "AI is everywhere right now, but for many development teams, the biggest question is no longer “What is AI?” it’s “How do we actually use it in real - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/05/bx-jwt-1.png"
+image: "/images/posts/2026/05/free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang/bx-jwt-1.png"
 categories:
   - "AI"
   - "BoxLang"

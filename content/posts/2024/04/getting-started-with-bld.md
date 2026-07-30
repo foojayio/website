@@ -6,7 +6,7 @@ lastmod: "2024-04-16T13:24:32+00:00"
 description: "bld is an up-and-coming build tool for the Java ecosystem. This article guides you through getting set up to use it in your own projects."
 authors:
   - "ethan-mccue"
-image: "https://foojay.io/wp-content/uploads/2024/04/bld-create.png"
+image: "/images/posts/2024/04/getting-started-with-bld/bld-create.png"
 categories:
   - "Developer Tools"
   - "Java"

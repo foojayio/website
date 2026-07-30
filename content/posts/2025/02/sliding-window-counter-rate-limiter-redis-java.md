@@ -7,7 +7,7 @@ description: "Learn how to implement a Sliding Window Counter Rate Limiter using
 canonical: "https://medium.com/redis-with-raphael-de-lio/sliding-window-counter-rate-limiter-redis-java-1ba8901c02e5"
 authors:
   - "raphael-delio"
-image: "https://foojay.io/wp-content/uploads/2025/02/Redis_Video_RateLimiterImplementations_Part5_YoutubeThumbnail.png"
+image: "/images/posts/2025/02/sliding-window-counter-rate-limiter-redis-java/Redis_Video_RateLimiterImplementations_Part5_YoutubeThumbnail.png"
 categories:
   - "Databases"
   - "Java"

@@ -5,7 +5,7 @@ date: "2025-12-02T09:21:00+00:00"
 description: "In the world of modern web applications, data is king—but raw numbers rarely tell the full story. 📈 That's where visualization becomes crucial, - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2025/11/bx-chart-release.jpg"
+image: "/images/posts/2025/12/unleashing-the-power-of-data-visualization-introducing-bx-charts-for-boxlang/bx-chart-release.jpg"
 categories:
   - "Uncategorized"
 tags:

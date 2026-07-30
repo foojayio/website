@@ -6,7 +6,7 @@ lastmod: "2023-12-14T10:41:35+00:00"
 description: "Or: I just released version 0.0.11 with a cool new feature that I can't wait to tell you about..."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/12/image-8-2000x1279-1.png"
+image: "/images/posts/2023/12/profiling-maven-projects-with-my-intellij-profiler-plugin/image-8-2000x1279-1.png"
 categories:
   - "Developer Tools"
   - "IntelliJ IDEA"

@@ -6,7 +6,7 @@ lastmod: "2024-05-08T08:03:54+00:00"
 description: "With every major cloud provider now offering Arm-based instances, it’s time to start looking at what you need to do to migrate your Java applications to Aarch64."
 authors:
   - "michael-hall"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2024/05/is-your-java-application-ready-for-the-next-generation-of-server-cpus/Favicon-3-2.png"
 categories:
   - "Cloud"
   - "DevOps"

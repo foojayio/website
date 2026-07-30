@@ -8,7 +8,7 @@ canonical: "https://www.azul.com/blog/changes-included-in-the-stable-release-23-
 authors:
   - "frankdelporte"
   - "matt-van-order"
-image: "https://foojay.io/wp-content/uploads/2023/09/Azul-Prime-Stable-2308.jpg"
+image: "/images/posts/2023/10/changes-included-in-the-stable-release-23-08-of-azul-zulu-prime-builds-of-openjdk/Azul-Prime-Stable-2308.jpg"
 categories:
   - "Java"
   - "Performance"

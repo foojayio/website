@@ -9,7 +9,7 @@ authors:
   - "erikcostlow"
   - "frankdelporte"
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2024/09/episode-58-security.jpg"
+image: "/images/posts/2024/09/foojay-podcast-58/episode-58-security.jpg"
 categories:
   - "Debugging"
   - "Developer Tools"

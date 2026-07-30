@@ -6,7 +6,7 @@ lastmod: "2025-05-29T18:08:18+00:00"
 description: "A few examples of how you can use the awesome TestContainers projects to enhance testing of your MongoDB Atlas Search Java apps."
 authors:
   - "luke-thompson"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongodb-lucene-1.png"
+image: "/images/posts/2025/05/testing-mongodb-atlas-search-java-apps-using-testcontainers/mongodb-lucene-1.png"
 categories:
   - "Databases"
   - "Mongo"

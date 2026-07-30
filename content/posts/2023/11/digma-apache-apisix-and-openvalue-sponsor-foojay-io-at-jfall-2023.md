@@ -6,7 +6,7 @@ lastmod: "2023-11-13T22:31:11+00:00"
 description: "Last week at JFall 2023, was a high point in the evolution of Foojay.io, the place for friends of OpenJDK."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2023/11/booth-1-jfall-2023-1024x768.png"
+image: "/images/posts/2023/11/digma-apache-apisix-and-openvalue-sponsor-foojay-io-at-jfall-2023/booth-1-jfall-2023-1024x768.png"
 categories:
   - "Events"
   - "Foojay"

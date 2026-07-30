@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:15:26+00:00"
 description: "Foojay is a one stop solution for everything related to Java. The Dashboard offers analysis, highlights, and categorized lists of updates by Java users."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/08/Screenshot-2020-08-20-at-17.19.43-1-1024x647.png"
+image: "/images/posts/2020/05/dashboard-for-openjdk-update-release-details/Screenshot-2020-08-20-at-17.19.43-1-1024x647.png"
 categories:
   - "Release Notes"
 tags:

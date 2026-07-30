@@ -6,7 +6,7 @@ lastmod: "2026-06-02T11:41:04+00:00"
 description: "Five talks from OCX26 Brussels 2026 explore how Jakarta EE handles AI integration, local inference, agentic systems, and API design — with no framework gymnastics required."
 authors:
   - "dominika-tasarz"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2026/06/jakarta-ee-is-ready-for-ai-but-dont-just-take-my-word-for-it/Favicon-3-2.png"
 categories:
   - "AI"
   - "Conference"

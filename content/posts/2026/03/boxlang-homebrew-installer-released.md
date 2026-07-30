@@ -6,7 +6,7 @@ lastmod: "2026-03-06T22:25:40+00:00"
 description: "We're excited to announce the official BoxLang Homebrew tap — the easiest way to get BoxLang up and running on macOS (and Linux with Homebrew). One - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/03/boxlang-homebrew.jpg"
+image: "/images/posts/2026/03/boxlang-homebrew-installer-released/boxlang-homebrew.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"

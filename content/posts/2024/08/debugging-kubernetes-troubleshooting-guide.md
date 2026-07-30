@@ -7,7 +7,7 @@ description: "Discover effective solutions to common Kubernetes errors. Learn tr
 canonical: "https://debugagent.com/debugging-kubernetes-troubleshooting-guide"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/06/c46a56605ff1dccf303be0b4eddc49ef.webp-copy.jpg"
+image: "/images/posts/2024/08/debugging-kubernetes-troubleshooting-guide/c46a56605ff1dccf303be0b4eddc49ef.webp-copy.jpg"
 categories:
   - "Tutorials"
 tags:

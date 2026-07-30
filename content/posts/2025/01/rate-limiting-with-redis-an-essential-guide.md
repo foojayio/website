@@ -7,7 +7,7 @@ description: "Discover the essentials of rate limiting with Redis. Learn about p
 canonical: "https://raphaeldelio.com/2024/12/23/rate-limiting-with-redis-an-essential-guide/"
 authors:
   - "raphael-delio"
-image: "https://foojay.io/wp-content/uploads/2025/01/Redis_Video_RateLimiterImplementations_Part1_YoutubeThumbnail.png"
+image: "/images/posts/2025/01/rate-limiting-with-redis-an-essential-guide/Redis_Video_RateLimiterImplementations_Part1_YoutubeThumbnail.png"
 categories:
   - "Databases"
   - "nosql"

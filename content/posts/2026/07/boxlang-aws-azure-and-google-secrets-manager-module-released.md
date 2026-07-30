@@ -6,7 +6,7 @@ lastmod: "2026-07-21T11:52:14+00:00"
 description: "Every production application carries secrets: database passwords, API tokens, encryption keys. The question is never whether to manage them - it's how - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/07/boxlang-secrets.jpg"
+image: "/images/posts/2026/07/boxlang-aws-azure-and-google-secrets-manager-module-released/boxlang-secrets.jpg"
 categories:
   - "BoxLang"
   - "Cloud"

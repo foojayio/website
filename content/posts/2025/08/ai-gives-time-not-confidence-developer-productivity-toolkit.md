@@ -6,7 +6,7 @@ lastmod: "2025-08-25T07:08:59+00:00"
 description: "By offloading some of that work to AI, you get more time and energy to focus on the truly challenging and rewarding parts of software development."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2025/07/https___dev-to-uploads.s3.amazonaws.com_uploads_articles_9a39wkc2svq2rm6x9nym.webp"
+image: "/images/posts/2025/08/ai-gives-time-not-confidence-developer-productivity-toolkit/https___dev-to-uploads.s3.amazonaws.com_uploads_articles_9a39wkc2svq2rm6x9nym.webp"
 categories:
   - "Developer Tools"
   - "Java"

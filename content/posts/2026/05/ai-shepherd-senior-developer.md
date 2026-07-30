@@ -5,7 +5,7 @@ date: "2026-05-05T08:59:45+00:00"
 description: "AI is automating the code, not the engineering. A guide for senior developers on shepherding AI through the work that was always the actual job."
 authors:
   - "markus-westergren"
-image: "https://foojay.io/wp-content/uploads/2026/05/image.png"
+image: "/images/posts/2026/05/ai-shepherd-senior-developer/image.png"
 categories:
   - "Uncategorized"
 tags:

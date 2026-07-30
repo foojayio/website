@@ -7,7 +7,7 @@ description: "Configure the Adaptive Lighting integration to our Home Assistant 
 canonical: "https://blog.frankel.ch/home-assistant/4/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/12/light-bulbs-3958844.jpg"
+image: "/images/posts/2025/01/an-example-of-hacs-adaptive-lighting/light-bulbs-3958844.jpg"
 categories:
   - "Uncategorized"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2026-05-18T09:25:50+00:00"
 description: "Payara Platform Community is now Azul Payara Community. Find out what's changing, what's staying the same, and what's new in the April and May 2026 releases."
 authors:
   - "dominika-tasarz"
-image: "https://foojay.io/wp-content/uploads/2026/05/Azul-Payara-Community-New-Release-1.png"
+image: "/images/posts/2026/05/a-new-chapter-for-the-payara-community/Azul-Payara-Community-New-Release-1.png"
 categories:
   - "Jakarta EE"
   - "Payara"

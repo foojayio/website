@@ -6,7 +6,7 @@ description: "Lottie animations run on Android, iOS, and the web. Getting them w
 canonical: "https://webtechie.be/post/2026-06-04-interview-with-naail-from-lottiefiles/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/06/edit-lottiefiles-naail-scaled.jpg"
+image: "/images/posts/2026/06/lottie4j-meets-lottiefiles/edit-lottiefiles-naail-scaled.jpg"
 categories:
   - "JavaFX"
 tags:

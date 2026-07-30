@@ -7,7 +7,7 @@ description: "One of the most \"fancy\" electronic components is definitely... a
 canonical: "https://webtechie.be/post/2023-10-13-controlling-led-strips-with-java/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/10/matrix-test-scaled.jpg"
+image: "/images/posts/2024/01/controlling-led-strips-with-java-and-jbang/matrix-test-scaled.jpg"
 categories:
   - "Embedded"
   - "JavaFX"

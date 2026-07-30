@@ -6,7 +6,7 @@ lastmod: "2024-01-09T12:58:51+00:00"
 description: "The practices of Event-Driven Architecture and Behaviour-Driven Development have more in common than may at first be apparent."
 authors:
   - "george-ball"
-image: "https://foojay.io/wp-content/uploads/2023/10/Screenshot-2023-10-17-at-4.04.33-PM.png"
+image: "/images/posts/2023/10/navigating-behaviour-with-events/Screenshot-2023-10-17-at-4.04.33-PM.png"
 categories:
   - "Java"
   - "Java Core"

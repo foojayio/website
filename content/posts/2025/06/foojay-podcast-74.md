@@ -6,7 +6,7 @@ lastmod: "2025-11-13T08:36:07+00:00"
 description: "Let's have an AI Bingo and talk about ChatGPT, LLM, ML, RAG, MCP, GenAI, and more! This is part 3 of the interviews recorded at the JCON conference in - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/06/episode-74-jcon-part-3.png"
+image: "/images/posts/2025/06/foojay-podcast-74/episode-74-jcon-part-3.png"
 categories:
   - "Conference"
   - "LangChain4j"

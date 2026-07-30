@@ -7,7 +7,7 @@ description: "Learn how transitioning from traditional relational databases to M
 canonical: "https://dev.to/mongodb/building-a-spring-boot-crud-application-using-mongodbs-relational-migrator-59kf"
 authors:
   - "aasawari-sahasrabuddhe"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/07/building-a-spring-boot-crud-application-using-mongodbs-relational-migrator/mongologo.png"
 categories:
   - "Databases"
   - "Java"

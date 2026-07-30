@@ -6,7 +6,7 @@ lastmod: "2024-05-09T21:46:43+00:00"
 description: "We'll look at how to write GenAI applications with Java using the Spring AI framework and utilize RAG for improving answers."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2024/05/unsplash-ai-chip-scaled.jpg"
+image: "/images/posts/2024/05/spring-ai-how-to-write-genai-applications-with-java/unsplash-ai-chip-scaled.jpg"
 categories:
   - "Graph"
   - "Java"

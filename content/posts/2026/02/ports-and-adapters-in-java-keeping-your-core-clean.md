@@ -6,7 +6,7 @@ lastmod: "2026-02-19T16:14:01+00:00"
 description: "In this article, we focus on a concrete, real-world scenario: using a database, specifically MongoDB, without contaminating the main domain. The goal is not theoretical elegance, but long-term maintainability and testability of the solution."
 authors:
   - "matteo-rossi"
-image: "https://foojay.io/wp-content/uploads/2026/02/Screenshot-2026-02-11-at-3.13.47-PM.png"
+image: "/images/posts/2026/02/ports-and-adapters-in-java-keeping-your-core-clean/Screenshot-2026-02-11-at-3.13.47-PM.png"
 categories:
   - "Databases"
   - "Java"

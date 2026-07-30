@@ -7,7 +7,7 @@ description: "Learn advanced techniques for debugging across the full stack, fro
 canonical: "https://debugagent.com/front-end-debugging-part-1-not-just-console-log"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/10/bc0c6cc72cdd01372f0495cd7bdd464e.webp-copy.jpg"
+image: "/images/posts/2024/11/front-end-debugging-part-1-not-just-console-log/bc0c6cc72cdd01372f0495cd7bdd464e.webp-copy.jpg"
 categories:
   - "Debugging"
   - "Tutorials"

@@ -7,7 +7,7 @@ description: "If you are new to JavaFX+Kotlin, this book is a good starting poin
 canonical: "https://webtechie.be/post/2024-05-06-book-review-javafx-kotlin/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/05/books-side-by-side.jpg"
+image: "/images/posts/2024/06/book-review-frontend-development-with-javafx-and-kotlin/books-side-by-side.jpg"
 categories:
   - "Book Review"
   - "Books"

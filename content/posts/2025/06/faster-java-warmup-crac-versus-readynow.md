@@ -7,7 +7,7 @@ description: "This is the first blog post in a series on faster Java application
 canonical: "https://www.azul.com/blog/faster-warmup-of-your-java-applications-crac-versus-readynow/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/06/faster-java-warmup-crac-versus-readynow/Favicon-3-2.png"
 categories:
   - "CRaC"
   - "Java"

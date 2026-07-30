@@ -6,7 +6,7 @@ lastmod: "2025-06-19T08:38:07+00:00"
 description: "SpringBoot and Kafka Streams – Event Routing & Testing. Build a Kafka Streams app to validate and route Lille city tour!"
 authors:
   - "vincent-vauban"
-image: "https://foojay.io/wp-content/uploads/2025/06/kstream.png"
+image: "/images/posts/2025/06/spring-boot-kafka-streams-event-routing-testing/kstream.png"
 categories:
   - "Java"
   - "Kafka"

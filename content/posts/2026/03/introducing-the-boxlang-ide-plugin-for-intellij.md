@@ -6,7 +6,7 @@ lastmod: "2026-03-17T15:47:36+00:00"
 description: "The IntelliJ ecosystem is one of the most powerful development environments for JVM developers. Today, we’re excited to introduce the official BoxLang IDE - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/03/1773053085130-700x467-1.jpg"
+image: "/images/posts/2026/03/introducing-the-boxlang-ide-plugin-for-intellij/1773053085130-700x467-1.jpg"
 categories:
   - "Developer Tools"
   - "Java"

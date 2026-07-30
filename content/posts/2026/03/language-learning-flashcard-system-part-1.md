@@ -6,7 +6,7 @@ lastmod: "2026-03-24T17:17:50+00:00"
 description: "In this post, we'll write a Java Spring Boot REST API backend application without any frontend, that will store flash cards and decks in MongoDB. In a second post, we'll add the SRS part and a functional React frontend to use our cards."
 authors:
   - "diego-freniche"
-image: "https://foojay.io/wp-content/uploads/2026/03/Screenshot-2026-03-10-at-2.22.35-PM.png"
+image: "/images/posts/2026/03/language-learning-flashcard-system-part-1/Screenshot-2026-03-10-at-2.22.35-PM.png"
 categories:
   - "Databases"
   - "Java"
@@ -155,7 +155,7 @@ Then run your application again.
 
 Finally, if we provide a URI, the app starts:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MONGODB_URI=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1b1a0b2b2b6aeb3a581b8aeb4b3eca2adb4b2b5a4b3efacaeafa6aea5a3efafa4b5">[email&nbsp;protected]</a>/srsapp ./mvnw spring-boot:run</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MONGODB_URI=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a4a5b49494d55485e7a43554f481759564f494e5f48145755545d555e5814545f4e">[email&nbsp;protected]</a>/srsapp ./mvnw spring-boot:run</pre>
 
 And you should see in the log messages from org.mongodb.driver.client
 

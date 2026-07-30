@@ -6,7 +6,7 @@ lastmod: "2026-05-25T08:41:07+00:00"
 description: "Learn how to connect Java applications to Microsoft Access (.accdb/.mdb) using UCanAccess. A pure-Java, open-source JDBC driver for cross-platform database access."
 authors:
   - "markus-spann"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2026/05/ucanaccess-java-ms-access-jdbc-guide/Favicon-3-2.png"
 categories:
   - "Databases"
   - "Java"

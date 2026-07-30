@@ -5,7 +5,7 @@ date: "2026-07-23T12:35:26+00:00"
 description: "Every three months your production JDKs fall further behind on security patches. Azul closes that gap today with the July 2026 quarterly update for Azul - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/09/Azul-Prime-Stable-2308.jpg"
+image: "/images/posts/2026/07/azul-zulu-july-2026-quarterly-update-released/Azul-Prime-Stable-2308.jpg"
 categories:
   - "Java"
   - "Java Core"

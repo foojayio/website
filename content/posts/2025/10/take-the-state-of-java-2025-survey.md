@@ -6,7 +6,7 @@ lastmod: "2025-10-07T05:30:45+00:00"
 description: "Take the State of Java 2025 Survey and learn what's being used where and how in the Java ecosystem."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2025/09/which.png"
+image: "/images/posts/2025/10/take-the-state-of-java-2025-survey/which.png"
 categories:
   - "Java"
   - "Performance"

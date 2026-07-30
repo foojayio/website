@@ -7,7 +7,7 @@ description: "Ever wondered if AI can localize an entire project? Let’s walk t
 canonical: "https://flounder.dev/posts/localize-apps-with-ai/"
 authors:
   - "igor-kulakov"
-image: "https://foojay.io/wp-content/uploads/2024/03/localized-nl.png"
+image: "/images/posts/2024/03/localize-apps-with-ai/localized-nl.png"
 categories:
   - "Java Beginner"
   - "Spring"

@@ -7,7 +7,7 @@ description: "Learn how to integrate the ChatGPT engine into your Java applicati
 canonical: "https://dzone.com/articles/creating-scalable-openai-gpt-applications-in-java"
 authors:
   - "denis-magda"
-image: "https://foojay.io/wp-content/uploads/2023/04/budgetjourney-700x363-1.png"
+image: "/images/posts/2023/04/creating-scalable-openai-gpt-applications-in-java/budgetjourney-700x363-1.png"
 categories:
   - "Databases"
   - "Java Core"

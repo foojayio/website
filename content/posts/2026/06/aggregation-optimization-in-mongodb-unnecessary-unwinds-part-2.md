@@ -6,7 +6,7 @@ lastmod: "2026-06-25T12:01:22+00:00"
 description: "And why MongoDB might be a better relational database than you ever realized. Design reviews are one-on-one meetings where MongoDB experts deliver advice - by Graeme Robinson"
 authors:
   - "graeme-robinson"
-image: "https://foojay.io/wp-content/uploads/2026/06/tue11.png"
+image: "/images/posts/2026/06/aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2/tue11.png"
 categories:
   - "Databases"
   - "Java"

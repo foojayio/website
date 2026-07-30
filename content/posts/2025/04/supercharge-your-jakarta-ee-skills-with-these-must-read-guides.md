@@ -6,7 +6,7 @@ lastmod: "2025-05-01T07:52:49+00:00"
 description: "Jakarta EE is a mature, powerful platform — but it’s also approachable, thanks to resources like these!"
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2022/11/omnifish-logo-transparent-400px-margin.png"
+image: "/images/posts/2025/04/supercharge-your-jakarta-ee-skills-with-these-must-read-guides/omnifish-logo-transparent-400px-margin.png"
 categories:
   - "Jakarta EE"
   - "Tutorials"

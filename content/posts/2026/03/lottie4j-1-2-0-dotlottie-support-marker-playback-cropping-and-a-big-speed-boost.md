@@ -5,7 +5,7 @@ date: "2026-03-24T07:51:00+00:00"
 description: "Version 1.2.0 of Lottie4J is out, and it's again a big release! The headline feature is support for the .lottie container format, but that's just the - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/03/lottie4j-v1.2.0-scaled.jpg"
+image: "/images/posts/2026/03/lottie4j-1-2-0-dotlottie-support-marker-playback-cropping-and-a-big-speed-boost/lottie4j-v1.2.0-scaled.jpg"
 categories:
   - "JavaFX"
 tags:

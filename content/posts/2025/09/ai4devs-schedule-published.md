@@ -5,7 +5,7 @@ date: "2025-09-01T20:05:04+00:00"
 description: "We are happy to announce the Schedule for AI4Devs. Talks 50% live coding showing libraries in Python, Java, Kotlin, Data Science and JScript."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2025/09/Screenshot_20250901_220109.png"
+image: "/images/posts/2025/09/ai4devs-schedule-published/Screenshot_20250901_220109.png"
 categories:
   - "AI"
   - "Conference"

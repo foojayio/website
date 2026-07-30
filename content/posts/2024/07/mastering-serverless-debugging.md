@@ -7,7 +7,7 @@ description: "Discover effective strategies for debugging serverless and AWS Lam
 canonical: "https://debugagent.com/mastering-serverless-debugging"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/07/ff47ff1d20fcebaea29f4f4afaf6bccf.webp-copy.jpg"
+image: "/images/posts/2024/07/mastering-serverless-debugging/ff47ff1d20fcebaea29f4f4afaf6bccf.webp-copy.jpg"
 categories:
   - "Debugging"
   - "Tutorials"

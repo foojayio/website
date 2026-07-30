@@ -8,7 +8,7 @@ canonical: "https://www.azul.com/blog/find-undead-code-in-your-java-environments
 authors:
   - "erikcostlow"
   - "trisha-gee"
-image: "https://foojay.io/wp-content/uploads/2025/02/Undead-Code-Time-Vampire-Ad-1-768x432-1.png"
+image: "/images/posts/2025/02/webinar-find-undead-code-in-your-java-environments/Undead-Code-Time-Vampire-Ad-1-768x432-1.png"
 categories:
   - "Developer Tools"
   - "Events"

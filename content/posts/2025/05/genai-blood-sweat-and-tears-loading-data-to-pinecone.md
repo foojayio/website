@@ -6,7 +6,7 @@ lastmod: "2025-05-07T22:10:39+00:00"
 description: "The task to load some JSON data to Pinecone was much more arduous than I had anticipated, but I learned a lot along the way!"
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2025/04/unsplash-hard-labor-scaled.jpg"
+image: "/images/posts/2025/05/genai-blood-sweat-and-tears-loading-data-to-pinecone/unsplash-hard-labor-scaled.jpg"
 categories:
   - "Databases"
   - "Java"

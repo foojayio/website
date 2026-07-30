@@ -6,7 +6,7 @@ lastmod: "2024-09-18T10:03:36+00:00"
 description: "Java 23 has arrived! It's been six months since Java 22 was released, so it's time for a fresh truckload of JEPs."
 authors:
   - "hanno-embregts"
-image: "https://foojay.io/wp-content/uploads/2024/09/road-train.jpg"
+image: "/images/posts/2024/09/java-23-has-arrived-and-it-brings-a-truckload-of-changes/road-train.jpg"
 categories:
   - "Java"
   - "Java Core"

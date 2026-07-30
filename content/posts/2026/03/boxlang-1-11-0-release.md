@@ -6,7 +6,7 @@ lastmod: "2026-03-17T15:45:32+00:00"
 description: "We're proud to announce BoxLang 1.11.0, a highly focused performance and stability release that delivers measurable speed improvements across every - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/03/boxlang-v1.11.0.jpg"
+image: "/images/posts/2026/03/boxlang-1-11-0-release/boxlang-v1.11.0.jpg"
 categories:
   - "AI"
   - "BoxLang"
@@ -349,7 +349,7 @@ CLI error messages now provide clearer context and actionable information when B
 BoxLang 1.11.0 is a drop-in upgrade. No code changes are required to benefit from the performance improvements.
 
 <pre class="EnlighterJSRAW" data-enlighter-language="java"># CommandBox
-box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f99b96819598979eb9c8d7c8c8d7c9">[email&nbsp;protected]</a>
+box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8bab7a0b4b9b6bf98e9f6e9e9f6e8">[email&nbsp;protected]</a>
 
 # BVM
 bvm install 1.11.0 &amp;&amp; bvm use 1.11.0

@@ -6,7 +6,7 @@ lastmod: "2026-07-23T15:30:40+00:00"
 description: "AI finds decades-old flaws at machine speed, but the fixes only reach supported versions. What that means for end-of-life Java, and what to do."
 authors:
   - "steve-poole"
-image: "https://foojay.io/wp-content/uploads/2026/07/Gemini_Generated_Image_kms68akms68akms6-1024x541.png"
+image: "/images/posts/2026/07/ai-found-the-bugs-whos-patching-your-eol-java-code/Gemini_Generated_Image_kms68akms68akms6-1024x541.png"
 categories:
   - "AI"
   - "Java"

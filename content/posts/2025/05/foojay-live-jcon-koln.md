@@ -6,7 +6,7 @@ lastmod: "2025-05-20T07:34:21+00:00"
 description: "Today and tomorrow, we will be at the JCON Conference in Köln, Germany. We have set up an interview booth to talk to speakers and visitors about all - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/05/foojay-at-jcon-booth-1-scaled.jpg"
+image: "/images/posts/2025/05/foojay-live-jcon-koln/foojay-at-jcon-booth-1-scaled.jpg"
 categories:
   - "Interviews"
 tags:

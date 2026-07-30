@@ -6,7 +6,7 @@ lastmod: "2025-10-09T14:49:51+00:00"
 description: "Hybrid search in MongoDB brings together two complementary search techniques:Full text search (BM25 via Atlas Search)—optimized for exact keyword matches, powered by Lucene inside mongot. Perfect when users expect documents that literally contain their query terms.Vector search (kNN via Atlas Vector Search)—optimized for semantic similarity. It uses dense embeddings from ML models to find conceptually related content, even when no keywords match.On their own, each method has advantages and limitations. Text search misses context (“non-linear crime story” won’t return Memento). Pure semantic search may return results that are semantically aligned but sometimes not practically useful. Hybrid search combines the strengths of both, ensuring results are contextually relevant and precise."
 authors:
   - "arekborucki"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/10/keywords-meet-vectors-hybrid-search-on-mongodb/Favicon-3-2.png"
 categories:
   - "AI"
   - "Databases"

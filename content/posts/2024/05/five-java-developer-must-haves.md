@@ -7,7 +7,7 @@ description: "How to get ultra-fast startup of your Java apps without developer 
 canonical: "https://dzone.com/articles/five-java-developer-must-haves-for-ultra-fast-star"
 authors:
   - "laura-cowen"
-image: "https://foojay.io/wp-content/uploads/2024/05/startuptimeinms.png"
+image: "/images/posts/2024/05/five-java-developer-must-haves/startuptimeinms.png"
 categories:
   - "Java"
   - "Opinion"

@@ -7,7 +7,7 @@ description: "A family vacation as a topic for a Foojay blog post? Really? Yes, 
 canonical: "https://webtechie.be/post/2024-09-04-timezone-change-kazakstan/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/09/kstan.png"
+image: "/images/posts/2024/11/how-we-almost-missed-a-plane-in-kazakhstan-but-openjdk-could-have-saved-us/kstan.png"
 categories:
   - "Java"
   - "Trip Reports"

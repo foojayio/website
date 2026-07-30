@@ -8,7 +8,7 @@ authors:
   - "frankdelporte"
   - "geertjan-wielenga"
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2025/04/episode-70-foojay-5.png"
+image: "/images/posts/2025/04/foojay-podcast-70/episode-70-foojay-5.png"
 categories:
   - "Foojay"
   - "Podcast"

@@ -7,7 +7,7 @@ description: "Every year, I look forward to our State of Java Survey & Report 
 canonical: "https://www.azul.com/blog/what-2000-professionals-told-us-about-the-state-of-java-ai-cloud-costs-and-the-future-of-the-java-ecosystem/"
 authors:
   - "scott-sellers"
-image: "https://foojay.io/wp-content/uploads/2026/02/SoJ26-Download.png"
+image: "/images/posts/2026/02/what-2000-professionals-told-us-about-the-state-of-java-ai-cloud-costs-and-the-future-of-the-java-ecosystem/SoJ26-Download.png"
 categories:
   - "Java"
   - "Java Core"

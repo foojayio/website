@@ -6,7 +6,7 @@ lastmod: "2025-06-10T08:57:32+00:00"
 description: "Discover how to turn JavaFX applications into native executables with GraalVM. Build native images locally or with GitHub Actions."
 authors:
   - "catherine-edelveis"
-image: "https://foojay.io/wp-content/uploads/2025/04/graalvm-docs.png"
+image: "/images/posts/2025/04/a-guide-to-creating-javafx-native-images/graalvm-docs.png"
 categories:
   - "Performance"
 tags:
@@ -207,7 +207,7 @@ jobs:
           ./mvnw -Pnative package
 
       - name: Archive Release
-        uses: thedoctor0/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aed4c7de83dccbc2cbcfddcbee9e8099809b">[email&nbsp;protected]</a>
+        uses: thedoctor0/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="85ffecf5a8f7e0e9e0e4f6e0c5b5abb2abb0">[email&nbsp;protected]</a>
         with:
           type: 'zip'
           filename: "raffle-${{ matrix.platform }}.zip"

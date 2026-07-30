@@ -5,7 +5,7 @@ date: "2026-05-07T08:44:23+00:00"
 description: "Every year on May 4th, fans around the world celebrate Star Wars Day with the iconic phrase “May the 4th be with you.” The following day, May 5th, is - by Igor De Souza"
 authors:
   - "igor-de-souza"
-image: "https://foojay.io/wp-content/uploads/2026/05/duke_sw_01.jpg"
+image: "/images/posts/2026/05/java-is-not-the-dark-side-why-learning-java-is-easier-than-you-think/duke_sw_01.jpg"
 categories:
   - "Java"
   - "Java Beginner"

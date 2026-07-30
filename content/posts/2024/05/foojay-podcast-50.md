@@ -10,7 +10,7 @@ authors:
   - "marit-van-dijk"
   - "miro-wengner"
   - "steve-poole"
-image: "https://foojay.io/wp-content/uploads/2024/05/jcon-part-2-1.jpg"
+image: "/images/posts/2024/05/foojay-podcast-50/jcon-part-2-1.jpg"
 categories:
   - "Conference"
   - "Debugging"

@@ -7,7 +7,7 @@ description: "Imagine managing your Jakarta EE applications not just with Maven 
 canonical: "https://blog.payara.fish/payara-server-maven-plugin-ai-agent"
 authors:
   - "dominika-tasarz"
-image: "https://foojay.io/wp-content/uploads/2025/09/see-it-in-action-screenshot-AI-Maven-Blog.jpg"
+image: "/images/posts/2025/09/boost-developer-productivity-with-payara-server-maven-plugin-ai-agent/see-it-in-action-screenshot-AI-Maven-Blog.jpg"
 categories:
   - "AI"
   - "Jakarta EE"

@@ -7,7 +7,7 @@ description: "Java 21's virtual threads simplify handling I/O-bound operations, 
 canonical: "https://dev.to/mongodb/java-virtual-threads-in-action-optimizing-mongodb-operation-4l5k"
 authors:
   - "otavio-santana"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/07/java-virtual-threads-in-action-optimizing-mongodb-operation/mongologo.png"
 categories:
   - "Databases"
   - "Java"
@@ -26,7 +26,7 @@ Virtual threads have become one of the most popular resources in Java and are tr
 
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/mongodb-virtual-threads):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81e6e8f5c1e6e8f5e9f4e3afe2eeec">[email&nbsp;protected]</a>:soujava/mongodb-virtual-threads.git
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe99978abe99978a968b9cd09d9193">[email&nbsp;protected]</a>:soujava/mongodb-virtual-threads.git
 </pre>
 
 Prerequisites {#h2-0-prerequisites}

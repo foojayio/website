@@ -6,7 +6,7 @@ lastmod: "2024-11-12T13:24:19+00:00"
 description: "It was a great day, with a lot of reconnecting to new and existing (not old!) friends, a solid basis for more Foojay.io booths at conferences, just like this and last year at JFall!"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2024/11/IMG_8957-1024x768.png"
+image: "/images/posts/2024/11/foojay-io-at-jfall-2024-and-the-winner-is/IMG_8957-1024x768.png"
 categories:
   - "Events"
   - "Foojay"

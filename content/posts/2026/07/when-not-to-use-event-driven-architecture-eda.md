@@ -6,7 +6,7 @@ lastmod: "2026-07-11T00:34:05+00:00"
 description: "Learn when not to use Event-Driven Architecture (EDA), from simple CRUD apps to strong consistency, immediate responses, and operational complexity."
 authors:
   - "vincent-vauban"
-image: "https://foojay.io/wp-content/uploads/2026/07/4coverNoEDA-1024x576.png"
+image: "/images/posts/2026/07/when-not-to-use-event-driven-architecture-eda/4coverNoEDA-1024x576.png"
 categories:
   - "Java"
   - "Kafka"

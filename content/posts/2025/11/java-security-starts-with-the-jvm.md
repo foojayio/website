@@ -7,7 +7,7 @@ description: "When it comes to Java security, the first thing that comes to mind
 canonical: "https://www.azul.com/blog/java-security-starts-with-the-jvm/"
 authors:
   - "anthony-layton"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/11/java-security-starts-with-the-jvm/Favicon-3-2.png"
 categories:
   - "Java Core"
   - "Performance"

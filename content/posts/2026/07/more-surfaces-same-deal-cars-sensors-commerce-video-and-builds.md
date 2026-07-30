@@ -6,7 +6,7 @@ description: "This week's release adds car dashboards, motion sensors, desktop-c
 canonical: "https://www.codenameone.com/blog/one-codebase-more-surfaces/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/07/one-codebase-more-surfaces.jpg"
+image: "/images/posts/2026/07/more-surfaces-same-deal-cars-sensors-commerce-video-and-builds/one-codebase-more-surfaces.jpg"
 categories:
   - "Java"
 tags:

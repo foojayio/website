@@ -6,7 +6,7 @@ lastmod: "2025-07-07T09:50:58+00:00"
 description: "Discover how JobRunr v8 helps developers cut CO2 emissions without sacrificing performance. Use Carbon Aware Job Processing to run background jobs when your grid is greenest. Make your apps smarter, and the planet a little cleaner, with just a few lines of code."
 authors:
   - "nicholas-dhondt"
-image: "https://foojay.io/wp-content/uploads/2025/07/jobrunr-carbon-foojay.png"
+image: "/images/posts/2025/07/carbon-aware-job-processing-with-jobrunr-v8/jobrunr-carbon-foojay.png"
 categories:
   - "Java"
   - "Tutorials"

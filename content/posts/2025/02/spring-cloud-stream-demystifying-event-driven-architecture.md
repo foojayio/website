@@ -5,7 +5,7 @@ date: "2025-02-28T08:34:32+00:00"
 description: "Introduction Consider a bustling restaurant environment. The kitchen receives a flood of orders, waitstaff dart between tables, and patrons anxiously - by Mahendra Rao B"
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2025/02/spring-cloud-stream-event-driven.webp"
+image: "/images/posts/2025/02/spring-cloud-stream-demystifying-event-driven-architecture/spring-cloud-stream-event-driven.webp"
 categories:
   - "Apache Pulsar"
   - "Cloud"

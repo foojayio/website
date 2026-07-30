@@ -6,7 +6,7 @@ lastmod: "2026-05-14T09:46:38+00:00"
 description: "This article is part of our 7-part deep dive on building production-ready AI systems with BoxLang. BoxLang AI 3.0 Series · Part 1 of 7 Every AI framework - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/04/Imagen1.png"
+image: "/images/posts/2026/04/boxlang-ai-deep-dive-part-1-of-7-the-skills-revolution-🎓/Imagen1.png"
 categories:
   - "AI"
   - "BoxLang"

@@ -6,7 +6,7 @@ lastmod: "2023-12-01T14:02:28+00:00"
 description: "In this video I show how simple it can be to add drag and drop to a Vaadin application! - by Simon Martinelli"
 authors:
   - "simon-martinelli"
-image: "https://foojay.io/wp-content/uploads/2023/11/vaadin.png"
+image: "/images/posts/2023/12/video-vaadin-drag-drop-support-its-so-easy/vaadin.png"
 categories:
   - "Java"
   - "Vaadin"

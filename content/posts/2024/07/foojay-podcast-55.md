@@ -7,7 +7,7 @@ description: "In this episode #55, we look into the history of the Java Micro Ed
 authors:
   - "frankdelporte"
   - "pavel"
-image: "https://foojay.io/wp-content/uploads/2021/07/foojay_podcast.png"
+image: "/images/posts/2024/07/foojay-podcast-55/foojay_podcast.png"
 categories:
   - "Cloud"
   - "CRaC"

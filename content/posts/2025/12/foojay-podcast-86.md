@@ -6,7 +6,7 @@ lastmod: "2025-12-29T13:17:59+00:00"
 description: "The AI revolution isn't replacing Java developers. No, it's forcing us to think harder. Welcome to another episode of the Foojay Podcast! Today, we're - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/12/episode-86-ai-facts.jpg"
+image: "/images/posts/2025/12/foojay-podcast-86/episode-86-ai-facts.jpg"
 categories:
   - "AI"
   - "Conference"

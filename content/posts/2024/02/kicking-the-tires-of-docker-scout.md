@@ -7,7 +7,7 @@ description: "Let's try Docker Scout, the Docker image vulnerability detection t
 canonical: "https://blog.frankel.ch/kicking-tires-docker-scout/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/01/1636542639252_Moby-logo.png"
+image: "/images/posts/2024/02/kicking-the-tires-of-docker-scout/1636542639252_Moby-logo.png"
 categories:
   - "DevOps"
 tags:
@@ -70,7 +70,7 @@ This is the result:
     packages        │ 272
 ## Packages and Vulnerabilities
    0C     1H     0M     0L  org.yaml/snakeyaml 1.33
-pkg:maven/org.yaml/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="70031e111b1509111d1c30415e4343">[email&nbsp;protected]</a>
+pkg:maven/org.yaml/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="99eaf7f8f2fce0f8f4f5d9a8b7aaaa">[email&nbsp;protected]</a>
     ✗ HIGH CVE-2022-1471 [Improper Input Validation]
       https://scout.docker.com/v/CVE-2022-1471
       Affected range : &lt;=1.33
@@ -78,7 +78,7 @@ pkg:maven/org.yaml/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" da
       CVSS Score     : 8.3
       CVSS Vector    : CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:L
    0C     1H     0M     0L  io.netty/netty-handler 4.1.100.Final
-pkg:maven/io.netty/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4cac1d0d0dd89ccc5cac0c8c1d6e4908a958a9594948ae2cdcac5c8">[email&nbsp;protected]</a>
+pkg:maven/io.netty/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4e202b3a3a3763262f202a222b3c0e7a607f607f7e7e600827202f22">[email&nbsp;protected]</a>
     ✗ HIGH CVE-2023-4586 [OWASP Top Ten 2017 Category A9 - Using Components with Known Vulnerabilities]
       https://scout.docker.com/v/CVE-2023-4586
       Affected range : &gt;=4.1.0

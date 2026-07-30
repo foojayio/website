@@ -6,7 +6,7 @@ description: "Device APIs move into the framework core, revolutionary Bluetooth 
 canonical: "https://www.codenameone.com/blog/nfc-crypto-biometrics-and-build-cloud/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/05/nfc-crypto-biometrics-and-build-cloud.jpg"
+image: "/images/posts/2026/06/nfc-crypto-biometrics-and-a-new-build-cloud/nfc-crypto-biometrics-and-build-cloud.jpg"
 categories:
   - "Java"
 tags:

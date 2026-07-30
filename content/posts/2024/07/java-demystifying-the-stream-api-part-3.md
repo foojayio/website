@@ -6,7 +6,7 @@ lastmod: "2024-07-05T06:57:35+00:00"
 description: "Dive into the world of Stream API in Java using Lambda Expressions, Method References, and Functional Interfaces."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2024/03/DALL·E-2024-03-10-13.01.01-A-conceptual-illustration-for-a-blog-post-header-about-debugging-Java-streams-using-the-peek-method.-The-image-should-visually-represent-the-concept.jpeg"
+image: "/images/posts/2024/07/java-demystifying-the-stream-api-part-3/DALL-E-2024-03-10-13.01.01-A-conceptual-illustration-for-a-blog-post-header-about-debugging-Java-streams-using-the-peek-method.-The-image-should-visually-represent-the-concept.jpeg"
 categories:
   - "Java"
   - "Java Beginner"

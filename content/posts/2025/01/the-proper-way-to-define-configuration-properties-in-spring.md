@@ -7,7 +7,7 @@ description: "Upgrading from Spring Boot 2 to 3 forced me to define my configura
 canonical: "https://wimdetroyer.com/blog/the-proper-way-of-using-configuration-properties-in-spring"
 authors:
   - "wim-de-troyer"
-image: "https://foojay.io/wp-content/uploads/2025/01/intellij-autocomplete-1.png"
+image: "/images/posts/2025/01/the-proper-way-to-define-configuration-properties-in-spring/intellij-autocomplete-1.png"
 categories:
   - "Java"
   - "Spring"

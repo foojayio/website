@@ -7,7 +7,7 @@ description: "Learn how to leverage JMX and Spring Boot for advanced debugging a
 canonical: "https://debugagent.com/debugging-using-jmx-revisited"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/03/DALL·E-2024-02-27-06.55.05-Create-a-simplified-digital-illustration-suitable-for-a-blog-post-header-representing-advanced-debugging-and-application-management.-The-image-should.jpeg"
+image: "/images/posts/2024/04/debugging-using-jmx-revisited/DALL-E-2024-02-27-06.55.05-Create-a-simplified-digital-illustration-suitable-for-a-blog-post-header-representing-advanced-debugging-and-application-management.-The-image-should.jpeg"
 categories:
   - "Tutorials"
 tags:

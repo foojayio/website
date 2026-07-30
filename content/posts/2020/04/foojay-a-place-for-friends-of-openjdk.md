@@ -7,7 +7,7 @@ description: "For Java developers who depend on OpenJDK, foojay is the place to 
 canonical: "https://www.azul.com/blog/foojay-a-place-for-friends-of-openjdk/"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/04/Logo.png"
+image: "/images/posts/2020/04/foojay-a-place-for-friends-of-openjdk/Logo.png"
 categories:
   - "Security"
 tags:

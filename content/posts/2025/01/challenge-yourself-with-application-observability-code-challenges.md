@@ -6,7 +6,7 @@ lastmod: "2025-01-22T13:23:26+00:00"
 description: "Quite a few developers are struggling to get up to speed with applying observability practices!"
 authors:
   - "cees-bos"
-image: "https://foojay.io/wp-content/uploads/2025/01/aocc_small-1.png"
+image: "/images/posts/2025/01/challenge-yourself-with-application-observability-code-challenges/aocc_small-1.png"
 categories:
   - "Java"
   - "Observability"

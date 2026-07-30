@@ -7,7 +7,7 @@ description: "Explore the intricacies of Java’s multidimensional arrays with t
 canonical: "https://thenewstack.io/multi-dimensional-array-java/"
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/08/taking-java-arrays-to-another-dimension/Favicon-3-2.png"
 categories:
   - "Java"
   - "Java Beginner"

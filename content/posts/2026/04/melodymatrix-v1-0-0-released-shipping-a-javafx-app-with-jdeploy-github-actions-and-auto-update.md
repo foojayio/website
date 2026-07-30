@@ -6,7 +6,7 @@ description: "Some side projects take a while to get to a proper release. Melody
 canonical: "https://webtechie.be/post/2026-04-16-first-release-of-melodymatrix-with-jdeploy/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/04/edit-melodymatrix-jdeploy-release.jpg"
+image: "/images/posts/2026/04/melodymatrix-v1-0-0-released-shipping-a-javafx-app-with-jdeploy-github-actions-and-auto-update/edit-melodymatrix-jdeploy-release.jpg"
 categories:
   - "JavaFX"
 tags:

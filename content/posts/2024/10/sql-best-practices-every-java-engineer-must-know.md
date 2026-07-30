@@ -6,7 +6,7 @@ lastmod: "2024-10-09T09:33:23+00:00"
 description: "This comprehensive guide dives into the best practices for SQL query optimization, tailored specifically for Java engineers."
 authors:
   - "abo-saad-muaath"
-image: "https://foojay.io/wp-content/uploads/2024/10/1.png"
+image: "/images/posts/2024/10/sql-best-practices-every-java-engineer-must-know/1.png"
 categories:
   - "Databases"
   - "Java"
@@ -34,12 +34,12 @@ Indexes can significantly improve query performance by allowing the database to 
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT * FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2e4f42476e49434f4742004d4143">[email&nbsp;protected]</a>';</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT * FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="09686560496e64686065276a6664">[email&nbsp;protected]</a>';</pre>
 
 🟢 **Good Practice**:
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE INDEX idx_users_email ON users (email);
-SELECT name, email FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c4d40456c4b414d4540024f4341">[email&nbsp;protected]</a>';</pre>
+SELECT name, email FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e485888da48389858d88ca878b89">[email&nbsp;protected]</a>';</pre>
 
 This creates an index on the `email` column of the `users` table, speeding up searches based on email.
 
@@ -67,7 +67,7 @@ This creates a function-based index on the uppercase version of the last_name co
 In PostgreSQL, these are called expression indexes. Here's an example:
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE INDEX idx_lower_email ON users (LOWER(email)); 
-SELECT * FROM users WHERE LOWER(email) = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a4f495f487a5f425b574a565f14595557">[email&nbsp;protected]</a>';</pre>
+SELECT * FROM users WHERE LOWER(email) = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdb8bea8bf8da8b5aca0bda1a8e3aea2a0">[email&nbsp;protected]</a>';</pre>
 
 This creates an expression index on the lowercase version of the email column, optimizing case-insensitive email searches.
 

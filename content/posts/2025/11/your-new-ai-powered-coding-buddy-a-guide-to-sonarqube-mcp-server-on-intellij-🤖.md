@@ -5,7 +5,7 @@ date: "2025-11-07T17:00:24+00:00"
 description: "You have an AI-powered assistant to help you out. SonarQube MCP Server comes in. Let's dive into how this cool new MCP can supercharge your daily coding routine. 🚀."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2025/11/Screenshot-2025-11-07-at-17.57.47-1024x709.png"
+image: "/images/posts/2025/11/your-new-ai-powered-coding-buddy-a-guide-to-sonarqube-mcp-server-on-intellij-🤖/Screenshot-2025-11-07-at-17.57.47-1024x709.png"
 categories:
   - "AI"
   - "GenAI"

@@ -7,7 +7,7 @@ description: "Observability is an orchestra, not a single instrument. By combini
 canonical: "https://debugagent.com/not-a-single-trace"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/10/doppleware_a_software_developer_in_a_cubicle_full_of_threads_d29b9c00-90c5-49b4-b75c-741fdd3cc838.jpg"
+image: "/images/posts/2023/10/not-a-single-trace/doppleware_a_software_developer_in_a_cubicle_full_of_threads_d29b9c00-90c5-49b4-b75c-741fdd3cc838.jpg"
 categories:
   - "Debugging"
   - "Tutorials"

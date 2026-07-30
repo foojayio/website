@@ -7,7 +7,7 @@ description: "A couple of years ago, I developed a small Kotlin GUI to help me r
 canonical: "https://blog.frankel.ch/jar-to-macos-app/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2026/01/cover_large-3.jpg"
+image: "/images/posts/2026/02/from-a-jar-to-a-full-fledged-macos-app/cover_large-3.jpg"
 categories:
   - "Java"
   - "Use Cases"

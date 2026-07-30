@@ -6,7 +6,7 @@ lastmod: "2024-03-15T14:09:35+00:00"
 description: "Increase readability, reduce cognitive complexity, and avoid bugs that are hard to spot with Java's Pattern Matching."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2024/03/instanceof.png"
+image: "/images/posts/2024/03/increase-readability-and-reduce-complexity-with-javas-pattern-matching/instanceof.png"
 categories:
   - "Java"
   - "Java Core"

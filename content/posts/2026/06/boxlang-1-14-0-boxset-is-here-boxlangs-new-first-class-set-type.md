@@ -6,7 +6,7 @@ lastmod: "2026-06-17T13:09:37+00:00"
 description: "BoxLang 1.14.0 ships BoxSet: a native Set type with literal syntax, union/intersection operators, functional pipeline, and deep Java interop."
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/06/BoxLang-release-1.14.0-1701-x-1701-px-1-1024x1024.png"
+image: "/images/posts/2026/06/boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type/BoxLang-release-1.14.0-1701-x-1701-px-1-1024x1024.png"
 categories:
   - "BoxLang"
   - "Design Patterns"

@@ -7,7 +7,7 @@ description: "Tired of rerunning the same broken pipeline? Learn how to find and
 canonical: "https://dev.karakun.com/2025/01/25/eliminating-flaky-tests.html"
 authors:
   - "francois-martin"
-image: "https://foojay.io/wp-content/uploads/2025/12/eliminating-flaky-tests.png"
+image: "/images/posts/2026/04/eliminating-flaky-tests-to-end-world-hunger/eliminating-flaky-tests.png"
 categories:
   - "Conference"
   - "Gradle"

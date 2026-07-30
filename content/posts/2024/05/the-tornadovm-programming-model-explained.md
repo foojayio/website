@@ -6,7 +6,7 @@ lastmod: "2024-05-29T08:47:56+00:00"
 description: "In this article, we have explained the basics of the TornadoVM programming model and the main API blocks."
 authors:
   - "juan-fumero"
-image: "https://foojay.io/wp-content/uploads/2024/05/progModel.jpg"
+image: "/images/posts/2024/05/the-tornadovm-programming-model-explained/progModel.jpg"
 categories:
   - "TornadoVM"
   - "Tutorials"

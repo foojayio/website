@@ -7,7 +7,7 @@ description: "Lately, for my Generative AI powered Java apps, I've used the Gemi
 canonical: "https://glaforge.dev/posts/2024/04/04/calling-gemma-with-ollama-and-testcontainers/"
 authors:
   - "guillaume-laforge"
-image: "https://foojay.io/wp-content/uploads/2024/04/gemma-ollama-testcontainers-langchain4j-700x360-1.png"
+image: "/images/posts/2024/04/calling-gemma-with-ollama-testcontainers-and-langchain4j/gemma-ollama-testcontainers-langchain4j-700x360-1.png"
 categories:
   - "Java"
   - "Machine Learning"

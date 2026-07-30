@@ -7,7 +7,7 @@ description: "How to perform pointer arithmetic using the Foreign Function & Mem
 canonical: "https://davidvlijmincx.com/posts/pointer-arithmetic-in-java/"
 authors:
   - "david-vlijmincx"
-image: "https://foojay.io/wp-content/uploads/2026/01/jmh.png"
+image: "/images/posts/2026/01/pointer-arithmetic-in-modern-java/jmh.png"
 categories:
   - "Java"
 tags:

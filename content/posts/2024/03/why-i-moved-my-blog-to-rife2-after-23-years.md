@@ -6,7 +6,7 @@ lastmod: "2024-03-05T07:19:54+00:00"
 description: "In April 2023, I decided to move my 23-year-old blog to RIFE2, a no-dependencies full-stack Java framework…"
 authors:
   - "erik-thauvin"
-image: "https://foojay.io/wp-content/uploads/2024/02/rife2.png"
+image: "/images/posts/2024/03/why-i-moved-my-blog-to-rife2-after-23-years/rife2.png"
 categories:
   - "Apache Tomcat"
   - "Java"

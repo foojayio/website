@@ -6,7 +6,7 @@ lastmod: "2025-12-09T16:41:19+00:00"
 description: "AI MCP is awesome to connect our Agents to real time data, but also open a dangerous door to security threats"
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2025/12/Gemini_Generated_Image_fkvuf4fkvuf4fkvu-scaled.png"
+image: "/images/posts/2025/12/the-5-knights-of-the-mcp-apocalypse/Gemini_Generated_Image_fkvuf4fkvuf4fkvu-scaled.png"
 categories:
   - "AI"
   - "Security"

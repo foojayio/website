@@ -6,7 +6,7 @@ lastmod: "2024-11-22T14:31:12+00:00"
 description: "In this part, we have four new interviews for you! Learn more about JavaFX combined with Scala, Swing, React, trains, scientific research, banking, and more..."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/07/jfxinaction-part-2.png"
+image: "/images/posts/2024/11/video-series-javafx-in-action-part-2/jfxinaction-part-2.png"
 categories:
   - "Interviews"
   - "JavaFX"

@@ -6,7 +6,7 @@ lastmod: "2024-12-19T13:15:57+00:00"
 description: "Warp is a new engine available in Azul Zulu builds that can fully replace CRIU, and does not require any extra priviledges."
 authors:
   - "rvansa"
-image: "https://foojay.io/wp-content/uploads/2024/12/lcars-e1733997498646.png"
+image: "/images/posts/2024/12/warp-the-new-crac-engine/lcars-e1733997498646.png"
 categories:
   - "CRaC"
   - "Microservices"

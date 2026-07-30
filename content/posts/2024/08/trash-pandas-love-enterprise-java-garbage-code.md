@@ -7,7 +7,7 @@ description: "If raccoons were software engineers, they would feel at home insid
 canonical: "https://www.azul.com/blog/trash-pandas-love-enterprise-java-garbage-code/"
 authors:
   - "erikcostlow"
-image: "https://foojay.io/wp-content/uploads/2024/08/2024-06-27-trash-panda.jpg"
+image: "/images/posts/2024/08/trash-pandas-love-enterprise-java-garbage-code/2024-06-27-trash-panda.jpg"
 categories:
   - "Debugging"
   - "Java Core"

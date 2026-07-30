@@ -7,7 +7,7 @@ description: "Coding a duplicate content finder that quickly detects exact and f
 canonical: "https://flounder.dev/posts/duplicate-finder-requirements/"
 authors:
   - "igor-kulakov"
-image: "https://foojay.io/wp-content/uploads/2024/12/duplicate-finder-banner-1024x538-1.jpg"
+image: "/images/posts/2024/12/duplicate-finder-for-text-requirements/duplicate-finder-banner-1024x538-1.jpg"
 categories:
   - "Kotlin"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2023-11-16T11:16:13+00:00"
 description: "Let’s examine the world of failover strategies and explore how they safeguard software continuity."
 authors:
   - "rob-austin"
-image: "https://foojay.io/wp-content/uploads/2023/10/Screenshot-2023-10-31-at-3.45.06-PM-476x1024.png"
+image: "/images/posts/2023/11/preserving-software-continuity/Screenshot-2023-10-31-at-3.45.06-PM-476x1024.png"
 categories:
   - "Chronicle Software"
   - "Events"

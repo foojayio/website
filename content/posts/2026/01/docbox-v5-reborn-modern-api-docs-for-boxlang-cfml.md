@@ -6,7 +6,7 @@ lastmod: "2026-01-27T17:12:15+00:00"
 description: "Welcome to DocBox v5! We didn't just update DocBox. We rebuilt it from the ground up. DocBox v5.0.0 represents a complete architectural rewrite—modern - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/01/docbox.png"
+image: "/images/posts/2026/01/docbox-v5-reborn-modern-api-docs-for-boxlang-cfml/docbox.png"
 categories:
   - "AI"
   - "BoxLang"

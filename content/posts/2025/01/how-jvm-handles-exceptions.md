@@ -7,7 +7,7 @@ description: "It's interesting to know how the JVM runs bytecode instructions...
 canonical: "https://nataliiadziubenko.com/2024/12/15/how-jvm-handles-exceptions.html"
 authors:
   - "nataliia"
-image: "https://foojay.io/wp-content/uploads/2025/01/try-catch-finally-700x506-1.png"
+image: "/images/posts/2025/01/how-jvm-handles-exceptions/try-catch-finally-700x506-1.png"
 categories:
   - "Java"
   - "Java Core"

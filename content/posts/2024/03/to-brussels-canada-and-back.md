@@ -6,7 +6,7 @@ lastmod: "2024-03-26T10:53:12+00:00"
 description: "I went traveling again, read more on my travels to FOSDEM, Canada and Zurich in February/early March in this travel report."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2024/03/image-1-2000x745-1.png"
+image: "/images/posts/2024/03/to-brussels-canada-and-back/image-1-2000x745-1.png"
 categories:
   - "Trip Reports"
 tags:

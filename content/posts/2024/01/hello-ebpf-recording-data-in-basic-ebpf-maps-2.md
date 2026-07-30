@@ -6,7 +6,7 @@ lastmod: "2024-01-30T00:11:32+00:00"
 description: "This week we'll add support eBPF maps to hello-ebpf to communicate between eBPF program and userland Java programs."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2024/01/ebpf_maps-2000x425-1.png"
+image: "/images/posts/2024/01/hello-ebpf-recording-data-in-basic-ebpf-maps-2/ebpf_maps-2000x425-1.png"
 categories:
   - "Tools"
 tags:

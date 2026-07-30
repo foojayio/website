@@ -6,7 +6,7 @@ lastmod: "2026-02-23T08:31:58+00:00"
 description: "A community site showcasing legacy Java patterns alongside modern equivalents to help developers understand how everyday Java code has evolved."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2026/02/Screenshot-2026-02-20-at-6.28.07-AM-scaled.png"
+image: "/images/posts/2026/02/a-visual-diff-of-javas-evolution-inside-java-evolved/Screenshot-2026-02-20-at-6.28.07-AM-scaled.png"
 categories:
   - "Uncategorized"
 tags:

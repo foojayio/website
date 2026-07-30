@@ -6,7 +6,7 @@ lastmod: "2025-10-30T12:06:35+00:00"
 description: "This newsletter focuses on examining how AI enhances productivity through enterprise studies, agentic system architecture, attack vectors, and more!"
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2025/07/ai-insider-1.png"
+image: "/images/posts/2025/10/jc-ai-newsletter-8/ai-insider-1.png"
 categories:
   - "AI"
   - "Design Patterns"

@@ -6,7 +6,7 @@ lastmod: "2026-03-05T08:31:48+00:00"
 description: "I built a Spring Boot 4 REST API that defines terms using Wikidata, orchestrated by an Embabel agent—no API keys, no local models, fully reproducible."
 authors:
   - "vincent-vauban"
-image: "https://foojay.io/wp-content/uploads/2026/03/3embabel.png"
+image: "/images/posts/2026/03/embabel-spring-boot-wikidata-definition-api/3embabel.png"
 categories:
   - "AI"
   - "Java"

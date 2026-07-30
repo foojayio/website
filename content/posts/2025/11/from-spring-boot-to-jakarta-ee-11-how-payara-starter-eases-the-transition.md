@@ -7,7 +7,7 @@ description: "Discover how Payara Starter simplifies the transition from Spring 
 canonical: "https://payara.fish/blog/from-spring-boot-to-jakarta-ee-11-how-payara-starter-eases-the-transition/"
 authors:
   - "dominika-tasarz"
-image: "https://foojay.io/wp-content/uploads/2025/11/Blog-Image_Spring-to-Jakarta-EE.jpg"
+image: "/images/posts/2025/11/from-spring-boot-to-jakarta-ee-11-how-payara-starter-eases-the-transition/Blog-Image_Spring-to-Jakarta-EE.jpg"
 categories:
   - "Eclipse"
   - "Jakarta EE"

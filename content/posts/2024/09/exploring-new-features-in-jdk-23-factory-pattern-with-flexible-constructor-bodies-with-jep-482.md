@@ -6,7 +6,7 @@ lastmod: "2024-10-06T09:21:04+00:00"
 description: "Let's take a look at one particular brand new preview feature added to the latest JDK release 23 [2], JEP-482: Flexible Constructor Bodies in its second iteration."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2024/09/exploring-new-features-in-jdk-23-factory-pattern-with-flexible-constructor-bodies-with-jep-482/Favicon-3-2.png"
 categories:
   - "Java"
   - "JEPs"

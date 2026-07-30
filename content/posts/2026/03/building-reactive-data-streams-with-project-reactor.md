@@ -6,7 +6,7 @@ lastmod: "2026-04-15T21:09:34+00:00"
 description: "Creating Non-Blocking Streaming Endpoints for High-Throughput Applications"
 authors:
   - "matteo-rossi"
-image: "https://foojay.io/wp-content/uploads/2026/03/Screenshot-2026-03-12-at-10.15.08-AM.png"
+image: "/images/posts/2026/03/building-reactive-data-streams-with-project-reactor/Screenshot-2026-03-12-at-10.15.08-AM.png"
 categories:
   - "Databases"
   - "Java"

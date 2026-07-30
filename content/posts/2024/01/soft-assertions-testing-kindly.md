@@ -6,7 +6,7 @@ lastmod: "2024-01-20T10:51:23+00:00"
 description: "Using the concept of soft-assertions makes testing the impact of our changes on a single object a lot more convenient, and reduces the potential need for reruns."
 authors:
   - "simon-verhoeven"
-image: "https://foojay.io/wp-content/uploads/2022/06/chemical-scientist-test-chemistry-chemist-student.jpg"
+image: "/images/posts/2024/01/soft-assertions-testing-kindly/chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Testing"
   - "Tools"

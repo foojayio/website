@@ -6,7 +6,7 @@ lastmod: "2025-01-06T08:59:27+00:00"
 description: "For the first article of 2025, I'm continuing my retrospective series!"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/01/social-metrics-532x510-1.jpeg"
+image: "/images/posts/2025/01/2024-in-retrospective-nicolas-frankel/social-metrics-532x510-1.jpeg"
 categories:
   - "Opinion"
 tags:

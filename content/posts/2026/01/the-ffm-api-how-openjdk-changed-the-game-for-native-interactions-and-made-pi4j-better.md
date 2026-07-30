@@ -7,7 +7,7 @@ description: "The Pi4J project is a Java library that allows you to control the 
 canonical: "https://www.javaadvent.com/2025/12/ffm-api-for-java-on-raspberry-pi.html"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/12/pi4j-overview-scaled.jpg"
+image: "/images/posts/2026/01/the-ffm-api-how-openjdk-changed-the-game-for-native-interactions-and-made-pi4j-better/pi4j-overview-scaled.jpg"
 categories:
   - "Java"
   - "Java Core"

@@ -7,7 +7,7 @@ description: "I have many different \"smart\" devices at home and no centralized
 canonical: "https://blog.frankel.ch/home-assistant/1/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/11/Home_Assistant_Logo.svg.png"
+image: "/images/posts/2024/12/why-home-assistant/Home_Assistant_Logo.svg.png"
 categories:
   - "Developer Tools"
   - "Research"

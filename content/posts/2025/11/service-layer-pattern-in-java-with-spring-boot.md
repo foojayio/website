@@ -6,7 +6,7 @@ lastmod: "2025-11-18T14:40:28+00:00"
 description: "In modern software design, it is important to develop code that is clean and maintainable. One way developers do this is using the Service Layer pattern.What you'll learnIn this article, you'll learn:What the Service Layer pattern is and why it matters.How it fits with the MVC architecture.How to implement it in a real Spring Boot application.How to add MongoDB with minimal code.Best practices and common mistakes to avoid."
 authors:
   - "tim-kelly"
-image: "https://foojay.io/wp-content/uploads/2025/11/Screenshot-2025-11-11-at-2.17.07-PM.png"
+image: "/images/posts/2025/11/service-layer-pattern-in-java-with-spring-boot/Screenshot-2025-11-11-at-2.17.07-PM.png"
 categories:
   - "Databases"
   - "Java"
@@ -423,9 +423,9 @@ Best practices {#h2-18-best-practices}
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
 
 public void createUser_duplicateEmail_throwsException() {
-&nbsp;&nbsp;&nbsp;&nbsp;when(userRepository.existsByEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ccb8a9bfb88ca9b4ada1bca0a9e2afa3a1">[email&nbsp;protected]</a>")).thenReturn(true);
+&nbsp;&nbsp;&nbsp;&nbsp;when(userRepository.existsByEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="027667717642677a636f726e672c616d6f">[email&nbsp;protected]</a>")).thenReturn(true);
 &nbsp;&nbsp;&nbsp;&nbsp;assertThrows(DuplicateEmailException.class, () -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userService.createUser("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="592d3c2a2d193c21383429353c773a3634">[email&nbsp;protected]</a>", "Test User");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userService.createUser("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dca8b9afa89cb9a4bdb1acb0b9f2bfb3b1">[email&nbsp;protected]</a>", "Test User");
 &nbsp;&nbsp;&nbsp;&nbsp;});
 }</pre>
 

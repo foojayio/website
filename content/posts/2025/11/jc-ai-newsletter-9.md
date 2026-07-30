@@ -6,7 +6,7 @@ lastmod: "2025-11-12T15:21:14+00:00"
 description: "Fourteen days have passed, and it is time to present a fresh collection of readings that could influence developments in the field of artificial - by Miro Wengner"
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2025/07/ai-insider.png"
+image: "/images/posts/2025/11/jc-ai-newsletter-9/ai-insider.png"
 categories:
   - "AI"
   - "Design Patterns"

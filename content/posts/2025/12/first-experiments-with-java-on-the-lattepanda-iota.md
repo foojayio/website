@@ -7,7 +7,7 @@ description: "After years of experimenting with Raspberry Pi boards, Java, JavaF
 canonical: "https://webtechie.be/post/2025-11-25-first-test-lattepanda-iota-with-ubuntu-and-java/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/11/lattepanda-iota-first-impressions.jpg"
+image: "/images/posts/2025/12/first-experiments-with-java-on-the-lattepanda-iota/lattepanda-iota-first-impressions.jpg"
 categories:
   - "Embedded"
   - "Java"

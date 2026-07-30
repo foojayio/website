@@ -7,7 +7,7 @@ description: "Learn from the experts in this podcast about testing methodologies
 authors:
   - "frankdelporte"
   - "roni-dover"
-image: "https://foojay.io/wp-content/uploads/2024/02/podcast-43-guests.png"
+image: "/images/posts/2024/02/foojay-podcast-43/podcast-43-guests.png"
 categories:
   - "Podcast"
   - "Testcontainers"

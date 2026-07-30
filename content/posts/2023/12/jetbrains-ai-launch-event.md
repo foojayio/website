@@ -6,7 +6,7 @@ lastmod: "2023-12-04T11:32:34+00:00"
 description: "Don’t miss the online JetBrains AI launch event, where we'll release our AI-powered coding companion, JetBrains AI Assistant."
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2023/12/DSGN-18145_AI_Launch_Blog-Social-Share-1280x720@2x-1024x576.png"
+image: "/images/posts/2023/12/jetbrains-ai-launch-event/DSGN-18145_AI_Launch_Blog-Social-Share-1280x720-2x-1024x576.png"
 categories:
   - "Developer Tools"
   - "Events"

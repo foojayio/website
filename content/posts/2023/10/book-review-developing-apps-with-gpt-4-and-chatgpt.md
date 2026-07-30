@@ -6,7 +6,7 @@ lastmod: "2023-12-23T14:39:33+00:00"
 description: "Thorough, practical examples using a new & rapidly evolving tool. Pro or contra, it's a very worthwhile read."
 authors:
   - "simon-verhoeven"
-image: "https://foojay.io/wp-content/uploads/2023/10/910nFKaAHeL._SL1500_.jpg"
+image: "/images/posts/2023/10/book-review-developing-apps-with-gpt-4-and-chatgpt/910nFKaAHeL._SL1500_.jpg"
 categories:
   - "Book Review"
   - "Books"

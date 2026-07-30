@@ -6,7 +6,7 @@ lastmod: "2025-02-05T18:58:14+00:00"
 description: "After working on a new online Spring Data Neo4j course, I learned a couple more things about updating an entity."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2025/01/unsplash-sdn-update-entity-scaled-e1737583612770.jpg"
+image: "/images/posts/2025/02/spring-data-neo4j-how-to-update-an-entity/unsplash-sdn-update-entity-scaled-e1737583612770.jpg"
 categories:
   - "Databases"
   - "Graph"

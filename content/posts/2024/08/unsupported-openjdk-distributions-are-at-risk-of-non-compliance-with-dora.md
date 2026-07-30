@@ -6,7 +6,7 @@ lastmod: "2024-09-05T06:31:09+00:00"
 description: "Read the only logical conclusion of reading DORA in the context of OpenJDK, assuming that it has meaning and intent in the context of OpenJDK or any ICT asset that is vulnerable to the risk that DORA seeks to mitigate."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2024/07/dora.png"
+image: "/images/posts/2024/08/unsupported-openjdk-distributions-are-at-risk-of-non-compliance-with-dora/dora.png"
 categories:
   - "EU DORA Act"
   - "Java Core"

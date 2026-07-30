@@ -6,7 +6,7 @@ lastmod: "2024-01-09T12:58:25+00:00"
 description: "A way to automatically (re)compile, (re)load and (re)execute code on file changed!"
 authors:
   - "anthony-goubard"
-image: "https://foojay.io/wp-content/uploads/2023/11/hot-reload-code-ant-commander-pro-1024x391-1.png"
+image: "/images/posts/2023/11/live-recompile-reload-reexecute-java-code-in-100-loc/hot-reload-code-ant-commander-pro-1024x391-1.png"
 categories:
   - "Java"
   - "JShell"

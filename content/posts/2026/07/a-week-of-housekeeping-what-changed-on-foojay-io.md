@@ -7,7 +7,7 @@ description: "Running a community website is a bit like maintaining a codebase: 
 authors:
   - "dominika-tasarz"
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/07/foojay_linkedin_banner.png"
+image: "/images/posts/2026/07/a-week-of-housekeeping-what-changed-on-foojay-io/foojay_linkedin_banner.png"
 categories:
   - "Foojay"
 tags:
@@ -83,4 +83,4 @@ Why We're Telling You This {#h2-7-why-we-re-telling-you-this}
 
 Transparency is part of what we want Foojay to be. The site exists because the Java community keeps it alive with articles, podcast appearances, event submissions, and feedback. When we make changes, small or big, it's worth saying so, both so you know where things stand and so you can point out anything we missed.
 
-If you spot something that's still broken, outdated, or confusing on the site, the easiest way to let us know is via the [Foojay Slack](https://foojay.io/today/join-slack-com-t-foojay-signup/) or by emailing [\[email protected\]](/cdn-cgi/l/email-protection#543c3138383b14323b3b3e352d7a3d3b). The Pedia in particular is designed to grow. If there's a Java or OpenJDK term you'd like to see explained, use the submission form on any Pedia entry and we'll add it to the list.
+If you spot something that's still broken, outdated, or confusing on the site, the easiest way to let us know is via the [Foojay Slack](https://foojay.io/today/join-slack-com-t-foojay-signup/) or by emailing [\[email protected\]](/cdn-cgi/l/email-protection#c2aaa7aeaead82a4adada8a3bbecabad). The Pedia in particular is designed to grow. If there's a Java or OpenJDK term you'd like to see explained, use the submission form on any Pedia entry and we'll add it to the list.

@@ -6,7 +6,7 @@ lastmod: "2025-06-12T15:40:26+00:00"
 description: "In a multi-threaded, distributed environment like MongoDB, when clients execute queries concurrently, operations interleave with one another if they are - by Vivekanandan Sakthivelu"
 authors:
   - "vivekanandan-sakthivelu"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/06/java-concurrency-best-practices-for-mongodb/mongologo.png"
 categories:
   - "Java"
   - "Mongo"

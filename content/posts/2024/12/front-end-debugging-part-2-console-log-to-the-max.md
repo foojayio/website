@@ -7,7 +7,7 @@ description: "Learn advanced front-end debugging: use console log levels, CSS st
 canonical: "https://debugagent.com/front-end-debugging-part-2-consolelog-to-the-max"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/11/65198e695ec5906a9b9db9b873f71bc55a6b1161d3776b2efa03a5a7b5ce6b54.jpg"
+image: "/images/posts/2024/12/front-end-debugging-part-2-console-log-to-the-max/65198e695ec5906a9b9db9b873f71bc55a6b1161d3776b2efa03a5a7b5ce6b54.jpg"
 categories:
   - "Debugging"
   - "Tutorials"

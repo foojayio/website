@@ -6,7 +6,7 @@ lastmod: "2024-04-03T09:00:39+00:00"
 description: "Discover how Java records enhance parameterized testing in JUnit 5. Learn to create cleaner, more expressive, and type-safe tests."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2024/03/Gemini_Generated_Image-2.jpeg"
+image: "/images/posts/2024/04/records-for-cleaner-and-more-expressive-parameterized-tests-in-junit-5/Gemini_Generated_Image-2.jpeg"
 categories:
   - "Java"
 tags:

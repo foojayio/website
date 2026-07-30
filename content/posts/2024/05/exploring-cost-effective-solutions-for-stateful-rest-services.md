@@ -6,7 +6,7 @@ lastmod: "2024-09-05T07:47:45+00:00"
 description: "A cost-effective approach to implementing stateful REST services using IBM Cloud Code Engine, EclipseStore, and IBM Cloud Object Storage, highlighting their integration and scalability benefits for enterprise applications."
 authors:
   - "johannes-rabauer"
-image: "https://foojay.io/wp-content/uploads/2024/05/CodeEngineEclipseStore.drawio-1.png"
+image: "/images/posts/2024/05/exploring-cost-effective-solutions-for-stateful-rest-services/CodeEngineEclipseStore.drawio-1.png"
 categories:
   - "Cloud"
   - "Databases"

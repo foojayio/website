@@ -6,7 +6,7 @@ lastmod: "2025-08-14T12:38:44+00:00"
 description: "Recently Azul announced that AVD makes it possible to identify vulnerable components on a jar file level but also on class file level."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2025/06/avdazul.png"
+image: "/images/posts/2025/06/save-time-and-money-by-reducing-false-positives/avdazul.png"
 categories:
   - "Java"
   - "Security"

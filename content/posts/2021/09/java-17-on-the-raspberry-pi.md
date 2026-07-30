@@ -6,7 +6,7 @@ lastmod: "2024-02-06T12:18:16+00:00"
 description: "As part of the Foojay Virtual OpenJDK 17+ JUG Tour, I was asked to present the state of Java and JavaFX 17 on the Raspberry Pi!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/08/Screenshot-2021-08-21-at-15.40.18.png"
+image: "/images/posts/2021/09/java-17-on-the-raspberry-pi/Screenshot-2021-08-21-at-15.40.18.png"
 categories:
   - "JavaFX"
   - "Pi4J"

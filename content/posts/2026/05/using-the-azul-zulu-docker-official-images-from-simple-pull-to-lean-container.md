@@ -7,7 +7,7 @@ description: "Previously in this series: Trusted Java Containers: Azul Zulu Open
 canonical: "https://www.azul.com/blog/using-the-azul-zulu-docker-official-images-from-simple-pull-to-lean-container/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/04/zulu-lean-container.avif"
+image: "/images/posts/2026/05/using-the-azul-zulu-docker-official-images-from-simple-pull-to-lean-container/zulu-lean-container.avif"
 categories:
   - "Cloud"
   - "Java"

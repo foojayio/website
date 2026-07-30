@@ -6,7 +6,7 @@ lastmod: "2025-03-26T07:01:10+00:00"
 description: "This is the next part in the series of \"JavaFX in Action\" interviews. Are you working on a fantastic JavaFX application? Let me know, and let's talk! July - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/02/jfxinaction-part-4.jpg"
+image: "/images/posts/2025/03/video-series-javafx-in-action-part-4/jfxinaction-part-4.jpg"
 categories:
   - "Interviews"
   - "JavaFX"

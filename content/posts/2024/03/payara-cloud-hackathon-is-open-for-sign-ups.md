@@ -7,7 +7,7 @@ description: "We're excited to announce that the 2nd edition of Payara Hackathon
 canonical: "https://www.payara.fish/page/payara-hackathon-2024/"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2024/03/Hackathon-2024-Ad-2-1.png"
+image: "/images/posts/2024/03/payara-cloud-hackathon-is-open-for-sign-ups/Hackathon-2024-Ad-2-1.png"
 categories:
   - "Events"
   - "Payara"

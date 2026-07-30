@@ -7,7 +7,7 @@ description: "On the Pi4J discussion list, someone recently asked what the best 
 canonical: "https://webtechie.be/post/2024-09-26-java-bits-bytes-short-int-long-signed-unsigned/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/09/thumbnail.jpg"
+image: "/images/posts/2024/10/deep-dive-into-bits-bytes-shorts-ints-longs-signed-and-unsigned-with-java/thumbnail.jpg"
 categories:
   - "Java"
   - "Java Beginner"

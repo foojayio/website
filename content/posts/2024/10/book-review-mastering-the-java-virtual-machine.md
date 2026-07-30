@@ -6,7 +6,7 @@ lastmod: "2024-10-18T13:54:50+00:00"
 description: "Discover the bleak of beauty of Java Virtual Machine (JVM) which provides greater insights for Java Developers, packed with intriguing topics."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2024/10/mastering.png"
+image: "/images/posts/2024/10/book-review-mastering-the-java-virtual-machine/mastering.png"
 categories:
   - "Book Review"
   - "Books"

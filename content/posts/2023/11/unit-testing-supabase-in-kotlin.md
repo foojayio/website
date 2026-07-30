@@ -6,7 +6,7 @@ lastmod: "2023-11-19T16:46:36+00:00"
 description: "In this article, I'll dive into several methods I've been looking into to unit test a Kotlin application using Supabase and why I finally decided to go for a Docker Compose / Test Containers solution."
 authors:
   - "jlengrand"
-image: "https://foojay.io/wp-content/uploads/2023/11/Screenshot-2023-10-11-at-23.57.36.png"
+image: "/images/posts/2023/11/unit-testing-supabase-in-kotlin/Screenshot-2023-10-11-at-23.57.36.png"
 categories:
   - "Kotlin"
   - "Testing"

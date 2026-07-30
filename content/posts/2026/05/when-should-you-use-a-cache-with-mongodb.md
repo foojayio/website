@@ -6,7 +6,7 @@ lastmod: "2026-05-05T15:23:32+00:00"
 description: "From time to time, I'll run a design review for an application being migrated from a relational database onto MongoDB, where the customer shares an architectural diagram showing a caching layer (typically Redis) sitting between the app server and MongoDB."
 authors:
   - "amorgan"
-image: "https://foojay.io/wp-content/uploads/2026/04/Screenshot-2026-04-21-at-1.44.45-PM.png"
+image: "/images/posts/2026/05/when-should-you-use-a-cache-with-mongodb/Screenshot-2026-04-21-at-1.44.45-PM.png"
 categories:
   - "Databases"
   - "Mongo"

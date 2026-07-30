@@ -7,7 +7,7 @@ description: "In the two previous articles, I described Vue and Alpine. We confi
 canonical: "https://blog.frankel.ch/ajax-ssr/5/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2024/10/augmenting-the-client-with-htmx/Favicon-3-2.png"
 categories:
   - "Research"
 tags:
@@ -60,7 +60,7 @@ Here is how I integrate Thymeleaf and HTMX in the POM:
 
 The code on the HTML side is straightforward :
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:src="@{/webjars/htmx.org/dist/htmx.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bad2ced7c294d5c8ddfa8b9483">[email&nbsp;protected]</a>/dist/htmx.min.js"&gt;&lt;/script&gt; &lt;!--1--&gt;</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:src="@{/webjars/htmx.org/dist/htmx.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="19716d746137766b7e59283720">[email&nbsp;protected]</a>/dist/htmx.min.js"&gt;&lt;/script&gt; &lt;!--1--&gt;</pre>
 
 1. Add the HTMX dependency
 

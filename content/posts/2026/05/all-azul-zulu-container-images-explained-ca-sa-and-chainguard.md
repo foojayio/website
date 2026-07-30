@@ -6,7 +6,7 @@ description: "Previously in this series: Trusted Java Containers: Azul Zulu Open
 canonical: "https://www.azul.com/blog/all-azul-zulu-container-images-explained-ca-sa-and-chainguard/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/05/azul-zulu-ca-sa-chainguard.avif"
+image: "/images/posts/2026/05/all-azul-zulu-container-images-explained-ca-sa-and-chainguard/azul-zulu-ca-sa-chainguard.avif"
 categories:
   - "Cloud"
   - "Java"

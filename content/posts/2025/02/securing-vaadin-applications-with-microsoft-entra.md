@@ -7,7 +7,7 @@ description: "Many companies use Microsoft 365, so letting users log in with the
 canonical: "https://martinelli.ch/securing-vaadin-applications-with-microsoft-entra/"
 authors:
   - "simon-martinelli"
-image: "https://foojay.io/wp-content/uploads/2022/05/VaadinLogo_RGB_1000x310.png"
+image: "/images/posts/2025/02/securing-vaadin-applications-with-microsoft-entra/VaadinLogo_RGB_1000x310.png"
 categories:
   - "Security"
   - "Spring"
@@ -151,7 +151,7 @@ public abstract class KaribuTest {
     @Autowired
     protected ApplicationContext ctx;
     // Default user and role
-    private String username = "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f05000701410b000a2f1b0a1c1b410c0002">[email&nbsp;protected]</a>";
+    private String username = "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9a3a6a1a7e7ada6ac89bdacbabde7aaa6a4">[email&nbsp;protected]</a>";
     private String name = "John Doe";
     private String role = Roles.ADMIN;
     private OAuth2AuthenticationToken oAuth2AuthenticationToken;

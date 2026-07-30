@@ -7,7 +7,7 @@ description: "TestContainers helps improves true-to-production testing, see how 
 canonical: "https://developer.ibm.com/articles/true-to-production-testing-microprofile-testcontainers/"
 authors:
   - "grace-jansen"
-image: "https://foojay.io/wp-content/uploads/2024/09/testcontainers3-700x476-1.png"
+image: "/images/posts/2024/09/true-to-production-testing-java-apps/testcontainers3-700x476-1.png"
 categories:
   - "Cloud"
   - "Developer Tools"

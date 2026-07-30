@@ -6,7 +6,7 @@ lastmod: "2026-05-14T09:59:03+00:00"
 description: "BoxLang AI 3.0 Series · Part 7 of 7 The AI ecosystem has a tool problem. Every framework has its own way of defining tools, every agent has its own way of - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/05/Captura-de-pantalla-2026-05-07-234306.png"
+image: "/images/posts/2026/05/boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything/Captura-de-pantalla-2026-05-07-234306.png"
 categories:
   - "AI"
   - "Developer Tools"
@@ -366,7 +366,7 @@ println( "Middleware       : #config.middlewareCount#" )
 
 // Run — the agent orchestrates across internal tools, KB, and memory automatically
 response = supportAgent.run(
-    "Customer <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="76171a1f151336130e171b061a135815191b">[email&nbsp;protected]</a> says order #ORD-78291 arrived damaged. Resolve this.",
+    "Customer <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="95f4f9fcf6f0d5f0edf4f8e5f9f0bbf6faf8">[email&nbsp;protected]</a> says order #ORD-78291 arrived damaged. Resolve this.",
     {},
     { userId: "support-agent-maria", conversationId: "ticket-45892" }
 )
@@ -387,7 +387,7 @@ Get Started {#h2-17-get-started}
 --------------------------------
 
 <pre class="EnlighterJSRAW" data-enlighter-language="java"># CommandBox / Web applications
-install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="13716b3e727a53203d233d23">[email&nbsp;protected]</a>
+install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee8c96c38f87aeddc0dec0de">[email&nbsp;protected]</a>
 
 # OS / CLI applications
 install-bx-module bx-ai

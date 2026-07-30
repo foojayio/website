@@ -6,7 +6,7 @@ lastmod: "2025-09-18T00:11:35+00:00"
 description: "A lot of what I have said would also apply to other strongly typed languages too—but for most of the problems I am solving at the moment, Java feels like the best tool for the job. In addition to its excellent strengths as a language, ease of maintenance, and the benefits I have mentioned, it also has an excellent community of experienced developers you can easily find and hire (which you can’t say for many other languages).I would also say that I am a regular developer of Python, TypeScript, and JavaScript solutions. I love some of the flexibility and simplicity they have. When I build things with those languages, I like to spend even more effort on testing than I will with Java, to try to safeguard against the inadequacies of the type systems they use. MongoDB also supports JSON Schema validation rules that enforce schemas at the database layer. This may be a useful guardrail to add if the language you are using is not enforcing the schema through the type system."
 authors:
   - "luke-thompson"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/09/mongodb-schemas-in-java/mongologo.png"
 categories:
   - "Databases"
   - "Java"

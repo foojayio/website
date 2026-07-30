@@ -6,7 +6,7 @@ lastmod: "2024-02-15T13:17:27+00:00"
 description: "Recap of spending the day in AI and Machine Learning Developer Room at FOSDEM’24!"
 authors:
   - "soham-dasgupta"
-image: "https://foojay.io/wp-content/uploads/2024/02/banner.jpg"
+image: "/images/posts/2024/02/state-of-open-source-and-free-ai-a-fosdem-recap/banner.jpg"
 categories:
   - "Conference"
   - "Machine Learning"

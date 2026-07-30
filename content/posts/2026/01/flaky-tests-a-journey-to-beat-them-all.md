@@ -5,7 +5,7 @@ date: "2026-01-13T13:00:07+00:00"
 description: "“Sleep is not a synchronization primitive.” Every test engineer, eventually What’s a flaky test? A flaky test is a test that sometimes passes and - by Loic Mathieu"
 authors:
   - "loic-mathieu"
-image: "https://foojay.io/wp-content/uploads/2026/01/Flaky-test.jpg"
+image: "/images/posts/2026/01/flaky-tests-a-journey-to-beat-them-all/Flaky-test.jpg"
 categories:
   - "Java"
   - "Testing"

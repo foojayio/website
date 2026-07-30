@@ -6,7 +6,7 @@ lastmod: "2025-05-19T07:40:44+00:00"
 description: "If you want to run a Vaadin application on an external servlet container like Apache Tomcat 11, you need to package your application as a WAR."
 authors:
   - "simon-martinelli"
-image: "https://foojay.io/wp-content/uploads/2025/04/vaadinlogo.png"
+image: "/images/posts/2025/05/how-to-deploy-a-vaadin-application-as-a-war-on-tomcat-11/vaadinlogo.png"
 categories:
   - "Apache Tomcat"
   - "Spring"

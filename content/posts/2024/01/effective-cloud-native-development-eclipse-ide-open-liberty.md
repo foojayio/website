@@ -7,7 +7,7 @@ description: "Use Liberty Tools for the Eclipse IDE to enable fast, easy, and ef
 canonical: "https://developer.ibm.com/articles/awb-effective-cloud-native-development-open-liberty-eclipse-ide/"
 authors:
   - "grace-jansen"
-image: "https://foojay.io/wp-content/uploads/2024/01/EclipseLibertyTools1.png"
+image: "/images/posts/2024/01/effective-cloud-native-development-eclipse-ide-open-liberty/EclipseLibertyTools1.png"
 categories:
   - "Developer Tools"
   - "Eclipse"

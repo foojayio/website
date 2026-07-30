@@ -6,7 +6,7 @@ lastmod: "2023-12-20T09:21:57+00:00"
 description: "The Foreign Function & Memory API (also called Project Panama) has come a long way since it started."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/12/panama-2000x981-1.png"
+image: "/images/posts/2023/12/writing-c-code-in-java/panama-2000x981-1.png"
 categories:
   - "Java"
   - "Java Core"

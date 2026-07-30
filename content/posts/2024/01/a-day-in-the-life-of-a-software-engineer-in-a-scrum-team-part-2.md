@@ -6,7 +6,7 @@ lastmod: "2024-01-17T13:54:04+00:00"
 description: "Let's dive deeper and explore a day in the life of Alex, a software engineer in a Payment Scrum Team."
 authors:
   - "abo-saad-muaath"
-image: "https://foojay.io/wp-content/uploads/2024/01/grovemade-RvPDe41lYBA-unsplash-scaled.jpg"
+image: "/images/posts/2024/01/a-day-in-the-life-of-a-software-engineer-in-a-scrum-team-part-2/grovemade-RvPDe41lYBA-unsplash-scaled.jpg"
 categories:
   - "Agile"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2025-01-09T17:13:27+00:00"
 description: "Want to track how users interact with your Vaadin Flow application? Learn how to integrate Google Analytics with a clean, reusable component."
 authors:
   - "simon-martinelli"
-image: "https://foojay.io/wp-content/uploads/2022/05/VaadinLogo_RGB_1000x310.png"
+image: "/images/posts/2025/01/integrating-google-analytics-with-vaadin-flow-a-step-by-step-guide/VaadinLogo_RGB_1000x310.png"
 categories:
   - "Java"
   - "Vaadin"

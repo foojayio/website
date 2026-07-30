@@ -7,7 +7,7 @@ description: "This is going to be a fun, practical tutorial demonstrating how to
 canonical: "https://tech-blog.luketn.com/java-faceted-full-text-search-api-using-mongodb-atlas-search"
 authors:
   - "luke-thompson"
-image: "https://foojay.io/wp-content/uploads/2026/03/Screenshot-2026-03-16-at-4.44.02-PM.png"
+image: "/images/posts/2026/04/java-faceted-full-text-search-api-using-mongodb-atlas-search/Screenshot-2026-03-16-at-4.44.02-PM.png"
 categories:
   - "Databases"
   - "Java"

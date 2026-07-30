@@ -6,7 +6,7 @@ description: "As part of my 2026 learning goals around Java on RISC-V (see this 
 canonical: "https://webtechie.be/post/2026-01-16-first-test-visionfive-java/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/02/visionfive-front.jpg"
+image: "/images/posts/2026/02/first-test-of-java-on-the-visionfive-2-lite-risc-v/visionfive-front.jpg"
 categories:
   - "Embedded"
 tags:

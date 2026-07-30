@@ -6,7 +6,7 @@ lastmod: "2026-02-10T12:26:34+00:00"
 description: "Unlock Enterprise AI on the JVM with BoxLang AI Build Agents, RAG Pipelines & Multi-Model Workflows — One API, Zero Lock-In Modern enterprises want to - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/02/Webinar-SM1-1024x576.png"
+image: "/images/posts/2026/02/join-our-webinar-build-agents-rag-pipelines-multi-model-workflows-with-boxlang-ai/Webinar-SM1-1024x576.png"
 categories:
   - "AI"
   - "BoxLang"

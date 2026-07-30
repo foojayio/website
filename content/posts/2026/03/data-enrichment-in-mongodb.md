@@ -6,7 +6,7 @@ lastmod: "2026-03-03T16:10:38+00:00"
 description: "In a recent design review, a customer was enriching new data as it came in. As the enrichment process was fairly complex, they ran into some issues with concurrency. To solve this, they decided that data should go into a staging collection rather than the main collection that held the data. This did nothing to help with concurrency issues and actually created more work on the database side of things when enrichment was complete."
 authors:
   - "mike-laspina"
-image: "https://foojay.io/wp-content/uploads/2025/12/Screenshot-2025-12-30-at-10.48.52-PM.png"
+image: "/images/posts/2026/03/data-enrichment-in-mongodb/Screenshot-2025-12-30-at-10.48.52-PM.png"
 categories:
   - "Databases"
   - "Mongo"

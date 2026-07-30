@@ -7,7 +7,7 @@ description: "This e-book introduces Jakarta EE as the modern foundation for bui
 canonical: "https://payara.fish/blog/scalable-enterprise-java-for-the-cloud/"
 authors:
   - "dominika-tasarz"
-image: "https://foojay.io/wp-content/uploads/2025/12/Scalable-Enterprise-Java-for-the-Cloud-05.png"
+image: "/images/posts/2025/12/scalable-enterprise-java-for-the-cloud/Scalable-Enterprise-Java-for-the-Cloud-05.png"
 categories:
   - "Jakarta EE"
   - "Java"

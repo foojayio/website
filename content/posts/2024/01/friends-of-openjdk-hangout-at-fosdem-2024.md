@@ -6,7 +6,7 @@ lastmod: "2024-01-29T10:20:44+00:00"
 description: "Spend time with OpenJDK enthusiasts in Bier Central in Brussels on Saturday, 3 February from 18.30."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2024/01/image-7-1024x768.png"
+image: "/images/posts/2024/01/friends-of-openjdk-hangout-at-fosdem-2024/image-7-1024x768.png"
 categories:
   - "Events"
   - "Foojay"

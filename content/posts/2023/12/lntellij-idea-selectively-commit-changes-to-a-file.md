@@ -7,7 +7,7 @@ description: "Selectively commit changes to a file using the Git integration in 
 canonical: "https://maritvandijk.com/git-selectively-commit/"
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2020/10/1200px-IntelliJ_IDEA_Logo.svg_.png"
+image: "/images/posts/2023/12/lntellij-idea-selectively-commit-changes-to-a-file/1200px-IntelliJ_IDEA_Logo.svg_.png"
 categories:
   - "IntelliJ IDEA"
   - "Tools"

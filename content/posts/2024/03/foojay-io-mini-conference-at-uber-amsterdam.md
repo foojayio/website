@@ -6,7 +6,7 @@ lastmod: "2024-03-11T17:01:47+00:00"
 description: "Uber Tech is partnering with Java User Group Amsterdam to host their first mini conference with Foojay.io."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2021/07/foojay_podcast.png"
+image: "/images/posts/2024/03/foojay-io-mini-conference-at-uber-amsterdam/foojay_podcast.png"
 categories:
   - "Events"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2024-07-24T14:00:46+00:00"
 description: "Master effective logging in Java applications using SLF4J and Logback. This comprehensive guide provides 14 essential best practices."
 authors:
   - "abo-saad-muaath"
-image: "https://foojay.io/wp-content/uploads/2024/07/log-1.webp"
+image: "/images/posts/2024/07/effective-java-logging/log-1.webp"
 categories:
   - "Java"
   - "Java Core"

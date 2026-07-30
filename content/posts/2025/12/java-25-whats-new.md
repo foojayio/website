@@ -7,7 +7,7 @@ description: "This article was first published in my personal blog: Java 25: Wha
 canonical: "https://www.loicmathieu.fr/wordpress/informatique/java-25-whats-new/"
 authors:
   - "loic-mathieu"
-image: "https://foojay.io/wp-content/uploads/2025/12/j25.png"
+image: "/images/posts/2025/12/java-25-whats-new/j25.png"
 categories:
   - "Java"
   - "JEPs"

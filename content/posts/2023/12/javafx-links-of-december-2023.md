@@ -7,7 +7,7 @@ description: "Thanks for following these updates and looking forward to more of 
 canonical: "https://webtechie.be/post/2023-12-22-javafx-links-of-december-2023/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/05/Screen-Shot-2021-05-17-at-12.15.51-AM.png"
+image: "/images/posts/2023/12/javafx-links-of-december-2023/Screen-Shot-2021-05-17-at-12.15.51-AM.png"
 categories:
   - "JavaFX"
 tags:

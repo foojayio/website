@@ -6,7 +6,7 @@ lastmod: "2023-12-15T14:12:14+00:00"
 description: "Discover the ultimate guidebook for software engineers, packed with essential tips and strategies for success in the industry."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2023/12/The-Software-Engineers-GuideBook.jpg"
+image: "/images/posts/2023/12/book-review-the-software-engineers-guidebook/The-Software-Engineers-GuideBook.jpg"
 categories:
   - "Book Review"
   - "Books"

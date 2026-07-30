@@ -7,7 +7,7 @@ description: "Discover effective k8s debugging strategies, from kubectl debug an
 canonical: "https://debugagent.com/why-is-kubernetes-debugging-so-problematic"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/06/DALL·E-2024-05-26-20.26.54-A-futuristic-technical-illustration-of-Kubernetes-debugging-process.-Features-include-Kubernetes-logo-containers-and-a-person-using-a-laptop-with-c.jpeg"
+image: "/images/posts/2024/06/why-is-kubernetes-debugging-so-problematic/DALL-E-2024-05-26-20.26.54-A-futuristic-technical-illustration-of-Kubernetes-debugging-process.-Features-include-Kubernetes-logo-containers-and-a-person-using-a-laptop-with-c.jpeg"
 categories:
   - "Kubernetes"
   - "Tutorials"

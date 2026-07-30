@@ -5,7 +5,7 @@ date: "2025-12-26T08:07:18+00:00"
 description: "This is the next part in the series of \"JavaFX in Action\" interviews. Are you working on a fantastic JavaFX application? Let me know, and let's discuss it - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/12/jfxinaction-part-6-scaled.jpg"
+image: "/images/posts/2025/12/video-series-javafx-in-action-part-6/jfxinaction-part-6-scaled.jpg"
 categories:
   - "Interviews"
   - "JavaFX"

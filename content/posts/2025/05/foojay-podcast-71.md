@@ -6,7 +6,7 @@ lastmod: "2025-11-13T08:37:20+00:00"
 description: "We are celebrating Java's 30th anniversary this May! This is a very special anniversary episode of the Foojay Podcast! As we approach May 23rd, marking - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/05/edit-james-gosling.png"
+image: "/images/posts/2025/05/foojay-podcast-71/edit-james-gosling.png"
 categories:
   - "Interviews"
   - "Java"

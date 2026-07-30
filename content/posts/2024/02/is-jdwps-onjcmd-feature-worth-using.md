@@ -6,7 +6,7 @@ lastmod: "2024-02-12T11:25:23+00:00"
 description: "We run benchmarks to see whether JDWP's onjcmd features improves the debugging performance."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2024/02/Figure_1-3-2000x1500-1.png"
+image: "/images/posts/2024/02/is-jdwps-onjcmd-feature-worth-using/Figure_1-3-2000x1500-1.png"
 categories:
   - "Debugging"
 tags:

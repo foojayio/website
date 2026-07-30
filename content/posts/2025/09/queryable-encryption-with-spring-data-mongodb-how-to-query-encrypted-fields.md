@@ -6,7 +6,7 @@ lastmod: "2025-12-12T21:22:43+00:00"
 description: "Information is one of the most valuable assets in computing and keeping it protected is even more critical. When we talk about data protection, it’s not just about preventing breaches or leaks; it’s also about complying with privacy regulations and protecting user data.MongoDB provides strong encryption capabilities, including in transit, at rest, and in use. The Queryable Encryption feature falls into the in use category. It allows data to be encrypted on the client side, so that even with access to the database and its credentials, no one can read the protected fields without the proper encryption key. At the same time, it supports querying over encrypted fields, making it possible to filter, match, or retrieve data without compromising confidentiality. In this tutorial, we’ll implement this feature using Spring Data MongoDB, applying encryption to sensitive fields in a sample human resources (HR) system."
 authors:
   - "ricardo-mello"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/09/queryable-encryption-with-spring-data-mongodb-how-to-query-encrypted-fields/Favicon-3-2.png"
 categories:
   - "Databases"
   - "Java"

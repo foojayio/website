@@ -6,7 +6,7 @@ lastmod: "2025-08-04T13:47:37+00:00"
 description: "Monolith vs Microservices in 2025. Discover trends, trade-offs, and why simplicity and DX matter more than ever."
 authors:
   - "vincent-vauban"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/08/monolith-vs-microservices-2025/Favicon-3-2.png"
 categories:
   - "Cloud"
   - "Microservices"

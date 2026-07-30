@@ -7,7 +7,7 @@ description: "Your Java AI app is live. But have you tested whether it can be ja
 authors:
   - "frankdelporte"
   - "iryna-dohndorf"
-image: "https://foojay.io/wp-content/uploads/2026/06/episode-99-tiberius.png"
+image: "/images/posts/2026/06/foojay-podcast-99/episode-99-tiberius.png"
 categories:
   - "AI"
   - "Podcast"

@@ -6,7 +6,7 @@ lastmod: "2026-01-06T21:53:41+00:00"
 description: "Public clouds such as AWS, Microsoft Azure, and Google Cloud, and platforms like Red Hat OpenShift, favor services that start fast and stay lean. Quarkus is engineered for exactly that."
 authors:
   - "michal-maler"
-image: "https://foojay.io/wp-content/uploads/2026/01/quarkus-as-a-powerful-runtime.jpeg"
+image: "/images/posts/2026/01/quarkus-a-runtime-and-framework-for-cloud-native-java/quarkus-as-a-powerful-runtime.jpeg"
 categories:
   - "Cloud"
   - "Kubernetes"

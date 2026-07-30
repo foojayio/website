@@ -7,7 +7,7 @@ description: "When I spoke to developers at Devoxx in Belgium in October, I was 
 canonical: "https://webtechie.be/post/2024-10-30-java-8-ticking-time-bomb/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/10/azul-roadmap-end-of-2024.png"
+image: "/images/posts/2024/11/why-java-8-is-a-ticking-time-bomb-hiding-within-your-organization/azul-roadmap-end-of-2024.png"
 categories:
   - "Java"
   - "Java Core"

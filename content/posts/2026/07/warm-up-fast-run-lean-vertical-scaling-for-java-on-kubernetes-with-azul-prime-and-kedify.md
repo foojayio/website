@@ -6,7 +6,7 @@ description: "Autoscaling on Kubernetes has evolved significantly, but many prod
 authors:
   - "jiri-holusa"
   - "zbynek-roubalik"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2026/07/warm-up-fast-run-lean-vertical-scaling-for-java-on-kubernetes-with-azul-prime-and-kedify/Favicon-3-2.png"
 categories:
   - "Cloud"
   - "Java"

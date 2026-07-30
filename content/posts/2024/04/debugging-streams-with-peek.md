@@ -7,7 +7,7 @@ description: "Learn how to debug Java streams effectively using the peek() metho
 canonical: "https://debugagent.com/debugging-streams-with-peek"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/03/DALL·E-2024-03-10-13.01.01-A-conceptual-illustration-for-a-blog-post-header-about-debugging-Java-streams-using-the-peek-method.-The-image-should-visually-represent-the-concept.jpeg"
+image: "/images/posts/2024/04/debugging-streams-with-peek/DALL-E-2024-03-10-13.01.01-A-conceptual-illustration-for-a-blog-post-header-about-debugging-Java-streams-using-the-peek-method.-The-image-should-visually-represent-the-concept.jpeg"
 categories:
   - "Java"
   - "Tutorials"

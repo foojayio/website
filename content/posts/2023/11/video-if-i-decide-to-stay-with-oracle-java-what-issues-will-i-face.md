@@ -7,7 +7,7 @@ description: "Simon Ritter and Gerrit Grunwald answer a question that they hear 
 authors:
   - "gerrit-grunwald"
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2023/11/video-if-i-decide-to-stay-with-oracle-java-what-issues-will-i-face/Favicon-3-2.png"
 categories:
   - "Java Core"
   - "Videos"

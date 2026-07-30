@@ -6,7 +6,7 @@ lastmod: "2025-05-19T08:27:58+00:00"
 description: "Join the Dutch Java community at J-Spring 2025, the premier Java conference in the Netherlands, taking place Thursday, June 5th at Jaarbeurs Utrecht."
 authors:
   - "martin-smelt"
-image: "https://foojay.io/wp-content/uploads/2025/05/nljugjspring2025.png"
+image: "/images/posts/2025/05/join-the-nljug-jspring-conference-on-thursday-june-5/nljugjspring2025.png"
 categories:
   - "Conference"
   - "Events"

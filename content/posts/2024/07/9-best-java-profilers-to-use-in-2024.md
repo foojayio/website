@@ -7,7 +7,7 @@ description: "In this article, I will share why my team decided to start a Java 
 canonical: "https://digma.ai/9-best-java-profilers-to-use-in-2024/"
 authors:
   - "lee-sheinberg"
-image: "https://foojay.io/wp-content/uploads/2024/06/WhatsApp-Image-2024-03-18-at-11.42.39-AM.jpeg"
+image: "/images/posts/2024/07/9-best-java-profilers-to-use-in-2024/WhatsApp-Image-2024-03-18-at-11.42.39-AM.jpeg"
 categories:
   - "Profiler"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2025-10-29T06:48:10+00:00"
 description: "We're thrilled to announce BoxLang 1.6.0, a release that delivers massive performance improvements, intelligent developer tooling, and enhanced async capabilities."
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2025/10/boxlang-v1.6.0-1.jpg"
+image: "/images/posts/2025/10/boxlang-v1-6-0-performance-ai-powered-docs-and-advanced-async-monitoring-2/boxlang-v1.6.0-1.jpg"
 categories:
   - "BoxLang"
   - "Release Notes"

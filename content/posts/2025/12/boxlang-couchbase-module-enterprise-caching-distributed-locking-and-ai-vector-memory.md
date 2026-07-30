@@ -6,7 +6,7 @@ lastmod: "2025-12-17T08:28:07+00:00"
 description: "Ortus Solutions is thrilled to announce the official release of bx-couchbase v1.0, a groundbreaking module that brings enterprise-grade Couchbase capabilities to the BoxLang ecosystem"
 authors:
   - "luis-majano"
-image: "https://foojay.io/wp-content/uploads/2025/12/bx-couchbase.jpg"
+image: "/images/posts/2025/12/boxlang-couchbase-module-enterprise-caching-distributed-locking-and-ai-vector-memory/bx-couchbase.jpg"
 categories:
   - "AI"
   - "BoxLang"
@@ -43,7 +43,7 @@ bx-couchbase introduces a complete cache provider with replication, fault tolera
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cache("default").set("user:123", {
     name: "Alice Smith",
-    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="22434e4b414762475a434f524e470c414d4f">[email&nbsp;protected]</a>",
+    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="62030e0b010722071a030f120e074c010d0f">[email&nbsp;protected]</a>",
     role: "admin"
 } )
 

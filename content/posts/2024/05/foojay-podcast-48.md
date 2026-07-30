@@ -7,7 +7,7 @@ description: "In this episode, we are in Oberpfalz, Germany, for a particular re
 authors:
   - "frankdelporte"
   - "r-fichtner"
-image: "https://foojay.io/wp-content/uploads/2024/05/podcast_48_guests.png"
+image: "/images/posts/2024/05/foojay-podcast-48/podcast_48_guests.png"
 categories:
   - "Conference"
   - "JUGs"

@@ -7,7 +7,7 @@ description: "Though I used Spring transactions a lot via the @Transactional ann
 canonical: "https://blog.frankel.ch/transactions-threadlocal-spring/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/10/cover.jpeg"
+image: "/images/posts/2025/10/transactions-and-threadlocal-in-spring/cover.jpeg"
 categories:
   - "Spring"
 tags:

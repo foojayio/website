@@ -7,7 +7,7 @@ description: "In the end, it’s essential to keep in mind that people will most
 authors:
   - "frankdelporte"
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2023/11/fail-timezone-issue.jpg"
+image: "/images/posts/2023/11/unexpected-things-that-make-you-a-senior-developer/fail-timezone-issue.jpg"
 categories:
   - "Opinion"
 tags:

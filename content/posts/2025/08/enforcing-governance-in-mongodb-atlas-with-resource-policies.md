@@ -6,7 +6,7 @@ lastmod: "2025-08-13T12:58:29+00:00"
 description: "The growing adoption of MongoDB Atlas as a managed database platform increasingly demands mechanisms that align security, compliance, and governance."
 authors:
   - "samuel-molling"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/08/enforcing-governance-in-mongodb-atlas-with-resource-policies/mongologo.png"
 categories:
   - "Databases"
   - "Java"

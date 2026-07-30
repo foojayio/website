@@ -6,7 +6,7 @@ lastmod: "2026-01-30T14:55:07+00:00"
 description: "At JCON EUROPE, developers, speakers, and contributors from across the globe come together to exchange ideas, share experiences, and connect around Java. - by Richard Fichtner"
 authors:
   - "r-fichtner"
-image: "https://foojay.io/wp-content/uploads/2026/01/54521451118_839e4e684e_o.jpg"
+image: "/images/posts/2026/01/one-java-community-many-countries-one-place-to-meet-jcon-europe/54521451118_839e4e684e_o.jpg"
 categories:
   - "Events"
   - "Uncategorized"

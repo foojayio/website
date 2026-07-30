@@ -6,7 +6,7 @@ lastmod: "2025-07-07T15:27:28+00:00"
 description: "Learn you how develop and run a CAP Spring-Boot Java app locally on your Android phone using Termux and VSCode."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2025/06/cap-1024x767.png"
+image: "/images/posts/2025/07/cap-in-the-pocket-developing-java-applications-on-your-phone/cap-1024x767.png"
 categories:
   - "Java"
 tags:

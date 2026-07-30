@@ -6,7 +6,7 @@ lastmod: "2026-07-23T10:28:59+00:00"
 description: "Azul Payara's July 2026 release: Server and Micro 7.2.0, Jakarta EE 11, and a brute force security fix across every supported line."
 authors:
   - "luqman-saeed"
-image: "https://foojay.io/wp-content/uploads/2026/07/Whats-New-in-the-Payara-Platform-July-2026-Release.jpg"
+image: "/images/posts/2026/07/whats-new-in-the-july-2026-azul-payara-release/Whats-New-in-the-Payara-Platform-July-2026-Release.jpg"
 categories:
   - "Jakarta EE"
   - "Payara"

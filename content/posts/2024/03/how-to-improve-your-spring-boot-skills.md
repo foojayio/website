@@ -7,7 +7,7 @@ description: "How to make sure you're unlocking the full potential of Spring Boo
 canonical: "https://digma.ai/the-spring-way-of-doing-things-9-ways-to-improve-your-spring-boot-skills/"
 authors:
   - "lee-sheinberg"
-image: "https://foojay.io/wp-content/uploads/2024/03/digmalovejava-spring.png"
+image: "/images/posts/2024/03/how-to-improve-your-spring-boot-skills/digmalovejava-spring.png"
 categories:
   - "Java"
   - "Observability"

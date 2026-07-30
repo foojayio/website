@@ -6,7 +6,7 @@ lastmod: "2024-07-11T16:34:53+00:00"
 description: "Let's see other possibilities than the default ones that can be done with the structured concurrency API."
 authors:
   - "anthony-goubard"
-image: "https://foojay.io/wp-content/uploads/2024/07/structured-concurrency-round.png"
+image: "/images/posts/2024/07/structured-concurrency-is-more-than-shutdownonfailure/structured-concurrency-round.png"
 categories:
   - "Java"
   - "Java Core"

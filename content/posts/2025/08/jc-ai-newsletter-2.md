@@ -6,7 +6,7 @@ lastmod: "2025-10-14T05:40:12+00:00"
 description: "The JC-AI Newsletter Vol.2 brings again a very interesting collection of articles worth considering."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2025/07/ai-insider-1.png"
+image: "/images/posts/2025/08/jc-ai-newsletter-2/ai-insider-1.png"
 categories:
   - "AI"
   - "Design Patterns"

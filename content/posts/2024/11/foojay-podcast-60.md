@@ -10,7 +10,7 @@ authors:
   - "johan-vos"
   - "ronald-dehuysser"
   - "wim-deblauwe"
-image: "https://foojay.io/wp-content/uploads/2024/10/podcast-60-belgium-thumbnail.jpg"
+image: "/images/posts/2024/11/foojay-podcast-60/podcast-60-belgium-thumbnail.jpg"
 categories:
   - "Conference"
   - "Podcast"

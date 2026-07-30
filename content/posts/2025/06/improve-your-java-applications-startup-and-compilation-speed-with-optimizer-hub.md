@@ -7,7 +7,7 @@ description: "This is the fourth blog post in a series on faster Java applicatio
 canonical: "https://www.azul.com/blog/improve-your-java-applications-startup-and-compilation-speed-with-optimizer-hub/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/06/improve-your-java-applications-startup-and-compilation-speed-with-optimizer-hub/Favicon-3-2.png"
 categories:
   - "Java"
   - "Performance"

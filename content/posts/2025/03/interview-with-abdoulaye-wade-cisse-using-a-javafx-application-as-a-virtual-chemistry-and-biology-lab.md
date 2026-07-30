@@ -7,7 +7,7 @@ description: "I continuously collect JavaFX-related content for the JFX Central 
 canonical: "https://webtechie.be/post/2025-02-11-interview-abdoulaye-lab-app-in-javafx/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/02/lab-5.jpg"
+image: "/images/posts/2025/03/interview-with-abdoulaye-wade-cisse-using-a-javafx-application-as-a-virtual-chemistry-and-biology-lab/lab-5.jpg"
 categories:
   - "Interviews"
   - "JavaFX"

@@ -7,7 +7,7 @@ description: "A lurking issue has been surprisingly overlooked: the continued us
 canonical: "https://snyk.io/blog/log4shell-spring4shell-threat/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2024/09/the-persistent-threat-why-major-vulnerabilities-like-log4shell-and-spring4shell-remain-significant/Favicon-3-2.png"
 categories:
   - "Security"
   - "Snyk"

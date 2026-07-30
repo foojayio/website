@@ -7,7 +7,7 @@ description: "How to use Apache APISIX with imgproxy to reduce the storage cost 
 canonical: "https://blog.frankel.ch/resize-images-on-the-fly/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/10/camera-514992.jpg"
+image: "/images/posts/2023/10/resizing-images-on-the-fly/camera-514992.jpg"
 categories:
   - "DevOps"
   - "Performance"

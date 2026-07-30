@@ -6,7 +6,7 @@ lastmod: "2024-04-14T19:42:59+00:00"
 description: "This year, the first meeting of the JCP Executive Committee will take place in Munich with the support of MicroDoc."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2020/10/duke-welcome-1.jpg"
+image: "/images/posts/2024/04/jug-munich-hosts-the-jcp-executive-committee-meeting-to-25th-anniversary-of-jcp/duke-welcome-1.jpg"
 categories:
   - "Events"
   - "Java"

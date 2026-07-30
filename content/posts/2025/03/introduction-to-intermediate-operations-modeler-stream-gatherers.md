@@ -6,7 +6,7 @@ lastmod: "2025-03-19T13:04:15+00:00"
 description: "Gatherers is a new and powerful API that enhances the Stream API by modeling intermediate operations and allowing the definition of custom intermediate operations."
 authors:
   - "huseyin-akdogan"
-image: "https://foojay.io/wp-content/uploads/2025/03/gatherer.png"
+image: "/images/posts/2025/03/introduction-to-intermediate-operations-modeler-stream-gatherers/gatherer.png"
 categories:
   - "Java"
 tags:

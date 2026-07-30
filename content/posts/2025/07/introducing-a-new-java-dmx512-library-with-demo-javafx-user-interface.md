@@ -6,7 +6,7 @@ description: "In this post, I would like to inform you about a new Java library 
 canonical: "https://webtechie.be/post/2025-07-17-introducing-java-dmx512-library-with-demo-javafx-ui/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/07/thumbnail-dmx512-ofl.jpg"
+image: "/images/posts/2025/07/introducing-a-new-java-dmx512-library-with-demo-javafx-user-interface/thumbnail-dmx512-ofl.jpg"
 categories:
   - "Desktop"
   - "Java"

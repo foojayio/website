@@ -7,7 +7,7 @@ description: "Brokk can help you tackle large Java codebases with ease. Big code
 canonical: "https://brokk.ai/blog/brokk-for-java-developers"
 authors:
   - "jbellis"
-image: "https://foojay.io/wp-content/uploads/2025/05/hero.png"
+image: "/images/posts/2025/05/brokk-for-java-developers/hero.png"
 categories:
   - "Developer Tools"
   - "Java"

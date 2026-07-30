@@ -7,7 +7,7 @@ description: "Learn how to design your own railway display using Java, SpringBoo
 authors:
   - "ancy-thomas"
   - "rijo-sam"
-image: "https://foojay.io/wp-content/uploads/2024/11/NS_display_2-scaled.jpg"
+image: "/images/posts/2024/11/crafting-your-own-railway-display-with-java/NS_display_2-scaled.jpg"
 categories:
   - "Java"
   - "Raspberry Pi"

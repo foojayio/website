@@ -6,7 +6,7 @@ lastmod: "2026-06-24T07:10:03+00:00"
 description: "MongoDB, by virtue of its use of the document data model rather than the rows and columns of tabular RDBMSs, provides ways of modeling relationships that can offer significant performance benefits when querying that data. However, to realize those benefits, data must be modeled in MongoDB using schema design patterns that are optimized for the document data model, and frequently, those are not the same as would be appropriate in a RDBMS"
 authors:
   - "graeme-robinson"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongodb.png"
+image: "/images/posts/2026/06/aggregation-optimization-in-mongodb-a-case-study-from-the-field-part-1/mongodb.png"
 categories:
   - "Mongo"
 tags:

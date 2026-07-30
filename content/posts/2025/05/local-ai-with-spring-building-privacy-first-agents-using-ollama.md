@@ -6,7 +6,7 @@ lastmod: "2025-05-06T06:44:08+00:00"
 description: "Build local AI with Spring: private, cost-efficient local running AI agents with Spring AI and Ollama. Keep your AI under control!"
 authors:
   - "bruno-oliveira"
-image: "https://foojay.io/wp-content/uploads/2025/05/3wm66Vp.md_.png"
+image: "/images/posts/2025/05/local-ai-with-spring-building-privacy-first-agents-using-ollama/3wm66Vp.md_.png"
 categories:
   - "Java"
   - "Spring"

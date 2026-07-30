@@ -6,7 +6,7 @@ lastmod: "2026-06-14T22:30:57+00:00"
 description: "What happens when you point an observability agent at your IDE rather than your application?"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2022/08/opentelemetry-horizontal-color.png"
+image: "/images/posts/2026/06/observing-apache-netbeans-with-opentelemetry-and-dash0/opentelemetry-horizontal-color.png"
 categories:
   - "Developer Tools"
   - "NetBeans"

@@ -6,7 +6,7 @@ lastmod: "2024-08-21T09:51:22+00:00"
 description: "Since about a year ago, the Foojay community has a group of people that are working on a book with tips and information on Sustainable Software Engineering."
 authors:
   - "janhendrik-kuperus"
-image: "https://foojay.io/wp-content/uploads/2024/08/itsustainability-1.png"
+image: "/images/posts/2024/08/sustainable-software-engineering-input-requested/itsustainability-1.png"
 categories:
   - "Books"
   - "FinOps"

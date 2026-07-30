@@ -7,7 +7,7 @@ description: "Since 2018, we’ve had a new release of the Java platform every s
 canonical: "https://www.azul.com/blog/six-jdk-24-features-you-should-know-about/"
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2025/04/six-jdk24-features.jpg"
+image: "/images/posts/2025/04/six-jdk-24-features-you-should-know-about/six-jdk24-features.jpg"
 categories:
   - "Java"
   - "Java Core"

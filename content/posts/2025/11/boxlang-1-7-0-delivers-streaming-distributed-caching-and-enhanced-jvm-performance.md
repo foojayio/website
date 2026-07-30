@@ -6,7 +6,7 @@ lastmod: "2025-11-11T13:01:47+00:00"
 description: "Ortus Solutions announced the release of **BoxLang 1.7.0**, a major update to its modern dynamic language for the JVM that delivers enterprise-grade capabilities for building real-time, horizontally scalable, and AI-driven applications."
 authors:
   - "luis-majano"
-image: "https://foojay.io/wp-content/uploads/2025/11/boxlang-v1.7.0.jpg"
+image: "/images/posts/2025/11/boxlang-1-7-0-delivers-streaming-distributed-caching-and-enhanced-jvm-performance/boxlang-v1.7.0.jpg"
 categories:
   - "BoxLang"
   - "Press"
@@ -188,7 +188,7 @@ About Ortus Solutions {#h2-8-about-ortus-solutions}
 
 Ortus Solutions, Corp.  
 
-📧 [\[email protected\]](/cdn-cgi/l/email-protection#b1d8dfd7def1dec3c5c4c2c2deddc4c5d8dedfc29fd2dedc)  
+📧 [\[email protected\]](/cdn-cgi/l/email-protection#bcd5d2dad3fcd3cec8c9cfcfd3d0c9c8d5d3d2cf92dfd3d1)  
 
 🌍 [www.ortussolutions.com](https://www.ortussolutions.com)  
 

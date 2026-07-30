@@ -7,7 +7,7 @@ description: "Analyzing a curious bottleneck in IntelliJ IDEA using the built-in
 canonical: "https://flounder.dev/posts/profile-idea-with-idea/"
 authors:
   - "igor-kulakov"
-image: "https://foojay.io/wp-content/uploads/2024/10/selfprofilingin.png"
+image: "/images/posts/2024/10/profile-intellij-idea-with-its-own-profiler/selfprofilingin.png"
 categories:
   - "Debugging"
   - "IntelliJ IDEA"

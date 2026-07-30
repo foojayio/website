@@ -8,7 +8,7 @@ canonical: "https://blog.payara.fish/revolutionising-java-collections-the-advent
 authors:
   - "jadon-ortlepp"
   - "luqman-saeed"
-image: "https://foojay.io/wp-content/uploads/2020/10/payara_square_logo.jpg"
+image: "/images/posts/2023/12/revolutionising-java-collections-the-advent-of-sequenced-collections-in-java-21/payara_square_logo.jpg"
 categories:
   - "Java Core"
   - "JEPs"

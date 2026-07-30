@@ -7,7 +7,7 @@ description: "An experiment showing that you can add roughly 10 times more objec
 canonical: "https://webtechie.be/post/2024-07-22-javafx-nodes-versus-canvas/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/07/canvas-nodes-javafx.png"
+image: "/images/posts/2024/08/javafx-nodes-versus-canvas/canvas-nodes-javafx.png"
 categories:
   - "JavaFX"
   - "Use Cases"

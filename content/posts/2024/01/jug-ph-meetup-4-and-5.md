@@ -6,7 +6,7 @@ lastmod: "2024-01-14T13:26:27+00:00"
 description: "The JUG PH Meetup 4 and 5 Report. This report focuses on the meetups that happened in September and November 2023."
 authors:
   - "tristan-mahinay"
-image: "https://foojay.io/wp-content/uploads/2024/01/jugph.png"
+image: "/images/posts/2024/01/jug-ph-meetup-4-and-5/jugph.png"
 categories:
   - "Events"
   - "JUGs"

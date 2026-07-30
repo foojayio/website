@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:53:08+00:00"
 description: "Unless you are creating all your images, by drawing then inside the code with the Graphics2D commands, you will need an image library to load images as BufferedImages. You will also need an Image library if you wish to save the results.  ImageIO is part of Java, it is free and it supports a range of Image formats including GIF, JPEG, PNG, and TIF. Because it is expandable, there are additional libraries to extend it. - by Mark Stephens"
 authors:
   - "mark-stephens"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/06/how-does-java-handle-different-images-and-colorspaces-part-4/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

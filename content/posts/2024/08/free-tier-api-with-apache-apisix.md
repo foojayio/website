@@ -7,7 +7,7 @@ description: "Lots of service providers offer a free tier of their service. The 
 canonical: "https://blog.frankel.ch/free-tier-api-apisix/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/07/beer-2439237.jpg"
+image: "/images/posts/2024/08/free-tier-api-with-apache-apisix/beer-2439237.jpg"
 categories:
   - "DevOps"
 tags:

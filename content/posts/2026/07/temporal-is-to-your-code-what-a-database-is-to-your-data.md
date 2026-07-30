@@ -6,7 +6,7 @@ lastmod: "2026-07-11T13:48:54+00:00"
 description: "Your database made your data durable. Temporal does the same for your code."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2026/07/horizontal-logo.png"
+image: "/images/posts/2026/07/temporal-is-to-your-code-what-a-database-is-to-your-data/horizontal-logo.png"
 categories:
   - "Durability"
   - "Performance"

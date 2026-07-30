@@ -7,7 +7,7 @@ description: "For Java developers, CodeRabbit offers specialized analysis that u
 authors:
   - "aravind-putrevu"
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2025/07/Cr_icon_632e505ce3-1.png"
+image: "/images/posts/2025/07/coderabbit-tutorial-for-java-developers/Cr_icon_632e505ce3-1.png"
 categories:
   - "AI"
   - "CodeRabbit"

@@ -6,7 +6,7 @@ lastmod: "2024-03-31T01:37:12+00:00"
 description: "Experience the ease and efficiency of Spring Framework RestClient. Simplify your RESTful API integration and unlock the full potential of your applications."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2024/03/RestClient_1-700x394-1.jpg"
+image: "/images/posts/2024/03/spring-internals-of-restclient/RestClient_1-700x394-1.jpg"
 categories:
   - "Java"
   - "Microservices"

@@ -7,7 +7,7 @@ description: "Let's continue our exploration of Python's magic methods in this s
 canonical: "https://blog.frankel.ch/python-magic-methods/2/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/10/pexels-benni-fish-9468322.jpg"
+image: "/images/posts/2023/11/python-magic-methods-part-2/pexels-benni-fish-9468322.jpg"
 categories:
   - "Tutorials"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2024-09-05T07:47:10+00:00"
 description: "We've added extra coupons for our free Continuous Feedback Udemy course! We're glad to see it's been valuable for some of you."
 authors:
   - "roni-dover"
-image: "https://foojay.io/wp-content/uploads/2024/06/image-digma-udemy.png"
+image: "/images/posts/2024/07/continuous-feedback-free-udemy-course-additional-coupons-available/image-digma-udemy.png"
 categories:
   - "Tutorials"
 tags:

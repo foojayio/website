@@ -6,7 +6,7 @@ lastmod: "2023-10-04T07:13:41+00:00"
 description: "Read how you can help create a community certification for Java Developers as part of the Foojay community"
 authors:
   - "janhendrik-kuperus"
-image: "https://foojay.io/wp-content/uploads/2023/09/Community-Process.png"
+image: "/images/posts/2023/10/how-to-participate-in-the-foojay-community-certification-project/Community-Process.png"
 categories:
   - "Foojay"
   - "Java"

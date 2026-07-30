@@ -8,7 +8,7 @@ authors:
   - "frankdelporte"
   - "rijo-sam"
   - "tom-cools"
-image: "https://foojay.io/wp-content/uploads/2024/11/episode-61-thumbnail.png"
+image: "/images/posts/2024/11/foojay-podcast-61/episode-61-thumbnail.png"
 categories:
   - "Podcast"
 tags:

@@ -6,7 +6,7 @@ description: "Here is the overview of the JavaFX LinksOfTheMonth of April 2025. 
 canonical: "https://webtechie.be/post/2025-04-28-javafx-links-of-april-2025/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/09/jfxcentral.png"
+image: "/images/posts/2025/04/javafx-links-of-april-2025/jfxcentral.png"
 categories:
   - "JavaFX"
 tags:

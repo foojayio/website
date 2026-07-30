@@ -6,7 +6,7 @@ lastmod: "2023-12-13T08:48:41+00:00"
 description: "In this article we continue diving into TestContainers and Supabase, and run unit tests against a full local self-hosted Supabase."
 authors:
   - "jlengrand"
-image: "https://foojay.io/wp-content/uploads/2023/11/Screenshot-2023-10-11-at-23.57.36-1.png"
+image: "/images/posts/2023/12/unit-testing-supabase-in-kotlin-using-test-containers-part-2/Screenshot-2023-10-11-at-23.57.36-1.png"
 categories:
   - "Kotlin"
   - "Testing"

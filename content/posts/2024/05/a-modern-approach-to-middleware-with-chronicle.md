@@ -6,7 +6,7 @@ lastmod: "2024-05-17T09:46:41+00:00"
 description: "Financial institutions today face significant challenges in updating their legacy middleware systems which are crucial for supporting millions of lines of code serving critical business functions."
 authors:
   - "ryan-andrews"
-image: "https://foojay.io/wp-content/uploads/2024/05/Screenshot-2024-05-07-at-09.59.51-700x487-1.png"
+image: "/images/posts/2024/05/a-modern-approach-to-middleware-with-chronicle/Screenshot-2024-05-07-at-09.59.51-700x487-1.png"
 categories:
   - "Chronicle Software"
   - "Java"

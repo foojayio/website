@@ -8,7 +8,7 @@ authors:
   - "jadon-ortlepp"
   - "luqman-saeed"
   - "priya"
-image: "https://foojay.io/wp-content/uploads/2023/10/150000-downloads.png"
+image: "/images/posts/2023/11/payara-platform-reaches-150000-monthly-users/150000-downloads.png"
 categories:
   - "Jakarta EE"
   - "Java"

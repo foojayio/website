@@ -6,7 +6,7 @@ lastmod: "2025-01-29T16:51:24+00:00"
 description: "The incident response platform market continues to expand as organizations prioritize effective incident management in their cloud-native environments."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2022/06/chemical-scientist-test-chemistry-chemist-student.jpg"
+image: "/images/posts/2025/01/incident-response-platform-comparison-market-analysis-2025/chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Developer Tools"
 tags:

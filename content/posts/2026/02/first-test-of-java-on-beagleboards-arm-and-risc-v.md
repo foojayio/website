@@ -6,7 +6,7 @@ description: "As part of my 2026 learning goals around Java on RISC-V (see this 
 canonical: "https://webtechie.be/post/2026-02-10-first-test-beagleboard-java/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/02/first-test-beagleboard.jpg"
+image: "/images/posts/2026/02/first-test-of-java-on-beagleboards-arm-and-risc-v/first-test-beagleboard.jpg"
 categories:
   - "Embedded"
 tags:
@@ -125,7 +125,7 @@ This board proved challenging due to my Raspberry Pi habits. I initially created
 
 Default username and password are `beagle:temppwd`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ceacabafa9a2ab8efffee0fffcfee0fffee0ffff">[email&nbsp;protected]</a>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="71131410161d143140415f4043415f40415f4040">[email&nbsp;protected]</a>
 Ubuntu 23.04
 
 BeagleBoard.org Ubuntu 23.04 Console Image 2023-10-19

@@ -6,7 +6,7 @@ lastmod: "2024-06-12T14:38:33+00:00"
 description: "Vaadin 24.4: Vaadin Copilot, Hilla integration, and React support in Flow."
 authors:
   - "marcus-hellberg"
-image: "https://foojay.io/wp-content/uploads/2024/06/vaadinwebapp.png"
+image: "/images/posts/2024/06/vaadin-24-4-adds-react-support-in-app-coding-assistant/vaadinwebapp.png"
 categories:
   - "Release Notes"
   - "Tools"

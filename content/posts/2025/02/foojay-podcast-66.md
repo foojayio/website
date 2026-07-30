@@ -10,7 +10,7 @@ authors:
   - "maximillian-arruda"
   - "rijo-sam"
   - "wim-de-troyer"
-image: "https://foojay.io/wp-content/uploads/2025/02/episode-66-code-posts.jpg"
+image: "/images/posts/2025/02/foojay-podcast-66/episode-66-code-posts.jpg"
 categories:
   - "Java"
   - "Podcast"

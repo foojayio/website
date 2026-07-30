@@ -7,7 +7,7 @@ description: "JGraphlet is a tiny, zero-dependency library for building task pip
 canonical: "https://shaaf.dev/post/2025-08-25-think-in-graphs-not-just-chains-jgraphlet-for-taskpipelines/"
 authors:
   - "shaaf"
-image: "https://foojay.io/wp-content/uploads/2025/08/jgraphlets.jpg"
+image: "/images/posts/2025/10/think-in-graphs-not-just-chains-jgraphlet-for-taskpipelines/jgraphlets.jpg"
 categories:
   - "Java"
   - "Library"

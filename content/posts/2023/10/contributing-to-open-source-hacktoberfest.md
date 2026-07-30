@@ -6,7 +6,7 @@ lastmod: "2023-10-03T09:08:14+00:00"
 description: "Have you ever considered contributing to open source software, but are you unsure on how to start? Consider participating in Hacktoberfest."
 authors:
   - "simon-verhoeven"
-image: "https://foojay.io/wp-content/uploads/2023/09/hacktober.png"
+image: "/images/posts/2023/10/contributing-to-open-source-hacktoberfest/hacktober.png"
 categories:
   - "Events"
   - "Java Beginner"

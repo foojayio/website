@@ -6,7 +6,7 @@ lastmod: "2025-10-23T18:19:26+00:00"
 description: "REST has become the default choice for building web services, and for good reason. It’s straightforward to implement, easy for clients to consume, and built directly on top of the same principles of the web itself.HTTP already gives us well-defined methods (GET, POST, PUT, DELETE), built-in caching, redirect support, secure transport via TLS, and widespread tooling support across platforms. REST doesn’t reinvent the web—it uses it.REST is not a protocol or a rigid standard. It’s a lightweight architectural approach that encourages scalable, evolvable, and interoperable services. Its creator, Roy Fielding, helped define many of the specs that underpin the web today."
 authors:
   - "tim-kelly"
-image: "https://foojay.io/wp-content/uploads/2025/10/546a7b8392ade39f6930ae5605b54327b1d73306_2_690x362.png"
+image: "/images/posts/2025/09/building-rest-apis-in-java-with-spring-boot/546a7b8392ade39f6930ae5605b54327b1d73306_2_690x362.png"
 categories:
   - "Databases"
   - "Java"

@@ -6,7 +6,7 @@ lastmod: "2024-03-21T08:41:03+00:00"
 description: "Users of the Java development tool FEPCOS-J can create a multithreaded server in Java without thread or network programming. Read more."
 authors:
   - "gerhard-fuchs"
-image: "https://foojay.io/wp-content/uploads/2024/03/fuchs-2024-fepcos-j-implemented-multithreaded-server-in-java-680x510-1.png"
+image: "/images/posts/2024/03/fuchs-2024-fepcos-j-multithreaded-server/fuchs-2024-fepcos-j-implemented-multithreaded-server-in-java-680x510-1.png"
 categories:
   - "Developer Tools"
   - "Java"

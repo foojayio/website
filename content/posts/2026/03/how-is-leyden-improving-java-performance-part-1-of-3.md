@@ -7,7 +7,7 @@ description: "In this series of 3 blog posts we will explain how OpenJDK project
 canonical: "https://delawen.com/2025/03/17/How-is-Leyden-improving-Java-Performance/"
 authors:
   - "maria-arias"
-image: "https://foojay.io/wp-content/uploads/2026/03/aot-cache.webp"
+image: "/images/posts/2026/03/how-is-leyden-improving-java-performance-part-1-of-3/aot-cache.webp"
 categories:
   - "Java"
   - "JEPs"

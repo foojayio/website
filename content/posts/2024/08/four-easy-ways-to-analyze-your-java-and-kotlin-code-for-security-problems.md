@@ -7,7 +7,7 @@ description: "Nowadays, the security of your applications is just as important a
 canonical: "https://snyk.io/blog/analyze-java-kotlin-code/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/11/snyk-logo.png"
+image: "/images/posts/2024/08/four-easy-ways-to-analyze-your-java-and-kotlin-code-for-security-problems/snyk-logo.png"
 categories:
   - "Security"
   - "Snyk"

@@ -6,7 +6,7 @@ lastmod: "2023-10-14T11:51:35+00:00"
 description: "A magnificent job of walking through a lot the different architectural considerations one has to make to develop maintainable code."
 authors:
   - "simon-verhoeven"
-image: "https://foojay.io/wp-content/uploads/2023/09/GetYourHandsDirtyOnCleanArchitecture-1.jpg"
+image: "/images/posts/2023/10/book-review-get-your-hands-dirty-on-clean-architecture-second-edition/GetYourHandsDirtyOnCleanArchitecture-1.jpg"
 categories:
   - "Book Review"
   - "Books"

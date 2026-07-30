@@ -6,7 +6,7 @@ lastmod: "2026-02-21T18:17:57+00:00"
 description: "Happy 40th Anniversary to The Legend of Zelda! 🎉🗡️ Today, February 21, 2026, marks exactly 40 years since the original game launched in Japan on February - by Igor De Souza"
 authors:
   - "igor-de-souza"
-image: "https://foojay.io/wp-content/uploads/2026/02/zelda01.png"
+image: "/images/posts/2026/02/the-triforce-that-slays-legacy-java-myths-happy-40th-zelda/zelda01.png"
 categories:
   - "Uncategorized"
 tags:

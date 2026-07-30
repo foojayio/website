@@ -6,7 +6,7 @@ lastmod: "2026-02-13T14:27:43+00:00"
 description: "JaCoCo is the go-to code coverage tool for Java projects. It integrates seamlessly with Maven, generates detailed HTML reports, and works out of the box. - by Bruno Borges"
 authors:
   - "bruno-borges"
-image: "https://foojay.io/wp-content/uploads/2026/02/Screenshot-2026-02-13-at-07.38.45.png"
+image: "/images/posts/2026/02/how-to-customize-jacoco-report-styling-in-your-java-project/Screenshot-2026-02-13-at-07.38.45.png"
 categories:
   - "Developer Tools"
   - "Testing"

@@ -6,7 +6,7 @@ lastmod: "2025-12-04T19:06:36+00:00"
 description: "Every software system begins with intent. A human decision. A statement of what should exist, how it should behave, and why it matters. But somewhere along the way, that intent dies. It’s decomposed into documentation, user stories, and scattered logic. It becomes a shadow of itself fragmented across layers of code, processes, and people who no longer remember what it was meant to achieve.We’ve automated infrastructure. We’ve scripted configurations. We’ve even made AI write code for us. But we’ve never automated understanding. Our systems execute brilliantly yet comprehend nothing. They operate without memory of purpose. They run, but they do not know why.This is the gap that Requirements-as-Code (RaC) exists to close. It’s not a tool or a framework. It’s an engineering discipline an architectural shift that treats requirements, business rules, and behavioral constraints as executable data models, not static documentation. Under RaC, requirements don’t describe software they are the software. They exist as structured data, versioned, queryable, interpretable at runtime, and observable across the system lifecycle."
 authors:
   - "elie-hannouch"
-image: "https://foojay.io/wp-content/uploads/2025/11/1_fKlXRaOCelfpXA_XhNaitA.webp"
+image: "/images/posts/2025/12/building-systems-that-know-why-they-exist-when-data-logic-and-intent-finally-align/1_fKlXRaOCelfpXA_XhNaitA.webp"
 categories:
   - "Databases"
   - "Mongo"

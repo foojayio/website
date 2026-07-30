@@ -7,7 +7,7 @@ description: "You may know I'm a big fan of OpenTelemetry. I recently finished d
 canonical: "https://blog.frankel.ch/opentelemetry-tracing-jvm/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/08/cover_large.jpeg"
+image: "/images/posts/2025/08/opentelemetry-tracing-on-the-jvm/cover_large.jpeg"
 categories:
   - "OpenTelemetry"
   - "Spring"

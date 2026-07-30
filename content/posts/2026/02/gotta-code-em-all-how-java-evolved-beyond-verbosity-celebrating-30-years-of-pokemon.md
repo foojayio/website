@@ -5,7 +5,7 @@ date: "2026-02-27T09:57:35+00:00"
 description: "Happy 30th Anniversary to Pokémon! 🎉 February 27, 2026 marks exactly 30 years since the original Pokémon Red and Green launched in Japan on February 27, - by Igor De Souza"
 authors:
   - "igor-de-souza"
-image: "https://foojay.io/wp-content/uploads/2026/02/pokemon01.jpg"
+image: "/images/posts/2026/02/gotta-code-em-all-how-java-evolved-beyond-verbosity-celebrating-30-years-of-pokemon/pokemon01.jpg"
 categories:
   - "Java"
   - "Java Beginner"

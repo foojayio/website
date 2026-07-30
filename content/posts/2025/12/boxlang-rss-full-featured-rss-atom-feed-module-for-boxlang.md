@@ -6,7 +6,7 @@ lastmod: "2025-12-02T11:44:24+00:00"
 description: "We're thrilled to announce the release of bx-rss, a comprehensive RSS and Atom feed module that brings powerful syndication capabilities to BoxLang! - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2025/10/BoxLang-Logo-Dark.png"
+image: "/images/posts/2025/12/boxlang-rss-full-featured-rss-atom-feed-module-for-boxlang/BoxLang-Logo-Dark.png"
 categories:
   - "BoxLang"
   - "Developer Tools"
@@ -208,14 +208,14 @@ feedItems = [
         "link" : "https://myblog.com/getting-started-boxlang",
         "description" : "Learn the basics of BoxLang in this comprehensive guide",
         "publishedDate" : now(),
-        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1470716271787b64716654796d76787b733a777b79">[email&nbsp;protected]</a>"
+        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="37535241525b58475245775a4e555b58501954585a">[email&nbsp;protected]</a>"
     },
     {
         "title" : "Building REST APIs with BoxLang",
         "link" : "https://myblog.com/rest-apis-boxlang",
         "description" : "Create powerful REST APIs using BoxLang",
         "publishedDate" : dateAdd( "d", -1, now() ),
-        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="67030211020b08170215270a1e050b08004904080a">[email&nbsp;protected]</a>"
+        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7511100310191a05100735180c17191a125b161a18">[email&nbsp;protected]</a>"
     }
 ];
 
@@ -256,7 +256,7 @@ episodes = [
         "link" : "https://podcast.boxlang.io/episode-1",
         "description" : "Introduction to BoxLang and what makes it special",
         "publishedDate" : now(),
-        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5f2f303b3c3e2c2b1f3d3027333e3138713630">[email&nbsp;protected]</a>",
+        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2c2ddd6d1d3c1c6f2d0ddcaded3dcd59cdbdd">[email&nbsp;protected]</a>",
         // iTunes episode metadata
         "itunesTitle" : "Welcome to BoxLang",
         "itunesDuration" : "00:42: 15",

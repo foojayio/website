@@ -8,7 +8,7 @@ canonical: "https://www.azul.com/blog/how-to-optimize-cpu-utilization-to-avoid-c
 authors:
   - "jiri-holusa"
   - "matt-van-order"
-image: "https://foojay.io/wp-content/uploads/2023/10/before_after.png"
+image: "/images/posts/2023/11/controlling-jit-compiler-overhead-to-avoid-cpu-autoscaling/before_after.png"
 categories:
   - "DevOps"
   - "Java"

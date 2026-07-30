@@ -7,7 +7,7 @@ description: "Is your Java application actually secure, or does it just look tha
 authors:
   - "frankdelporte"
   - "steve-poole"
-image: "https://foojay.io/wp-content/uploads/2026/05/episode-95-security-eol-cve.jpg"
+image: "/images/posts/2026/05/foojay-podcast-95/episode-95-security-eol-cve.jpg"
 categories:
   - "Java"
   - "Java Core"

@@ -6,7 +6,7 @@ lastmod: "2025-09-05T10:01:06+00:00"
 description: "Learn how to build a memory-enabled AI agent using Spring Boot, Spring AI, and Redis. Store and recall user preferences and conversation history for personalized, context-aware responses."
 authors:
   - "raphael-delio"
-image: "https://foojay.io/wp-content/uploads/2025/07/Copia-de-Blue-—-WIP.png"
+image: "/images/posts/2025/07/agent-memory-with-spring-ai-redis/Copia-de-Blue---WIP.png"
 categories:
   - "Redis"
   - "Spring"

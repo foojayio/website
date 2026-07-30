@@ -6,7 +6,7 @@ lastmod: "2026-05-07T22:03:10+00:00"
 description: "BoxLang AI 3.0 Series · Part 6 of 7 A chatbot with no memory isn't a conversation — it's a series of isolated queries. Every message starts from scratch. - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/05/Captura-de-pantalla-2026-05-05-171751.png"
+image: "/images/posts/2026/05/boxlang-ai-deep-dive-part-6-of-7-memory-systems-rag-building-ai-that-remembers/Captura-de-pantalla-2026-05-05-171751.png"
 categories:
   - "AI"
   - "BoxLang"

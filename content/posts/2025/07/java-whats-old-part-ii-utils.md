@@ -6,7 +6,7 @@ lastmod: "2025-07-30T08:52:09+00:00"
 description: "What are the old utility classes less known in Java?"
 authors:
   - "anthony-goubard"
-image: "https://foojay.io/wp-content/uploads/2025/06/old-coffee.jpg"
+image: "/images/posts/2025/07/java-whats-old-part-ii-utils/old-coffee.jpg"
 categories:
   - "Java"
   - "Java Core"

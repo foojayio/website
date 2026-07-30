@@ -6,7 +6,7 @@ lastmod: "2026-06-06T11:23:18+00:00"
 description: "Tiberius: A Security Testing Framework for LLM Applications in Java How do you write a regression test for a system that is non-deterministic by design? - by Iryna Dohndorf"
 authors:
   - "iryna-dohndorf"
-image: "https://foojay.io/wp-content/uploads/2026/06/AdobeStock_975408349-scaled.jpeg"
+image: "/images/posts/2026/06/tiberius-a-security-testing-framework-for-llm-applications-in-java/AdobeStock_975408349-scaled.jpeg"
 categories:
   - "AI"
   - "GenAI"

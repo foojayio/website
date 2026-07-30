@@ -6,7 +6,7 @@ lastmod: "2025-06-11T07:35:51+00:00"
 description: "In this blog post, we'll explore the different layers of RAG, including vector RAG, graph RAG, and agents."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2025/05/unsplash-croissant-layers.jpg"
+image: "/images/posts/2025/06/intro-to-rag-foundations-of-retrieval-augmented-generation-part-2/unsplash-croissant-layers.jpg"
 categories:
   - "Databases"
   - "Graph"

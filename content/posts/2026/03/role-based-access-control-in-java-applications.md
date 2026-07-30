@@ -6,7 +6,7 @@ lastmod: "2026-03-05T20:31:51+00:00"
 description: "In this article, we will explore how to implement RBAC at the application level, using MongoDB to store user metadata and keeping the authorization logic close to the core of the system. The goal is not only to make things secure, but also to make them architecturally consistent. All the code used in this article is inside this repository."
 authors:
   - "matteo-rossi"
-image: "https://foojay.io/wp-content/uploads/2026/03/rbac-image2-1.png"
+image: "/images/posts/2026/03/role-based-access-control-in-java-applications/rbac-image2-1.png"
 categories:
   - "Databases"
   - "Java"
@@ -107,7 +107,7 @@ Below, let's try to imagine a simple document representing a user
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
 &nbsp;&nbsp;"_id": "user-123",
-&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="32535e5b515772574a535f425e571c515d5f">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5b4b9bcb6b095b0adb4b8a5b9b0fbb6bab8">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;"roles": ["CUSTOMER"],
 &nbsp;&nbsp;"status": "ACTIVE"
 }</pre>

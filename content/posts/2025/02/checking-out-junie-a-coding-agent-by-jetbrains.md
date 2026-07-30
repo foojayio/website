@@ -7,7 +7,7 @@ description: "Checking out Junie, a newly announced coding agent by JetBrains by
 canonical: "https://flounder.dev/posts/trying-out-junie/"
 authors:
   - "igor-kulakov"
-image: "https://foojay.io/wp-content/uploads/2025/02/banner-1.png"
+image: "/images/posts/2025/02/checking-out-junie-a-coding-agent-by-jetbrains/banner-1.png"
 categories:
   - "IntelliJ IDEA"
   - "Kotlin"

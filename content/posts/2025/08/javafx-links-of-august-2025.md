@@ -6,7 +6,7 @@ description: "Here are the links shared on jfx-central.com in the August summary
 canonical: "https://www.jfx-central.com/links"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/09/jfxcentral.png"
+image: "/images/posts/2025/08/javafx-links-of-august-2025/jfxcentral.png"
 categories:
   - "JavaFX"
 tags:

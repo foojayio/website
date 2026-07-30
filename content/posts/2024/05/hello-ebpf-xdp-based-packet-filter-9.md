@@ -6,7 +6,7 @@ lastmod: "2024-05-13T07:13:39+00:00"
 description: "Learn about new support for XDP to create a simple package blocker for eBPF."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2024/05/xdp_filter-1-2000x1005-1.png"
+image: "/images/posts/2024/05/hello-ebpf-xdp-based-packet-filter-9/xdp_filter-1-2000x1005-1.png"
 categories:
   - "Tools"
 tags:

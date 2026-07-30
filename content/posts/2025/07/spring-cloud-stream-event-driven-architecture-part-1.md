@@ -6,7 +6,7 @@ lastmod: "2025-07-21T13:35:48+00:00"
 description: "Learn how to build scalable, event-driven microservices using Spring Cloud Stream. This guide covers core concepts, messaging patterns, and integration with brokers like RabbitMQ, Kafka, Apache Pulsar, and Amazon Kinesis etc."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2025/07/SpringCloudStream-700x394-1.jpg"
+image: "/images/posts/2025/07/spring-cloud-stream-event-driven-architecture-part-1/SpringCloudStream-700x394-1.jpg"
 categories:
   - "Apache Pulsar"
   - "IntelliJ IDEA"

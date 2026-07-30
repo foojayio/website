@@ -6,7 +6,7 @@ lastmod: "2026-05-10T15:14:28+00:00"
 description: "💪😤 THE 12 LABOURS OF PRIMEFACES 15.0.15 #release"
 authors:
   - "vincent-vauban"
-image: "https://foojay.io/wp-content/uploads/2026/05/toge-herculer-1024x576.png"
+image: "/images/posts/2026/05/the-12-labours-of-primefaces-15-0-15-release/toge-herculer-1024x576.png"
 categories:
   - "Jakarta EE"
   - "Java"

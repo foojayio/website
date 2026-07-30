@@ -6,7 +6,7 @@ lastmod: "2025-08-26T15:16:01+00:00"
 description: "Whether you're designing scalable backend systems or just dividing your database into distributed databases, understanding how automatic failover works is key."
 authors:
   - "shrey-batra"
-image: "https://foojay.io/wp-content/uploads/2025/08/shrey.png"
+image: "/images/posts/2025/08/what-happens-when-a-primary-fails-in-a-mongodb-replica-set-automatic-failovers/shrey.png"
 categories:
   - "Databases"
   - "Mongo"

@@ -7,7 +7,7 @@ description: "provides a more detailed account of how Leyden’s proposed soluti
 canonical: "https://delawen.com/2025/03/17/How-is-Leyden-improving-Java-Performance-3/"
 authors:
   - "maria-arias"
-image: "https://foojay.io/wp-content/uploads/2026/03/9d94n4orpjxb2gyr6tgy.png"
+image: "/images/posts/2026/03/how-is-leyden-improving-java-performance-part-3-of-3/9d94n4orpjxb2gyr6tgy.png"
 categories:
   - "Java"
   - "Performance"

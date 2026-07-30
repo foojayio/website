@@ -7,7 +7,7 @@ description: "Overview of Spring Framework 7.0 and Spring Data 2025.1.0 gaining 
 canonical: "https://payara.fish/blog/spring-framework-spring-data-jakarta-ee-11-compatible/"
 authors:
   - "dominika-tasarz"
-image: "https://foojay.io/wp-content/uploads/2025/10/458-4589658_spring-framework-logo-spring-boot-png-transparent-png.png"
+image: "/images/posts/2025/11/spring-framework-7-0-and-spring-data-2025-1-0-embrace-jakarta-ee-11-compatibility/458-4589658_spring-framework-logo-spring-boot-png-transparent-png.png"
 categories:
   - "Jakarta EE"
   - "Payara"

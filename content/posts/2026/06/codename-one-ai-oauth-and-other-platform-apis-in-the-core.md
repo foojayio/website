@@ -6,7 +6,7 @@ description: "Deeper AI integration in the framework core, modern authentication
 canonical: "https://www.codenameone.com/blog/platform-apis-in-the-core/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/06/platform-apis-in-the-core.jpg"
+image: "/images/posts/2026/06/codename-one-ai-oauth-and-other-platform-apis-in-the-core/platform-apis-in-the-core.jpg"
 categories:
   - "Java"
 tags:

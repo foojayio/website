@@ -6,7 +6,7 @@ lastmod: "2023-11-19T21:31:57+00:00"
 description: "Design patterns plays a pivotal role in designing and solving the commonly occurring problems in software application."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2023/11/MSPatternsOne.png"
+image: "/images/posts/2023/11/patterns-for-the-design-of-microservices-part-3/MSPatternsOne.png"
 categories:
   - "Java"
   - "Kotlin"

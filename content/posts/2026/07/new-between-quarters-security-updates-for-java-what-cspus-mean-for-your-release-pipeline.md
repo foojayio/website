@@ -5,7 +5,7 @@ date: "2026-07-27T07:31:11+00:00"
 description: "In an announcement on the OpenJDK Updates Mailinglist on July 20, 2026, Rob McKenna explained a change in the Oracle security release cycle for JDK - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/07/openjdk-cspu-releases.png"
+image: "/images/posts/2026/07/new-between-quarters-security-updates-for-java-what-cspus-mean-for-your-release-pipeline/openjdk-cspu-releases.png"
 categories:
   - "Java"
   - "Java Core"

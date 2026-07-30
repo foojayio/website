@@ -7,7 +7,7 @@ description: "Explore the power of DTrace for system debugging and optimization:
 canonical: "https://debugagent.com/dtrace-revisited-advanced-debugging-techniques"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/01/DALL·E-2024-01-23-12.51.14-A-stylized-digital-artwork-representing-the-concept-of-system-debugging-and-optimization-featuring-elements-like-a-magnifying-glass-over-computer-cod.jpg"
+image: "/images/posts/2024/02/dtrace-revisited-advanced-debugging-techniques/DALL-E-2024-01-23-12.51.14-A-stylized-digital-artwork-representing-the-concept-of-system-debugging-and-optimization-featuring-elements-like-a-magnifying-glass-over-computer-cod.jpg"
 categories:
   - "Tutorials"
   - "Videos"

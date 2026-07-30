@@ -7,7 +7,7 @@ description: "Take a look at a nice illustration of how time-consuming processes
 canonical: "https://webtechie.be/post/2025-02-19-demo-application-with-crac-and-loading-data-in-memory/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/02/thumbnail-crac-data-in-memory.jpg"
+image: "/images/posts/2025/03/demo-application-with-crac-and-loading-data-in-memory/thumbnail-crac-data-in-memory.jpg"
 categories:
   - "CRaC"
   - "Raspberry Pi"

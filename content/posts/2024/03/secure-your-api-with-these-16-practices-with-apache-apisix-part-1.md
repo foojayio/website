@@ -7,7 +7,7 @@ description: "See how to configure Apache APISIX to secure your APIs against 7 o
 canonical: "https://blog.frankel.ch/secure-api-practices-apisix/1/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/02/img-BuLDzx81CexYQAzkaF36h.png"
+image: "/images/posts/2024/03/secure-your-api-with-these-16-practices-with-apache-apisix-part-1/img-BuLDzx81CexYQAzkaF36h.png"
 categories:
   - "DevOps"
   - "Security"

@@ -10,7 +10,7 @@ authors:
   - "jbaruch"
   - "markus-westergren"
   - "r-fichtner"
-image: "https://foojay.io/wp-content/uploads/2025/06/episode-72-jcon-part-1.png"
+image: "/images/posts/2025/06/foojay-podcast-72/episode-72-jcon-part-1.png"
 categories:
   - "Conference"
   - "Podcast"

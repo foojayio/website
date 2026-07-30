@@ -6,7 +6,7 @@ lastmod: "2023-11-21T10:09:01+00:00"
 description: "We are excited to announce our decision to officially open-source the Build Server for Gradle project!"
 authors:
   - "nick-zhu"
-image: "https://foojay.io/wp-content/uploads/2023/11/gradleext.png"
+image: "/images/posts/2023/11/announcing-the-bsp-repo/gradleext.png"
 categories:
   - "Java"
   - "Java Core"

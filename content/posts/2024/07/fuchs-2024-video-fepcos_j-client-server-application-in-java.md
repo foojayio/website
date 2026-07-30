@@ -6,7 +6,7 @@ lastmod: "2024-07-31T10:39:07+00:00"
 description: "See how FEPCOS-J relieves developers of the network programming required to implement a client-server application in Java."
 authors:
   - "gerhard-fuchs"
-image: "https://foojay.io/wp-content/uploads/2024/07/fepcos.png"
+image: "/images/posts/2024/07/fuchs-2024-video-fepcos_j-client-server-application-in-java/fepcos.png"
 categories:
   - "Developer Tools"
   - "Java"

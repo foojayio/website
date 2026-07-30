@@ -6,7 +6,7 @@ lastmod: "2026-05-18T05:55:12+00:00"
 description: "Explore how to use built-in tools in Spring AI SDK with Amazon Bedrock AgentCore, including Browser and Code Interpreter capabilities. Learn how AI agents can browse web content, execute code, automate reasoning tasks, and build intelligent workflows using Spring AI and Amazon Bedrock AgentCore."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2026/05/AgentcoreBrowser-2.png"
+image: "/images/posts/2026/05/explore-spring-ai-sdk-amazon-bedrock-agentcore-part-3/AgentcoreBrowser-2.png"
 categories:
   - "AI"
   - "IntelliJ IDEA"

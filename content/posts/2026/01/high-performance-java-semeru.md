@@ -8,7 +8,7 @@ canonical: "https://developer.ibm.com/articles/j-java-performance/"
 authors:
   - "grace-jansen"
   - "laura-cowen"
-image: "https://foojay.io/wp-content/uploads/2026/01/image05.png"
+image: "/images/posts/2026/01/high-performance-java-semeru/image05.png"
 categories:
   - "Performance"
 tags:

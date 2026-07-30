@@ -8,7 +8,7 @@ authors:
   - "francois-martin"
   - "frankdelporte"
   - "johan-vos"
-image: "https://foojay.io/wp-content/uploads/2025/11/episode-83-java-evolutions-tips-tricks.jpg"
+image: "/images/posts/2025/11/foojay-podcast-83/episode-83-java-evolutions-tips-tricks.jpg"
 categories:
   - "Java"
   - "Java Core"

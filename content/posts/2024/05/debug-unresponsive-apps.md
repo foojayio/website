@@ -7,7 +7,7 @@ description: "Learn how to debug unresponsive Java/JVM applications, then reload
 canonical: "https://flounder.dev/posts/debug-unresponsive-apps/"
 authors:
   - "igor-kulakov"
-image: "https://foojay.io/wp-content/uploads/2024/05/debug-unresponsive-apps-banner.png"
+image: "/images/posts/2024/05/debug-unresponsive-apps/debug-unresponsive-apps-banner.png"
 categories:
   - "IntelliJ IDEA"
   - "Java"

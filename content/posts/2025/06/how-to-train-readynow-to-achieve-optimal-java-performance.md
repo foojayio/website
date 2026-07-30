@@ -7,7 +7,7 @@ description: "This is the third blog post in a series on faster Java application
 canonical: "https://www.azul.com/blog/how-to-train-readynow-to-achieve-optimal-java-performance/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/06/how-to-train-readynow-to-achieve-optimal-java-performance/Favicon-3-2.png"
 categories:
   - "Java"
   - "Performance"

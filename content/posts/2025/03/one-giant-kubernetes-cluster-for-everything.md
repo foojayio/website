@@ -7,7 +7,7 @@ description: "The ideal size of your Kubernetes clusters is a day 0 question and
 canonical: "https://www.loft.sh/blog/one-giant-kubernetes-cluster"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/03/giant-kubernetes-1650x927-1.png"
+image: "/images/posts/2025/03/one-giant-kubernetes-cluster-for-everything/giant-kubernetes-1650x927-1.png"
 categories:
   - "DevOps"
   - "Kubernetes"

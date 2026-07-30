@@ -6,7 +6,7 @@ description: "There are bugs you can solve by yourself, and bugs where you just 
 canonical: "https://webtechie.be/post/2026-04-21-improving-melodymatrix-ui-with-bentofx/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/04/edit-melodymatrix-bentofx.jpg"
+image: "/images/posts/2026/05/debugging-bentofx-in-melodymatrix-with-matt-coley-scenic-view-and-an-honest-look-at-ai-generated-code/edit-melodymatrix-bentofx.jpg"
 categories:
   - "JavaFX"
 tags:

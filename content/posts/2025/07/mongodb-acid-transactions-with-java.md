@@ -6,7 +6,7 @@ lastmod: "2025-07-23T14:43:58+00:00"
 description: "MongoDB’s support for multi-document ACID transactions gives you flexibility when single-document atomicity isn’t enough."
 authors:
   - "tim-kelly"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/07/mongodb-acid-transactions-with-java/mongologo.png"
 categories:
   - "Databases"
   - "Java"

@@ -7,7 +7,7 @@ description: "Launched on June 26, 2025, Jakarta EE 11 introduces one brand-new
 canonical: "https://omnifish.ee/new-features-in-jakarta-ee-11-with-examples/"
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2022/09/omnifish-logo-turquise-bg-400px-e1663869726664.png"
+image: "/images/posts/2025/08/new-features-in-jakarta-ee-11-with-examples/omnifish-logo-turquise-bg-400px-e1663869726664.png"
 categories:
   - "Developer Tools"
   - "Jakarta EE"

@@ -7,7 +7,7 @@ description: "Understanding the shared steps in the project setup is crucial bef
 canonical: "https://blog.frankel.ch/ajax-ssr/2/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/09/ai-generated-8709325.jpg"
+image: "/images/posts/2024/09/server-side-rendering-with-spring-boot/ai-generated-8709325.jpg"
 categories:
   - "Spring"
 tags:

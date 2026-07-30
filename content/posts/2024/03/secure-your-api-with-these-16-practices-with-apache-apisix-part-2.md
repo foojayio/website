@@ -7,7 +7,7 @@ description: "In this two-post series, I've addressed most of 16 different pract
 canonical: "https://blog.frankel.ch/secure-api-practices-apisix/2/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/02/img-BuLDzx81CexYQAzkaF36h-1.png"
+image: "/images/posts/2024/03/secure-your-api-with-these-16-practices-with-apache-apisix-part-2/img-BuLDzx81CexYQAzkaF36h-1.png"
 categories:
   - "Security"
 tags:

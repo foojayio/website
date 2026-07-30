@@ -6,7 +6,7 @@ lastmod: "2024-01-10T16:05:43+00:00"
 description: "Explore the insightful journey of Bert Jan Schrijver, a Java Champion, as he discusses his path in software development, the role of community, and the evolution of Java in this enlightening interview."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2024/01/Simon-Martinelli-2.png"
+image: "/images/posts/2024/01/journey-of-a-java-champion-bert-jan-schrijvers-path-to-mastery-and-community-leadership/Simon-Martinelli-2.png"
 categories:
   - "Interviews"
 tags:

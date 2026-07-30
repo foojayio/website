@@ -6,7 +6,7 @@ lastmod: "2025-05-17T13:16:33+00:00"
 description: "Sorting text should be easy as String implements the Comparable interface. In this article, we'll see that it can be more complicated than that."
 authors:
   - "anthony-goubard"
-image: "https://foojay.io/wp-content/uploads/2022/06/chemical-scientist-test-chemistry-chemist-student.jpg"
+image: "/images/posts/2024/02/sorting-text-in-java-how-complicated-can-it-be/chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Java"
   - "Java Core"

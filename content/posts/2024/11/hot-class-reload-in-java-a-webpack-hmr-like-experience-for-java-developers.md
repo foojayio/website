@@ -6,7 +6,7 @@ lastmod: "2024-11-19T15:58:02+00:00"
 description: "Hot Class Reload in Java offers a powerful way to enhance development productivity by reducing the need for full application restarts."
 authors:
   - "mohibul-chowdhury"
-image: "https://foojay.io/wp-content/uploads/2024/11/image_2024-10-03_111134341_fwi3rh.png"
+image: "/images/posts/2024/11/hot-class-reload-in-java-a-webpack-hmr-like-experience-for-java-developers/image_2024-10-03_111134341_fwi3rh.png"
 categories:
   - "Java"
   - "Java Core"

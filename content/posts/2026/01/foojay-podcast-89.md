@@ -6,7 +6,7 @@ description: "For this episode of the Foojay Podcast, we invited the author of t
 authors:
   - "frankdelporte"
   - "michal-maler"
-image: "https://foojay.io/wp-content/uploads/2026/01/episode-89-quarkus.jpg"
+image: "/images/posts/2026/01/foojay-podcast-89/episode-89-quarkus.jpg"
 categories:
   - "Podcast"
 tags:

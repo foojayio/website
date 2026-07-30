@@ -6,7 +6,7 @@ lastmod: "2025-07-09T11:00:59+00:00"
 description: "Learn how I improved zero-shot classification in Deep Java Library (DJL) by fixing token_type_ids support, optimizing logit handling, and aligning it with Hugging Face Transformers for accurate Java machine learning."
 authors:
   - "raphael-delio"
-image: "https://foojay.io/wp-content/uploads/2025/06/Screenshot-2025-06-15-at-18.41.17.png"
+image: "/images/posts/2025/07/how-i-improved-zero-shot-classification-in-deep-java-library-djl-oss/Screenshot-2025-06-15-at-18.41.17.png"
 categories:
   - "Java"
   - "Machine Learning"

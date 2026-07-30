@@ -6,7 +6,7 @@ lastmod: "2026-05-13T10:22:04+00:00"
 description: "The final version of Eclipse GlassFish 8 is here, released on 5 February 2026. As a GlassFish committer, I'd like to share what it brings for the Java - by Ondro Mihalyi"
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2026/02/glassfish-8-smaller.jpeg"
+image: "/images/posts/2026/02/glassfish-8-is-here-with-jakarta-ee-11-virtual-threads-and-jakarta-data/glassfish-8-smaller.jpeg"
 categories:
   - "Jakarta EE"
   - "Payara"

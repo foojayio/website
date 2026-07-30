@@ -6,7 +6,7 @@ lastmod: "2024-01-27T11:18:35+00:00"
 description: "Very useful insights, and the small bite-sized sections made it an enjoyable, educative read."
 authors:
   - "simon-verhoeven"
-image: "https://foojay.io/wp-content/uploads/2024/01/tidyfirst.jpeg"
+image: "/images/posts/2024/01/book-review-tidy-first/tidyfirst.jpeg"
 categories:
   - "Book Review"
 tags:

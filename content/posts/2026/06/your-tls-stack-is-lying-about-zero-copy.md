@@ -7,7 +7,7 @@ description: "In a zero-allocation runtime, SSLEngine becomes a structural misma
 canonical: "https://blog.arkstack.dev/en/blog/your-tls-stack-is-lying-about-zero-copy"
 authors:
   - "arkadiusz-przychocki"
-image: "https://foojay.io/wp-content/uploads/2026/06/featured_cover1.png"
+image: "/images/posts/2026/06/your-tls-stack-is-lying-about-zero-copy/featured_cover1.png"
 categories:
   - "Java"
   - "Java Core"

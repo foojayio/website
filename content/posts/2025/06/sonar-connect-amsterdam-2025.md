@@ -6,7 +6,7 @@ lastmod: "2025-06-16T15:51:57+00:00"
 description: "Sonar Connect Amsterdam : learn about code quality and code security specially when using AI generated code."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2025/06/Screenshot-2025-06-16-at-17.46.22.png"
+image: "/images/posts/2025/06/sonar-connect-amsterdam-2025/Screenshot-2025-06-16-at-17.46.22.png"
 categories:
   - "Developer Tools"
   - "Events"

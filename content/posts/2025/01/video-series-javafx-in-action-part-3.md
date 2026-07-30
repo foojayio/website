@@ -8,7 +8,7 @@ authors:
   - "frankdelporte"
   - "jago-de-vreede"
   - "steve-hannah"
-image: "https://foojay.io/wp-content/uploads/2024/12/jfxinaction-part-3.png"
+image: "/images/posts/2025/01/video-series-javafx-in-action-part-3/jfxinaction-part-3.png"
 categories:
   - "Interviews"
   - "JavaFX"

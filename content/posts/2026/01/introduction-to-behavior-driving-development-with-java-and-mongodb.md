@@ -6,7 +6,7 @@ lastmod: "2026-01-27T16:35:55+00:00"
 description: "When we face software development, the biggest mistake is about delivering what the client wants. It sounds like a cliché, but after decades, we are still facing this problem. One good way to solve it is to start the test focusing on what the business needs."
 authors:
   - "otavio-santana"
-image: "https://foojay.io/wp-content/uploads/2025/10/546a7b8392ade39f6930ae5605b54327b1d73306_2_690x362.png"
+image: "/images/posts/2026/01/introduction-to-behavior-driving-development-with-java-and-mongodb/546a7b8392ade39f6930ae5605b54327b1d73306_2_690x362.png"
 categories:
   - "Databases"
   - "Java"
@@ -37,7 +37,7 @@ In this tutorial, you'll:
 
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/behavior-driven-development-mongodb):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="55323c2115323c213d20377b363a38">[email&nbsp;protected]</a>:soujava/behavior-driven-development-mongodb.git</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e88f819ca88f819c809d8ac68b8785">[email&nbsp;protected]</a>:soujava/behavior-driven-development-mongodb.git</pre>
 
 Prerequisites {#h2-0-prerequisites}
 -----------------------------------

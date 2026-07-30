@@ -7,7 +7,7 @@ description: "Are you a Jakarta EE developer interested in leveraging the power 
 canonical: "https://blog.payara.fish/build-flexible-jakarta-ee-applications-with-apache-couchdb-nosql-database-watch-the-recording"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2024/02/couchdb.png"
+image: "/images/posts/2024/02/build-flexible-jakarta-ee-applications-with-apache-couchdb-nosql-database/couchdb.png"
 categories:
   - "Jakarta EE"
   - "nosql"

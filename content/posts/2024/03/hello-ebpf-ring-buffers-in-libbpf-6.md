@@ -6,7 +6,7 @@ lastmod: "2024-03-19T17:54:23+00:00"
 description: "This week I'll implement ring buffer support in my eBPF library and explain how ring buffers are used in eBPF."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2024/03/ring_buffer.png"
+image: "/images/posts/2024/03/hello-ebpf-ring-buffers-in-libbpf-6/ring_buffer.png"
 categories:
   - "Tools"
 tags:
@@ -253,8 +253,8 @@ public abstract class RingSample extends BPFProgram {
 
 You can run the example via `./run_bpf.sh RingSample`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">do_sys_openat2 called by:C1 CompilerThre file:/sys/fs/cgroup/user.slice/user-1000.slice/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7702041205374647474759041205011e1412">[email&nbsp;protected]</a>/app.slice/snap.intellij-idea-community.intellij-idea-community-a46a168b-28d0-4bb9-9e15-f3a966353efe.scope/memory.max pid:69817
-do_sys_openat2 called by:C1 CompilerThre file:/sys/fs/cgroup/user.slice/user-1000.slice/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="215452445361101111110f52445357484244">[email&nbsp;protected]</a>/app.slice/snap.intellij-idea-community.intellij-idea-community-a46a168b-28d0-4bb9-9e15-f3a966353efe.scope/memory.max pid:69812
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">do_sys_openat2 called by:C1 CompilerThre file:/sys/fs/cgroup/user.slice/user-1000.slice/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e693958394a6d7d6d6d6c8958394908f8583">[email&nbsp;protected]</a>/app.slice/snap.intellij-idea-community.intellij-idea-community-a46a168b-28d0-4bb9-9e15-f3a966353efe.scope/memory.max pid:69817
+do_sys_openat2 called by:C1 CompilerThre file:/sys/fs/cgroup/user.slice/user-1000.slice/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86f3f5e3f4c6b7b6b6b6a8f5e3f4f0efe5e3">[email&nbsp;protected]</a>/app.slice/snap.intellij-idea-community.intellij-idea-community-a46a168b-28d0-4bb9-9e15-f3a966353efe.scope/memory.max pid:69812
 do_sys_openat2 called by:java file:/home/i560383/.sdkman/candidates/java/21.0.2-sapmchn/lib/libjimage.so pid:69797</pre>
 
 Conclusion {#h2-8-conclusion}

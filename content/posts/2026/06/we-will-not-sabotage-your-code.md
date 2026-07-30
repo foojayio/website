@@ -7,7 +7,7 @@ description: "A maintainer recently hid a destructive prompt-injection payload a
 canonical: "https://www.codenameone.com/blog/we-will-not-sabotage-your-code/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/06/we-will-not-sabotage-your-code.jpg"
+image: "/images/posts/2026/06/we-will-not-sabotage-your-code/we-will-not-sabotage-your-code.jpg"
 categories:
   - "Java"
 tags:

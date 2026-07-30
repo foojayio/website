@@ -7,7 +7,7 @@ description: "Boost Jakarta EE database performance by leveraging the following
 canonical: "https://omnifish.ee/performance-best-practice-no-1-optimize-database-operations/"
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2025/05/pool.png"
+image: "/images/posts/2025/06/performance-best-practise-no-1-optimize-database-operations/pool.png"
 categories:
   - "Databases"
   - "Jakarta EE"

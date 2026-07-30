@@ -6,7 +6,7 @@ lastmod: "2025-07-15T13:44:08+00:00"
 description: "We’re in the middle of a fundamental change in how enterprise software works. In the next decade, your database will become your AI."
 authors:
   - "karin-lauria"
-image: "https://foojay.io/wp-content/uploads/2025/07/feff67d2-great-data-reimagination-1024x576-1.jpg"
+image: "/images/posts/2025/07/the-great-data-reimagination-from-static-to-agile-in-the-ai-era/feff67d2-great-data-reimagination-1024x576-1.jpg"
 categories:
   - "Databases"
   - "Machine Learning"

@@ -6,7 +6,7 @@ lastmod: "2023-09-29T12:23:49+00:00"
 description: "Explore the intriguing world of web crawling in Java through a comparative lens: classical threads vs. virtual threads."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2023/09/83ea75d7-d979-46cc-a848-8cc082f8aba1.jpeg"
+image: "/images/posts/2023/09/web-crawling-in-java-a-tale-of-classical-threads-and-virtual-threads/83ea75d7-d979-46cc-a848-8cc082f8aba1.jpeg"
 categories:
   - "Java Core"
   - "Performance"

@@ -8,7 +8,7 @@ authors:
   - "frankdelporte"
   - "pratik-patel"
   - "zoran-sevarac"
-image: "https://foojay.io/wp-content/uploads/2025/03/20250428_Java_AI.png"
+image: "/images/posts/2025/04/foojay-webinar-live-stream-javas-place-in-the-ai-revolution/20250428_Java_AI.png"
 categories:
   - "LangChain4j"
   - "Machine Learning"

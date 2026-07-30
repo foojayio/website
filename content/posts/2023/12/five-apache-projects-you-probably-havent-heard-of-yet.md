@@ -6,7 +6,7 @@ lastmod: "2023-12-24T19:15:05+00:00"
 description: "In this article, I'd like to introduce some Apache projects that are not so well-known."
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/12/2560px-Apache_Software_Foundation_Logo.svg.png"
+image: "/images/posts/2023/12/five-apache-projects-you-probably-havent-heard-of-yet/2560px-Apache_Software_Foundation_Logo.svg.png"
 categories:
   - "DevOps"
 tags:

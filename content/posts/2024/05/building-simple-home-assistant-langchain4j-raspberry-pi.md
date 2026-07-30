@@ -6,7 +6,7 @@ lastmod: "2024-05-12T05:31:18+00:00"
 description: "Discover how to build a smart home assistant using Langchain4j and Raspberry Pi, featuring capabilities such as question-answering with RAG, integrating external APIs, controlling smart devices, and utilizing camera and multimodal functionalities."
 authors:
   - "jansen-ang"
-image: "https://foojay.io/wp-content/uploads/2024/05/raspberry-pi-smart-assistant-1.png"
+image: "/images/posts/2024/05/building-simple-home-assistant-langchain4j-raspberry-pi/raspberry-pi-smart-assistant-1.png"
 categories:
   - "Java"
   - "Machine Learning"

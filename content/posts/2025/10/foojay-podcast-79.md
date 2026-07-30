@@ -6,7 +6,7 @@ lastmod: "2025-11-13T08:35:17+00:00"
 description: "On September 19th, 2025, the first AI4Devs conference took place in Amsterdam. I grabbed my camera and microphone to talk with speakers and attendees - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/10/thumnail-aidevs-part-1.jpg"
+image: "/images/posts/2025/10/foojay-podcast-79/thumnail-aidevs-part-1.jpg"
 categories:
   - "Conference"
   - "Podcast"

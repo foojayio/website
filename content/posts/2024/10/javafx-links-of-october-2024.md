@@ -7,7 +7,7 @@ description: "Here is the overview of the JavaFX LinksOfTheMonth of October 2024
 canonical: "https://webtechie.be/post/2024-10-28-javafx-links-of-october-2024/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/09/jfxcentral.png"
+image: "/images/posts/2024/10/javafx-links-of-october-2024/jfxcentral.png"
 categories:
   - "JavaFX"
 tags:

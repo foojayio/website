@@ -7,7 +7,7 @@ description: "Recently, I stumbled upon the list of all registered HTTP Headers.
 canonical: "https://blog.frankel.ch/vary-http-header"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/05/web-3876081.jpg"
+image: "/images/posts/2024/05/the-vary-http-header/web-3876081.jpg"
 categories:
   - "Research"
 tags:

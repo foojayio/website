@@ -6,7 +6,7 @@ lastmod: "2025-08-14T12:33:35+00:00"
 description: "This strategic collaboration empowers Kotlin teams to accelerate development cycles and optimize application performance."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2025/05/Azul_systems_logo.png"
+image: "/images/posts/2025/05/azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads/Azul_systems_logo.png"
 categories:
   - "Press"
   - "Release Notes"

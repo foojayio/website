@@ -6,7 +6,7 @@ lastmod: "2024-01-04T16:13:08+00:00"
 description: "Embrace Scrum, make it your own, and watch as your projects transform from to-do lists to done-and-dusted"
 authors:
   - "abo-saad-muaath"
-image: "https://foojay.io/wp-content/uploads/2023/12/scrum.webp"
+image: "/images/posts/2024/01/unlocking-scrum-a-software-engineers-journey-part-1/scrum.webp"
 categories:
   - "Agile"
   - "DevOps"

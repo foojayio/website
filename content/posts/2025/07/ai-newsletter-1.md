@@ -6,7 +6,7 @@ lastmod: "2025-10-14T05:36:45+00:00"
 description: "After brainstorming, our Java Champion Education group agreed to create a newsletter with a 14 days cadence."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2025/07/ai-insider.png"
+image: "/images/posts/2025/07/ai-newsletter-1/ai-insider.png"
 categories:
   - "AI"
   - "Design Patterns"

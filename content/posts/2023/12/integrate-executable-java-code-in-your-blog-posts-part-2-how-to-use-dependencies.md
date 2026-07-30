@@ -6,7 +6,7 @@ lastmod: "2023-12-15T10:12:29+00:00"
 description: "Not only \"simple\" Java code can be added: a more complex class with a record and Maven dependencies can be created and executed on Foojay."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/12/defdeps.png"
+image: "/images/posts/2023/12/integrate-executable-java-code-in-your-blog-posts-part-2-how-to-use-dependencies/defdeps.png"
 categories:
   - "Foojay"
   - "Tutorials"

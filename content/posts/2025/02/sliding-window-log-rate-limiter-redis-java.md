@@ -7,7 +7,7 @@ description: "Build a sliding window log rate limiter with Redis and Java. Track
 canonical: "https://raphaeldelio.com/2025/01/22/sliding-window-log-rate-limiter-redis-java/"
 authors:
   - "raphael-delio"
-image: "https://foojay.io/wp-content/uploads/2025/01/Redis_Video_RateLimiterImplementations_Part4_YoutubeThumbnail.png"
+image: "/images/posts/2025/02/sliding-window-log-rate-limiter-redis-java/Redis_Video_RateLimiterImplementations_Part4_YoutubeThumbnail.png"
 categories:
   - "Java"
   - "Java Beginner"

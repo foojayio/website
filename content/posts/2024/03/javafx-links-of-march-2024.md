@@ -7,7 +7,7 @@ description: "Here is the overview of the JavaFX LinksOfTheMonth of March 2024, 
 canonical: "https://webtechie.be/post/2024-03-29-javafx-links-of-march-2024/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/09/jfxcentral.png"
+image: "/images/posts/2024/03/javafx-links-of-march-2024/jfxcentral.png"
 categories:
   - "JavaFX"
 tags:

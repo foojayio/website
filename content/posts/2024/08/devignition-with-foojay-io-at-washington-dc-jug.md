@@ -8,7 +8,7 @@ authors:
   - "cullen-gray"
   - "geertjan-wielenga"
   - "kadi-grigg"
-image: "https://foojay.io/wp-content/uploads/2024/08/devignition.png"
+image: "/images/posts/2024/08/devignition-with-foojay-io-at-washington-dc-jug/devignition.png"
 categories:
   - "Events"
 tags:

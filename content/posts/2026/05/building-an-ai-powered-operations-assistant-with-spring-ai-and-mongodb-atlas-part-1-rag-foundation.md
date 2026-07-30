@@ -6,7 +6,7 @@ lastmod: "2026-05-07T19:22:13+00:00"
 description: "This is the first article in a three-part series. Part 2 covers short-term and long-term memory; Part 3 introduces stateful workflow checkpointing with pause/resume."
 authors:
   - "matteo-rossi"
-image: "https://foojay.io/wp-content/uploads/2026/05/Screenshot-2026-05-01-at-2.28.13-PM.png"
+image: "/images/posts/2026/05/building-an-ai-powered-operations-assistant-with-spring-ai-and-mongodb-atlas-part-1-rag-foundation/Screenshot-2026-05-01-at-2.28.13-PM.png"
 categories:
   - "AI"
   - "Databases"

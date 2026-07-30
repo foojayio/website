@@ -6,7 +6,7 @@ lastmod: "2024-02-06T11:44:28+00:00"
 description: "Simplify your migration process to Spring Boot 3.2 with the help of OpenRewrite."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2023/09/OpenRewrite.gif"
+image: "/images/posts/2024/02/openrewrite-migrate-to-spring-boot-3-2/OpenRewrite.gif"
 categories:
   - "Jakarta EE"
   - "Java"

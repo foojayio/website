@@ -6,7 +6,7 @@ lastmod: "2023-10-02T08:44:29+00:00"
 description: "Between 2nd and 17th September, I gave three talks in three different cities!"
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/09/image-14.png"
+image: "/images/posts/2023/10/report-of-my-trip-to-javazone-and-northern-germany/image-14.png"
 categories:
   - "Events"
 tags:

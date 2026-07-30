@@ -7,7 +7,7 @@ description: "It’s not enough for your application or queries to just “work.
 canonical: "https://medium.com/@MongoDB/why-mirroring-production-in-dev-helps-you-avoid-costly-mistakes-7e2c4595c2a1"
 authors:
   - "ricardo-mello"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/07/why-mirroring-production-in-dev-helps-you-avoid-costly-mistakes/mongologo.png"
 categories:
   - "Databases"
   - "DevOps"

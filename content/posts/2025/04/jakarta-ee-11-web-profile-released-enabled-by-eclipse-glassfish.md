@@ -6,7 +6,7 @@ lastmod: "2026-03-23T15:13:53+00:00"
 description: "A cleaner, more modern baseline to the Jakarta EE platform, with strong alignment to recent Java versions, improved modularity, and the removal of legacy specifications."
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2025/04/jakarta-ee-11-web-1.png"
+image: "/images/posts/2025/04/jakarta-ee-11-web-profile-released-enabled-by-eclipse-glassfish/jakarta-ee-11-web-1.png"
 categories:
   - "Cloud"
   - "Jakarta EE"

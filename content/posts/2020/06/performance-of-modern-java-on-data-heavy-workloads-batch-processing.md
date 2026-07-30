@@ -6,7 +6,7 @@ lastmod: "2021-03-25T17:52:24+00:00"
 description: "Let's consider the experimental low-latency collectors in this round, since their very short GC pauses have no effect on the test result."
 authors:
   - "marko-topolnik"
-image: "https://foojay.io/wp-content/uploads/2021/03/2020-06-01-batch-mutable-664x510.png"
+image: "/images/posts/2020/06/performance-of-modern-java-on-data-heavy-workloads-batch-processing/2020-06-01-batch-mutable-664x510.png"
 categories:
   - "Performance"
 tags:

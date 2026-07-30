@@ -5,7 +5,7 @@ date: "2026-03-04T06:52:00+00:00"
 description: "In my \"Java on Single Board Computers\" series, I already published several posts and videos in which I unpack the board, connect it for the first time, - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/02/sbc-java-benchmarks.jpg"
+image: "/images/posts/2026/03/java-benchmarks-on-single-board-computers/sbc-java-benchmarks.jpg"
 categories:
   - "Embedded"
   - "Java"

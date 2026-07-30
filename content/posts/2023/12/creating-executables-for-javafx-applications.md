@@ -6,7 +6,7 @@ lastmod: "2023-12-08T13:46:52+00:00"
 description: "Let's take a look in this article at the current state of what can be done with jpackage and GitHub Actions for JavaFX."
 authors:
   - "heshan-thenura-kariyawasam"
-image: "https://foojay.io/wp-content/uploads/2023/11/JavaPackageDemo.png"
+image: "/images/posts/2023/12/creating-executables-for-javafx-applications/JavaPackageDemo.png"
 categories:
   - "Desktop"
   - "DevOps"

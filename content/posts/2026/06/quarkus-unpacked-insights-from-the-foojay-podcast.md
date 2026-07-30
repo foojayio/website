@@ -6,7 +6,7 @@ lastmod: "2026-06-24T07:15:41+00:00"
 description: "I recently had the pleasure of joining the Foojay podcast to talk about Quarkus in depth. The conversation covered a lot of ground, from what makes - by Michal Maléř"
 authors:
   - "michal-maler"
-image: "https://foojay.io/wp-content/uploads/2026/06/3-Quarkus-Unpacked-2-2.jpeg"
+image: "/images/posts/2026/06/quarkus-unpacked-insights-from-the-foojay-podcast/3-Quarkus-Unpacked-2-2.jpeg"
 categories:
   - "Cloud"
   - "Developer Tools"

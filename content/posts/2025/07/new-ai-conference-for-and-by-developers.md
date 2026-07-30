@@ -7,7 +7,7 @@ description: "AI4DEVS, September 19 in Amsterdam, is created for and by develop
 authors:
   - "geertjan-wielenga"
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2025/07/ai4devs.png"
+image: "/images/posts/2025/07/new-ai-conference-for-and-by-developers/ai4devs.png"
 categories:
   - "Events"
 tags:

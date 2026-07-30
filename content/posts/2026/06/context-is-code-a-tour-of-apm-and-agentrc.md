@@ -6,7 +6,7 @@ lastmod: "2026-06-05T10:00:58+00:00"
 description: "Why agent context needs a package manager, what APM gives you, and how AgentRC closes the loop on generation and evals."
 authors:
   - "soham-dasgupta"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2026/06/context-is-code-a-tour-of-apm-and-agentrc/Favicon-3-2.png"
 categories:
   - "Developer Tools"
   - "GenAI"

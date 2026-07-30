@@ -6,7 +6,7 @@ description: "What if the future of Java depends on who we invite to learn it to
 authors:
   - "frankdelporte"
   - "igor-de-souza"
-image: "https://foojay.io/wp-content/uploads/2025/12/episode-85-next-generations.jpg"
+image: "/images/posts/2025/12/foojay-podcast-85/episode-85-next-generations.jpg"
 categories:
   - "Conference"
   - "Java Beginner"

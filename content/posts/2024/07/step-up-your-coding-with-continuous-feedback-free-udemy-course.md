@@ -6,7 +6,7 @@ lastmod: "2024-07-10T10:13:17+00:00"
 description: "What do you know about the code changes that were just introduced into the codebase? When will you notice if something goes wrong? - by Roni Dover"
 authors:
   - "roni-dover"
-image: "https://foojay.io/wp-content/uploads/2023/10/Digma-white-260.png"
+image: "/images/posts/2024/07/step-up-your-coding-with-continuous-feedback-free-udemy-course/Digma-white-260.png"
 categories:
   - "Tutorials"
 tags:

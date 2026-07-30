@@ -6,7 +6,7 @@ lastmod: "2025-11-13T08:53:00+00:00"
 description: "We did interviews with speakers and guests at J-Fall in the Netherlands. In this part, we touch on topics related to the developers' lives."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/07/foojay_podcast.png"
+image: "/images/posts/2023/11/foojay-podcast-34/foojay_podcast.png"
 categories:
   - "Conference"
   - "Podcast"

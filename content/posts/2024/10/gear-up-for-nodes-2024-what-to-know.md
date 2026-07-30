@@ -6,7 +6,7 @@ lastmod: "2024-10-03T17:02:26+00:00"
 description: "NODES is a free, virtual conference run by Neo4j for developers, data scientists, and other technical roles who want to learn more about graph databases and how they can be used to solve complex problems."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2024/09/unsplash-nodes2024-gearup-scaled.jpg"
+image: "/images/posts/2024/10/gear-up-for-nodes-2024-what-to-know/unsplash-nodes2024-gearup-scaled.jpg"
 categories:
   - "Conference"
   - "Events"

@@ -6,7 +6,7 @@ description: "As we begin 2026, we’re pleased to announce new releases across 
 authors:
   - "dominika-tasarz"
   - "luqman-saeed"
-image: "https://foojay.io/wp-content/uploads/2026/01/Payara-New-Release-Image-Square.png"
+image: "/images/posts/2026/01/whats-new-in-the-january-2026-payara-platform-release/Payara-New-Release-Image-Square.png"
 categories:
   - "Jakarta EE"
   - "Java"

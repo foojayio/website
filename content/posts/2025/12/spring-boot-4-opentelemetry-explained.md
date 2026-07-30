@@ -6,7 +6,7 @@ lastmod: "2025-12-10T10:24:14+00:00"
 description: "A complete Spring Boot 4 OpenTelemetry guide covering metrics, traces, and logs. Understand native observability features, OTLP support, and how to monitor microservices with detailed tracing and instrumentation."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2025/12/OpenTelemetrySpringBoot4-1.jpg"
+image: "/images/posts/2025/12/spring-boot-4-opentelemetry-explained/OpenTelemetrySpringBoot4-1.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Java"

@@ -6,7 +6,7 @@ lastmod: "2024-01-24T20:05:54+00:00"
 description: "If flexibility and resilience are priorities, embracing the distributed future of software development is worth considering."
 authors:
   - "jasmine-taylor"
-image: "https://foojay.io/wp-content/uploads/2024/01/Screenshot-2024-01-19-at-17.18.11.png"
+image: "/images/posts/2024/01/microservices-architecture-navigating-the-buzz/Screenshot-2024-01-19-at-17.18.11.png"
 categories:
   - "Chronicle Software"
   - "Microservices"

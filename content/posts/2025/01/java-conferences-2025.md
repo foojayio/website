@@ -6,7 +6,7 @@ lastmod: "2025-07-16T10:03:37+00:00"
 description: "Also see javaconferences.org, a subset of which is below. January 15: Voxxed Days CERN, Switzerland 17: Voxxed Days Ticino, Switzerland 23, 24, 27, 28: - by Geertjan Wielenga"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/01/java-conferences-2025/Favicon-3-2.png"
 categories:
   - "Events"
 tags:

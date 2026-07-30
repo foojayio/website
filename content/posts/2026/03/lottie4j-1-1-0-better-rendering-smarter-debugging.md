@@ -6,7 +6,7 @@ description: "Just one week after the first public release of Lottie4J, the open
 canonical: "https://webtechie.be/post/2026-03-10-new-release-of-lottie4j/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/03/lottie4j-v1.1.0-scaled.jpg"
+image: "/images/posts/2026/03/lottie4j-1-1-0-better-rendering-smarter-debugging/lottie4j-v1.1.0-scaled.jpg"
 categories:
   - "JavaFX"
 tags:

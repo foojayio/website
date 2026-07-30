@@ -6,7 +6,7 @@ lastmod: "2026-01-15T13:44:23+00:00"
 description: "If you are like me, get the adrenaline rush of getting up on stage and can’t wait to share things that you experienced and learned, then submitting talks - by Soham Dasgupta"
 authors:
   - "soham-dasgupta"
-image: "https://foojay.io/wp-content/uploads/2026/01/why.png"
+image: "/images/posts/2026/01/why-is-my-talk-selected-reflections-from-a-program-committee-reviewer/why.png"
 categories:
   - "Conference"
   - "Events"

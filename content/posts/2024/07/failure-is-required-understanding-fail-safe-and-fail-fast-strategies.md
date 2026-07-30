@@ -7,7 +7,7 @@ description: "Learn how embracing failure can improve your app's quality, leadin
 canonical: "https://debugagent.com/failure-is-required-understanding-fail-safe-and-fail-fast-strategies"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/05/DALL·E-2024-04-30-05.33.16-A-visually-engaging-header-image-for-a-blog-post-titled-Failure-is-Required-Understanding-Fail-Safe-and-Fail-Fast-Strategies.-The-image-features-a-.jpeg"
+image: "/images/posts/2024/07/failure-is-required-understanding-fail-safe-and-fail-fast-strategies/DALL-E-2024-04-30-05.33.16-A-visually-engaging-header-image-for-a-blog-post-titled-Failure-is-Required-Understanding-Fail-Safe-and-Fail-Fast-Strategies.-The-image-features-a-.jpeg"
 categories:
   - "Debugging"
   - "Tutorials"

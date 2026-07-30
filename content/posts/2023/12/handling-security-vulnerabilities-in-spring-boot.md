@@ -7,7 +7,7 @@ description: "Keeping your dependencies in check is crucial to ensure that your 
 canonical: "https://snyk.io/blog/security-vulnerabilities-spring-boot/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/11/snyk-logo.png"
+image: "/images/posts/2023/12/handling-security-vulnerabilities-in-spring-boot/snyk-logo.png"
 categories:
   - "Security"
   - "Snyk"

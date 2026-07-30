@@ -6,7 +6,7 @@ lastmod: "2026-04-13T15:50:35+00:00"
 description: "Full-text search powers all of our digital lives — googling for this and that; asking Siri where to find a tasty, nearby dinner; shopping at Amazon; and so on. We receive relevant results, often even in spite of our typos, voice transcription mistakes, or vaguely formed queries. We have grown accustomed to expecting the best results for our searching intentions, right there, at the top."
 authors:
   - "erik-hatcher"
-image: "https://foojay.io/wp-content/uploads/2026/02/Screenshot-2026-02-27-at-12.56.01-PM.png"
+image: "/images/posts/2026/03/mongodb-search-score-breakdown/Screenshot-2026-02-27-at-12.56.01-PM.png"
 categories:
   - "Databases"
   - "Java"

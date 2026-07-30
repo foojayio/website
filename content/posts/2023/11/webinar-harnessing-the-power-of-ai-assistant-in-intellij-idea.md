@@ -6,7 +6,7 @@ lastmod: "2023-11-28T16:40:18+00:00"
 description: "In this session, Anton Arhipov will demonstrate the capabilities of AI Assistant in IntelliJ IDEA. You will learn how the tool helps you explore and improve existing code as well as write new code in different scenarios."
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2023/11/IntelliJ_IDEA_AI_Assistant_Webinar.jpeg"
+image: "/images/posts/2023/11/webinar-harnessing-the-power-of-ai-assistant-in-intellij-idea/IntelliJ_IDEA_AI_Assistant_Webinar.jpeg"
 categories:
   - "Developer Tools"
   - "Machine Learning"

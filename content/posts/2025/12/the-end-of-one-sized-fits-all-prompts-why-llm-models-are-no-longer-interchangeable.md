@@ -7,7 +7,7 @@ description: "The days of brittle, monolithic prompts and plug-and-play model sw
 canonical: "https://www.coderabbit.ai/blog/the-end-of-one-sized-fits-all-prompts-why-llm-models-are-no-longer-interchangeable"
 authors:
   - "nehal-gajraj"
-image: "https://foojay.io/wp-content/uploads/2025/12/366d55fa-75e8-401a-842e-f8b4d407b7a2.webp"
+image: "/images/posts/2025/12/the-end-of-one-sized-fits-all-prompts-why-llm-models-are-no-longer-interchangeable/366d55fa-75e8-401a-842e-f8b4d407b7a2.webp"
 categories:
   - "AI"
   - "CodeRabbit"

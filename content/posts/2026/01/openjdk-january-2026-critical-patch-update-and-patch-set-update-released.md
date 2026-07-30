@@ -5,7 +5,7 @@ date: "2026-01-21T08:32:01+00:00"
 description: "The January 2026 OpenJDK quarterly updates are now (or will soon be) available from various OpenJDK distributors. This quarterly release brings important - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/01/openjdk_january_2026.png"
+image: "/images/posts/2026/01/openjdk-january-2026-critical-patch-update-and-patch-set-update-released/openjdk_january_2026.png"
 categories:
   - "CRaC"
   - "Java"

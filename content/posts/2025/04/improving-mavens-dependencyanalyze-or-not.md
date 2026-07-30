@@ -7,7 +7,7 @@ description: "Recently, my good friend Richard Fichtner advised using the mvn de
 canonical: "https://blog.frankel.ch/maven-dependency-analyze/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/03/cover.jpg"
+image: "/images/posts/2025/04/improving-mavens-dependencyanalyze-or-not/cover.jpg"
 categories:
   - "Maven"
   - "Spring"

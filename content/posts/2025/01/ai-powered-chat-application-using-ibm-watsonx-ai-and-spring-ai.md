@@ -6,7 +6,7 @@ lastmod: "2025-01-03T08:39:32+00:00"
 description: "Discover on how quickly to integrate the IBM watsonx.ai platform in your Java application using Spring AI by creating a chat application"
 authors:
   - "tristan-mahinay"
-image: "https://foojay.io/wp-content/uploads/2024/12/generative-ai-in-enterprise-systems-1024x589.png"
+image: "/images/posts/2025/01/ai-powered-chat-application-using-ibm-watsonx-ai-and-spring-ai/generative-ai-in-enterprise-systems-1024x589.png"
 categories:
   - "Java"
   - "JDK21"

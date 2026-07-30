@@ -6,7 +6,7 @@ lastmod: "2025-09-04T05:31:24+00:00"
 description: "In this post, we’ll walk through how to use `$group` to categorize recipes by type and explore grouping by tags to uncover popular recipe categories."
 authors:
   - "justin-jenkins"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/09/mongodb-aggregations-organizing-recipes-by-meal-type-with-group/mongologo.png"
 categories:
   - "Databases"
   - "Mongo"

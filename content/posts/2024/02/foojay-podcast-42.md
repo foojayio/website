@@ -6,7 +6,7 @@ lastmod: "2025-11-13T08:44:57+00:00"
 description: "Today, we are traveling to Cape Town and Johannesburg to learn more about its Java communities!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/02/podcast-guests-south-africa-jugs.png"
+image: "/images/posts/2024/02/foojay-podcast-42/podcast-guests-south-africa-jugs.png"
 categories:
   - "JUGs"
   - "Podcast"

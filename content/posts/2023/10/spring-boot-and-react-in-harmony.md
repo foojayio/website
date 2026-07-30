@@ -7,7 +7,7 @@ description: "Navigating the complexities of full-stack development in Spring Bo
 canonical: "https://dzone.com/articles/spring-boot-react-harmony-with-hilla"
 authors:
   - "tarek-oraby"
-image: "https://foojay.io/wp-content/uploads/2023/10/hilla-logo.png"
+image: "/images/posts/2023/10/spring-boot-and-react-in-harmony/hilla-logo.png"
 categories:
   - "Hilla"
   - "Spring"

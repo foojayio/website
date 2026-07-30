@@ -7,7 +7,7 @@ description: "This is the first Foojay podcast in Spanish. It's also the shortes
 authors:
   - "frankdelporte"
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2025/07/episode-77-decbcn-part-2.jpg"
+image: "/images/posts/2025/07/foojay-podcast-77/episode-77-decbcn-part-2.jpg"
 categories:
   - "Conference"
   - "Podcast"

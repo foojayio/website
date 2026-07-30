@@ -7,7 +7,7 @@ description: "TL;DR : 5 years after its introduction Kotlin adoption inside ING
 canonical: "https://medium.com/ing-blog/kotlin-adoption-inside-ing-5-years-later-df6421b14dc4"
 authors:
   - "jlengrand"
-image: "https://foojay.io/wp-content/uploads/2022/06/chemical-scientist-test-chemistry-chemist-student.jpg"
+image: "/images/posts/2025/07/ing-kotlin-adoption-five-years/chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Java"
   - "Kotlin"

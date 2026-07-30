@@ -6,7 +6,7 @@ lastmod: "2025-11-10T16:14:27+00:00"
 description: "Sonar Connect Zurich: Maximize the ROI of your generative AI projects Where? AWS Offices Event Space - Marsstrasse 2, 8002 Zurich, Switzerland When? - by Jonathan Vila"
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2025/11/1761763663675.jpeg"
+image: "/images/posts/2025/11/sonar-connect-zurich/1761763663675.jpeg"
 categories:
   - "Events"
 tags:

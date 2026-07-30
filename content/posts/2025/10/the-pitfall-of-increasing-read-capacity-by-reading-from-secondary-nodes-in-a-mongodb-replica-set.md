@@ -7,7 +7,7 @@ description: "Imagine we are responsible for managing the MongoDB cluster that s
 canonical: "https://delbridge.solutions/read-capacity-mongodb-replica-set/"
 authors:
   - "artur-costa"
-image: "https://foojay.io/wp-content/uploads/2025/10/Screenshot-2025-10-29-at-11.47.54-AM.png"
+image: "/images/posts/2025/10/the-pitfall-of-increasing-read-capacity-by-reading-from-secondary-nodes-in-a-mongodb-replica-set/Screenshot-2025-10-29-at-11.47.54-AM.png"
 categories:
   - "Databases"
   - "Mongo"

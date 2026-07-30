@@ -6,7 +6,7 @@ lastmod: "2026-04-15T06:12:54+00:00"
 description: "Every Monday at 10 AM Eastern, @javaevolved now tweets a modern Java pattern — automatically. No manual steps, no third-party services, no cron servers. - by Bruno Borges"
 authors:
   - "bruno-borges"
-image: "https://foojay.io/wp-content/uploads/2026/04/social-post-banner.png"
+image: "/images/posts/2026/04/how-i-automated-weekly-twitter-x-posts-with-java-jbang-and-github-actions/social-post-banner.png"
 categories:
   - "Foojay"
   - "Java"

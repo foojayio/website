@@ -7,7 +7,7 @@ description: "While the ecosystem has room for improvement, it's already possibl
 canonical: "https://blog.frankel.ch/wasm-docker/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/06/wasm-ferris.png"
+image: "/images/posts/2024/01/playing-with-wasm-on-docker/wasm-ferris.png"
 categories:
   - "DevOps"
 tags:

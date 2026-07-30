@@ -6,7 +6,7 @@ lastmod: "2026-05-05T15:23:49+00:00"
 description: "BoxLang AI 3.0 Series · Part 5 of 7 Vendor lock-in is the silent killer of AI projects. You pick OpenAI, build everything against the OpenAI API, and then - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/04/Captura-de-pantalla-2026-04-29-125804.png"
+image: "/images/posts/2026/04/boxlang-ai-deep-dive-part-5-of-7-one-api-17-providers-the-provider-architecture-deep-dive/Captura-de-pantalla-2026-04-29-125804.png"
 categories:
   - "AI"
   - "Developer Tools"
@@ -434,7 +434,7 @@ Get Started {#h2-16-get-started}
 --------------------------------
 
 <pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Install via CommandBox
-install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b3d1cb9ed2daf3809d839d83">[email&nbsp;protected]</a>
+install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1e7c66337f775e2d302e302e">[email&nbsp;protected]</a>
 
 # Or for OS/CLI applications
 install-bx-module bx-ai

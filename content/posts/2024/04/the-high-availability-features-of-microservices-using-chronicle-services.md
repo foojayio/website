@@ -6,7 +6,7 @@ lastmod: "2024-04-25T13:37:04+00:00"
 description: "Learn how Chronicle Services, a Java-based framework optimised for low-latency microservices, meets critical requirements by integrating HA, performance, and data persistence."
 authors:
   - "rob-austin"
-image: "https://foojay.io/wp-content/uploads/2024/04/Screenshot-2024-04-16-at-17.51.31-1024x588-1.png"
+image: "/images/posts/2024/04/the-high-availability-features-of-microservices-using-chronicle-services/Screenshot-2024-04-16-at-17.51.31-1024x588-1.png"
 categories:
   - "Chronicle Software"
   - "Java"

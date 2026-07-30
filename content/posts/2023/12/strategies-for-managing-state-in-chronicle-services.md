@@ -6,7 +6,7 @@ lastmod: "2024-01-09T12:57:55+00:00"
 description: "When implementing an application using a Microservice architecture, it is crucially important to be aware of the potential pitfalls of managing mutable state in components."
 authors:
   - "george-ball"
-image: "https://foojay.io/wp-content/uploads/2023/11/Screenshot-2023-11-22-at-2.19.12-PM-1024x469-1.png"
+image: "/images/posts/2023/12/strategies-for-managing-state-in-chronicle-services/Screenshot-2023-11-22-at-2.19.12-PM-1024x469-1.png"
 categories:
   - "Chronicle Software"
   - "Cloud"

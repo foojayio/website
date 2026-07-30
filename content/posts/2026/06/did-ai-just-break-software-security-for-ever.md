@@ -6,7 +6,7 @@ lastmod: "2026-06-17T08:34:09+00:00"
 description: "AI finds exploits in hours. Patch cycles run 30–60 days. EOL software gets neither. Here's what changed in 2026 and what to do about it."
 authors:
   - "steve-poole"
-image: "https://foojay.io/wp-content/uploads/2026/06/Gemini_Generated_Image_oayu0aoayu0aoayu-1024x541.png"
+image: "/images/posts/2026/06/did-ai-just-break-software-security-for-ever/Gemini_Generated_Image_oayu0aoayu0aoayu-1024x541.png"
 categories:
   - "Java"
   - "Security"

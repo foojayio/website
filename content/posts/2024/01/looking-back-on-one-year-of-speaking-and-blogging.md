@@ -6,7 +6,7 @@ lastmod: "2024-01-05T17:49:05+00:00"
 description: "2023 was an adventurous year for me: I came into my blogging rhythm, blogging every one to two weeks, resulting in 39 articles, many of them on Foojay.io."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/12/image-15-2000x1333-1.png"
+image: "/images/posts/2024/01/looking-back-on-one-year-of-speaking-and-blogging/image-15-2000x1333-1.png"
 categories:
   - "Trip Reports"
 tags:

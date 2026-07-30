@@ -6,7 +6,7 @@ lastmod: "2025-05-16T11:50:17+00:00"
 description: "Create a Spring app that can stream in financial transactions from Apache Kafka, and upon insertion into the database, can use Atlas Vector Search to indicate whether they appear to be fraudulent."
 authors:
   - "tim-kelly"
-image: "https://foojay.io/wp-content/uploads/2025/05/embeddingmodelmongo.png"
+image: "/images/posts/2025/05/building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb/embeddingmodelmongo.png"
 categories:
   - "Databases"
   - "Mongo"

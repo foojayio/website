@@ -6,7 +6,7 @@ description: "New iOS Modern (liquid glass) and Android Material 3 native themes
 canonical: "https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/05/liquid-glass-material-3-modern-native-themes-2.jpg"
+image: "/images/posts/2026/05/liquid-glass-material-3-and-a-lot-of-plumbing/liquid-glass-material-3-modern-native-themes-2.jpg"
 categories:
   - "Java"
 tags:
@@ -59,7 +59,7 @@ raised.setUIID("RaisedButton");
 row.add(raised);
 form.add(row);
 
-TextField tf = new TextField("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d4bcb1b8b8bb94b1acb5b9a4b8b1fab7bbb9">[email&nbsp;protected]</a>");
+TextField tf = new TextField("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="29414c454546694c51484459454c074a4644">[email&nbsp;protected]</a>");
 form.add(tf);
 
 Container toggles = new Container(BoxLayout.x());

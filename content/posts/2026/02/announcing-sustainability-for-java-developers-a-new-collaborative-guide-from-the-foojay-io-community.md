@@ -12,7 +12,7 @@ authors:
   - "markus-westergren"
   - "mthmulders"
   - "simon-martinelli"
-image: "https://foojay.io/wp-content/uploads/2026/02/sustainabilitybook-1.png"
+image: "/images/posts/2026/02/announcing-sustainability-for-java-developers-a-new-collaborative-guide-from-the-foojay-io-community/sustainabilitybook-1.png"
 categories:
   - "Book Announcement"
   - "Books"

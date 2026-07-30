@@ -7,7 +7,7 @@ description: "Learn about the model objects available in Home Assistant. After t
 canonical: "https://blog.frankel.ch/home-assistant/2/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/12/cover-model_large.jpeg"
+image: "/images/posts/2024/12/the-home-assistant-model/cover-model_large.jpeg"
 categories:
   - "Developer Tools"
   - "Research"

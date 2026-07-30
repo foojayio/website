@@ -6,7 +6,7 @@ description: "In this Foojay Podcast, we're celebrating a major milestone in Jav
 authors:
   - "frankdelporte"
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2026/03/episode-91-intellij-idea-25-years.jpg"
+image: "/images/posts/2026/03/foojay-podcast-91/episode-91-intellij-idea-25-years.jpg"
 categories:
   - "Developer Tools"
   - "IntelliJ IDEA"

@@ -7,7 +7,7 @@ description: "Loki, a storage engine, provides a RESTful API to store and read l
 canonical: "https://blog.frankel.ch/logs-loki/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/08/viking-5996459.jpg"
+image: "/images/posts/2023/10/send-your-logs-to-loki/viking-5996459.jpg"
 categories:
   - "DevOps"
 tags:

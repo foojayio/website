@@ -7,7 +7,7 @@ description: "Last year, I wrote a post on Open Telemetry Tracing to understand 
 canonical: "https://blog.frankel.ch/improve-otel-demo/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/01/blacksmith-2740128.jpg"
+image: "/images/posts/2024/04/improving-upon-my-opentelemetry-tracing-demo/blacksmith-2740128.jpg"
 categories:
   - "DevOps"
 tags:

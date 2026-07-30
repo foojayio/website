@@ -6,7 +6,7 @@ description: "As part of my 2026 learning goals around Java on RISC-V (see this 
 canonical: "https://webtechie.be/post/first-test-of-java-on-banana-pi-arm-and-risc-v-plus-a-blinking-led-with-pi4j/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/07/thumb-bananapi.png"
+image: "/images/posts/2026/07/first-test-of-java-on-banana-pi-arm-and-risc-v-plus-a-blinking-led-with-pi4j/thumb-bananapi.png"
 categories:
   - "Embedded"
   - "Java"

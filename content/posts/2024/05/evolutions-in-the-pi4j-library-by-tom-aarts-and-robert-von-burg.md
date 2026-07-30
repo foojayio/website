@@ -6,7 +6,7 @@ lastmod: "2024-09-12T15:24:56+00:00"
 description: "Multiple improvements have been implemented in the new release, V2.6.0 (2024-04-29) of Pi4J, a friendly object-oriented I/O API and implementation - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/03/pi4j.png"
+image: "/images/posts/2024/05/evolutions-in-the-pi4j-library-by-tom-aarts-and-robert-von-burg/pi4j.png"
 categories:
   - "Embedded"
   - "Interviews"

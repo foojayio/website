@@ -7,7 +7,7 @@ description: "In this Foojay Podcast, we're diving deep into some of the most ex
 authors:
   - "frankdelporte"
   - "john-ceccarelli"
-image: "https://foojay.io/wp-content/uploads/2025/11/episode-82-openjdk-projects.jpg"
+image: "/images/posts/2025/11/foojay-podcast-82/episode-82-openjdk-projects.jpg"
 categories:
   - "Java"
   - "Java Core"

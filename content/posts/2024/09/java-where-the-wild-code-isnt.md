@@ -6,7 +6,7 @@ lastmod: "2024-10-03T16:36:26+00:00"
 description: "The OpenJDK community has made Java safer for users and developers while making it easier to design, build, and run applications quickly."
 authors:
   - "erikcostlow"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2024/09/java-where-the-wild-code-isnt/Favicon-3-2.png"
 categories:
   - "Security"
 tags:

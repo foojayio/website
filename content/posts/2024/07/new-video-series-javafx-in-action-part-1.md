@@ -6,7 +6,7 @@ lastmod: "2024-11-19T08:01:28+00:00"
 description: "With this new series of video interviews, I want to take you behind-the-scenes of some applications built using JavaFX."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/07/jfxinaction-part-1.png"
+image: "/images/posts/2024/07/new-video-series-javafx-in-action-part-1/jfxinaction-part-1.png"
 categories:
   - "DevOps"
   - "Interviews"

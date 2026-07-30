@@ -6,7 +6,7 @@ lastmod: "2026-05-19T12:15:47+00:00"
 description: "BoxLang 1.13.0 is a stability-first release with deep compatibility work and runtime hardening. This build closes 48 issues, with the majority focused on - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/05/Captura-de-pantalla-2026-05-14-123135.png"
+image: "/images/posts/2026/05/boxlang-v1-13-0-compatibility-concurrency-and-formatter-maturity/Captura-de-pantalla-2026-05-14-123135.png"
 categories:
   - "BoxLang"
   - "Developer Tools"

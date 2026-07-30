@@ -7,7 +7,7 @@ description: "Here I describe using the proxy-rewrite plugin with a path variabl
 canonical: "https://blog.frankel.ch/advanced-url-rewrite-apisix/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/07/notebook-1840276.jpg"
+image: "/images/posts/2024/07/advanced-url-rewriting-with-apache-apisix/notebook-1840276.jpg"
 categories:
   - "DevOps"
 tags:

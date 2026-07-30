@@ -7,7 +7,7 @@ description: "How to use Liberty Tools for IntelliJ IDEA to enable rapid, easy, 
 canonical: "https://developer.ibm.com/articles/awb-effective-cloud-native-development-open-liberty-intellij-idea/"
 authors:
   - "grace-jansen"
-image: "https://foojay.io/wp-content/uploads/2024/03/ScreenshotLibertyToolsIntelliJ.png"
+image: "/images/posts/2024/04/effective-cloud-native-java-app-development-with-open-liberty-in-intellij-idea/ScreenshotLibertyToolsIntelliJ.png"
 categories:
   - "Cloud"
   - "Developer Tools"

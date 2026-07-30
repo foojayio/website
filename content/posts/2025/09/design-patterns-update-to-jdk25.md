@@ -6,7 +6,7 @@ lastmod: "2025-09-24T11:30:10+00:00"
 description: "Java 25 represents a notable milestone, empowering developers to leverage enhanced switch statements to effectively address implementation challenges across Creational, Structural, and Behavioral design patterns."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2025/07/116749_image_676x380.webp"
+image: "/images/posts/2025/09/design-patterns-update-to-jdk25/116749_image_676x380.webp"
 categories:
   - "Agile"
   - "Java"

@@ -7,7 +7,7 @@ description: "You can configure Renovate for every package manager you can think
 canonical: "https://blog.frankel.ch/renovate-for-everything/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/06/paint-brush-1034901.jpg"
+image: "/images/posts/2024/06/renovate-for-everything/paint-brush-1034901.jpg"
 categories:
   - "DevOps"
 tags:

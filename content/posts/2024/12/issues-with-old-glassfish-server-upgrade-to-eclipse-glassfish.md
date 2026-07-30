@@ -7,7 +7,7 @@ description: "If you haven’t explored Eclipse GlassFish since it joined the Ec
 canonical: "https://omnifish.ee/2024/12/11/issues-with-old-glassfish/"
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2023/10/GlassFish-embedded-e1698251860666.png"
+image: "/images/posts/2024/12/issues-with-old-glassfish-server-upgrade-to-eclipse-glassfish/GlassFish-embedded-e1698251860666.png"
 categories:
   - "Jakarta EE"
   - "Java"

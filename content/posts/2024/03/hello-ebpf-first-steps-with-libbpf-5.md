@@ -6,7 +6,7 @@ lastmod: "2024-03-07T13:51:36+00:00"
 description: "Learn why using libbcc is not the best idea and start working with the newer libbpf."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2024/03/bcc_vs_bpf-1-2000x1125-1.png"
+image: "/images/posts/2024/03/hello-ebpf-first-steps-with-libbpf-5/bcc_vs_bpf-1-2000x1125-1.png"
 categories:
   - "Tools"
 tags:

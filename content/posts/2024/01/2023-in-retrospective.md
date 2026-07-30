@@ -7,7 +7,7 @@ description: "Last year, I wrote my first yearly retrospective. I liked the expe
 canonical: "https://blog.frankel.ch/2023-retrospective/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/12/apisix.png"
+image: "/images/posts/2024/01/2023-in-retrospective/apisix.png"
 categories:
   - "Uncategorized"
 tags:

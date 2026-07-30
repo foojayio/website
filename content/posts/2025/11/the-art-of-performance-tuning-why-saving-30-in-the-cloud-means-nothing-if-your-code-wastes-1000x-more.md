@@ -5,7 +5,7 @@ date: "2025-11-25T06:46:00+00:00"
 description: "The Hidden Cost of “Good Enough” Code A few weeks ago, Kirk Pepperdine published a fascinating performance challenge — a small Java code snippet that - by Daniel Witkowski"
 authors:
   - "daniel-witkowski"
-image: "https://foojay.io/wp-content/uploads/2025/11/fj_art1_results_5.png"
+image: "/images/posts/2025/11/the-art-of-performance-tuning-why-saving-30-in-the-cloud-means-nothing-if-your-code-wastes-1000x-more/fj_art1_results_5.png"
 categories:
   - "Debugging"
   - "Design Patterns"

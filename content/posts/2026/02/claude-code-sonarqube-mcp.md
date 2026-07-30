@@ -6,7 +6,7 @@ lastmod: "2026-02-13T15:58:22+00:00"
 description: "Stay in the flow with the Claude Code SonarQube MCP integration. Verify Java code, fix security issues, and check quality gates directly from your terminal."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2026/02/Gemini_Generated_Image_3v7k2u3v7k2u3v7k-1024x572.png"
+image: "/images/posts/2026/02/claude-code-sonarqube-mcp/Gemini_Generated_Image_3v7k2u3v7k2u3v7k-1024x572.png"
 categories:
   - "AI"
   - "GenAI"

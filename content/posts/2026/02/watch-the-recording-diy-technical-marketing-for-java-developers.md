@@ -6,7 +6,7 @@ description: "See why personal branding matters for developers and how even smal
 canonical: "https://payara.fish/blog/watch-the-recording-diy-technical-marketing-for-developers/"
 authors:
   - "dominika-tasarz"
-image: "https://foojay.io/wp-content/uploads/2026/02/DYI-tech-Marketing-title-page.jpg"
+image: "/images/posts/2026/02/watch-the-recording-diy-technical-marketing-for-java-developers/DYI-tech-Marketing-title-page.jpg"
 categories:
   - "Conference"
   - "Java"

@@ -5,7 +5,7 @@ date: "2025-12-09T08:23:00+00:00"
 description: "Let's see input and output hidden gems in the Java."
 authors:
   - "anthony-goubard"
-image: "https://foojay.io/wp-content/uploads/2025/06/old-coffee.jpg"
+image: "/images/posts/2025/12/java-whats-old-part-iii-i-o/old-coffee.jpg"
 categories:
   - "Java"
   - "Java Core"

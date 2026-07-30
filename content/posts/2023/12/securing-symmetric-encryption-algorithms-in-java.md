@@ -7,7 +7,7 @@ description: "Encryption is converting readable data or plaintext into unreadabl
 canonical: "https://snyk.io/blog/symmetric-encryption-algorithms-java/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/11/snyk-logo-2.png"
+image: "/images/posts/2023/12/securing-symmetric-encryption-algorithms-in-java/snyk-logo-2.png"
 categories:
   - "Security"
   - "Snyk"

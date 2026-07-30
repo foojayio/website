@@ -6,7 +6,7 @@ lastmod: "2023-11-02T14:03:26+00:00"
 description: "Have you ever wanted to bring your JFR events into context? Adding information on sessions, user IDs, and more can improve your ability to make sense of all the events in your profile."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/11/Screenshot-2023-10-19-at-12.28.35-2000x1509-1.png"
+image: "/images/posts/2023/11/putting-jfr-into-context/Screenshot-2023-10-19-at-12.28.35-2000x1509-1.png"
 categories:
   - "Java Core"
   - "Performance"

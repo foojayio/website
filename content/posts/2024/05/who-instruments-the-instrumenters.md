@@ -7,7 +7,7 @@ description: "Have you ever wondered how libraries like Spring and Mockito modif
 authors:
   - "johannes-bechberger"
   - "mikael-francoeur"
-image: "https://foojay.io/wp-content/uploads/2024/05/johannescode.png"
+image: "/images/posts/2024/05/who-instruments-the-instrumenters/johannescode.png"
 categories:
   - "Developer Tools"
   - "Spring"

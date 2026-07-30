@@ -7,7 +7,7 @@ description: "The goal of JEP 445 is to make it easier to get started with Java,
 canonical: "https://webtechie.be/post/2023-09-18-jep-445-unnamed-classes-and-instance-main-methods/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/09/newer-than-8.jpg"
+image: "/images/posts/2023/10/java-21-jep-445-unnamed-classes-and-instance-main-methods/newer-than-8.jpg"
 categories:
   - "Java"
   - "Java Beginner"

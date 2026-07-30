@@ -6,7 +6,7 @@ lastmod: "2026-01-22T00:11:06+00:00"
 description: "Learn how the Java programming language has new ways to access native libraries that are written in native languages like C, C++, and Fortran."
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2021/08/duke_and_panama.png"
+image: "/images/posts/2026/01/project-panama-for-newbies-part-1/duke_and_panama.png"
 categories:
   - "JEPs"
   - "Project Panama"

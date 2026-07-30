@@ -6,7 +6,7 @@ lastmod: "2023-10-13T08:01:52+00:00"
 description: "Dive into the highlights from Sonatype's 9th edition of the 'State of the Software Supply Chain Report.' Discover insights on open source adoption, software vulnerabilities, and the transformative role of AI in software development."
 authors:
   - "steve-poole"
-image: "https://foojay.io/wp-content/uploads/2023/10/Screenshot-2023-10-11-at-14.36.06-1024x541.png"
+image: "/images/posts/2023/10/evolving-landscape-software-supply-chains-java-developers/Screenshot-2023-10-11-at-14.36.06-1024x541.png"
 categories:
   - "Java"
   - "Press"

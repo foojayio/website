@@ -8,7 +8,7 @@ canonical: "https://www.azul.com/blog/make-java-fleets-warm-up-faster-on-aws/"
 authors:
   - "frankdelporte"
   - "john-ceccarelli"
-image: "https://foojay.io/wp-content/uploads/2023/09/Azul-Prime-Stable-2308.jpg"
+image: "/images/posts/2025/12/make-java-fleets-warm-up-faster-on-aws-with-azul-optimizer-hub/Azul-Prime-Stable-2308.jpg"
 categories:
   - "Cloud"
   - "Performance"

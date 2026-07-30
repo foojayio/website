@@ -7,7 +7,7 @@ description: "We start a series where we compiled 10 best practices for performa
 canonical: "https://omnifish.ee/10-best-practices-for-jakarta-ee-performance-optimization-2/"
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2022/09/omnifish-logo-turquise-bg-400px-e1663869726664.png"
+image: "/images/posts/2025/05/10-best-practises-for-jakarta-ee-performance-optimization/omnifish-logo-turquise-bg-400px-e1663869726664.png"
 categories:
   - "Jakarta EE"
   - "Java"

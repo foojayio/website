@@ -6,7 +6,7 @@ description: "Payara 6 Community has reached its final release, and the platform
 canonical: "https://payara.fish/blog/payara-6-community-end-of-life/"
 authors:
   - "dominika-tasarz"
-image: "https://foojay.io/wp-content/uploads/2025/11/Blog-Images-_Moving-forward-with-Payara-Platform-Community-7.png"
+image: "/images/posts/2025/11/goodbye-payara-community-6-on-to-the-next-chapter-with-payara-community-7/Blog-Images-_Moving-forward-with-Payara-Platform-Community-7.png"
 categories:
   - "Jakarta EE"
   - "Java"

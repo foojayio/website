@@ -7,7 +7,7 @@ description: "Not just mic, but also camera, in the 30th Foojay podcast, focused
 authors:
   - "frankdelporte"
   - "hanno-embregts"
-image: "https://foojay.io/wp-content/uploads/2023/09/utrechtjug.jpg"
+image: "/images/posts/2023/10/foojay-podcast-30/utrechtjug.jpg"
 categories:
   - "JUGs"
   - "Podcast"

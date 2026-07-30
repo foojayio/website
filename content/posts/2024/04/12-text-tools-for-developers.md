@@ -6,7 +6,7 @@ lastmod: "2024-04-12T13:39:52+00:00"
 description: "Text data and text manipulation of it is also part of a developer job. Let's see a few free text tools to simplify your job."
 authors:
   - "anthony-goubard"
-image: "https://foojay.io/wp-content/uploads/2024/03/Toolbox.png"
+image: "/images/posts/2024/04/12-text-tools-for-developers/Toolbox.png"
 categories:
   - "Desktop"
   - "Developer Tools"

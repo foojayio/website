@@ -7,7 +7,7 @@ description: "As we look to the future, our momentum only grows stronger!"
 canonical: "https://omnifish.ee/reflections-on-2024/"
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2025/01/freepik__adjust__85845_2025-1024x574-1.png"
+image: "/images/posts/2025/01/reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee/freepik__adjust__85845_2025-1024x574-1.png"
 categories:
   - "Jakarta EE"
   - "Opinion"

@@ -6,7 +6,7 @@ lastmod: "2023-11-24T09:21:13+00:00"
 description: "Improve your desktop applications with easy-to-apply tips!"
 authors:
   - "christopher-schnick"
-image: "https://foojay.io/wp-content/uploads/2023/11/permission.png"
+image: "/images/posts/2023/11/java-for-desktop-applications-part-1/permission.png"
 categories:
   - "Desktop"
   - "Java"

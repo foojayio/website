@@ -6,7 +6,7 @@ lastmod: "2026-02-26T14:16:01+00:00"
 description: "How I used Claude Sonnet 4.6 and fleets of GitHub Copilot Coding Agents to internationalize java.evolved — from spec to deployment java.evolved is a - by Bruno Borges"
 authors:
   - "bruno-borges"
-image: "https://foojay.io/wp-content/uploads/2026/02/Screenshot-2026-02-25-at-22.43.09.png"
+image: "/images/posts/2026/02/translating-a-website-into-8-languages-with-ai-agents-in-one-night/Screenshot-2026-02-25-at-22.43.09.png"
 categories:
   - "Uncategorized"
 tags:

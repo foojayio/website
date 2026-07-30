@@ -6,7 +6,7 @@ lastmod: "2026-02-20T19:01:35+00:00"
 description: "If you maintain a busy codebase, you already know the daily grind: triaging issues, writing status reports, updating documentation, and chasing down - by Bruno Borges"
 authors:
   - "bruno-borges"
-image: "https://foojay.io/wp-content/uploads/2026/02/547386585-b25e6389-9134-42f1-aa0d-f7d941ca5c47.webp"
+image: "/images/posts/2026/02/stop-writing-yaml-automating-your-repo-with-plain-natural-language/547386585-b25e6389-9134-42f1-aa0d-f7d941ca5c47.webp"
 categories:
   - "AI"
 tags:

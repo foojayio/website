@@ -6,7 +6,7 @@ lastmod: "2025-10-03T09:47:20+00:00"
 description: "The inaugural AI4Devs conference in Amsterdam, proved to be a resounding success, bringing together approximately 200 developers at Amsterdam's iO Digital Campus."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2025/10/IMG_6230-scaled.jpg"
+image: "/images/posts/2025/10/ai4devs-amsterdam-successful-inaugural-developer-focused-ai-conference/IMG_6230-scaled.jpg"
 categories:
   - "Conference"
   - "Events"

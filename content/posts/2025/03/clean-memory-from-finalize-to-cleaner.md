@@ -7,7 +7,7 @@ description: "Clean your Memory: exploring approaches for cleaning native resour
 canonical: "https://blog.frankel.ch/java-cleaner/"
 authors:
   - "stefano-fago"
-image: "https://foojay.io/wp-content/uploads/2025/03/java_references.png"
+image: "/images/posts/2025/03/clean-memory-from-finalize-to-cleaner/java_references.png"
 categories:
   - "Java Core"
   - "Tutorials"

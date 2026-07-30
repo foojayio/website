@@ -5,7 +5,7 @@ date: "2026-06-26T07:28:00+00:00"
 description: "65 million years ago, dinosaurs didn't adapt. They're gone. Your JDK 7 app is giving the same energy. 🫠 I spent a year and a half migrating more than 15 - by Aicha Laafia"
 authors:
   - "aicha-laafia"
-image: "https://foojay.io/wp-content/uploads/2026/06/1_wul-KqE6vXk4ynnh_IljSQ.webp"
+image: "/images/posts/2026/06/jurassic-jdk-migrate-or-extinct/1_wul-KqE6vXk4ynnh_IljSQ.webp"
 categories:
   - "Jakarta EE"
   - "Java"

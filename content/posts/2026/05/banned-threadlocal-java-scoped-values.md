@@ -7,7 +7,7 @@ description: "Why ThreadLocal kills performance under Project Loom and how the E
 canonical: "https://blog.arkstack.dev/en/blog/why-i-banned-threadlocal-from-the-exeris-kernel"
 authors:
   - "arkadiusz-przychocki"
-image: "https://foojay.io/wp-content/uploads/2026/05/Screenshot-2026-06-03-at-09.05.15.png"
+image: "/images/posts/2026/05/banned-threadlocal-java-scoped-values/Screenshot-2026-06-03-at-09.05.15.png"
 categories:
   - "Java"
   - "JavaPro"

@@ -6,7 +6,7 @@ lastmod: "2026-06-15T15:06:52+00:00"
 description: "Compare Spring, Quarkus, Jooby, Vert.x on the same Java CRUD app. See startup time, image size, complexity, ecosystem tradeoffs, and best-fit use cases."
 authors:
   - "catherine-edelveis"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2026/06/spring-quarkus-jooby-vertx-java-framework-comparison/Favicon-3-2.png"
 categories:
   - "Java"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2026-07-09T13:32:00+00:00"
 description: "The official Java documentary premieres July 17 on YouTube. Watch the trailer, meet the guests, and join the live chat with James Gosling."
 authors:
   - "dominika-tasarz"
-image: "https://foojay.io/wp-content/uploads/2026/07/Java-Documentary-snap.png"
+image: "/images/posts/2026/07/the-java-story-a-film-about-all-of-us/Java-Documentary-snap.png"
 categories:
   - "Apache Tomcat"
   - "Jakarta EE"

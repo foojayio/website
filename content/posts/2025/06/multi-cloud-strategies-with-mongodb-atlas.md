@@ -6,7 +6,7 @@ lastmod: "2025-06-19T11:50:11+00:00"
 description: "In the technological world, the cloud has become more prevalent. It brings many benefits, including flexibility, scalability, faster innovation, and - by Luce Carter"
 authors:
   - "luce-carter"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/06/multi-cloud-strategies-with-mongodb-atlas/mongologo.png"
 categories:
   - "Databases"
   - "Developer Tools"

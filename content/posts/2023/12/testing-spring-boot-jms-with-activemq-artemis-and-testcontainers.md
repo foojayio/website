@@ -6,7 +6,7 @@ lastmod: "2023-12-12T07:55:05+00:00"
 description: "Testcontainers is a fantastic way to start resources as containers. Even if there is no pre-made container, you can always use GenericContainer to run virtually any container image."
 authors:
   - "simon-martinelli"
-image: "https://foojay.io/wp-content/uploads/2023/12/testcontainer-artemis.png"
+image: "/images/posts/2023/12/testing-spring-boot-jms-with-activemq-artemis-and-testcontainers/testcontainer-artemis.png"
 categories:
   - "JMS"
   - "Spring"

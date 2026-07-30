@@ -7,7 +7,7 @@ description: "Explore the power of Wireshark and tcpdump for network analysis in
 canonical: "https://debugagent.com/wireshark-tcpdump-a-debugging-power-couple"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/04/DALL·E-2024-03-31-12.25.28-Create-an-illustration-for-a-blog-post-about-network-analysis-tools-specifically-focusing-on-Wireshark-and-tcpdump.-The-image-should-show-a-computer-.jpeg"
+image: "/images/posts/2024/07/wireshark-tcpdump-a-debugging-power-couple/DALL-E-2024-03-31-12.25.28-Create-an-illustration-for-a-blog-post-about-network-analysis-tools-specifically-focusing-on-Wireshark-and-tcpdump.-The-image-should-show-a-computer-.jpeg"
 categories:
   - "Debugging"
   - "Tutorials"

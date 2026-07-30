@@ -6,7 +6,7 @@ lastmod: "2023-11-08T09:05:17+00:00"
 description: "Thanks to JDoodle you can now also add executable code to your Foojay content!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/10/jdoodle-example.png"
+image: "/images/posts/2023/11/integrate-executable-java-code-in-your-blog-posts/jdoodle-example.png"
 categories:
   - "Foojay"
   - "Java Beginner"

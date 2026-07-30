@@ -7,7 +7,7 @@ canonical: "https://www.azul.com/blog/ai-assisted-unused-dead-code-removal/"
 authors:
   - "erikcostlow"
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/06/ai-assisted-dead-code-removal.avif"
+image: "/images/posts/2026/06/ai-assisted-unused-dead-code-removal/ai-assisted-dead-code-removal.avif"
 categories:
   - "AI"
   - "Conference"

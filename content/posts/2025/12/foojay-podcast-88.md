@@ -6,7 +6,7 @@ lastmod: "2025-12-29T13:35:01+00:00"
 description: "What turns a nervous first-timer into a confident conference speaker? Let's find out. This the last Foojay Podcast of 2025 and also the last one with - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/12/fromcode.png"
+image: "/images/posts/2025/12/foojay-podcast-88/fromcode.png"
 categories:
   - "Conference"
   - "Podcast"

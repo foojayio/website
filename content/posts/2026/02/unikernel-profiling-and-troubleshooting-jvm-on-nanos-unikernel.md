@@ -6,7 +6,7 @@ lastmod: "2026-02-11T21:24:49+00:00"
 description: "Profiling a Java Application Running Inside an Unikernel with JProfiler Unikernels are often associated with minimalism and tight resource control. But - by Angelo Rubini"
 authors:
   - "angelo-rubini"
-image: "https://foojay.io/wp-content/uploads/2026/02/jprofiler5LiveMemory-700x344-1.png"
+image: "/images/posts/2026/02/unikernel-profiling-and-troubleshooting-jvm-on-nanos-unikernel/jprofiler5LiveMemory-700x344-1.png"
 categories:
   - "Cloud"
   - "Debugging"

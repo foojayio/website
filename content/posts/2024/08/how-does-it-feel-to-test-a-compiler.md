@@ -7,7 +7,7 @@ description: "My experience testing compilers, focusing on the Kotlin/Native com
 canonical: "https://medium.com/@zakharenko/how-does-it-feel-to-test-a-compiler-fa1ff5d86065"
 authors:
   - "alexander-zakharenko"
-image: "https://foojay.io/wp-content/uploads/2024/07/icon.png"
+image: "/images/posts/2024/08/how-does-it-feel-to-test-a-compiler/icon.png"
 categories:
   - "Kotlin"
   - "Testing"

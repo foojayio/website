@@ -7,7 +7,7 @@ description: "In this article, we'll achieved several milestones toward the end-
 canonical: "https://blog.frankel.ch/pr-testing-kubernetes/2/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/02/concrete-block.jpeg"
+image: "/images/posts/2025/03/pull-request-testing-on-kubernetes-working-with-github-actions-and-gke/concrete-block.jpeg"
 categories:
   - "Testing"
 tags:
@@ -245,7 +245,7 @@ Using the authentication setup above within the GitHub workflow requires the fol
   uses: google-github-actions/auth@v2
   with:
     workload_identity_provider: projects/49535911505/locations/global/workloadIdentityPools/github-actions/providers/github-provider #1
-    service_account: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="66010f120e13044b0705120f0908152610050a13151203144b160f16030a0f0803480f070b4801150314100f0503070505091308124805090b">[email&nbsp;protected]</a> #2</pre>
+    service_account: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="37505e435f42551a5654435e5859447741545b42444352451a475e47525b5e5952195e565a1950445245415e5452565454584259431954585a">[email&nbsp;protected]</a> #2</pre>
 
 1. The full path to the WIPP we created above. For reference, the pattern is `projects/$PROJECT_ID/locations/global/workloadIdentityPools/$WORKLOAD_ID_POOL_NAME/providers/$WORKLOAD_ID_POOL_PROVIDER_NAME`
 2. The "email" of the SA we created
@@ -372,7 +372,7 @@ That being settled, we should follow the nominal path: create a Kubernetes secre
   run: |
     kubectl create secret docker-registry github-docker-registry \      #1
       --docker-server=${{ env.REGISTRY }} \                             #2
-      --docker-email="<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="513f3e2334213d28113638253924337f323e3c">[email&nbsp;protected]</a>" \                             #3
+      --docker-email="<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5937362b3c293520193e302d312c3b773a3634">[email&nbsp;protected]</a>" \                             #3
       --docker-username="${{ github.actor }}" \                         #4
       --docker-password="${{ secrets.GITHUB_TOKEN }}" \                 #5
       --dry-run=client -o yaml | kubectl apply -f -                     #6</pre>

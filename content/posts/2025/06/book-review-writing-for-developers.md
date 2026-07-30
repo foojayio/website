@@ -7,7 +7,7 @@ description: "The exhaustive description of common patterns is a huge asset for 
 canonical: "https://blog.frankel.ch/writing-for-developers/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/05/cover_large.jpg"
+image: "/images/posts/2025/06/book-review-writing-for-developers/cover_large.jpg"
 categories:
   - "Book Review"
   - "Books"

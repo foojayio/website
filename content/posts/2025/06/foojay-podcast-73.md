@@ -11,7 +11,7 @@ authors:
   - "jens-knipper"
   - "karl-heinz-marbaise"
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2025/06/episode-73-jcon-part-2.png"
+image: "/images/posts/2025/06/foojay-podcast-73/episode-73-jcon-part-2.png"
 categories:
   - "Java"
   - "Java Core"

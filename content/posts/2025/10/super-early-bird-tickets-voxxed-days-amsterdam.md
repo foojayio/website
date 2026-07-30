@@ -7,7 +7,7 @@ description: "The first batch of Super Early Bird tickets will go on sale on O
 authors:
   - "geertjan-wielenga"
   - "ko-turk"
-image: "https://foojay.io/wp-content/uploads/2025/10/keynote_slide.001.jpeg"
+image: "/images/posts/2025/10/super-early-bird-tickets-voxxed-days-amsterdam/keynote_slide.001.jpeg"
 categories:
   - "Conference"
   - "Events"

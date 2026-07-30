@@ -6,7 +6,7 @@ lastmod: "2024-08-02T07:59:13+00:00"
 description: "A report on JUG PH: 1H 2024 Meetups. Topics covered were Angular Framework, Java Best Practices, GitHub Copilot and API Development."
 authors:
   - "tristan-mahinay"
-image: "https://foojay.io/wp-content/uploads/2024/07/jugph-angular-2024-1-700x467-1.jpeg"
+image: "/images/posts/2024/08/jug-ph-1h-2024-meetups/jugph-angular-2024-1-700x467-1.jpeg"
 categories:
   - "Events"
   - "Java"

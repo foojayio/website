@@ -7,7 +7,7 @@ description: "I recently developed a new workflow, and it prompted me to write t
 canonical: "https://blog.frankel.ch/github-workflows-tips-tricks/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/08/cover_large-1.jpg"
+image: "/images/posts/2025/08/github-workflows-tips-and-tricks/cover_large-1.jpg"
 categories:
   - "Developer Tools"
 tags:

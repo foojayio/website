@@ -5,7 +5,7 @@ date: "2026-07-02T10:00:00+00:00"
 description: "Artificial Intelligence has swiftly evolved from a niche research topic to a technology that impacts nearly every aspect of the software industry. Developers now use AI to generate code, review pull requests, create documentation, and accelerate workflows through methods like vibe coding and specification-driven development. While these applications position AI as an engineering tool, a new trend is emerging: integrating AI directly into business workflows within applications. by Otavio Santana"
 authors:
   - "otavio-santana"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2026/07/building-ai-systems-with-mongodb-implementing-the-planning-pattern/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:
@@ -32,7 +32,7 @@ In this tutorial, you'll:
 
 You can find all the code presented in this tutorial in the GitHub repository:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e19170a3e19170a160b1c501d1113">[email&nbsp;protected]</a>:soujava/mongodb-ai-planning-pattern.git</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4e29273a0e29273a263b2c602d2123">[email&nbsp;protected]</a>:soujava/mongodb-ai-planning-pattern.git</pre>
 
 Prerequisites {#h2-0-prerequisites}
 -----------------------------------

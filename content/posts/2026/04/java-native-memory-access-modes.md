@@ -6,7 +6,7 @@ lastmod: "2026-04-16T07:28:18+00:00"
 description: "Thread-safe native memory access covering Plain, Opaque, Acquire/Release, and Volatile with JCStress tests to prove each guarantee"
 authors:
   - "david-vlijmincx"
-image: "https://foojay.io/wp-content/uploads/2026/04/0407.png"
+image: "/images/posts/2026/04/java-native-memory-access-modes/0407.png"
 categories:
   - "Java"
   - "Performance"

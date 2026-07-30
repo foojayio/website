@@ -7,7 +7,7 @@ description: "WebAssembly is already running inside Java applications, most deve
 authors:
   - "andrea-peruffo"
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/06/edit-98-webassembly.png"
+image: "/images/posts/2026/06/foojay-podcast-98/edit-98-webassembly.png"
 categories:
   - "Podcast"
 tags:

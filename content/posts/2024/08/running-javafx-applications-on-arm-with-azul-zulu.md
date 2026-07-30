@@ -7,7 +7,7 @@ description: "Since the April release of Azul Zulu Builds of OpenJDK, packages w
 canonical: "https://www.azul.com/blog/running-javafx-applications-on-arm-with-azul-zulu/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/08/azul-downloads-arm-javafx.png"
+image: "/images/posts/2024/08/running-javafx-applications-on-arm-with-azul-zulu/azul-downloads-arm-javafx.png"
 categories:
   - "Arm"
   - "Java Core"

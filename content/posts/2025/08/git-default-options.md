@@ -7,7 +7,7 @@ description: "In this post, we describe the default of two of the most common Gi
 canonical: "https://blog.frankel.ch/git-default-options/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/07/tree-3097419.jpg"
+image: "/images/posts/2025/08/git-default-options/tree-3097419.jpg"
 categories:
   - "Developer Tools"
 tags:

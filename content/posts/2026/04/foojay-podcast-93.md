@@ -10,7 +10,7 @@ authors:
   - "joost-kaan"
   - "ko-turk"
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2026/04/episode-93-voxxeddaysamsterdam.jpg"
+image: "/images/posts/2026/04/foojay-podcast-93/episode-93-voxxeddaysamsterdam.jpg"
 categories:
   - "Conference"
   - "Interviews"

@@ -7,7 +7,7 @@ description: "I've been eying OpenRewrite for some time, but I haven't had time 
 canonical: "https://blog.frankel.ch/openrewrite-recipes/1/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/06/cover.jpg"
+image: "/images/posts/2025/06/authoring-an-openrewrite-recipe/cover.jpg"
 categories:
   - "Kotlin"
   - "OpenRewrite"

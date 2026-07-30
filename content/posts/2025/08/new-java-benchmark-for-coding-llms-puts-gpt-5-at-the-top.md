@@ -7,7 +7,7 @@ description: "The Brokk Power Ranking is a new open-source coding benchmark, fea
 canonical: "https://blog.brokk.ai/introducing-the-brokk-power-ranking/"
 authors:
   - "jbellis"
-image: "https://foojay.io/wp-content/uploads/2025/08/Screenshot-2025-08-12-at-20-04-14-Brokk-–-AI-for-Large-Codebases-scaled.png"
+image: "/images/posts/2025/08/new-java-benchmark-for-coding-llms-puts-gpt-5-at-the-top/Screenshot-2025-08-12-at-20-04-14-Brokk---AI-for-Large-Codebases-scaled.png"
 categories:
   - "AI"
   - "GenAI"

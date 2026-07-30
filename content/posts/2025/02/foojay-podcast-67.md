@@ -8,7 +8,7 @@ authors:
   - "frankdelporte"
   - "trisha-gee"
   - "wim-deblauwe"
-image: "https://foojay.io/wp-content/uploads/2025/02/episode-67-write-a-book.jpg"
+image: "/images/posts/2025/02/foojay-podcast-67/episode-67-write-a-book.jpg"
 categories:
   - "Books"
   - "Podcast"

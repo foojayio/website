@@ -6,7 +6,7 @@ description: "ParparVM went from 4.21x slower than warmed Java 25 to geomean par
 canonical: "https://www.codenameone.com/blog/beating-hotspot-performance/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/07/beating-hotspot-performance.jpg"
+image: "/images/posts/2026/07/how-we-beat-hotspot-performance-by-cheating-but-not-like-that/beating-hotspot-performance.jpg"
 categories:
   - "Java"
 tags:

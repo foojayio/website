@@ -6,7 +6,7 @@ lastmod: "2024-04-24T21:01:32+00:00"
 description: "This week we generate the C code for struct and map definitions automatically, using annotation processors to simplify writing programs."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2024/01/ebpf_maps-2000x425-1.png"
+image: "/images/posts/2024/04/hello-ebpf-generating-c-code-8/ebpf_maps-2000x425-1.png"
 categories:
   - "Tools"
 tags:

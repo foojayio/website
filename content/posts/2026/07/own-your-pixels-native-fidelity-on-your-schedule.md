@@ -6,7 +6,7 @@ description: "Codename One statically links its lightweight UI into your native 
 canonical: "https://www.codenameone.com/blog/pixel-perfect-is-a-test/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/07/pixel-perfect-is-a-test.jpg"
+image: "/images/posts/2026/07/own-your-pixels-native-fidelity-on-your-schedule/pixel-perfect-is-a-test.jpg"
 categories:
   - "Java"
 tags:

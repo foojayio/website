@@ -6,7 +6,7 @@ lastmod: "2026-05-28T17:49:19+00:00"
 description: "You know the drill. Someone opens a PR and half the review comments are about tabs vs spaces, where braces go, or why that one function has its arguments - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/05/formatter.png"
+image: "/images/posts/2026/05/intro-to-the-boxlang-formatter/formatter.png"
 categories:
   - "BoxLang"
   - "Developer Tools"

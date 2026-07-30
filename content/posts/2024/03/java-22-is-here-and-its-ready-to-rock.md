@@ -6,7 +6,7 @@ lastmod: "2024-03-19T13:57:48+00:00"
 description: "Java 22 is here, and it's ready to rock! Boasting a set of 12 JEPs, it finalizes features and previews new ones. This article has all the info!"
 authors:
   - "hanno-embregts"
-image: "https://foojay.io/wp-content/uploads/2024/03/guitar-pedals.jpg"
+image: "/images/posts/2024/03/java-22-is-here-and-its-ready-to-rock/guitar-pedals.jpg"
 categories:
   - "Java"
   - "Java Core"

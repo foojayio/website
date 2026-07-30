@@ -7,7 +7,7 @@ description: "As developers, we read code more than we write it. When reading co
 canonical: "https://maritvandijk.com/tips-reading-code/"
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2024/03/Tips-for-reading-code.png"
+image: "/images/posts/2024/03/tips-for-reading-code/Tips-for-reading-code.png"
 categories:
   - "Debugging"
   - "Developer Tools"

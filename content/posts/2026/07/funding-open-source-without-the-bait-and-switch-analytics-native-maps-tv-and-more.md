@@ -6,7 +6,7 @@ description: "This week adds a privacy-first analytics API, a pure-vector map en
 canonical: "https://www.codenameone.com/blog/funding-open-source-without-the-bait-and-switch/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/07/funding-open-source-without-the-bait-and-switch.jpg"
+image: "/images/posts/2026/07/funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more/funding-open-source-without-the-bait-and-switch.jpg"
 categories:
   - "Java"
 tags:

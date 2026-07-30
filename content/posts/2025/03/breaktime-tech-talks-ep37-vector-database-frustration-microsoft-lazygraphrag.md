@@ -7,7 +7,7 @@ description: "This is episode 37 of the Breaktime Tech Talks. https://www.youtub
 canonical: "https://www.youtube.com/watch?v=hv-FtjIHg_I&list=PLzZ7iUdr2mwS6qexoz9dsI0NfnU614p1w&index=1"
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2025/03/breaktime-tech-talks-img-large.jpg"
+image: "/images/posts/2025/03/breaktime-tech-talks-ep37-vector-database-frustration-microsoft-lazygraphrag/breaktime-tech-talks-img-large.jpg"
 categories:
   - "Conference"
   - "Databases"

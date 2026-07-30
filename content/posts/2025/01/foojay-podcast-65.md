@@ -7,7 +7,7 @@ description: "With the first Foojay podcast of 2025, we want to help you to boos
 authors:
   - "frankdelporte"
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2025/01/boost.png"
+image: "/images/posts/2025/01/foojay-podcast-65/boost.png"
 categories:
   - "Podcast"
 tags:

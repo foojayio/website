@@ -6,7 +6,7 @@ lastmod: "2025-02-17T09:26:04+00:00"
 description: "Ever wonder how the JDK Flight Recorder (JFR) keeps track of the classes and methods it has collected for stack traces and more? In this short article, - by Johannes Bechberger"
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2025/02/tag-1-2000x1086-1.png"
+image: "/images/posts/2025/02/a-glance-into-jfr-class-and-method-tagging/tag-1-2000x1086-1.png"
 categories:
   - "Developer Tools"
   - "Performance"

@@ -6,7 +6,7 @@ lastmod: "2021-01-29T22:34:03+00:00"
 description: "Resources on JVM command line arguments are scattered and hard to find, here is aconsolidated list so that others don't have to scour the internet as I did!"
 authors:
   - "betsy"
-image: "https://foojay.io/wp-content/uploads/2020/06/Logo.png"
+image: "/images/posts/2020/06/top-10-fun-with-jvm-flags/Logo.png"
 categories:
   - "Performance"
 tags:

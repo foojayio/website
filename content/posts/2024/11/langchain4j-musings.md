@@ -7,7 +7,7 @@ description: "Learn how to start your Langchain4j journey in several incremental
 canonical: "https://blog.frankel.ch/langchain4j-musings/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2024/11/langchain4j-musings/Favicon-3-2.png"
 categories:
   - "Spring"
   - "Tutorials"

@@ -6,7 +6,7 @@ lastmod: "2024-02-14T09:57:11+00:00"
 description: "The most detected issues in Java projects by not following the clean code approach, and how to fix them with clear examples."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2024/02/1500x500-1.jpeg"
+image: "/images/posts/2024/02/top-most-detected-issues-in-java-projects/1500x500-1.jpeg"
 categories:
   - "Debugging"
   - "Developer Tools"

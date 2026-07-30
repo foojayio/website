@@ -6,7 +6,7 @@ lastmod: "2025-11-13T08:53:25+00:00"
 description: "This is part 1, and we talk about J-Fall, of course. Plus, much more, with Brian Vermeer, Pratik Patel, and many more!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/07/foojay_podcast.png"
+image: "/images/posts/2023/11/foojay-podcast-33/foojay_podcast.png"
 categories:
   - "Conference"
   - "Podcast"

@@ -9,7 +9,7 @@ authors:
   - "frankdelporte"
   - "geertjan-wielenga"
   - "hanno-embregts"
-image: "https://foojay.io/wp-content/uploads/2024/12/podcast-64-jfall-various.jpg"
+image: "/images/posts/2024/12/foojay-podcast-64/podcast-64-jfall-various.jpg"
 categories:
   - "Cloud"
   - "Conference"

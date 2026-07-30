@@ -8,7 +8,7 @@ authors:
   - "deepu-sasidharan"
   - "frankdelporte"
   - "matt-raible"
-image: "https://foojay.io/wp-content/uploads/2024/01/podcast-java-for-beginners-guests.png"
+image: "/images/posts/2024/01/foojay-podcast-40/podcast-java-for-beginners-guests.png"
 categories:
   - "Java Beginner"
   - "Podcast"

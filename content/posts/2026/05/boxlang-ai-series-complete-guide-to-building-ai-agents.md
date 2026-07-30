@@ -6,7 +6,7 @@ lastmod: "2026-05-18T09:04:50+00:00"
 description: "The world of AI development is moving fast, but building real, production-ready AI agents doesn’t have to be complex. This series walks you step by step - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/05/Captura-de-pantalla-2026-05-13-120114.png"
+image: "/images/posts/2026/05/boxlang-ai-series-complete-guide-to-building-ai-agents/Captura-de-pantalla-2026-05-13-120114.png"
 categories:
   - "AI"
   - "BoxLang"

@@ -6,7 +6,7 @@ lastmod: "2025-04-22T08:07:51+00:00"
 description: "This week I talk through my hands-on experience of what happens when embedding models for creating vectors and searching them don’t match."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2025/03/techtalks.png"
+image: "/images/posts/2025/04/breaktime-tech-talks-ep39-why-embedding-models-should-match-advice-for-starting-a-blog/techtalks.png"
 categories:
   - "Databases"
   - "Graph"

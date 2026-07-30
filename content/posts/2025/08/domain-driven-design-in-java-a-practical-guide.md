@@ -6,7 +6,7 @@ lastmod: "2025-08-15T09:42:11+00:00"
 description: "While waiting for your flight in an airport, have you ever wondered how much behind-the-scenes planning it takes to keep an airport running smoothly? - by Rajesh Nair"
 authors:
   - "rajesh-nair"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/08/domain-driven-design-in-java-a-practical-guide/mongologo.png"
 categories:
   - "Databases"
   - "Java"

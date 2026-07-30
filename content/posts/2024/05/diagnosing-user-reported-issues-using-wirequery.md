@@ -6,7 +6,7 @@ lastmod: "2024-05-14T12:20:53+00:00"
 description: "WireQuery is a tool that helps you solve user-reported issues by combining session replay with capturing API calls. In this article, I will explain how it works, how to use it and how it can be integrated into your projects."
 authors:
   - "wouter-nederhof"
-image: "https://foojay.io/wp-content/uploads/2024/05/Scherm_afbeelding-2024-05-11-om-22.41.05-700x430-1.png"
+image: "/images/posts/2024/05/diagnosing-user-reported-issues-using-wirequery/Scherm_afbeelding-2024-05-11-om-22.41.05-700x430-1.png"
 categories:
   - "Debugging"
   - "Developer Tools"
@@ -53,7 +53,7 @@ Do take note, however, that in real world applications, the user is probably bet
 
 To get started, first clone the WireQuery repository and start the server:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e59574a7e59574a564b5c105d5153">[email&nbsp;protected]</a>:wirequery/wirequery.git
+<pre class="EnlighterJSRAW" data-enlighter-language="bash">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="adcac4d9edcac4d9c5d8cf83cec2c0">[email&nbsp;protected]</a>:wirequery/wirequery.git
 cd wirequery
 docker-compose up</pre>
 

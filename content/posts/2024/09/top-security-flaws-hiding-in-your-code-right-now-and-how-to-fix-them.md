@@ -6,7 +6,7 @@ lastmod: "2024-09-09T15:03:08+00:00"
 description: "Let's examine the three most common injection attack types—SQL injection, Deserialization Injection, and Logging Injection—and discuss ways to prevent them."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2024/09/Screenshot-2024-08-27-at-16.01.33.png"
+image: "/images/posts/2024/09/top-security-flaws-hiding-in-your-code-right-now-and-how-to-fix-them/Screenshot-2024-08-27-at-16.01.33.png"
 categories:
   - "Java"
   - "Java Core"

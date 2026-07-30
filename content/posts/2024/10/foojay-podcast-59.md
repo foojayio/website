@@ -9,7 +9,7 @@ authors:
   - "jbaruch"
   - "pratik-patel"
   - "roni-dover"
-image: "https://foojay.io/wp-content/uploads/2024/10/episode-59-devrel-2.jpg"
+image: "/images/posts/2024/10/foojay-podcast-59/episode-59-devrel-2.jpg"
 categories:
   - "Conference"
   - "Podcast"

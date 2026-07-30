@@ -7,7 +7,7 @@ description: "In this article, I take my first steps in augmenting an SSR app wi
 canonical: "https://blog.frankel.ch/ajax-ssr/3/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/09/vuevue.png"
+image: "/images/posts/2024/10/augmenting-the-client-with-vue-js/vuevue.png"
 categories:
   - "Developer Tools"
   - "Spring"
@@ -82,7 +82,7 @@ If you're used to developing APIs, you're familiar with the `body()` function; i
 
 Here's the code on the HTML side:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="43223b2a2c3003726d74">[email&nbsp;protected]</a>/dist/axios.min.js"&gt;&lt;/script&gt; &lt;!--1--&gt;
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="513029383e2211607f66">[email&nbsp;protected]</a>/dist/axios.min.js"&gt;&lt;/script&gt; &lt;!--1--&gt;
 &lt;script th:src="@{/webjars/vue/dist/vue.global.js}" src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"&gt;&lt;/script&gt; &lt;!--2--&gt;
 &lt;script th:src="@{/vue.js}" src="../static/vue.js"&gt;&lt;/script&gt;             &lt;!--3--&gt;
 &lt;script th:inline="javascript"&gt;

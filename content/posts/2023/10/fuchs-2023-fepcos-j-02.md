@@ -6,7 +6,7 @@ lastmod: "2023-10-13T06:07:01+00:00"
 description: "Compose networked systems like building blocks. An example illustrates how a Java developer can do this by using FEPCOS-J. Read more."
 authors:
   - "gerhard-fuchs"
-image: "https://foojay.io/wp-content/uploads/2023/10/fuchs2023-fepcos-j-example-use-case-510x510-1.png"
+image: "/images/posts/2023/10/fuchs-2023-fepcos-j-02/fuchs2023-fepcos-j-example-use-case-510x510-1.png"
 categories:
   - "Developer Tools"
   - "Java"

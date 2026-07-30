@@ -6,7 +6,7 @@ lastmod: "2026-03-09T08:08:08+00:00"
 description: "DPoP is one of the most exciting developments in the IAM (Identity and Access Management) space in recent years. Yet many backend developers either have - by Hüseyin Akdoğan"
 authors:
   - "huseyin-akdogan"
-image: "https://foojay.io/wp-content/uploads/2026/03/Screenshot-2026-03-09-at-09.33.06-scaled.png"
+image: "/images/posts/2026/03/dpop-what-it-is-how-it-works-and-why-bearer-tokens-arent-enough/Screenshot-2026-03-09-at-09.33.06-scaled.png"
 categories:
   - "Security"
 tags:

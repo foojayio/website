@@ -6,7 +6,7 @@ lastmod: "2023-11-06T11:17:35+00:00"
 description: "AI and Java what is there?, what can it do?, what do we want it to do?, Asking for your input readers. Share your thoughts at Foojay.io"
 authors:
   - "steve-poole"
-image: "https://foojay.io/wp-content/uploads/2023/11/image1.png"
+image: "/images/posts/2023/11/generative-ai-and-java-hype-or-urgent-reality/image1.png"
 categories:
   - "Developer Tools"
   - "DevOps"

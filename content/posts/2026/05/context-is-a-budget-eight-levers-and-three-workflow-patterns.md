@@ -6,7 +6,7 @@ lastmod: "2026-05-27T07:54:58+00:00"
 description: "Eight levers and three workflow patterns that pay for themselves in a week."
 authors:
   - "soham-dasgupta"
-image: "https://foojay.io/wp-content/uploads/2026/05/01-token-distribution-700x364-1.png"
+image: "/images/posts/2026/05/context-is-a-budget-eight-levers-and-three-workflow-patterns/01-token-distribution-700x364-1.png"
 categories:
   - "AI"
   - "Design Patterns"

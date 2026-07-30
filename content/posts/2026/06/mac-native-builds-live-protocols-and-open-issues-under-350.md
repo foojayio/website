@@ -7,7 +7,7 @@ description: "The open issue count dropped below 350 after a push through the ol
 canonical: "https://www.codenameone.com/blog/mac-native-grpc-graphql-and-fewer-open-issues/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/06/weekly.jpg"
+image: "/images/posts/2026/06/mac-native-builds-live-protocols-and-open-issues-under-350/weekly.jpg"
 categories:
   - "Java"
 tags:

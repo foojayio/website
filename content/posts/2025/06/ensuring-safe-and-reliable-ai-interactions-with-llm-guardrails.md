@@ -7,7 +7,7 @@ description: "We know that LLMs can and will make mistakes, and while enriching 
 canonical: "https://snyk.io/articles/ensuring-safe-and-reliable-ai-interactions-with-llm-guardrails/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/11/snyk-logo-2.png"
+image: "/images/posts/2025/06/ensuring-safe-and-reliable-ai-interactions-with-llm-guardrails/snyk-logo-2.png"
 categories:
   - "LangChain4j"
   - "Security"

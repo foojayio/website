@@ -6,7 +6,7 @@ lastmod: "2024-06-03T17:06:34+00:00"
 description: "Dive into the world of functional programming in Java using Lambda Expressions, Method References, and Functional Interfaces."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2024/06/FunctionalProgramming-700x394-2.png"
+image: "/images/posts/2024/06/java-functional-programming-fx-part2/FunctionalProgramming-700x394-2.png"
 categories:
   - "Java"
   - "Java Beginner"

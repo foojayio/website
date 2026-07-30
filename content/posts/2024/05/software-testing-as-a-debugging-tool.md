@@ -7,7 +7,7 @@ description: "Software testing functions as a critical debugging tool, significa
 canonical: "https://debugagent.com/software-testing-as-a-debugging-tool"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/04/DALL·E-2024-04-15-15.22.29-Create-a-blog-cover-image-for-a-post-titled-Software-Testing-as-a-Debugging-Tool.-The-image-should-visually-represent-software-testing-and-debugging.jpeg"
+image: "/images/posts/2024/05/software-testing-as-a-debugging-tool/DALL-E-2024-04-15-15.22.29-Create-a-blog-cover-image-for-a-post-titled-Software-Testing-as-a-Debugging-Tool.-The-image-should-visually-represent-software-testing-and-debugging.jpeg"
 categories:
   - "Testing"
   - "Tutorials"

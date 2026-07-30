@@ -6,7 +6,7 @@ lastmod: "2023-10-01T15:21:26+00:00"
 description: "Here is the overview of the JavaFX LinksOfTheWeek that got published on jfx-central.com during September."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/09/jfxcentral.png"
+image: "/images/posts/2023/09/javafx-links-of-september-2023/jfxcentral.png"
 categories:
   - "JavaFX"
   - "JDK21"

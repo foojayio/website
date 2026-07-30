@@ -6,7 +6,7 @@ lastmod: "2026-01-23T12:06:07+00:00"
 description: "This is a follow-on to the article The Real Mechanics of Vulnerabilities in an Upstream/Downstream, Topsy-Turvy EOL World. What you'll learn in this - by Steve Poole"
 authors:
   - "steve-poole"
-image: "https://foojay.io/wp-content/uploads/2026/01/Gemini_Generated_Image_cuv3ntcuv3ntcuv3-scaled.png"
+image: "/images/posts/2026/01/security-doesnt-start-at-liftoff/Gemini_Generated_Image_cuv3ntcuv3ntcuv3-scaled.png"
 categories:
   - "Security"
 tags:

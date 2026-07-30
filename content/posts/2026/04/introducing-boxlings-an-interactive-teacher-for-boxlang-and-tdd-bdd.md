@@ -5,7 +5,7 @@ date: "2026-04-09T08:48:57+00:00"
 description: "BoxLings gives you 129 progressive exercises across 28 topics from the basics of variables and functions all the way to async programming, Java interop, destructuring, and CLI app development."
 authors:
   - "luis-majano"
-image: "https://foojay.io/wp-content/uploads/2026/04/boxlings-banner.jpg"
+image: "/images/posts/2026/04/introducing-boxlings-an-interactive-teacher-for-boxlang-and-tdd-bdd/boxlings-banner.jpg"
 categories:
   - "BoxLang"
   - "Testing"

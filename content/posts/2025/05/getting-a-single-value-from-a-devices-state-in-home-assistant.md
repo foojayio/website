@@ -7,7 +7,7 @@ description: "I recently acquired Netatmo smart radiator valves to manage my roo
 canonical: "https://blog.frankel.ch/home-assistant/7/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/05/cover-sensor.webp"
+image: "/images/posts/2025/05/getting-a-single-value-from-a-devices-state-in-home-assistant/cover-sensor.webp"
 categories:
   - "Developer Tools"
   - "Research"

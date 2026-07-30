@@ -7,7 +7,7 @@ description: "We're excited to present the first episode of the Foojay Podcast's
 authors:
   - "frankdelporte"
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2025/09/episode-78-java-25.jpg"
+image: "/images/posts/2025/09/foojay-podcast-78/episode-78-java-25.jpg"
 categories:
   - "Java"
   - "Podcast"

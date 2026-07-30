@@ -6,7 +6,7 @@ lastmod: "2025-03-03T13:16:22+00:00"
 description: "LangChain4j already provides two types of memory eviction policies, lets adopt a third one: SummarizingTokenWindowChatMemory"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2025/02/Gemini_Generated_Image_6ad3g46ad3g46ad3.webp"
+image: "/images/posts/2025/03/summarizingtokenwindowchatmemory-enhancing-llms-conversations-with-efficient-summarization/Gemini_Generated_Image_6ad3g46ad3g46ad3.webp"
 categories:
   - "Java"
   - "LangChain4j"

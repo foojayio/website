@@ -7,7 +7,7 @@ description: "Great day, great people, great discussions and great team of dis-
 canonical: "https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/"
 authors:
   - "nick-ebbitt"
-image: "https://foojay.io/wp-content/uploads/2024/04/110677_image_676x380.webp"
+image: "/images/posts/2024/07/jmanc-2024-trip-report/110677_image_676x380.webp"
 categories:
   - "Events"
   - "Trip Reports"

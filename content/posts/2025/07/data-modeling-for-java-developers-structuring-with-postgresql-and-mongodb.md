@@ -6,7 +6,7 @@ lastmod: "2025-07-03T21:03:28+00:00"
 description: "Application and system designs have always been considered the most essential step in application development. All the later steps and technologies to be - by Aasawari Sahasrabuddhe"
 authors:
   - "aasawari-sahasrabuddhe"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/07/data-modeling-for-java-developers-structuring-with-postgresql-and-mongodb/mongologo.png"
 categories:
   - "Databases"
   - "Java"
@@ -155,7 +155,7 @@ Depending on the modelling technique chosen, the documents inside in the collect
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
   _id: ObjectId("60d5ec9f4b1a8e2a1c8f7a1"), 
   name: "J.K. Rowling",
-  email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3953524b564e5550575e795c41585449555c175a5654">[email&nbsp;protected]</a>",
+  email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4cecfd6cbd3c8cdcac3e4c1dcc5c9d4c8c18ac7cbc9">[email&nbsp;protected]</a>",
   nationality: "British",
   books: [
     ObjectId("60d5ec9f4b1a8e2a1c8f7a2"), 

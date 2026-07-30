@@ -7,7 +7,7 @@ description: "My journey in programming began over two decades ago, a time when 
 canonical: "https://blog.frankel.ch/ajax-ssr/1/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/09/book-8858593.jpg"
+image: "/images/posts/2024/09/a-short-history-of-ajax-and-ssr/book-8858593.jpg"
 categories:
   - "Java"
 tags:

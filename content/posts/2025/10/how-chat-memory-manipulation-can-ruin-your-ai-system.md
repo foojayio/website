@@ -7,7 +7,7 @@ description: "Did you know that by tampering with chat history, you're able to m
 canonical: "https://snyk.io/articles/chat-memory-manipulation-ai/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2025/09/cars.png"
+image: "/images/posts/2025/10/how-chat-memory-manipulation-can-ruin-your-ai-system/cars.png"
 categories:
   - "AI"
   - "Security"

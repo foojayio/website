@@ -6,7 +6,7 @@ lastmod: "2026-01-23T12:03:32+00:00"
 description: "One Year. 100+ Features. Unlimited Possibilities. Just one year ago, in March 2024, we launched BoxLang AI 1.0. Today, we're thrilled to announce BoxLang - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/01/boxlang-ai-v2-700x467.jpg"
+image: "/images/posts/2026/01/boxlang-ai-v2-enterprise-ai-development-without-the-complexity/boxlang-ai-v2-700x467.jpg"
 categories:
   - "AI"
   - "BoxLang"

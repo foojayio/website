@@ -8,7 +8,7 @@ authors:
   - "frankdelporte"
   - "pratik-patel"
   - "zoran-sevarac"
-image: "https://foojay.io/wp-content/uploads/2025/03/20250428_Java_AI.png"
+image: "/images/posts/2025/04/webinar-java-ai/20250428_Java_AI.png"
 categories:
   - "Events"
   - "Machine Learning"

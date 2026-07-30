@@ -6,7 +6,7 @@ lastmod: "2025-11-11T19:31:11+00:00"
 description: "Welcome to the third and final part of the series \"The Cost of Not Knowing MongoDB.\" Building upon the foundational optimizations explored in Part 1 and Part 2, this article delves into advanced MongoDB design patterns that can dramatically transform application performance.In Part 1, we improved application performance by concatenating fields, changing data types, and shortening field names. In Part 2, we implemented the Bucket Pattern and Computed Pattern and optimized the aggregation pipeline to achieve even better performance.In this final article, we address the Issues and Improvements identified in AppV5R4. Specifically, we focus on reducing the document size in our application to alleviate the disk throughput bottleneck on the MongoDB server. This reduction will be accomplished by adopting a Dynamic Schema and modifying the storage compression algorithm.All the application versions and revisions from this article were developed by a senior MongoDB developer, as they are built on all the previous versions and utilize the Dynamic Schema pattern, which isn't very common to see."
 authors:
   - "artur-costa"
-image: "https://foojay.io/wp-content/uploads/2025/11/Screenshot-2025-11-11-at-1.26.29-PM.png"
+image: "/images/posts/2025/11/the-cost-of-not-knowing-mongodb-part-3-appv6r0-to-appv6r4/Screenshot-2025-11-11-at-1.26.29-PM.png"
 categories:
   - "Databases"
   - "Mongo"

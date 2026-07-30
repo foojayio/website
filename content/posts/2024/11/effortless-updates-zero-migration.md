@@ -7,7 +7,7 @@ description: "In today’s production environments, it is not only expected, but
 canonical: "https://openliberty.io/blog/2024/10/09/zero-migration.html"
 authors:
   - "michal-broz"
-image: "https://foojay.io/wp-content/uploads/2024/11/openliberty.png"
+image: "/images/posts/2024/11/effortless-updates-zero-migration/openliberty.png"
 categories:
   - "DevOps"
 tags:

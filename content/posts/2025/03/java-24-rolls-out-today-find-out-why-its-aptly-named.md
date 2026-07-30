@@ -6,7 +6,7 @@ lastmod: "2025-03-18T07:43:55+00:00"
 description: "Java 24 rolls out today, and it brings a diverse set of features. For example, compact object headers bring better performance, and various security features have been added. Or how about the eagerly-awaited solution to virtual thread pinning? This post has all the info! - by Hanno Embregts"
 authors:
   - "hanno-embregts"
-image: "https://foojay.io/wp-content/uploads/2025/03/basketball-24.jpg"
+image: "/images/posts/2025/03/java-24-rolls-out-today-find-out-why-its-aptly-named/basketball-24.jpg"
 categories:
   - "Java"
   - "Release Notes"

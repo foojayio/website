@@ -6,7 +6,7 @@ lastmod: "2023-01-20T12:24:23+00:00"
 description: "Join Foojay.io on Slack, here: join.slack.com/t/foojay/signup"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2022/08/image-1024x825.png"
+image: "/images/posts/2022/08/join-slack-com-t-foojay-signup/image-1024x825.png"
 categories:
   - "Foojay"
 tags:

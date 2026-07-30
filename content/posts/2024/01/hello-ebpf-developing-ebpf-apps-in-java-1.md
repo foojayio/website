@@ -6,7 +6,7 @@ lastmod: "2024-01-30T00:11:41+00:00"
 description: "eBPF allows you to attach programs directly to hooks in the Linux kernel without loading kernel modules, like hooks for networking or executing programs."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2024/01/text2102.png"
+image: "/images/posts/2024/01/hello-ebpf-developing-ebpf-apps-in-java-1/text2102.png"
 categories:
   - "Tools"
 tags:

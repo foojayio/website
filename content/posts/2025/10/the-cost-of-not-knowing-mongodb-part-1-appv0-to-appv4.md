@@ -6,7 +6,7 @@ lastmod: "2025-10-27T20:33:37+00:00"
 description: "The primary focus of this series is to show how much performance you can gain, and as a consequence, the cost you can save when using MongoDB properly, following the best practices, studying your application needs, and using it to model your data. To show these possible gains, a dummy application will be presented, and many possible implementations of it using MongoDB will be developed and load-tested. There will be implementations for all levels of MongoDB knowledge: beginner, intermediate, senior, and mind-blowing."
 authors:
   - "artur-costa"
-image: "https://foojay.io/wp-content/uploads/2025/10/546a7b8392ade39f6930ae5605b54327b1d73306_2_690x362.png"
+image: "/images/posts/2025/10/the-cost-of-not-knowing-mongodb-part-1-appv0-to-appv4/546a7b8392ade39f6930ae5605b54327b1d73306_2_690x362.png"
 categories:
   - "Databases"
   - "Mongo"

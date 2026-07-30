@@ -7,7 +7,7 @@ description: "As described before on Java 21+ Not Working on Raspberry Pi Zero 2
 canonical: "https://webtechie.be/post/2025-10-13-java-on-raspberry-pi-zero-2/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/10/java-on-zero2.png"
+image: "/images/posts/2025/12/java-21-on-raspberry-pi-zero-2-is-back-in-business/java-on-zero2.png"
 categories:
   - "Embedded"
   - "Java Core"

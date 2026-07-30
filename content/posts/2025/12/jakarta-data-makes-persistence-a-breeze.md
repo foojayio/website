@@ -7,7 +7,7 @@ canonical: "https://payara.fish/downloads/payara-platform-community-edition/"
 authors:
   - "alfonso-altamirano"
   - "dominika-tasarz"
-image: "https://foojay.io/wp-content/uploads/2025/12/Blog_Jakarta-Data.png"
+image: "/images/posts/2025/12/jakarta-data-makes-persistence-a-breeze/Blog_Jakarta-Data.png"
 categories:
   - "Jakarta EE"
   - "Java"

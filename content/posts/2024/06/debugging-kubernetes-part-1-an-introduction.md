@@ -7,7 +7,7 @@ description: "In this first part of our k8s debugging series we take an in-depth
 canonical: "https://debugagent.com/debugging-kubernetes-part-1-an-introduction"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/05/DALL·E-2024-05-13-08.10.19-A-futuristic-digital-illustration-for-a-blog-post-heading-featuring-a-stylized-representation-of-Kubernetes-and-container-orchestration.-The-image-in.jpeg"
+image: "/images/posts/2024/06/debugging-kubernetes-part-1-an-introduction/DALL-E-2024-05-13-08.10.19-A-futuristic-digital-illustration-for-a-blog-post-heading-featuring-a-stylized-representation-of-Kubernetes-and-container-orchestration.-The-image-in.jpeg"
 categories:
   - "Debugging"
   - "Kubernetes"

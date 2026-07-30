@@ -8,7 +8,7 @@ canonical: "https://blog.payara.fish/java-21-and-the-upcoming-jakarta-ee-11-a-ne
 authors:
   - "jadon-ortlepp"
   - "luqman-saeed"
-image: "https://foojay.io/wp-content/uploads/2020/10/payara_square_logo.jpg"
+image: "/images/posts/2023/10/java-21-and-the-upcoming-jakarta-ee-11-a-new-era-of-cloud-native-java/payara_square_logo.jpg"
 categories:
   - "Jakarta EE"
   - "Java"

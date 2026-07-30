@@ -7,7 +7,7 @@ description: "Java is the environment that offers the highest developer producti
 canonical: "https://www.azul.com/blog/a-fresh-look-at-embedded-java/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/08/fresh-look-embedded-java.png"
+image: "/images/posts/2024/09/a-fresh-look-at-embedded-java/fresh-look-embedded-java.png"
 categories:
   - "Embedded"
   - "Java"

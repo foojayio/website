@@ -7,7 +7,7 @@ description: "What's new in Java 24 for us, developers"
 canonical: "https://www.loicmathieu.fr/wordpress/informatique/java-24-quoi-de-neuf/"
 authors:
   - "loic-mathieu"
-image: "https://foojay.io/wp-content/uploads/2025/02/fb9dcc56-387f-4952-b62f-240beaeb24cf.webp"
+image: "/images/posts/2025/02/java-24-whats-new/fb9dcc56-387f-4952-b62f-240beaeb24cf.webp"
 categories:
   - "Java"
   - "JEPs"

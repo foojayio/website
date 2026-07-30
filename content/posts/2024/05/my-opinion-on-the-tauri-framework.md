@@ -7,7 +7,7 @@ description: "Tauri is a Rust-based framework for building desktop applications.
 canonical: "https://blog.frankel.ch/opinion-tauri/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/05/header_light.png"
+image: "/images/posts/2024/05/my-opinion-on-the-tauri-framework/header_light.png"
 categories:
   - "Opinion"
 tags:

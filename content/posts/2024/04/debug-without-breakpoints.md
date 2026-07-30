@@ -7,7 +7,7 @@ description: "Learn how to use IntelliJ IDEA's Pause – a lesser known feature 
 canonical: "https://flounder.dev/posts/debug-without-breakpoints/"
 authors:
   - "igor-kulakov"
-image: "https://foojay.io/wp-content/uploads/2024/04/debug-without-breakpoints-banner-1024x538-1.png"
+image: "/images/posts/2024/04/debug-without-breakpoints/debug-without-breakpoints-banner-1024x538-1.png"
 categories:
   - "Debugging"
   - "IntelliJ IDEA"

@@ -6,7 +6,7 @@ lastmod: "2024-03-28T06:58:57+00:00"
 description: "The AspectJ framework streamlines AOP adoption in Java. AOP improves modularity which leads to code that is easier to understand and maintain."
 authors:
   - "abo-saad-muaath"
-image: "https://foojay.io/wp-content/uploads/2024/03/aspectj.png"
+image: "/images/posts/2024/03/aspect-oriented-programming-aop/aspectj.png"
 categories:
   - "Java"
 tags:

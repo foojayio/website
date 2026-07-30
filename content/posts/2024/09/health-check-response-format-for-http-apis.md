@@ -7,7 +7,7 @@ description: "I'm continuing my journey on getting more familiar with HTTP APIs 
 canonical: "https://blog.frankel.ch/healthcheck-http-apis/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/05/pexels-puwadon-sangngern-5340274.jpg"
+image: "/images/posts/2024/09/health-check-response-format-for-http-apis/pexels-puwadon-sangngern-5340274.jpg"
 categories:
   - "DevOps"
   - "Spring"

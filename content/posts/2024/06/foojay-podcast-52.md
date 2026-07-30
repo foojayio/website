@@ -7,7 +7,7 @@ description: "Garbage Collectors, Intelligence Cloud, Test Containers and Flaky 
 authors:
   - "frankdelporte"
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2024/06/jconpic.png"
+image: "/images/posts/2024/06/foojay-podcast-52/jconpic.png"
 categories:
   - "CRaC"
   - "Java"

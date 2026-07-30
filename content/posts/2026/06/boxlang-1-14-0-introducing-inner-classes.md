@@ -6,7 +6,7 @@ lastmod: "2026-06-11T10:29:34+00:00"
 description: "BoxLang has always embraced a simple truth: the way you organize code shapes the way you think about problems. For a long time, if you needed a helper - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/06/BoxLang-release-1.14.0-1701-x-1701-px-1024x1024.png"
+image: "/images/posts/2026/06/boxlang-1-14-0-introducing-inner-classes/BoxLang-release-1.14.0-1701-x-1701-px-1024x1024.png"
 categories:
   - "BoxLang"
   - "Design Patterns"

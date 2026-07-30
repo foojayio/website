@@ -7,7 +7,7 @@ description: "This story is about how \"Write Once, Run Anywhere\" got broken in
 canonical: "https://www.pi4j.com/blog/2025/20250625-java-21-not-working-on-zero-2/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/06/compare-boards.png"
+image: "/images/posts/2025/07/java-21-not-working-on-the-raspberry-pi-zero-2/compare-boards.png"
 categories:
   - "Embedded"
   - "Java"

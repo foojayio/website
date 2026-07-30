@@ -6,7 +6,7 @@ lastmod: "2024-10-04T11:58:06+00:00"
 description: "FEPCOS-J allows declaratively implementing a Java server and generating its profile usable to generate the networking code of a Rust client."
 authors:
   - "gerhard-fuchs"
-image: "https://foojay.io/wp-content/uploads/2024/09/fuchs2024-java-server-and-rust-client-example.png"
+image: "/images/posts/2024/10/fuchs2024-fepcos-j-java-server-and-rust-client/fuchs2024-java-server-and-rust-client-example.png"
 categories:
   - "Developer Tools"
   - "Use Cases"

@@ -6,7 +6,7 @@ lastmod: "2026-04-04T14:26:12+00:00"
 description: "The Motivation: Why Another AWS Emulator? As Java developers, we are used to local-first development. Tools that emulate the cloud environment have become - by Hector Ventura"
 authors:
   - "hector-ventura"
-image: "https://foojay.io/wp-content/uploads/2026/04/perf-chart-light.png"
+image: "/images/posts/2026/04/introducing-floci-a-high-performance-graalvm-powered-aws-emulator/perf-chart-light.png"
 categories:
   - "Cloud"
   - "Developer Tools"

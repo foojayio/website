@@ -6,7 +6,7 @@ lastmod: "2026-07-10T08:54:25+00:00"
 description: "Learn how to use Exposed, a lightweight SQL ORM for Kotlin. Discover DSL and DAO APIs, database support, and setup your first project."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2026/07/Screenshot-2026-07-10-at-10.53.02-1024x687.png"
+image: "/images/posts/2026/07/exposed-kotlin-orm-complete-guide/Screenshot-2026-07-10-at-10.53.02-1024x687.png"
 categories:
   - "Databases"
   - "Foojay"

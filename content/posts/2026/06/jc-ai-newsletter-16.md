@@ -6,7 +6,7 @@ lastmod: "2026-06-11T09:06:23+00:00"
 description: "Over the past two weeks, the field of artificial intelligence has continued its remarkable pace of advancement. As AI becomes increasingly woven into the - by Miro Wengner"
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2025/07/ai-insider-1.png"
+image: "/images/posts/2026/06/jc-ai-newsletter-16/ai-insider-1.png"
 categories:
   - "Data Engineering"
   - "Interviews"

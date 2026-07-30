@@ -6,7 +6,7 @@ lastmod: "2023-10-04T11:19:11+00:00"
 description: "\"Migrating from one Java vendor to another has never been easier thanks to this book!\""
 authors:
   - "johan-janssen"
-image: "https://foojay.io/wp-content/uploads/2023/08/image-764x1024-dummies.png"
+image: "/images/posts/2023/10/openjdk-migration-book-review/image-764x1024-dummies.png"
 categories:
   - "Book Review"
   - "Books"

@@ -7,7 +7,7 @@ description: "On April 3rd, the first VoxxedDays event in Amsterdam took place. 
 authors:
   - "frankdelporte"
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2025/04/episode-69-voxxeddays-amsterdam.png"
+image: "/images/posts/2025/04/foojay-podcast-69/episode-69-voxxeddays-amsterdam.png"
 categories:
   - "Conference"
   - "Podcast"

@@ -6,7 +6,7 @@ lastmod: "2026-03-03T16:19:55+00:00"
 description: "x402, ERC-8004, A2A, and The Next Wave of AI Commerce: Do AI Agents Dream of Electric Langoustines? A Blade Runner riff for a world where the lobster - by Michal Maléř"
 authors:
   - "michal-maler"
-image: "https://foojay.io/wp-content/uploads/2026/02/daydreams-2-scaled.jpg"
+image: "/images/posts/2026/02/from-crypto-ai-to-general-ai-do-ai-agents-dream-of-electric-langoustines/daydreams-2-scaled.jpg"
 categories:
   - "AI"
   - "Developer Tools"

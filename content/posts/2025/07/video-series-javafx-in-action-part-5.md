@@ -7,7 +7,7 @@ description: "This is the next part in the series of \"JavaFX in Action\" interv
 authors:
   - "frankdelporte"
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2025/07/jfxinaction-part-5.jpg"
+image: "/images/posts/2025/07/video-series-javafx-in-action-part-5/jfxinaction-part-5.jpg"
 categories:
   - "Interviews"
   - "JavaFX"

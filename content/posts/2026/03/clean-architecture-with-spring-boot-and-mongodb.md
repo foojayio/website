@@ -6,7 +6,7 @@ lastmod: "2026-03-24T16:43:15+00:00"
 description: "In this article, you will build a product catalog with orders. Products have names, prices, and stock quantities. Orders reference products and enforce rules like \"you can't order more than what's in stock.\" The domain is small enough to follow in one sitting, but it has real business rules that benefit from the architecture. The tech stack is Java 17+, Spring Boot 3.x, and Spring Data MongoDB. By the end, you will have a project structure where the domain and application layers compile without Spring or MongoDB on the classpath."
 authors:
   - "farhan-chowdhury"
-image: "https://foojay.io/wp-content/uploads/2026/03/Screenshot-2026-03-18-at-8.36.30-AM.png"
+image: "/images/posts/2026/03/clean-architecture-with-spring-boot-and-mongodb/Screenshot-2026-03-18-at-8.36.30-AM.png"
 categories:
   - "Databases"
   - "Java"

@@ -7,7 +7,7 @@ description: "Earn this brand-new badge, recognizing your ability to effectively
 canonical: "https://openliberty.io/blog/2024/08/06/liberty-developer-essentials-badge.html"
 authors:
   - "grace-jansen"
-image: "https://foojay.io/wp-content/uploads/2024/08/LibertyBadge1.png"
+image: "/images/posts/2024/08/get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge/LibertyBadge1.png"
 categories:
   - "Cloud"
   - "Jakarta EE"

@@ -6,7 +6,7 @@ lastmod: "2025-09-18T15:25:24+00:00"
 description: "After launching your local MongoDB Atlas cluster and running the show dbs command in mongosh, you’ll see only the default system databases: admin, config, and local. These are used internally by MongoDB and contain no user data or vector embeddings at this point. To understand how embeddings come into play, take a look at the diagram below. It illustrates how they are generated and stored in MongoDB together with application data."
 authors:
   - "arekborucki"
-image: "https://foojay.io/wp-content/uploads/2025/09/Screenshot-2025-09-18-at-10.22.30-AM.png"
+image: "/images/posts/2025/09/from-zero-to-vector-hero-locally/Screenshot-2025-09-18-at-10.22.30-AM.png"
 categories:
   - "Databases"
   - "Mongo"

@@ -5,7 +5,7 @@ date: "2026-06-16T00:35:19+00:00"
 description: "Ask a Lille Dev: Java developers from DevLille 2026 share insights on Spring Boot, Quarkus, IntelliJ, software quality, tech communities, architecture, and DevOps."
 authors:
   - "vincent-vauban"
-image: "https://foojay.io/wp-content/uploads/2026/06/lilledev.png"
+image: "/images/posts/2026/06/ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers/lilledev.png"
 categories:
   - "Events"
   - "IntelliJ IDEA"

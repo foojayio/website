@@ -7,7 +7,7 @@ description: "Azul is your one-stop partner for all questions related to using J
 canonical: "https://www.azul.com/blog/azul-brings-java-from-edge-to-cloud/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/09/edge-cover.png"
+image: "/images/posts/2024/09/azul-brings-java-from-edge-to-cloud/edge-cover.png"
 categories:
   - "Cloud"
   - "Desktop"

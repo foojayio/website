@@ -7,7 +7,7 @@ description: "Use IntelliJ IDEA's Dependency Matrix to explore the structure of 
 canonical: "https://maritvandijk.com/explore-project-structure-with-dependency-matrix/"
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2023/11/dependency-matrix-menu.png"
+image: "/images/posts/2023/11/explore-project-structure-with-intellij-ideas-dependency-matrix/dependency-matrix-menu.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

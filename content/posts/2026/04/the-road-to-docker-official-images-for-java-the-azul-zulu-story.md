@@ -6,7 +6,7 @@ description: "Previously in this series: Trusted Java Containers: Azul Zulu Open
 canonical: "https://www.azul.com/blog/the-road-to-docker-official-images-for-java-the-azul-zulu-story/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/04/azul-docker-official.avif"
+image: "/images/posts/2026/04/the-road-to-docker-official-images-for-java-the-azul-zulu-story/azul-docker-official.avif"
 categories:
   - "Cloud"
   - "Developer Tools"

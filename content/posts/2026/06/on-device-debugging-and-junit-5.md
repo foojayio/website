@@ -6,7 +6,7 @@ description: "A walk-through of the new JDWP-based on-device debugging pipeline 
 canonical: "https://www.codenameone.com/blog/developer-workflow-debug-and-junit/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/06/developer-workflow-debug-and-junit.jpg"
+image: "/images/posts/2026/06/on-device-debugging-and-junit-5/developer-workflow-debug-and-junit.jpg"
 categories:
   - "Java"
 tags:
@@ -229,7 +229,7 @@ class EmailValidatorTest {
 
     @Test
     void acceptsCommonAddress() {
-        assertTrue(new EmailValidator().isValid("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="92fcf3fff7d2f7eaf3ffe2fef7bcf1fdff">[email&nbsp;protected]</a>"));
+        assertTrue(new EmailValidator().isValid("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e101f131b3e1b061f130e121b501d1113">[email&nbsp;protected]</a>"));
     }
 }</pre>
 

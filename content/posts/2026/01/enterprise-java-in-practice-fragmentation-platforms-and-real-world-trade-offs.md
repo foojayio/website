@@ -6,7 +6,7 @@ description: "Learn how enterprise Java teams are modernizing, adopting Kubernet
 authors:
   - "chiara-civardi"
   - "dominika-tasarz"
-image: "https://foojay.io/wp-content/uploads/2026/01/Image-20-scaled-1.png"
+image: "/images/posts/2026/01/enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs/Image-20-scaled-1.png"
 categories:
   - "Jakarta EE"
   - "Java"

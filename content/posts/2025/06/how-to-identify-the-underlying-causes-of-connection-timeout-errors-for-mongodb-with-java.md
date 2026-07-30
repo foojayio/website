@@ -7,7 +7,7 @@ description: "Understand common causes of connection timeout error when using Mo
 canonical: "https://dzone.com/articles/connection-time-out-errors-mongodb-java"
 authors:
   - "rajesh-nair"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/06/how-to-identify-the-underlying-causes-of-connection-timeout-errors-for-mongodb-with-java/mongologo.png"
 categories:
   - "Databases"
   - "Mongo"

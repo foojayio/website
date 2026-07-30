@@ -6,7 +6,7 @@ description: "A Lottie library is only as good as its output looks. If an animat
 canonical: "https://webtechie.be/post/closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/07/20260702-lottie4j-after.png"
+image: "/images/posts/2026/07/closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j/20260702-lottie4j-after.png"
 categories:
   - "JavaFX"
 tags:

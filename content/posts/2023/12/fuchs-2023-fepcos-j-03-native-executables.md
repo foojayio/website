@@ -6,7 +6,7 @@ lastmod: "2023-12-13T12:14:17+00:00"
 description: "An example shows how Java developers can build native executables of declaratively composed networked systems by using FEPCOS-J and GraalVM."
 authors:
   - "gerhard-fuchs"
-image: "https://foojay.io/wp-content/uploads/2023/11/fuchs2023-fepcos-j-modular-design.png"
+image: "/images/posts/2023/12/fuchs-2023-fepcos-j-03-native-executables/fuchs2023-fepcos-j-modular-design.png"
 categories:
   - "Developer Tools"
   - "Java"

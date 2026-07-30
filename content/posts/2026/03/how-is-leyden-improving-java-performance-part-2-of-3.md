@@ -7,7 +7,7 @@ description: "How to use the AOT capabilities by Leyden and show test results wh
 canonical: "https://delawen.com/2025/03/17/How-is-Leyden-improving-Java-Performance-2"
 authors:
   - "maria-arias"
-image: "https://foojay.io/wp-content/uploads/2026/03/training-maria-training.png"
+image: "/images/posts/2026/03/how-is-leyden-improving-java-performance-part-2-of-3/training-maria-training.png"
 categories:
   - "Java"
   - "Performance"

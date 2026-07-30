@@ -6,7 +6,7 @@ lastmod: "2026-02-10T14:32:05+00:00"
 description: "Over the past decade, the Java ecosystem has gradually abandoned the idea that increasing the number of threads is the scalable solution to growing load. Cloud-native implementations, containerized workloads, and high-I/O applications have highlighted the inefficiencies of the traditional synchronous thread-per-request model.Reactive programming is not a panacea, a miracle solution. Certainly, it does not make applications “faster” by default. What it offers, when applied correctly, is the ability to predict behavior under load, better resource utilization, and explicit control over data flow. For systems that handle high concurrency, streaming data, or variable traffic patterns, these characteristics are hugely relevant.Project Reactor has become the de facto standard for reactive libraries in the Java ecosystem. This is due to its strong integration with Spring WebFlux and Spring Data. In combination with MongoDB's Reactive Streams driver, it allows you to build non-blocking end-to-end pipelines, from the HTTP layer to the database."
 authors:
   - "matteo-rossi"
-image: "https://foojay.io/wp-content/uploads/2026/02/4201559.png"
+image: "/images/posts/2026/02/reactive-java-with-project-reactor/4201559.png"
 categories:
   - "Databases"
   - "Java"

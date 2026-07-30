@@ -7,7 +7,7 @@ description: "Use the debugger to find out how a Java application works under th
 canonical: "https://flounder.dev/posts/debugger-god-mode/"
 authors:
   - "igor-kulakov"
-image: "https://foojay.io/wp-content/uploads/2024/06/banner.png"
+image: "/images/posts/2024/06/debugger-godmode-hacking-a-jvm-application-with-the-debugger/banner.png"
 categories:
   - "Debugging"
   - "IntelliJ IDEA"

@@ -6,7 +6,7 @@ lastmod: "2025-10-07T14:01:54+00:00"
 description: "MongoDB makes it really easy to work with location data (sometimes called Geo Data) by simplifying how to store this type of data and streamlining how you query for it so you can easily create “find nearby” queries, or plot your location data with ease!Let’s start with the basics: modeling your data, indexing it properly, running geo queries, and then displaying results on a map."
 authors:
   - "justin-jenkins"
-image: "https://foojay.io/wp-content/uploads/2025/10/Screenshot-2025-10-06-at-1.23.35-PM.png"
+image: "/images/posts/2025/10/working-with-geo-location-data/Screenshot-2025-10-06-at-1.23.35-PM.png"
 categories:
   - "Databases"
   - "Mongo"

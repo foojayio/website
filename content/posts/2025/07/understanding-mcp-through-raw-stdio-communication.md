@@ -6,7 +6,7 @@ lastmod: "2025-07-17T16:08:57+00:00"
 description: "Get hands-on experience with the exact code examined in this article, along with exercises, debugging techniques, and best practices for production deployment."
 authors:
   - "david-parry"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/07/understanding-mcp-through-raw-stdio-communication/Favicon-3-2.png"
 categories:
   - "Java"
   - "Java Beginner"

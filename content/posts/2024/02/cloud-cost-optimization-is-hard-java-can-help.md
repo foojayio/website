@@ -7,7 +7,7 @@ description: "Did you know switching your Java runtime helps reduce Cloud waste?
 canonical: "https://www.azul.com/blog/cloud-cost-optimization-is-hard/"
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2024/02/Latency-Line-Chart-min.jpg"
+image: "/images/posts/2024/02/cloud-cost-optimization-is-hard-java-can-help/Latency-Line-Chart-min.jpg"
 categories:
   - "Java Core"
   - "Performance"

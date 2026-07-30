@@ -7,7 +7,7 @@ description: "Quartz is often considered the standard job scheduling library in 
 authors:
   - "ismaila-adamou"
   - "ronald-dehuysser"
-image: "https://foojay.io/wp-content/uploads/2024/11/db-scheduler.png"
+image: "/images/posts/2024/11/task-schedulers-in-java-modern-alternatives-to-quartz-scheduler/db-scheduler.png"
 categories:
   - "Developer Tools"
   - "Java"
@@ -86,7 +86,7 @@ Here's a simple example of how to schedule a job using JobRunr:
 <pre class="EnlighterJSRAW" data-enlighter-language="java">// Schedule a one-off job to run in 1 hour
 jobScheduler.schedule(
     Instant.now().plus(1, ChronoUnit.HOURS),
-    () -&gt; sendEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dca9afb9ae9cb9a4bdb1acb0b9f2bfb3b1">[email&nbsp;protected]</a>")
+    () -&gt; sendEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6114120413210419000c110d044f020e0c">[email&nbsp;protected]</a>")
 );</pre>
 
 JobRunr integrates very well with the whole Java ecosystem like Spring Boot, Quarkus and Micronaut and supports all major SQL databases and even some popular NoSQL databases.

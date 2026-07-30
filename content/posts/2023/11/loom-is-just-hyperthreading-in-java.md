@@ -6,7 +6,7 @@ lastmod: "2023-11-14T10:54:08+00:00"
 description: "I had an epiphany: Aren't virtual threads with Loom just a version of HyperThreading on the JVM?"
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/10/ht_vs_vt_pyramid-1-2000x1125-1.png"
+image: "/images/posts/2023/11/loom-is-just-hyperthreading-in-java/ht_vs_vt_pyramid-1-2000x1125-1.png"
 categories:
   - "Java"
 tags:

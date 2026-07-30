@@ -7,7 +7,7 @@ description: "Here is the overview of the JavaFX LinksOfTheMonth of February 202
 canonical: "https://webtechie.be/post/2024-02-28-javafx-links-of-february-2024/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/09/jfxcentral.png"
+image: "/images/posts/2024/02/javafx-links-of-february-2024/jfxcentral.png"
 categories:
   - "JavaFX"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2024-04-16T06:25:37+00:00"
 description: "Smart logging with AOP in Spring boot with our smart Logging, leveraging AOP for detailed, configurable logging. Ideal for cleaner code"
 authors:
   - "abo-saad-muaath"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2024/04/smarter-logging-in-spring-boot-with-aop/Favicon-3-2.png"
 categories:
   - "Java"
 tags:

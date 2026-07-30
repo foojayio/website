@@ -7,7 +7,7 @@ description: "Today, I'd like to write about my North America \"Tour\" across se
 canonical: "https://blog.franke.ch/apisix-north-america-tour/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/03/globe-1311758_1280.jpg"
+image: "/images/posts/2024/03/apache-apisix-north-america-tour/globe-1311758_1280.jpg"
 categories:
   - "Events"
   - "JUGs"

@@ -6,7 +6,7 @@ lastmod: "2026-07-09T13:53:17+00:00"
 description: "Learn how intricate and amazing the JVM is and how much cognitive load that it takes on so you rarely have to think about things that steal your focus away from application logic."
 authors:
   - "kirk-pepperdine"
-image: "https://foojay.io/wp-content/uploads/2026/07/Screenshot-2026-07-09-at-15.41.30.png"
+image: "/images/posts/2026/07/nulling-out-references-wont-help-your-garbage-collector/Screenshot-2026-07-09-at-15.41.30.png"
 categories:
   - "Performance"
 tags:

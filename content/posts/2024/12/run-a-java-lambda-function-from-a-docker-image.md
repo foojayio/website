@@ -6,7 +6,7 @@ lastmod: "2024-12-11T22:24:06+00:00"
 description: "The Hello Lambda Function project contains an AWS Lambda maven application with AWS Java SDK 2.x dependencies."
 authors:
   - "charl-fasching"
-image: "https://foojay.io/wp-content/uploads/2024/12/LambdaDocker.png"
+image: "/images/posts/2024/12/run-a-java-lambda-function-from-a-docker-image/LambdaDocker.png"
 categories:
   - "Cloud"
   - "DevOps"

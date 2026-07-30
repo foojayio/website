@@ -7,7 +7,7 @@ description: "Instead of forking the call on the client side, we fork the call o
 canonical: "https://blog.frankel.ch/chopping-monolith-smarter-way/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/11/roger_stone.jpg"
+image: "/images/posts/2023/12/chopping-the-monolith-in-a-smarter-way/roger_stone.jpg"
 categories:
   - "Microservices"
   - "Performance"

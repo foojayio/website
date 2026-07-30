@@ -7,7 +7,7 @@ description: "A simple implementation of the Idempotency-Key header specificatio
 canonical: "https://blog.frankel.ch/implement-idempotency-key-apisix/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/04/stormtrooper-2899993.jpg"
+image: "/images/posts/2024/09/implementing-the-idempotency-key-specification-on-apache-apisix/stormtrooper-2899993.jpg"
 categories:
   - "DevOps"
   - "Use Cases"

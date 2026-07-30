@@ -7,7 +7,7 @@ description: "Redis 8 with its new capabilities and with AGPL licensing demonstr
 canonical: "https://redis.io/blog/agplv3/"
 authors:
   - "rowan-trollope"
-image: "https://foojay.io/wp-content/uploads/2025/05/redissmall.png"
+image: "/images/posts/2025/05/redis-is-now-available-under-the-agplv3-open-source-license/redissmall.png"
 categories:
   - "Redis"
 tags:

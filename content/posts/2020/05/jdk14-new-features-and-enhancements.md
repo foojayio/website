@@ -7,7 +7,7 @@ description: "Java 14 (Java SE 14) and its Java Development Kit 14 (JDK 14) is n
 canonical: "https://www.azul.com/blog/whats-new-in-jdk14-latest-release/"
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/05/jdk14-new-features-and-enhancements/Favicon-3-2.png"
 categories:
   - "Performance"
 tags:

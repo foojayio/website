@@ -7,7 +7,7 @@ description: "Trouble finding memory leaks in a Java program? Learn how allocati
 canonical: "https://flounder.dev/posts/allocation-profiling/"
 authors:
   - "igor-kulakov"
-image: "https://foojay.io/wp-content/uploads/2024/08/banner.png"
+image: "/images/posts/2024/08/get-started-with-allocation-profiling/banner.png"
 categories:
   - "Debugging"
   - "IntelliJ IDEA"

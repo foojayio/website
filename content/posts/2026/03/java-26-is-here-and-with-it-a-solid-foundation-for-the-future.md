@@ -6,7 +6,7 @@ description: "Java 26 is here, and its main purpose seems to be to provide a sol
 canonical: "https://hanno.codes/2026/03/17/java-26-is-here/"
 authors:
   - "hanno-embregts"
-image: "https://foojay.io/wp-content/uploads/2026/03/foundation.jpg"
+image: "/images/posts/2026/03/java-26-is-here-and-with-it-a-solid-foundation-for-the-future/foundation.jpg"
 categories:
   - "Java"
 tags:

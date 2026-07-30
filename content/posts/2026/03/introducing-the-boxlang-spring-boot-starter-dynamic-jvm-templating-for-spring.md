@@ -6,7 +6,7 @@ lastmod: "2026-03-20T06:51:26+00:00"
 description: "Spring Boot developers know the pain of evaluating view technologies. Thymeleaf is great — until you need more expressiveness. FreeMarker is powerful — - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/03/boxlang-spring-boot-release.jpg"
+image: "/images/posts/2026/03/introducing-the-boxlang-spring-boot-starter-dynamic-jvm-templating-for-spring/boxlang-spring-boot-release.jpg"
 categories:
   - "BoxLang"
   - "Cloud"

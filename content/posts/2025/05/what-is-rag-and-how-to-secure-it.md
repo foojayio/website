@@ -7,7 +7,7 @@ description: "The implementation of RAG introduces security considerations. Risk
 canonical: "https://snyk.io/articles/what-is-rag-and-how-to-secure-it/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2025/05/Screenshot_2025-04-17_at_10.56.16_AM_j9yhif.webp"
+image: "/images/posts/2025/05/what-is-rag-and-how-to-secure-it/Screenshot_2025-04-17_at_10.56.16_AM_j9yhif.webp"
 categories:
   - "LangChain4j"
   - "Security"

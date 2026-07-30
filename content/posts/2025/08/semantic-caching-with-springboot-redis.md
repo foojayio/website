@@ -6,7 +6,7 @@ lastmod: "2025-08-07T07:02:22+00:00"
 description: "Build semantic caching with Spring AI & Redis to cut LLM costs 80%. Cache by meaning, not exact text. Full tutorial with working demo."
 authors:
   - "raphael-delio"
-image: "https://foojay.io/wp-content/uploads/2025/07/Copia-de-Blue-—-WIP-2.png"
+image: "/images/posts/2025/08/semantic-caching-with-springboot-redis/Copia-de-Blue---WIP-2.png"
 categories:
   - "AI"
   - "Java"

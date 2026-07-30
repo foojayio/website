@@ -7,7 +7,7 @@ description: "DORA significantly impacts investments by the financial sector in 
 authors:
   - "geertjan-wielenga"
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2024/07/dora.png"
+image: "/images/posts/2024/07/the-impact-of-the-digital-operational-resilience-act-dora-on-java-investment-with-azul/dora.png"
 categories:
   - "EU DORA Act"
   - "Java Core"

@@ -6,7 +6,7 @@ lastmod: "2024-10-04T06:19:19+00:00"
 description: "A null object pattern, in our case a NULL_SENSOR instance, can easily contribute to the process flow of a running program while remaining consistent and type-safe."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2024/10/exploring-new-features-in-jdk-23-null-object-pattern-to-avoid-null-pointer-exception-with-jep-455/Favicon-3-2.png"
 categories:
   - "Java"
   - "JEPs"

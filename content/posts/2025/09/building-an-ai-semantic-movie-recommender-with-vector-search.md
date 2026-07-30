@@ -6,7 +6,7 @@ lastmod: "2025-09-30T13:23:38+00:00"
 description: "Last time, we created a vector search index in a local MongoDB Atlas cluster. Now, let’s put it to work with a real case: building an AI-powered movie recommender that suggests films similar to The Matrix–without any shared keywords."
 authors:
   - "arekborucki"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/09/building-an-ai-semantic-movie-recommender-with-vector-search/Favicon-3-2.png"
 categories:
   - "AI"
   - "Mongo"

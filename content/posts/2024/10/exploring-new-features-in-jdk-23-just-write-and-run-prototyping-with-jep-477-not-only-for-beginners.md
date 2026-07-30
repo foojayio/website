@@ -6,7 +6,7 @@ lastmod: "2024-10-23T09:45:14+00:00"
 description: "JEP-477 can be considered an example of the symbiotic development of multiple JEPs together, similar to the result of the development of the Java platform."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2024/10/exploring-new-features-in-jdk-23-just-write-and-run-prototyping-with-jep-477-not-only-for-beginners/Favicon-3-2.png"
 categories:
   - "Java"
   - "Java Beginner"

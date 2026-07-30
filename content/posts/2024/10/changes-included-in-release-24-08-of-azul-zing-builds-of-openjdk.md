@@ -8,7 +8,7 @@ canonical: "https://www.azul.com/blog/changes-included-in-release-24-08-of-azul-
 authors:
   - "frankdelporte"
   - "matt-van-order"
-image: "https://foojay.io/wp-content/uploads/2023/09/Azul-Prime-Stable-2308.jpg"
+image: "/images/posts/2024/10/changes-included-in-release-24-08-of-azul-zing-builds-of-openjdk/Azul-Prime-Stable-2308.jpg"
 categories:
   - "Cloud"
   - "Java"

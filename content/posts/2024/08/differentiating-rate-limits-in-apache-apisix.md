@@ -7,7 +7,7 @@ description: "In this post, we implement rate limiting with Apache APISIX. We se
 canonical: "https://blog.frankel.ch/different-rate-limits-apisix/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/07/speedometer-1249610.jpg"
+image: "/images/posts/2024/08/differentiating-rate-limits-in-apache-apisix/speedometer-1249610.jpg"
 categories:
   - "DevOps"
 tags:

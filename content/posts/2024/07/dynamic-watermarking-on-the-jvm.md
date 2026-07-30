@@ -7,7 +7,7 @@ description: "Displaying images on your website makes for an interesting problem
 canonical: "https://blog.frankel.ch/dynamic-watermarking/1/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/06/faucet-1684902.jpg"
+image: "/images/posts/2024/07/dynamic-watermarking-on-the-jvm/faucet-1684902.jpg"
 categories:
   - "Java"
   - "Java Core"

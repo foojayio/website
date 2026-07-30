@@ -6,7 +6,7 @@ lastmod: "2024-04-14T16:19:51+00:00"
 description: "Let's look into the eBPF memory layout and alignment of structs transferred between the kernel and user-land."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2024/04/struct_layout2-2000x772-1.png"
+image: "/images/posts/2024/04/hello-ebpf-auto-layouting-structs-7/struct_layout2-2000x772-1.png"
 categories:
   - "Tools"
 tags:

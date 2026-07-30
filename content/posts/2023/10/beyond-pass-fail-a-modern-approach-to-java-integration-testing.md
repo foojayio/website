@@ -7,7 +7,7 @@ description: "Tests can run limited sets of assertions on your code, or reveal i
 canonical: "https://www.atomicjar.com/2023/10/beyond-pass-fail-a-modern-approach-to-java-integration-testing/"
 authors:
   - "roni-dover"
-image: "https://foojay.io/wp-content/uploads/2023/10/1_JAiQsj-ez608WsovCheXVQ-1024x512-1.png"
+image: "/images/posts/2023/10/beyond-pass-fail-a-modern-approach-to-java-integration-testing/1_JAiQsj-ez608WsovCheXVQ-1024x512-1.png"
 categories:
   - "Developer Tools"
   - "Observability"

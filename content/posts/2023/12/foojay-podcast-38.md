@@ -7,7 +7,7 @@ description: "Cloud servers, Docker, Kubernetes, distributed systems, scaling up
 authors:
   - "frankdelporte"
   - "grace-jansen"
-image: "https://foojay.io/wp-content/uploads/2023/12/podcast-38-cloud-guests.png"
+image: "/images/posts/2023/12/foojay-podcast-38/podcast-38-cloud-guests.png"
 categories:
   - "Cloud"
   - "DevOps"

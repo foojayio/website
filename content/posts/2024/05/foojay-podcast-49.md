@@ -10,7 +10,7 @@ authors:
   - "mgrygles"
   - "r-fichtner"
   - "soham-dasgupta"
-image: "https://foojay.io/wp-content/uploads/2024/05/foojay-jcon.png"
+image: "/images/posts/2024/05/foojay-podcast-49/foojay-jcon.png"
 categories:
   - "Conference"
   - "Java Core"

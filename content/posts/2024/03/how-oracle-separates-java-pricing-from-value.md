@@ -7,7 +7,7 @@ description: "Oracle deserves props for continuing to develop Java as an open-s
 canonical: "https://www.azul.com/blog/how-oracle-separates-java-pricing-from-value/"
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2023/08/image-764x1024-dummies.png"
+image: "/images/posts/2024/03/how-oracle-separates-java-pricing-from-value/image-764x1024-dummies.png"
 categories:
   - "Java Core"
 tags:

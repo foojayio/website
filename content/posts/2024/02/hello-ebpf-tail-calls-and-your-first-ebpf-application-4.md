@@ -6,7 +6,7 @@ lastmod: "2024-02-23T08:44:52+00:00"
 description: "This week, we use tail calls and create our first application using hello-ebpf as a library."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2024/02/image-1-1.png"
+image: "/images/posts/2024/02/hello-ebpf-tail-calls-and-your-first-ebpf-application-4/image-1-1.png"
 categories:
   - "Tools"
 tags:

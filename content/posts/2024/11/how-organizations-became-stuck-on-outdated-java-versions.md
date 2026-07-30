@@ -6,7 +6,7 @@ lastmod: "2024-11-27T15:46:17+00:00"
 description: "Why is your company still on Java 8 (or older)? And why did you never move to 9, 10,... and got stuck on this outdated version?"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/11/java-discussions.webp"
+image: "/images/posts/2024/11/how-organizations-became-stuck-on-outdated-java-versions/java-discussions.webp"
 categories:
   - "Java"
   - "Java Core"

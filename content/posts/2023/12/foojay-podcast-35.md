@@ -6,7 +6,7 @@ lastmod: "2025-11-13T08:52:04+00:00"
 description: "Today, we are traveling to Dublin to learn more about its Java community!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/11/dublin-jug-podcast-guest.png"
+image: "/images/posts/2023/12/foojay-podcast-35/dublin-jug-podcast-guest.png"
 categories:
   - "JUGs"
   - "Podcast"

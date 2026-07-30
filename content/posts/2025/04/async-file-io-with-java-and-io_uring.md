@@ -7,7 +7,7 @@ description: "Using Java together with Project Panama and virtual threads to cre
 canonical: "https://davidvlijmincx.com/posts/async-io-with-java-and-panama/"
 authors:
   - "david-vlijmincx"
-image: "https://foojay.io/wp-content/uploads/2025/04/async.png"
+image: "/images/posts/2025/04/async-file-io-with-java-and-io_uring/async.png"
 categories:
   - "Java"
   - "Java Core"

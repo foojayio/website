@@ -6,7 +6,7 @@ lastmod: "2026-01-19T15:27:16+00:00"
 description: "Secure Java projects with SonarQube AI Code Assurance. Use AI CodeFix and the MCP Server to auto-remediate technical debt instantly."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2026/01/Gemini_Generated_Image_d9mrmpd9mrmpd9mr.png"
+image: "/images/posts/2026/01/sonarqube-part-4-ai-code-assurance/Gemini_Generated_Image_d9mrmpd9mrmpd9mr.png"
 categories:
   - "AI"
   - "Developer Tools"

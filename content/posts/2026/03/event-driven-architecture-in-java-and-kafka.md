@@ -6,7 +6,7 @@ lastmod: "2026-03-10T18:35:45+00:00"
 description: "Reactive Java is well suited to modern streaming, event driven applications. In this article, we'll walk through an example of such an application using Reactive Java with MongoDB. Specifically, we're going to cover:Why Reactive Java was introduced and how it differs from more traditional Java programming.Details of some of the key elements of Reactive Java - Mono, Flux and flatMap.A walk through of a sample application, comparing a Reactive version of the code using the Reactive Streams MongoDB driver, with a more traditional version of the code using the synchronous MongoDB driver."
 authors:
   - "graeme-robinson"
-image: "https://foojay.io/wp-content/uploads/2026/03/Screenshot-2026-03-06-at-12.25.26-PM.png"
+image: "/images/posts/2026/03/event-driven-architecture-in-java-and-kafka/Screenshot-2026-03-06-at-12.25.26-PM.png"
 categories:
   - "Java"
   - "Kafka"

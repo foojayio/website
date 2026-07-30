@@ -6,7 +6,7 @@ lastmod: "2025-11-13T08:55:45+00:00"
 description: "The first week of October, the 20th edition of Devoxx took place in Antwerp, Belgium. I got the opportunity to walk around with a microphone and talk to visitors and speakers!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/10/podcast-31-devoxx.png"
+image: "/images/posts/2023/10/foojay-podcast-31/podcast-31-devoxx.png"
 categories:
   - "Conference"
   - "Java Core"

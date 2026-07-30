@@ -6,7 +6,7 @@ lastmod: "2024-01-08T12:40:16+00:00"
 description: "Thanks Gokul for your support to bring an online Java editor to Foojay!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/10/jdoodle-example.png"
+image: "/images/posts/2024/01/interview-with-gokul-chandrasekaran-the-creator-of-jdoodle/jdoodle-example.png"
 categories:
   - "Foojay"
   - "Interviews"

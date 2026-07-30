@@ -6,7 +6,7 @@ lastmod: "2024-02-09T10:18:25+00:00"
 description: "Explore the Evolution of Microservices: Microservices in the Modern Architecture Landscape with our in-depth guide that compares it with SOA."
 authors:
   - "abo-saad-muaath"
-image: "https://foojay.io/wp-content/uploads/2024/02/think-samll-microservices.jpg"
+image: "/images/posts/2024/02/evolution-of-microservices-from-soa-to-modern-architecture/think-samll-microservices.jpg"
 categories:
   - "Microservices"
 tags:

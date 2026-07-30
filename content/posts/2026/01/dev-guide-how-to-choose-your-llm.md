@@ -6,7 +6,7 @@ lastmod: "2026-01-22T14:54:28+00:00"
 description: "In the AI LLM ecosystem (Anthropic, OpenAI, Google, ...), if the code compiles and does what we asked is just level 1. I have been analyzing the latest Sonar Leaderboard (with fresh data from late 2025/2026 on 4,444 Java tasks) and there are big surprises."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2026/01/Gemini_Generated_Image_z9j355z9j355z9j3-2.png"
+image: "/images/posts/2026/01/dev-guide-how-to-choose-your-llm/Gemini_Generated_Image_z9j355z9j355z9j3-2.png"
 categories:
   - "AI"
 tags:

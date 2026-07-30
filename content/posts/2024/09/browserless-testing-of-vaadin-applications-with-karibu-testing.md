@@ -6,7 +6,7 @@ lastmod: "2024-09-09T06:27:42+00:00"
 description: "About a testing framework that stands out for its ability to run browserless testing, offering several advantages over traditional end-to-end testing approaches, such as Selenium, Playwright, or Cypress."
 authors:
   - "simon-martinelli"
-image: "https://foojay.io/wp-content/uploads/2024/09/pexels-tomas-malik-793526-26690667.jpg"
+image: "/images/posts/2024/09/browserless-testing-of-vaadin-applications-with-karibu-testing/pexels-tomas-malik-793526-26690667.jpg"
 categories:
   - "Testing"
   - "Vaadin"
@@ -140,7 +140,7 @@ As we want to test a protected view we first login and then navigate to the view
 
     @BeforeEach
     public void login() {
-        login("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94e7fdf9fbfad4f9f5e6e0fdfaf1f8f8fdbaf7fc">[email&nbsp;protected]</a>", "", List.of(Role.ADMIN));
+        login("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6112080c0e0f210c001315080f040d0d084f0209">[email&nbsp;protected]</a>", "", List.of(Role.ADMIN));
 
         UI.getCurrent().navigate(ClubsView.class);
     }

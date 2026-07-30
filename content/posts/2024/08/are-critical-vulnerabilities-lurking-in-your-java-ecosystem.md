@@ -6,7 +6,7 @@ lastmod: "2024-08-19T12:58:01+00:00"
 description: "According to the Datadog \"State of DevSecOps\" report, a staggering 90% of Java services are susceptible to one or more critical or high-severity vulnerabilities"
 authors:
   - "maqsud-mohammad"
-image: "https://foojay.io/wp-content/uploads/2024/08/java-eco-system.jpeg"
+image: "/images/posts/2024/08/are-critical-vulnerabilities-lurking-in-your-java-ecosystem/java-eco-system.jpeg"
 categories:
   - "DevOps"
   - "Java"

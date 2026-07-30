@@ -6,7 +6,7 @@ lastmod: "2024-04-14T16:16:14+00:00"
 description: "How to ensure the right usage of the new version of Java 21, and improve performance and clarity in our code base."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2024/04/ensuring-the-right-usage-of-java-21-new-features/Favicon-3-2.png"
 categories:
   - "Developer Tools"
   - "Java"

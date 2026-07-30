@@ -7,7 +7,7 @@ description: "In this short article, we detail the three options for versioning 
 canonical: "https://blog.frankel.ch/api-versioning/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/11/signpost-3691159.jpg"
+image: "/images/posts/2024/01/api-versioning/signpost-3691159.jpg"
 categories:
   - "Tutorials"
 tags:

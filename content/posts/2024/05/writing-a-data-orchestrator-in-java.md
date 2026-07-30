@@ -6,7 +6,7 @@ lastmod: "2024-05-03T08:37:28+00:00"
 description: "What makes Kestra unique amongst all the data orchestrators and how to leverage the power of the Java platform and its ecosystem to build a performant, scalable, and feature-rich data orchestrator."
 authors:
   - "loic-mathieu"
-image: "https://foojay.io/wp-content/uploads/2024/04/kestra-software-architecture-700x394-1.png"
+image: "/images/posts/2024/05/writing-a-data-orchestrator-in-java/kestra-software-architecture-700x394-1.png"
 categories:
   - "DataEngineering"
   - "Java"

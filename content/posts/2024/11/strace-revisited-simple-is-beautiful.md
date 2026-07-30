@@ -7,7 +7,7 @@ description: "Explore strace for Linux debugging: origins, usage, JVM insights, 
 canonical: "https://debugagent.com/strace-revisited-simple-is-beautiful"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/02/DALL·E-2024-01-30-08.36.40-A-full-width-dynamic-and-colorful-digital-illustration-for-a-blog-header-focused-on-the-theme-of-system-debugging-in-a-Linux-environment.-The-image-.jpg"
+image: "/images/posts/2024/11/strace-revisited-simple-is-beautiful/DALL-E-2024-01-30-08.36.40-A-full-width-dynamic-and-colorful-digital-illustration-for-a-blog-header-focused-on-the-theme-of-system-debugging-in-a-Linux-environment.-The-image-.jpg"
 categories:
   - "Tools"
   - "Tutorials"

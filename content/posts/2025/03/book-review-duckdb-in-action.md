@@ -6,7 +6,7 @@ lastmod: "2025-03-05T13:43:48+00:00"
 description: "This review is about DuckDB in Action by JoMark Needham, Michael Hunger, and Michael Simons from Manning."
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/11/DuckDB_in_Action_large.jpg"
+image: "/images/posts/2025/03/book-review-duckdb-in-action/DuckDB_in_Action_large.jpg"
 categories:
   - "Book Review"
   - "Databases"

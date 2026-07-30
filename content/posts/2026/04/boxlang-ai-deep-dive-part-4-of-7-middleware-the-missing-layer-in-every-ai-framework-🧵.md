@@ -6,7 +6,7 @@ lastmod: "2026-05-14T09:54:42+00:00"
 description: "BoxLang AI 3.0 Series · Part 4 of 7 Here's the question every team eventually asks about their AI agents: how do we test these things? Agents make live - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/04/bxai-series-cover-04S.png"
+image: "/images/posts/2026/04/boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework-🧵/bxai-series-cover-04S.png"
 categories:
   - "AI"
   - "BoxLang"

@@ -6,7 +6,7 @@ lastmod: "2025-05-07T22:11:35+00:00"
 description: "Whether your child is just beginning to explore technology or ready for more advanced programming, this book provides a solid foundation for fostering lifelong interest in technology."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2025/05/6187sWf3qUL._SY522_.jpg"
+image: "/images/posts/2025/05/book-review-raising-young-coders/6187sWf3qUL._SY522_.jpg"
 categories:
   - "Book Review"
   - "Books"

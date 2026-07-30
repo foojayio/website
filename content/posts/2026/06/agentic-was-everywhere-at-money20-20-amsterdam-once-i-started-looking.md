@@ -6,7 +6,7 @@ lastmod: "2026-06-05T08:55:50+00:00"
 description: "Can an agent initiate a payment, decline a loan, or file a compliance report in a way that's deterministic enough to defend?"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2026/06/1780385104999.jpeg"
+image: "/images/posts/2026/06/agentic-was-everywhere-at-money20-20-amsterdam-once-i-started-looking/1780385104999.jpeg"
 categories:
   - "AI"
   - "Machine Learning"

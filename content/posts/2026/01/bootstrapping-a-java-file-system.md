@@ -6,7 +6,7 @@ lastmod: "2026-01-29T14:59:44+00:00"
 description: "Creating a custom Java file system is both geeky and fun, perhaps more fun than I have had in a while, plus I have a deeper understanding of a core Java concept."
 authors:
   - "scott-sosna"
-image: "https://foojay.io/wp-content/uploads/2026/01/disk-controller.jpg"
+image: "/images/posts/2026/01/bootstrapping-a-java-file-system/disk-controller.jpg"
 categories:
   - "Tutorials"
   - "Use Cases"

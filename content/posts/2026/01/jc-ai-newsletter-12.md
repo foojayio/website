@@ -6,7 +6,7 @@ lastmod: "2026-02-05T20:40:57+00:00"
 description: "First of all, Happy New Year 2026! This year is designated in the Chinese Calendar as the Year of the Fire Horse (starting on February 17.). The year 2026 - by Miro Wengner"
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2025/07/ai-insider-1.png"
+image: "/images/posts/2026/01/jc-ai-newsletter-12/ai-insider-1.png"
 categories:
   - "AI"
   - "Data Engineering"

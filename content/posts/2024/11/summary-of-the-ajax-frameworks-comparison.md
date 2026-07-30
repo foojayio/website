@@ -7,7 +7,7 @@ description: "In previous weeks, I've analyzed several libraries and frameworks 
 canonical: "https://blog.frankel.ch/ajax-ssr/7/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/10/technology-7111798.jpg"
+image: "/images/posts/2024/11/summary-of-the-ajax-frameworks-comparison/technology-7111798.jpg"
 categories:
   - "Vaadin"
 tags:

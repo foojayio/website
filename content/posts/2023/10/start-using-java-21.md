@@ -7,7 +7,7 @@ description: "Java 21, including virtual threads, is finally here! And you can t
 canonical: "https://openliberty.io/blog/2023/10/17/23.0.0.10.html"
 authors:
   - "laura-cowen"
-image: "https://foojay.io/wp-content/uploads/2023/10/OL_logo_green_on_white.png"
+image: "/images/posts/2023/10/start-using-java-21/OL_logo_green_on_white.png"
 categories:
   - "JDK21"
   - "Release Notes"

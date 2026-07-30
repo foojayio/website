@@ -7,7 +7,7 @@ description: "Explore the refined Java Structured Concurrency API. Learn about n
 canonical: "https://bazlur.ca/2025/05/25/javas-structured-concurrency-finally-finding-its-footing/"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2022/02/shutterstock_1111260050-350x233-1.jpg"
+image: "/images/posts/2025/06/javas-structured-concurrency-finally-finding-its-footing/shutterstock_1111260050-350x233-1.jpg"
 categories:
   - "Java"
   - "Java Core"

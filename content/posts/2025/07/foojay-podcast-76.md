@@ -8,7 +8,7 @@ authors:
   - "frankdelporte"
   - "geertjan-wielenga"
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2025/07/episode-76-decbcn-part-1.jpg"
+image: "/images/posts/2025/07/foojay-podcast-76/episode-76-decbcn-part-1.jpg"
 categories:
   - "Conference"
   - "Java"

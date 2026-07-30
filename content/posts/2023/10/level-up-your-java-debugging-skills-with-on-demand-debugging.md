@@ -6,7 +6,7 @@ lastmod: "2023-10-16T14:21:25+00:00"
 description: "Learn about onthrow and onjcmd and more that can improve the performance of on-demand debugging, as this allows us to trigger the start of the debugging session from outside the debugger."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/10/ondemanddebug.png"
+image: "/images/posts/2023/10/level-up-your-java-debugging-skills-with-on-demand-debugging/ondemanddebug.png"
 categories:
   - "Debugging"
 tags:

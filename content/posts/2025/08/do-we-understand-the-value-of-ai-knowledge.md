@@ -6,7 +6,7 @@ lastmod: "2025-08-12T11:26:51+00:00"
 description: "The future is not yet written and every moment is important."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2025/08/20250810_Neuron_wiki.png"
+image: "/images/posts/2025/08/do-we-understand-the-value-of-ai-knowledge/20250810_Neuron_wiki.png"
 categories:
   - "AI"
   - "Design Patterns"

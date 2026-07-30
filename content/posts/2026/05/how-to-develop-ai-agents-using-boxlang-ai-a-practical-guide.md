@@ -6,7 +6,7 @@ lastmod: "2026-05-14T10:03:42+00:00"
 description: "AI agents are transforming how we build software. Unlike traditional chatbots that just answer questions, agents can reason about what tools they need, - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/05/Captura-de-pantalla-2026-05-11-195950.png"
+image: "/images/posts/2026/05/how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide/Captura-de-pantalla-2026-05-11-195950.png"
 categories:
   - "AI"
   - "BoxLang"
@@ -523,8 +523,8 @@ Every memory operation accepts `userId` and `conversationId` to route each read/
 When you pass `userId` and `conversationId` through `agent.run()` options, they flow automatically to all memory operations --- no explicit wiring needed:
 
 <pre class="EnlighterJSRAW" data-enlighter-language="java">// Same agent instance, fully isolated per user
-agent.run( "My order is late.", {}, { userId: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82e3eeebe1e7c2e7fae3eff2eee7ace1edef">[email&nbsp;protected]</a>", conversationId: "ticket-101" } )
-agent.run( "I need a refund.",  {}, { userId: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="93f1fcf1d3f6ebf2fee3fff6bdf0fcfe">[email&nbsp;protected]</a>",   conversationId: "ticket-102" } )
+agent.run( "My order is late.", {}, { userId: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8eefe2e7edebceebf6efe3fee2eba0ede1e3">[email&nbsp;protected]</a>", conversationId: "ticket-101" } )
+agent.run( "I need a refund.",  {}, { userId: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="54363b3614312c35392438317a373b39">[email&nbsp;protected]</a>",   conversationId: "ticket-102" } )
 </pre>
 
 No per-user agent factories. No thread-local hacks. One instance handles thousands of concurrent users safely.

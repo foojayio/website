@@ -7,7 +7,7 @@ description: "If no cookie is set, randomly forward the request to one of the up
 canonical: "https://blog.frankel.ch/fixed-routes-apisix/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/06/tower-1897536.jpg"
+image: "/images/posts/2024/08/random-and-fixed-routes-with-apache-apisix/tower-1897536.jpg"
 categories:
   - "DevOps"
 tags:

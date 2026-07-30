@@ -6,7 +6,7 @@ lastmod: "2024-06-18T10:42:28+00:00"
 description: "An exciting new AI related feature for Java developers on Visual Studio Code."
 authors:
   - "nick-zhu"
-image: "https://foojay.io/wp-content/uploads/2024/06/pack.png"
+image: "/images/posts/2024/06/java-on-visual-studio-code-may-2024-update-new-ai-feature-spring-updates/pack.png"
 categories:
   - "Java"
   - "Tools"

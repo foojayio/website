@@ -7,7 +7,7 @@ description: "Get started experimenting with htmx and the many benefits it can b
 canonical: "https://webtechie.be/post/2023-12-10-book-review-htmx/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/12/htmx-cover-small.jpg"
+image: "/images/posts/2023/12/book-review-modern-frontends-with-htmx/htmx-cover-small.jpg"
 categories:
   - "Book Review"
   - "Books"

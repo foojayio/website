@@ -6,7 +6,7 @@ lastmod: "2024-08-29T13:36:30+00:00"
 description: "IBM Semeru Runtimes for Java 11+ includes FIPS 140-3 cryptography certified by the U.S. National Institute of Standards and Technology (NIST)."
 authors:
   - "laura-cowen"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2024/08/ibm-semeru-java-fips140-3-cryptographic-standard/Favicon-3-2.png"
 categories:
   - "Java"
   - "Security"

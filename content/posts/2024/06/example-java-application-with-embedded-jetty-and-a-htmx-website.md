@@ -7,7 +7,7 @@ description: "I was experimenting with a Java application that can act as a web 
 canonical: "https://webtechie.be/post/2024-03-28-java-jetty-htmx-websocket-example/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/03/java-jetty-htmx.png"
+image: "/images/posts/2024/06/example-java-application-with-embedded-jetty-and-a-htmx-website/java-jetty-htmx.png"
 categories:
   - "Developer Tools"
   - "Videos"
@@ -44,7 +44,7 @@ It's a JavaScript library you add to your website, that allows you to "swap" HTM
 
 The htmx website gives this minimal example for a webpage with the action: _"When a user clicks on this button, issue an AJAX request to `MARKDOWN_HASH15537f6d76c78712ccd209e4e3f83362MARKDOWN`*HASH*, and replace the entire button with the HTML response":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;script src="https://unpkg.com/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8a0bca5b0e6a7baaf88f9e6f1e6f9f9">[email&nbsp;protected]</a>"&gt;&lt;/script&gt;
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;script src="https://unpkg.com/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b435f46530544594c6b1a0512051a1a">[email&nbsp;protected]</a>"&gt;&lt;/script&gt;
 &lt;!-- have a button POST a click via AJAX --&gt;
 &lt;button hx-post="/clicked" hx-swap="outerHTML"&gt;
     Click Me

@@ -6,7 +6,7 @@ lastmod: "2024-11-13T13:37:51+00:00"
 description: "How TornadoVM programmers can utilize the API functions for transferring data to the accelerator's (e.g., GPU) memory, and backwards."
 authors:
   - "thanos-stratikopoulos"
-image: "https://foojay.io/wp-content/uploads/2024/08/DataRange-Scheme-1024x786-1.png"
+image: "/images/posts/2024/08/defining-patterns-of-data-transfers-for-java-applications-with-tornadovm/DataRange-Scheme-1024x786-1.png"
 categories:
   - "TornadoVM"
 tags:

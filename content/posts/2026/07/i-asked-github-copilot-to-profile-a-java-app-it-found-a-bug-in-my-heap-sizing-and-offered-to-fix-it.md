@@ -6,7 +6,7 @@ lastmod: "2026-07-15T07:41:12+00:00"
 description: "I built an extension to collapse the entire loop of running and measuring the performance of Java workloads, so it can be used within a place some - by Bruno Borges"
 authors:
   - "bruno-borges"
-image: "https://foojay.io/wp-content/uploads/2026/07/github-copilot-profiling.png"
+image: "/images/posts/2026/07/i-asked-github-copilot-to-profile-a-java-app-it-found-a-bug-in-my-heap-sizing-and-offered-to-fix-it/github-copilot-profiling.png"
 categories:
   - "Uncategorized"
 tags:

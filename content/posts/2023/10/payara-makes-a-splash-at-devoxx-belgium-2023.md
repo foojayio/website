@@ -7,7 +7,7 @@ description: "As representatives of Payara, a sponsor of the conference, we had 
 canonical: "https://blog.payara.fish/payara-makes-a-splash-at-devoxx-belgium-2023"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2020/10/payara_square_logo.jpg"
+image: "/images/posts/2023/10/payara-makes-a-splash-at-devoxx-belgium-2023/payara_square_logo.jpg"
 categories:
   - "Events"
   - "Uncategorized"

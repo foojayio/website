@@ -8,7 +8,7 @@ canonical: "https://openliberty.io/blog/2024/04/01/open-liberty-with-langchain4j
 authors:
   - "gilbert-kwan"
   - "grace-jansen"
-image: "https://foojay.io/wp-content/uploads/2024/08/llms.png"
+image: "/images/posts/2024/08/run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty/llms.png"
 categories:
   - "Cloud"
   - "Jakarta EE"

@@ -7,7 +7,7 @@ description: "Let’s get in and build a Quarkus REST API that classifies text s
 canonical: "https://myfear.substack.com/p/sentiment-analysis-java-quarkus-langchain4j-local-llm"
 authors:
   - "markus-eisele"
-image: "https://foojay.io/wp-content/uploads/2025/06/49de875e-fe8c-40d2-9613-61a6c8270eb3_1536x1024.webp"
+image: "/images/posts/2025/06/build-a-sentiment-analysis-api-in-java-with-quarkus-and-local-llms/49de875e-fe8c-40d2-9613-61a6c8270eb3_1536x1024.webp"
 categories:
   - "Java"
   - "LangChain4j"

@@ -7,7 +7,7 @@ description: "Explore how to use git bisect for efficient debugging, including t
 canonical: "https://debugagent.com/unleashing-the-power-of-git-bisect"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/02/DALL·E-2024-02-13-11.18.34-Create-an-engaging-blog-post-header-image-that-visually-represents-the-concept-of-using-git-bisect-for-debugging-software-regressions.-The-image-shoul.jpeg"
+image: "/images/posts/2024/10/unleashing-the-power-of-git-bisect/DALL-E-2024-02-13-11.18.34-Create-an-engaging-blog-post-header-image-that-visually-represents-the-concept-of-using-git-bisect-for-debugging-software-regressions.-The-image-shoul.jpeg"
 categories:
   - "Developer Tools"
   - "Tutorials"

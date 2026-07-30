@@ -7,7 +7,7 @@ description: "A few weeks ago, Igor De Souza shared Bringing Java Closer to Educ
 authors:
   - "frankdelporte"
   - "igor-de-souza"
-image: "https://foojay.io/wp-content/uploads/2026/03/java-in-education-site.png"
+image: "/images/posts/2026/03/the-java-in-education-catalog-now-has-a-beautiful-home/java-in-education-site.png"
 categories:
   - "Foojay"
   - "Java Beginner"

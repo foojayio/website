@@ -6,7 +6,7 @@ lastmod: "2026-02-25T12:38:06+00:00"
 description: "TL;DR: We just released a production-ready starter template that deploys a modern BoxLang application to DigitalOcean App Platform in under 5 - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/02/boxlang-digitalocean-wave.jpg"
+image: "/images/posts/2026/02/announcing-cloud-native-boxlang-for-5-month/boxlang-digitalocean-wave.jpg"
 categories:
   - "BoxLang"
   - "Cloud"

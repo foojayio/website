@@ -6,7 +6,7 @@ lastmod: "2024-01-16T07:53:57+00:00"
 description: "A Report of 2023 Software Conferences in the Philippines for the Java Community and Java User Groups. Sharing the details of the events."
 authors:
   - "tristan-mahinay"
-image: "https://foojay.io/wp-content/uploads/2024/01/softcon-2023-duke-brick-scaled.jpg"
+image: "/images/posts/2024/01/2023-software-conferences-in-the-philippines/softcon-2023-duke-brick-scaled.jpg"
 categories:
   - "Conference"
   - "Events"

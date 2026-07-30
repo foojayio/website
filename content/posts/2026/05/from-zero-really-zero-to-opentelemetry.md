@@ -6,7 +6,7 @@ lastmod: "2026-05-21T17:49:44+00:00"
 description: "Use https://github.com/dash0hq/agent-skills, the free collection of skills for AI coding agents to make applications observable with OpenTelemetry."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2023/11/opentelemetry-horizontal-color-scaled.jpg"
+image: "/images/posts/2026/05/from-zero-really-zero-to-opentelemetry/opentelemetry-horizontal-color-scaled.jpg"
 categories:
   - "AI"
   - "Developer Tools"

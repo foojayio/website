@@ -6,7 +6,7 @@ lastmod: "2026-02-17T09:56:35+00:00"
 description: "Register for the developers' conference in Barcelona next June, with Java, AI, Cloud, Frontend and Managing."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2026/02/Screenshot-2026-02-17-at-10.35.06.png"
+image: "/images/posts/2026/02/devbcn-2026/Screenshot-2026-02-17-at-10.35.06.png"
 categories:
   - "Agile"
   - "AI"

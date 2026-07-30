@@ -6,7 +6,7 @@ lastmod: "2025-08-14T12:35:26+00:00"
 description: "Java is the engine behind mission-critical applications and end user experiences. From faster response times to consistent performance, Java can have a - by Geertjan Wielenga"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2025/06/unlock.png"
+image: "/images/posts/2025/07/prime-time-the-high-performance-java-event/unlock.png"
 categories:
   - "Events"
   - "Java"

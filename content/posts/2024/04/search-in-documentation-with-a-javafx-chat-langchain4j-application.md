@@ -7,7 +7,7 @@ description: "Let's use an existing documentation set as the data for a ChatGPT-
 canonical: "https://webtechie.be/post/2024-03-18-search-documentation-javafx-chat-langchain4j/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/03/langchain4j-question-story.png"
+image: "/images/posts/2024/04/search-in-documentation-with-a-javafx-chat-langchain4j-application/langchain4j-question-story.png"
 categories:
   - "Java"
   - "Machine Learning"

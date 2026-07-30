@@ -6,7 +6,7 @@ lastmod: "2024-10-24T12:50:36+00:00"
 description: "Do you ever wonder what OpenJDK distributions and what Java versions your peers are using? Java-based infrastructures and languages? How Java workloads are affecting cloud compute costs?"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2024/10/image002-1.jpg"
+image: "/images/posts/2024/10/learn-about-how-your-peers-use-java/image002-1.jpg"
 categories:
   - "Java Core"
   - "Surveys"

@@ -6,7 +6,7 @@ lastmod: "2025-05-12T07:12:42+00:00"
 description: "Autopo is a free and open source JavaFX application that automates .po file translation and validation with AI."
 authors:
   - "andrea-vacondio"
-image: "https://foojay.io/wp-content/uploads/2025/05/autopo@6x.png"
+image: "/images/posts/2025/05/building-autopo-an-ai-powered-open-source-application-to-manage-po-files/autopo-6x.png"
 categories:
   - "Desktop"
   - "JavaFX"
@@ -77,7 +77,7 @@ I use English text as the keys in the `.po` files (and, in turn, in the resource
 To keep the translation templates up to date, I use a simple script that uses gettext to extract all translatable strings from the Java source code and update the `.pot` template file whenever new strings are added or existing ones are changed:
 
 <pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#!/bin/sh
-xgettext -ktr -L Java -o po/autopo.pot --copyright-holder='Your copyright info' <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e4c9c98997838d80c986918397c985808096819797d98981a4819c8589948881ca878b89">[email&nbsp;protected]</a> --no-location $(find ../ -name "*.java" -not -path "*/.idea/*" -not -name "*Test.java") –from-code=UTF-8</pre>
+xgettext -ktr -L Java -o po/autopo.pot --copyright-holder='Your copyright info' <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fad7d797899d939ed7988f9d89d79b9e9e889f8989c7979fba9f829b978a969fd4999597">[email&nbsp;protected]</a> --no-location $(find ../ -name "*.java" -not -path "*/.idea/*" -not -name "*Test.java") –from-code=UTF-8</pre>
 
 Introducing Zanata {#h2-3-introducing-zanata}
 ---------------------------------------------

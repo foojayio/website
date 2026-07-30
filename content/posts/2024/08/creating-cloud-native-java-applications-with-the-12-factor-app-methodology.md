@@ -7,7 +7,7 @@ description: "Learn how you could create cloud-native Java apps that are portabl
 canonical: "https://developer.ibm.com/articles/creating-a-12-factor-application-with-open-liberty/"
 authors:
   - "grace-jansen"
-image: "https://foojay.io/wp-content/uploads/2024/08/grace.png"
+image: "/images/posts/2024/08/creating-cloud-native-java-applications-with-the-12-factor-app-methodology/grace.png"
 categories:
   - "Cloud"
   - "DevOps"

@@ -7,7 +7,7 @@ description: "Payara Starter now supports Jakarta EE 11 with a fast project setu
 canonical: "https://blog.payara.fish/kickstart-jakarta-ee-11-projects-with-payara-starter"
 authors:
   - "dominika-tasarz"
-image: "https://foojay.io/wp-content/uploads/2025/09/Payara-Starter-04-1.webp"
+image: "/images/posts/2025/09/how-to-kickstart-your-jakarta-ee-11-projects-with-payara-starter/Payara-Starter-04-1.webp"
 categories:
   - "Gradle"
   - "Jakarta EE"

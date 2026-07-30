@@ -6,7 +6,7 @@ lastmod: "2025-06-11T07:34:11+00:00"
 description: "Explore a few introductory concepts around Retrieval Augmented Generation (RAG), why it exists and the problems it solves."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2025/05/unsplash-layers-rag-scaled.jpg"
+image: "/images/posts/2025/05/intro-to-rag-foundations-of-retrieval-augmented-generation-part-1/unsplash-layers-rag-scaled.jpg"
 categories:
   - "Databases"
   - "DataEngineering"

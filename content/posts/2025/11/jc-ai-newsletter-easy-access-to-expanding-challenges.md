@@ -6,7 +6,7 @@ lastmod: "2025-11-10T12:56:42+00:00"
 description: "A few months ago, I launched the AI Newsletter to provide a minimally biased perspective on the growing challenges surrounding artificial intelligence."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2025/07/ai-insider.png"
+image: "/images/posts/2025/11/jc-ai-newsletter-easy-access-to-expanding-challenges/ai-insider.png"
 categories:
   - "Agile"
   - "AI"

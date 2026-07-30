@@ -6,7 +6,7 @@ lastmod: "2025-11-13T08:54:58+00:00"
 description: "Once a month we talk about the history of a JUG and the people behind it. Today we travel to the Philippines. Let's talk about the history and future of the Java community in the Philippines!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/10/philippines-jug-guests.png"
+image: "/images/posts/2023/11/foojay-podcast-32-philippines-jug/philippines-jug-guests.png"
 categories:
   - "Conference"
   - "JUGs"

@@ -7,7 +7,7 @@ description: "Collecting important data about your code in dev and test has beco
 authors:
   - "jonatan-ivanov"
   - "roni-dover"
-image: "https://foojay.io/wp-content/uploads/2023/10/Digma-white-260.png"
+image: "/images/posts/2023/12/couch-to-fully-observed-code-with-spring-boot-3-2-micrometer-tracing-and-digma/Digma-white-260.png"
 categories:
   - "Developer Tools"
   - "Java"

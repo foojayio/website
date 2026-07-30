@@ -6,7 +6,7 @@ lastmod: "2024-09-19T08:05:01+00:00"
 description: "Is Java ready for running on RISC-V accelerators? If so, how? This post shows a possible way by using open source solutions integrating TornadoVM with the oneAPI Construction Kit. - by Juan Fumero"
 authors:
   - "juan-fumero"
-image: "https://foojay.io/wp-content/uploads/2024/09/Picture1.jpg"
+image: "/images/posts/2024/09/tornadovm-for-risc-v-accelerators/Picture1.jpg"
 categories:
   - "Research"
   - "TornadoVM"

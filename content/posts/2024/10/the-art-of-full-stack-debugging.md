@@ -7,7 +7,7 @@ description: "Tired of frustrating bugs? Learn practical, real-world strategies 
 canonical: "https://debugagent.com/the-art-of-full-stack-debugging"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2024/10/6799d702e1bf5cdf944ca20059345fd8.webp-copy.jpg"
+image: "/images/posts/2024/10/the-art-of-full-stack-debugging/6799d702e1bf5cdf944ca20059345fd8.webp-copy.jpg"
 categories:
   - "Debugging"
   - "Tutorials"

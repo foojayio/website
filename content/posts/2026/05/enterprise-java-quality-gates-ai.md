@@ -6,7 +6,7 @@ lastmod: "2026-06-03T07:07:46+00:00"
 description: "Learn how enterprise Java teams can use deterministic quality gates, CI checks and tooling to keep AI-assisted code reviewable, consistent and safe."
 authors:
   - "anton-lem"
-image: "https://foojay.io/wp-content/uploads/2026/05/ChatGPT-Image-May-26-2026-04_44_09-PM-1536x864-1.png"
+image: "/images/posts/2026/05/enterprise-java-quality-gates-ai/ChatGPT-Image-May-26-2026-04_44_09-PM-1536x864-1.png"
 categories:
   - "AI"
   - "Developer Tools"

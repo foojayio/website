@@ -7,7 +7,7 @@ description: "Learn how to build secure AI applications using LangChain4j guardr
 canonical: "https://bazlur.ca/2025/06/21/building-robust-ai-applications-with-langchain4j-guardrails-and-spring-boot/"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2025/06/u6131494527_1._Shield__AI_Brain_Concept__A_modern_minimalist__c6366e07-45bb-4d60-8f31-a4380e8e1bd8_0.png"
+image: "/images/posts/2025/07/building-robust-ai-applications-with-langchain4j-guardrails-and-spring-boot/u6131494527_1._Shield__AI_Brain_Concept__A_modern_minimalist__c6366e07-45bb-4d60-8f31-a4380e8e1bd8_0.png"
 categories:
   - "AI"
   - "Java"
@@ -927,7 +927,7 @@ Demo {#h2-12-demo}
 ------------------
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Clone the project
-git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81e6e8f5c1e6e8f5e9f4e3afe2eeec">[email&nbsp;protected]</a>:rokon12/guardrails-demo.git
+git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e4838d90a4838d908c9186ca878b89">[email&nbsp;protected]</a>:rokon12/guardrails-demo.git
 cd guardrails-demo
 
 # Set your OpenAI API key

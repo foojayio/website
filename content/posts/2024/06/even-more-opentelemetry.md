@@ -7,7 +7,7 @@ description: "I continue to work on my Opentelemetry demo. Its main idea is to s
 canonical: "https://blog.frankel.ch/even-more-opentelemetry/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/06/otel-component-model.png"
+image: "/images/posts/2024/06/even-more-opentelemetry/otel-component-model.png"
 categories:
   - "DevOps"
 tags:

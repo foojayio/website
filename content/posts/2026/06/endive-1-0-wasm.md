@@ -6,7 +6,7 @@ lastmod: "2026-06-29T10:32:40+00:00"
 description: "A few weeks ago, we wrote about a new generation of Java libraries powered by WebAssembly. SQLite, QuickJS, Protocol Buffers, the Ruby Prism parser, all - by Andrea Peruffo"
 authors:
   - "andrea-peruffo"
-image: "https://foojay.io/wp-content/uploads/2026/06/log_plus_text_green-1.png"
+image: "/images/posts/2026/06/endive-1-0-wasm/log_plus_text_green-1.png"
 categories:
   - "Java"
   - "Java Core"

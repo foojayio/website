@@ -6,7 +6,7 @@ lastmod: "2025-05-23T06:58:58+00:00"
 description: "BSON is at the core of how MongoDB stores and transmits data. It extends JSON with additional data."
 authors:
   - "tim-kelly"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/05/understanding-bson-a-beginners-guide-to-mongodbs-data-format/mongologo.png"
 categories:
   - "Databases"
   - "Developer Tools"

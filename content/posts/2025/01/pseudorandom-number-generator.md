@@ -6,7 +6,7 @@ lastmod: "2025-01-02T14:51:11+00:00"
 description: "Discover the importance of random number generators and their crucial role in cryptography and data security."
 authors:
   - "rijo-sam"
-image: "https://foojay.io/wp-content/uploads/2024/12/Santa-Claus-1.jpg"
+image: "/images/posts/2025/01/pseudorandom-number-generator/Santa-Claus-1.jpg"
 categories:
   - "Java"
   - "Security"

@@ -7,7 +7,7 @@ description: "Can we have the simplicity that Virtual Threads promise and the re
 canonical: "https://javapro.io/2025/04/04/from-reactive-streams-to-virtual-threads/"
 authors:
   - "adam-warski"
-image: "https://foojay.io/wp-content/uploads/2025/04/JavaProLogo-1.png"
+image: "/images/posts/2025/04/javapro-shout-out-from-reactive-streams-to-virtual-threads/JavaProLogo-1.png"
 categories:
   - "JavaPro"
 tags:

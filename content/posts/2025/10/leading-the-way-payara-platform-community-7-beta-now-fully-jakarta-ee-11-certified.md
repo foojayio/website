@@ -7,7 +7,7 @@ description: "Payara Platform Community 7 Beta is Jakarta EE 11 certified across
 canonical: "https://blog.payara.fish/leading-the-way-payara-platform-community-7-beta-now-fully-jakarta-ee-11-certified"
 authors:
   - "dominika-tasarz"
-image: "https://foojay.io/wp-content/uploads/2025/09/Community_Announcement.jpg"
+image: "/images/posts/2025/10/leading-the-way-payara-platform-community-7-beta-now-fully-jakarta-ee-11-certified/Community_Announcement.jpg"
 categories:
   - "Jakarta EE"
   - "Java"

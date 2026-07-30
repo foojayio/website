@@ -6,7 +6,7 @@ lastmod: "2026-02-17T07:57:14+00:00"
 description: "Every Java developer has been there. Something breaks, and the first instinct is to litter the code with System.out.println(\">>> HERE - by Bruno Borges"
 authors:
   - "bruno-borges"
-image: "https://foojay.io/wp-content/uploads/2026/02/debugger-ai.webp"
+image: "/images/posts/2026/02/enabling-ai-agents-to-use-a-real-debugger-instead-of-logging/debugger-ai.webp"
 categories:
   - "AI"
   - "Debugging"

@@ -7,7 +7,7 @@ description: "Every six months, we get a new version of Java. Java 26 is just ar
 authors:
   - "frankdelporte"
   - "jakob-jenkov"
-image: "https://foojay.io/wp-content/uploads/2026/02/episode-90-java-21-to-25.jpg"
+image: "/images/posts/2026/02/foojay-podcast-90/episode-90-java-21-to-25.jpg"
 categories:
   - "Java"
   - "Java Core"

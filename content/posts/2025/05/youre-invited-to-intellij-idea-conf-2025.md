@@ -6,7 +6,7 @@ lastmod: "2025-05-05T13:18:51+00:00"
 description: "We are excited to invite you to IntelliJ IDEA Conf 2025, a free virtual event."
 authors:
   - "marit-van-dijk"
-image: "https://foojay.io/wp-content/uploads/2025/05/jbconf.png"
+image: "/images/posts/2025/05/youre-invited-to-intellij-idea-conf-2025/jbconf.png"
 categories:
   - "Developer Tools"
   - "Events"

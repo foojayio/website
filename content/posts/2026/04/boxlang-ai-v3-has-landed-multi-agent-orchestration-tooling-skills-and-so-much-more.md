@@ -5,7 +5,7 @@ date: "2026-04-06T12:03:58+00:00"
 description: "It's been a while since we've shipped something this big. BoxLang AI 3.0 is a ground-up rethink of how AI agents, models, and tools work in the BoxLang - by Luis Majano"
 authors:
   - "luis-majano"
-image: "https://foojay.io/wp-content/uploads/2026/04/boxlang-ai-v3.jpg"
+image: "/images/posts/2026/04/boxlang-ai-v3-has-landed-multi-agent-orchestration-tooling-skills-and-so-much-more/boxlang-ai-v3.jpg"
 categories:
   - "AI"
   - "BoxLang"

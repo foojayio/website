@@ -7,7 +7,7 @@ description: "Have fun with this overview of the \"JavaFX LinksOfTheWeek\" that 
 canonical: "https://webtechie.be/post/2023-10-27-javafx-links-of-october-2023/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/09/jfxcentral.png"
+image: "/images/posts/2023/10/javafx-links-of-october-2023/jfxcentral.png"
 categories:
   - "JavaFX"
 tags:

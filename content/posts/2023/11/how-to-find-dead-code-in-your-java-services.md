@@ -7,7 +7,7 @@ description: "There’s an interesting relation between the problem of finding d
 authors:
   - "jakob-loehnertz"
   - "sander-mak"
-image: "https://foojay.io/wp-content/uploads/2023/11/1_zB4tm16eE9QotLZZAads7g.png"
+image: "/images/posts/2023/11/how-to-find-dead-code-in-your-java-services/1_zB4tm16eE9QotLZZAads7g.png"
 categories:
   - "Java"
   - "Tools"

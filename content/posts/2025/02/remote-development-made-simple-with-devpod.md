@@ -7,7 +7,7 @@ description: "DevPod is a nice tool around your toolbelt that allows your develo
 canonical: "https://www.loft.sh/blog/remote-development-devpod"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/01/cover.jpg"
+image: "/images/posts/2025/02/remote-development-made-simple-with-devpod/cover.jpg"
 categories:
   - "Developer Tools"
 tags:

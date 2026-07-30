@@ -6,7 +6,7 @@ lastmod: "2024-05-06T08:25:45+00:00"
 description: "My talk titled \"Jakarta EE 11 - Performance and Developer Productivity\" will give you a full overview of what to expect from the upcoming Jakarta EE 11 release."
 authors:
   - "r-fichtner"
-image: "https://foojay.io/wp-content/uploads/2024/05/image.png"
+image: "/images/posts/2024/05/why-this-jcon-europe-talk-is-unmissable-part-2/image.png"
 categories:
   - "Events"
   - "Jakarta EE"

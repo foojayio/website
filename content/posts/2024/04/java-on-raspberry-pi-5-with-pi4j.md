@@ -7,7 +7,7 @@ description: "Alexander Liggesmeyer contributed a new plugin to Pi4J: GpioDPlugi
 canonical: "https://pi4j.com/blog/2024/20240318_interview_alexander_liggesmeyer/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/03/pi4jplugin.png"
+image: "/images/posts/2024/04/java-on-raspberry-pi-5-with-pi4j/pi4jplugin.png"
 categories:
   - "Embedded"
   - "Pi4J"

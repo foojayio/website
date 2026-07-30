@@ -7,7 +7,7 @@ description: "This is part 3 of Frank's JCON interviews, featuring multiple peop
 authors:
   - "frankdelporte"
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2024/05/jcon-part-3.jpg"
+image: "/images/posts/2024/06/foojay-podcast-51/jcon-part-3.jpg"
 categories:
   - "Book Review"
   - "Cloud"

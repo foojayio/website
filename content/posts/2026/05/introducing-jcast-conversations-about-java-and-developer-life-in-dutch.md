@@ -5,7 +5,7 @@ date: "2026-05-04T08:00:40+00:00"
 description: "JCast: A Dutch podcast about IT, dev life, and soft skills by three Belgian developers exploring what it means to work in software."
 authors:
   - "oumaima-zerouali"
-image: "https://foojay.io/wp-content/uploads/2026/03/coole_jcast.png"
+image: "/images/posts/2026/05/introducing-jcast-conversations-about-java-and-developer-life-in-dutch/coole_jcast.png"
 categories:
   - "Foojay"
   - "Interviews"

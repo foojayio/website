@@ -6,7 +6,7 @@ lastmod: "2026-05-27T11:23:08+00:00"
 description: "If you're running JRuby in production, you're running WebAssembly. If TrinoDB is evaluating your Python UDFs, that's WebAssembly too. If Microcks is - by Andrea Peruffo"
 authors:
   - "andrea-peruffo"
-image: "https://foojay.io/wp-content/uploads/2026/05/Screenshot-2026-05-27-at-13.22.27.png"
+image: "/images/posts/2026/05/a-new-generation-of-java-libraries-is-born-wasm-becomes-the-implementation-detail/Screenshot-2026-05-27-at-13.22.27.png"
 categories:
   - "Tools"
 tags:

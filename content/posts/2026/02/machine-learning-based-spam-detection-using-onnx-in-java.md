@@ -7,7 +7,7 @@ description: "See how to use machine learning in java by building a Spring Boot 
 canonical: "https://code.zikani.me/machine-learning-based-spam-detection-using-onnx-in-java"
 authors:
   - "zikani-mwase"
-image: "https://foojay.io/wp-content/uploads/2026/02/b7530ac8-b6e3-4aab-9eae-4f25365ea85b.webp"
+image: "/images/posts/2026/02/machine-learning-based-spam-detection-using-onnx-in-java/b7530ac8-b6e3-4aab-9eae-4f25365ea85b.webp"
 categories:
   - "AI"
   - "Machine Learning"

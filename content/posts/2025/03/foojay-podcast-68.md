@@ -8,7 +8,7 @@ authors:
   - "frankdelporte"
   - "hanno-embregts"
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2025/03/episode-68-java-24.jpg"
+image: "/images/posts/2025/03/foojay-podcast-68/episode-68-java-24.jpg"
 categories:
   - "Java"
   - "Java Core"

@@ -6,7 +6,7 @@ lastmod: "2024-06-13T14:54:27+00:00"
 description: "It's crucial to understand the trade-offs and ensure they are the right fit for your specific context before moving ahead with a microservices architecture"
 authors:
   - "rob-austin"
-image: "https://foojay.io/wp-content/uploads/2022/06/chemical-scientist-test-chemistry-chemist-student.jpg"
+image: "/images/posts/2024/05/top-7-java-microservices-frameworks/chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Java"
 tags:

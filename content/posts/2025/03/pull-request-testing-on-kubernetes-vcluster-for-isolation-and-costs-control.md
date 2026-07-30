@@ -7,7 +7,7 @@ description: "This week's article is the third and final in my series about runn
 canonical: "https://www.loft.sh/blog/pull-request-testing-on-kubernetes"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/03/pull-request-testing-on-kubernetes-vcluster-for-isolation-and-costs-control/Favicon-3-2.png"
 categories:
   - "Developer Tools"
   - "DevOps"

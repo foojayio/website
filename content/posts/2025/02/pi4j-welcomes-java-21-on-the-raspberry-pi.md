@@ -6,7 +6,7 @@ lastmod: "2025-02-20T10:49:09+00:00"
 description: "So with the core team we made a few decisions that are allowing us to bring the project to \"the next level\" and... Java 21!."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/12/pi4j-overview-scaled.jpg"
+image: "/images/posts/2025/02/pi4j-welcomes-java-21-on-the-raspberry-pi/pi4j-overview-scaled.jpg"
 categories:
   - "Embedded"
   - "Pi4J"

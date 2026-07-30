@@ -6,7 +6,7 @@ lastmod: "2023-10-27T08:56:22+00:00"
 description: "I can heartily recommend this book, it offers a lot of valuable insights into persistence in Cloud computing, the involved technologies, and technical and architectural considerations by two developers with years of experience."
 authors:
   - "simon-verhoeven"
-image: "https://foojay.io/wp-content/uploads/2023/09/image-830x1024.png"
+image: "/images/posts/2023/10/book-review-persistence-best-practices-for-java-applications/image-830x1024.png"
 categories:
   - "Book Review"
   - "Books"

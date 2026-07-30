@@ -7,7 +7,7 @@ description: "The beauty of Vaadin lies in its simplicity - you only write backe
 canonical: "https://blog.frankel.ch/ajax-ssr/6/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/10/reindeer-5635891.jpg"
+image: "/images/posts/2024/10/vaadin-battery-included-server-side-ajax-framework/reindeer-5635891.jpg"
 categories:
   - "Vaadin"
 tags:

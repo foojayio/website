@@ -6,7 +6,7 @@ lastmod: "2024-03-08T12:41:23+00:00"
 description: "TornadoInsight is an open-source IntelliJ IDEA plugin for enhancing the developer experience when working with TornadoVM."
 authors:
   - "thanos-stratikopoulos"
-image: "https://foojay.io/wp-content/uploads/2024/03/Static_Check_Fig1-1024x671-1.webp"
+image: "/images/posts/2024/03/tornadoinsight-an-intellij-plugin-for-tornavovm/Static_Check_Fig1-1024x671-1.webp"
 categories:
   - "IntelliJ IDEA"
   - "Tools"

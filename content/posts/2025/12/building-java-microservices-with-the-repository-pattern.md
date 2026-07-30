@@ -6,7 +6,7 @@ lastmod: "2025-12-11T23:19:11+00:00"
 description: "The repository pattern is a design method that allows for abstraction between business logic and the data of an application. This allows for retrieving and saving/updating objects without exposing the technical details of how that data is stored in the main application. In this blog, we will use Spring Boot with MongoDB in order to create a repository pattern-based application. Spring Boot applications generally have two main components to a repository pattern: standard repository items from spring—in this case, MongoRepository—and then custom repository items that you create to perform operations beyond what is included with the standard repository."
 authors:
   - "mike-laspina"
-image: "https://foojay.io/wp-content/uploads/2025/11/Screenshot-2025-11-11-at-2.17.07-PM.png"
+image: "/images/posts/2025/12/building-java-microservices-with-the-repository-pattern/Screenshot-2025-11-11-at-2.17.07-PM.png"
 categories:
   - "Databases"
   - "Java"

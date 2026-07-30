@@ -6,7 +6,7 @@ lastmod: "2025-05-21T09:23:24+00:00"
 description: "Learn how to use Spring AI and Java Virtual Threads to send hundreds of prompts to OpenAI in parallel."
 authors:
   - "raphael-delio"
-image: "https://foojay.io/wp-content/uploads/2025/05/Screenshot-2025-05-13-at-11.13.22.png"
+image: "/images/posts/2025/05/how-to-send-prompts-in-bulk-with-spring-ai-and-java-virtual-threads/Screenshot-2025-05-13-at-11.13.22.png"
 categories:
   - "Java"
   - "JDK21"

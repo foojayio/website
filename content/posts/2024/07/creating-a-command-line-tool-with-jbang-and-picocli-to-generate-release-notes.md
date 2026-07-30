@@ -6,7 +6,7 @@ lastmod: "2024-07-24T13:56:35+00:00"
 description: "Learn how to create a Java command-line tool with JBang and PicoCLI to automate generating release notes from GitHub."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2024/07/DALL·E-2024-07-18-21.31.00-A-clean-and-simple-illustration-featuring-a-command-line-interface-with-Java-code-on-the-screen.-The-background-shows-small-minimalist-logos-of-JBang.webp"
+image: "/images/posts/2024/07/creating-a-command-line-tool-with-jbang-and-picocli-to-generate-release-notes/DALL-E-2024-07-18-21.31.00-A-clean-and-simple-illustration-featuring-a-command-line-interface-with-Java-code-on-the-screen.-The-background-shows-small-minimalist-logos-of-JBang.webp"
 categories:
   - "Java"
 tags:

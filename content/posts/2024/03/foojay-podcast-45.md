@@ -8,7 +8,7 @@ authors:
   - "frankdelporte"
   - "loic-mathieu"
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2024/03/podcast-guests-java-22.png"
+image: "/images/posts/2024/03/foojay-podcast-45/podcast-guests-java-22.png"
 categories:
   - "Java"
   - "Java Beginner"

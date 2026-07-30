@@ -6,7 +6,7 @@ lastmod: "2024-03-06T11:01:56+00:00"
 description: "Immutability in Java with creational patterns Builders and Withers, along with a new type of immutable object in Java: Records."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2024/02/sonarlint.png"
+image: "/images/posts/2024/02/builders-withers-and-records-javas-path-to-immutability/sonarlint.png"
 categories:
   - "Java"
   - "Java Core"
@@ -99,7 +99,7 @@ With this approach though, we face potential issues in terms of readability and 
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic">public Person(String name, int age, String id, String phoneNumber, String email, Person parent1, Person parent2) { ... }
 
-Person person = new Person("Antonio", 15, 1445678, "+34 666 77 88 99", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5938372d36373036193c21383429353c773a3634">[email&nbsp;protected]</a>", juan, carla);
+Person person = new Person("Antonio", 15, 1445678, "+34 666 77 88 99", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="14757a607b7a7d7b54716c75796478713a777b79">[email&nbsp;protected]</a>", juan, carla);
 </pre>
 
 In case we add more mandatory properties, as we see above, we need to add more parameters to the constructor and this will impact the existing code making us modify it on every call to the constructor.

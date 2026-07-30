@@ -6,7 +6,7 @@ lastmod: "2026-01-29T16:43:24+00:00"
 description: "The Data Access Object (DAO) pattern is a structural pattern that isolates your application's business logic from persistence operations. By using an abstract API, the DAO pattern hides all the complexity of performing CRUD operations against your database—whether that's MongoDB, a relational database, or any other storage mechanism. The DAO pattern ensures both layers can evolve independently.In this tutorial written by Tim Kelly published on Friends of OpenJDK (Foojay.io), we'll implement the DAO pattern with MongoDB as our backend. We'll start with a simple in-memory example to understand the core concepts, then build a production-ready implementation using the MongoDB Java Driver. Along the way, you'll see how MongoDB's document model actually makes the DAO pattern more straightforward than with traditional ORMs—no complex entity mappings required."
 authors:
   - "tim-kelly"
-image: "https://foojay.io/wp-content/uploads/2025/10/546a7b8392ade39f6930ae5605b54327b1d73306_2_690x362.png"
+image: "/images/posts/2026/01/abstracting-data-access-in-java-with-the-dao-pattern/546a7b8392ade39f6930ae5605b54327b1d73306_2_690x362.png"
 categories:
   - "Databases"
   - "Java"

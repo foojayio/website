@@ -7,7 +7,7 @@ description: "Let's use MongoDB with LangChain4j to create a simple RAG applicat
 canonical: "https://dev.to/mongodb/how-to-make-a-rag-application-with-langchain4j-1mad"
 authors:
   - "tim-kelly"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/07/how-to-make-a-rag-application-with-langchain4j/mongologo.png"
 categories:
   - "Databases"
   - "Java"

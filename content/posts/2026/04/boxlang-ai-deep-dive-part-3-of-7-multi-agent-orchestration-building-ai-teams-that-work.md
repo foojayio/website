@@ -6,7 +6,7 @@ lastmod: "2026-05-14T09:51:47+00:00"
 description: "BoxLang AI 3.0 Series · Part 3 of 7 A single agent is useful. An orchestra of agents is powerful. The problem with most multi-agent frameworks is that the - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/04/bxai-series-cover-03S.png"
+image: "/images/posts/2026/04/boxlang-ai-deep-dive-part-3-of-7-multi-agent-orchestration-building-ai-teams-that-work/bxai-series-cover-03S.png"
 categories:
   - "AI"
   - "BoxLang"

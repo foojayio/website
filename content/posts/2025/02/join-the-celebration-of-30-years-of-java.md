@@ -6,7 +6,7 @@ lastmod: "2025-02-03T09:29:06+00:00"
 description: "On Thursday, March 13, Azul is hosting a virtual celebration of 30 years of Java, starting at 09:00 PST / 17:00 GMT / 18:00 CET."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2025/02/duke30.png"
+image: "/images/posts/2025/02/join-the-celebration-of-30-years-of-java/duke30.png"
 categories:
   - "Events"
 tags:

@@ -7,7 +7,7 @@ description: "Did you know? The Quarkus Clubd initiative started less than a ye
 authors:
   - "frankdelporte"
   - "igor-de-souza"
-image: "https://foojay.io/wp-content/uploads/2024/02/podcast-quarkus-club-guests.png"
+image: "/images/posts/2024/03/foojay-podcast-44/podcast-quarkus-club-guests.png"
 categories:
   - "JUGs"
   - "Podcast"

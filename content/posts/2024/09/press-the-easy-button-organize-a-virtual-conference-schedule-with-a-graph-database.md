@@ -6,7 +6,7 @@ lastmod: "2024-09-10T06:18:37+00:00"
 description: "Putting together a conference schedule for NODES 2024 (one of my favorite events of the year) is a massive undertaking, but my colleague and I used technologies and tools at our disposal to make this process a little more efficient and greatly reduce opportunities for mistakes."
 authors:
   - "jennifer-reif"
-image: "https://foojay.io/wp-content/uploads/2024/08/unsplash-meeting-calendar-scaled.jpg"
+image: "/images/posts/2024/09/press-the-easy-button-organize-a-virtual-conference-schedule-with-a-graph-database/unsplash-meeting-calendar-scaled.jpg"
 categories:
   - "Conference"
   - "Events"

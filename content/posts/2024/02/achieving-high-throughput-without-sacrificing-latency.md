@@ -6,7 +6,7 @@ lastmod: "2024-02-02T10:07:26+00:00"
 description: "Low latency coding techniques are designed to keep a processor core as busy as possible, executing at its full potential and so getting work done as quickly as possible."
 authors:
   - "george-ball"
-image: "https://foojay.io/wp-content/uploads/2024/01/latencythroughput.png"
+image: "/images/posts/2024/02/achieving-high-throughput-without-sacrificing-latency/latencythroughput.png"
 categories:
   - "Chronicle Software"
   - "FinOps"

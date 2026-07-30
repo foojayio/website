@@ -6,7 +6,7 @@ description: "I'm building MelodyMatrix with my son, an application to look at a
 canonical: "https://webtechie.be/post/introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/07/screenshot-melodymatrix.png"
+image: "/images/posts/2026/07/introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music/screenshot-melodymatrix.png"
 categories:
   - "JavaFX"
   - "Release Notes"

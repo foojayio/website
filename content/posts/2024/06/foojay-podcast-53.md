@@ -9,7 +9,7 @@ authors:
   - "marcus-hellberg"
   - "nicolas-frankel"
   - "simon-martinelli"
-image: "https://foojay.io/wp-content/uploads/2024/06/part5-1024x781.png"
+image: "/images/posts/2024/06/foojay-podcast-53/part5-1024x781.png"
 categories:
   - "Cloud"
   - "DevOps"

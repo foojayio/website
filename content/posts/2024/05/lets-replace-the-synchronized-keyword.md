@@ -6,7 +6,7 @@ lastmod: "2024-05-07T04:27:09+00:00"
 description: "Let's replace the synchronized keyword to be more virtual threads friendly in a code readable way."
 authors:
   - "anthony-goubard"
-image: "https://foojay.io/wp-content/uploads/2024/04/synchronized-feature.png"
+image: "/images/posts/2024/05/lets-replace-the-synchronized-keyword/synchronized-feature.png"
 categories:
   - "Java"
   - "Java Core"

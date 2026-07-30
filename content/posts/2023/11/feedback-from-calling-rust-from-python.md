@@ -7,7 +7,7 @@ description: "Improving low-level integration with ctypes to the generic ready-t
 canonical: "https://blog.frankel.ch/feedback-rust-from-python/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/10/Screenshot-2023-10-29-at-21.31.31.png"
+image: "/images/posts/2023/11/feedback-from-calling-rust-from-python/Screenshot-2023-10-29-at-21.31.31.png"
 categories:
   - "Research"
   - "Tutorials"

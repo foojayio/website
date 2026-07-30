@@ -6,7 +6,7 @@ lastmod: "2024-02-27T08:21:01+00:00"
 description: "We are back and excited to invite you to IntelliJ IDEA Conf 2024, a developer-focused, live, online event that is free for all to attend!"
 authors:
   - "irina-maryasova"
-image: "https://foojay.io/wp-content/uploads/2024/02/Featured_1280x720_x2-1200x675-2-700x394-1.png"
+image: "/images/posts/2024/02/youre-invited-to-intellij-idea-conf-2024/Featured_1280x720_x2-1200x675-2-700x394-1.png"
 categories:
   - "Developer Tools"
   - "Events"

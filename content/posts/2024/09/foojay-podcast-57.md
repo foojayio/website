@@ -7,7 +7,7 @@ description: "OpenJDK (Java) 23 is (almost) here! This version introduces three 
 authors:
   - "frankdelporte"
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2024/09/episode-57-java-23-guests.jpg"
+image: "/images/posts/2024/09/foojay-podcast-57/episode-57-java-23-guests.jpg"
 categories:
   - "Java"
   - "Java Core"

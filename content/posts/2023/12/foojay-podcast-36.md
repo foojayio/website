@@ -6,7 +6,7 @@ lastmod: "2025-11-13T08:51:45+00:00"
 description: "In this part, hear about Maven, contributing to Open Source projects, JOOQ, Desktop Applications, Thymeleaf, htmx, and Security."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/07/foojay_podcast.png"
+image: "/images/posts/2023/12/foojay-podcast-36/foojay_podcast.png"
 categories:
   - "Conference"
   - "Podcast"

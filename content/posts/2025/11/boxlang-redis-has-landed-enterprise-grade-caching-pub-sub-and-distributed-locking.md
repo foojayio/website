@@ -6,7 +6,7 @@ lastmod: "2025-11-25T09:35:45+00:00"
 description: "We're thrilled to announce the release of the BoxLang Redis Module (bx-redis) - a powerful addition to BoxLang that brings enterprise-grade Redis - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2025/10/BoxLang-Logo-Dark.png"
+image: "/images/posts/2025/11/boxlang-redis-has-landed-enterprise-grade-caching-pub-sub-and-distributed-locking/BoxLang-Logo-Dark.png"
 categories:
   - "BoxLang"
   - "Redis"
@@ -88,7 +88,7 @@ The Redis module works seamlessly with BoxLang's standard caching approaches:
 userData = {
     userID: 123,
     name: "John Doe",
-    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d0babfb8be90b5a8b1bda0bcb5feb3bfbd">[email&nbsp;protected]</a>",
+    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="711b1e191f311409101c011d145f121e1c">[email&nbsp;protected]</a>",
     preferences: { theme: "dark", language: "en" }
 };
 
@@ -435,4 +435,4 @@ Ready to unlock bx-ldap and other premium modules? Choose your plan:
 
 Need help choosing the right plan or have questions? **Contact us directly:**
 
-[📧 **\[email protected\]**](/cdn-cgi/l/email-protection#e48d8a828ba4868b9c88858a83ca8d8b "📧 **info@boxlang.io**")
+[📧 **\[email protected\]**](/cdn-cgi/l/email-protection#20494e464f60424f584c414e470e494f "📧 **info@boxlang.io**")

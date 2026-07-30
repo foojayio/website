@@ -6,7 +6,7 @@ description: "Earlier this month, I released V0.0.1 of my new Java library to in
 canonical: "https://webtechie.be/post/2025-07-29-java-dmx512-library-v0.0.2-universes-and-usb/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2025/07/thumbnail-dmx512-ofl.jpg"
+image: "/images/posts/2025/08/release-v0-0-2-of-java-dmx512-library-with-universes-and-usb-to-dmx-support/thumbnail-dmx512-ofl.jpg"
 categories:
   - "Java"
   - "Library"

@@ -7,7 +7,7 @@ description: "Read on to find out more about Payara Rodmap in the coming months 
 canonical: "https://blog.payara.fish/payara-platform-roadmap-2024"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2024/01/image-3.png"
+image: "/images/posts/2024/01/payara-platform-roadmap-2024/image-3.png"
 categories:
   - "Payara"
   - "Tools"

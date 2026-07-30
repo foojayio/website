@@ -6,7 +6,7 @@ lastmod: "2025-09-25T13:53:59+00:00"
 description: "Data-driven testing (DDT) is important because it enables you to validate business behavior across various scenarios without having to duplicate test logic. When used in conjunction with a document database like MongoDB, it becomes a powerful tool to ensure that your queries align not only with the data structure but also with the intended business outcomes. For Java applications where persistence logic goes beyond basic CRUD operations, data-driven testing helps you safeguard what matters most: correctness, clarity, and confidence."
 authors:
   - "otavio-santana"
-image: "https://foojay.io/wp-content/uploads/2025/09/java.jpeg"
+image: "/images/posts/2025/09/introduction-to-data-driven-testing-with-java-and-mongodb/java.jpeg"
 categories:
   - "Databases"
   - "Java"
@@ -34,7 +34,7 @@ In this tutorial, you'll:
 
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/data-driven-test-mongodb):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="197e706d597e706d716c7b377a7674">[email&nbsp;protected]</a>:soujava/data-driven-test-mongodb.git</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="12757b6652757b667a67703c717d7f">[email&nbsp;protected]</a>:soujava/data-driven-test-mongodb.git</pre>
 
 Prerequisites {#h2-0-prerequisites}
 -----------------------------------

@@ -6,7 +6,7 @@ lastmod: "2026-03-26T07:12:39+00:00"
 description: "I keep hearing the same question in architecture reviews, slack threads, and conference Hallways: \"If AI is writing the code, does language even matter - by David Parry"
 authors:
   - "david-parry"
-image: "https://foojay.io/wp-content/uploads/2026/03/dominance-1024x683.png"
+image: "/images/posts/2026/03/does-language-still-matter-in-the-age-of-ai-yes-but-the-tradeoff-has-changed/dominance-1024x683.png"
 categories:
   - "AI"
   - "Cloud"

@@ -7,7 +7,7 @@ description: "DRY is an important principle in software development. In this art
 canonical: "https://blog.frankel.ch/dry-apisix-config/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/09/desert-279862.jpg"
+image: "/images/posts/2024/09/dry-your-apache-apisix-config/desert-279862.jpg"
 categories:
   - "DevOps"
 tags:

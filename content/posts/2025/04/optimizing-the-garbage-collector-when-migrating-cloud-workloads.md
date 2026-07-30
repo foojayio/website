@@ -6,7 +6,7 @@ lastmod: "2025-04-17T12:57:24+00:00"
 description: "You might associate Arm primarily with smartphones and the Java-based Android runtime. But no more after this article!"
 authors:
   - "kieran-hejmadi"
-image: "https://foojay.io/wp-content/uploads/2025/04/arm.png"
+image: "/images/posts/2025/04/optimizing-the-garbage-collector-when-migrating-cloud-workloads/arm.png"
 categories:
   - "Arm"
   - "Cloud"

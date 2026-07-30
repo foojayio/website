@@ -6,7 +6,7 @@ description: "A new Metal rendering backend for iOS, a browser-hosted Skin Desig
 canonical: "https://www.codenameone.com/blog/metal-and-skins/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/05/metal-and-skins.jpg"
+image: "/images/posts/2026/05/metal-and-skins/metal-and-skins.jpg"
 categories:
   - "Java"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2026-01-05T19:33:09+00:00"
 description: "Have you ever tried to search for something such as a product, a song, or a movie but couldn’t quite remember its exact name? Maybe you recall only a clue—a desert pyramid, a short melody, or “that ship that hit an iceberg.” Keyword search struggles with that. Vector search doesn’t: It lets you search by meaning.It works by turning text into embeddings, vectors (arrays of numbers) that capture semantic similarity, so results are ranked by what they mean, not just what they say.With recent vector query support in Spring Data, Java developers can build semantic search using familiar repositories and queries."
 authors:
   - "ricardo-mello"
-image: "https://foojay.io/wp-content/uploads/2025/10/458-4589658_spring-framework-logo-spring-boot-png-transparent-png.png"
+image: "/images/posts/2025/10/beyond-keywords-implementing-semantic-search-in-java-with-spring-data-part-1/458-4589658_spring-framework-logo-spring-boot-png-transparent-png.png"
 categories:
   - "Databases"
   - "Java"

@@ -7,7 +7,7 @@ description: "Exploring how to profile and benchmark Java code using JMH and Asy
 canonical: "https://davidvlijmincx.com/posts/benchmark-and-profile-java/"
 authors:
   - "david-vlijmincx"
-image: "https://foojay.io/wp-content/uploads/2025/06/flamegraph-example-2.png"
+image: "/images/posts/2025/06/benchmarking-and-profiling-java-with-jmh/flamegraph-example-2.png"
 categories:
   - "Java"
   - "Performance"

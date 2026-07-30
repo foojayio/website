@@ -6,7 +6,7 @@ lastmod: "2024-05-13T09:45:59+00:00"
 description: "In this article, we want to share our experience using real-life examples on how to identify and optimize slow SQL queries, especially when working with relational database management systems like PostgreSQL, MySQL, MSSQL, Oracle, etc."
 authors:
   - "oleksandr-hrebeniuk"
-image: "https://foojay.io/wp-content/uploads/2024/05/image-10.png"
+image: "/images/posts/2024/05/sql-query-optimization-how-to-identify-and-optimize-slow-sql-queries/image-10.png"
 categories:
   - "Developer Tools"
   - "Observability"

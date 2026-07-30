@@ -6,7 +6,7 @@ lastmod: "2026-07-08T17:10:44+00:00"
 description: "AMD hyperthreading caused solver performance variance in our Java based cloud pods. Switching to ARM instances doubled throughput per dollar."
 authors:
   - "tom-cools"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2026/07/why-we-moved-our-timefold-java-worker-pods-from-amd-to-arm64/Favicon-3-2.png"
 categories:
   - "Arm"
   - "Cloud"

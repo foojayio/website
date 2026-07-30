@@ -8,7 +8,7 @@ authors:
   - "donata-petkeviciute"
   - "ismaila-adamou"
   - "ronald-dehuysser"
-image: "https://foojay.io/wp-content/uploads/2024/05/2020-04-23-jobrunr-gets-jobs-done.webp"
+image: "/images/posts/2024/05/getting-started-with-jobrunr-a-powerful-task-scheduler-in-ja/2020-04-23-jobrunr-gets-jobs-done.webp"
 categories:
   - "Java"
   - "Spring"

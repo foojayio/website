@@ -6,7 +6,7 @@ lastmod: "2024-07-11T07:52:33+00:00"
 description: "Java's sun.misc.Unsafe is being phased out. Learn safer memory access using VarHandle and Foreign Function & Memory API to keep your applications secure and up-to-date."
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2024/07/Gemini_Generated_Image_9cppb89cppb89cpp.jpeg"
+image: "/images/posts/2024/07/unsafe-is-finally-going-away-embracing-safer-memory-access-with-jep-471/Gemini_Generated_Image_9cppb89cppb89cpp.jpeg"
 categories:
   - "Java"
   - "JDK 23"

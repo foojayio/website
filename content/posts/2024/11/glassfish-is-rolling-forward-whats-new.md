@@ -7,7 +7,7 @@ description: "The Evolution Continues. GlassFish, which used to be a popular ap
 canonical: "https://omnifish.ee/2024/09/12/glassfish-is-rolling-forward-whats-new/"
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2024/11/GlassFish-commits-1024x437-1.png"
+image: "/images/posts/2024/11/glassfish-is-rolling-forward-whats-new/GlassFish-commits-1024x437-1.png"
 categories:
   - "Cloud"
   - "Jakarta EE"

@@ -6,7 +6,7 @@ lastmod: "2023-10-02T12:37:32+00:00"
 description: "JVector is a pure Java embedded vector search engine that powers DataStax Astra and is being added to Apache Cassandra."
 authors:
   - "jbellis"
-image: "https://foojay.io/wp-content/uploads/2023/10/Screenshot-from-2023-09-29-16-39-33.png"
+image: "/images/posts/2023/10/jvector-1-0/Screenshot-from-2023-09-29-16-39-33.png"
 categories:
   - "Apache Cassandra"
   - "Machine Learning"

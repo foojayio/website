@@ -7,7 +7,7 @@ description: "In 2025, Java offers something rare in the tech world: stability w
 canonical: "https://empatheticdeveloper.wordpress.com/2025/07/20/why-java-is-still-worth-learning-in-2025-a-developers-25-year-journey/"
 authors:
   - "markus-westergren"
-image: "https://foojay.io/wp-content/uploads/2022/06/chemical-scientist-test-chemistry-chemist-student.jpg"
+image: "/images/posts/2025/08/why-java-is-still-worth-learning-in-2025-a-developers-25-year-journey/chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Jakarta EE"
   - "Java"

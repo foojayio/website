@@ -6,7 +6,7 @@ lastmod: "2025-11-13T08:40:51+00:00"
 description: "AI, LLMs, ChatGPT—these are just a few of the buzzwords of the massive revolution unfolding right now."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/11/podcast-62-ai-and-programming.png"
+image: "/images/posts/2024/12/foojay-podcast-62/podcast-62-ai-and-programming.png"
 categories:
   - "Conference"
   - "Jakarta EE"

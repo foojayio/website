@@ -6,7 +6,7 @@ lastmod: "2024-05-24T09:54:53+00:00"
 description: "Intelligence Cloud works with any JVM from any vendor or distribution to slash time from tasks across an enterprise’s entire Java estate."
 authors:
   - "erikcostlow"
-image: "https://foojay.io/wp-content/uploads/2024/05/ic-benefits.png"
+image: "/images/posts/2024/05/improve-devops-productivity-with-azul-intelligence-cloud-for-any-jvm/ic-benefits.png"
 categories:
   - "Java Core"
   - "Performance"

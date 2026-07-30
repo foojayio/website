@@ -6,7 +6,7 @@ lastmod: "2023-10-19T15:09:19+00:00"
 description: "A widget on your MacOS desktop that shows the days until the next release/update of OpenJDK, and more."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2023/10/JDKMonitor-644x510.png"
+image: "/images/posts/2023/10/new-jdkmonitor/JDKMonitor-644x510.png"
 categories:
   - "Tools"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2026-01-12T11:16:46+00:00"
 description: "BoxLang continues to expand as more customers migrate to it’s dynamic JVM platform."
 authors:
   - "luis-majano"
-image: "https://foojay.io/wp-content/uploads/2026/01/IMG_0067.jpeg"
+image: "/images/posts/2026/01/boxlang-1-9-0-released-production-ready-stability-and-enterprise-grade-reliability/IMG_0067.jpeg"
 categories:
   - "BoxLang"
   - "Java"

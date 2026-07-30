@@ -6,7 +6,7 @@ lastmod: "2026-07-02T18:17:18+00:00"
 description: "Every application eventually has to deal with deeply nested data. JSON API responses with payloads six levels deep. Configuration files where the key you - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/07/BoxLang-release-1.14.0-1701-x-1701-px-3-1024x1024.png"
+image: "/images/posts/2026/07/boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator/BoxLang-release-1.14.0-1701-x-1701-px-3-1024x1024.png"
 categories:
   - "BoxLang"
   - "DataEngineering"

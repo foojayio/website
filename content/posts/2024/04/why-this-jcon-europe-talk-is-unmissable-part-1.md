@@ -6,7 +6,7 @@ lastmod: "2024-04-29T07:33:07+00:00"
 description: "JCON Europe in Cologne is around the corner (and here are your free Foojay JCON tickets). Why should you go? Well, one reason is that the talks will be awesome. Here's the start of a series of reasons why some of them are absolutely unmissable!"
 authors:
   - "r-fichtner"
-image: "https://foojay.io/wp-content/uploads/2024/04/Baruch-Sadogursky-1.jpg"
+image: "/images/posts/2024/04/why-this-jcon-europe-talk-is-unmissable-part-1/Baruch-Sadogursky-1.jpg"
 categories:
   - "DevOps"
   - "Events"

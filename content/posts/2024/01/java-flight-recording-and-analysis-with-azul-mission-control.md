@@ -6,7 +6,7 @@ lastmod: "2024-01-25T08:00:21+00:00"
 description: "With Azul Mission Control, you can delve deep into JFR recordings to optimize your code and ensure it runs smoothly and error-free."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2024/01/azul-mission-control-screenshot.png"
+image: "/images/posts/2024/01/java-flight-recording-and-analysis-with-azul-mission-control/azul-mission-control-screenshot.png"
 categories:
   - "Debugging"
   - "Developer Tools"

@@ -6,7 +6,7 @@ lastmod: "2026-02-05T10:14:07+00:00"
 description: "We're excited to announce BoxLang 1.10.0, a feature-packed release that brings powerful functional programming capabilities, elegant loop syntax, and - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2025/10/BoxLang-Logo-Dark.png"
+image: "/images/posts/2026/02/boxlang-1-10-0-functional-arrays-elegant-loops-distributed-locking/BoxLang-Logo-Dark.png"
 categories:
   - "BoxLang"
   - "Design Patterns"
@@ -193,7 +193,7 @@ BoxLang 1.10.0 introduces destructuring syntax `for` for loops, eliminating verb
 <pre class="EnlighterJSRAW" data-enlighter-language="java">// Struct iteration with key and value
 userData = {
     name: "Alice",
-    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cbaaa7a2a8ae8baeb3aaa6bba7aee5a8a4a6">[email&nbsp;protected]</a>",
+    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="680904010b0d280d10090518040d460b0705">[email&nbsp;protected]</a>",
     role: "admin"
 }
 

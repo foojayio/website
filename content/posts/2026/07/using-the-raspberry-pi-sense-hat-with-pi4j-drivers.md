@@ -7,7 +7,7 @@ description: "One of the biggest advantages of the Pi4J Drivers project is the a
 canonical: "https://dev.to/igoriot/introduction-to-the-raspberry-pi-sense-hat-4lfg"
 authors:
   - "igor-de-souza"
-image: "https://foojay.io/wp-content/uploads/2026/06/duke_sensehat.png"
+image: "/images/posts/2026/07/using-the-raspberry-pi-sense-hat-with-pi4j-drivers/duke_sensehat.png"
 categories:
   - "Java Beginner"
   - "Pi4J"

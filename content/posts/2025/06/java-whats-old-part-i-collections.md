@@ -6,7 +6,7 @@ lastmod: "2025-06-19T08:33:40+00:00"
 description: "In this series, I'm focusing on what's old in the JDK, not that known, and can be useful. A few hidden gems in the JDK."
 authors:
   - "anthony-goubard"
-image: "https://foojay.io/wp-content/uploads/2025/06/old-coffee.jpg"
+image: "/images/posts/2025/06/java-whats-old-part-i-collections/old-coffee.jpg"
 categories:
   - "Java"
   - "Java Core"

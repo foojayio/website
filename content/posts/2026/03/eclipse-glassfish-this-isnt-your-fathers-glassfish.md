@@ -6,7 +6,7 @@ lastmod: "2026-03-30T12:19:59+00:00"
 description: "GlassFish is an application server with a long history and has always had a special role in the Java world as the reference implementation of Java EE, - by Ondro Mihalyi"
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2026/03/oracle_glassfish_comparison_infographic-1024x682.png"
+image: "/images/posts/2026/03/eclipse-glassfish-this-isnt-your-fathers-glassfish/oracle_glassfish_comparison_infographic-1024x682.png"
 categories:
   - "Jakarta EE"
 tags:

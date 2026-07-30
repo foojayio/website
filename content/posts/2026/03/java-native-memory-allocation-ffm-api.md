@@ -7,7 +7,7 @@ description: "Managing native memory in Java using the Foreign Function & Memory
 canonical: "https://davidvlijmincx.com/posts/java-native-memory-allocation-ffm-api/"
 authors:
   - "david-vlijmincx"
-image: "https://foojay.io/wp-content/uploads/2026/03/ffmep.png"
+image: "/images/posts/2026/03/java-native-memory-allocation-ffm-api/ffmep.png"
 categories:
   - "Java"
   - "Java Core"

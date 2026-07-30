@@ -6,7 +6,7 @@ lastmod: "2024-02-13T15:36:11+00:00"
 description: "How to save money storing data in Cloud blob-stores instead of expensive databases through the use of the open-source Spring-Data-Eclipse-Store library."
 authors:
   - "johannes-rabauer"
-image: "https://foojay.io/wp-content/uploads/2024/02/XDEV_Logo_SpringData_EclipseStore_square.png"
+image: "/images/posts/2024/02/minimize-costs-by-utilizing-cloud-storage-with-spring-data-eclipse-store/XDEV_Logo_SpringData_EclipseStore_square.png"
 categories:
   - "Cloud"
   - "Databases"

@@ -7,7 +7,7 @@ description: "There is a lot of documentation for sending mails, but gathering i
 canonical: "https://jensknipper.de/blog/receiving-emails-in-java/"
 authors:
   - "jens-knipper"
-image: "https://foojay.io/wp-content/uploads/2025/01/mailusage.png"
+image: "/images/posts/2025/01/receiving-mails-in-java-with-imap-or-pop3/mailusage.png"
 categories:
   - "Java"
 tags:

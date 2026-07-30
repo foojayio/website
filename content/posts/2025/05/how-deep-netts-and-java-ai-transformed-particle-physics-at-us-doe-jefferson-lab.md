@@ -6,7 +6,7 @@ lastmod: "2025-05-19T12:15:16+00:00"
 description: "Jefferson Lab is leveraging Java-based AI to overcome one of the most computationally intense challenges in modern science."
 authors:
   - "zoran-sevarac"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/05/how-deep-netts-and-java-ai-transformed-particle-physics-at-us-doe-jefferson-lab/Favicon-3-2.png"
 categories:
   - "Deep Netts"
   - "Machine Learning"

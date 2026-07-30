@@ -6,7 +6,7 @@ lastmod: "2023-11-01T08:04:30+00:00"
 description: "Microsoft and Gradle Enterprise have joined forces to explore a novel approach to Gradle project import and building, based on the Build Server Protocol (BSP)."
 authors:
   - "nick-zhu"
-image: "https://foojay.io/wp-content/uploads/2023/10/build-server-gradle.png"
+image: "/images/posts/2023/10/elevating-java-development-in-visual-studio-code-experience-the-new-build-server-for-gradle/build-server-gradle.png"
 categories:
   - "Gradle"
   - "Tools"

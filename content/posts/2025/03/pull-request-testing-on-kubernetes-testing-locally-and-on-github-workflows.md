@@ -7,7 +7,7 @@ description: "In this post, we'll lay the ground for a simple app's unit- and in
 canonical: "https://blog.frankel.ch/pr-testing-kubernetes/1/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/02/concrete-block.jpeg"
+image: "/images/posts/2025/03/pull-request-testing-on-kubernetes-testing-locally-and-on-github-workflows/concrete-block.jpeg"
 categories:
   - "Kotlin"
   - "Testing"

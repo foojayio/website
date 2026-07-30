@@ -5,7 +5,7 @@ date: "2026-06-29T11:47:41+00:00"
 description: "Seven jackson-databind vulnerabilities, one researcher, one day. Two critical RCEs. This is AI-assisted security research in practice."
 authors:
   - "steve-poole"
-image: "https://foojay.io/wp-content/uploads/2026/06/ChatGPT-Image-Jun-29-2026-12_44_59-PM.png"
+image: "/images/posts/2026/06/7-new-vulnerabilities-in-jackson-in-one-day-this-is-what-ai-assisted-security-research-looks-like/ChatGPT-Image-Jun-29-2026-12_44_59-PM.png"
 categories:
   - "Java"
   - "Security"

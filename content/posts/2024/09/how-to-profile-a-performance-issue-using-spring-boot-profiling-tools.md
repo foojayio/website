@@ -7,7 +7,7 @@ description: "Profiling performance issues and establishing robust monitoring an
 canonical: "https://digma.ai/how-to-use-spring-boot-profiling-tools/"
 authors:
   - "nasim-salmany"
-image: "https://foojay.io/wp-content/uploads/2024/09/1_YcY6m7k2T-2AD_ymmgYq1w.webp"
+image: "/images/posts/2024/09/how-to-profile-a-performance-issue-using-spring-boot-profiling-tools/1_YcY6m7k2T-2AD_ymmgYq1w.webp"
 categories:
   - "Performance"
   - "Profiler"

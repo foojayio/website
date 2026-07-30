@@ -6,7 +6,7 @@ lastmod: "2024-06-07T13:00:12+00:00"
 description: "Migration from a monolithic architecture to microservices presents challenges, particularly in identifying and managing dependencies within the codebase."
 authors:
   - "oleksandr-hrebeniuk"
-image: "https://foojay.io/wp-content/uploads/2024/06/Digmo-and-teelscope.jpeg"
+image: "/images/posts/2024/06/how-to-identify-dependencies-in-your-codebase-during-microservices-migration/Digmo-and-teelscope.jpeg"
 categories:
   - "Microservices"
   - "Tools"

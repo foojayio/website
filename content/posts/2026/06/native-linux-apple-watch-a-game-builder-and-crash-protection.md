@@ -7,7 +7,7 @@ description: "This week adds a native Linux desktop port, an Apple Watch and Wea
 canonical: "https://www.codenameone.com/blog/native-linux-apple-watch-game-builder-crash-protection/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/06/native-linux-apple-watch-game-builder-crash-protection.jpg"
+image: "/images/posts/2026/06/native-linux-apple-watch-a-game-builder-and-crash-protection/native-linux-apple-watch-game-builder-crash-protection.jpg"
 categories:
   - "Java"
 tags:

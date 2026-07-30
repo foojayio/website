@@ -6,7 +6,7 @@ lastmod: "2024-09-18T06:29:46+00:00"
 description: "A 1-Day Modern Java Bootcamp for IT students, early professionals, and career shifters with minimal Java or general programming experience."
 authors:
   - "tristan-mahinay"
-image: "https://foojay.io/wp-content/uploads/2024/07/java-bootcamp-2024-1.jpg"
+image: "/images/posts/2024/08/jug-ph-1-day-modern-java-development-bootcamp/java-bootcamp-2024-1.jpg"
 categories:
   - "Java"
   - "Java Core"

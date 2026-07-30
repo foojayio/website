@@ -6,7 +6,7 @@ lastmod: "2024-10-18T16:53:19+00:00"
 description: "Gatherers help eliminate the need to define large error-prone Collectors, which can degrade source code maintainability."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2024/10/gatherers.png"
+image: "/images/posts/2024/10/exploring-new-features-in-jdk-23-gatherers-upgrades-pipeline-design-pattern-jep-461/gatherers.png"
 categories:
   - "Java"
   - "Java Beginner"

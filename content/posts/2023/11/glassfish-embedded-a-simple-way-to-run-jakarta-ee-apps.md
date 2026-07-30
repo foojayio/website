@@ -6,7 +6,7 @@ lastmod: "2023-11-01T15:55:16+00:00"
 description: "Jan Blavins shares how builds both server component and a client component in his project using the GlassFish Embedded container with little effort."
 authors:
   - "ondro-mihalyi"
-image: "https://foojay.io/wp-content/uploads/2023/10/GlassFish-embedded-e1698251860666.png"
+image: "/images/posts/2023/11/glassfish-embedded-a-simple-way-to-run-jakarta-ee-apps/GlassFish-embedded-e1698251860666.png"
 categories:
   - "Jakarta EE"
   - "Use Cases"

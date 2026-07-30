@@ -6,7 +6,7 @@ lastmod: "2026-06-14T22:05:20+00:00"
 description: "AgentFlow4J is a JVM-native runtime for governed multi-agent systems. Build, govern and operate AI agents on your existing Spring infrastructure without introducing a second platform."
 authors:
   - "ahmed-sekka"
-image: "https://foojay.io/wp-content/uploads/2026/06/spring-govern.png"
+image: "/images/posts/2026/06/spring-ai-agents-no-second-runtime/spring-govern.png"
 categories:
   - "AI"
   - "FinOps"

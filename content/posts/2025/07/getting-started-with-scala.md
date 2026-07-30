@@ -6,7 +6,7 @@ lastmod: "2025-07-16T06:42:21+00:00"
 description: "At Quantexa, we love Scala. This may be the first dedicated article on Foojay.io about Scala. I hope my colleagues and I can add more in due course."
 authors:
   - "steve-wilcockson"
-image: "https://foojay.io/wp-content/uploads/2025/07/Scala1.png"
+image: "/images/posts/2025/07/getting-started-with-scala/Scala1.png"
 categories:
   - "Data Engineering"
   - "Scala"

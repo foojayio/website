@@ -7,7 +7,7 @@ description: "Within OpenJDK, there is a whole Java package dedicated to MIDI co
 authors:
   - "frankdelporte"
   - "geert-bevin"
-image: "https://foojay.io/wp-content/uploads/2024/06/podcast-guests-java-midi.png"
+image: "/images/posts/2024/06/foojay-podcast-54/podcast-guests-java-midi.png"
 categories:
   - "Desktop"
   - "Java Core"

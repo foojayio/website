@@ -6,7 +6,7 @@ lastmod: "2025-06-25T12:17:57+00:00"
 description: "One of the discussions that always leaves me with both doubts and excitement is the one about system architecture."
 authors:
   - "ricardo-mello"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/06/clean-and-modular-java-a-hexagonal-architecture-approach/mongologo.png"
 categories:
   - "Databases"
   - "Java"

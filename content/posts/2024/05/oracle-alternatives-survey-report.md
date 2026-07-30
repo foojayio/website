@@ -6,7 +6,7 @@ lastmod: "2024-05-17T20:31:26+00:00"
 description: "Azul is planning to issue an Oracle \"alternatives\" Report in late July, and would like your help to complete the survey."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2024/05/dimensional.png"
+image: "/images/posts/2024/05/oracle-alternatives-survey-report/dimensional.png"
 categories:
   - "Java Core"
   - "Performance"

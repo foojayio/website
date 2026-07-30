@@ -6,7 +6,7 @@ lastmod: "2026-04-23T07:18:47+00:00"
 description: "The April 2026 quarterly update for Azul Zulu Builds of OpenJDK is now available. This quarterly release brings security and bug fixes, along with a few - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2023/09/Azul-Prime-Stable-2308.jpg"
+image: "/images/posts/2026/04/azul-zulu-april-2026-quarterly-update-released/Azul-Prime-Stable-2308.jpg"
 categories:
   - "Java"
   - "Release Notes"

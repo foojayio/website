@@ -6,7 +6,7 @@ description: "The incident that taught me to respect pinning looked like nothing
 canonical: "https://dev.to/maschiojv/your-loom-app-quietly-became-a-thread-pool-again-a-field-guide-to-virtual-thread-pinning-2a3f"
 authors:
   - "felipe-maschio"
-image: "https://foojay.io/wp-content/uploads/2026/07/foojay-featured-virtual-thread-pinning.jpg"
+image: "/images/posts/2026/07/virtual-thread-pinning-field-guide/foojay-featured-virtual-thread-pinning.jpg"
 categories:
   - "Java"
   - "Java Core"

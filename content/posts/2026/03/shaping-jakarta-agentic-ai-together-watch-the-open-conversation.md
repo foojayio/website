@@ -7,7 +7,7 @@ description: "Watch the Jakarta Agentic AI open conversation recording and learn
 canonical: "https://payara.fish/blog/jakarta-agentic-ai-open-conversation-recording/"
 authors:
   - "dominika-tasarz"
-image: "https://foojay.io/wp-content/uploads/2026/03/Blog-Image_Community-Jakarta-Agentic-AI-square-scaled.jpg"
+image: "/images/posts/2026/03/shaping-jakarta-agentic-ai-together-watch-the-open-conversation/Blog-Image_Community-Jakarta-Agentic-AI-square-scaled.jpg"
 categories:
   - "AI"
   - "Jakarta EE"

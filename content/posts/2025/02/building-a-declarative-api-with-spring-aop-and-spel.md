@@ -7,7 +7,7 @@ description: "See how to implement a declarative API with Spring AOP and SpEL to
 canonical: "https://lemikaelf.github.io/blog/posts/spel-arguments/"
 authors:
   - "mikael-francoeur"
-image: "https://foojay.io/wp-content/uploads/2025/02/spel.png"
+image: "/images/posts/2025/02/building-a-declarative-api-with-spring-aop-and-spel/spel.png"
 categories:
   - "Java"
   - "Spring"

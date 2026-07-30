@@ -7,7 +7,7 @@ description: "What do you do when you have a bug? Using a well defined process i
 canonical: "https://debugagent.com/the-theory-of-debugging"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2023/07/shaialmog_A_group_of_hunters_armed_with_computer_keyboards_are__b241e558-c26b-4c9c-bf60-1fb7d81fe6a3.jpg"
+image: "/images/posts/2023/12/the-theory-of-debugging/shaialmog_A_group_of_hunters_armed_with_computer_keyboards_are__b241e558-c26b-4c9c-bf60-1fb7d81fe6a3.jpg"
 categories:
   - "Tutorials"
 tags:

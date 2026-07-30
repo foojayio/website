@@ -7,7 +7,7 @@ authors:
   - "cristobal-escobar"
   - "frankdelporte"
   - "luis-majano"
-image: "https://foojay.io/wp-content/uploads/2026/06/edit-97-boxlang.jpg"
+image: "/images/posts/2026/06/foojay-podcast-97/edit-97-boxlang.jpg"
 categories:
   - "AI"
   - "BoxLang"

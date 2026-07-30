@@ -6,7 +6,7 @@ description: "There is an evergreen debate in the Java world: Should you always 
 canonical: "https://blog.frankel.ch/bigdecimal-vs-double/"
 authors:
   - "stefano-fago"
-image: "https://foojay.io/wp-content/uploads/2026/06/cover_large-1.jpg"
+image: "/images/posts/2026/06/double-bigdecimal-or-fixed-point-precision-performance-and-sane-choices-for-numbers-in-java/cover_large-1.jpg"
 categories:
   - "Java"
 tags:

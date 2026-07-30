@@ -9,7 +9,7 @@ authors:
   - "frankdelporte"
   - "ko-turk"
   - "ronald-dehuysser"
-image: "https://foojay.io/wp-content/uploads/2025/12/episode-84-sustainable-engineering.jpg"
+image: "/images/posts/2025/12/foojay-podcast-84/episode-84-sustainable-engineering.jpg"
 categories:
   - "Podcast"
 tags:

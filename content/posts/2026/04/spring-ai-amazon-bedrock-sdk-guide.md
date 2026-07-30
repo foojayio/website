@@ -6,7 +6,7 @@ lastmod: "2026-04-20T13:44:55+00:00"
 description: "Learn how to use Spring AI SDK with the Amazon Bedrock AgentCore to build scalable AI-powered applications."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2026/04/springaiagentcore.png"
+image: "/images/posts/2026/04/spring-ai-amazon-bedrock-sdk-guide/springaiagentcore.png"
 categories:
   - "AI"
   - "GenAI"

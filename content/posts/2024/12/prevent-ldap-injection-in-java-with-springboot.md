@@ -6,7 +6,7 @@ lastmod: "2024-12-05T06:26:36+00:00"
 description: "Prevent LDAP injection in #java 💥💉with #springboot: Learn how to prevent LDAP injection attacks with expert tips from Vincent VAUBAN. Understand the basics of LDAP, its importance, and techniques to secure your applications. Includes practical coding demonstrations and OWASP recommendations."
 authors:
   - "vincent-vauban"
-image: "https://foojay.io/wp-content/uploads/2024/12/ldap-injection-pix.png"
+image: "/images/posts/2024/12/prevent-ldap-injection-in-java-with-springboot/ldap-injection-pix.png"
 categories:
   - "DevOps"
   - "Java"

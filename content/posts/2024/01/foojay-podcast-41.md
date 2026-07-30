@@ -7,7 +7,7 @@ description: "Do you really need JavaScript frameworks? Why would you not just s
 authors:
   - "frankdelporte"
   - "marcus-hellberg"
-image: "https://foojay.io/wp-content/uploads/2024/01/podcast-guests-web-development.png"
+image: "/images/posts/2024/01/foojay-podcast-41/podcast-guests-web-development.png"
 categories:
   - "Podcast"
   - "Vaadin"

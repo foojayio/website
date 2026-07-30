@@ -7,7 +7,7 @@ description: "Practical tips for debugging front-end network issues using browse
 canonical: "https://debugagent.com/front-end-debugging-part-3-networking"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2025/01/587131dc76555712343a86003c0e777949669b82b49a29d50ca9310de383431b.jpg"
+image: "/images/posts/2025/02/front-end-debugging-part-3-networking/587131dc76555712343a86003c0e777949669b82b49a29d50ca9310de383431b.jpg"
 categories:
   - "Tutorials"
 tags:

@@ -6,7 +6,7 @@ description: "This post will help you map your MicroProfile Health knowledge to 
 canonical: "https://payara.fish/blog/spring-boot-actuator-health-for-microprofile-developers/"
 authors:
   - "luqman-saeed"
-image: "https://foojay.io/wp-content/uploads/2026/03/Blog-Image_SpringBoot-Actuator-Health-for-Microprofile-Developers-scaled-1.jpg"
+image: "/images/posts/2026/03/spring-boot-actuator-health-for-microprofile-developers/Blog-Image_SpringBoot-Actuator-Health-for-Microprofile-Developers-scaled-1.jpg"
 categories:
   - "Jakarta EE"
   - "Java"

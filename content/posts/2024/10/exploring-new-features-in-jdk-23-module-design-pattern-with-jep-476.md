@@ -6,7 +6,7 @@ lastmod: "2024-10-31T09:41:21+00:00"
 description: "JEP-476 is another great example of Java platform evolution while enabling internal project stability, transparency and security."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2024/10/jep476.png"
+image: "/images/posts/2024/10/exploring-new-features-in-jdk-23-module-design-pattern-with-jep-476/jep476.png"
 categories:
   - "Java"
   - "Java Beginner"

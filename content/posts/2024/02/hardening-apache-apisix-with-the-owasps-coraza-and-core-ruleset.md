@@ -7,7 +7,7 @@ description: "Most organizations don't incentivize for security. Hence, we need 
 canonical: "https://blog.frankel.ch/apisix-owasp-coraza-core-ruleset/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/02/img-HDlf4Xx9m1iqS0Ico3oBZ-1024x683.png"
+image: "/images/posts/2024/02/hardening-apache-apisix-with-the-owasps-coraza-and-core-ruleset/img-HDlf4Xx9m1iqS0Ico3oBZ-1024x683.png"
 categories:
   - "DevOps"
   - "Security"

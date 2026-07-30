@@ -6,7 +6,7 @@ lastmod: "2025-07-16T06:45:40+00:00"
 description: "Spring Boot API documentation with Redocusaurus: from exporting your OpenAPI spec to setting up a beautiful developer portal in minutes."
 authors:
   - "vincent-vauban"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/07/spring-boot-api-documentation-redocusaurus/Favicon-3-2.png"
 categories:
   - "Java"
   - "Spring"

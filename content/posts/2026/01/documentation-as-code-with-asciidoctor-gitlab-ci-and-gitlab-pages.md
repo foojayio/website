@@ -6,7 +6,7 @@ description: "Writing documentation should be as low-key as possible to remove t
 canonical: "https://jensknipper.de/blog/gitlab-ci-pages-asciidoc-documentation-as-code/"
 authors:
   - "jens-knipper"
-image: "https://foojay.io/wp-content/uploads/2026/01/gitlab-asciidoc-documentation-as-code-result.png"
+image: "/images/posts/2026/01/documentation-as-code-with-asciidoctor-gitlab-ci-and-gitlab-pages/gitlab-asciidoc-documentation-as-code-result.png"
 categories:
   - "GitLab"
 tags:

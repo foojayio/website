@@ -5,7 +5,7 @@ date: "2026-03-25T09:00:00+00:00"
 description: "We built an AI agent runtime in pure Java using Spring AI, Spring Modulith, JobRunr, and Spring Events and called it ClawRunr (aka Javaclaw). Here's how the pieces fit together."
 authors:
   - "nicholas-dhondt"
-image: "https://foojay.io/wp-content/uploads/2026/03/ThumbClawRunr.png"
+image: "/images/posts/2026/03/how-we-built-a-java-ai-agent-by-connecting-the-dots-the-ecosystem-already-had/ThumbClawRunr.png"
 categories:
   - "AI"
   - "Java"

@@ -6,7 +6,7 @@ description: "Ever since I started my #JavaOnRaspberryPi journey in 2019, which 
 canonical: "https://webtechie.be/post/2026-01-07-x86-arm-riscv/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/01/single-board-computers-scaled.jpg"
+image: "/images/posts/2026/01/java-on-single-board-computers-x86-vs-arm-vs-risc-v/single-board-computers-scaled.jpg"
 categories:
   - "Embedded"
   - "Java"

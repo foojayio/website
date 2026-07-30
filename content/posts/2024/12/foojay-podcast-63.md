@@ -9,7 +9,7 @@ authors:
   - "frankdelporte"
   - "gerrit-grunwald"
   - "johan-janssen"
-image: "https://foojay.io/wp-content/uploads/2024/12/podcast-63-up-to-date-java.jpg"
+image: "/images/posts/2024/12/foojay-podcast-63/podcast-63-up-to-date-java.jpg"
 categories:
   - "Java"
   - "Java Core"

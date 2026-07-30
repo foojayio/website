@@ -6,7 +6,7 @@ lastmod: "2026-03-26T06:40:39+00:00"
 description: "TestBox 7.x focuses on improving testing workflows for BoxLang and CFML applications. This release introduces improvements to the BoxLang CLI runner, - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/03/testbox-7-1-700x467-1.jpg"
+image: "/images/posts/2026/03/testbox-7-real-time-feedback-a-browser-based-ide-and-modern-testing-workflows-on-the-jvm/testbox-7-1-700x467-1.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"

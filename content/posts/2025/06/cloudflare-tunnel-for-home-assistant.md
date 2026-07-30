@@ -7,7 +7,7 @@ description: "I continue to take care of my Home Assistant. This week, I replace
 canonical: "https://blog.frankel.ch/home-assistant/6/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/05/cover-cloudflare-tunnel.jpg"
+image: "/images/posts/2025/06/cloudflare-tunnel-for-home-assistant/cover-cloudflare-tunnel.jpg"
 categories:
   - "DevOps"
 tags:

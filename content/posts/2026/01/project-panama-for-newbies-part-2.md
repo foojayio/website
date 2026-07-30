@@ -6,7 +6,7 @@ lastmod: "2026-01-02T11:55:15+00:00"
 description: "In this part of the Panama series, the goal is to call C function signatures, often defined to accept pointers and structs, from Java."
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2021/08/panama_part2.png"
+image: "/images/posts/2026/01/project-panama-for-newbies-part-2/panama_part2.png"
 categories:
   - "JEPs"
   - "Project Panama"

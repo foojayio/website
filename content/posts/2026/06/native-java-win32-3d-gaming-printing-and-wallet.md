@@ -7,7 +7,7 @@ description: "This week brings native Windows executables with no JVM, a portabl
 canonical: "https://www.codenameone.com/blog/native-java-win32-3d-gaming-printing-and-wallet/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/06/weekly-1.jpg"
+image: "/images/posts/2026/06/native-java-win32-3d-gaming-printing-and-wallet/weekly-1.jpg"
 categories:
   - "Java"
 tags:

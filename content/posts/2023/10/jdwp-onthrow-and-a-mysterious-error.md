@@ -6,7 +6,7 @@ lastmod: "2023-11-20T12:00:24+00:00"
 description: "Collaborating with other people from different companies in an Open-Source project is great."
 authors:
   - "johannes-bechberger"
-image: "https://foojay.io/wp-content/uploads/2023/10/F7hNsheWUAA0Y46-2000x1500-1.jpg"
+image: "/images/posts/2023/10/jdwp-onthrow-and-a-mysterious-error/F7hNsheWUAA0Y46-2000x1500-1.jpg"
 categories:
   - "Debugging"
   - "Java Core"

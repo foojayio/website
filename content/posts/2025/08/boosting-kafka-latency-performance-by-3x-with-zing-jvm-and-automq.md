@@ -8,7 +8,7 @@ canonical: "https://www.automq.com/blog/automq-zing-boost-latency-performance"
 authors:
   - "john-ceccarelli"
   - "kaiming-wan"
-image: "https://foojay.io/wp-content/uploads/2025/08/kafka-with-zing-and-automq.jpg"
+image: "/images/posts/2025/08/boosting-kafka-latency-performance-by-3x-with-zing-jvm-and-automq/kafka-with-zing-and-automq.jpg"
 categories:
   - "Java"
   - "Kafka"

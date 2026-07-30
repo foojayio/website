@@ -7,7 +7,7 @@ description: "The problem of some Kubernetes objects: they are cluster-wide and 
 canonical: "https://www.loft.sh/blog/solution-clusterwide-crds"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/12/idea.png"
+image: "/images/posts/2025/01/a-solution-to-the-problem-of-cluster-wide-crds/idea.png"
 categories:
   - "Cloud"
   - "Use Cases"

@@ -7,7 +7,7 @@ description: "Let's explore aspects of the OpenTelemetry Collector that sits at 
 canonical: "https://blog.frankel.ch/opentelemetry-collector/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/11/opentelemetry-horizontal-color-scaled.jpg"
+image: "/images/posts/2023/12/exploring-the-opentelemetry-collector/opentelemetry-horizontal-color-scaled.jpg"
 categories:
   - "DevOps"
 tags:

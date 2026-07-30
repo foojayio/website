@@ -7,7 +7,7 @@ description: "Let's make a duplicate finder for documentation together – a too
 canonical: "https://flounder.dev/posts/duplicate-finder-intro/"
 authors:
   - "igor-kulakov"
-image: "https://foojay.io/wp-content/uploads/2024/04/duplicate-finder-banner.png"
+image: "/images/posts/2024/05/duplicate-finder-for-documentation/duplicate-finder-banner.png"
 categories:
   - "Java"
   - "Kotlin"

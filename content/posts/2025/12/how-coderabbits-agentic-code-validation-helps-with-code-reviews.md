@@ -6,7 +6,7 @@ lastmod: "2025-12-07T11:14:09+00:00"
 description: "Instead of chasing higher benchmark scores or relying on traditional metrics, CodeRabbit focuses on how AI systems actually perform in live engineering environments through custom evaluation methods, some visible directly on the PRs we review."
 authors:
   - "ewa-szyszka"
-image: "https://foojay.io/wp-content/uploads/2025/12/ee88f311-e2fd-4bb5-acb5-2a07ceff098d.webp"
+image: "/images/posts/2025/12/how-coderabbits-agentic-code-validation-helps-with-code-reviews/ee88f311-e2fd-4bb5-acb5-2a07ceff098d.webp"
 categories:
   - "AI"
   - "CodeRabbit"

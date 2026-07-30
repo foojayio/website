@@ -7,7 +7,7 @@ description: "DORA is not just a regional EU regulation but one with far-reachin
 authors:
   - "geertjan-wielenga"
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2024/07/dora.png"
+image: "/images/posts/2024/08/the-impact-of-the-eu-dora-act-on-non-eu-financial-organizations/dora.png"
 categories:
   - "EU DORA Act"
   - "Java Core"

@@ -7,7 +7,7 @@ description: "Whether you’re a sustainability lead, a FinOps architect, or a J
 canonical: "https://www.azul.com/blog/sustainability-starts-with-your-runtime-meet-a-green-jvm/"
 authors:
   - "anthony-layton"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/07/sustainability-starts-with-your-runtime-meet-a-green-jvm/Favicon-3-2.png"
 categories:
   - "Cloud"
   - "Java"

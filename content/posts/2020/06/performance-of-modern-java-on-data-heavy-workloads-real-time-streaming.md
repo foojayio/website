@@ -6,7 +6,7 @@ lastmod: "2021-03-25T17:25:53+00:00"
 description: "Hazelcast put new Java technologies to the test on workloads typical for their distributed stream processing engine, Hazelcast Jet."
 authors:
   - "marko-topolnik"
-image: "https://foojay.io/wp-content/uploads/2021/03/2020-06-01-light-streaming-latency-700x415.png"
+image: "/images/posts/2020/06/performance-of-modern-java-on-data-heavy-workloads-real-time-streaming/2020-06-01-light-streaming-latency-700x415.png"
 categories:
   - "Performance"
 tags:

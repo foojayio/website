@@ -7,7 +7,7 @@ description: "MongoT is a wrapper around the amazing Java search engine: Lucene.
 canonical: "https://tech-blog.luketn.com/exploring-mongot-atlas-search"
 authors:
   - "luke-thompson"
-image: "https://foojay.io/wp-content/uploads/2026/05/Screenshot-2026-05-08-at-3.17.36-PM.png"
+image: "/images/posts/2026/05/exploring-mongot-atlas-search/Screenshot-2026-05-08-at-3.17.36-PM.png"
 categories:
   - "Databases"
   - "Java"

@@ -7,7 +7,7 @@ description: "Java was the first language I used professionally and is the scale
 canonical: "https://blog.frankel.ch/python-magic-methods/1/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/10/pexels-benni-fish-9468322.jpg"
+image: "/images/posts/2023/11/python-magic-methods-part-1/pexels-benni-fish-9468322.jpg"
 categories:
   - "Tutorials"
 tags:

@@ -7,7 +7,7 @@ description: "In this article, learn about canary releases and how you can confi
 canonical: "https://blog.frankel.ch/canary-releases-apisix/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2023/12/bird-5285011.jpg"
+image: "/images/posts/2023/12/canary-releases-with-apache-apisix/bird-5285011.jpg"
 categories:
   - "DevOps"
 tags:

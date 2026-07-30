@@ -6,7 +6,7 @@ lastmod: "2026-05-21T11:44:10+00:00"
 description: "Today we're launching something we've been quietly building for months: skills.boxlang.io — a public, agent-agnostic directory for AI skills covering - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/05/Captura-de-pantalla-2026-05-21-134045.png"
+image: "/images/posts/2026/05/introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world/Captura-de-pantalla-2026-05-21-134045.png"
 categories:
   - "AI"
   - "BoxLang"

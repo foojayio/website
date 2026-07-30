@@ -6,7 +6,7 @@ lastmod: "2025-11-13T16:57:46+00:00"
 description: "By making one change, using Azul Platform Prime enhanced by Optimizer Hub, a global enterprise improved application responsiveness and stability at scale while reducing infrastructure costs."
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2025/02/azullogo.png"
+image: "/images/posts/2025/10/what-happens-when-10000-jvms-collaborate-in-one-production-environment/azullogo.png"
 categories:
   - "Java Core"
   - "Performance"

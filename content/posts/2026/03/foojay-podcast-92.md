@@ -7,7 +7,7 @@ authors:
   - "frankdelporte"
   - "loic-mathieu"
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2026/03/episode-92-java-26.jpg"
+image: "/images/posts/2026/03/foojay-podcast-92/episode-92-java-26.jpg"
 categories:
   - "Java"
   - "Java Core"

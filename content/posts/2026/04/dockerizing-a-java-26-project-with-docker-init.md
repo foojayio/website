@@ -6,7 +6,7 @@ description: "Java 26 came out in March 2026. This article walks you through Doc
 canonical: "https://www.dockersecurity.io/blog/dockerize-java-26-with-docker-init"
 authors:
   - "aerabi"
-image: "https://foojay.io/wp-content/uploads/2026/04/asgard-init-1024x765.png"
+image: "/images/posts/2026/04/dockerizing-a-java-26-project-with-docker-init/asgard-init-1024x765.png"
 categories:
   - "DevOps"
   - "Java"

@@ -7,7 +7,7 @@ description: "This is the second article in a series on faster Java application 
 canonical: "https://www.azul.com/blog/how-readynow-improves-java-warmup-time/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2025/06/how-readynow-improves-java-warmup-time/Favicon-3-2.png"
 categories:
   - "Performance"
 tags:

@@ -6,7 +6,7 @@ description: "I'm proud to present a new JavaFX library: Lottie4J, that brings L
 canonical: "https://webtechie.be/post/2026-03-03-introducing-lottie4j/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/03/launch-lottie4j-scaled.jpg"
+image: "/images/posts/2026/03/introducing-lottie4j-a-javafx-library-to-parse-and-play-lottie-animation-files/launch-lottie4j-scaled.jpg"
 categories:
   - "Uncategorized"
 tags:

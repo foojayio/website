@@ -6,7 +6,7 @@ lastmod: "2024-07-27T10:47:25+00:00"
 description: "OpenJDK24 recently added a new HotSpot JVM option called PrintMemoryMapAtExit."
 authors:
   - "chriswhocodes"
-image: "https://foojay.io/wp-content/uploads/2024/07/PrintMemoryMapAtExit.png"
+image: "/images/posts/2024/07/understanding-jvm-memory-layout-with-openjdk24s-new-printmemorymapatexit-vm-option/PrintMemoryMapAtExit.png"
 categories:
   - "Java Core"
 tags:

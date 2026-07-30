@@ -7,7 +7,7 @@ description: "As part of my 2026 learning goals around Java on Single Board Comp
 canonical: "https://webtechie.be/post/2026-01-12-first-test-orangepi-java/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2026/01/orangepi-connections-scaled.jpg"
+image: "/images/posts/2026/01/first-test-of-java-on-the-orange-pi-arm-and-risc-v/orangepi-connections-scaled.jpg"
 categories:
   - "Raspberry Pi"
 tags:

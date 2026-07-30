@@ -7,7 +7,7 @@ description: "Azul ensures that financial institutions using Java remain complia
 authors:
   - "geertjan-wielenga"
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2024/07/dora.png"
+image: "/images/posts/2024/08/consequences-of-dora-on-java-and-openjdk-with-azul/dora.png"
 categories:
   - "EU DORA Act"
   - "Java Core"

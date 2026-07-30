@@ -7,7 +7,7 @@ description: "An OpenAPI 3.x client generator that turns a spec into typed Coden
 canonical: "https://www.codenameone.com/blog/build-time-codegen/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/06/build-time-codegen.jpg"
+image: "/images/posts/2026/06/openapi-orm-svg-and-lottie/build-time-codegen.jpg"
 categories:
   - "Java"
 tags:

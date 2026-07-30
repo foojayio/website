@@ -6,7 +6,7 @@ lastmod: "2026-06-24T10:46:18+00:00"
 description: "BoxLang 1.14.0 ships a lot of exciting features - Dynamic Sets, Ranges, Inner Classes, JSONPath navigation - but one quietly powerful addition will - by Cristobal Escobar"
 authors:
   - "cristobal-escobar"
-image: "https://foojay.io/wp-content/uploads/2026/06/BoxLang-release-1.14.0-1701-x-1701-px-2-1024x1024.png"
+image: "/images/posts/2026/06/boxlang-1-14-0-query-transformers-take-full-control-of-your-query-results/BoxLang-release-1.14.0-1701-x-1701-px-2-1024x1024.png"
 categories:
   - "BoxLang"
   - "Databases"

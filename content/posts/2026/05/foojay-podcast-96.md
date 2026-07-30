@@ -6,7 +6,7 @@ description: "What if you could run 35 AWS services locally in under 25 millisec
 authors:
   - "frankdelporte"
   - "hector-ventura"
-image: "https://foojay.io/wp-content/uploads/2026/05/edit-96-floci.jpg"
+image: "/images/posts/2026/05/foojay-podcast-96/edit-96-floci.jpg"
 categories:
   - "Cloud"
   - "Podcast"

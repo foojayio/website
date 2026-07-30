@@ -6,7 +6,7 @@ lastmod: "2025-01-02T22:59:52+00:00"
 description: "How to have less terminal windows opened and stay in the flow while working in your IDE."
 authors:
   - "anthony-goubard"
-image: "https://foojay.io/wp-content/uploads/2024/12/shell-prompt-java2-1.png"
+image: "/images/posts/2024/12/more-free-shells-for-your-java-ide/shell-prompt-java2-1.png"
 categories:
   - "Desktop"
   - "Eclipse"

@@ -6,7 +6,7 @@ lastmod: "2025-04-02T06:55:24+00:00"
 description: "Learn how to speed up your Spring Batch jobs using GraalVM Native Image! Discover how to compile batch apps into native executables and more!"
 authors:
   - "vincent-vauban"
-image: "https://foojay.io/wp-content/uploads/2024/12/speedup-batch.png"
+image: "/images/posts/2024/12/speed-up-your-spring-batch-with-native-image-and-graalvm/speedup-batch.png"
 categories:
   - "Cloud"
   - "Java"

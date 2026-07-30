@@ -7,7 +7,7 @@ description: "Equifax had numerous firewalls in place that would have done all t
 canonical: "https://www.azul.com/blog/the-importance-of-java-security-updates/"
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2021/08/image-1024x679.png"
+image: "/images/posts/2024/08/are-java-security-updates-important/image-1024x679.png"
 categories:
   - "Security"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2025-05-26T08:12:58+00:00"
 description: "AI can generate tests, but the result is not totally reliable. This article covers best practices to incorporate AI into the test generation."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2025/04/ai-test-generation.png"
+image: "/images/posts/2025/05/ai-driven-testing-best-practices/ai-test-generation.png"
 categories:
   - "Java"
   - "Testing"

@@ -6,7 +6,7 @@ lastmod: "2024-06-30T11:16:00+00:00"
 description: "The School of OpenJDK Migration is totally free and self-paced. Do yourself a favor and start preparing about OpenJDK migration today. "
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2023/08/image-764x1024-dummies.png"
+image: "/images/posts/2024/06/master-your-journey-in-the-school-of-openjdk-migration/image-764x1024-dummies.png"
 categories:
   - "Java Beginner"
   - "Java Core"

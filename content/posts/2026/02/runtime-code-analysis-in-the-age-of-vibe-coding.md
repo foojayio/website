@@ -6,7 +6,7 @@ lastmod: "2026-02-17T18:33:34+00:00"
 description: "In the era of vibe coding—where large amounts of code are introduced or refactored in short bursts, often with the help of LLMs—you need immediate - by Suneet Kamath"
 authors:
   - "suneet-kamath"
-image: "https://foojay.io/wp-content/uploads/2026/02/what.png"
+image: "/images/posts/2026/02/runtime-code-analysis-in-the-age-of-vibe-coding/what.png"
 categories:
   - "Java"
   - "Observability"

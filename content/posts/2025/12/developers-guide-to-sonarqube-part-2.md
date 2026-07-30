@@ -6,7 +6,7 @@ lastmod: "2025-12-16T15:53:30+00:00"
 description: "Eliminate \"works on my machine\" issues. Learn to sync SonarQube for IDE with the cloud, catch taint security flaws, and customize Quality Gates for your Java projects."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2025/12/Gemini_Generated_Image_jfxwfrjfxwfrjfxw-scaled.png"
+image: "/images/posts/2025/12/developers-guide-to-sonarqube-part-2/Gemini_Generated_Image_jfxwfrjfxwfrjfxw-scaled.png"
 categories:
   - "IntelliJ IDEA"
   - "Java"

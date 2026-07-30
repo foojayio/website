@@ -6,7 +6,7 @@ lastmod: "2025-09-12T09:09:14+00:00"
 description: "The name “Stochastic AI Agility” suggests that the output of using AI-LLM definitely contributes to the goal, but the impact may not be exactly predicted."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2025/08/adp.png"
+image: "/images/posts/2025/09/stochastic-ai-agility-breaking-cycles-of-debt/adp.png"
 categories:
   - "Agile"
   - "AI"

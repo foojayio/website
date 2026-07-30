@@ -7,7 +7,7 @@ description: "Let's implement a watermarking feature with the help of imgproxy. 
 canonical: "https://blog.frankel.ch/dynamic-watermarking/2/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/07/faucet-1684902.jpg"
+image: "/images/posts/2024/07/dynamic-watermarking-with-imgproxy-and-apache-apisix/faucet-1684902.jpg"
 categories:
   - "DevOps"
 tags:

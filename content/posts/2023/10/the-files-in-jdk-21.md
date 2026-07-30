@@ -6,7 +6,7 @@ lastmod: "2023-10-17T07:22:29+00:00"
 description: "As Java developers, we all have it installed on our computer: the Java Development Kit, also known as the JDK. In this article, we'll explore the files of the JDK."
 authors:
   - "anthony-goubard"
-image: "https://foojay.io/wp-content/uploads/2023/10/jdk21-files-feature-image.png"
+image: "/images/posts/2023/10/the-files-in-jdk-21/jdk21-files-feature-image.png"
 categories:
   - "Java"
   - "JDK21"

@@ -6,7 +6,7 @@ lastmod: "2024-10-10T11:00:56+00:00"
 description: "Explore how to shift an object initiation process across various parties with creational pattern builder and JEP-455."
 authors:
   - "miro-wengner"
-image: "https://foojay.io/wp-content/uploads/2024/10/jdk-23-builder.png"
+image: "/images/posts/2024/10/exploring-new-features-in-jdk-23-builder-pattern-simplicity-with-jep-455-primitive-types-in-patterns-instanceof-and-switch-preview/jdk-23-builder.png"
 categories:
   - "Java"
   - "Java Beginner"

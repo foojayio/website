@@ -7,7 +7,7 @@ description: "I've been a big fan of Mutation Testing since I discovered PIT. As
 canonical: "https://blog.frankel.ch/mutation-testing-rust/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2025/03/cover-2.jpg"
+image: "/images/posts/2025/04/mutation-testing-in-rust/cover-2.jpg"
 categories:
   - "Testing"
 tags:

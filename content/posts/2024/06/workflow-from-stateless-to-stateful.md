@@ -7,7 +7,7 @@ description: "How I first limited my usage of BPMN and then unlocked its true po
 canonical: "https://blog.frankel.ch/worfklow-stateless-stateful/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/05/work-6671449.jpg"
+image: "/images/posts/2024/06/workflow-from-stateless-to-stateful/work-6671449.jpg"
 categories:
   - "Use Cases"
 tags:

@@ -5,7 +5,7 @@ date: "2026-01-15T10:00:00+00:00"
 description: "Memory management remains the primary factor for application performance in enterprise Java environments. Between 2017 and 2025, the ecosystem shifted from manual tuning to architectural selection. Industry data suggests that 60 percent of Java performance issues and 45 percent of production incidents in distributed systems stem from suboptimal Garbage Collection (GC) behavior. This guide provides a strategic framework for selecting collectors based on workload characteristics. It covers the transition from legacy collectors to Generational ZGC, analyzing trade-offs regarding throughput, latency, and hardware constraints with mathematical precision. - by Alexius Dionysius Diakogiannis"
 authors:
   - "alexius-diakogiannis"
-image: "https://foojay.io/wp-content/uploads/2026/01/Gemini_Generated_Image_pa4tufpa4tufpa4t-1024x559.png"
+image: "/images/posts/2026/01/the-ultimate-10-years-java-garbage-collection-guide-2016-2026-choosing-the-right-gc-for-every-workload/Gemini_Generated_Image_pa4tufpa4tufpa4t-1024x559.png"
 categories:
   - "Java"
   - "Java Core"

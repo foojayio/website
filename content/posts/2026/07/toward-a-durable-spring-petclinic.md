@@ -6,7 +6,7 @@ lastmod: "2026-07-22T21:31:56+00:00"
 description: "What makes a process a good candidate for durability? To answer this, we'll take the canonical Spring PetClinic and interrogate its sources."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2026/07/horizontal-logo.png"
+image: "/images/posts/2026/07/toward-a-durable-spring-petclinic/horizontal-logo.png"
 categories:
   - "Developer Tools"
   - "Durability"

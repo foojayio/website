@@ -6,7 +6,7 @@ lastmod: "2026-02-03T15:43:10+00:00"
 description: "For many years, REST has been the standard architectural style for creating APIs in the Java ecosystem. Frameworks such as Spring MVC and, more recently, - by Matteo Rossi"
 authors:
   - "matteo-rossi"
-image: "https://foojay.io/wp-content/uploads/2026/01/gra.png"
+image: "/images/posts/2026/02/graphql-for-java-developers-building-a-flexible-data-layer/gra.png"
 categories:
   - "Databases"
   - "Java"

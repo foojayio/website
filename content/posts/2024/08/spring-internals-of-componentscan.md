@@ -6,7 +6,7 @@ lastmod: "2024-08-31T09:24:52+00:00"
 description: "Explore the nuances of Spring's @ComponentScan in our extensive guide. Gain insights into its internals and optimize your application's configuration effectively."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2024/08/componentscan.png"
+image: "/images/posts/2024/08/spring-internals-of-componentscan/componentscan.png"
 categories:
   - "Java"
   - "Spring"

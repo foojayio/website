@@ -6,7 +6,7 @@ lastmod: "2024-05-07T04:33:47+00:00"
 description: "JFR logs are easily obtained by simply going into the command line. But what if you don't have access to the command line or terminal directly on the system where the JVM is running?"
 authors:
   - "matt-van-order"
-image: "https://foojay.io/wp-content/uploads/2024/04/RecordingProgress-1.png"
+image: "/images/posts/2024/05/remotely-recording-a-jfr-log-from-a-container-without-using-the-command-line/RecordingProgress-1.png"
 categories:
   - "Java"
   - "JDK Flight Recorder"

@@ -6,7 +6,7 @@ lastmod: "2025-12-22T10:42:43+00:00"
 description: "Your code is safe, but are your dependencies? Part 3 reveals how SonarQube Advanced Security detects hidden CVEs, manages licenses, and generates SBOMs to secure your Java supply chain."
 authors:
   - "jonathan-vila"
-image: "https://foojay.io/wp-content/uploads/2025/12/Gemini_Generated_Image_y2e57wy2e57wy2e5-1.png"
+image: "/images/posts/2025/12/avoid-the-trojan-horse-in-your-pom-xml-sonarqube-advanced-security-part-3/Gemini_Generated_Image_y2e57wy2e57wy2e5-1.png"
 categories:
   - "Developer Tools"
   - "Security"
@@ -203,7 +203,7 @@ You don't want to write this list by hand in Excel. SonarQube creates this for y
 
 &nbsp;&nbsp;&nbsp;&nbsp;"type" : "library",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"bom-ref" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5832393b332b373675393636372c392c3137362b186a7661766968">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;&nbsp;&nbsp;"bom-ref" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="315b50525a425e5f1c505f5f5e455045585e5f4271031f081f0001">[email&nbsp;protected]</a>",
 
 &nbsp;&nbsp;&nbsp;&nbsp;"supplier" : {
 
@@ -223,13 +223,13 @@ You don't want to write this list by hand in Excel. SonarQube creates this for y
 
 &nbsp;&nbsp;&nbsp;&nbsp;} ],
 
-&nbsp;&nbsp;&nbsp;&nbsp;"purl" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f892999b938b9796d5999696978c998c9197968bb8cad6c1d6c9c8">[email&nbsp;protected]</a>"
+&nbsp;&nbsp;&nbsp;&nbsp;"purl" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2842494b435b474605494646475c495c4147465b681a0611061918">[email&nbsp;protected]</a>"
 
 &nbsp;&nbsp;}, {
 
 &nbsp;&nbsp;&nbsp;&nbsp;"type" : "library",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"bom-ref" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90faf1f3fbe3fffebdf3ffe2f5d0a2bea9bea1a0">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;&nbsp;&nbsp;"bom-ref" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c464d4f475f4342014f435e496c1e0215021d1c">[email&nbsp;protected]</a>",
 
 &nbsp;&nbsp;&nbsp;&nbsp;"supplier" : {
 
@@ -249,7 +249,7 @@ You don't want to write this list by hand in Excel. SonarQube creates this for y
 
 &nbsp;&nbsp;&nbsp;&nbsp;} ],
 
-&nbsp;&nbsp;&nbsp;&nbsp;"purl" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="177d76747c6478793a747865725725392e392627">[email&nbsp;protected]</a>"
+&nbsp;&nbsp;&nbsp;&nbsp;"purl" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d777c7e766e7273307e726f785d2f3324332c2d">[email&nbsp;protected]</a>"
 
 &nbsp;&nbsp;}
 

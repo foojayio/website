@@ -7,7 +7,7 @@ description: "In this post, we list five alternatives to pass parameters server-
 canonical: "https://blog.frankel.ch/pass-parameters-apisix/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/04/american-football-63109.jpg"
+image: "/images/posts/2024/04/five-ways-to-pass-parameters-to-apache-apisix/american-football-63109.jpg"
 categories:
   - "DevOps"
 tags:

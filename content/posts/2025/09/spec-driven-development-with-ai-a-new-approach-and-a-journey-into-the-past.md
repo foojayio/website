@@ -6,7 +6,7 @@ lastmod: "2025-09-09T08:53:57+00:00"
 description: "We’re at an inflection point. AI can generate high-quality code, but only if we give it high-quality specifications."
 authors:
   - "simon-martinelli"
-image: "https://foojay.io/wp-content/uploads/2025/07/116749_image_676x380.webp"
+image: "/images/posts/2025/09/spec-driven-development-with-ai-a-new-approach-and-a-journey-into-the-past/116749_image_676x380.webp"
 categories:
   - "AI"
   - "Opinion"

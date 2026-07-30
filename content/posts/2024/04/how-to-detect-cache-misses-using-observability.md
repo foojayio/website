@@ -7,7 +7,7 @@ description: "In this article, we'll examine cache misses and, in general, learn
 canonical: "https://digma.ai/how-to-detect-cache-misses-using-observability/"
 authors:
   - "saeed-zarinfam"
-image: "https://foojay.io/wp-content/uploads/2024/03/Spring-Digma.png"
+image: "/images/posts/2024/04/how-to-detect-cache-misses-using-observability/Spring-Digma.png"
 categories:
   - "Developer Tools"
   - "Observability"

@@ -7,7 +7,7 @@ description: "Java Language improvements culminating in java 21 obviate the need
 canonical: "https://wimdetroyer.com/blog/visitor-pattern-in-dop"
 authors:
   - "wim-de-troyer"
-image: "https://foojay.io/wp-content/uploads/2025/11/domain-oop.png"
+image: "/images/posts/2025/11/the-visitor-pattern-revisited-using-data-oriented-programming-techniques/domain-oop.png"
 categories:
   - "Java"
   - "JDK21"

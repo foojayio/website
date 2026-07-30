@@ -6,7 +6,7 @@ description: "Java 17 is the new Initializr default, generated projects ship an 
 canonical: "https://www.codenameone.com/blog/skills-java17-and-theme-accents/"
 authors:
   - "shai-almog"
-image: "https://foojay.io/wp-content/uploads/2026/05/skills-java17-and-theme-accents.jpg"
+image: "/images/posts/2026/05/skills-java-17-and-theme-accents-with-codename-one/skills-java17-and-theme-accents.jpg"
 categories:
   - "Java"
 tags:

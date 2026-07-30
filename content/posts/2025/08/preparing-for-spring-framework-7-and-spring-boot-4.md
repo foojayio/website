@@ -6,7 +6,7 @@ lastmod: "2025-08-17T00:07:21+00:00"
 description: "Spring Boot 4 and Spring 7 bring API changes, native threads, and resilience. Prepare your codebase for the upgrade."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2025/08/spring.png"
+image: "/images/posts/2025/08/preparing-for-spring-framework-7-and-spring-boot-4/spring.png"
 categories:
   - "Jakarta EE"
   - "Java"

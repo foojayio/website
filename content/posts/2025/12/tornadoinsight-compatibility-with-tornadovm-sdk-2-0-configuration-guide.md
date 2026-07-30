@@ -6,7 +6,7 @@ lastmod: "2025-12-30T15:18:44+00:00"
 description: "This blog updates the previously published TornadoInsight configuration guidelines and explains how to configure the required environment variable to - by Thanos Stratikopoulos"
 authors:
   - "thanos-stratikopoulos"
-image: "https://foojay.io/wp-content/uploads/2024/02/tornado-insight.webp"
+image: "/images/posts/2025/12/tornadoinsight-compatibility-with-tornadovm-sdk-2-0-configuration-guide/tornado-insight.webp"
 categories:
   - "IntelliJ IDEA"
   - "Tools"

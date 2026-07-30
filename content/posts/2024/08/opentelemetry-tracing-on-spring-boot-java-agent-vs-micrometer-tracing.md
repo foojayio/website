@@ -7,7 +7,7 @@ description: "Let's compare three different ways to do OpenTelemtry Tracing: Jav
 canonical: "https://blog.frankel.ch/opentelemetry-tracing-spring-boot/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2024/08/micrometer-tracing-otel.png"
+image: "/images/posts/2024/08/opentelemetry-tracing-on-spring-boot-java-agent-vs-micrometer-tracing/micrometer-tracing-otel.png"
 categories:
   - "DevOps"
   - "OpenTelemetry"

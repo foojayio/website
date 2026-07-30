@@ -6,7 +6,7 @@ lastmod: "2024-09-18T06:31:21+00:00"
 description: "Processing phone numbers seems complicated at first glance because of the many different formats."
 authors:
   - "simon-martinelli"
-image: "https://foojay.io/wp-content/uploads/2022/06/chemical-scientist-test-chemistry-chemist-student.jpg"
+image: "/images/posts/2024/07/the-best-way-to-handle-phone-numbers/chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Java"
   - "Java Core"

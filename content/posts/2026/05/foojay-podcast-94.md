@@ -17,7 +17,7 @@ authors:
   - "jago-de-vreede"
   - "markus-westergren"
   - "rene-schwietzke"
-image: "https://foojay.io/wp-content/uploads/2026/05/edit-94-jcon-foojay-6years.jpg"
+image: "/images/posts/2026/05/foojay-podcast-94/edit-94-jcon-foojay-6years.jpg"
 categories:
   - "Conference"
   - "Java"

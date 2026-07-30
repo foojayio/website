@@ -6,7 +6,7 @@ lastmod: "2026-03-26T15:50:32+00:00"
 description: "This tutorial walks you through both approaches — embedded documents and references — using plain Java POJOs and the MongoDB Java Sync Driver. You'll build a small blogging application, see the resulting document structures, and learn when each pattern shines (and when it doesn't). Along the way, we'll also introduce a hybrid strategy known as the Subset Pattern that combines the best of both worlds."
 authors:
   - "arthur_rib"
-image: "https://foojay.io/wp-content/uploads/2026/03/Screenshot-2026-03-10-at-2.22.35-PM.png"
+image: "/images/posts/2026/03/modeling-one-to-many-relationships-in-java-with-mongodb/Screenshot-2026-03-10-at-2.22.35-PM.png"
 categories:
   - "Databases"
   - "Java"
@@ -303,7 +303,7 @@ public class EmbeddedExample {
 
 &nbsp;&nbsp;&nbsp;&nbsp;public void run() {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 1. Build the author as an embedded User object
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User alice = new User("alice", "Alice Johnson", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dabbb6b3b9bf9abfa2bbb7aab6bff4b9b5b7">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User alice = new User("alice", "Alice Johnson", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="97f6fbfef4f2d7f2eff6fae7fbf2b9f4f8fa">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Java developer and MongoDB enthusiast.");
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 2. Build the post with the embedded author and comments
@@ -357,7 +357,7 @@ The resulting MongoDB document looks like this:
 &nbsp;&nbsp;"author": {
 &nbsp;&nbsp;&nbsp;&nbsp;"username": "alice",
 &nbsp;&nbsp;&nbsp;&nbsp;"display_name": "Alice Johnson",
-&nbsp;&nbsp;&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94f5f8fdf7f1d4f1ecf5f9e4f8f1baf7fbf9">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee8f82878d8bae8b968f839e828bc08d8183">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;&nbsp;&nbsp;"bio": "Java developer and MongoDB enthusiast."
 &nbsp;&nbsp;},
 &nbsp;&nbsp;"published_at": ISODate("2025-01-01T00:00:00Z"),
@@ -525,11 +525,11 @@ public class ReferencedExample {
 
 &nbsp;&nbsp;&nbsp;&nbsp;public void run() {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 1. Insert users into the users collection
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User alice = new User("alice", "Alice Johnson", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="690805000a0c290c11080419050c470a0604">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User alice = new User("alice", "Alice Johnson", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b7d6dbded4d2f7d2cfd6dac7dbd299d4d8da">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Java developer and MongoDB enthusiast.");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User bob = new User("bob", "Bob Smith", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="83e1ece1c3e6fbe2eef3efe6ade0ecee">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User bob = new User("bob", "Bob Smith", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb999499bb9e839a968b979ed5989496">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Backend engineer who loves databases.");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User carol = new User("carol", "Carol Williams", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="593a382b3635193c21383429353c773a3634">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User carol = new User("carol", "Carol Williams", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6d0e0c1f02012d08150c001d0108430e0200">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Full-stack developer and tech blogger.");
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;usersCollection.insertMany(Arrays.asList(alice, bob, carol));
 
@@ -619,7 +619,7 @@ The resulting MongoDB documents span three collections:
 &nbsp;&nbsp;"_id": ObjectId("uuu"),
 &nbsp;&nbsp;"username": "alice",
 &nbsp;&nbsp;"display_name": "Alice Johnson",
-&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1c0cdc8c2c4e1c4d9c0ccd1cdc48fc2cecc">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe9f92979d9bbe9b869f938e929bd09d9193">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;"bio": "Java developer and MongoDB enthusiast.",
 &nbsp;&nbsp;"joined_at": ISODate("...")
 },
@@ -627,7 +627,7 @@ The resulting MongoDB documents span three collections:
 &nbsp;&nbsp;"_id": ObjectId("uuu2"),
 &nbsp;&nbsp;"username": "bob",
 &nbsp;&nbsp;"display_name": "Bob Smith",
-&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e3818c81a3869b828e938f86cd808c8e">[email&nbsp;protected]</a>",
+&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="02606d6042677a636f726e672c616d6f">[email&nbsp;protected]</a>",
 &nbsp;&nbsp;"bio": "Java developer and MongoDB enthusiast.",
 &nbsp;&nbsp;"joined_at": ISODate("...")
 }]

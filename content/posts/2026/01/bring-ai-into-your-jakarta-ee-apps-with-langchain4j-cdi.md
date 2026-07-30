@@ -6,7 +6,7 @@ lastmod: "2026-01-26T22:03:09+00:00"
 description: "Goal: This article will demonstrate how to add AI features to a Jakarta EE / MicroProfile application using LangChain4J‑CDI, with simple to implement - by Buhake Sindi"
 authors:
   - "buhake-sindi"
-image: "https://foojay.io/wp-content/uploads/2026/01/image-3-1024x943.png"
+image: "/images/posts/2026/01/bring-ai-into-your-jakarta-ee-apps-with-langchain4j-cdi/image-3-1024x943.png"
 categories:
   - "AI"
   - "Jakarta EE"

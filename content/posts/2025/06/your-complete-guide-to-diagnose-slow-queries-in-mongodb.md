@@ -6,7 +6,7 @@ lastmod: "2025-06-17T04:29:35+00:00"
 description: "MongoDB is built to be fast. The real win comes from knowing how to keep it that way, even as your app grows and your data gets more complex."
 authors:
   - "tim-kelly"
-image: "https://foojay.io/wp-content/uploads/2025/05/mongologo.png"
+image: "/images/posts/2025/06/your-complete-guide-to-diagnose-slow-queries-in-mongodb/mongologo.png"
 categories:
   - "Databases"
   - "Mongo"

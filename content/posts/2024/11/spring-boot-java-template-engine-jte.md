@@ -6,7 +6,7 @@ lastmod: "2024-11-13T16:26:06+00:00"
 description: "Java Template Engine(jte) offers a secure and efficient solution tailored for Java and Kotlin."
 authors:
   - "mahendra1413"
-image: "https://foojay.io/wp-content/uploads/2024/11/jte.png"
+image: "/images/posts/2024/11/spring-boot-java-template-engine-jte/jte.png"
 categories:
   - "IntelliJ IDEA"
   - "Java"

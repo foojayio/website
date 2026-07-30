@@ -7,7 +7,7 @@ description: "In cloud environments with auto-scaling, a “scaling loop” can 
 canonical: "https://www.azul.com/blog/java-warmup-and-the-scaling-loop-problem/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2026/01/java-warmup-and-the-scaling-loop-problem/Favicon-3-2.png"
 categories:
   - "Performance"
 tags:
