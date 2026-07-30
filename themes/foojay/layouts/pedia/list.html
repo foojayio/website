@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="page-head">
+  <div class="page-head__inner">
+    <span class="eyebrow">Friends of OpenJDK</span>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
+<div class="content-col full-width">
+  {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+  {{/* A glossary: list terms alphabetically, no dates. */}}
+  <div class="pedia-grid">
+    {{ range .Pages.ByTitle }}
+      <a class="pedia-card" href="{{ .Permalink }}">
+        <h3>{{ .Title }}</h3>
+        {{ with .Params.description }}<p>{{ . | truncate 150 }}</p>{{ end }}
+      </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

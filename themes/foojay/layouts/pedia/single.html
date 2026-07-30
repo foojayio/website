@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="content-col full-width">
+  <article class="post-single pedia-single">
+    <p class="pedia-back"><a href="{{ "pedia/" | relURL }}">&larr; Java Terms Explained</a></p>
+
+    <h1>{{ .Title }}</h1>
+
+    <div class="prose">
+      {{ .Content }}
+    </div>
+
+    <p class="pedia-back pedia-back--foot"><a href="{{ "pedia/" | relURL }}">&larr; Back to all terms</a></p>
+  </article>
+</div>
+{{ end }}

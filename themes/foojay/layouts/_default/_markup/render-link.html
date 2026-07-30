@@ -1,15 +1,20 @@
-{{- /* Link render hook. Two jobs:
-       1. Root-relative internal links get the baseURL subpath (relURL only
+{{- /* Link render hook. Three jobs:
+       1. Absolute foojay.io links in migrated content (e.g. "See also" links)
+          point at the live WordPress site -- rewrite them to this site's path.
+       2. Root-relative internal links get the baseURL subpath (relURL only
           prefixes it when the path doesn't already start with "/").
-       2. Links to any host other than foojay.io are treated as external and
-          opened in a new tab (target="_blank" + safe rel). Relative links,
-          anchors, mailto: and foojay.io / *.foojay.io stay in the same tab. */ -}}
-{{- $dest := .Destination -}}
-{{- $isAbs := or (hasPrefix $dest "http://") (hasPrefix $dest "https://") (hasPrefix $dest "//") -}}
-{{- /* External = absolute and not a foojay.io URL. String check (not urls.Parse,
-       which errors on malformed destinations found in migrated content). */ -}}
-{{- $external := and $isAbs (not (in $dest "foojay.io")) -}}
-{{- if not (or $isAbs (hasPrefix $dest "mailto:") (hasPrefix $dest "#") (hasPrefix $dest "data:")) -}}
+       3. Links to any other host are external -> open in a new tab.
+       String checks (not urls.Parse, which errors on malformed migrated URLs). */ -}}
+{{- $orig := .Destination -}}
+{{- $dest := $orig -}}
+{{- $isAbs := or (hasPrefix $orig "http://") (hasPrefix $orig "https://") (hasPrefix $orig "//") -}}
+{{- /* Host-anchored so foojay.social and query strings don't false-match. */ -}}
+{{- $internal := or (hasPrefix $orig "https://foojay.io") (hasPrefix $orig "http://foojay.io") (hasPrefix $orig "https://www.foojay.io") (hasPrefix $orig "http://www.foojay.io") (hasPrefix $orig "//foojay.io") -}}
+{{- $external := and $isAbs (not $internal) -}}
+{{- if $internal -}}
+  {{- $dest = replaceRE "^(https?:)?//(www\\.)?foojay\\.io" "" $dest -}}
+{{- end -}}
+{{- if not (or $external (hasPrefix $dest "http") (hasPrefix $dest "//") (hasPrefix $dest "mailto:") (hasPrefix $dest "#") (hasPrefix $dest "data:")) -}}
   {{- $dest = $dest | strings.TrimPrefix "/" | relURL -}}
 {{- end -}}
 <a href="{{ $dest }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text | safeHTML }}</a>

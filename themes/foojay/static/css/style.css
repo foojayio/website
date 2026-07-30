@@ -840,3 +840,13 @@ body.lightbox-open { overflow: hidden; }
 @media (max-width: 560px) {
   .post-single .post-header .post-hero { width: 88px; margin-right: 1rem; }
 }
+
+/* --- Pedia (Java Terms Explained) glossary --- */
+.pedia-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.pedia-card { display: block; padding: 1.1rem 1.25rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); text-decoration: none; color: inherit; transition: border-color .15s ease, transform .15s ease; }
+.pedia-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.pedia-card h3 { margin: 0 0 .4rem; font-size: 1.05rem; }
+.pedia-card p { margin: 0; font-size: .9rem; color: var(--ink-muted); }
+.pedia-back { margin: 0 0 1.25rem; }
+.pedia-back a { font-weight: 600; font-size: .95rem; }
+.pedia-back--foot { margin: 2.25rem 0 0; }
