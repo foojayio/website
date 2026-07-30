@@ -29,8 +29,13 @@ jobs:
           extended: true
 
       - name: Configure GitHub Pages
+        id: pages
         uses: actions/configure-pages@v5
 
+      # The `id: pages` above is required for steps.pages.outputs.base_url to
+      # resolve. Without it the expression is empty and Hugo builds with
+      # baseURL "/", so every relURL asset (css/js/images) 404s under the
+      # /website/ project-pages subpath. base_url already includes that subpath.
       - name: Build
         run: hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
