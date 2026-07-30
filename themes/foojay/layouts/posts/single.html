@@ -1,0 +1,47 @@
+{{ define "main" }}
+<div class="layout-with-sidebar">
+  <article class="post-single">
+    <h1>{{ .Title }}</h1>
+    <div class="post-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+      {{ with .Params.author }}
+        {{ range where $.Site.Pages "Section" "authors" }}
+          {{ if eq .File.LogicalName (printf "%s.md" $.Params.author) }}<a href="{{ .Permalink }}">{{ .Title }}</a>{{ end }}
+        {{ end }}
+      {{ end }}
+    </div>
+    {{ if .Params.image }}<img class="post-hero" src="{{ .Params.image }}" alt="{{ .Title }}">{{ end }}
+
+    {{ .Content }}
+
+    {{ with .Params.categories }}
+    <div class="post-categories">
+      {{ range . }}<a href="{{ $.Site.Home.RelPermalink }}today/category/{{ . | urlize }}/">{{ . }}</a>{{ end }}
+    </div>
+    {{ end }}
+    {{ with .Params.tags }}
+    <div class="post-tags">
+      {{ range . }}<a href="{{ $.Site.Home.RelPermalink }}today/tag/{{ . | urlize }}/">#{{ . }}</a>{{ end }}
+    </div>
+    {{ end }}
+
+    {{ with .Params.related_posts }}
+    <section class="related-posts">
+      <h3>Related Posts</h3>
+      <ul>
+        {{ $allPosts := where $.Site.Pages "Section" "posts" }}
+        {{ range . }}
+          {{ $slug := . }}
+          {{ range $allPosts }}
+            {{ if eq .File.ContentBaseName $slug }}
+              <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+  </article>
+  {{ partial "sidebar.html" . }}
+</div>
+{{ end }}

@@ -1,0 +1,3 @@
+name = "foojay"
+license = "MIT"
+description = "Structural Hugo recreation of the foojay.io WordPress theme, built for the WP -> Hugo migration."

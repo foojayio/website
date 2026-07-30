@@ -1,0 +1,40 @@
+/* Structural starting point only -- reproduces the current section layout
+   (header nav, post grid, sidebar widgets, footer columns) but not the exact
+   visual design/branding of the live WordPress theme. Treat as v0 scaffolding
+   to refine against the real brand assets (fonts, colors, spacing). */
+
+:root {
+  --max-width: 1200px;
+  --color-text: #1a1a1a;
+  --color-muted: #6b6b6b;
+  --color-border: #e5e5e5;
+  --color-accent: #c8102e;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--color-text); line-height: 1.5; }
+a { color: var(--color-accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.site-header { display: flex; align-items: center; gap: 2rem; padding: 1rem 2rem; border-bottom: 1px solid var(--color-border); flex-wrap: wrap; }
+.site-header .logo { font-weight: 700; font-size: 1.4rem; color: var(--color-text); }
+.main-nav ul { display: flex; gap: 1.25rem; list-style: none; margin: 0; padding: 0; }
+.site-search { margin-left: auto; }
+
+.layout-with-sidebar { display: grid; grid-template-columns: 1fr 320px; gap: 2rem; max-width: var(--max-width); margin: 2rem auto; padding: 0 1rem; }
+.content-col.full-width { grid-column: 1 / -1; max-width: var(--max-width); margin: 2rem auto; padding: 0 1rem; }
+
+.post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+.post-card img { width: 100%; height: auto; border-radius: 4px; }
+.post-card-meta { color: var(--color-muted); font-size: 0.85rem; display: flex; gap: 0.5rem; }
+
+.sidebar .widget { margin-bottom: 2rem; }
+.sidebar h4 { border-bottom: 2px solid var(--color-accent); padding-bottom: 0.25rem; }
+
+.site-footer { border-top: 1px solid var(--color-border); margin-top: 3rem; padding: 2rem; }
+.footer-cols { display: flex; gap: 3rem; max-width: var(--max-width); margin: 0 auto; flex-wrap: wrap; }
+.footer-legal { max-width: var(--max-width); margin: 1rem auto 0; display: flex; gap: 1rem; color: var(--color-muted); font-size: 0.85rem; }
+
+.post-single .post-hero { width: 100%; height: auto; border-radius: 6px; margin: 1rem 0; }
+.author-avatar { width: 96px; height: 96px; border-radius: 50%; }
+.author-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }

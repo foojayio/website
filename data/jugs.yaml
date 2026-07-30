@@ -1,0 +1,11 @@
+# Java User Groups tracked for the daily Meetup events sync
+# (.github/workflows/meetup-sync.yml).
+#
+# To add a JUG: add a new entry below with its Meetup group URL slug
+# (the part after meetup.com/ in the group's URL) and a display name.
+# No code changes needed — the sync workflow reads this file directly.
+
+- name: Toronto Java Users Group
+  slug: toronto-java-users-group
+- name: Belgian Java User Group
+  slug: belgian-java-user-group

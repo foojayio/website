@@ -1,0 +1,23 @@
+<article class="post-card">
+  {{ if .Params.image }}
+  <a href="{{ .Permalink }}" class="post-card-image">
+    <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+  </a>
+  {{ end }}
+  <h3 class="post-card-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+  <div class="post-card-meta">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" }}</time>
+    {{ with .Params.author }}
+      {{ $author := where $.Site.Pages "Section" "authors" }}
+      {{ range $author }}{{ if eq .File.LogicalName (printf "%s.md" $.Params.author) }}
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+      {{ end }}{{ end }}
+    {{ end }}
+  </div>
+  {{ with .Params.categories }}
+  <div class="post-card-categories">
+    {{ range . }}<a href="{{ "/today/category/" | relURL }}{{ . | urlize }}/">{{ . }}</a>{{ end }}
+  </div>
+  {{ end }}
+  <p class="post-card-excerpt">{{ .Params.description }}</p>
+</article>

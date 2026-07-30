@@ -1,0 +1,32 @@
+baseURL = "https://foojay.io/"
+languageCode = "en-us"
+title = "foojay.io - Friends of OpenJDK"
+theme = "foojay"
+enableRobotsTXT = true
+
+# Legacy WordPress URLs used explicit per-page overrides (see each .md's `url:`
+# frontmatter) rather than relying purely on permalink patterns, because the
+# old page tree has inconsistent nesting (e.g. /java-quick-start/install-java/...).
+# Posts and authors DO follow a consistent pattern, so we keep it here too.
+[permalinks]
+  posts = "/today/:slug/"
+  authors = "/today/author/:slug/"
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  description = "Foojay is a place for Friends Of OpenJDK, providing free, reference materials and blogs for daily Java usage."
+  # Path to the JUG list consumed by the events sidebar/calendar page.
+  jugsDataFile = "jugs"
+  eventsDataFile = "events"
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]

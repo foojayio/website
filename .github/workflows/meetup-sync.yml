@@ -1,0 +1,35 @@
+name: Daily Meetup events sync
+
+on:
+  schedule:
+    # 05:00 UTC daily
+    - cron: "0 5 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  sync-events:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JBang
+        uses: jbangdev/setup-jbang@main
+
+      - name: Fetch events from Meetup
+        env:
+          MEETUP_OAUTH_TOKEN: ${{ secrets.MEETUP_OAUTH_TOKEN }}
+        run: jbang scripts/FetchMeetupEvents.java
+
+      - name: Commit updated events data
+        run: |
+          git config user.name "foojay-bot"
+          git config user.email "actions@github.com"
+          git add data/events.json
+          if git diff --cached --quiet; then
+            echo "No event changes today."
+          else
+            git commit -m "chore: daily Meetup events sync"
+            git push
+          fi

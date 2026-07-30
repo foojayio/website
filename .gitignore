@@ -1,0 +1,17 @@
+# Hugo
+/public/
+/resources/_gen/
+.hugo_build.lock
+
+# JBang
+.jbang/
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+
+# Logs from conversion scripts
+scripts/*.log

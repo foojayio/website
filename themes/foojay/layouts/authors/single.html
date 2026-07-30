@@ -1,0 +1,26 @@
+{{ define "main" }}
+<div class="layout-with-sidebar">
+  <div class="content-col">
+    <div class="author-profile">
+      {{ if .Params.avatar }}<img class="author-avatar" src="{{ .Params.avatar }}" alt="{{ .Title }}">{{ end }}
+      <h1>{{ .Title }}</h1>
+      <p class="author-bio">{{ .Params.bio }}</p>
+      <ul class="author-social">
+        {{ with .Params.twitter }}<li><a href="{{ . }}">Twitter/X</a></li>{{ end }}
+        {{ with .Params.linkedin }}<li><a href="{{ . }}">LinkedIn</a></li>{{ end }}
+        {{ with .Params.website }}<li><a href="{{ . }}">Website</a></li>{{ end }}
+      </ul>
+    </div>
+    <h2>Articles</h2>
+    <div class="post-grid">
+      {{ $authorSlug := .File.ContentBaseName }}
+      {{ range where .Site.RegularPages "Section" "posts" }}
+        {{ if eq .Params.author $authorSlug }}
+          {{ partial "post-card.html" . }}
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+  {{ partial "sidebar.html" . }}
+</div>
+{{ end }}

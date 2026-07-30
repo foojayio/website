@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="content-col full-width">
+  <h1>Authors</h1>
+  <div class="author-grid">
+    {{ range .Site.RegularPages }}
+      {{ if eq .Section "authors" }}
+      <a class="author-card" href="{{ .Permalink }}">
+        {{ if .Params.avatar }}<img src="{{ .Params.avatar }}" alt="{{ .Title }}">{{ end }}
+        <span>{{ .Title }}</span>
+      </a>
+      {{ end }}
+    {{ end }}
+  </div>
+</div>
+{{ end }}

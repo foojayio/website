@@ -1,0 +1,14 @@
+{{ define "main" }}
+<div class="layout-with-sidebar">
+  <div class="content-col">
+    <h1>{{ .Title }}</h1>
+    <div class="post-grid">
+      {{ range .Paginator.Pages }}
+        {{ partial "post-card.html" . }}
+      {{ end }}
+    </div>
+    {{ template "_internal/pagination.html" . }}
+  </div>
+  {{ partial "sidebar.html" . }}
+</div>
+{{ end }}

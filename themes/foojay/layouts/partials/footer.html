@@ -1,0 +1,34 @@
+<footer class="site-footer">
+  <div class="footer-cols">
+    <div class="footer-col">
+      <h4>Community Hub</h4>
+      <ul>
+        <li><a href="{{ "/today/" | relURL }}">Friends of OpenJDK Today</a></li>
+        <li><a href="{{ "/all-events/" | relURL }}">Events Calendar</a></li>
+        <li><a href="{{ "/jugs/" | relURL }}">Java User Groups</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <ul>
+        <li><a href="{{ "/who-we-are/" | relURL }}">What is Foojay?</a></li>
+        <li><a href="{{ "/meet-the-team/" | relURL }}">Meet The Team</a></li>
+        <li><a href="{{ "/today/author/" | relURL }}">Authors</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Join the Community</h4>
+      <ul class="social-links">
+        <li><a href="https://bsky.app/profile/foojay.io">Bluesky</a></li>
+        <li><a href="https://twitter.com/foojayio">Twitter</a></li>
+        <li><a href="https://foojay.social/@foojay">Mastodon</a></li>
+        <li><a href="https://www.linkedin.com/company/foojayio/">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <span>&copy; {{ now.Year }} foojay.io</span>
+    <a href="{{ "/terms-of-use/" | relURL }}">Terms of Use</a>
+    <a href="{{ "/privacy-policy/" | relURL }}">Privacy Policy</a>
+  </div>
+</footer>

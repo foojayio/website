@@ -1,0 +1,33 @@
+{{ define "main" }}
+<div class="content-col full-width">
+  <h1>{{ .Title }}</h1>
+  <p>{{ .Params.description }}</p>
+
+  {{ $data := .Site.Data.events }}
+  {{ if $data }}
+    <p class="events-updated">Last updated: {{ $data.generatedAt }}</p>
+    {{ range $data.groups }}
+      <section class="jug-events">
+        <h2>{{ .name }}</h2>
+        {{ if .error }}
+          <p class="events-error">Could not load events for this group right now.</p>
+        {{ else if .events }}
+          <ul>
+            {{ range .events }}
+              <li>
+                <a href="{{ .url }}">{{ .title }}</a>
+                <span class="event-date">{{ .startTime }}</span>
+                {{ if .venue }}<span class="event-venue">{{ .venue }}{{ with .city }}, {{ . }}{{ end }}</span>{{ end }}
+              </li>
+            {{ end }}
+          </ul>
+        {{ else }}
+          <p>No upcoming events listed right now.</p>
+        {{ end }}
+      </section>
+    {{ end }}
+  {{ else }}
+    <p>Event data hasn't synced yet. It updates daily via the Meetup sync workflow.</p>
+  {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,19 @@
+<header class="site-header">
+  <div class="branding">
+    <a href="{{ "/" | relURL }}" class="logo">foojay<span>.io</span></a>
+    <span class="tagline">Friends of OpenJDK</span>
+  </div>
+  <nav class="main-nav">
+    <ul>
+      <li><a href="{{ "/today/" | relURL }}">Daily News</a></li>
+      <li><a href="{{ "/today/category/podcast/" | relURL }}">Podcast</a></li>
+      <li><a href="{{ "/all-events/" | relURL }}">Event Calendar</a></li>
+      <li><a href="{{ "/jugs/" | relURL }}">Java User Groups</a></li>
+      <li><a href="{{ "/who-we-are/" | relURL }}">About</a></li>
+      <li><a href="{{ "/today/author/" | relURL }}">Authors</a></li>
+    </ul>
+  </nav>
+  <form class="site-search" role="search" action="{{ "/search/" | relURL }}">
+    <input type="search" name="q" placeholder="Search...">
+  </form>
+</header>
