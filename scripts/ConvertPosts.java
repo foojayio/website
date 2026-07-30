@@ -133,7 +133,11 @@ public class ConvertPosts {
     // more than one author, so this yields a list.
     static final String SELECTOR_AUTHOR_LINKS = ".article__author a[href*=/today/author/]";
     static final Pattern AUTHOR_SLUG_IN_HREF = Pattern.compile("/today/author/([^/]+)/");
-    static final String SELECTOR_RELATED_POSTS = "div.related-posts a, aside.related a, .jp-relatedposts a, .related_post a";
+    // Verified 2026-07: foojay renders "related" posts in a .related-articles
+    // section (article-small cards linking to /today/<slug>/). The rest are
+    // fallbacks for classic related-posts plugins.
+    static final String SELECTOR_RELATED_POSTS =
+            ".related-articles a[href*=/today/], div.related-posts a, .jp-relatedposts a, .related_post a";
     static final String SELECTOR_FEATURED_IMAGE_FALLBACK = "article img, .entry-content img";
 
     static final ObjectMapper JSON = new ObjectMapper();

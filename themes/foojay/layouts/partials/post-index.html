@@ -1,0 +1,10 @@
+{{- /* Returns a map { <slug> : <post Page> } for every post, keyed by filename
+       (the slug that related_posts reference). Bucketing of posts into
+       content/posts/<year>/<month>/ is irrelevant here -- lookups are by slug.
+       Built with newScratch (O(1) inserts, unlike merge-in-a-loop) and called
+       via partialCached so it's built once per site build, not per lookup. */ -}}
+{{- $s := newScratch -}}
+{{- range where site.RegularPages "Section" "posts" -}}
+  {{- $s.SetInMap "m" .File.ContentBaseName . -}}
+{{- end -}}
+{{- return $s.Get "m" -}}

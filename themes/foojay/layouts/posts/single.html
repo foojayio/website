@@ -44,15 +44,16 @@
     {{ end }}
 
     {{ with .Params.related_posts }}
+    {{ $posts := partialCached "post-index.html" "posts" }}
     <section class="related-posts">
       <h3>Related posts</h3>
       <ul>
+        {{/* Match related slugs to posts via the cached slug->page index, so a
+             related link resolves regardless of the post's <year>/<month> bucket
+             and without scanning every post per slug. */}}
         {{ range . }}
-          {{ $slug := . }}
-          {{ range where site.RegularPages "Section" "posts" }}
-            {{ if eq .File.ContentBaseName $slug }}
-              <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
-            {{ end }}
+          {{ with index $posts . }}
+            <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
           {{ end }}
         {{ end }}
       </ul>

@@ -23,19 +23,27 @@ public class ValidateFrontmatter {
 
     public static void main(String[] args) throws IOException {
         List<String> problems = new ArrayList<>();
-        Set<String> postSlugs = new HashSet<>();
 
         // Posts live under content/posts/<year>/<month>/<slug>.md, so this
         // needs to walk recursively rather than list the top-level dir.
+        // Track every file per slug so duplicates can be reported: two posts with
+        // the same slug resolve to the same /today/<slug>/ URL, and Hugo would
+        // silently drop one (and one writePost would overwrite the other).
         Path postsDir = Path.of("content/posts");
+        Map<String, List<Path>> slugFiles = new TreeMap<>();
         if (Files.isDirectory(postsDir)) {
             try (Stream<Path> files = Files.walk(postsDir)) {
                 files.filter(p -> p.toString().endsWith(".md") && !p.getFileName().toString().equals("_index.md"))
-                     .forEach(p -> postSlugs.add(stripExt(p.getFileName().toString())));
+                     .forEach(p -> slugFiles.computeIfAbsent(stripExt(p.getFileName().toString()),
+                             k -> new ArrayList<>()).add(p));
             }
         }
+        slugFiles.forEach((slug, paths) -> {
+            if (paths.size() > 1) problems.add("duplicate post slug '" + slug + "' in: " + paths);
+        });
+        Set<String> postSlugs = slugFiles.keySet();
 
-        problems.addAll(checkDir(Path.of("content/posts"), List.of("title", "description", "canonical", "author")));
+        problems.addAll(checkDir(Path.of("content/posts"), List.of("title", "description", "authors")));
         problems.addAll(checkDir(Path.of("content/authors"), List.of("title")));
         problems.addAll(checkDir(Path.of("content/pages"), List.of("title", "url")));
         problems.addAll(checkRelatedPosts(postsDir, postSlugs));
