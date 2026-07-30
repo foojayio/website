@@ -1,0 +1,112 @@
+---
+title: "Closing the Visual Gap Between the Official Lottie Webplayer and Lottie4J"
+slug: "closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j"
+date: "2026-07-07T08:25:55+00:00"
+description: "A Lottie library is only as good as its output looks. If an animation renders differently in Lottie4J than it does in the official web player, that's a - by Frank Delporte"
+canonical: "https://webtechie.be/post/closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j/"
+authors:
+  - "frankdelporte"
+image: "https://foojay.io/wp-content/uploads/2026/07/20260702-lottie4j-after.png"
+categories:
+  - "JavaFX"
+tags:
+related_posts:
+enlighterjs: true
+frozen: false
+---
+
+A Lottie library is only as good as its output looks. If an animation renders differently in [Lottie4J](https://lottie4j.com/) than it does in the official web player, that's a bug, even when no exception is thrown and the code looks correct.
+
+Within the `fxfileviewer`, there is an app to visually compare the result of the JavaFX player and a webview using the official JavaScript player. Problem is that I was using the JavaFX Web component for this and this doesn't fully support the latest/best version of this player. Based on this app for manual checks, I also created a unit test which is able to loop over a set of files and compare the differences to make sure changes in the code don't break the existing renderer. But I kept struggling with the same test file [interactive_mood_selector_ui.json](https://github.com/lottie4j/lottie4j/tree/main/fxfileviewer/src/test/resources/json/interactive_mood_selector_ui.json) which didn't render correctly, both in the JavaFX view and my web-based view to compare it with.
+
+Over the last weeks the focus has been exactly there: **making the JavaFX output match the reference renderer, pixel for pixel** (if possible).
+![](/images/posts/2026/07/closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j/20260702-lottie4j-after.png)
+
+### Improved Comparison Workflow {#h3-0-improved-comparison-workflow}
+
+The biggest change is not a rendering fix but the way rendering is now verified. The test suite renders the same animation two ways and compares them frame by frame:
+
+* The **reference** side runs the official web player inside a headless Chrome instance. This reference renderer was migrated from `lottie-web` to **`dotlottie-wc` (thorvg)** , the engine LottieFiles is standardizing on. The reference images are not generated during the unit test, but as a one-time job on my PC and committed in the [test/resources](https://github.com/lottie4j/lottie4j/tree/main/fxfileviewer/src/test/resources).
+* The **Lottie4J** side renders the same file through the JavaFX player.
+
+Now each frame is diffed, instead of every 5 frames before, and measured against a tolerance "floor". When Lottie4J drifts from the reference, a test fails and points at the exact frame. This runs with headless JavaFX on GitHub Actions as described in the post [Testing Lottie4J JavaFX Animations in GitHub Actions Without a Display: JavaFX 26 Headless to the Rescue](https://webtechie.be/post/testing-lottie4j-javafx-animations-in-github-actions-without-a-display-javafx-26-headless-to-the-rescue/). That turned "this animation looks a bit off" into a concrete, reproducible signal. The goal is to get each file to [99.5% similarity](https://github.com/lottie4j/lottie4j/blob/main/fxfileviewer/src/test/java/com/lottie4j/fxfileviewer/CompareFxViewWithWebViewTest.java#L85), but that value can be overruled per file. As you can [see in the code](https://github.com/lottie4j/lottie4j/blob/main/fxfileviewer/src/test/java/com/lottie4j/fxfileviewer/CompareFxViewWithWebViewTest.java#L135), the "worst" file is now at 95.2%, and yes, it's still that difficult `interactive_mood_selector_ui.json`.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">     private static final Map&lt;String, Double&gt; PER_FILE_FLOOR_OVERRIDE = Map.ofEntries(
+            Map.entry("json/interactive_mood_selector_ui.json", 95.2),
+            Map.entry("json/animated_background_patterns.json", 99.2),
+            Map.entry("json/angry_bird.json", 98.2),
+            Map.entry("json/face-peeking.json", 98.5),
+            Map.entry("json/java_duke_flip.json", 95.7),
+            Map.entry("json/java_duke_slidein.json", 98.8),
+            Map.entry("json/lottie_lego.json", 98.0),
+            Map.entry("json/sandy_loading.json", 99.3),
+            Map.entry("dot/demo-1.lottie", 99.3)
+    );</pre>
+
+New real-world test animations, like `pi4j.json`, `foojay-reporter.json` and `foojay-duke.json`, got added so the harness measures against the files I'm actually using.
+
+### Rendering Fixes {#h3-1-rendering-fixes}
+
+With the harness in place, the diffs made it obvious where JavaFX and the web player disagreed. The fixes can be grouped into a few areas:
+
+* **Easing** : The `lottie-web` `BezierEaser` was ported byte-for-byte into a shared `core.helper.BezierEasing`, and the arc renderer now clamps the easing solver to prevent bezier divergence, with a bisection fallback for flat-point curves. A full-circle trim path that used to flicker (floating-point precision loss when wrapping the offset) is fixed.
+* **Mattes** : Pixel-level matte composition was extracted into a testable static helper, and the inverted-alpha matte type (`tt: 2` → `INVERTED_ALPHA`) is now handled correctly.
+* **Gradients**: Alpha and colour stops are merged at the union of their offsets, and linear-RGB gradient stops are densified so colour transitions match the reference.
+* **Blur and blend modes**: Gaussian blur was improved, the blend-mode offscreen buffer size is rounded up (ceil) so nothing gets clipped, and the effects renderer was reworked.
+* **Text**: Text colour handling and text animation are now correct.
+
+Individually these are small, but together they close a lot of the visible distance between Lottie4J and the official player.
+
+### Built with Systematic AI Coding {#h3-2-built-with-systematic-ai-coding}
+
+All of this was implemented with **[Theia IDE](https://theia-ide.org/)** using the **Claude API** . I learned about Theia IDE during an Eclipse Foundation workshop in Brussels. I wrote about it on Foojay.io: [Systematic AI coding, my takeaways](https://foojay.io/today/systematic-ai-coding-my-takeaways-from-the-eclipse-foundation-workshop-in-brussels/).
+
+The takeaways from that article map almost one-to-one onto this batch of work:
+
+* **Design before prompting, then review the output** : The comparison harness is what makes review possible. And the `@Architect` within Theia IDE was able to run the tests file by file, find differences, write plans, and evaluate the results.
+* **A tight feedback loop beats one big prompt** : Failing frame → targeted fix → re-run → next frame. The [commit history reads as exactly that rhythm](https://github.com/lottie4j/lottie4j/commits/main/).
+* **Keep sessions scoped and don't fear a restart** : The `@Architect` writes the plan. And then you start a new session and ask the `@Coder` agent to execute it. Each rendering area (mattes, gradients, blur, text) was tackled as its own well-bounded task rather than one ever-lasting conversation.
+* **Let the tools review too**: A round of code improvements came straight out of SonarQube findings.
+
+I committed all the tasks written by the `@Architect` [into the repository](https://github.com/lottie4j/lottie4j/tree/main/.prompts/done) so they are available as "history of the project". The most important take-away here isn't that AI wrote the code, but the disciplined process with clear tasks and small iterations, each in a new session.
+
+### The Result {#h3-3-the-result}
+
+Where are we now? Check the images below.
+
+1. The first screenshot is the test file in the [**Preview player** on the Lottie website](https://lottiefiles.com/preview). As you can see a lot of gradients are used in the background and around the emojis. Those are the parts I was struggling with...
+2. The second screenshot is the **"before"**. Both the JavaFX and the webview version have a lot of differences. This also means I was using the wrong comparison source images to validate the JavaFX result!
+3. The third screenshot is the **"after"** which shows a lot of improvements. First and most important, the comparison images from the webview are now pixel-perfect as they get rendered based on the latest version of the official Lottie web player. And you can also see that the JavaFX result is now a really close match! The background gradients are not pixel-perfect yet, and I still see small differences in the text, which confirms the 95% similarity score. But overall, I'm very happy with the improvements!
+
+<figure data-wp-context="{&quot;galleryId&quot;:&quot;6a6bbf7ad68db&quot;}" data-wp-interactive="core/gallery" class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
+ <figure data-wp-context="{&quot;imageId&quot;:&quot;6a6bbf7ad6df4&quot;}" data-wp-interactive="core/image" data-wp-key="6a6bbf7ad6df4" class="wp-block-image size-large wp-lightbox-container">
+  <img decoding="async" width="910" height="438" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on--click="actions.showLightbox" data-wp-on--load="callbacks.setButtonStyles" data-wp-on--pointerdown="actions.preloadImage" data-wp-on--pointerenter="actions.preloadImageWithDelay" data-wp-on--pointerleave="actions.cancelPreload" data-wp-on-window--resize="callbacks.setButtonStyles" data-id="124480" src="/images/posts/2026/07/closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j/20260702-lottie4j-previewer.png" alt="" class="wp-image-124480"><button class="lightbox-trigger" type="button" aria-haspopup="dialog" data-wp-bind--aria-label="state.thisImage.triggerButtonAriaLabel" data-wp-init="callbacks.initTriggerButton" data-wp-on--click="actions.showLightbox" data-wp-style--right="state.thisImage.buttonRight" data-wp-style--top="state.thisImage.buttonTop">
+   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewbox="0 0 12 12">
+    <path fill="#fff" d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z" />
+   </svg></button>
+ </figure>
+ <figure data-wp-context="{&quot;imageId&quot;:&quot;6a6bbf7ad74bb&quot;}" data-wp-interactive="core/image" data-wp-key="6a6bbf7ad74bb" class="wp-block-image size-large wp-lightbox-container">
+  <img decoding="async" width="1013" height="351" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on--click="actions.showLightbox" data-wp-on--load="callbacks.setButtonStyles" data-wp-on--pointerdown="actions.preloadImage" data-wp-on--pointerenter="actions.preloadImageWithDelay" data-wp-on--pointerleave="actions.cancelPreload" data-wp-on-window--resize="callbacks.setButtonStyles" data-id="124481" src="/images/posts/2026/07/closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j/20260702-lottie4j-before.png" alt="" class="wp-image-124481"><button class="lightbox-trigger" type="button" aria-haspopup="dialog" data-wp-bind--aria-label="state.thisImage.triggerButtonAriaLabel" data-wp-init="callbacks.initTriggerButton" data-wp-on--click="actions.showLightbox" data-wp-style--right="state.thisImage.buttonRight" data-wp-style--top="state.thisImage.buttonTop">
+   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewbox="0 0 12 12">
+    <path fill="#fff" d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z" />
+   </svg></button>
+ </figure>
+ <figure data-wp-context="{&quot;imageId&quot;:&quot;6a6bbf7ad7992&quot;}" data-wp-interactive="core/image" data-wp-key="6a6bbf7ad7992" class="wp-block-image size-large wp-lightbox-container">
+  <img loading="lazy" decoding="async" width="1015" height="350" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on--click="actions.showLightbox" data-wp-on--load="callbacks.setButtonStyles" data-wp-on--pointerdown="actions.preloadImage" data-wp-on--pointerenter="actions.preloadImageWithDelay" data-wp-on--pointerleave="actions.cancelPreload" data-wp-on-window--resize="callbacks.setButtonStyles" data-id="124482" src="/images/posts/2026/07/closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j/20260702-lottie4j-after.png" alt="" class="wp-image-124482"><button class="lightbox-trigger" type="button" aria-haspopup="dialog" data-wp-bind--aria-label="state.thisImage.triggerButtonAriaLabel" data-wp-init="callbacks.initTriggerButton" data-wp-on--click="actions.showLightbox" data-wp-style--right="state.thisImage.buttonRight" data-wp-style--top="state.thisImage.buttonTop">
+   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewbox="0 0 12 12">
+    <path fill="#fff" d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z" />
+   </svg></button>
+ </figure>
+</figure>
+
+### The Cost {#h3-4-the-cost}
+
+Of course, the AI coding process is not free. Theia IDE luckily is free, but it needs one or more API keys to call AI services. As you can see, I burned a lot of tokens, and budget. But to be honest, I would not have achieved these improvements by myself in such a short time. Actually, I could do my "real work", and have the tools work in the background!
+![](/images/posts/2026/07/closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j/20260702-lottie4j-cost-ai-assisted-coding-1024x403.png)
+
+What's Next {#h2-5-what-s-next}
+-------------------------------
+
+I'm happy with the results so will release a new version soon. The same approach with `@Architect`/`@Coder` will help me to further improve or fix the library when needed. But first I want to know which visual differences remain based on feedback from the users of the Lottie4J library!
+
+As always, contributions, bug reports, and pull requests are welcome at the [Lottie4J GitHub repository](https://github.com/lottie4j/lottie4j). If you have an animation that renders differently than you expect, isolate it, and open an issue with the JSON. That's exactly the kind of case the test flow is built to catch.

@@ -1,0 +1,926 @@
+---
+title: "Java 26 Is Here, And With It a Solid Foundation for the Future"
+slug: "java-26-is-here-and-with-it-a-solid-foundation-for-the-future"
+date: "2026-03-17T07:00:00+00:00"
+description: "Java 26 is here, and its main purpose seems to be to provide a solid foundation for future things to come. It comes with a few new features, some performance improvements and multiple enhancements that mention Project Valhalla as the inspiration for their existence. This post has all the info! - by Hanno Embregts"
+canonical: "https://hanno.codes/2026/03/17/java-26-is-here/"
+authors:
+  - "hanno-embregts"
+image: "https://foojay.io/wp-content/uploads/2026/03/foundation.jpg"
+categories:
+  - "Java"
+tags:
+related_posts:
+enlighterjs: true
+frozen: false
+---
+
+Java 26 is here! Six months ago, we welcomed Java 25 into our hearts, which means it's time for another fresh helping of Java features. This time, the set of features is a bit smaller compared to some of the previous releases, which can only mean one thing: the focus for this release was to provide a solid foundation for something big to be released soon™️! My hope is that the first JEPs out of Project Valhalla will be announced later this year. That hope is fueled by some of Java 26's changes as they feel like appropriate preparation steps for the first Valhalla features (this is especially true for JEPs [500](#jep-500-prepare-to-make-final-mean-final) and [529](#jep-529-vector-api-eleventh-incubator)).
+
+Regardless of any future plans, this post focuses on everything that has been added in this release, giving you a brief introduction to each of the features. Where applicable the differences with Java 25 are highlighted and a few typical use cases are provided, so that you'll be more than ready to start using these features after reading this.
+
+JEP Overview {#h2-0-jep-overview}
+---------------------------------
+
+To start off, let's see an overview of the JEPs that ship with Java 26. This table contains their preview status, to which project they belong, what kind of features they add and the things that have changed since Java 25.
+
+|                                         JEP                                          |                         Title                         |       Status       |    Project    | Feature Type | Changes since previous Java version |
+|--------------------------------------------------------------------------------------|-------------------------------------------------------|--------------------|---------------|--------------|-------------------------------------|
+| **[500](#jep-500-prepare-to-make-final-mean-final)**                                 | Prepare to Make Final Mean Final                      |                    | Core Libs     | Deprecation  | Warnings                            |
+| **[504](#jep-504-remove-the-applet-api)**                                            | Remove the Applet API                                 |                    | Client Libs   | Deprecation  | Deprecation                         |
+| **[516](#jep-516-ahead-of-time-object-caching-with-any-gc)**                         | Ahead-of-Time Object Caching with Any GC              |                    | HotSpot       | Performance  | New feature                         |
+| **[517](#jep-517-http3-for-the-http-client-api)**                                    | HTTP/3 for the HTTP Client API                        |                    | Core Libs     | Extension    | New feature                         |
+| **[522](#jep-522-g1-gc-improve-throughput-by-reducing-synchronization)**             | G1 GC: Improve Throughput by Reducing Synchronization |                    | HotSpot       | Performance  | New feature                         |
+| **[524](#jep-524-pem-encodings-of-cryptographic-objects-second-preview)**            | PEM Encodings of Cryptographic Objects                | Second Preview     | Security Libs | Security     | Minor                               |
+| **[525](#jep-525-structured-concurrency-sixth-preview)**                             | Structured Concurrency                                | Sixth Preview      | Loom          | Concurrency  | Minor                               |
+| **[526](#jep-526-lazy-constants-second-preview)**                                    | Lazy Constants                                        | Second Preview     | Core Libs     | New API      | Major                               |
+| **[529](#jep-529-vector-api-eleventh-incubator)**                                    | Vector API                                            | Eleventh Incubator | Panama        | New API      | None                                |
+| **[530](#jep-530-primitive-types-in-patterns-instanceof-and-switch-fourth-preview)** | Primitive Types in Patterns, instanceof, and switch   | Fourth Preview     | Amber         | Language     | Minor                               |
+
+New features {#h2-1-new-features}
+---------------------------------
+
+Let's start with the JEPs that add brand-new features to Java 26.
+
+### HotSpot {#h3-2-hotspot}
+
+Java 26 introduces two new features in [HotSpot](https://openjdk.org/groups/hotspot/):
+
+* JEP 516: Ahead-of-Time Object Caching with Any GC
+* JEP 522: G1 GC: Improve Throughput by Reducing Synchronization
+
+> The HotSpot JVM is the runtime engine that is developed by Oracle. It translates Java bytecode into machine code for the host operating system's processor architecture.
+
+#### JEP 516: Ahead-of-Time Object Caching with Any GC
+
+An important metric for applications that require a fast response time, such as web servers or real-time systems, is [tail latency](https://brooker.co.za/blog/2021/04/19/latency.html) (the time it takes for a request to be processed).  
+
+It can be caused by either garbage collection pauses, or requests that are sent to a new, not-yet-warmed-up JVM instance.  
+
+The first cause can be mitigated by using a low-latency garbage collector, such as the Z Garbage Collector (ZGC), while the second can be mitigated by using the [ahead-of-time cache](https://hanno.codes/2025/03/18/java-24-rolls-out-today/#jep-483-ahead-of-time-class-loading--linking), which allows JVM instances to start up faster.
+
+Java 24 introduced this ahead-of-time cache, storing classes in memory after reading, parsing, loading and linking them as a result of an initial *training run* .  
+
+Then, it could be re-used in subsequent runs of the application to improve startup time.  
+
+However, back then the use of the cache was somewhat limited, as cached Java objects were stored in a GC-specific format, making it incompatible with other garbage collectors like ZGC. JEP 516 extends support for the ahead-of-time cache to ZGC (and to any other garbage collector for that matter) by caching Java objects in a GC-agnostic format.
+
+##### What Makes the New Cache Format GC-Agnostic?
+
+Each garbage collector has its own policies for laying out objects in memory, which means that the memory addresses of cached objects are not valid across different garbage collectors.  
+
+To solve this problem, JEP 516 changes the cache format by replacing memory addresses with logical indices.  
+
+When the cache is loaded, these logical indices are converted back to memory addresses by *streaming* them into memory, materializing the cached objects in the process.
+
+##### Usage
+
+The JVM will automatically cache objects in the streamable, GC-agnostic format if, in training, either ZGC or the `-XX:-UseCompressedOops` command-line option was used, or if the heap was larger than 32GB. In contrast, it will cache objects in the old, GC-specific format if, in training, the `-XX:+UseCompressedOops` (notice the ' plus') command-line option was used. This indicates that the training environment had a heap smaller than 32GB and did not use ZGC.
+
+If you want to force the use of the new GC-agnostic cache format regardless of the training environment, you can specify the `-XX:+AOTStreamableObjects` command-line option to make it happen.
+
+##### Why Not Simply Create ZGC-Specific Caches?
+
+The alternative of creating ZGC-specific caches was not pursued because it would have required maintaining separate caches for each garbage collector. Moreover, the only benefit of a ZGC-specific cache would have been a slightly better performance on single-core machines. This benefit would have been negligible in practice, as the highly-concurrent ZGC was designed to perform well on multi-core machines rather than single-core machines, and it would not have justified the maintenance cost of multiple caches.
+
+##### More Information
+
+For more information on this feature, read [JEP 516](https://openjdk.org/jeps/516).
+
+#### JEP 522: G1 GC: Improve Throughput by Reducing Synchronization
+
+*G1 GC* has been Java's [default garbage collector since Java 9](https://openjdk.org/jeps/248). It's been designed to provide high performance and low pause times for applications with large heaps, with the aim of balancing latency and throughput. To achieve this balance, G1 performs its work concurrently with the application, making the application threads share the CPU with GC threads. This situation requires thread synchronization, which unfortunately lowers throughput and increases latency.
+
+JEP 522 proposes to improve both throughput and latency by reducing the amount of synchronization required between application threads and GC threads.
+
+##### Why Is Synchronization Currently Necessary?
+
+When G1 reclaims memory, live objects in the heap are copied to new memory regions, freeing up the space they leave behind. References to those objects must be updated to point to their new location. To prevent having to scan the entire heap for existing references to these objects, G1 maintains a data structure called the *card table* , which is updated every time an object reference is stored in a field. These updates are performed by pieces of code called *write barriers*, which G1 injects into the application in cooperation with the Just-In-Time (JIT) compiler.
+
+Scanning the card table is an efficient operation and will typically fit within a GC pause's time window. However, in environments where objects are allocated very frequently the card table may grow too large to be scanned within the timespan of G1's pause time goal. To avoid that, G1 optimizes the card table in the background via separate optimizer threads. This approach can only work if the card table is updated in a thread-safe way, which is currently achieved by synchronizing the optimizer threads with the application threads. Arguably, this leads to more complicated and slower write-barrier code.
+
+##### Towards A Second Card Table
+
+JEP 522 proposes to introduce a *second card table*, to make sure the optimizer threads and application threads no longer interfere. The write barriers in the application threads will update the first card table without any synchronization, while the optimizer threads will update the second, initially empty, card table.
+
+When G1 determines that scanning the current card table during a pause would likely breach the pause‑time target, it atomically switches the two card tables. Application threads then continue to write to the now‑empty table (the former "second" table), while dedicated optimizer threads process the previously‑filled table (the former "first" table) without any additional synchronization. G1 repeats this swapping as needed so that the work required on the active card table stays within the desired limits.
+
+This approach reduces the amount of synchronization required between application and optimizer threads. In applications that heavily modify object-reference fields, throughput gains of 5-15% can be expected. On top of that, because the write barrier code can be a lot simpler, additional throughput gains of up to 5% have been observed in x64 architectures, even in applications that don't heavily modify object-reference fields.
+
+The two card tables are identical in size, each consuming the same extra native memory. Together they occupy roughly 0.2% of the Java heap, which translates to about 2MB of native memory for every gigabyte of heap space. This modest overhead is well worth the sizable performance gains---especially when you consider that, before Java 20, G1 needed more than eight times the memory that the second card table now requires.
+
+##### More Information
+
+For more information on this feature, read [JEP 522](https://openjdk.org/jeps/522).
+
+### Core Libs {#h3-3-core-libs}
+
+Java 26 introduces a single new feature that is part of the Core Libs:
+
+* JEP 517: HTTP/3 for the HTTP Client API
+
+#### JEP 517: HTTP/3 for the HTTP Client API
+
+Since Java 11, a modern HTTP client API is available within the Java Platform. It supports both HTTP/1.1 and HTTP/2 and was designed to potentially support future versions as well. In its current form, the API assumes HTTP/2 by default, but it can revert to HTTP/1.1 should the target server not support a newer HTTP version.
+
+The code example below demonstrates the ease of use and protocol agnosticity of the API:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.net.http.*;
+
+...
+var client = HttpClient.newHttpClient();
+var request = HttpRequest.newBuilder(URI.create("https://foojay.io")).GET().build();
+var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+assert response.statusCode() == 200;
+String htmlText = response.body();
+assert htmlText.contains("Java");</pre>
+
+As you can see, we didn't specify any HTTP version in this code example--the API assumes HTTP/2 by default.
+
+##### HTTP/3: HTTP's Next Version
+
+HTTP/3 was standardized in 2022 by the [IETF](https://www.ietf.org/), using the [QUIC](https://en.wikipedia.org/wiki/QUIC) transport-layer protocol over TCP. Applications that use the HTTP/3 protocol can benefit from multiplexing, faster handshakes, avoidance of network congestion issues and more reliable transport, among others. Most web browsers [already support HTTP/3](https://caniuse.com/http3) and [about a third of all web sites](https://w3techs.com/technologies/details/ce-http3) currently benefit from its features. So this seems like a good time to start supporting it in the HTTP client API, which is exactly what JEP 517 is proposing.
+
+##### Using HTTP/3 In Java Code
+
+In Java 26, the HTTP client API requires you to opt-in to HTTP/3 by configuring an instance of either `HttpClient` or `HttpRequest` with the `HTTP_3` version. For example:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// for reuse with multiple requests
+var http3Client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_3).build();
+
+// just for a single request
+var http3Request = HttpRequest.newBuilder(URI.create("https://foojay.io"))
+    .version(HttpClient.Version.HTTP_3)
+    .GET().build();</pre>
+
+Once HTTP/3 has been chosen---either in the request itself or in the client---you transmit the request just as you normally would. If the destination server lacks HTTP/3 support, the request is automatically and transparently rolled back to HTTP/2 or, if necessary, to HTTP/1.1.
+
+##### Negotiating Protocol Versions
+
+The HTTP client API can't know for sure if a target server will support HTTP/3. Moreover, existing HTTP/1.1 and HTTP/2 connections cannot be upgraded to HTTP/3, since HTTP/1.1 and HTTP/2 are built on top of TCP, while HTTP/3's QUIC is based on UDP datagrams. So the API needs a way to negotiate protocol versions--in order to do that, it's been equipped with four separate approaches:
+
+1. **Try HTTP/3 first, fall back if it times‑out** -- Initiate the request with HTTP/3; if a connection cannot be established within a reasonable timeout, automatically downgrade to HTTP/2 or HTTP/1.1. *(matches a `HttpRequest` whose preferred version is set to `HTTP_3`)*
+2. **Race HTTP/3 against an older protocol** -- Open both an HTTP/3 connection and an HTTP/2 or HTTP/1.1 connection simultaneously and use whichever succeeds first. *(occurs when the `HttpClient` prefers `HTTP_3` but the `HttpRequest` does not specify a preferred version)*
+3. **Start with HTTP/2 or 1.1 and switch on discovery** -- Send the initial request over HTTP/2 or HTTP/1.1. If the server's response indicates that HTTP/3 is available, switch to HTTP/3 for all following requests. *(triggered by setting `Http3DiscoveryMode.ALT_SVC` for the `H3_DISCOVERY` option, with at least one of the clients or requests preferring `HTTP_3`)*
+4. **Force HTTP/3 only** -- Send every request exclusively over HTTP/3; if the server cannot reply with HTTP/3, treat it as a failure and do not fall back to earlier protocols. *(enabled by `Http3DiscoveryMode.HTTP_3_URI_ONLY` for the `H3_DISCOVERY` option, with at least one client or request preferring `HTTP_3`)*
+
+The four methods each come with their own drawbacks:
+
+* Option 1 incurs a timeout delay before falling back.
+* Option 2 may waste resources by establishing an HTTP/3 connection that is never reused.
+* Option 3 requires an initial HTTP/2 or HTTP/1.1 round‑trip before any HTTP/3 benefits are realized.
+* Option 4 only works when you already know that the target server supports HTTP/3.
+
+HTTP/3 is not as widely deployed as its older counterparts, which is why no single approach can work in all circumstances. This is also the main reason why HTTP/3 can't be made the default protocol version at this time, though this may be change in the future when HTTP/3 is more widely adopted.
+
+##### More Information
+
+For more information on this feature, read [JEP 517](https://openjdk.org/jeps/517).
+
+Repreviews {#h2-4-repreviews}
+-----------------------------
+
+Now it's time to take a look at a few features that might already be familiar to you, because they were introduced in a previous version of Java. They have been repreviewed in Java 26, with only minor changes compared to Java 25 in most cases.
+
+### JEP 524: PEM Encodings of Cryptographic Objects (Second Preview) {#h3-5-jep-524-pem-encodings-of-cryptographic-objects-second-preview}
+
+Within a Java context, cryptographic objects such as public keys, private keys and certificates can be easily created and distributed. But outside of the Java world, the de facto standard is the [Privacy-Enhanced Mail](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) (PEM) format. Let's see an example of a PEM-encoded cryptographic object:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-----BEGIN PUBLIC KEY-----
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEi/kRGOL7wCPTN4KJ2ppeSt5UYB6u
+cPjjuKDtFTXbguOIFDdZ65O/8HTUqS/sVzRF+dg7H3/tkQ/36KdtuADbwQ==
+-----END PUBLIC KEY-----</pre>
+
+The Java Platform currently doesn't include an easy-to-use API for decoding and encoding text in the PEM format, which means that decoding a PEM-encoded key can be a tedious job that involves careful parsing of the source PEM text. To further illustrate this point, encrypting and decrypting a private key currently requires over a dozen lines of code.
+
+To solve this problem, JEP 524 introduces an API that can encode objects to the PEM format. It effectively acts as a bridge between Base64 and cryptographic objects. It involves a new interface and three new classes, in the `java.security` package:
+
+[`DEREncodable`](https://cr.openjdk.org/~ascarpino/pem26/api/java.base/java/security/DEREncodable.html)  
+
+: A sealed interface that groups together all cryptographic objects that support converting their instances to and from byte arrays in the [Distinguished Encoding Rules](https://en.wikipedia.org/wiki/X.690#DER_encoding) (DER) format.
+
+[`PEMEncoder`](https://cr.openjdk.org/~ascarpino/pem26/api/java.base/java/security/PEMEncoder.html)  
+
+: A class that declares methods for encoding `DEREncodable` objects into PEM text.
+
+[`PEMDecoder`](https://cr.openjdk.org/~ascarpino/pem26/api/java.base/java/security/PEMDecoder.html)  
+
+: A class that declares methods for decoding PEM text to `DEREncodable` objects.
+
+[`PEM`](https://cr.openjdk.org/~ascarpino/pem26/api/java.base/java/security/PEM.html)  
+
+: A record that implements `DEREncodable`, which can hold any type of PEM data. It allows you to encode and decode PEM tests yielding cryptographic objects for which no Java representation currently exists.
+
+##### Typical Usage
+
+The following code example shows typical usage of the API:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">PrivateKey privateKey = ...;
+PublicKey publicKey = ...;
+
+// let's encode a cryptographic object!
+PEMEncoder pemEncoder = PEMEncoder.of();
+
+// this returns PEM text in a byte array
+byte[] privateKeyPem = pemEncoder.encode(privateKey);
+
+// this returns PEM text in a String
+String keyPairPem = pemEncoder.encodeToString(new KeyPair(privateKey, publicKey)); 
+
+// this returns encrypted PEM text
+String password = "java-first-java-always";
+String pem = pemEncoder.withEncryption(password).encodeToString(privateKey);
+
+// let's decode a cryptographic object!
+PEMDecoder pemDecoder = PEMDecoder.of();
+
+// this returns a DEREncodable, so we need to pattern-match
+switch (pemDecoder.decode(pem)) {
+    case PublicKey publicKey -&gt; ...;
+    case PrivateKey privateKey -&gt; ...;
+    default -&gt; throw new IllegalArgumentException("Unsupported cryptographic object");
+}
+
+// alternatively, if you know the type of the encoded cryptographic object in advance:
+PrivateKey key = pemDecoder.decode(pem, PrivateKey.class);
+
+// this decodes an encrypted cryptographic object
+PrivateKey decryptedkey = pemDecoder.withDecryption(password).decode(pem, PrivateKey.class);</pre>
+
+##### Preview Warning
+
+Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so you'll need to add the `--enable-preview` flag to the command-line to take the feature for a spin.
+
+#### What's Different From Java 25?
+
+A few minor changes were made to the API compared to Java 25:
+
+* `PEMRecord` was renamed to `PEM`, and includes a `decode()` method that returns decoded Base64 content;
+* The `PEMEncoder` and `PEMDecoder` classes now support the encryption and decryption of `KeyPair` and `PKCS8EncodedKeySpec` objects;
+* Finally, a few changes were made to the `EncryptedPrivateKeyInfo` class:
+  * The `encryptKey` methods are now named `encrypt`, and they now accept `DEREncodable` objects rather than `PrivateKey` objects, enabling the encryption of `KeyPair` and `PKCS8EncodedKeySpec` objects.
+  * It includes `getKeyPair` methods that decrypt PKCS#8-encoded text containing a `PublicKey`.
+  * The exceptions thrown by the `getKey` methods are now aligned with those thrown by the nearby `getKeySpec` methods.
+
+#### More Information
+
+For more information on this feature, see [JEP 524](https://openjdk.org/jeps/524).
+
+### JEP 525: Structured Concurrency (Sixth Preview) {#h3-6-jep-525-structured-concurrency-sixth-preview}
+
+Java's take on concurrency has always been *unstructured*, meaning that tasks run independently of each other. There's no hierarchy, scope, or other structure involved, which means errors or cancellation intent is hard to communicate. To illustrate this, let's look at a code example that takes place in a restaurant:
+> These code examples were taken from my conference talk ["Java's Concurrency Journey Continues! Exploring Structured Concurrency and Scoped Values"](https://hanno.codes/talks/#javas-concurrency-journey-continues).
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class MultiWaiterRestaurant implements Restaurant {
+    @Override
+    public MultiCourseMeal announceMenu() throws ExecutionException, InterruptedException {
+        Waiter grover = new Waiter("Grover");
+        Waiter zoe = new Waiter("Zoe");
+        Waiter rosita = new Waiter("Rosita");
+
+        try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            Future&lt;Course&gt; starter = executor.submit(() -&gt; grover.announceCourse(CourseType.STARTER));
+            Future&lt;Course&gt; main = executor.submit(() -&gt; zoe.announceCourse(CourseType.MAIN));
+            Future&lt;Course&gt; dessert = executor.submit(() -&gt; rosita.announceCourse(CourseType.DESSERT));
+
+            return new MultiCourseMeal(starter.get(), main.get(), dessert.get());
+        }
+    }
+}</pre>
+
+Note that the `announceCourse(..)` method in the `Waiter` class sometimes fails with an `OutOfStockException`, because one of the ingredients for the course might not be in stock. This can lead to some problems:
+
+* If `zoe.announceCourse(CourseType.MAIN)` takes a long time to execute but `grover.announceCourse(CourseType.STARTER)` fails in the meantime, the `announceMenu(..)` method will unnecessarily wait for the main course announcement by blocking on `main.get()`, instead of cancelling it (which would be the sensible thing to do).
+* If an exception happens in `zoe.announceCourse(CourseType.MAIN)`, `main.get()` will throw it, but `grover.announceCourse(CourseType.STARTER)` will continue to run in its own thread, resulting in thread leakage.
+* If the thread executing `announceMenu(..)` is interrupted, the interruption will not propagate to the subtasks: all threads that run an `announceCourse(..)` invocation will leak, continuing to run even after `announceMenu()` has failed.
+
+Ultimately the problem here is that our program is logically structured with task-subtask relationships, but these relationships exist only in the mind of the developer. We might all prefer structured code that reads like a sequential story, but this example simply doesn't meet that criterion.
+
+In contrast, the execution of single-threaded code *always* enforces a hierarchy of tasks and subtasks, as shown by the single-threaded version of our restaurant example:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class SingleWaiterRestaurant implements Restaurant {
+    @Override
+    public MultiCourseMeal announceMenu() throws OutOfStockException {
+        Waiter elmo = new Waiter("Elmo");
+
+        Course starter = elmo.announceCourse(CourseType.STARTER);
+        Course main = elmo.announceCourse(CourseType.MAIN);
+        Course dessert = elmo.announceCourse(CourseType.DESSERT);
+
+        return new MultiCourseMeal(starter, main, dessert);
+    }
+}</pre>
+
+Here, we don't have *any* of the problems we had before.  
+
+Our waiter Elmo will announce the courses in exactly the right order, and if one subtask fails the remaining one(s) won't even be started.  
+
+And because all work runs in the same thread, there is no risk of thread leakage.
+
+It became apparent from these examples that concurrent programming would be a lot easier and more intuitive if enforcing the hierarchy of tasks and subtasks was possible, just like with single-threaded code.
+
+#### Introducing Structured Concurrency
+
+In a structured concurrency approach, threads have a clear hierarchy, their own scope, and clear entry and exit points. Structured concurrency arranges threads hierarchically, akin to function calls, forming a tree with parent-child relationships. Execution scopes persist until all child threads complete, matching code structure.
+
+#### Shutdown on Failure
+
+Let's look at a structured, concurrent version of our example now:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class StructuredConcurrencyRestaurant implements Restaurant {
+    @Override
+    public MultiCourseMeal announceMenu() throws ExecutionException, InterruptedException {
+        Waiter grover = new Waiter("Grover");
+        Waiter zoe = new Waiter("Zoe");
+        Waiter rosita = new Waiter("Rosita");
+
+        try (var scope = StructuredTaskScope.open()) {
+            Supplier&lt;Course&gt; starter = scope.fork(() -&gt; grover.announceCourse(CourseType.STARTER));
+            Supplier&lt;Course&gt; main = scope.fork(() -&gt; zoe.announceCourse(CourseType.MAIN));
+            Supplier&lt;Course&gt; dessert = scope.fork(() -&gt; rosita.announceCourse(CourseType.DESSERT));
+
+            scope.join(); // 1
+
+            return new MultiCourseMeal(starter.get(), main.get(), dessert.get()); // 2
+        }
+    }
+}</pre>
+
+The scope's purpose is to keep the threads together. At `1`, we wait (`join`) until all threads are done with their work. If one of the threads is interrupted, an `InterruptedException` is thrown. A `RuntimeException` can also be thrown here, if an exception occurs in one of the spawned threads. Once we reach `2`, we can be sure everything has gone well, and we can retrieve and process the results.
+
+Actually, the main difference with the code we had before is the fact that we create threads (`fork`) within a new `scope`. Now we can be certain that the lifetimes of the three threads are confined to this scope, which coincides with the body of the try-with-resources statement.
+
+Furthermore, we've gained *short-circuiting behaviour* . When one of the `announceCourse(..)` subtasks fails, the others are canceled if they didn't complete yet. We've also gained *cancellation propagation* . When the thread that runs `announceMenu()` is interrupted before or during the call to `scope.join()`, all subtasks are cancelled automatically when the thread exits the scope.
+
+#### Shutdown on Success
+
+The factory method that gave us the scope (`StructuredTaskScope.open()`) implements a shutdown-on-failure policy by default, which cancels any remaining tasks in the scope if one of the tasks has failed. A shutdown-on-success policy is also available: it cancels any remaining tasks in the scope if one of the tasks has succeeded. It can be used to avoid doing unnecessary work when a successful result has already been achieved.
+
+We can use a shutdown-on-success policy by calling an overload of the `StructuredTaskScope.open()` method that takes a `Joiner` as its parameter. Let's see what that would look like:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record DrinkOrder(Guest guest, Drink drink) {}
+
+public class StructuredConcurrencyBar implements Bar {
+    @Override
+    public DrinkOrder determineDrinkOrder(Guest guest) throws InterruptedException, ExecutionException {
+        Waiter zoe = new Waiter("Zoe");
+        Waiter elmo = new Waiter("Elmo");
+
+        try (var scope = StructuredTaskScope.open(Joiner.&lt;DrinkOrder&gt;anySuccessfulOrThrow())) {
+            scope.fork(() -&gt; zoe.getDrinkOrder(guest, BEER, WINE, JUICE));
+            scope.fork(() -&gt; elmo.getDrinkOrder(guest, COFFEE, TEA, COCKTAIL, DISTILLED));
+
+            return scope.join(); // 1
+        }
+    }
+}</pre>
+
+In this example the waiter is responsible for getting a valid `DrinkOrder` object based on guest preference and the drinks supply at the bar.  
+
+In the method `Waiter.getDrinkOrder(Guest guest, DrinkCategory... categories)`, the waiter starts to list all available drinks in the drink categories that were passed to the method.  
+
+Once a guest hears something they like, they respond and the waiter creates a drink order. When this happens, the `getDrinkOrder(..)` method returns a `DrinkOrder` object and the scope will shut down.  
+
+This means that any unfinished subtasks (such as the one in which Elmo is still listing different kinds of tea) will be cancelled.  
+
+The `join()` method at `1` will either return a valid `DrinkOrder` object, or throw a `RuntimeException` if one of the subtasks has failed.
+
+#### More Shutdown Policies
+
+We've seen examples of two shutdown policies so far, but four more are provided out-of-the-box through the static factory methods in the `StructuredTaskScope.Joiner` interface. For example, `Joiner.allSuccessfulOrThrow()` will keep the scope alive until all subtasks have completed successfully, and cancels it if any subtasks fails. And `Joiner.awaitAll()` will wait for all subtasks to complete, whether they complete successfully or not. It's also possible to create your own shutdown policies by implementing the `Joiner` interface. That will allow you to have full control over when the scope will be shut down and what results will be collected.
+
+#### What's Different From Java 25?
+
+A few minor changes were made to the API compared to Java 25:
+
+* A new method in the `Joiner` interface, `onTimeout()`, allows implementations of that interface to return a result when a timeout expires.
+* `Joiner::allSuccessfulOrThrow()` now returns a list of results instead of a stream of subtasks.
+* `Joiner::anySuccessfulResultOrThrow()` was renamed to the slightly simpler `anySuccessfulOrThrow()`.
+* The static `open` method that used to take a `Joiner` and a `Function` to modify the default configuration now takes a `Joiner` and a `UnaryOperator`.
+
+#### Preview Warning
+
+Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so you'll need to add the `--enable-preview` flag to the command-line to take the feature for a spin.
+
+#### More Information
+
+[JEP 525](https://openjdk.org/jeps/525) has more details on the current state of this feature, should you wish to learn more.
+
+### JEP 526: Lazy Constants (Second Preview) {#h3-7-jep-526-lazy-constants-second-preview}
+
+Immutable objects are a far less complicated concept than mutable objects, because they can only be in a single state and can be shared freely across multiple threads.  
+
+Currently, the main tool to achieve immutability in Java is `final` fields.  
+
+But they come with two drawbacks, restricting their potential in many real-world applications:
+
+* they must be set eagerly;
+* the order in which multiple `final` fields are initialized can never be changed, as it is determined by the [textual order](https://docs.oracle.com/javase/specs/jls/se23/html/jls-12.html#jls-12.4) in which the fields are declared.
+
+Consider the use of immutability in the following code example, which takes place in a guitar store domain:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class OrderController {
+    private final Logger logger = Logger.create(OrderController.class);
+
+    void submitOrder(User user, List&lt;Guitar&gt; guitar) {
+        logger.info("Ordering new guitars...");
+
+        // ...
+
+        logger.info("New guitars have been ordered, let's get to work!");
+    }
+}</pre>
+
+Whenever an instance of `OrderController` is created, the `logger` field is initialized eagerly, which potentially makes creating an `OrderController` slow.  
+
+And this might not be the only place in our application where a `logger` field is initialized eagerly:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class GuitarStore {
+    static final OrderController ORDERS = new OrderController();
+    static final GuitarRepository GUITARS = new GuitarRepository();
+    static final ManufacturerService MANUFACTURERS = new ManufacturerService();
+}</pre>
+
+All this initialization work causes the application to start up more slowly, and the worst thing is: it may not even be necessary!  
+
+If a user is simply browsing the guitar store, with no intention of ordering a new guitar, the `OrderController` won't even be called and we will have initialized the `logger` field for nothing.
+
+##### Sacrificing Immutability For More Flexible Initialization
+
+The only alternative we currently have is to resort to a mutability-based approach, in which we delay the initialization of complex objects to as late a time as possible:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class OrderController {
+    private Logger logger;
+
+    Logger getLogger() {
+        if (logger == null) {
+            logger = Logger.create(OrderController.class);
+        }
+        return logger;
+    }
+
+    void submitOrder(User user, List&lt;Guitar&gt; guitar) {
+        getLogger().info("Ordering new guitars...");
+
+        // ...
+
+        getLogger().info("New guitars have been ordered, let's get to work!");
+    }
+}</pre>
+
+This improves application startup, but comes with a few drawbacks of its own:
+
+* All accesses to the `logger` field must go through the `getLogger` method, but code that fails to follow this practice runs the risk of encountering `NullPointerException`s;
+* In multi-threaded environments, multiple logger objects could be created during concurrent calls to the `submitOrder` method;
+* [Constant-folding](https://en.wikipedia.org/wiki/Constant_folding) access to an already-initialized `logger` field is no longer viable, as the JVM can't trust its content never to change after its initial update.
+
+What we need is a solution that has the best of both worlds:
+
+* a way to promise that a field will be initialized by the time it is used;
+* with a value that is computed at most once, and;
+* safely with respect to concurrency.
+
+In other words, we want to *defer immutability*, and have first-class support for it in the Java runtime.
+
+##### Lazy Constants
+
+JEP 526 introduces that first-class support in the form of *lazy constants* .  
+
+A lazy constant is an object of type `LazyConstant`, that holds a single data value.  
+
+It must be initialized some time before its content is first retrieved, and is immutable thereafter.
+
+Let's rewrite the `OrderController` class to use a lazy constant for its logger:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class OrderController {
+    private final LazyConstant&lt;Logger&gt; logger = LazyConstant.of(() -&gt; Logger.create(OrderController.class));
+
+    void submitOrder(User user, List&lt;Guitar&gt; guitar) {
+        logger.get().info("Ordering new guitars...");
+
+        // ...
+
+        logger.get().info("New guitars have been ordered, let's get to work!");
+    }
+}</pre>
+
+Initially, the lazy constant is uninitialized. When it is accessed for the first time through the `get()` method, it is initialized by invoking the lambda expression that was passed to the `of()` factory method.  
+
+If the lazy constant was already initialized, then the `get` method simply returns its content.  
+
+Thus, the `get` method guarantees that the provided lambda expression is evaluated only once (even when it is invoked concurrently).
+
+If we look at the properties of lazy constants, we see that they fill a gap between final and non-final fields:
+
+|                   | **Update count** |               **Update location** | **Constant folding?** | **Concurrent updates?** |
+|------------------:|-----------------:|----------------------------------:|----------------------:|------------------------:|
+|     `final` field |                1 | Constructor or static initializer |                   Yes |                      No |
+|    `LazyConstant` |         \[0, 1\] |                Computing function |     Yes, after update |          Yes, by winner |
+| non-`final` field |         \[0, ∞\] |                          Anywhere |                    No |                     Yes |
+
+Usage of lazy constants is certainly not limited to loggers--we can also use a lazy constant to store the `OrderController` component itself, and related components:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class GuitarStore {
+    static final LazyConstant&lt;OrderController&gt; ORDERS = LazyConstant.of(OrderController::new);
+    static final LazyConstant&lt;GuitarRepository&gt; GUITARS = LazyConstant.of(GuitarRepository::new);
+    static final LazyConstant&lt;ManufacturerService&gt; MANUFACTURERS = LazyConstant.of(ManufacturerService::new);
+
+    public static OrderController orders() {
+        return ORDERS.get();
+    }
+
+    public static GuitarRepository guitars() {
+        return GUITARS.get();
+    }
+
+    public static ManufacturerService manufacturers() {
+        return MANUFACTURERS.get();
+    }
+}</pre>
+
+The application's startup time improves because it no longer initializes its components, such as `OrderController`, up front.  
+
+Rather, it initializes each component on demand, via the `get` method of the corresponding lazy constant.  
+
+Each component, moreover, initializes its sub-components, such as its logger, on demand in the same way.
+
+Under the hood, the JVM will treat the content of any lazy constant that is declared as `final` as a constant, allowing constant-folding optimizations to happen.
+
+##### Lazy Lists
+
+What if you wanted to keep track of multiple lazy constants, for example when keeping a pool of objects?  
+
+We can achieve this by using a *lazy list*:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class GuitarStore {
+    static final int POOL_SIZE = 10;
+    static final List&lt;OrderController&gt; ORDERS = List.ofLazy(POOL_SIZE, _ -&gt; new OrderController());
+
+    public static OrderController orders() {
+        long index = Thread.currentThread().threadId() % POOL_SIZE;
+        return ORDERS.get((int) index);
+    }
+}</pre>
+
+Here, `ORDERS` is no longer a lazy constant, but a lazy list, in which each element is stored in a lazy constant.  
+
+To access the content, clients call `ORDERS.get(...)`, passing it an index, of which the first invocation will invoke the lambda function that ignores the index and invokes the `OrderController()` constructor.  
+
+Subsequent invocations of `ORDERS.get(...)` with the same index will return the element's content immediately.
+
+##### Lazy Maps
+
+Alternatively, we could have solved the problem with a *lazy map*, whose keys are known at construction time and whose values are stored in lazy constants, initialized on demand by a computing function that is also provided at construction:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class GuitarStore {
+    static final Map&lt;String, OrderController&gt; ORDERS = Map.ofLazy(Set.of("Customers", "Internal", "Testing"), _ -&gt; new OrderController());
+
+    public static OrderController orders() {
+        return ORDERS.get(Thread.currentThread().getName());
+    }
+}</pre>
+
+In this example, `OrderController` instances are associated with thread names ("Customers", "Internal", and "Testing" in this case) rather than integer indexes computed from thread identifiers. Lazy maps allow for more expressive access idioms than lazy lists, but otherwise have all the same benefits.
+
+#### What's Different From Java 25?
+
+The feature that used to be known as 'stable values' was renamed to 'lazy constants' to better capture its intended high-level use case.
+
+Other changes have a similar purpose--they include:
+
+* Removing the low-level methods `orElseSet`, `setOrThrow`, and `trySet`, leaving only factory methods that take value-computing functions;
+* Moving the factory methods for lazy lists (`StableValue.list`) and maps (`StableValue.map`) into the `List` and `Map` interfaces, respectively, to enhance discoverability;
+* Incorporating the ideas behind 'stable suppliers' into the new `LazyConstant.get()` method;
+* Removing the `function` and `intFunction` factory methods to further simplify the API;
+* Disallowing `null` as a computed value in order to improve performance and better align lazy constants with constructs such as unmodifiable collections and scoped values.
+
+#### More Information
+
+[JEP 526](https://openjdk.org/jeps/526) has more details on the current state of this feature, should you wish to learn more.
+
+### JEP 529: Vector API (Eleventh Incubator) {#h3-8-jep-529-vector-api-eleventh-incubator}
+
+The Vector API makes it possible to express vector computations that reliably compile at runtime to optimal vector instructions.  
+
+This means that these computations will significantly outperform equivalent scalar computations on the supported CPU architectures (x64 and AArch64).
+
+#### Vector Computations? Help Me Out Here!
+
+A *vector computation* is a mathematical operation on one or more one-dimensional matrices of an arbitrary length. Think of a vector as an array with a dynamic length. Furthermore, the elements in the vector can be accessed in constant time via indices, just like with an array.
+
+In the past, Java programmers could only program such computations at the assembly-code level. But now that modern CPUs support advanced [SIMD](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data) features (Single Instruction, Multiple Data), it becomes more important to take advantage of the performance gains that SIMD instructions and multiple lanes operating in parallel can bring. The Vector API brings that possibility closer to the Java programmer.
+
+#### Code Example
+
+Here is a code example (taken from the JEP) that compares a simple scalar computation over elements of arrays with its equivalent using the Vector API:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void scalarComputation(float[] a, float[] b, float[] c) {
+   for (int i = 0; i &lt; a.length; i++) {
+        c[i] = (a[i] * a[i] + b[i] * b[i]) * -1.0f;
+   }
+}
+
+static final VectorSpecies&lt;Float&gt; SPECIES = FloatVector.SPECIES_PREFERRED;
+
+void vectorComputation(float[] a, float[] b, float[] c) {
+    int i = 0;
+    int upperBound = SPECIES.loopBound(a.length);
+    for (; i &lt; upperBound; i += SPECIES.length()) {
+        // FloatVector va, vb, vc;
+        var va = FloatVector.fromArray(SPECIES, a, i);
+        var vb = FloatVector.fromArray(SPECIES, b, i);
+        var vc = va.mul(va)
+                   .add(vb.mul(vb))
+                   .neg();
+        vc.intoArray(c, i);
+    }
+    for (; i &lt; a.length; i++) {
+        c[i] = (a[i] * a[i] + b[i] * b[i]) * -1.0f;
+    }
+}</pre>
+
+From the perspective of the Java developer, this is just another way of expressing scalar computations. It might come across as being more verbose, but on the other hand it can bring spectacular performance gains.
+
+#### Typical Use Cases
+
+The Vector API provides a way to write complex vector algorithms in Java that perform extremely well, such as vectorized `hashCode` implementations or specialized array comparisons. Numerous domains can benefit from this, including machine learning, linear algebra, encryption, text processing, finance, and code within the JDK itself.
+
+#### What's Different From Java 25?
+
+Compared to the tenth incubator version of this feature in Java 25, nothing was changed or added.
+
+The Vector API will keep incubating until necessary features of Project Valhalla become available as preview features. When that happens, the Vector API will be adapted to use them, and it will be promoted from incubation to preview.
+
+#### More Information
+
+For more information on this feature, read [JEP 529](https://openjdk.org/jeps/529).
+
+### JEP 530: Primitive Types in Patterns, instanceof, and switch (Fourth Preview) {#h3-9-jep-530-primitive-types-in-patterns-instanceof-and-switch-fourth-preview}
+
+Since Java 23, pattern matching supports primitive types in all pattern contexts, and in the `instanceof` and `switch` constructs. The feature has been in three consecutive preview statuses, and will be previewed for a fourth time in Java 26. Let's first go through the differences with Java 22 before we highlight the changes in the fourth preview.
+
+#### Pattern Matching for Switch
+
+Java 22's version of [pattern matching for switch](https://openjdk.org/jeps/441) didn't support type patterns that specify a primitive type. In Java 23 support was added for primitive type patterns in `switch`, allowing the following code example:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">switch (reverb.roomSize()) {
+    case 1 -&gt; "Toilet";
+    case 2 -&gt; "Bedroom";
+    case 30 -&gt; "Classroom";
+    default -&gt; "Unsupported value: " + reverb.roomSize();
+}</pre>
+
+...to be written as follows:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">switch (reverb.roomSize()) {
+    case 1 -&gt; "Toilet";
+    case 2 -&gt; "Bedroom";
+    case 30 -&gt; "Classroom";
+    case int i -&gt; "Unsupported int value: " + i;
+}</pre>
+
+This also allows guards to inspect the matched value, like so:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">switch (reverb.roomSize()) {
+    case 1 -&gt; "Toilet";
+    case 2 -&gt; "Bedroom";
+    case 30 -&gt; "Classroom";
+    case int i when i &gt; 100 &amp;&amp; i &lt; 1000 -&gt; "Cinema";
+    case int i when i &gt; 5000 -&gt; "Stadium";
+    case int i -&gt; "Unsupported int value: " + i;
+}</pre>
+
+#### Record Patterns
+
+[Record patterns](https://openjdk.org/jeps/440) used to have limited support for primitive types.  
+
+Recall that a record pattern decomposes a record into its individual components, but when one of them is a primitive type, the record pattern must be precise about its type. To illustrate this point, consider the following code example:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Tuner(double pitchInHz) implements Effect {}
+
+var tuner = new Tuner(440); // int argument is widened to double
+
+// Attempt 1: record pattern match on int argument
+if (tuner instanceof Tuner(int p)) {} // doesn't compile!
+
+// Attempt 2: record pattern match on double argument
+if (tuner instanceof Tuner(double p)) {
+    int pitch = p; // doesn't compile! needs a cast to int
+}
+
+// Attempt 3: record pattern match on double argument, cast to int
+if (tuner instanceof Tuner(double p)) {
+    int pitch = (int) p;
+}</pre>
+
+To put it differently, the Java compiler widens the provided `int` to a `double`, but it doesn't narrow it back to an `int`. This limitation exists because narrowing could lead to data loss: the value of the `double` at runtime might exceed the range of an `int` or have more precision than an `int` can accommodate. However, one significant advantage of pattern matching is its ability to automatically reject invalid values by not matching them at all. If the `double` component of a `Tuner` is either too large or too precise to safely convert back to an `int`, then `instanceof Tuner(int p)` would simply return `false`, allowing the program to manage the large `double` component in a different code branch.
+
+This is analogous to how pattern matching currently behaves for reference type patterns. For example:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record SingleEffect(Effect effect) {}
+var singleEffect = new SingleEffect(...);
+
+if (singleEffect instanceof SingleEffect(Delay d)) {
+    // ...
+} else if (singleEffect instanceof SingleEffect(Reverb r)) {
+    // ...
+} else {
+    // ...
+}</pre>
+
+`instanceof` can be used here to try to match a `SingleEffect` with a `Delay` or a `Reverb` component; it automatically narrows if the pattern matches.
+
+To summarize, the JEP proposes to make primitive type patterns work as smoothly as reference type patterns, allowing `Tuner(int p)` even if the corresponding record component is a numeric primitive type other than `int`.
+
+#### Pattern Matching for instanceof
+
+The Java 22-version of [pattern matching for instanceof](https://openjdk.org/jeps/394) didn't support primitive type patterns, but this capability would perfectly align with the purpose of `instanceof`: to test whether a value can be converted safely to a given type. To convert primitives safely, Java developers had to deal with lossy casts and range checks to prevent loss of information:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int roomSize = reverb.roomSize();
+
+if (roomSize &gt;= -128 &amp;&amp; roomSize &lt; 127) {
+    byte r = (byte) roomSize;
+    // now it's safe to use r
+}</pre>
+
+The JEP proposes the possibility to replace these constructs with simple `instanceof` checks that operate on primitives. Let's rewrite the code example to make use of this feature:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int roomSize = reverb.roomSize();
+
+if (roomSize instanceof byte r) {
+    // now it's safe to use r
+}</pre>
+
+The pattern `roomSize instanceof byte r` will match only if `roomSize` fits into a `byte`, eliminating the need for casts and range checks.
+
+#### Primitive Types in instanceof
+
+The `instanceof` keyword used to take a reference type only, and since Java 16 it can also take a type pattern.  
+
+But it would make sense to have `instanceof` take a primitive type also.  
+
+In that case `instanceof` would check if the conversion is safe but would not actually perform it:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (roomSize instanceof byte) { // check if value of roomSize fits in a byte
+    ... (byte) roomSize ... // yes, it fits! but cast is required
+}</pre>
+
+The JEP proposes to support this construct, which makes it easier to change the `instanceof` check to take a type pattern and vice versa.
+
+#### Primitive Types in switch
+
+The Java 22-version of the `switch` statement/expression supported `byte`, `short`, `char`, and `int` values.  
+
+The JEP proposes to also add support for the other primitive types: `boolean`, `float`, `double` and `long`.  
+
+A `switch` on a `boolean` value can be a good alternative for the ternary operator (`?:`), because its branches can also hold statements instead of just expressions.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String guitaristResponse = switch (guitar.isInTune()) {
+    case true -&gt; "Ready to play a song.";
+    case false -&gt; {
+        log.warn("Guitar is out of tune!");
+        yield "Let's take five!";
+    }
+}</pre>
+
+#### What's Different From Java 25?
+
+One minor change was made compared to Java 25: tighter dominance checks in `switch` constructs were applied.  
+
+One pattern is said to *dominate* another pattern if it matches all the values that the other pattern matches.  
+
+The definition of [dominance](https://openjdk.org/jeps/441#Dominance-of-case-labels) used to be applicable to reference types only; this JEP broadens that definition so that primitive types are included as well.  
+
+As a result, e.g., the type pattern `long q` is now said to dominate the type pattern `int i`.
+
+#### Preview Warning
+
+Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so you'll need to add the `--enable-preview` flag to the command-line to take the feature for a spin.
+
+#### More Information
+
+For more information on this feature, read [JEP 530](https://openjdk.org/jeps/530).
+
+Deprecations {#h2-10-deprecations}
+----------------------------------
+
+Java 26 also deprecates a few older features. Let's see which ones were involved in this effort to improve stability and clarity.
+
+### JEP 500: Prepare to Make Final Mean Final {#h3-11-jep-500-prepare-to-make-final-mean-final}
+
+Final fields in Java represent immutable state. Once assigned in a constructor or in a class initializer, a final field cannot be reassigned. This behaviour is important when reasoning about correctness, and for performance reasons. The more constraints there are on the behaviour of a class, the more optimizations the JVM can apply (like [constant folding](https://en.wikipedia.org/wiki/Constant_folding)). Moreover, the immutability we can expect from final fields plays an important role in the [safe initialization of objects](https://www.cs.umd.edu/~pugh/java/memoryModel/jsr-133-faq.html#finalWrong) in multi-threaded code.
+
+Unfortunately, the expectation that a final field cannot be reassigned is false. [Several APIs](https://openjdk.org/jeps/8305968#Undermining-integrity) allow final fields to be reassigned at any time by any code in a program, undermining all reasoning about correctness and invalidating important optimizations. The *deep reflection API* is the most notorious of them, through its `Field.setAccessible` and `Field.set` methods. These methods allow you to mutate final fields at will, for example:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// A normal class with a final field
+static class Guitar {
+    final int numberOfStrings;
+
+    Guitar() {
+        numberOfStrings = 6;
+    }
+}
+
+void main() throws ReflectiveOperationException {
+    // 1. Perform deep reflection over the final field in Guitar
+    java.lang.reflect.Field numberOfStrings = Guitar.class.getDeclaredField("numberOfStrings");
+    numberOfStrings.setAccessible(true);      // Make Guitar's final field mutable
+
+    // 2. Create an instance of Guitar
+    Guitar guitar = new Guitar();
+    IO.println(guitar.numberOfStrings);  // Prints 6
+
+    // 3. Mutate the final field in the object
+    numberOfStrings.set(guitar, 12);
+    IO.println(guitar.numberOfStrings);  // Prints 12
+    numberOfStrings.set(guitar, 4);
+    IO.println(guitar.numberOfStrings);  // Prints 4
+}</pre>
+
+This example shows that, in practice, final fields can be as mutable as non-final fields.
+
+##### Reasons For Mutating a Final Field
+
+So why was the possibility added in the first place? The answer has to do with (you guessed it!) *serialization*. Serialization libraries need the ability to mutate final fields when initializing objects during deserialization. The problem is that relative little code mutates final fields for the right reasons, yet the mere existence of APIs for doing so makes it impossible to trust the value of any final field. Looking back, offering this functionality was a poor choice because it sacrifices integrity.
+
+Recent additions like [hidden classes](https://openjdk.org/jeps/371) and [records](https://openjdk.org/jeps/395) don't allow mutating final fields, and now it's time to extend this behaviour to regular classes.
+
+##### Final Field Restrictions
+
+JEP 500 proposes to issue warnings when deep reflection is used to mutate final fields. These warnings will prepare developers for a future release that ensures integrity by default by restricting final field mutation, making Java programs safer and potentially faster. One exception to this rule will remain supported, namely serialization libraries that need to mutate final fields during deserialization, via a limited-purpose API.
+
+The effects of these *final field restrictions* will be strengthened over time. Rather than issue warnings, a future JDK release will, by default, throw exceptions when Java code uses deep reflection to mutate final fields.
+
+##### Enabling Final Field Mutation
+
+Application developers can avoid these warnings and expections by opting-in to final field mutation via the command-line. To achieve this, specify the `--enable-final-field-mutation` command-line option and pass it a comma-separated list of module names:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java --enable-final-field-mutation=module1,module2</pre>
+
+Additional techniques are also available, such as setting environment variables, adding it to a JAR's manifest or configuring it in a custom runtime using `jlink`. Refer to [JEP 500](https://openjdk.org/jeps/500) for more details on these techniques.
+
+##### Behaviour of Field::set
+
+In JDK 26 the rules for `Field::set` on a `final` field change. The field will be mutated only if:
+
+1. `f.setAccessible(true)` has already succeeded,
+2. the field's declaring class is in a package **open** to the caller's module, and
+3. final‑field mutation is enabled for that module.
+
+The last two conditions are new. Consequently:
+
+* If a module doesn't have final‑field mutation enabled, any attempt to change a `final` field via deep reflection throws an `IllegalAccessException` (unless the JVM is started with `--illegal-final-field-mutation`). `f.setAccessible(true)` may still succeed, but `f.set(...)` is illegal.
+* If final‑field mutation is enabled but the field's package isn't open to the module, the same exception is thrown. This can happen when module A (with an open package) calls `f.setAccessible(true)` and passes the `Field` to module B, which has mutation enabled but no access to the package; module B's `f.set(...)` is illegal.
+
+##### Effects On Serialization Libraries
+
+When future JDK releases tighten final‑field restrictions, serialization libraries won't be able to rely on deep reflection automatically. Instead of asking users to turn on final‑field mutation via command‑line flags, library maintainers should use the `sun.reflect.ReflectionFactory` API, which is intended for this purpose. This API lets a serialization library acquire a method handle to special JDK‑generated code that can initialize an object by directly writing to its instance fields, even if they're declared `final`. The generated code gives the library the same capabilities as the JDK's built‑in serialization mechanisms, eliminating the need to enable final‑field mutation for the library's module.
+> Note that `sun.reflect.ReflectionFactory` only works for deserializing classes that implement `java.io.Serializable`.
+
+##### Libraries and Frameworks Should Not Use Deep Reflection to Mutate Final Fields
+
+Some dependency‑injection, testing, and mocking libraries rely on deep reflection to tamper with objects, even changing final fields. Their maintainers should treat enabling final‑field mutation via command‑line switches as a fallback only. Preferably, they should adopt designs that eliminate the need to alter final or private fields. For instance, most DI frameworks prohibit injecting final fields already and encourage constructor injection instead.
+
+#### More Information
+
+For more information on this feature, read [JEP 500](https://openjdk.org/jeps/500).
+
+### JEP 504: Remove the Applet API {#h3-12-jep-504-remove-the-applet-api}
+
+When the Java Platform rose to fame in the late 1990s and early 2000s, one of its main catalysts were Java applets and the Applet API. Java applets were small Java programs that could be embedded in web pages and run in a web browser, allowing developers to create interactive web applications. They were widely used for things like games, animations, and other interactive content on the web. People who weren't Java programmers at all at least knew the name 'Java' from their browser because of applets! (in roughly the same way as kids these days know about Java's existence because of a game called Minecraft.)
+![Hello! I am an applet!](/assets/images/blog/java-applet.png)
+
+<br />
+
+However, over time, Java applets became less popular due to security concerns and the rise of alternative technologies such as JavaScript and HTML5. As a result, many browser vendors have removed support for them. This is why the Applet API [was deprecated in Java 9](https://openjdk.org/jeps/289), [deprecated for removal in Java 17](https://openjdk.org/jeps/398) and it's one of the reasons why it will be removed in its entirety in Java 26. On top of that, a necessary foundation for running applets by sandboxing untrusted code, the Security Manager, [was permanently disabled in Java 24](https://openjdk.org/jeps/486), providing another reason to finally sunset the Applet API.
+
+##### Removals
+
+The following elements will be removed:
+
+* The entire `java.applet` package, consisting of:
+  * `java.applet.Applet`
+  * `java.applet.AppletContext`
+  * `java.applet.AppletStub`
+  * `java.applet.AudioClip`
+* These additional classes:
+  * `java.beans.AppletInitializer`
+  * `javax.swing.JApplet`
+* Any remaining API elements that reference the above classes and interfaces, including methods and fields in:
+  * `java.beans.Beans`
+  * `javax.swing.RepaintManager`
+
+##### Risks \& Migration
+
+Given that the Applet API in its current form is largely unusable, there is no substantial risk to user applications in removing the API. Applications that still use the Applet API will either stay on older releases or will migrate to some other API, like the AWT API or the [`javax.sound.SoundClip`](https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/sound/SoundClip.html) class for audio playback.
+
+#### More Information
+
+For more information on this removal, read [JEP 504](https://openjdk.org/jeps/504).
+
+Final thoughts {#h2-13-final-thoughts}
+--------------------------------------
+
+And that concludes our discussion of the 10 JEPs that come with Java 26. But that's not even all that's new: [many other updates](https://jdk.java.net/26/release-notes) were included in this release, including various performance, stability and security updates. One thing is for sure: this version of Java is primed and ready for more additions later this year. So what are you waiting for? It's time to take this brand-new Java release for a spin!
+
+<br />

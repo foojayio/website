@@ -8,13 +8,8 @@ authors:
   - "carldea"
 image: "https://foojay.io/wp-content/uploads/2020/08/duke-intellij-shirt.png"
 categories:
-  - "Podcast"
-  - "JC-AI Newsletter"
   - "IntelliJ IDEA"
   - "JavaFX"
-  - "Tutorials"
-  - "Game Development"
-  - "Tools"
 tags:
 related_posts:
 enlighterjs: true
@@ -27,8 +22,6 @@ frozen: false
   JavaFX in IntelliJ IDE
  </figcaption>
 </figure>
-
-
 
 This article is for the beginner who wants to get started developing JavaFX applications using [Jetbrains' IntelliJ](https://www.jetbrains.com/idea/) IDE. The article will create three flavors of a HelloWorld JavaFX application as follows:
 
@@ -109,15 +102,11 @@ After selecting the '**Add JDK** ' option locate the previously installed (ZuluF
 
 **Step 11:** Enter (copy \& paste) the following module definition into the file.
 
-
-
 <pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="true" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">module com.mycompany.helloworld {
    requires javafx.controls;
    exports com.mycompany.helloworld;
 }
 </pre>
-
-
 
 After hitting Ctrl + S to save the file you will encounter errors in the editor window where the module is referencing (exports) the **com.mycompany.helloworld** package which doesn't exist yet. So in the next step let's create the package namespace.
 
@@ -138,8 +127,6 @@ Next, the prompt will allow you to select the type of Java Class. Enter the name
 
 After hitting enter the file is created and displayed in the editor as shown in figure 17 below.
 
-
-
 <figure class="wp-block-image size-large is-resized is-style-default">
  <img loading="lazy" decoding="async" width="883" height="636" src="/images/posts/2021/04/beginning-javafx-with-intellij/HelloWorld.java-File.png" alt="" class="wp-image-32860" style="width:712px;height:512px">
  <figcaption class="wp-element-caption">
@@ -147,13 +134,9 @@ After hitting enter the file is created and displayed in the editor as shown in 
  </figcaption>
 </figure>
 
-
-
 Here you'll notice two things, a generated JavaFX class and no errors from missing a package and class (dependent in the module-info.java file). Also, the generated JavaFX code's **start()** method body is empty. In the next step you'll just cut \& paste the JavaFX application code into body of the method.
 
 **Step 14:** Enter or cut \& paste the following JavaFX code into the body of the **start()** method.
-
-
 
 <pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="true" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">        primaryStage.setTitle("Hello World");
         Group root = new Group();
@@ -168,11 +151,7 @@ Here you'll notice two things, a generated JavaFX class and no errors from missi
         primaryStage.setScene(scene);
         primaryStage.show();</pre>
 
-
-
 The final project in IntelliJ should look like the following:
-
-
 
 <figure class="wp-block-image size-large is-resized is-style-default">
  <img loading="lazy" decoding="async" width="1024" height="797" src="/images/posts/2021/04/beginning-javafx-with-intellij/Final-project-editor-1024x797.png" alt="" class="wp-image-32862" style="width:775px;height:603px">
@@ -180,8 +159,6 @@ The final project in IntelliJ should look like the following:
   Figure 18. The completed HelloWorldFX project in the IntelliJ IDE.
  </figcaption>
 </figure>
-
-
 
 **Step 15:** Executing the HelloWorldFX application project.
 
@@ -230,8 +207,6 @@ Step 4: Add Plugins and dependencies into **pom.xml**file
 
 Copy \& Paste to replace the following **pom.xml** into the editor and Save.
 
-
-
 <pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
@@ -279,8 +254,6 @@ Copy \& Paste to replace the following **pom.xml** into the editor and Save.
     &lt;/build&gt;
 &lt;/project&gt;</pre>
 
-
-
 **Step 5:**Project Settings -\> Project - Set Language Level
 
 Below you will want to ensure the Project SDK and Project language level is at least 11 or better. In figure 25 the language level was set to Java 14 (Preview).
@@ -301,14 +274,10 @@ After the file is created you will want to use the definition in step 6.
 
 **Step 6:** Copy and paste the following module definition to replace the generated one. Then hit **Save**.
 
-
-
 <pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">module com.mycompany.helloworld {
     requires javafx.controls;
     exports com.mycompany.helloworld;
 }</pre>
-
-
 
 **Step 6:** Create a Java package name space **com.mycompany.helloworld**.
 ![](/images/posts/2021/04/beginning-javafx-with-intellij/04-Package-namespace.png) Figure 27. New Package name space folder ![](/images/posts/2021/04/beginning-javafx-with-intellij/05-New-Package-name.png) Figure 28. Entering the package name
@@ -322,8 +291,6 @@ Right Mouse click the folder **com.mycompany.helloworld** (Project pane) to sele
 ![](/images/posts/2021/04/beginning-javafx-with-intellij/09-Create-Main-Class.png) Figure 30. Create a Class called HelloWorld
 
 Next, **copy \& paste** or type the following code to replace the code in the recently created **HelloWorld.java** file and **Save**.
-
-
 
 <pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mycompany.helloworld;
 
@@ -357,8 +324,6 @@ public class HelloWorld extends Application {
 }
 </pre>
 
-
-
 **Step 8:** Reload Maven Project
 
 On the right pane there should be tabs to select **Maven** . Next, click on the reload tool bar button. This will pull down any plugins or dependencies specified in the **pom.xml**.
@@ -373,27 +338,18 @@ If you want to run the application using the IDE's Run configuration you'll need
 
 When using ZuluFX:
 
-
-
 <pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">--add-modules javafx.controls</pre>
-
 
 ![](/images/posts/2021/04/beginning-javafx-with-intellij/11-VMoptions.png) Figure 33. VM Options
 
 When using JavaFX as separate libraries such as from GluonHQ (`$PATH_TO_FX`) and a **mods** directory (modules output directory):
 
-
-
 <pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">--module-path $PATH_TO_FX:mods --add-modules javafx.controls</pre>
-
-
 
 Gradle JavaFX Project {#h2-3-gradle-javafx-project}
 ---------------------------------------------------
 
 Because this article is getting way too long, I am only going to post the **build.gradle** file below. Because the file and directory structure of a gradle project is the same as a Maven project I trust you can simply go through creating the project in a similar manner and near the end click on the **Gradle** tab and the **reload** button to see the **run** task.
-
-
 
 <pre class="EnlighterJSRAW" data-enlighter-language="groovy" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">plugins {
   id 'application'
@@ -411,8 +367,6 @@ javafx {
 
 mainClassName = "com.mycompany.helloworldfx/com.mycompany.helloworldfx.HelloWorld"
 </pre>
-
-
 
 Conclusion {#h2-4-conclusion}
 -----------------------------

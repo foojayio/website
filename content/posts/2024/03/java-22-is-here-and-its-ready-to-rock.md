@@ -1,0 +1,1072 @@
+---
+title: "Java 22 Is Here, And It's Ready To Rock"
+slug: "java-22-is-here-and-its-ready-to-rock"
+date: "2024-03-19T13:56:23+00:00"
+lastmod: "2024-03-19T13:57:48+00:00"
+description: "Java 22 is here, and it's ready to rock! Boasting a set of 12 JEPs, it finalizes features and previews new ones. This article has all the info!"
+authors:
+  - "hanno-embregts"
+image: "https://foojay.io/wp-content/uploads/2024/03/guitar-pedals.jpg"
+categories:
+  - "Java"
+  - "Java Core"
+  - "Project Panama"
+  - "Records"
+tags:
+related_posts:
+enlighterjs: true
+frozen: false
+---
+
+Java 22 is here!
+
+It's been six months since Java 21 was released, so it's time for another fresh set of Java features.
+
+In this article, you'll go on a tour of the JEPs that are part of this release, giving you a brief introduction to each of them.
+
+Where applicable, the differences with Java 21 are highlighted and a few typical use cases are provided, so that you'll be more than ready to use these features after reading this!
+
+From Project Amber {#h2-0-from-project-amber}
+---------------------------------------------
+
+Java 22 contains four features that originated from [Project Amber](https://openjdk.org/projects/amber/):
+
+* Statements before super(...)
+* Unnamed Variables \& Patterns
+* String Templates
+* Implicitly Declared Classes and Instance Main Methods
+
+> The goal of Project Amber is to explore and incubate smaller, productivity-oriented Java language features.
+
+### JEP 447: Statements before super(...) (Preview) {#h3-1-jep-447-statements-before-super-preview}
+
+In Java, constructors run from top to bottom. On top of that, a superclass constructor must finish initializing its fields before a subclass constructor starts. This ensures proper object state initialization and prevents access to uninitialized fields.
+
+Java enforces this by requiring explicit constructor calls to be the first statement in a constructor body, and constructor arguments cannot access the current object. While these rules ensure that constructors behave predictably, they may restrict the use of common programming patterns in constructor methods. The following code example illustrates this point:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class StringQuartet extends Orchestra {
+    public StringQuartet(List&lt;Instrument&gt; instruments) {
+        super(instruments); // Potentially unnecessary work!
+
+        if (instruments.size() != 4) {
+            throw new IllegalArgumentException("Not a quartet!");
+        }
+    }
+}</pre>
+
+It would be better to let the constructor fail fast, by validating its arguments before the `super(...)` constructor is called.  
+
+Pre-Java 22, we could only achieve this by introducing a `static` method that acts upon the value passed to the super constructor.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class StringQuartet extends Orchestra {
+    public StringQuartet(List&lt;Instrument&gt; instruments) {
+        super(validate(instruments));
+    }
+
+    private static List&lt;Instrument&gt; validate(List&lt;Instrument&gt; instruments) {
+        if (instruments.size() != 4) {
+            throw new IllegalArgumentException("Not a quartet!");
+        }
+    }
+}</pre>
+
+But a far more readable way to write the same would be:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class StringQuartet extends Orchestra {
+    public StringQuartet(List&lt;Instrument&gt; instruments) {
+        if (instruments.size() != 4) {
+            throw new IllegalArgumentException("Not a quartet!");
+        }
+
+        super(instruments);
+    }
+}</pre>
+
+This approach will be possible in Java 22, due to the introduction of *pre-construction contexts* .  
+
+Java used to treat the arguments to an explicit constructor invocation to be in a *static context*, as if they were in a static method.
+
+But this restriction is a bit stronger than necessary, which is why Java 22 introduces the aforementioned *pre-construction contexts*; a strictly weaker concept. It covers both the arguments to an explicit constructor invocation and any statements that occur before it. Within a pre-construction context, the rules are similar to normal instance methods, except that the code may not access the instance under construction.
+
+#### What's Different From Java 21?
+
+In Java 21 and earlier, statements were not allowed to appear before an explicit constructor invocation. In Java 22 such constructions are now valid, but only if these statements don't reference the instance being created.
+
+Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so you'll need to add the `--enable-preview` flag to the command-line to take the feature for a spin.
+
+#### More Information
+
+The JEP contains a few more details on the restrictions of instance accessing in a pre-construction context. See [JEP 447](https://openjdk.org/jeps/447) to learn more.
+
+Or if you want to try out 'statements before super(...)' for yourself, then here's a [GitHub repository](https://github.com/hannotify/java-22-release-day) to get you started.
+
+### JEP 456: Unnamed Variables \& Patterns {#h3-2-jep-456-unnamed-variables-patterns}
+
+Data processing in Java has become increasingly streamlined since the introduction of [records](https://openjdk.org/jeps/395) and [record patterns](https://openjdk.org/jeps/440). But writing out an entire record pattern when some record components aren't even used in the logic that follows can be both cumbersome and confusing. Consider the following code example:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static boolean isDelayTimeEqualToReverbRoomSize(EffectLoop effectLoop) {
+    if (effectLoop instanceof EffectLoop(Delay(int timeInMs), Reverb(String name, int roomSize))) {
+        return timeInMs == roomSize;
+    }
+    return false;
+}</pre>
+
+This piece of code, which originates from a [music store example repository](https://github.com/hannotify/pattern-matching-music-store), deals with comparing two guitar effects that are stored in the `EffectLoop` that the fictional guitar player is currently using.  
+
+Here, the logic in the `if` body doesn't reference the `name` whatsoever, but for a long time Java didn't have a way to indicate this as an intentional omission.
+
+And so we've had no choice but to specify the entire record pattern, leading future readers of this code to doubt the correctness of the implementation.
+
+#### Unnamed Patterns
+
+This situation was changed in Java 21, when *unnamed patterns* became available through [JEP 443](https://openjdk.org/jeps/443), a feature that will be finalized in Java 22. Let's see how an unnamed pattern would change the example code we presented earlier:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static boolean isDelayTimeEqualToReverbRoomSize(EffectLoop effectLoop) {
+    if (effectLoop instanceof EffectLoop(Delay(int timeInMs), Reverb(_, int roomSize))) {
+        return timeInMs == roomSize;
+    }
+    return false;
+}</pre>
+
+The underscore denotes the unnamed pattern here: it is an unconditional pattern which binds nothing. You can use it to indicate that it doesn't matter to what first value the pattern matches the `Reverb`, as long as the second parameter is matched to an `int`.
+
+#### Unnamed Pattern Variables
+
+Java 21 also introduced *unnamed pattern variables* , a feature that is also finalized in Java 22. You can use an unnamed pattern variable whenever you care about the *type* your record pattern will match, but when you don't need any *value* bound to it.
+
+Now imagine our fictional guitar player wants to use their tuner effect pedal to also support tuning notes played on a piano. In that case we could use unnamed pattern variables like this:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static void apply(Effect effect, Piano piano) {
+    System.out.println(switch(effect) {
+        case Tuner(FlatNote _), Tuner(SharpNote _) -&gt; "Tuning one of the black keys...";
+        case Tuner(RegularNote _) -&gt; "Tuning one of the white keys...";
+        default -&gt; "An unknown effect is active...";
+    });
+}</pre>
+
+Here, we execute specific logic when we encounter a tuner that tunes a flat (♭) or sharp (♯) note. An unnamed pattern variable is the appropriate choice here, because the logic acts on the matched type only - meaning its value can be safely ignored.
+
+#### Unnamed Variables
+
+*Unnamed variables* can be useful in situations where variables are unused and their names are irrelevant, for example when keeping a counter variable within the body of a for-each loop:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int guitarCount = 0;
+for (Guitar guitar : guitars) {
+    if (guitarCount &lt; LIMIT) { 
+        guitarCount++;
+    }
+}
+</pre>
+
+The `guitar` variable is declared and populated here, but it is never used. Unfortunately, its intentional non-use doesn't come across as such to the reader.
+
+Moreover, static code analysis tools like Sonar will probably complain about the unused variable, raising suspicions even more. An unnamed variable better conveys the intent of the code:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int guitarCount = 0;
+for (Guitar _ : guitars) {
+    if (guitarCount &lt; LIMIT) { 
+        guitarCount++;
+    }
+}</pre>
+
+Another good example is handling exceptions in a generic way:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var lesPaul = new Guitar("Les Paul");
+try { 
+    cart.add(stock.get(lesPaul, guitarCount));
+} catch (OutOfStockException _) { 
+    System.out.println("Sorry, out of stock!");
+}</pre>
+
+Keep in mind that unnamed variables only make sense when they're not visible outside a method, so they currently only work with local variables, exception parameters and lambda parameters. The theoretical concept of *unnamed method parameters* is briefly touched upon in the JEP, but supporting it comes with enough challenges to at least warrant postponing it to a future JEP.
+
+#### What's Different From Java 21?
+
+Compared to the preview version of this feature in Java 21, nothing was changed or added. JEP 456 simply exists to finalize the feature.
+
+#### More Information
+
+For more information on this feature, see [JEP 456](https://openjdk.org/jeps/456).
+
+### JEP 459: String Templates (Second Preview) {#h3-3-jep-459-string-templates-second-preview}
+
+Several options in Java currently exist to compose a string from literal text and expressions:
+
+* String concatenation with the `+` operator;
+* `StringBuilder`;
+* `String::format` or `String::formatted`;
+* `java.text.MessageFormat`
+
+However, these mechanisms come with drawbacks. They involve hard-to-read code (`+` operator) or verbose code (`StringBuilder`), they separate the input string from the parameters (`String::format`) or require a lot of ceremony (`MessageFormat`).
+
+*String interpolation* is a mechanism that many programming languages offer instead. But it comes with a drawback of its own: interpolated strings need to be manually validated by the developer to avoid dangerous risks like [SQL injection](https://en.wikipedia.org/wiki/SQL_injection).
+
+This JEP re-previews the 'String Templates' feature: a template-based mechanism for composing strings that offers the benefits of interpolation, but is less prone to introducing security vulnerabilities. A *template expression* is a new kind of expression in Java that can perform string interpolation, but it's also programmable so that developers can compose strings safely and efficiently.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String guitarType = "Les Paul";
+System.out.println(STR."I bought a \{guitarType} yesterday.");
+// outputs "I bought a Les Paul yesterday."</pre>
+
+The template expression `STR."I bought a \{guitarType} yesterday."` consists of:
+
+* A template processor (`STR`);
+* A dot character, as seen in other kinds of expressions; and
+* A template (`"I bought a \{guitarType} yesterday."`), which contains an embedded expression (`\{guitarType}`).
+
+When a template expression is evaluated at run time, its template processor combines the literal text in the template with the values of the embedded expressions to produce a result. The embedded expressions can perform arithmetic, invoke methods and access fields:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int price = 12;
+System.out.println(STR."A set of strings costs \{price} dollars; so each string costs \{price / 6} dollars.");
+// outputs "A set of strings costs 12 dollars; so each string costs 2 dollars."</pre>
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Guitar(String name, boolean inTune) {}
+class GuitarTuner {
+    public static void main(String... args) {
+        var guitar = new Guitar("Gibson Les Paul Standard '50s Heritage Cherry Sunburst", false);
+        System.out.println(STR."This guitar is \{guitar.inTune() ? "" : "not"} in tune.");
+        // outputs "This guitar is not in tune.
+    }
+}</pre>
+
+As you can see, double-quote characters can be used inside embedded expressions without escaping them, making the switch from concatenation to template expressions easier. Multi-line template expressions are also possible; they use a syntax similar to that of [text blocks](https://docs.oracle.com/javase/specs/jls/se20/html/jls-3.html#jls-3.10.6):
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String title = "My Online Guitar Store";
+String text = "Buy your next Les Paul here!";
+String html = STR."""
+        &lt;html&gt;
+          &lt;head&gt;
+            &lt;title&gt;\{title}&lt;/title&gt;
+          &lt;/head&gt;
+          &lt;body&gt;
+            &lt;p&gt;\{text}&lt;/p&gt;
+          &lt;/body&gt;
+        &lt;/html&gt;
+        """;</pre>
+
+#### Template Processors
+
+`STR` is a template processor defined in the Java Platform. It performs string interpolation by replacing each embedded expression in the template with the (stringified) value of that expression. It is a `public static final` field that is automatically imported into every Java source file.
+
+More template processors exist:
+
+* `FMT` - besides performing interpolation, it also interprets format specifiers which appear to the left of embedded expressions. The format specifiers are the same as those defined in `java.util.Formatter`.
+* `RAW` - a standard template processor that produces an unprocessed `StringTemplate` object.
+
+#### Ensuring Safety
+
+The construct `STR."..."` we used so far is actually a shorthand for defining a template and calling its `process` method, meaning that the first code example:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String guitarType = "Les Paul";
+System.out.println(STR."I bought a \{guitarType} yesterday.");</pre>
+
+is equivalent to:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String guitarType = "Les Paul";
+StringTemplate template = RAW."I bought a \{guitarType} yesterday.");
+System.out.println(STR.process(template));</pre>
+
+Template expressions are designed to prevent the direct conversion of strings with embedded expressions to interpolated strings, making it impossible for potentially incorrect strings to spread. A template processor securely handles this interpolation, and if you forget to use one, the compiler will report an error.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String guitarType = "Les Paul";
+System.out.println("I bought a \{guitarType} yesterday."); // doesn't compile!
+// outputs: "error: processor missing from template expression"</pre>
+
+#### Custom Template Processors
+
+Each template processor is an object that implements the functional interface `StringTemplate.Processor`, which means developers can easily create custom template processors. Custom template processors can make use of the methods `StringTemplate::fragments` and `StringTemplate::values` in order to use static fragments and dynamic values of the string template, respectively.
+
+Custom template processors can be useful for various use cases. Let's illustrate two of them with some code examples:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var JSON = StringTemplate.Processor.of(
+    (StringTemplate st) -&gt; new JSONObject(st.interpolate())
+);
+
+String name = "Gibson Les Paul Standard '50s Heritage Cherry Sunburst";
+String type = "Les Paul";
+JSONObject doc = JSON."""
+    {
+        "name": "\{name}",
+        "type": "\{type}"
+    };
+    """;</pre>
+
+So the `JSON` template processor returns instances of `JSONObject` instead of `String`.  
+
+If we wanted, we could simply add more validation logic to the implementation of `JSON` to make the template processor handle its parameters a bit more safely.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record QueryBuilder(Connection conn) implements StringTemplate.Processor&lt;PreparedStatement, SQLException&gt; {
+    public PreparedStatement process(StringTemplate st) throws SQLException {
+        // 1. Replace StringTemplate placeholders with PreparedStatement placeholders
+        String query = String.join("?", st.fragments());
+
+        // 2. Create the PreparedStatement on the connection
+        PreparedStatement ps = conn.prepareStatement(query);
+
+        // 3. Set parameters of the PreparedStatement
+        int index = 1;
+        for (Object value : st.values()) {
+            switch (value) {
+                case Integer i -&gt; ps.setInt(index++, i);
+                case Float f   -&gt; ps.setFloat(index++, f);
+                case Double d  -&gt; ps.setDouble(index++, d);
+                case Boolean b -&gt; ps.setBoolean(index++, b);
+                default        -&gt; ps.setString(index++, String.valueOf(value));
+            }
+        }
+
+        return ps;
+    }
+}</pre>
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var DB = new QueryBuilder(conn);
+String type = "Les Paul"; 
+PreparedStatement ps = DB."SELECT * FROM Guitar g WHERE g.guitar_type = \{type}";
+ResultSet rs = ps.executeQuery();</pre>
+
+The `DB` custom template processor is capable of constructing `PreparedStatements` that have their parameters injected in a safe way.
+
+#### What's Different From Java 21?
+
+Except for a technical change in template expression types, there are no changes relative to the first preview.
+
+Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so you'll need to add the `--enable-preview` flag to the command-line to take the feature for a spin.
+
+#### More Information
+
+For more information on this feature, see [JEP 459](https://openjdk.org/jeps/459).
+
+### JEP 463: Implicitly Declared Classes and Instance Main Methods (Second Preview) {#h3-4-jep-463-implicitly-declared-classes-and-instance-main-methods-second-preview}
+
+Java's take on the classic [Hello, World!](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program) program is notoriously verbose:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HelloWorld { 
+    public static void main(String[] args) { 
+        System.out.println("Hello, World!");
+    }
+}</pre>
+
+On top of that, it forces newcomers to grasp a few concepts that they certainly don't need on their first day of Java programming:
+
+* The `public` access modifier and its role in encapsulating units of code, together with its counterparts `private`, `protected` and default;
+* The `String[] args` parameter, that allows the operating system's shell to pass arguments to the program;
+* The `static` modifier and how it's part of Java's class-and-object model.
+
+The motivation for this JEP is to help programmers that are new to Java by introducing concepts in the right order, starting with the more fundamental ones. This is done by hiding any unnecessary details until they are useful in larger programs.
+
+#### Changing the Launch Protocol
+
+To achieve this, the JEP proposes the following changes to the launch protocol:
+
+* allow *instance main methods* , which are not `static` and don't need a `public` modifier, nor a `String[]` parameter;
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class HelloWorld { 
+    void main() { // this is an instance main method
+        System.out.println("Hello, World!");
+    }
+}</pre>
+
+* allow a compilation unit to implicitly declare a class:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void main() { // this is an instance main method in an implicitly declared class
+    System.out.println("Hello, World!");
+}</pre>
+
+#### A flexible launch protocol
+
+Java 22 enhances the launch protocol even further to offer more flexibility in declaring a program's entry point. The `main` method of a launched class can now have `public`, `protected` or default access. Other enhancements of the launch protocol include:
+
+* If the launched class contains a main method with a `String[]` parameter, then choose that method.
+* Otherwise, if the class contains a main method with no parameters, then choose that method.
+* In either case, if the chosen method is `static`, then simply invoke it.
+* Otherwise, the chosen method is an instance method and the launched class must have a zero-parameter, non-private constructor. Invoke that constructor and then invoke the `main` method of the resulting object. If there is no such constructor, then report an error and terminate.
+* If there is no suitable `main` method, then report an error and terminate.
+
+#### Implicitly Declared Classes
+
+With the introduction of implicitly declared classes, the Java compiler will consider a method that is not enclosed in a class declaration, as well as any unenclosed fields and any classes declared in the file, to be members of an implicitly declared top-level class.  
+
+Such a class always belongs to the unnamed package, is `final`, and can't implement interfaces or extend classes except `Object`. You can't reference it by name or use method references for its static methods, but you can use `this` and make method references to its instance methods. Implicitly declared classes can't be instantiated or referenced by name in code. They're mainly used as program entry points and must have a `main` method, enforced by the Java compiler.
+
+#### What's Different From Java 21?
+
+Java 22 contains the following changes compared to Java 21:
+
+* The feature that is now called *implicitly declared classes* used to be called *unnamed classes*. The latter came with a mechanism to prevent an unnamed class being used by other classes. In contrast, implicitly declared classes use a simpler approach: a source file without an enclosing class declaration is said to implicitly declare a class with a name chosen by the host system. These classes behave like normal top-level classes and require no additional tooling, library, or runtime support.
+* The procedure for selecting a main method to invoke was too complicated, taking into account both whether the method had a parameter and whether it was a static or an instance method. Java 22 simplifies the selection process to two steps: If there is a candidate `main` method with a `String[]` parameter, then we invoke that method; otherwise we invoke a candidate `main` method with no parameters. There is no ambiguity here, because a class cannot declare a static method and an instance method of the same name and signature.
+
+Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so you'll need to add the `--enable-preview` flag to the command-line to take the feature for a spin.
+
+#### More Information
+
+For more information on this feature, see [JEP 463](https://openjdk.org/jeps/463).
+
+From Project Loom {#h2-5-from-project-loom}
+-------------------------------------------
+
+Java 22 contains two features that originated from [Project Loom](http://openjdk.java.net/projects/loom/):
+
+* Structured Concurrency
+* Scoped Values
+
+> Project Loom strives to simplify maintaining concurrent applications in Java by introducing *virtual threads* and an API for *structured concurrency*, among other things.
+
+### JEP 462: Structured Concurrency (Second Preview) {#h3-6-jep-462-structured-concurrency-second-preview}
+
+Java's take on concurrency has always been *unstructured* , meaning that tasks run independently of each other. There's no hierarchy, scope, or other structure involved, which means errors or cancellation intent is hard to communicate.  
+
+To illustrate this, let's look at a code example that takes place in a restaurant:
+> The code examples that illustrate Structured Concurrency were taken from my conference talk ["Java's Concurrency Journey Continues! Exploring Structured Concurrency and Scoped Values"](https://hanno.codes/talks/#javas-concurrency-journey-continues).
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class MultiWaiterRestaurant implements Restaurant {
+    @Override
+    public MultiCourseMeal announceMenu() throws ExecutionException, InterruptedException {
+        Waiter grover = new Waiter("Grover");
+        Waiter zoe = new Waiter("Zoe");
+        Waiter rosita = new Waiter("Rosita");
+
+        try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            Future&lt;Course&gt; starter = executor.submit(() -&gt; grover.announceCourse(CourseType.STARTER));
+            Future&lt;Course&gt; main = executor.submit(() -&gt; zoe.announceCourse(CourseType.MAIN));
+            Future&lt;Course&gt; dessert = executor.submit(() -&gt; rosita.announceCourse(CourseType.DESSERT));
+
+            return new MultiCourseMeal(starter.get(), main.get(), dessert.get());
+        }
+    }
+}</pre>
+
+Note that the `announceCourse(..)` method in the `Waiter` class sometimes fails with an `OutOfStockException`, because one of the ingredients for the course might not be in stock. This can lead to some problems:
+
+* If `zoe.announceCourse(CourseType.MAIN)` takes a long time to execute but `grover.announceCourse(CourseType.STARTER)` fails in the meantime, the `announceMenu(..)` method will unnecessarily wait for the main course announcement by blocking on `main.get()`, instead of cancelling it (which would be the sensible thing to do).
+* If an exception happens in `zoe.announceCourse(CourseType.MAIN)`, `main.get()` will throw it, but `grover.announceCourse(CourseType.STARTER)` will continue to run in its own thread, resulting in thread leakage.
+* If the thread executing `announceMenu(..)` is interrupted, the interruption will not propagate to the subtasks: all threads that run an `announceCourse(..)` invocation will leak, continuing to run even after `announceMenu()` has failed.
+
+Ultimately the problem here is that our program is logically structured with task-subtask relationships, but these relationships exist only in the mind of the developer. We might all prefer structured code that reads like a sequential story, but this example simply doesn't meet that criterion.
+
+In contrast, the execution of single-threaded code *always* enforces a hierarchy of tasks and subtasks, as shown by the single-threaded version of our restaurant example:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class SingleWaiterRestaurant implements Restaurant {
+    @Override
+    public MultiCourseMeal announceMenu() throws OutOfStockException {
+        Waiter elmo = new Waiter("Elmo");
+
+        Course starter = elmo.announceCourse(CourseType.STARTER);
+        Course main = elmo.announceCourse(CourseType.MAIN);
+        Course dessert = elmo.announceCourse(CourseType.DESSERT);
+
+        return new MultiCourseMeal(starter, main, dessert);
+    }
+}</pre>
+
+Here, we don't have *any* of the problems we had before.  
+
+Our waiter Elmo will announce the courses in exactly the right order, and if one subtask fails the remaining one(s) won't even be started.  
+
+And because all work runs in the same thread, there is no risk of thread leakage.
+
+It became apparent from these examples that concurrent programming would be a lot easier and more intuitive if enforcing the hierarchy of tasks and subtasks was possible, just like with single-threaded code.
+
+#### Introducing Structured Concurrency
+
+In a structured concurrency approach, threads have a clear hierarchy, their own scope, and clear entry and exit points. Structured concurrency arranges threads hierarchically, akin to function calls, forming a tree with parent-child relationships. Execution scopes persist until all child threads complete, matching code structure.
+
+#### Shutdown on Failure
+
+Let's now take a look at a structured, concurrent version of our example:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class StructuredConcurrencyRestaurant implements Restaurant {
+    @Override
+    public MultiCourseMeal announceMenu() throws ExecutionException, InterruptedException {
+        Waiter grover = new Waiter("Grover");
+        Waiter zoe = new Waiter("Zoe");
+        Waiter rosita = new Waiter("Rosita");
+
+        try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
+            Supplier&lt;Course&gt; starter = scope.fork(() -&gt; grover.announceCourse(CourseType.STARTER));
+            Supplier&lt;Course&gt; main = scope.fork(() -&gt; zoe.announceCourse(CourseType.MAIN));
+            Supplier&lt;Course&gt; dessert = scope.fork(() -&gt; rosita.announceCourse(CourseType.DESSERT));
+
+            scope.join(); // 1
+            scope.throwIfFailed(); // 2
+
+            return new MultiCourseMeal(starter.get(), main.get(), dessert.get()); // 3
+        }
+    }
+}</pre>
+
+The scope's purpose is to keep the threads together. At `1`, we wait (`join`) until *all* threads are done with their work. If one of the threads is interrupted, an `InterruptedException` is thrown here. At `2`, an `ExecutionException` is thrown if an exception occurs in one of the threads. Once we reach `3`, we can be sure everything has gone well, and we can retrieve and process the results.
+
+Actually, the main difference with the code we had before is the fact that we create threads (`fork`) within a new `scope`. Now we can be certain that the lifetimes of the three threads are confined to this scope, which coincides with the body of the try-with-resources statement.
+
+Furthermore, we've gained *short-circuiting behaviour* . When one of the `announceCourse(..)` subtasks fails, the others are cancelled if they didn't complete yet. This behaviour is managed by the `ShutdownOnFailure` policy. We've also gained *cancellation propagation* . When the thread that runs `announceMenu()` is interrupted before or during the call to `scope.join()`, all subtasks are cancelled automatically when the thread exits the scope.
+
+#### Shutdown on Success
+
+A shutdown-on-failure policy cancels tasks if one of them fails, while a *shutdown-on-success* policy cancels tasks if one succeeds. The latter is useful to prevent unnecessary work once a successful result is obtained.
+
+Let's see what a shutdown-on-success implementation would look like:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record DrinkOrder(Guest guest, Drink drink) {}
+
+public class StructuredConcurrencyBar implements Bar {
+    @Override
+    public DrinkOrder determineDrinkOrder(Guest guest) throws InterruptedException, ExecutionException {
+        Waiter zoe = new Waiter("Zoe");
+        Waiter elmo = new Waiter("Elmo");
+
+        try (var scope = new StructuredTaskScope.ShutdownOnSuccess&lt;DrinkOrder&gt;()) {
+            scope.fork(() -&gt; zoe.getDrinkOrder(guest, BEER, WINE, JUICE));
+            scope.fork(() -&gt; elmo.getDrinkOrder(guest, COFFEE, TEA, COCKTAIL, DISTILLED));
+
+            return scope.join().result(); // 1
+        }
+    }
+}</pre>
+
+In this example the waiter is responsible for getting a valid `DrinkOrder` object based on guest preference and the drinks supply at the bar. In the method `Waiter.getDrinkOrder(Guest guest, DrinkCategory... categories)`, the waiter starts to list all available drinks in the drink categories that were passed to the method. Once a guest hears something they like, they respond and the waiter creates a drink order. When this happens, the `getDrinkOrder(..)` method returns a `DrinkOrder` object and the scope will shut down. This means that any unfinished subtasks (such as the one in which Elmo is still listing different kinds of tea) will be cancelled.  
+
+The `result()` method at `1` will either return a valid `DrinkOrder` object, or throw an `ExecutionException` if one of the subtasks has failed.
+
+#### Custom Shutdown Policies
+
+Two shutdown policies are provided out-of-the-box, but it's also possible to create your own by extending the class `StructuredTaskScope` and its protected `handleComplete(..)` method.  
+
+That will allow you to have full control over when the scope will shut down and what results will be collected.
+
+#### What's Different From Java 21?
+
+Compared to the preview version of this feature in Java 21, nothing was changed or added. JEP 462 simply exists to gather more feedback from users.
+
+Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so you'll need to add the `--enable-preview` flag to the command-line to take the feature for a spin.
+
+#### More Information
+
+For more information on this feature, see [JEP 462](https://openjdk.org/jeps/462).
+
+### JEP 464: Scoped Values (Second Preview) {#h3-7-jep-464-scoped-values-second-preview}
+
+*Scoped values* enable the sharing of immutable data within and across threads.  
+
+They are preferred to thread-local variables, especially when using large numbers of virtual threads.
+> The code examples that illustrate Scoped Values were taken from my conference talk ["Java's Concurrency Journey Continues! Exploring Structured Concurrency and Scoped Values"](https://hanno.codes/talks/#javas-concurrency-journey-continues).
+
+#### ThreadLocal
+
+Since Java 1.2 we can make use of `ThreadLocal` variables, which confine a certain value to the thread that created it. Back then this was a simple way to achieve thread-safety, [in some cases](https://stackoverflow.com/a/817926).
+
+But thread-local variables also come with a few caveats. Every thread-local variable is mutable, making it hard to discern where shared state is updated and in what order. There's also the risk of memory leaks, because unless you call `remove()` on the `ThreadLocal` the data is retained until it is garbage collected (which is only after the thread terminates). And finally, thread-local variables of a parent thread can be inherited by child threads, meaning that the child thread has to allocate storage for every thread-local variable previously written in the parent thread.
+
+These drawbacks become more apparent now that virtual threads have been introduced, because millions of them could be active at the same time - each with their own thread-local variables - resulting in a significant memory footprint.
+
+#### Scoped Values
+
+Like a thread-local variable, a scoped value has multiple incarnations, one per thread. Unlike a thread-local variable, a scoped value is written once and is then immutable. It's available only for a bounded period during execution of the thread.
+
+To demonstrate this feature, we've added a scoped value to the `StructuredConcurrencyBar` class that you're already familiar with:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class StructuredConcurrencyBar implements Bar {
+    private static final ScopedValue&lt;Integer&gt; drinkOrderId = ScopedValue.newInstance();
+
+    @Override
+    public DrinkOrder determineDrinkOrder(Guest guest) throws Exception {
+        Waiter zoe = new Waiter("Zoe");
+        Waiter elmo = new Waiter("Elmo");
+
+        return ScopedValue.where(drinkOrderId, 1)
+                .call(() -&gt; {
+                    try (var scope = new StructuredTaskScope.ShutdownOnSuccess&lt;DrinkOrder&gt;()) {
+                        scope.fork(() -&gt; zoe.getDrinkOrder(guest, BEER, WINE, JUICE));
+                        scope.fork(() -&gt; elmo.getDrinkOrder(guest, COFFEE, TEA, COCKTAIL, DISTILLED));
+
+                        return scope.join().result();
+                    }
+                });
+    }
+}</pre>
+
+We see that `ScopedValue.where(...)` is called, presenting a scoped value and the object to which it is to be bound. The invocation of `call(...)` binds the scoped value, providing an incarnation that is specific to the current thread, and then executes the lambda expression passed as argument. During the lifetime of `call(...)`, the lambda expression - and any method called (in)directly from it - can read the scoped value via the value's `get()` method. After the `call(...)` method finishes, the binding is destroyed.
+
+#### Typical Use Cases
+
+Scoped values will be useful in all places where currently thread-local variables are used for the purpose of one-way transmission of unchanging data.
+
+#### What's Different From Java 21?
+
+Compared to the preview version of this feature in Java 21, nothing was changed or added. JEP 464 simply exists to gather more feedback from users of this feature.
+
+Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so you'll need to add the `--enable-preview` flag to the command-line to take the feature for a spin.
+
+#### More Information
+
+For more information on this feature, see [JEP 464](https://openjdk.org/jeps/464).
+
+From Project Panama {#h2-8-from-project-panama}
+-----------------------------------------------
+
+Java 22 contains two features that originated from [Project Panama](http://openjdk.java.net/projects/panama/):
+
+* Foreign Function \& Memory API
+* Vector API
+
+> Project Panama aims to improve the connection between the JVM and foreign (non-Java) libraries.
+
+### JEP 454: Foreign Function \& Memory API {#h3-9-jep-454-foreign-function-memory-api}
+
+Java programs have always had the option of interacting with code and data outside of the Java runtime, through the [Java Native Interface](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/) (JNI).  
+
+And accessing foreign memory (outside of the JVM, so off-heap) was possible using either the [ByteBuffer API](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/nio/ByteBuffer.html) or the [sun.misc.Unsafe API](https://github.com/openjdk/jdk/blob/master/src/jdk.unsupported/share/classes/sun/misc/Unsafe.java).
+
+However, these mechanisms have downsides, which is why a more modern API is now proposed to support foreign functions and foreign memory in a better way.
+> Performance-critical libraries like [Tensorflow](https://github.com/tensorflow/tensorflow), [Lucene](https://lucene.apache.org/) or [Netty](https://netty.io/) typically rely on using foreign memory, because they need more control over the memory they use to prevent the cost and unpredictability that comes with garbage collection.
+
+#### Code Example
+
+[JEP 454](https://openjdk.org/jeps/454) lists a code example that obtains a method handle for the C library function `radixsort` and then uses it to sort four strings that start out as Java array elements:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// 1. Find foreign function on the C library path
+Linker linker          = Linker.nativeLinker();
+SymbolLookup stdlib    = linker.defaultLookup();
+MethodHandle radixsort = linker.downcallHandle(stdlib.find("radixsort"), ...);
+// 2. Allocate on-heap memory to store four strings
+String[] javaStrings = { "mouse", "cat", "dog", "car" };
+// 3. Use try-with-resources to manage the lifetime of off-heap memory
+try (Arena offHeap = Arena.ofConfined()) {
+    // 4. Allocate a region of off-heap memory to store four pointers
+    MemorySegment pointers
+        = offHeap.allocate(ValueLayout.ADDRESS, javaStrings.length);
+    // 5. Copy the strings from on-heap to off-heap
+    for (int i = 0; i &lt; javaStrings.length; i++) {
+        MemorySegment cString = offHeap.allocateFrom(javaStrings[i]);
+        pointers.setAtIndex(ValueLayout.ADDRESS, i, cString);
+    }
+    // 6. Sort the off-heap data by calling the foreign function
+    radixsort.invoke(pointers, javaStrings.length, MemorySegment.NULL, '\0');
+    // 7. Copy the (reordered) strings from off-heap to on-heap
+    for (int i = 0; i &lt; javaStrings.length; i++) {
+        MemorySegment cString = pointers.getAtIndex(ValueLayout.ADDRESS, i);
+        javaStrings[i] = cString.reinterpret(...).getString(0);
+    }
+} // 8. All off-heap memory is deallocated here
+assert Arrays.equals(javaStrings, new String[] {"car", "cat", "dog", "mouse"});  // true</pre>
+
+Let's look at some of the types this code uses in more detail to get a rough idea of their function and purpose within the Foreign Function \& Memory API:
+
+`Linker`  
+
+Provides access to foreign functions from Java code, and access to Java code from foreign functions. It allows Java code to link against foreign functions, via *downcall method handles* . It also allows foreign functions to call Java method handles, via the generation of *upcall stubs* . See the [JavaDoc](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/Linker.html) of this type for more information.
+
+`SymbolLookup`  
+
+Retrieves the address of a symbol in one or more libraries. See the [JavaDoc](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/SymbolLookup.html) of this type for more information.
+
+`Arena`  
+
+Controls the lifecycle of memory segments. An arena has a scope, called the arena scope. When the arena is closed, the arena scope is no longer alive. As a result, all the segments associated with the arena scope are invalidated, their backing memory regions are deallocated (where applicable) and can no longer be accessed after the arena is closed. See the [JavaDoc](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/Arena.html) of this type for more information.
+
+`MemorySegment`  
+
+Provides access to a contiguous region of memory. There are two kinds of memory segments: *heap segments* (inside the Java memory heap) and *native segments* (outside of the Java memory heap). See the [JavaDoc](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/MemorySegment.html) of this type for more information.
+
+`ValueLayout`  
+
+Models values of basic data types, such as *integral* values, *floating-point* values and *address* values. On top of that, it defines useful value layout constants for Java primitive types and addresses. See the [JavaDoc](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/ValueLayout.html) of this type for more information.
+
+#### What's Different From Java 21?
+
+In Java 21, this feature was in third preview (in the form of [JEP 442](https://openjdk.org/jeps/442)) to gather more developer feedback. Based on this feedback the following changes happened in Java 22:
+
+* A new linker option allowing clients to pass heap segments to downcall method handles is now provided;
+* The Enable-Native-Access JAR-file manifest attribute has been introduced, allowing code in executable JAR files to call restricted methods without having to use the `--enable-native-access` command-line option;
+* Clients to build C-language function descriptors programmatically have been enabled, avoiding platform-specific constants;
+* Support for variable-length arrays in native memory has been improved;
+* Support for arbitrary charsets for native strings has been added.
+
+On top of that, the feature has been finalized!
+
+#### More Information
+
+For more information on this feature, see [JEP 454](https://openjdk.org/jeps/454).
+
+### JEP 460: Vector API (Seventh Incubator) {#h3-10-jep-460-vector-api-seventh-incubator}
+
+The Vector API makes it possible to express vector computations that reliably compile at runtime to optimal vector instructions.  
+
+This means that these computations will significantly outperform equivalent scalar computations on the supported CPU architectures (x64 and AArch64).
+
+#### Vector Computations? Help Me Out Here!
+
+A *vector computation* is a mathematical operation on one or more one-dimensional matrices of an arbitrary length. Think of a vector as an array with a dynamic length. Furthermore, the elements in the vector can be accessed in constant time via indices, just like with an array.
+
+In the past, Java programmers could only program such computations at the assembly-code level. But now that modern CPUs support advanced [SIMD](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data) features (Single Instruction, Multiple Data), it becomes more important to take advantage of the performance gains that SIMD instructions and multiple lanes operating in parallel can bring. The Vector API brings that possibility closer to the Java programmer.
+
+#### Code Example
+
+Here is a code example (taken from the JEP) that compares a simple scalar computation over elements of arrays with its equivalent using the Vector API:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void scalarComputation(float[] a, float[] b, float[] c) {
+   for (int i = 0; i &lt; a.length; i++) {
+        c[i] = (a[i] * a[i] + b[i] * b[i]) * -1.0f;
+   }
+}
+
+static final VectorSpecies&lt;Float&gt; SPECIES = FloatVector.SPECIES_PREFERRED;
+
+void vectorComputation(float[] a, float[] b, float[] c) {
+    int i = 0;
+    int upperBound = SPECIES.loopBound(a.length);
+    for (; i &lt; upperBound; i += SPECIES.length()) {
+        // FloatVector va, vb, vc;
+        var va = FloatVector.fromArray(SPECIES, a, i);
+        var vb = FloatVector.fromArray(SPECIES, b, i);
+        var vc = va.mul(va)
+                   .add(vb.mul(vb))
+                   .neg();
+        vc.intoArray(c, i);
+    }
+    for (; i &lt; a.length; i++) {
+        c[i] = (a[i] * a[i] + b[i] * b[i]) * -1.0f;
+    }
+}</pre>
+
+From the perspective of the Java developer, this is just another way of expressing scalar computations. It might come across as being more verbose, but on the other hand it can bring spectacular performance gains.
+
+#### Typical Use Cases
+
+The Vector API provides a way to write complex vector algorithms in Java that perform extremely well, such as vectorized `hashCode` implementations or specialized array comparisons. Numerous domains can benefit from this, including machine learning, linear algebra, encryption, text processing, finance, and code within the JDK itself.
+
+#### What's Different From Java 21?
+
+Aside from a minor set of bugfixes and (performance) enhancements in the API, the biggest difference with Java 21 is the support for vector access with heap `MemorySegment`s that are backed by an array of any primitive element type. Previously access was limited to heap MemorySegments backed by an array of byte.
+
+#### More Information
+
+For more information on this feature, see [JEP 460](https://openjdk.org/jeps/460).
+
+HotSpot {#h2-11-hotspot}
+------------------------
+
+Java 22 introduces a single change to [HotSpot](https://openjdk.org/groups/hotspot/):
+
+* Region Pinning for G1
+
+> The HotSpot JVM is the runtime engine that is developed by Oracle. It translates Java bytecode into machine code for the host operating system's processor architecture.
+
+### JEP 423: Region Pinning for G1 {#h3-12-jep-423-region-pinning-for-g1}
+
+The Java Native Interface ([JNI](https://docs.oracle.com/en/java/javase/21/docs/specs/jni/index.html)) facilitates interaction between Java and unmanaged languages like C and C++. When using JNI, functions are employed to acquire and release pointers to Java objects in pairs. This creates what is called a *critical region* , where code operates on a *critical object*.
+
+During garbage collection, Java must ensure that critical objects aren't moved, as they're being actively used. One method to achieve this is by pinning objects in place ('region pinning'), effectively locking them during GC. However, the default garbage collector, G1, currently opts to disable GC during critical regions to avoid moving critical objects.
+
+This approach can cause significant latency issues, particularly if a Java thread triggers GC while others are in critical regions. Users have reported scenarios where critical sections block application functionality for extended periods, leading to out-of-memory conditions and even VM shutdown. Consequently, some Java libraries and frameworks abstain from using critical regions to maintain throughput, despite potential adverse effects on performance.
+
+JEP 423 proposes to address this issue by ensuring Java threads never wait for G1GC operations to complete, thereby mitigating the latency problems associated with critical regions.
+
+#### What's Different From Java 21?
+
+In Java 21, G1GC disables garbage collection during critical regions to avoid moving critical objects. In Java 22, G1GC will use *region pinning* instead.
+
+#### More Information
+
+For more information on this feature, see [JEP 423](https://openjdk.org/jeps/423).
+
+Compiler {#h2-13-compiler}
+--------------------------
+
+Java 22 also brings us an addition that's part of the compiler:
+
+* Launch Multi-File Source-Code Programs
+
+### JEP 458: Launch Multi-File Source-Code Programs {#h3-14-jep-458-launch-multi-file-source-code-programs}
+
+Java is well-suited for building large, complex applications. But several recent additions to the JDK focus on the early stages of a software project instead, when it's still unclear of how big it might get. Features like [jshell](https://openjdk.org/jeps/222) and [instance main methods](https://openjdk.org/jeps/463) come to mind, but the ability to run `.java` source files directly without an explicit compilation step ([JEP 330](https://openjdk.org/jeps/330)) is probably the best example of Java's currenty focus on starter projects.
+
+A drawback of running a program like this is that all source code must be placed in a single `.java` file. To work with more than one `.java` file, a separate compilation step is still required, forcing developers to involve a build tool in their project. If the developer is still a beginner the situation is arguably worse: they must pause their learning of the language and must prioritise learning about `javac` or build tools like Maven or Gradle.
+
+This is why Java 22 introduces a `java` launcher that supports running a program consisting of multiple `.java` files. Suppose a directory contains two files, `Prog.java` and `Helper.java`, where each file declares a single class:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Prog.java
+class Prog {
+    public static void main(String[] args) { Helper.run(); }
+}
+
+// Helper.java
+class Helper {
+    static void run() { System.out.println("Hello!"); }
+}</pre>
+
+Running `java Prog.java` compiles the `Prog` class in memory and executes its `main` method. If `Prog` refers to another class, such as `Helper`, the launcher locates the `Helper.java` file in the filesystem and compiles its class in memory. Furthermore, if `Prog.java` would contain a `Helper` class, then that class would be preferred over the `Helper` class in `Helper.java`; the launcher would not search for the file `Helper.java`.
+
+#### Pre-compiled classes
+
+You can also launch programs from the command-line that depend on libraries. Given the following directory listing...
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Prog1.java
+Prog2.java
+Helper.java
+libs/
+├─ library1.jar
+├─ library2.jar</pre>
+
+...we can run these programs by passing `--class-path lib/*` to the `java` launcher:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java --class-path 'lib/*' Prog1.java
+$ java --class-path 'lib/*' Prog2.java</pre>
+
+> The argument to the `--class-path` option is quoted to avoid expansion of the asterisk by the shell.
+
+The programs in this example reside in the unnamed module. If the libraries in `libs/` would be modular, we would run the programs like so:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -p lib Prog1.java
+$ java -p lib Prog2.java</pre>
+
+#### What's Different From Java 21?
+
+Up until Java 21, running a program on the command-line directly without a separate compilation command was supported for single file programs only. Java 22 adds support for programs that span multiple files.
+
+#### More Information
+
+For more information on this feature, see [JEP 458](https://openjdk.org/jeps/458). It contains a few more details on launch-time semantics, how the launcher finds source files and how package structure comes into play.
+
+Core Libraries {#h2-15-core-libraries}
+--------------------------------------
+
+Java 22 also brings you two additions that are part of the core libraries:
+
+* Class-File API
+* Stream Gatherers
+
+### JEP 457: Class-File API (Preview) {#h3-16-jep-457-class-file-api-preview}
+
+Java's ecosystem relies heavily on the ability to parse, generate and transform class files. Frameworks use on-the-fly bytecode transformation to transparently add functionality, for example. These frameworks typically bundle class-file libraries like [ASM](https://asm.ow2.io/) or [Javassist](https://www.javassist.org/) to handle class file processing. However, these libraries suffer from the fact that the six-month release cadence of the JDK causes the class-file format to evolve more quickly than before, meaning they might encounter class files that are newer than the class-file library that they bundle.
+
+To solve this problem, JEP 457 proposes a standard class-file API that can produce class files that will always be up-to-date with the running JDK. This API will evolve together with the class-file format, enabling frameworks to rely solely on this API, rather than on the willingness of third-party developers to update and test their class-file libraries.
+
+#### Elements, Builders and Transforms
+
+The Class-File API, located in the `java.lang.classfile` package, consists of three main components:
+
+*Elements*   
+
+Immutable descriptions of parts of a class file, such as instructions, attributes, fields, methods, or the entire file.
+
+*Builders*   
+
+Corresponding builders for compound elements, offering specific building methods (e.g., `ClassBuilder::withMethod`) and serving as consumers of element types.
+
+*Transforms*   
+
+Functions that take an element and a builder, determining if and how the element is transformed into other elements. This allows for flexible modification of class file elements.
+
+#### Example and Comparison To ASM
+
+Suppose we wish to generate the following method in a class file:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void fooBar(boolean z, int x) {
+    if (z)
+        foo(x);
+    else
+        bar(x);
+}</pre>
+
+With ASM we could generate the method like so:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ClassWriter classWriter = ...;
+MethodVisitor mv = classWriter.visitMethod(0, "fooBar", "(ZI)V", null, null);
+mv.visitCode();
+mv.visitVarInsn(ILOAD, 1);
+Label label1 = new Label();
+mv.visitJumpInsn(IFEQ, label1);
+mv.visitVarInsn(ALOAD, 0);
+mv.visitVarInsn(ILOAD, 2);
+mv.visitMethodInsn(INVOKEVIRTUAL, "Foo", "foo", "(I)V", false);
+Label label2 = new Label();
+mv.visitJumpInsn(GOTO, label2);
+mv.visitLabel(label1);
+mv.visitVarInsn(ALOAD, 0);
+mv.visitVarInsn(ILOAD, 2);
+mv.visitMethodInsn(INVOKEVIRTUAL, "Foo", "bar", "(I)V", false);
+mv.visitLabel(label2);
+mv.visitInsn(RETURN);
+mv.visitEnd();</pre>
+
+Unlike in ASM, where clients directly create a `ClassWriter` and then request a `MethodVisitor`, the Class-File API adopts a different approach. Here, instead of clients initiating a builder through a constructor or factory, they supply a lambda function that takes a builder as its parameter:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ClassBuilder classBuilder = ...;
+classBuilder.withMethod("fooBar", MethodTypeDesc.of(CD_void, CD_boolean, CD_int), flags,
+                        methodBuilder -&gt; methodBuilder.withCode(codeBuilder -&gt; {
+    Label label1 = codeBuilder.newLabel();
+    Label label2 = codeBuilder.newLabel();
+    codeBuilder.iload(1)
+        .ifeq(label1)
+        .aload(0)
+        .iload(2)
+        .invokevirtual(ClassDesc.of("Foo"), "foo", MethodTypeDesc.of(CD_void, CD_int))
+        .goto_(label2)
+        .labelBinding(label1)
+        .aload(0)
+        .iload(2)
+        .invokevirtual(ClassDesc.of("Foo"), "bar", MethodTypeDesc.of(CD_void, CD_int))
+        .labelBinding(label2);
+        .return_();
+});</pre>
+
+#### What's Different From Java 21?
+
+Starting with Java 22, frameworks will be able to rely solely on the Class-File API, rather than third party libraries like ASM or Javassist.
+
+Note that the Class-File API is in the [preview](https://openjdk.org/jeps/12) stage, so you'll need to add the `--enable-preview` flag to the command-line to take the feature for a spin.
+
+#### More Information
+
+For more information on this feature, including more details on transforming class files, see [JEP 457](https://openjdk.org/jeps/457).
+
+### JEP 461: Stream Gatherers (Preview) {#h3-17-jep-461-stream-gatherers-preview}
+
+The Stream API has been around since Java 8 and it has definitely made its way into the heart of the typical Java developer. It enables a programming style that is both efficient and expressive. Recall that a stream pipeline consists of three parts: a source of elements, any number of intermediate operations, and a terminal operation. For example:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;Guitar&gt; guitars = List.of(
+        new Guitar("Cordoba F7 Paco Flamenco", GuitarStyle.CLASSICAL),
+        new Guitar("Taylor GS Mini-e Koa", GuitarStyle.WESTERN),
+        new Guitar("Gibson Les Paul Standard '50s Heritage Cherry Sunburst", GuitarStyle.ELECTRIC),
+        new Guitar("Fender Stratocaster", GuitarStyle.ELECTRIC));
+
+long numberOfNonClassicalGuitars = guitars.stream() // source of elements
+        .filter(g -&gt; GuitarStyle.CLASSICAL != g.guitarStyle()) // intermediate operation
+        .collect(Collectors.counting()); // terminal operation</pre>
+
+The Stream API offers a relatively diverse but predetermined range of intermediate and terminal operations, including mapping, filtering, reduction, sorting, and more. Over the years, many new intermediate operations have been suggested for the Stream API.
+
+For example, it could be useful to introduce a `distinctBy` intermediate operation. A `distinct` operation *does* exist, trakcing the elements it has already seen by using object equality. But what if we want distinct elements based on something else than object equality?
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var singleGuitarPerStyle = guitars.stream()
+                .distinctBy(Guitar::guitarStyle) // hypothetical
+                .toList();</pre>
+
+Over the years, many new intermediate operations have been suggested for the Stream API.  
+
+Most of the suggestions that were made would make sense when considered in isolation, but adding all of them would make the (already large) Stream API more difficult to learn because its operations would be less discoverable.
+
+A better alternative would be to introduce the ability to define custom intermediate operations, analogous to how the `Stream::collect` terminal operation currently is extensible, enabling the output of a pipeline to be summarized in a variety of ways.
+
+So that is why this JEP proposes an API for custom intermediate operations that allows developers to transform finite and infinite streams in their own preferred ways.
+
+#### Gatherers
+
+`Stream::gather(Gatherer)` is a new intermediate stream operation that processes stream elements by applying a user-defined *gatherer* . One could say it is the dual of `Stream::collect(Collector)`, but for intermediate operations.
+
+Gatherers transform elements in different ways: one-to-one, one-to-many, many-to-one, or many-to-many. They can track previously seen elements, enable short-circuiting for infinite streams, and support parallel execution. For example, they may start by transforming one input element into one output element but switch to transforming one input element into two output elements based on a certain condition.
+
+A gatherer implements the `java.util.stream.Gatherer` interface and is defined by four functions that work together:
+
+*[initializer](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherer.html#initializer()* (optional)  
+
+Provides an object that maintains private state while processing stream elements.
+
+*[integrator](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherer.Integrator.html)*   
+
+Integrates a new element from the input stream.
+
+*[combiner](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherer.html#combiner)* (optional)  
+
+Evaluates the gatherer in parallel when the input stream is marked as such.
+
+*[finisher](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherer.html#finisher()* (optional)  
+
+Is invoked when there are no more input elements to consume.
+
+When `Stream::gather` is called, it roughly performs the following steps:
+
+* Create a [`Downstream`](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherer.Downstream.html) object which, when given an element of the gatherer's output type, passes it to the next stage in the pipeline.
+* Obtain the gatherer's private state object by invoking the `get()` method of its initializer.
+* Obtain the gatherer's integrator by invoking its \[`integrator()`\]([https://cr.openjdk.org/\~vklang/gatherers/api/java.base/java/util/stream/Gatherer.html#integrator](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherer.html#integrator)()) method.
+* While there are more input elements, invoke the integrator's [`integrate(...)`](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherer.Integrator.html#integrate(A,T,java.util.stream.Gatherer.Downstream)) method, passing it the state object, the next element, and the downstream object. Terminate if that method returns false.
+* Obtain the gatherer's finisher and invoke it with the state and downstream objects.
+
+These steps are generic enough to allow every currently existing intermediate stream operation to be expressed in a custom gatherer. For example, the `Stream::map` operation turns each `T` element into a `U` element, so it is simply a stateless one-to-one gatherer. Likewise, the `Stream::filter` operation is a stateless one-to-many gatherer. This makes every stream pipeline conceptually equivalent to:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">stream
+    .gather(...)
+    .gather(...)
+    .gather(...)
+    .collect(...);</pre>
+
+#### Built-in gatherers
+
+As part of this JEP a few built-in gatherers are introduced:
+
+[`fold`](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherers.html#fold(java.util.function.Supplier,java.util.function.BiFunction))  
+
+A stateful many-to-one gatherer which constructs an aggregate incrementally and emits that aggregate when no more input elements exist.
+
+[`mapConcurrent`](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherers.html#mapConcurrent(int,java.util.function.Function))  
+
+A stateful one-to-one gatherer which invokes a supplied function for each input element concurrently, up to a supplied limit.
+
+[`scan`](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherers.html#scan(java.util.function.Supplier,java.util.function.BiFunction))  
+
+A stateful one-to-one gatherer which applies a supplied function to the current state and the current element to produce the next element, which it passes downstream.
+
+[`windowFixed`](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherers.html#windowFixed(int))  
+
+A stateful many-to-many gatherer which groups input elements into lists of a supplied size, emitting the windows downstream when they are full.
+
+[`windowSliding`](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherers.html#windowSliding(int))  
+
+A stateful many-to-many gatherer which groups input elements into lists of a supplied size. After the first window, each subsequent window is created from a copy of its predecessor by dropping the first element and appending the next element from the input stream.
+
+#### Example of a Custom Gatherer
+
+Let's look at a custom gatherer that implements the `distinctBy` operation we referred to earlier.
+> This example is based on Karl Heinz Marbaise's [excellent blog post on stream gatherers](https://blog.soebes.io/posts/2024/01/2024-01-07-jdk-gatherer/) - do check it out if you wish to know more!
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static &lt;T, A&gt; Gatherer&lt;T, ?, T&gt; distinctBy(Function&lt;? super T, ? extends A&gt; classifier) {
+    Supplier&lt;Map&lt;A, List&lt;T&gt;&gt;&gt; initializer = HashMap::new;
+    Gatherer.Integrator&lt;Map&lt;A, List&lt;T&gt;&gt;, T, T&gt; integrator = (state, element, _) -&gt; {
+        state.computeIfAbsent(classifier.apply(element), _ -&gt; new ArrayList&lt;&gt;()).add(element);
+        return true; // true, because more elements need to be consumed
+    };
+    BiConsumer&lt;Map&lt;A, List&lt;T&gt;&gt;, Gatherer.Downstream&lt;? super T&gt;&gt; finisher = (state, downstream) -&gt; {
+        state.forEach((_, value) -&gt; downstream.push(value.getLast()));
+    };
+    return Gatherer.ofSequential(initializer, integrator, finisher);
+}</pre>
+
+...and this is how you could use it:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">guitars.stream()
+        .gather(distinctBy(Guitar::guitarStyle))
+        .forEach(System.out::println);</pre>
+
+...which would yield the following output:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Guitar[name=Taylor GS Mini-e Koa, guitarStyle=WESTERN]
+Guitar[name=Fender Stratocaster, guitarStyle=ELECTRIC]
+Guitar[name=Cordoba F7 Paco Flamenco, guitarStyle=CLASSICAL]</pre>
+
+#### No New Intermediate Operations
+
+In conclusion the JEP also states that no new intermediate operations will be added to the `Stream` class to represent the newly-added built-in gatherers.
+
+This is because the language designers want the Stream API to remain concise and easy to learn.
+
+The JEP does suggest that adding new intermediate operations in a later round of preview could be an option, once they have proven that they are broadly useful.
+
+#### What's Different From Java 21?
+
+Up until Java 21, intermediate stream operations were limited to the ones that were built-in. In contrast, Java 22 includes support for custom intermediate operations.
+
+Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so you'll need to add the `--enable-preview` flag to the command-line to take the feature for a spin.
+
+#### More Information
+
+For more information on this feature, see [JEP 461](https://openjdk.org/jeps/461) and the [blog post on gatherers](https://dev.to/khmarbaise/jdk22-gatherer-2a6e) by Karl Heinz Marbaise.
+
+Final thoughts {#h2-18-final-thoughts}
+--------------------------------------
+
+It seems clear to me that Java 22 is ready to rock, with no less than 12 JEPs delivered!
+
+And that's not even all that's new: [many other updates](https://jdk.java.net/22/release-notes) were included in this release, including various performance and stability updates.
+
+Our favourite language is clearly more alive than ever, and on top of that it'll probably attract more newcomers due to the features that focus on starting projects.
+
+Here's to many happy hours of development with Java 22!
