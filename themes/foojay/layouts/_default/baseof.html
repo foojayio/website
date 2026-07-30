@@ -50,8 +50,12 @@
   {{/* data-pagefind-body switches Pagefind (see search/single.html) into
        opt-in indexing mode site-wide: only elements with this attribute get
        indexed, so header/nav/footer are automatically excluded from search
-       results without needing to tag them individually. */}}
-  <main class="site-main" id="main" data-pagefind-body>
+       results without needing to tag them individually.
+       data-pagefind-filter="section:..." tags every page with its Hugo
+       section (posts/authors/pages/pedia) so the search page can group
+       results under those headers -- set once here rather than in every
+       section's own template. */}}
+  <main class="site-main" id="main" data-pagefind-body{{ with .Section }} data-pagefind-filter="section:{{ . }}"{{ end }}>
     {{ block "main" . }}{{ end }}
   </main>
 

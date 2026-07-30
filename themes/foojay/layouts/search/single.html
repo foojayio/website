@@ -38,6 +38,14 @@
   var results = document.getElementById('search-page-results');
   var pagefindUrl = {{ "pagefind/pagefind.js" | relURL }};
 
+  // Matches Hugo's section names (content/posts, content/authors,
+  // content/pages, content/pedia), tagged onto every page via
+  // data-pagefind-filter="section:..." on <main> in baseof.html. Order here
+  // is the section-header order in results; anything not listed (a future
+  // content section) still gets shown, just after these, alphabetically.
+  var SECTION_ORDER = ['posts', 'authors', 'pages', 'pedia'];
+  var SECTION_LABELS = { posts: 'Posts', authors: 'Authors', pages: 'Pages', pedia: 'Pedia' };
+
   var pagefindPromise = import(pagefindUrl).catch(function () { return null; });
 
   function render(html) { results.innerHTML = html; }
@@ -46,6 +54,24 @@
     return s.replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
+  }
+
+  function renderResult(d) {
+    var dateLabel = '';
+    if (d.meta && d.meta.date) {
+      var parsed = new Date(d.meta.date);
+      dateLabel = isNaN(parsed) ? d.meta.date
+        : parsed.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+    return '' +
+      '<article class="search-result">' +
+      (d.meta && d.meta.image ? '<a class="search-result__image" href="' + d.url + '"><img src="' + d.meta.image + '" alt="" loading="lazy"></a>' : '') +
+      '<div class="search-result__body">' +
+      '<h3><a href="' + d.url + '">' + (d.meta && d.meta.title ? d.meta.title : d.url) + '</a></h3>' +
+      (dateLabel ? '<time class="search-result__date">' + dateLabel + '</time>' : '') +
+      '<p>' + d.excerpt + '</p>' +
+      '</div>' +
+      '</article>';
   }
 
   var debounceTimer;
@@ -69,34 +95,40 @@
           status.textContent = search.results.length + ' result' + (search.results.length === 1 ? '' : 's') + ' for "' + query + '"';
           return Promise.all(search.results.slice(0, 30).map(function (r) { return r.data(); }))
             .then(function (datas) {
-              // Newest first, for whichever results have a date (posts do,
-              // via data-pagefind-meta="date[datetime]" in posts/single.html;
-              // authors/pages don't). Undated results keep their original
-              // relevance order and sort after all dated ones, rather than
-              // being dropped -- Pagefind's own `sort` option would exclude
-              // anything missing the sort key entirely, which isn't what we
-              // want on a mixed-content site.
-              var dated = datas.filter(function (d) { return d.meta && d.meta.date; });
-              var undated = datas.filter(function (d) { return !(d.meta && d.meta.date); });
-              dated.sort(function (a, b) { return b.meta.date.localeCompare(a.meta.date); });
-              var ordered = dated.concat(undated);
+              // Group by section (posts/authors/pages/pedia), each group in
+              // its own relevance order, EXCEPT posts, which sort newest
+              // first via data-pagefind-meta="date[datetime]" on the <time>
+              // in posts/single.html. Sorted client-side rather than with
+              // Pagefind's own `sort` option, which would drop any result
+              // missing the sort key (i.e. everything but posts) instead of
+              // just leaving it unsorted.
+              var groups = {};
+              datas.forEach(function (d) {
+                var section = (d.filters && d.filters.section && d.filters.section[0]) || 'other';
+                (groups[section] = groups[section] || []).push(d);
+              });
+              if (groups.posts) {
+                groups.posts.sort(function (a, b) {
+                  var da = (a.meta && a.meta.date) || '';
+                  var db = (b.meta && b.meta.date) || '';
+                  return db.localeCompare(da);
+                });
+              }
 
-              render(ordered.map(function (d) {
-                var dateLabel = '';
-                if (d.meta && d.meta.date) {
-                  var parsed = new Date(d.meta.date);
-                  dateLabel = isNaN(parsed) ? d.meta.date
-                    : parsed.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
-                }
+              var sectionKeys = Object.keys(groups).sort(function (a, b) {
+                var ia = SECTION_ORDER.indexOf(a), ib = SECTION_ORDER.indexOf(b);
+                if (ia === -1) ia = SECTION_ORDER.length;
+                if (ib === -1) ib = SECTION_ORDER.length;
+                return ia !== ib ? ia - ib : a.localeCompare(b);
+              });
+
+              render(sectionKeys.map(function (key) {
+                var label = SECTION_LABELS[key] || (key.charAt(0).toUpperCase() + key.slice(1));
                 return '' +
-                  '<article class="search-result">' +
-                  (d.meta && d.meta.image ? '<a class="search-result__image" href="' + d.url + '"><img src="' + d.meta.image + '" alt="" loading="lazy"></a>' : '') +
-                  '<div class="search-result__body">' +
-                  '<h3><a href="' + d.url + '">' + (d.meta && d.meta.title ? d.meta.title : d.url) + '</a></h3>' +
-                  (dateLabel ? '<time class="search-result__date">' + dateLabel + '</time>' : '') +
-                  '<p>' + d.excerpt + '</p>' +
-                  '</div>' +
-                  '</article>';
+                  '<section class="search-page__section">' +
+                  '<h2>' + label + ' <span class="search-page__count">' + groups[key].length + '</span></h2>' +
+                  '<div class="search-page__group">' + groups[key].map(renderResult).join('') + '</div>' +
+                  '</section>';
               }).join(''));
             });
         });
