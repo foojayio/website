@@ -1,0 +1,41 @@
+<!--
+  giscus: comments + reactions ("likes"), backed by GitHub Discussions on
+  this repo. Zero infra to run.
+
+  Required one-time setup (see README.md "Engagement / comments" section):
+    1. Enable Discussions on github.com/foojayio/website (repo Settings ->
+       Features -> Discussions).
+    2. Install the giscus app on the repo: https://github.com/apps/giscus
+    3. Go to https://giscus.app, fill in the repo, pick a Discussion
+       category (a dedicated "Blog Comments" category is recommended over
+       "General" so these threads don't mix with real discussions), enable
+       reactions, and copy the generated repo-id/category-id into
+       [params.giscus] in hugo.toml.
+
+  Known gap: this starts every post at 0 comments -- it does NOT carry over
+  the handful of legacy WordPress comments. If that matters, a one-time
+  import (posting the old comments as the opening replies in each mapped
+  Discussion) would need to happen before cutover; flagging as optional,
+  unbuilt scope.
+-->
+{{ with .Site.Params.giscus }}
+{{ if and .repo .repoId .category .categoryId }}
+<section id="giscus-comments" class="giscus-section">
+  <script src="https://giscus.app/client.js"
+          data-repo="{{ .repo }}"
+          data-repo-id="{{ .repoId }}"
+          data-category="{{ .category }}"
+          data-category-id="{{ .categoryId }}"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async>
+  </script>
+</section>
+{{ end }}
+{{ end }}

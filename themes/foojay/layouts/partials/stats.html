@@ -1,0 +1,70 @@
+<!--
+  Engagement bar (views / comments+likes jump-link / share).
+
+  Why this shape and not a 1:1 port of the WP stats-grid: Hugo has no backend,
+  so any *number* here has to come from somewhere external. Views can be
+  fetched live client-side from GoatCounter's public per-page counter API.
+  Comments and likes are handled by giscus (see comments.html) further down
+  the page -- giscus's own widget already shows its live comment count and
+  reaction totals once it loads, so duplicating a second, likely-stale count
+  up here isn't worth the complexity. This bar just links down to it.
+
+  Setup required (see README.md "Engagement / comments" section):
+    - params.goatcounter.code in hugo.toml, sign up free at goatcounter.com
+    - params.giscus.* in hugo.toml, generate at giscus.app after enabling
+      GitHub Discussions on the repo
+-->
+<div class="stats-bar">
+  <div class="stats-bar__item" id="view-stat">
+    <span class="stats-bar__label">Views</span>
+    <span class="stats-bar__value" id="view-count" aria-live="polite">—</span>
+  </div>
+
+  <a class="stats-bar__item stats-bar__item--link" href="#giscus-comments">
+    <span class="stats-bar__label">Comments &amp; likes</span>
+    <span class="stats-bar__value">Join the discussion</span>
+  </a>
+
+  <button class="stats-bar__item stats-bar__item--link" id="share-btn" type="button">
+    <span class="stats-bar__label">Share</span>
+    <span class="stats-bar__value">Copy link</span>
+  </button>
+</div>
+
+{{ with .Site.Params.goatcounter }}
+{{ with .code }}
+<script>
+(function () {
+  var el = document.getElementById('view-count');
+  if (!el) return;
+  var code = {{ . }};
+  var path = window.location.pathname;
+  fetch('https://' + code + '.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (data) { el.textContent = data.count || '0'; })
+    .catch(function () { el.textContent = '—'; }); // e.g. page not counted yet, or public counts disabled
+})();
+</script>
+{{ end }}
+{{ end }}
+
+<script>
+(function () {
+  var btn = document.getElementById('share-btn');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    var url = window.location.href;
+    var title = document.title;
+    if (navigator.share) {
+      navigator.share({ title: title, url: url }).catch(function () {});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(function () {
+        var label = btn.querySelector('.stats-bar__value');
+        var original = label.textContent;
+        label.textContent = 'Copied!';
+        setTimeout(function () { label.textContent = original; }, 1500);
+      });
+    }
+  });
+})();
+</script>
