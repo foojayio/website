@@ -1,0 +1,105 @@
+{{ define "main" }}
+<div class="page-head">
+  <div class="page-head__inner">
+    <span class="eyebrow">Search</span>
+    <h1>{{ .Title }}</h1>
+  </div>
+</div>
+
+<div class="content-col full-width search-page">
+  <form class="search-page__form" role="search" id="search-page-form">
+    <label>
+      <span class="u-sr">Search foojay.io</span>
+      <input type="search" name="q" id="search-page-input" placeholder="Search foojay.io" autocomplete="off" autofocus>
+    </label>
+  </form>
+
+  <p class="search-page__status" id="search-page-status" aria-live="polite"></p>
+  <div class="search-page__results" id="search-page-results"></div>
+</div>
+
+{{/*
+  No external service: this loads the client-side index Pagefind generates
+  from the built site (see the "Build search index" step in
+  .github/workflows/build-deploy.yml, which runs `npx pagefind --site public`
+  right after `hugo --gc --minify`). Everything below runs entirely in the
+  browser -- no server, no API key.
+
+  Local dev gotcha: `hugo server -D` alone has no search index (Pagefind only
+  reads the already-built public/ output), so this shows a friendly message
+  instead of failing silently. To test locally: run `hugo`, then
+  `npx pagefind --site public`, then serve the public/ folder (e.g.
+  `npx serve public`) rather than `hugo server`.
+*/}}
+<script>
+(function () {
+  var input = document.getElementById('search-page-input');
+  var status = document.getElementById('search-page-status');
+  var results = document.getElementById('search-page-results');
+  var pagefindUrl = {{ "pagefind/pagefind.js" | relURL }};
+
+  var pagefindPromise = import(pagefindUrl).catch(function () { return null; });
+
+  function render(html) { results.innerHTML = html; }
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  var debounceTimer;
+  function runSearch(query) {
+    clearTimeout(debounceTimer);
+    if (!query) { render(''); status.textContent = ''; return; }
+
+    debounceTimer = setTimeout(function () {
+      status.textContent = 'Searching…';
+      pagefindPromise.then(function (pagefind) {
+        if (!pagefind) {
+          status.textContent = 'Search isn\'t available on this preview (the index is only built during deploy).';
+          return;
+        }
+        return pagefind.search(query).then(function (search) {
+          if (search.results.length === 0) {
+            status.textContent = 'No results for "' + query + '".';
+            render('');
+            return;
+          }
+          status.textContent = search.results.length + ' result' + (search.results.length === 1 ? '' : 's') + ' for "' + query + '"';
+          return Promise.all(search.results.slice(0, 30).map(function (r) { return r.data(); }))
+            .then(function (datas) {
+              render(datas.map(function (d) {
+                return '' +
+                  '<article class="search-result">' +
+                  (d.meta && d.meta.image ? '<a class="search-result__image" href="' + d.url + '"><img src="' + d.meta.image + '" alt="" loading="lazy"></a>' : '') +
+                  '<div class="search-result__body">' +
+                  '<h3><a href="' + d.url + '">' + (d.meta && d.meta.title ? d.meta.title : d.url) + '</a></h3>' +
+                  '<p>' + d.excerpt + '</p>' +
+                  '</div>' +
+                  '</article>';
+              }).join(''));
+            });
+        });
+      }).catch(function () {
+        status.textContent = 'Something went wrong running that search.';
+      });
+    }, 150);
+  }
+
+  input.addEventListener('input', function () { runSearch(input.value.trim()); });
+  document.getElementById('search-page-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    runSearch(input.value.trim());
+  });
+
+  // Honor ?q= from the header search box (which submits here as a plain GET).
+  var params = new URLSearchParams(window.location.search);
+  var initial = params.get('q');
+  if (initial) {
+    input.value = initial;
+    runSearch(initial);
+  }
+})();
+</script>
+{{ end }}

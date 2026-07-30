@@ -1,4 +1,6 @@
-<aside class="sidebar">
+<aside class="sidebar" data-pagefind-ignore>
+  {{/* Repeated on every page -- excluded from the search index so results
+       aren't dominated by sidebar widget text. */}}
 
   {{ with .Site.Params.sponsors }}
   <section class="widget widget-sponsors">

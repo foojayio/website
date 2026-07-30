@@ -51,10 +51,35 @@ IntelliJ's terminal, read this before making changes.
    reproduces the section layout (nav, post grid, sidebar widgets, footer)
    but not the real foojay.io branding/design. Needs a design pass against
    actual brand assets.
-5. **Content gaps**: comments, on-site search, and the dynamic "Authors of
-   the month" / "Featured Author" / "Trending" widgets from the WP theme
-   don't have a built equivalent yet — flagged but out of scope until
-   decided on.
+5. **Content gaps**: the dynamic "Authors of the month" / "Featured Author" /
+   "Trending" widgets from the WP theme don't have a built equivalent yet —
+   flagged but out of scope until decided on.
+6. **Search** (`content/search.md`, `themes/foojay/layouts/search/single.html`)
+   is wired up via Pagefind, no external service. `.github/workflows/build-deploy.yml`
+   runs `npx -y pagefind --site public` right after the Hugo build, which
+   writes a static, chunked index into `public/pagefind/`; the search page
+   loads it client-side and calls `pagefind.search()`. `data-pagefind-body`
+   on `<main>` (baseof.html) restricts indexing to page content; sidebar.html
+   carries `data-pagefind-ignore` so the repeated widgets don't pollute
+   results. Gotcha: `hugo server` alone has no index (only the built
+   `public/pagefind/pagefind.js` does) — test with `hugo && npx pagefind
+   --site public && npx serve public` instead. Not yet run for real (this
+   sandbox has no network access to the npm registry to fetch Pagefind), so
+   treat it the same as the conversion scripts: reviewed, untested.
+7. **Comments/likes/views** (`themes/foojay/layouts/partials/stats.html` +
+   `comments.html`) are built (giscus for comments+reactions, GoatCounter for
+   a live client-side view count) but **not yet wired into
+   `posts/single.html`** and not yet added to `hugo.toml` params — this was
+   mid-flight when the search work took priority. To finish: call both
+   partials from `posts/single.html`, add `[params.giscus]` (repo/repo-id/
+   category/category-id from giscus.app, after enabling GitHub Discussions)
+   and `[params.goatcounter]` (`code = "..."` after signing up) to hugo.toml.
+   Also open: whether to capture each post's current WP view count into a
+   `legacy_views` frontmatter field (cheap, and the number disappears once
+   WordPress is decommissioned) and whether to build a one-time seeding
+   script to backfill it into GoatCounter via its `/api/v0/count` API (which
+   does support backdated `created_at` per hit for exactly this) — ask before
+   building the seeder, it needs a real GoatCounter account to test against.
 
 ## Conventions to keep following
 

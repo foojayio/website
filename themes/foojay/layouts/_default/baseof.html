@@ -47,7 +47,11 @@
 <body>
   {{ partial "header.html" . }}
 
-  <main class="site-main" id="main">
+  {{/* data-pagefind-body switches Pagefind (see search/single.html) into
+       opt-in indexing mode site-wide: only elements with this attribute get
+       indexed, so header/nav/footer are automatically excluded from search
+       results without needing to tag them individually. */}}
+  <main class="site-main" id="main" data-pagefind-body>
     {{ block "main" . }}{{ end }}
   </main>
 

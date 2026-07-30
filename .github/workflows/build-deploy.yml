@@ -39,6 +39,14 @@ jobs:
       - name: Build
         run: hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
+      # No external search service: Pagefind crawls the already-built HTML in
+      # public/ and writes a static, chunked search index there
+      # (public/pagefind/). themes/foojay/layouts/search/single.html loads it
+      # client-side. `data-pagefind-body` (baseof.html) + `data-pagefind-ignore`
+      # (sidebar.html) control what gets indexed -- see comments there.
+      - name: Build search index (Pagefind)
+        run: npx -y pagefind --site public
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

@@ -10,6 +10,7 @@ site during a trial/transition period, then cut over once it proves to be solid 
 - `content/authors/` — author profile pages
 - `content/pages/` — everything else (About, Java Quick Start tree, etc.), mirroring the legacy URL structure as directories
 - `content/all-events.md` — JUG events calendar page (reads `data/events.json`)
+- `content/search.md` — on-site search (see "Search" below)
 - `themes/foojay/` — the Hugo theme (structural recreation of the current site; see "Known limitations" below)
 - `data/jugs.yaml` — list of Java User Groups tracked for the events calendar (just add a line to add a JUG)
 - `data/events.json` — generated daily by the Meetup sync workflow, do not hand-edit
@@ -40,6 +41,21 @@ selectors were written without direct access to the site's raw HTML (see
 
 ```bash
 hugo server -D
+```
+
+## Search
+
+No external service: [Pagefind](https://pagefind.app) indexes the built
+`public/` output at deploy time (`npx pagefind --site public`, added as a step
+in `build-deploy.yml`) and `content/search.md` loads that index client-side.
+
+`hugo server` alone won't have a working search box, since the index only
+exists after a real build. To test locally:
+
+```bash
+hugo
+npx pagefind --site public
+npx serve public
 ```
 
 ## Known limitations / needs verification

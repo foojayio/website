@@ -828,6 +828,38 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .prose .wp-block-gallery img { width: 100%; height: auto; }
 .prose figure::after { content: ""; display: block; clear: both; }
 
+/* ---------------------------------------------------------------- search --
+   Pagefind-backed /search/ page (themes/foojay/layouts/search/single.html).
+   `mark` is Pagefind's own match-highlighting inside excerpts. */
+
+.search-page__form { max-width: 46rem; margin-bottom: .5rem; }
+.search-page__form input {
+  width: 100%; font: inherit; font-size: 1.1rem;
+  padding: .8rem 1.1rem;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-strong); border-radius: 999px;
+  color: var(--ink);
+}
+.search-page__form input:focus { border-color: var(--brand-accent); outline-offset: 0; }
+
+.search-page__status { color: var(--ink-muted); font-size: .92rem; min-height: 1.4em; }
+
+.search-page__results { display: grid; gap: 1.25rem; max-width: 62rem; }
+.search-result {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.1rem;
+  padding-bottom: 1.25rem; border-bottom: 1px solid var(--border);
+}
+.search-result__image { display: block; width: 120px; border-radius: var(--radius-sm); overflow: hidden; }
+.search-result__image img { width: 120px; height: 84px; object-fit: cover; }
+.search-result h3 { margin: 0 0 .3rem; font-size: 1.1rem; }
+.search-result p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
+.search-result mark { background: var(--brand-accent-soft); color: var(--ink); border-radius: 2px; }
+
+@media (max-width: 560px) {
+  .search-result { grid-template-columns: minmax(0, 1fr); }
+  .search-result__image { display: none; }
+}
+
 /* --- Click-to-enlarge lightbox (js/lightbox.js) --- */
 .prose img.is-zoomable, img.post-hero.is-zoomable { cursor: zoom-in; }
 .lightbox { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.85); padding: 2rem; }
