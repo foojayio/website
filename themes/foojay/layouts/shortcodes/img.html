@@ -1,0 +1,12 @@
+{{- /* Formatted content image (float / resized / with caption), emitted by
+       HtmlToMarkdown.java instead of raw <img> HTML so the src goes through
+       relURL and picks up the baseURL subpath. Params: src, class, alt, width,
+       height, caption. */ -}}
+{{- $src := .Get "src" -}}
+{{- if not (or (hasPrefix $src "http") (hasPrefix $src "//") (hasPrefix $src "data:")) -}}
+  {{- $src = $src | strings.TrimPrefix "/" | relURL -}}
+{{- end -}}
+<figure{{ with .Get "class" }} class="{{ . }}"{{ end }}>
+  <img src="{{ $src }}" alt="{{ .Get "alt" }}"{{ with .Get "width" }} width="{{ . }}"{{ end }}{{ with .Get "height" }} height="{{ . }}"{{ end }} loading="lazy" class="is-zoomable">
+  {{- with .Get "caption" }}<figcaption class="wp-element-caption">{{ . }}</figcaption>{{ end -}}
+</figure>

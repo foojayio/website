@@ -22,7 +22,7 @@ As Java is fully standardized, the JVM (within a major version) is interchangeab
 * **JRE (Java Runtime environment).** The smallest type of JVM bundle. Used to run Java applications.
 * **JVM (Java virtual machine).** A runtime environment to execute Java applications shipped in ".jar" files. The smallest Java SE compliant JVM bundle is the JRE.
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-36259" src="/images/pedia/basic-java-concepts/image2020-11-4_13-5-7-700x359.png" alt="" width="700" height="359">
+{{< img src="/images/pedia/basic-java-concepts/image2020-11-4_13-5-7-700x359.png" class="size-medium" width="700" height="359" >}}
 
 <br />
 

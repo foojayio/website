@@ -55,13 +55,20 @@ public final class HtmlToMarkdown {
     //     ![](...) drops the float, the dimensions, the <figcaption> and the
     //     gallery grid, so these keep their original WordPress HTML.
     // (The image src inside them is still localized first, in localizeImages.)
+    // Kept as raw HTML: code widgets, embeds and galleries (multi-image, complex).
     private static final String SELECTOR_PRESERVE = String.join(", ",
             "pre.EnlighterJSRAW", "[data-pym-src]", "iframe",
             "figure.wp-block-embed", ".wp-block-embed",
+            ".wp-block-gallery", "figure.gallery", ".gallery");
+    // Single formatted images (float / resized / captioned). These become a
+    // {{< img >}} shortcode (see shortcodes/img.html) rather than raw HTML, so the
+    // localized src runs through relURL and gets the baseURL subpath -- raw HTML in
+    // content bypasses render hooks and would 404 on a /subpath/ deploy.
+    private static final String SELECTOR_IMG_SHORTCODE = String.join(", ",
             "figure.alignleft", "figure.alignright", "img.alignleft", "img.alignright",
             "figure.is-resized", "img.is-resized",
-            "figure.size-medium", "figure.size-thumbnail", "img.size-medium", "img.size-thumbnail",
-            ".wp-block-gallery", "figure.gallery", ".gallery");
+            "figure.size-medium", "figure.size-thumbnail", "img.size-medium", "img.size-thumbnail");
+    private static final Pattern FORMATTING_CLASS = Pattern.compile("align(?:left|right|center)|size-[\\w-]+|is-resized");
     private static final String PRESERVE_TOKEN = "PRESERVEDHTMLBLOCKZZ";
     private static final String PRESERVE_TOKEN_END = "ZZEND";
 
@@ -149,10 +156,21 @@ public final class HtmlToMarkdown {
             el.replaceWith(new Element("p").text(token));
         }
 
+        // Code widgets, embeds and galleries -> raw HTML (done before the image
+        // pass so a gallery's inner images aren't turned into standalone shortcodes).
         for (Element el : outermostMatches(content, SELECTOR_PRESERVE)) {
             String token = PRESERVE_TOKEN + preserved.size() + PRESERVE_TOKEN_END;
             preserved.add(el.outerHtml());
             el.replaceWith(new Element("p").text(token)); // block-level placeholder
+        }
+
+        // Formatted single images -> {{< img >}} shortcode (subpath-safe src).
+        for (Element el : outermostMatches(content, SELECTOR_IMG_SHORTCODE)) {
+            String shortcode = imageShortcode(el);
+            if (shortcode == null) continue;
+            String token = PRESERVE_TOKEN + preserved.size() + PRESERVE_TOKEN_END;
+            preserved.add(shortcode);
+            el.replaceWith(new Element("p").text(token));
         }
 
         String md = FlexmarkHtmlConverter.builder().build().convert(content.html()).trim();
@@ -166,6 +184,40 @@ public final class HtmlToMarkdown {
         // blank, but leaves a content line's trailing spaces (Markdown hard breaks).
         md = md.replaceAll("\\n(?:[ \\t]*\\n)+", "\n\n");
         return md.trim();
+    }
+
+    /** Builds a {{< img >}} shortcode call from a formatted image element (an
+     *  <img> or a <figure> wrapping one), or null if there's no image. */
+    static String imageShortcode(Element el) {
+        Element img = "img".equals(el.tagName()) ? el : el.selectFirst("img");
+        if (img == null) return null;
+        String cls = formattingClasses(el.className().isBlank() ? img.className() : el.className());
+        Element caption = el.selectFirst("figcaption");
+
+        StringBuilder sb = new StringBuilder("{{< img");
+        appendParam(sb, "src", img.attr("src"));
+        appendParam(sb, "class", cls);
+        appendParam(sb, "alt", img.attr("alt"));
+        appendParam(sb, "width", img.attr("width"));
+        appendParam(sb, "height", img.attr("height"));
+        appendParam(sb, "caption", caption != null ? caption.text() : "");
+        return sb.append(" >}}").toString();
+    }
+
+    /** Keeps only the WordPress alignment/size/resize classes (drops wp-image-NN etc.). */
+    static String formattingClasses(String classAttr) {
+        List<String> keep = new ArrayList<>();
+        for (String c : classAttr.split("\\s+")) {
+            if (FORMATTING_CLASS.matcher(c).matches()) keep.add(c);
+        }
+        return String.join(" ", keep);
+    }
+
+    private static void appendParam(StringBuilder sb, String key, String value) {
+        if (value == null || value.isBlank()) return;
+        // Shortcode param values are double-quoted; neutralize quotes/newlines.
+        String clean = value.replace("\"", "'").replace("\n", " ").trim();
+        sb.append(' ').append(key).append("=\"").append(clean).append('"');
     }
 
     /** Extracts the video id from a YouTube embed element (a figure wrapping an

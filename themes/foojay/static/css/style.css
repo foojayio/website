@@ -22,6 +22,11 @@
   --surface:        #ffffff;
   --surface-sunken: #f4f6f8;
   --surface-navy:   #0d1d2f;
+  /* Page background: a touch off-white so the page isn't glaringly bright,
+     while cards/header stay pure --surface white for contrast. */
+  --page-bg:        #f5f7f9;
+  /* Page-head band: a step darker than the page so the title area reads. */
+  --page-head-bg:   #e7ecf1;
 
   /* Footer keeps its own tokens: it is dark in the light scheme, and needs a
      different treatment once the whole page is dark. */
@@ -60,7 +65,7 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--surface);
+  background: var(--page-bg);
   color: var(--ink-soft);
   font-family: var(--font-body);
   font-size: 1.0625rem;
@@ -369,7 +374,7 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 /* -------------------------------------------------------- page headers -- */
 
 .page-head {
-  background: var(--surface-sunken);
+  background: var(--page-head-bg);
   border-bottom: 1px solid var(--border);
   padding: clamp(2rem, 4vw, 3.25rem) 0;
 }
@@ -772,6 +777,8 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
   --surface:        #0e1a26;
   --surface-sunken: #16232f;
   --surface-navy:   #0a131c;
+  --page-bg:        #0a131c;
+  --page-head-bg:   #16232f;
   --border:         #23323f;
   --border-strong:  #364a5c;
 
