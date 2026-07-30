@@ -6,7 +6,7 @@ lastmod: "2021-07-12T05:11:09+00:00"
 description: "JDK 15 was released on September 15, 2020. JEP 360 Sealed Types was included as a preview feature in this release, with its second preview in JDK 16.  Sealed Types is part of Project Amber. Sealed classes or interfaces can be used to restrict the interfaces or classes that are allowed to extend them. Also learn about the source code for an experimental implementation of a collections framework can be found in the Deck of Cards Kata repo. - by Don Raab"
 authors:
   - "don-raab"
-image: "https://foojay.io/wp-content/uploads/2020/12/foojay-don-1-1-469x510.png"
+image: "/images/posts/2020/12/immutable-collections-in-java-with-sealed-types/foojay-don-1-1-469x510.png"
 categories:
   - "Sealed Classes"
   - "Tutorials"

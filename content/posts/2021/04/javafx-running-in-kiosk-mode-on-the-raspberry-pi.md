@@ -7,7 +7,7 @@ description: "Combined with an inexpensive touch screen, the Raspberry Pi makes 
 canonical: "https://webtechie.be/post/2021-04-23-javafx-kiosk-raspberry-pi/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/04/maven-build-finished.png"
+image: "/images/posts/2021/04/javafx-running-in-kiosk-mode-on-the-raspberry-pi/maven-build-finished.png"
 categories:
   - "Embedded"
   - "JavaFX"

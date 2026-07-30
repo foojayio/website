@@ -7,7 +7,7 @@ description: "EclipseCon Community Day is on Monday, October 19 14:00 to 18:00 C
 canonical: "https://reza-rahman.me/2020/10/06/why-you-should-join-eclipsecon-community-day"
 authors:
   - "m-reza-rahman"
-image: "https://foojay.io/wp-content/uploads/2020/10/jakartaee_logo-1024x308.jpg"
+image: "/images/posts/2020/10/why-you-should-join-eclipsecon-community-day/jakartaee_logo-1024x308.jpg"
 categories:
   - "Eclipse"
   - "Tools"

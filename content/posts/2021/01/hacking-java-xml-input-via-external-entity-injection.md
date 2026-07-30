@@ -6,7 +6,7 @@ lastmod: "2021-01-14T08:45:42+00:00"
 description: "In this video, I explain and demonstrate how an XXE injection attack works by extracting system data that should not be exposed."
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2021/01/briansnykxxe-1024x574.png"
+image: "/images/posts/2021/01/hacking-java-xml-input-via-external-entity-injection/briansnykxxe-1024x574.png"
 categories:
   - "Security"
   - "Videos"

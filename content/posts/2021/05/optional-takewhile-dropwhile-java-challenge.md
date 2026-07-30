@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:46:45+00:00"
 description: "Main goal of the Optional class is to avoid NullPointerException. It’s much easier to deal with null when we use the concept of Optional."
 authors:
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2021/05/optional.png"
+image: "/images/posts/2021/05/optional-takewhile-dropwhile-java-challenge/optional.png"
 categories:
   - "Tutorials"
 tags:

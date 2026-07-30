@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:53:50+00:00"
 description: "Everything about JVM vendors & OpenJDK distributions, upgrading from one Java release to the next, and information on where to get the JDK Flight Recorder."
 authors:
   - "hirt"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/07/fantastic-jvms-and-where-to-find-them/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

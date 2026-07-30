@@ -6,7 +6,7 @@ lastmod: "2020-09-16T08:23:59+00:00"
 description: "Everyone who programs in Java is familiar with the term \"bytecode\". But how many of us understand what JDK bytecode actually is?"
 authors:
   - "kevinfarnham"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/09/what-is-jvm-bytecode/Favicon-3-2.png"
 categories:
   - "Performance"
 tags:

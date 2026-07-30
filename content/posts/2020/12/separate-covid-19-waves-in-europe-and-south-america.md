@@ -6,7 +6,7 @@ lastmod: "2020-12-11T09:58:50+00:00"
 description: "Software-ECG is a free time series analysis tool which we will use this week to compare Covid-19 trends in Europe with South America."
 authors:
   - "johannes-weigend"
-image: "https://foojay.io/wp-content/uploads/2020/12/CW50-1-1.png"
+image: "/images/posts/2020/12/separate-covid-19-waves-in-europe-and-south-america/CW50-1-1.png"
 categories:
   - "JavaFX"
 tags:

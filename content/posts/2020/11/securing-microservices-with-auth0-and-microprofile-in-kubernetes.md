@@ -7,7 +7,7 @@ description: "This presentation by Ondrej Mihalyi at DevOpsCon showcases the str
 canonical: "https://blog.payara.fish/securing-microservices-with-auth0-and-microprofile-in-kubernetes"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2020/10/microservices-example.png"
+image: "/images/posts/2020/11/securing-microservices-with-auth0-and-microprofile-in-kubernetes/microservices-example.png"
 categories:
   - "Kubernetes"
   - "Microservices"

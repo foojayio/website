@@ -7,7 +7,7 @@ description: "Switching from SD to USB Boot is very easy if you have a Flash Dri
 canonical: "https://webtechie.be/post/2020-09-29-64bit-raspbianos-on-raspberrypi4-with-usbboot/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/09/imager_eeprom.png"
+image: "/images/posts/2020/10/64-bit-raspbian-os-on-raspberry-pi-4-with-usb-boot/imager_eeprom.png"
 categories:
   - "Embedded"
   - "Raspberry Pi"

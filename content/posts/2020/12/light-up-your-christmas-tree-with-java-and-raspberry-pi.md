@@ -7,7 +7,7 @@ description: "Here we go with this small project to get you introduced to the wo
 canonical: "https://www.javaadvent.com/2020/12/light-up-your-christmas-lights-with-java-and-raspberry-pi.html"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/12/imager-start.png"
+image: "/images/posts/2020/12/light-up-your-christmas-tree-with-java-and-raspberry-pi/imager-start.png"
 categories:
   - "Embedded"
   - "Pi4J"

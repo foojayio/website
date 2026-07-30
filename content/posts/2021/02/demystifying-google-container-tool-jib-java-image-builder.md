@@ -7,7 +7,7 @@ description: "Learn about the internals of image layering created by container i
 canonical: "https://ashishtechmill.com/demystifying-google-container-tool-jib-java-image-builder"
 authors:
   - "yrashish"
-image: "https://foojay.io/wp-content/uploads/2021/02/jib-ashish-700x400.png"
+image: "/images/posts/2021/02/demystifying-google-container-tool-jib-java-image-builder/jib-ashish-700x400.png"
 categories:
   - "Uncategorized"
 tags:

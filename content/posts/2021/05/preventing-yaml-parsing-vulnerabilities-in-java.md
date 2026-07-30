@@ -7,7 +7,7 @@ description: "With anchors, you can create a YAML bomb! The tremendous amount of
 canonical: "https://snyk.io/blog/java-yaml-parser-with-snakeyaml/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/05/preventing-yaml-parsing-vulnerabilities-in-java/Favicon-3-2.png"
 categories:
   - "Kubernetes"
   - "Security"

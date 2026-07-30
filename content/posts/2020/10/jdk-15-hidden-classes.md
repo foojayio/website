@@ -6,7 +6,7 @@ lastmod: "2021-08-23T13:01:36+00:00"
 description: "Unlike sealed classes, hidden classes (JEP 371) are a JVM rather than a language-level feature, aiming not to change the Java language."
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/10/jdk-15-hidden-classes/Favicon-3-2.png"
 categories:
   - "JEPs"
 tags:

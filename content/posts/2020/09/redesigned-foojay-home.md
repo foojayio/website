@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:51:58+00:00"
 description: "foojay.io has had a bit of a facelift over the past week. Now you can see directly on the homepage all the key pieces that make up foojay."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-20.12.58-620x1024.png"
+image: "/images/posts/2020/09/redesigned-foojay-home/Screenshot-2020-09-11-at-20.12.58-620x1024.png"
 categories:
   - "Foojay"
 tags:

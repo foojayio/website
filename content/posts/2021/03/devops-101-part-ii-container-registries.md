@@ -6,7 +6,7 @@ lastmod: "2021-03-17T08:59:33+00:00"
 description: "I’m covering tools and terminology common to DevOps, plus the occasional newbie-friendly tutorial for emerging or established technologies."
 authors:
   - "kat-cosgrove"
-image: "https://foojay.io/wp-content/uploads/2021/03/index.png"
+image: "/images/posts/2021/03/devops-101-part-ii-container-registries/index.png"
 categories:
   - "DevOps"
 tags:

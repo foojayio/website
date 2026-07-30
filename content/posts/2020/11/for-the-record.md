@@ -7,7 +7,7 @@ description: "Data-carrier classes can be simplified to a few lines by adding th
 canonical: "https://medium.com/@pratha.sirisha/for-the-record-1bfb3622f446"
 authors:
   - "sirisha-pratha"
-image: "https://foojay.io/wp-content/uploads/2020/11/records.jpg"
+image: "/images/posts/2020/11/for-the-record/records.jpg"
 categories:
   - "Tutorials"
 tags:

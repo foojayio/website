@@ -7,7 +7,7 @@ description: "This week's post is pretty short. I've already written about overe
 canonical: "https://blog.frankel.ch/example-overengineering/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/04/complexity-5902955_1280.jpg"
+image: "/images/posts/2021/04/an-example-of-overengineering-keep-it-wet/complexity-5902955_1280.jpg"
 categories:
   - "Uncategorized"
 tags:

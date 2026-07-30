@@ -6,7 +6,7 @@ lastmod: "2021-04-19T09:02:54+00:00"
 description: "Our new design focuses on helping users find the most important features, getting started with the first project, and accessing references."
 authors:
   - "yaojin-yang"
-image: "https://foojay.io/wp-content/uploads/2021/04/feature-tour1.gif"
+image: "/images/posts/2021/04/new-java-welcome-page-for-vs-code/feature-tour1.gif"
 categories:
   - "VS Code"
 tags:

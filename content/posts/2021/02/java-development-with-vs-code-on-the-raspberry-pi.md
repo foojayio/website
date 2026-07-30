@@ -7,7 +7,7 @@ description: "Did you know you can use VS Code on ARM-processor-powered Raspberr
 canonical: "https://webtechie.be/post/2020-10-15-visual-studio-code-on-raspberry-pi/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/02/visualstudiocode-download.png"
+image: "/images/posts/2021/02/java-development-with-vs-code-on-the-raspberry-pi/visualstudiocode-download.png"
 categories:
   - "Raspberry Pi"
   - "VS Code"

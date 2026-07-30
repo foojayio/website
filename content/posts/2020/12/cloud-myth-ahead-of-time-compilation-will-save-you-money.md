@@ -7,7 +7,7 @@ description: "Learn about Jakarta EE runtimes that run Jakarta EE applications i
 canonical: "https://blog.payara.fish/java-ahead-of-time-native-compilation-on-cloud-economic-myths"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2020/12/cloud2.jpg"
+image: "/images/posts/2020/12/cloud-myth-ahead-of-time-compilation-will-save-you-money/cloud2.jpg"
 categories:
   - "Microservices"
 tags:

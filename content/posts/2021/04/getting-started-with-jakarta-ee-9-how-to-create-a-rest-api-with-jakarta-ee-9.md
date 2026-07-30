@@ -8,7 +8,7 @@ canonical: "https://blog.payara.fish/getting-started-with-jakarta-ee-9-how-to-cr
 authors:
   - "jadon-ortlepp"
   - "rudy-de-busscher"
-image: "https://foojay.io/wp-content/uploads/2021/04/MicrosoftTeams-image-46.jpg"
+image: "/images/posts/2021/04/getting-started-with-jakarta-ee-9-how-to-create-a-rest-api-with-jakarta-ee-9/MicrosoftTeams-image-46.jpg"
 categories:
   - "Videos"
 tags:

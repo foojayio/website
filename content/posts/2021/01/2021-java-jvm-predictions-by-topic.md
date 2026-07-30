@@ -6,7 +6,7 @@ lastmod: "2021-01-24T08:09:41+00:00"
 description: "Now that 2021 is well underway, many prominent Java developers have taken the time to predict what 2021 may bring to the Java universe!"
 authors:
   - "kevinfarnham"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/01/2021-java-jvm-predictions-by-topic/Favicon-3-2.png"
 categories:
   - "Performance"
   - "Security"

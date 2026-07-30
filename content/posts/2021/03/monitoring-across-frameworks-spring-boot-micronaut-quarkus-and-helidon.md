@@ -7,7 +7,7 @@ description: "Gone are the times when developers' jobs ended with the release of
 canonical: "https://blog.frankel.ch/monitoring-across-frameworks/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/02/pexels-mike-887843.jpg"
+image: "/images/posts/2021/03/monitoring-across-frameworks-spring-boot-micronaut-quarkus-and-helidon/pexels-mike-887843.jpg"
 categories:
   - "Spring"
 tags:

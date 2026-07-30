@@ -6,7 +6,7 @@ lastmod: "2021-09-03T09:28:33+00:00"
 description: "In this part, we create a custom JavaFX control by changing the style of an existing control, for example, using a JavaFX CheckBox control."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2021/01/Restyled-Control-2021-01-15-12-58-55.png"
+image: "/images/posts/2021/01/custom-controls-in-javafx-part-i/Restyled-Control-2021-01-15-12-58-55.png"
 categories:
   - "JavaFX"
 tags:

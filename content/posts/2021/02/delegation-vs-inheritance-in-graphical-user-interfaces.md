@@ -6,7 +6,7 @@ lastmod: "2021-12-16T09:45:05+00:00"
 description: "Find out what why Sven Ruppert from JFrog prefer delegation and why he wants to emphasize this rarely-used feature in Java!"
 authors:
   - "sven-ruppert"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/02/delegation-vs-inheritance-in-graphical-user-interfaces/Favicon-3-2.png"
 categories:
   - "Vaadin"
   - "Videos"

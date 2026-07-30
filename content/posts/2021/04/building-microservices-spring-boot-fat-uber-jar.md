@@ -6,7 +6,7 @@ lastmod: "2023-08-28T12:47:43+00:00"
 description: "Explore the simple steps of building Spring Boot Fat (Uber) Jars of your own project and running it as microservices."
 authors:
   - "tetiana-fydorenchyk"
-image: "https://foojay.io/wp-content/uploads/2021/04/spring-boot-fat.png"
+image: "/images/posts/2021/04/building-microservices-spring-boot-fat-uber-jar/spring-boot-fat.png"
 categories:
   - "Jelastic"
   - "Microservices"

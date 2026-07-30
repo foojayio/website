@@ -6,7 +6,7 @@ lastmod: "2023-08-28T12:43:57+00:00"
 description: "How to create a simple Web Service using Spring Boot, making it effortless to develop Web Services, so long as the appropriate dependencies are in place."
 authors:
   - "josh-juneau"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/09/a-simple-service-with-spring-boot/Favicon-3-2.png"
 categories:
   - "Java Beginner"
   - "Spring"

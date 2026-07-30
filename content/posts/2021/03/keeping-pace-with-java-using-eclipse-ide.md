@@ -6,7 +6,7 @@ lastmod: "2021-07-12T05:11:54+00:00"
 description: "Major interesting features of latest Java versions like records and switch expressions with their tooling support in Eclipse Java IDE."
 authors:
   - "noopur-gupta"
-image: "https://foojay.io/wp-content/uploads/2021/03/eclipse-logo.png"
+image: "/images/posts/2021/03/keeping-pace-with-java-using-eclipse-ide/eclipse-logo.png"
 categories:
   - "Eclipse"
   - "Sealed Classes"

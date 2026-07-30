@@ -6,7 +6,7 @@ lastmod: "2022-08-30T10:52:19+00:00"
 description: "Multiple different vendors provide the OpenJDK and Foojay.io gives you access to them all."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2022/08/image-1-1024x748.png"
+image: "/images/posts/2021/03/download-openjdk-today/image-1-1024x748.png"
 categories:
   - "Foojay"
 tags:

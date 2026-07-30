@@ -7,7 +7,7 @@ description: "In this short video, Rudy de Busscher demonstrates how to use Micr
 canonical: "https://blog.payara.fish/microprofile-opentracing-with-jaeger"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/02/microprofile-opentracing-with-jaeger/Favicon-3-2.png"
 categories:
   - "Microservices"
   - "Videos"

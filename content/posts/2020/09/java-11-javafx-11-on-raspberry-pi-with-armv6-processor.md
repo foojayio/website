@@ -7,7 +7,7 @@ description: "Here are complete and thorough steps for having a working Java JDK
 canonical: "https://webtechie.be/post/2020-08-27-azul-zulu-java-11-and-gluon-javafx-11-on-armv6-raspberry-pi/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/09/javafx-on-armv6-raspberrypi.png"
+image: "/images/posts/2020/09/java-11-javafx-11-on-raspberry-pi-with-armv6-processor/javafx-on-armv6-raspberrypi.png"
 categories:
   - "JavaFX"
   - "Raspberry Pi"

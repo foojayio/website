@@ -6,7 +6,7 @@ lastmod: "2021-09-08T15:20:12+00:00"
 description: "Payara commended for its achievements within global trading and exporting with the Queen’s Award for Enterprise for International Trade!"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2021/04/4.-Payara-Services-QA-Logo-2021-1-3-593x1024.png"
+image: "/images/posts/2021/05/payara-services-wins-prestigious-queens-award/4.-Payara-Services-QA-Logo-2021-1-3-593x1024.png"
 categories:
   - "Release Notes"
 tags:

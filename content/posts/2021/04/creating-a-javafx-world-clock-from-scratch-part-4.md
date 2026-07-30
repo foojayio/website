@@ -6,7 +6,7 @@ lastmod: "2022-04-30T03:32:25+00:00"
 description: "In this part, I will fast forward my progress of the JFX World Clock and jump into building and creating an installer that you can distribute."
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2021/03/Screen-Shot-2021-03-28-at-4.05.45-PM.png"
+image: "/images/posts/2021/04/creating-a-javafx-world-clock-from-scratch-part-4/Screen-Shot-2021-03-28-at-4.05.45-PM.png"
 categories:
   - "Bach"
   - "JavaFX"
@@ -136,7 +136,7 @@ Verify external modules located in file:///Users/cdea/projects/worldclock/.bach/
 Verified 3 external modules
 Build 1 main module: worldclock
   javac    --module worldclock --module-version 17-bach --module-source-path worldclock=src/main/java --module-path .bach/e[...]
-  jar      --create --file .bach/workspace/modules/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9ced6cbd5dddad5d6dad2f9888e94dbd8dad197d3d8cb">[email&nbsp;protected]</a> -C .bach/workspace/classes-main-16/worldclock . -[...]
+  jar      --create --file .bach/workspace/modules/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe89918c929a9d92919d95becfc9d39c9f9d96d0949f8c">[email&nbsp;protected]</a> -C .bach/workspace/classes-main-16/worldclock . -[...]
 Assemble custom runtime image
   jlink    --add-modules worldclock --module-path .bach/workspace/modules:.bach/external-modules --launcher worldclock=worl[...]
 Build took 3.739s

@@ -6,7 +6,7 @@ lastmod: "2021-06-25T09:11:06+00:00"
 description: "When I first came across the notion of Live Templates, I couldn't figure out what was 'live' about them. Did they need feeding?"
 authors:
   - "helenjoscott"
-image: "https://foojay.io/wp-content/uploads/2020/10/1200px-IntelliJ_IDEA_Logo.svg_.png"
+image: "/images/posts/2020/10/live-templates-in-intellij-idea/1200px-IntelliJ_IDEA_Logo.svg_.png"
 categories:
   - "IntelliJ IDEA"
   - "Tools"

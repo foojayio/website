@@ -6,7 +6,7 @@ lastmod: "2021-03-24T07:35:50+00:00"
 description: "DevOps has a ton of jargon in it, though. It’s like running into a brick wall. Here, I'll explain package managers!"
 authors:
   - "kat-cosgrove"
-image: "https://foojay.io/wp-content/uploads/2021/03/index.png"
+image: "/images/posts/2021/03/devops-101-part-iii-package-management/index.png"
 categories:
   - "DevOps"
 tags:

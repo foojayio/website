@@ -7,7 +7,7 @@ description: "How to build native applications for multiple devices from a singl
 canonical: "https://webtechie.be/post/2020-11-24-javafx-gluon-mobile-github-actions/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/11/github_actions_gluon_diagram.jpg"
+image: "/images/posts/2020/11/native-applications-for-multiple-devices-from-a-single-javafx-project-with-gluon-mobile-and-github-actions/github_actions_gluon_diagram.jpg"
 categories:
   - "JavaFX"
   - "Maven"
@@ -197,7 +197,7 @@ To build the Windows version of the application, Visual Studio is required, whic
 * [egor-tensin/vs-shell](https://github.com/egor-tensin/vs-shell): GitHub action to setup the Visual Studio shell environment.
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- name: Add msbuild to PATH
-  uses: microsoft/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b283e2f2e2b763628392e32373f1b2d6a756b7569">[email&nbsp;protected]</a>
+  uses: microsoft/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5d6c0d1d0d588c8d6c7d0ccc9c1e5d3948b958b97">[email&nbsp;protected]</a>
 - name: Visual Studio shell
   uses: egor-tensin/vs-shell@v1</pre>
 

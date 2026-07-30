@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:56:53+00:00"
 description: "Every advance in creating a better performing JVM will increase the performance of every program ever developed in any JVM language."
 authors:
   - "kevinfarnham"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/08/is-java-still-an-emerging-technology/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

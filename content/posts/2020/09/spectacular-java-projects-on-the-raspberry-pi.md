@@ -6,7 +6,7 @@ lastmod: "2021-12-16T09:43:29+00:00"
 description: "I want to share a number of Java / Raspberry Pi projects with everyone, as they can be an inspiration for getting started with Java on the Raspberry Pi!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/09/igor-souza-kafka-300x260.png"
+image: "/images/posts/2020/09/spectacular-java-projects-on-the-raspberry-pi/igor-souza-kafka-300x260.png"
 categories:
   - "JavaFX"
   - "Pi4J"

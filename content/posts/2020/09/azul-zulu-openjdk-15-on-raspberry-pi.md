@@ -6,7 +6,7 @@ lastmod: "2020-09-21T08:34:45+00:00"
 description: "For this post I did some experiments with Java 15, reusing the Ubuntu 64bit SD card, which was also used for my earlier post on startup speed."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/09/Screenshot-2020-09-21-at-10.21.40-1024x264.png"
+image: "/images/posts/2020/09/azul-zulu-openjdk-15-on-raspberry-pi/Screenshot-2020-09-21-at-10.21.40-1024x264.png"
 categories:
   - "Raspberry Pi"
 tags:

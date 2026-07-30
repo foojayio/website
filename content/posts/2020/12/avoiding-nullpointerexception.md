@@ -7,7 +7,7 @@ description: "The terrible NullPointerException (NPE) is the most frequent Java 
 canonical: "https://victorrentea.ro/blog/avoiding-null-pointer-exception/"
 authors:
   - "victor-rentea"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/12/avoiding-nullpointerexception/Favicon-3-2.png"
 categories:
   - "Java Core"
 tags:

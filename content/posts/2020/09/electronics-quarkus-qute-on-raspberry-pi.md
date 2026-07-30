@@ -8,7 +8,7 @@ canonical: "http://www.igfasouza.com/blog/quarkus-qute-with-raspberry-pi/"
 authors:
   - "frankdelporte"
   - "igor-de-souza"
-image: "https://foojay.io/wp-content/uploads/2020/09/led-number-display-300x260.jpg"
+image: "/images/posts/2020/09/electronics-quarkus-qute-on-raspberry-pi/led-number-display-300x260.jpg"
 categories:
   - "Pi4J"
   - "Raspberry Pi"

@@ -6,7 +6,7 @@ lastmod: "2020-09-01T14:07:55+00:00"
 description: "The Java Version Almanac provides details per release on OpenJDK distributions, new features, and differences between APIs across releases."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/08/Screenshot-2020-08-25-at-08.35.09-1024x559.png"
+image: "/images/posts/2020/08/interview-java-version-almanac/Screenshot-2020-08-25-at-08.35.09-1024x559.png"
 categories:
   - "Interviews"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2025-05-26T08:24:53+00:00"
 description: "Azul has made Zulu OpenJDK builds of OpenJDK 8, 11, and 13, as well as 16-ea, available on Apple Silicon, Arm-based Macs. Check it out!"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2025/05/Azul_systems_logo.png"
+image: "/images/posts/2020/11/apple-silicon-with-zulu-openjdk-and-intellij-idea/Azul_systems_logo.png"
 categories:
   - "IntelliJ IDEA"
   - "Release Notes"

@@ -7,7 +7,7 @@ description: "Fifteen events are already confirmed in an ambitious virtual tour 
 authors:
   - "geertjan-wielenga"
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2021/03/Foojay-Tour_Monitor-Twitter_Dark-1150x647-1.png"
+image: "/images/posts/2021/03/virtual-tour-is-biggest-project-yet-for-new-java-community-platform-foojay/Foojay-Tour_Monitor-Twitter_Dark-1150x647-1.png"
 categories:
   - "Events"
   - "Foojay"

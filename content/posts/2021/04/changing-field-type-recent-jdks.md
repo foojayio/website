@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:56:16+00:00"
 description: "In this article, I will share some findings regarding the security changes regarding changing a field's type across JDK versions."
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/04/writing-play-cards-art-design-hands-869927.jpg"
+image: "/images/posts/2021/04/changing-field-type-recent-jdks/writing-play-cards-art-design-hands-869927.jpg"
 categories:
   - "Uncategorized"
 tags:

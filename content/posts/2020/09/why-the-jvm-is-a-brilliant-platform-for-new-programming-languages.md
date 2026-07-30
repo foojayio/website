@@ -6,7 +6,7 @@ lastmod: "2020-09-11T10:43:40+00:00"
 description: "The capability of the JVM to overcome problems related to hardware and operating systems is why we're seeing inventions of new languages on top of the JVM."
 authors:
   - "kevinfarnham"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/09/why-the-jvm-is-a-brilliant-platform-for-new-programming-languages/Favicon-3-2.png"
 categories:
   - "Performance"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2021-05-07T07:54:23+00:00"
 description: "Let’s see how we can integrate security and secure development into IntelliJ IDEA using the new Snyk vulnerability scanner plugin!"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/04/fix-java-security-issues-while-coding-in-intellij-idea/Favicon-3-2.png"
 categories:
   - "IntelliJ IDEA"
   - "Security"

@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:55:40+00:00"
 description: "PDF files are the world's most common file format, defining 70% of the world's documents. But they are also complex and poorly supported by Java. Tips!"
 authors:
   - "mark-stephens"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/08/10-basic-questions-about-pdf-files-for-java-developers/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

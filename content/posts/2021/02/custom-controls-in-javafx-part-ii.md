@@ -6,7 +6,7 @@ lastmod: "2021-02-05T08:49:42+00:00"
 description: "Last time you saw how to create JavaFX controls by playing around with CSS, today how to create a control by combining existing controls."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2021/01/Combined-Control-2021-01-26-15-13-25.png"
+image: "/images/posts/2021/02/custom-controls-in-javafx-part-ii/Combined-Control-2021-01-26-15-13-25.png"
 categories:
   - "JavaFX"
 tags:

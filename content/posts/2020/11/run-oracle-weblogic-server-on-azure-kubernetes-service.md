@@ -6,7 +6,7 @@ lastmod: "2021-07-05T20:06:45+00:00"
 description: "We are delighted to announce the initial release of solutions to run Oracle WebLogic Server on the Azure Kubernetes Service."
 authors:
   - "m-reza-rahman"
-image: "https://foojay.io/wp-content/uploads/2020/11/weblogic-architecture-aks.png"
+image: "/images/posts/2020/11/run-oracle-weblogic-server-on-azure-kubernetes-service/weblogic-architecture-aks.png"
 categories:
   - "Kubernetes"
   - "Release Notes"

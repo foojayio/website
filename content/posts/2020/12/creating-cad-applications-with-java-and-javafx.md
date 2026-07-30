@@ -6,7 +6,7 @@ lastmod: "2021-01-21T12:02:33+00:00"
 description: "Some days ago I finished a CAD application whose purpose is to calculate the energy efficiency of Dwellings (or multiple Dwellings). It can be seen as an application similar to Autocad (which is used in Civil Engineering, Architecture, etc) but with the specific purpose to do energy efficiency assessment. I believe, having a good UX, features users have been dying to have, good, well structured code that lets you continuously evolve and better maintain what you already have and finally topping all that with a nice looking user interface, are the markers to a successful application. I think we’ve been able to score high in all those markers. - by Pedro Duque Vieira"
 authors:
   - "pedro-vieira"
-image: "https://foojay.io/wp-content/uploads/2020/12/showcase-model-view-1024x555.png"
+image: "/images/posts/2020/12/creating-cad-applications-with-java-and-javafx/showcase-model-view-1024x555.png"
 categories:
   - "JavaFX"
   - "Use Cases"

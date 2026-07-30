@@ -7,7 +7,7 @@ description: "Let's discuss Records, an official feature in Java 16, and apply t
 canonical: "https://ashishtechmill.com/spring-boot-and-java-16-records"
 authors:
   - "yrashish"
-image: "https://foojay.io/wp-content/uploads/2021/03/jan-kopriva-AAMaDdDHLFg-unsplash.jpg"
+image: "/images/posts/2021/03/spring-boot-java-16-records/jan-kopriva-AAMaDdDHLFg-unsplash.jpg"
 categories:
   - "Records"
 tags:

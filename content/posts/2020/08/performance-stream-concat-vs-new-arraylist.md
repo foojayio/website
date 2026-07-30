@@ -7,7 +7,7 @@ description: "What happened when the Java Stream API met the ArrayList? Which is
 canonical: "https://blog.soebes.de/blog/2020/03/31/performance-stream-concat/"
 authors:
   - "karl-heinz-marbaise"
-image: "https://foojay.io/wp-content/uploads/2020/08/Screenshot-2020-08-26-at-22.23.26-1024x125.png"
+image: "/images/posts/2020/08/performance-stream-concat-vs-new-arraylist/Screenshot-2020-08-26-at-22.23.26-1024x125.png"
 categories:
   - "Performance"
 tags:

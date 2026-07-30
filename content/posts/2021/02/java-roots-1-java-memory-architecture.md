@@ -6,7 +6,7 @@ lastmod: "2021-10-11T12:36:53+00:00"
 description: "Welcome to a series of articles on key concepts in Core Java and J2EE. The series revolves around memory architecture and a lot more!"
 authors:
   - "sumith-puri"
-image: "https://foojay.io/wp-content/uploads/2021/02/java.jpg"
+image: "/images/posts/2021/02/java-roots-1-java-memory-architecture/java.jpg"
 categories:
   - "Performance"
 tags:

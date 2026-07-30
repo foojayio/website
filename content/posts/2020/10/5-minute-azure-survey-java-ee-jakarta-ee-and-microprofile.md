@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:37:38+00:00"
 description: "Azure team at Microsoft is strengthening its commitment to Jakarta EE, Java EE, and MicroProfile communities. Please provide feedback via a quick survey."
 authors:
   - "m-reza-rahman"
-image: "https://foojay.io/wp-content/uploads/2020/10/Screenshot-2020-10-01-at-14.51.02-1024x336.png"
+image: "/images/posts/2020/10/5-minute-azure-survey-java-ee-jakarta-ee-and-microprofile/Screenshot-2020-10-01-at-14.51.02-1024x336.png"
 categories:
   - "Jakarta EE"
   - "Microservices"

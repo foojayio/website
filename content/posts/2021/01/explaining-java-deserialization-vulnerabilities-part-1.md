@@ -7,7 +7,7 @@ description: "Java serialization—and specifically deserialization—is “the 
 canonical: "https://snyk.io/blog/serialization-and-deserialization-in-java/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2021/01/image-7-1024x433.png"
+image: "/images/posts/2021/01/explaining-java-deserialization-vulnerabilities-part-1/image-7-1024x433.png"
 categories:
   - "Security"
 tags:

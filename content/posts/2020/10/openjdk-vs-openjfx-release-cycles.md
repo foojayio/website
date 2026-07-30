@@ -6,7 +6,7 @@ lastmod: "2021-10-15T08:37:46+00:00"
 description: "Confused about the release cycles of OpenJDK and OpenJFX and the relationship between them? Read on to have all your questions answered."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/10/history_java_releases.png"
+image: "/images/posts/2020/10/openjdk-vs-openjfx-release-cycles/history_java_releases.png"
 categories:
   - "JavaFX"
   - "Release Notes"

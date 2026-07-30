@@ -7,7 +7,7 @@ description: "Thereâ€™s a lot going on when you first load IntelliJ IDEA. Hereâ€
 canonical: "https://www.helenjoscott.com/posts/new-to-intellij-idea"
 authors:
   - "helenjoscott"
-image: "https://foojay.io/wp-content/uploads/2020/10/1200px-IntelliJ_IDEA_Logo.svg_.png"
+image: "/images/posts/2020/10/new-to-intellij-idea-me-too/1200px-IntelliJ_IDEA_Logo.svg_.png"
 categories:
   - "IntelliJ IDEA"
   - "Tools"

@@ -7,7 +7,7 @@ description: "Because Hazelcast is developed in Java, it's available as a JAR, a
 canonical: "https://hazelcast.com/blog/from-embedded-to-client-server/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/04/pexels-pixabay-276502.jpg"
+image: "/images/posts/2021/04/hazelcast-from-embedded-to-client-server/pexels-pixabay-276502.jpg"
 categories:
   - "Hazelcast"
   - "Research"

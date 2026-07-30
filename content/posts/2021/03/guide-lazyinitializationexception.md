@@ -7,7 +7,7 @@ description: "Posts that have been written about Hibernate's LazyInitializationE
 canonical: "https://blog.frankel.ch/guide-lazyinitializationexception/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/03/guide-lazyinitializationexception/Favicon-3-2.png"
 categories:
   - "Performance"
 tags:

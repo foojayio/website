@@ -7,7 +7,7 @@ description: "Simplifying your code has advantages, including improving readabil
 canonical: "https://blog.jetbrains.com/idea/2020/12/3-ways-to-refactor-your-code-in-intellij-idea/"
 authors:
   - "helenjoscott"
-image: "https://foojay.io/wp-content/uploads/2021/01/refactor-1.png"
+image: "/images/posts/2021/01/3-ways-to-refactor-your-code-in-intellij-idea/refactor-1.png"
 categories:
   - "IntelliJ IDEA"
 tags:

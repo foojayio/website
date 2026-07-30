@@ -6,7 +6,7 @@ lastmod: "2021-07-12T05:13:11+00:00"
 description: "The JDK Enhancement Proposal (or JEP) is a community process for proposals for enhancements to the OpenJDK. Which ones made it into Java 16?"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/03/highlights-of-new-jeps-in-java-16/Favicon-3-2.png"
 categories:
   - "Records"
   - "Sealed Classes"

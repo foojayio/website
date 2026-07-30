@@ -6,7 +6,7 @@ lastmod: "2021-02-11T09:13:06+00:00"
 description: "Learn how to write to disk safely in Java, combining disk sync, shutdown hooks, and atomic renaming of files!"
 authors:
   - "michael-roeschter"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/02/safe-writing-to-files-in-iot-and-industrial-systems/Favicon-3-2.png"
 categories:
   - "Embedded"
   - "Performance"

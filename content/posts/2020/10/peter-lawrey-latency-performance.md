@@ -6,7 +6,7 @@ lastmod: "2020-10-22T07:49:42+00:00"
 description: "Build a realistic workload, profile it, and tune the code if possible, or the JVM to optimise for that use case."
 authors:
   - "kevinfarnham"
-image: "https://foojay.io/wp-content/uploads/2020/10/PeterLawrey.jpg"
+image: "/images/posts/2020/10/peter-lawrey-latency-performance/PeterLawrey.jpg"
 categories:
   - "Interviews"
   - "Performance"

@@ -7,7 +7,7 @@ description: "Did you know Java Flight Recorder offers a public API for controli
 canonical: "https://blog.arkey.fr/2020/06/28/using-jdk-flight-recorder-and-jdk-mission-control/"
 authors:
   - "brice-dutheil"
-image: "https://foojay.io/wp-content/uploads/2020/11/try.png"
+image: "/images/posts/2020/11/using-java-flight-recorder-and-mission-control-part-3/try.png"
 categories:
   - "JDK Flight Recorder"
   - "Tools"

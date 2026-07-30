@@ -7,7 +7,7 @@ description: "Introdudcing frgaal, a retrofitting Java compiler, letting you use
 canonical: "https://medium.com/@toni.epple/use-next-generation-java-today-d3394efb8c24"
 authors:
   - "eppleton"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/09/getting-started-with-babel-for-java/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

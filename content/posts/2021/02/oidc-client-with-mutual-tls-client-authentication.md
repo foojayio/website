@@ -6,7 +6,7 @@ lastmod: "2021-02-04T08:48:46+00:00"
 description: "Learn how to set up an OpenID Connect (OIDC) client with Spring Security using mutual TLS as a method for authenticating the client."
 authors:
   - "michal-trojanowski"
-image: "https://foojay.io/wp-content/uploads/2021/01/image-9.png"
+image: "/images/posts/2021/02/oidc-client-with-mutual-tls-client-authentication/image-9.png"
 categories:
   - "Security"
   - "Tutorials"

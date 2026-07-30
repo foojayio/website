@@ -6,7 +6,7 @@ lastmod: "2020-10-21T06:35:28+00:00"
 description: "The OpenJDK sources are now fully available and developed on GitHub, thanks to Project Skara. We can build it from sources on any device."
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/09/compiling-java-1024x357.png"
+image: "/images/posts/2020/10/building-openjdk-from-github-sources-on-64-bit-raspberry-pi/compiling-java-1024x357.png"
 categories:
   - "Raspberry Pi"
 tags:

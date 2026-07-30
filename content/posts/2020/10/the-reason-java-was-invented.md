@@ -6,7 +6,7 @@ lastmod: "2020-10-05T08:07:37+00:00"
 description: "The Java virtual machine is a system whereby any code could be run on any machine or operating system that supports a JVM."
 authors:
   - "kevinfarnham"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/10/the-reason-java-was-invented/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

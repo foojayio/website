@@ -7,7 +7,7 @@ description: "with a few changes in our code we can easily solve the problem of 
 canonical: "https://blog.soebes.de/blog/2020/09/20/spring-boot-strategy-pattern/"
 authors:
   - "karl-heinz-marbaise"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/10/spring-boot-strategy-design-pattern-convenience-and-limitation/Favicon-3-2.png"
 categories:
   - "Spring"
 tags:

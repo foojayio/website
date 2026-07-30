@@ -6,7 +6,7 @@ lastmod: "2021-08-23T13:03:24+00:00"
 description: "Wrapping up a series with a list of brief predictions from a wide variety of leading members of the Java community!"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/12/java-predictions-for-2021/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

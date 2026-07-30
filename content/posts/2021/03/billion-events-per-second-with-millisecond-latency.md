@@ -6,7 +6,7 @@ lastmod: "2021-03-25T19:18:42+00:00"
 description: "On a scientific paper on Hazelcast Jet, its architecture based on symmetric, data-local, non-blocking distributed event processing."
 authors:
   - "marko-topolnik"
-image: "https://foojay.io/wp-content/uploads/2021/03/2021-03-18_latencies-700x441.png"
+image: "/images/posts/2021/03/billion-events-per-second-with-millisecond-latency/2021-03-18_latencies-700x441.png"
 categories:
   - "Performance"
 tags:

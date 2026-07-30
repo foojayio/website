@@ -7,7 +7,7 @@ description: "Code reviews are hard to do well. Particularly when you’re not e
 canonical: "https://snyk.io/blog/secure-code-review/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/03/secure-code-review-best-practices-part-2/Favicon-3-2.png"
 categories:
   - "Security"
 tags:

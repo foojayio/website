@@ -7,7 +7,7 @@ description: "A discussion on the usage of JDK Flight Recorder and that it’s p
 canonical: "https://blog.arkey.fr/2020/06/28/using-jdk-flight-recorder-and-jdk-mission-control/"
 authors:
   - "brice-dutheil"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/12/how-when-to-use-jdk-flight-recorder-in-production/Favicon-3-2.png"
 categories:
   - "JDK Flight Recorder"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2020-11-30T20:45:11+00:00"
 description: "I like many things about IntelliJ IDEA, but I thought it'd be fun to write about the ones that make me most productive. Read on for details!"
 authors:
   - "matt-raible"
-image: "https://foojay.io/wp-content/uploads/2020/11/idea-2020.2.3-700x455.png"
+image: "/images/posts/2020/11/why-i-love-intellij-idea-for-java-development/idea-2020.2.3-700x455.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

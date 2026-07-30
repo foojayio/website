@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:59:10+00:00"
 description: "Looking at the latest TIOBE Programming Community Index, we see Java has surpassed C in the TIOBE ratings index, with Python holding steady in third."
 authors:
   - "kevinfarnham"
-image: "https://foojay.io/wp-content/uploads/2020/08/tiobe_20200820.png"
+image: "/images/posts/2020/08/why-java-c-and-python-are-todays-most-utilized-programming-languages/tiobe_20200820.png"
 categories:
   - "Uncategorized"
 tags:

@@ -7,7 +7,7 @@ description: "I thought it’d be fun to write a post that provides people with 
 canonical: "https://developer.okta.com/blog/2018/12/11/learning-java-first-language"
 authors:
   - "matt-raible"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/09/learning-java-as-a-first-language/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

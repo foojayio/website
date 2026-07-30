@@ -7,7 +7,7 @@ description: "For some time now, there has been an undeniable growth in interest
 canonical: "https://blog.payara.fish/evolution-of-microservices"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2020/10/microservices.jpg"
+image: "/images/posts/2020/10/evolution-of-microservices/microservices.jpg"
 categories:
   - "Microservices"
 tags:

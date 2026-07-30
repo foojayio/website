@@ -6,7 +6,7 @@ lastmod: "2021-08-23T13:05:04+00:00"
 description: "Unified logging was introduced in JDK 9, let's begin with a recapitulation of JEP-158, laying out the foundation of JVM unified logging."
 authors:
   - "brice-dutheil"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/03/introduction-to-jvm-unified-logging-jep-158-jep-271/Favicon-3-2.png"
 categories:
   - "JEPs"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2021-04-16T07:18:31+00:00"
 description: "Did you know? Since the release of IntelliJ IDEA 2020.3, there are now two ways to manage your commits to Git."
 authors:
   - "helenjoscott"
-image: "https://foojay.io/wp-content/uploads/2021/04/intellij-idea-default-changelist-nothing-selected.png"
+image: "/images/posts/2021/04/intellij-idea-changelists-and-git-staging/intellij-idea-default-changelist-nothing-selected.png"
 categories:
   - "IntelliJ IDEA"
 tags:

@@ -7,7 +7,7 @@ description: "The HotSpot JVM has a lot of options available. I have summed up h
 canonical: "https://jpbempel.github.io/2012/11/15/the-useful-jvm-options.html"
 authors:
   - "jpbempel"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/09/useful-jvm-options-heap-sizing/Favicon-3-2.png"
 categories:
   - "Performance"
 tags:

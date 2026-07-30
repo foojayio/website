@@ -7,7 +7,7 @@ description: "teeing() method returns a Collector, a composite of two downstream
 canonical: "https://blog.frankel.ch/teeing-java-api/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/05/letter-3038384_1280.jpg"
+image: "/images/posts/2021/05/teeing-java-api/letter-3038384_1280.jpg"
 categories:
   - "Uncategorized"
 tags:

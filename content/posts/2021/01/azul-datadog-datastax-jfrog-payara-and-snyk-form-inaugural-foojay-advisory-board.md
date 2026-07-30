@@ -6,7 +6,7 @@ lastmod: "2021-11-03T13:31:01+00:00"
 description: "Foojay.io today named the companies who will make up its advisory board—Azul, Datadog, DataStax, JFrog, Payara, and Snyk."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/01/azul-datadog-datastax-jfrog-payara-and-snyk-form-inaugural-foojay-advisory-board/Favicon-3-2.png"
 categories:
   - "Apache Cassandra"
   - "Press"
@@ -38,7 +38,7 @@ With this announcement, Foojay also announces its first event, which will be at 
 *** ** * ** ***
 
 ***F*** ***oojay**
-[Foojay](https://foojay.io/), a place for Friends of OpenJDK, is a fast-growing community focused around the OpenJDK, providing tips and insights for Java developers, and user-focused Java and OpenJDK technical dashboards with free information on all things Java. A dedicated blogging area is available on Foojay to anyone who has thoughts or code to share on topics relevant to the Java ecosystem. To contribute, send a mail to [\[email protected\]](/cdn-cgi/l/email-protection#fb939e979794bb9d9494919a82d59294).* *Follow us on Twitter [@foojayio](https://twitter.com/foojayio).*
+[Foojay](https://foojay.io/), a place for Friends of OpenJDK, is a fast-growing community focused around the OpenJDK, providing tips and insights for Java developers, and user-focused Java and OpenJDK technical dashboards with free information on all things Java. A dedicated blogging area is available on Foojay to anyone who has thoughts or code to share on topics relevant to the Java ecosystem. To contribute, send a mail to [\[email protected\]](/cdn-cgi/l/email-protection#2149444d4d4e61474e4e4b40580f484e).* *Follow us on Twitter [@foojayio](https://twitter.com/foojayio).*
 
 ***Azul**
 [Azul](https://www.azul.com/) is the largest company 100% focused on Java and the Java Virtual Machine (JVM), providing the world's most trusted open source Java enterprise platform. Azul's Java runtimes power Microsoft Azure; the cloud infrastructure of companies like Bazaarvoice, Priceline, and Workday; and the operations and products of Avaya, BMW, Credit Suisse, Deutsche Telekom, LG, Mastercard, Mizuho, and Software AG. Azul's customers include 27% of the Fortune 100, 50% of Forbes Top 10 World's Most Valuable Brands, and all 10 of the world's Top 10 financial trading companies. Azul solutions are available for developers, ISVs, enterprises with on-prem and cloud deployments, as well as for OEMs building embedded and IoT devices. Follow us on Twitter [@AzulSystems](https://twitter.com/azulsystems).*
@@ -60,6 +60,6 @@ With this announcement, Foojay also announces its first event, which will be at 
 **Media Contact**   
 
 David Oro  
-[\[email protected\]](/cdn-cgi/l/email-protection#b6d7ccc3daf6d9c4d9d1c4d9c3c698d5d9db)  
+[\[email protected\]](/cdn-cgi/l/email-protection#b1d0cbc4ddf1dec3ded6c3dec4c19fd2dedc)  
 
 +1-707-558-8585

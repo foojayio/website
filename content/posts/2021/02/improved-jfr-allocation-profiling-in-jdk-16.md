@@ -7,7 +7,7 @@ description: "The new throughput management mechanism in JFR gets fine details a
 canonical: "https://withent.blogspot.com/2021/01/improved-jfr-allocation-profiling-in.html"
 authors:
   - "jaroslav-bachorik"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/02/improved-jfr-allocation-profiling-in-jdk-16/Favicon-3-2.png"
 categories:
   - "JDK Flight Recorder"
 tags:

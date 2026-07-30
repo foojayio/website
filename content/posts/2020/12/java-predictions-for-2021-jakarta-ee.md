@@ -6,7 +6,7 @@ lastmod: "2021-08-23T15:34:44+00:00"
 description: "Java developers may stop having to worry about Kubernetes as it is abstracted away as 'just infrastructure'. Payara's 2021 Java predictions!"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2021/01/image.png"
+image: "/images/posts/2020/12/java-predictions-for-2021-jakarta-ee/image.png"
 categories:
   - "Jakarta EE"
   - "Microservices"

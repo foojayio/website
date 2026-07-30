@@ -7,7 +7,7 @@ description: "Java Stream's Collectors methods fit most use-cases. Let's imagine
 canonical: "https://blog.frankel.ch/real-world-stream-collector/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/05/pexels-joshua-woroniecki-2607956.jpg"
+image: "/images/posts/2021/05/real-world-stream-collector/pexels-joshua-woroniecki-2607956.jpg"
 categories:
   - "Use Cases"
 tags:

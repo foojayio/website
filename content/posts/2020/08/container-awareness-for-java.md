@@ -7,7 +7,7 @@ description: "When you containerize a Java application, make sure your base JDK 
 canonical: "https://spring-gcp.saturnism.me/deployment/docker/container-awareness"
 authors:
   - "saturnism"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/08/container-awareness-for-java/Favicon-3-2.png"
 categories:
   - "Performance"
 tags:

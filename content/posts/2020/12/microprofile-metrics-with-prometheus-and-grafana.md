@@ -7,7 +7,7 @@ description: "Learn how to connect MicroProfile Metrics with Prometheus and Graf
 canonical: "https://blog.payara.fish/microprofile-metrics-with-prometheus-and-grafana"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2020/11/MP-metrics.jpg"
+image: "/images/posts/2020/12/microprofile-metrics-with-prometheus-and-grafana/MP-metrics.jpg"
 categories:
   - "Microservices"
   - "Videos"

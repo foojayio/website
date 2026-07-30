@@ -7,7 +7,7 @@ description: "To celebrate the OpenJDK and Foojay.io as a community platform for
 authors:
   - "ari-waller"
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/01/virtual-foojay-jug-tour/Favicon-3-2.png"
 categories:
   - "Apache Cassandra"
   - "Campaigns"

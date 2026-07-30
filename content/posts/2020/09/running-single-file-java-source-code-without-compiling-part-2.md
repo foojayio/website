@@ -7,7 +7,7 @@ description: "Let's continue this series, by looking at JEP 330, Launch Single-F
 canonical: "https://www.infoq.com/articles/single-file-execution-java11/"
 authors:
   - "mohamed-taman"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/09/running-single-file-java-source-code-without-compiling-part-2/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

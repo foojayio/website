@@ -7,7 +7,7 @@ description: "To celebrate the OpenJDK and Foojay.io, we’re kicking off the Vi
 authors:
   - "ari-waller"
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/02/schedule-for-foojay-virtual-jug-tour/Favicon-3-2.png"
 categories:
   - "Campaigns"
   - "Events"

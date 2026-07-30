@@ -6,7 +6,7 @@ lastmod: "2020-09-03T09:44:46+00:00"
 description: "We're happy to announce that we’re hosting Chris Newland’s VMOptionsExplorer on foojay, providing all details per release on Java command line switches."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/08/Screenshot-2020-08-29-at-23.09.05-1024x514.png"
+image: "/images/posts/2020/08/interview-java-command-line-switches/Screenshot-2020-08-29-at-23.09.05-1024x514.png"
 categories:
   - "Interviews"
 tags:

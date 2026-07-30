@@ -7,7 +7,7 @@ description: "Skaffold eases development and deployment of applications running 
 canonical: "https://ashishtechmill.com/cicd-workflow-for-spring-boot-application-on-kubernetes-via-skaffold"
 authors:
   - "yrashish"
-image: "https://foojay.io/wp-content/uploads/2020/12/Screenshot-2020-12-08-at-8.26.16-AM.png"
+image: "/images/posts/2021/01/ci-cd-workflow-for-spring-boot-applications-on-kubernetes-via-skaffold/Screenshot-2020-12-08-at-8.26.16-AM.png"
 categories:
   - "Kubernetes"
   - "Maven"

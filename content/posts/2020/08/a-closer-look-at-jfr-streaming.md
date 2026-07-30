@@ -7,7 +7,7 @@ description: "Learn some of the things you can do with Java Flight Recorder stre
 canonical: "http://hirt.se/blog/?p=1239"
 authors:
   - "hirt"
-image: "https://foojay.io/wp-content/uploads/2020/08/Latency-distribution-1.png"
+image: "/images/posts/2020/08/a-closer-look-at-jfr-streaming/Latency-distribution-1.png"
 categories:
   - "JDK Flight Recorder"
   - "Performance"

@@ -7,7 +7,7 @@ description: "These are resources I've used and still use to re-learn Java. If y
 canonical: "https://www.helenjoscott.com/posts/new-to-java-resources"
 authors:
   - "helenjoscott"
-image: "https://foojay.io/wp-content/uploads/2021/04/java.png"
+image: "/images/posts/2021/04/new-to-java-some-resources/java.png"
 categories:
   - "Uncategorized"
 tags:

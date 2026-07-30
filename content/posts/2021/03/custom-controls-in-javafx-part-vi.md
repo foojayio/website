@@ -6,7 +6,7 @@ lastmod: "2021-03-05T08:21:13+00:00"
 description: "Drawing on the Canvas node will directly go down to the graphics hardware, making it really fast. Of course, this also comes with drawbacks!"
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2021/02/Affinity-Designer-AquaButton-100.0-2021-02-03-17-12-12-700x444.png"
+image: "/images/posts/2021/03/custom-controls-in-javafx-part-vi/Affinity-Designer-AquaButton-100.0-2021-02-03-17-12-12-700x444.png"
 categories:
   - "JavaFX"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2023-02-16T14:07:14+00:00"
 description: "So you're a Java developer and you want to do some machine learning. Meet JSR 381, a standard Java API for Visual Recognition using machine learning."
 authors:
   - "zoran-sevarac"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/10/quick-start-with-machine-learning-in-java/Favicon-3-2.png"
 categories:
   - "Deep Netts"
   - "Machine Learning"

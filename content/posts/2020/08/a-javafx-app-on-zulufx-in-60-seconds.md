@@ -6,7 +6,7 @@ lastmod: "2021-09-03T09:27:33+00:00"
 description: "Here I show you how to use a popular distribution from Azul Zulu OpenJDK to build a JavaFX Hello World Application in 60 seconds."
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2020/08/duke_azul_jfx_shirt.png"
+image: "/images/posts/2020/08/a-javafx-app-on-zulufx-in-60-seconds/duke_azul_jfx_shirt.png"
 categories:
   - "JavaFX"
 tags:
@@ -95,13 +95,13 @@ OpenJDK 64-Bit Server VM Zulu14.29+23-CA (build 14.0.2+12, mixed mode, sharing)
 # Verify JavaFX Modules are included in Zulu's Open JDK
 $ java --list-modules
 ...
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="264c475047405e084447554366171208160814">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="107a71667176683e737f7e64627f7c635021243e203e22">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe949f889f9886d098869392becfcad0ced0cc">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b313a2d3a3d23753c293a2b333238281b6a6f756b7569">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b1dbd0c7d0d7c99fdcd4d5d8d0f180859f819f83">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3a9a2b5a2a5bbedb0b4aaada483f2f7edf3edf1">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b414a5d4a4d53055c4e496b1a1f051b0519">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e48e859285829cca86859781a4d5d0cad4cad6">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="274d465146415f094448495355484b5467161309170915">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1f757e697e796731796772735f2e2b312f312d">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b414a5d4a4d53054c594a5b434248586b1a1f051b0519">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4329223522253b6d2e26272a220372776d736d71">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0dad1c6d1d6c89ec3c7d9ded7f081849e809e82">[email&nbsp;protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a505b4c5b5c42144d5f587a0b0e140a1408">[email&nbsp;protected]</a>
 ...</pre>
 
 <br />

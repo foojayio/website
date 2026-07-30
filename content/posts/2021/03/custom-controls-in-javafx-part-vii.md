@@ -6,7 +6,7 @@ lastmod: "2021-03-12T10:40:11+00:00"
 description: "I have created an application that makes use of JavaFX custom controls. Here I'll go through the custom controls that I've created for it."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2021/02/JDK-Butler-2021-02-10-11-57-56-700x504.png"
+image: "/images/posts/2021/03/custom-controls-in-javafx-part-vii/JDK-Butler-2021-02-10-11-57-56-700x504.png"
 categories:
   - "JavaFX"
 tags:

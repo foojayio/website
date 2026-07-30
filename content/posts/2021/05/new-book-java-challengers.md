@@ -6,7 +6,7 @@ lastmod: "2021-06-21T16:29:10+00:00"
 description: "Newly released \"Java Challenges\" book is a way for you to challenge yourself with fun code challenges so you will be a better Java developer."
 authors:
   - "rafael-del-nero"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/05/new-book-java-challengers/Favicon-3-2.png"
 categories:
   - "Book Announcement"
   - "Books"

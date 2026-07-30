@@ -6,7 +6,7 @@ lastmod: "2021-03-09T08:00:59+00:00"
 description: "I’ll cover tools and terminology common to DevOps, plus the occasional newbie-friendly tutorial for emerging or established technologies."
 authors:
   - "kat-cosgrove"
-image: "https://foojay.io/wp-content/uploads/2021/03/index.png"
+image: "/images/posts/2021/03/devops-101-part-i-ci-cd/index.png"
 categories:
   - "DevOps"
 tags:

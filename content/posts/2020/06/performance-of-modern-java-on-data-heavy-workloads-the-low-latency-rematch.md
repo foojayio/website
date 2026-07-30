@@ -6,7 +6,7 @@ lastmod: "2021-03-25T17:33:58+00:00"
 description: "This is a followup on the series analyzing performance of modern JVMs on workloads relevant to the use case of real-time stream processing."
 authors:
   - "marko-topolnik"
-image: "https://foojay.io/wp-content/uploads/2021/03/2020-06-23-histo-2m-679x510.png"
+image: "/images/posts/2020/06/performance-of-modern-java-on-data-heavy-workloads-the-low-latency-rematch/2020-06-23-histo-2m-679x510.png"
 categories:
   - "Performance"
 tags:

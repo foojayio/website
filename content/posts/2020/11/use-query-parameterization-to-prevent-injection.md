@@ -6,7 +6,7 @@ lastmod: "2020-11-23T08:14:54+00:00"
 description: "Tip: By distinguishing between the SQL code and the parameter data, the query can’t be hijacked by malicious input."
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/11/use-query-parameterization-to-prevent-injection/Favicon-3-2.png"
 categories:
   - "Security"
 tags:

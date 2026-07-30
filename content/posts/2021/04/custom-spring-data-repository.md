@@ -7,7 +7,7 @@ description: "how one can use Arrow's type system with Spring Data. You can bene
 canonical: "https://blog.frankel.ch/custom-spring-data-repository/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/04/boot-data.png"
+image: "/images/posts/2021/04/custom-spring-data-repository/boot-data.png"
 categories:
   - "Research"
   - "Tools"

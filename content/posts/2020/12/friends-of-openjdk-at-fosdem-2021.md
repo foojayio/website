@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:50:20+00:00"
 description: "Organizations included in setting up the Foojay dev room, all active on Foojay.io in one way or another, are Azul, JFrog, Payara, and Snyk."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/12/friends-of-openjdk-at-fosdem-2021/Favicon-3-2.png"
 categories:
   - "Foojay"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2020-12-16T20:29:04+00:00"
 description: "United by their passion for open source, Payara and IBM recently teamed up for a panel discussion on security in Java application development."
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/12/panel.png"
+image: "/images/posts/2020/12/minimizing-security-risks-in-java-application-development/panel.png"
 categories:
   - "Security"
   - "Videos"

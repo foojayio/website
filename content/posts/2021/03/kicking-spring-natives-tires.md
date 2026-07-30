@@ -7,7 +7,7 @@ description: "Despite all the \"magic\" of Spring Boot, Spring Native handles mo
 canonical: "https://blog.frankel.ch/kick-spring-native-tires/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/03/logo.png"
+image: "/images/posts/2021/03/kicking-spring-natives-tires/logo.png"
 categories:
   - "Performance"
   - "Research"

@@ -7,7 +7,7 @@ description: "This article aims to describe ways to create self-contained execut
 canonical: "https://blog.frankel.ch/creating-self-contained-executable-jars/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/01/image-12.png"
+image: "/images/posts/2021/02/creating-self-contained-executable-jars/image-12.png"
 categories:
   - "Uncategorized"
 tags:

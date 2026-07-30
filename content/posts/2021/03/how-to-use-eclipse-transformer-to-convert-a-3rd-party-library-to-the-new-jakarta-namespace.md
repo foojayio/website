@@ -8,7 +8,7 @@ canonical: "https://blog.payara.fish/how-to-use-the-eclipse-transformer-project-
 authors:
   - "jadon-ortlepp"
   - "rudy-de-busscher"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/03/how-to-use-eclipse-transformer-to-convert-a-3rd-party-library-to-the-new-jakarta-namespace/Favicon-3-2.png"
 categories:
   - "Jakarta EE"
 tags:

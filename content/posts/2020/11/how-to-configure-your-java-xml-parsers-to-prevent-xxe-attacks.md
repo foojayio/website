@@ -6,7 +6,7 @@ lastmod: "2020-11-06T11:44:16+00:00"
 description: "With XML eXternal Entity (XXE) enabled, it is possible to create a malicious XML, and read the content of an arbitrary file on the machine."
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/11/how-to-configure-your-java-xml-parsers-to-prevent-xxe-attacks/Favicon-3-2.png"
 categories:
   - "Security"
 tags:

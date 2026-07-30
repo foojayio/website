@@ -6,7 +6,7 @@ lastmod: "2020-12-07T14:11:45+00:00"
 description: "Recently, I worked on an issue to implement union, intersect, and difference operations in Sets for primitive types in Eclipse Collections."
 authors:
   - "sirisha-pratha"
-image: "https://foojay.io/wp-content/uploads/2020/12/foojay-prim-1-700x157.png"
+image: "/images/posts/2020/12/primitive-set-operations-in-eclipse-collections/foojay-prim-1-700x157.png"
 categories:
   - "Eclipse"
 tags:

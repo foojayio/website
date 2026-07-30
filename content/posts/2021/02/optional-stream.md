@@ -7,7 +7,7 @@ description: "This week, I learned about a \"new\" feature of Optional that I wa
 canonical: "https://blog.frankel.ch/optional-stream/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/02/engineer-4690505_1280.jpg"
+image: "/images/posts/2021/02/optional-stream/engineer-4690505_1280.jpg"
 categories:
   - "Uncategorized"
 tags:

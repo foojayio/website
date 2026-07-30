@@ -6,7 +6,7 @@ lastmod: "2020-09-21T21:05:21+00:00"
 description: "Here on foojay, the fixes that went into the release are listed, giving you a unique and readable changelog in helpful categories."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2020/09/new-java-15-foojay-1024x617.png"
+image: "/images/posts/2020/09/whats-new-in-java-15/new-java-15-foojay-1024x617.png"
 categories:
   - "Release Notes"
 tags:

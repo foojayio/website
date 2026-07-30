@@ -6,7 +6,7 @@ lastmod: "2020-12-18T08:57:48+00:00"
 description: "\"Oceania\" as a collective term for Australia, New Zealand, and Polynesia. In this part, we use Software-ECG to analyze Covid-19 there."
 authors:
   - "johannes-weigend"
-image: "https://foojay.io/wp-content/uploads/2020/12/CW51-software-ecg-deaths-oceania.png"
+image: "/images/posts/2020/12/summer-with-covid-19-in-australia-new-zealand-and-polynesia/CW51-software-ecg-deaths-oceania.png"
 categories:
   - "JavaFX"
 tags:

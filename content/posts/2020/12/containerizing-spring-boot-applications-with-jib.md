@@ -7,7 +7,7 @@ description: "How to create Docker or OCI compliant images, without installing D
 canonical: "https://ashishtechmill.com/containerizing-spring-boot-application-with-jib"
 authors:
   - "yrashish"
-image: "https://foojay.io/wp-content/uploads/2020/12/Screenshot-2020-12-29-at-12.10.08-AM.png"
+image: "/images/posts/2020/12/containerizing-spring-boot-applications-with-jib/Screenshot-2020-12-29-at-12.10.08-AM.png"
 categories:
   - "Spring"
 tags:

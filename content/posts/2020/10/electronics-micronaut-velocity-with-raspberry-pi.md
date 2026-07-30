@@ -8,7 +8,7 @@ canonical: "http://www.igfasouza.com/blog/micronaut-velocity-with-raspberry-pi/"
 authors:
   - "frankdelporte"
   - "igor-de-souza"
-image: "https://foojay.io/wp-content/uploads/2020/09/raspberry_micronaut.jpg"
+image: "/images/posts/2020/10/electronics-micronaut-velocity-with-raspberry-pi/raspberry_micronaut.jpg"
 categories:
   - "Embedded"
   - "Pi4J"

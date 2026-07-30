@@ -7,7 +7,7 @@ description: "Learn how you can create a pod, deploy a Spring Boot application, 
 canonical: "https://ashishtechmill.com/deploying-spring-boot-application-on-kubernetes"
 authors:
   - "yrashish"
-image: "https://foojay.io/wp-content/uploads/2020/12/Screenshot-2020-12-07-at-7.29.06-PM-700x219.png"
+image: "/images/posts/2021/02/deploying-spring-boot-applications-on-kubernetes/Screenshot-2020-12-07-at-7.29.06-PM-700x219.png"
 categories:
   - "Kubernetes"
 tags:

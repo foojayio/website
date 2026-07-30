@@ -7,7 +7,7 @@ description: "The Payara Platform 2021 Survey is underway and we're inviting eve
 canonical: "https://blog.payara.fish/payara-platform-2021-survey"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2021/02/image-866x1024.png"
+image: "/images/posts/2021/02/payara-platform-2021-survey/image-866x1024.png"
 categories:
   - "Microservices"
   - "Surveys"

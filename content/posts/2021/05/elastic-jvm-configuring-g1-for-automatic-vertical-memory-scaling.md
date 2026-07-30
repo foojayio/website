@@ -6,7 +6,7 @@ lastmod: "2021-09-16T14:48:32+00:00"
 description: "Details on OpenJDK patch that improves elasticity & enables automatic vertical memory scaling of Java applications with G1 garbage collector!"
 authors:
   - "tetiana-fydorenchyk"
-image: "https://foojay.io/wp-content/uploads/2021/04/jvm.png"
+image: "/images/posts/2021/05/elastic-jvm-configuring-g1-for-automatic-vertical-memory-scaling/jvm.png"
 categories:
   - "Jelastic"
   - "Tutorials"

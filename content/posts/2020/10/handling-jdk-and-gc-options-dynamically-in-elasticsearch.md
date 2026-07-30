@@ -6,7 +6,7 @@ lastmod: "2021-08-23T13:02:17+00:00"
 description: "We dive into the startup of Elasticsearch, parse configurable JVM options, and ergonomically switch between JVM options on startup."
 authors:
   - "alexander-reelsen"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/10/handling-jdk-and-gc-options-dynamically-in-elasticsearch/Favicon-3-2.png"
 categories:
   - "Elastic"
 tags:

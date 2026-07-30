@@ -7,7 +7,7 @@ description: "SQL injection, when a user adds untrusted data to a database query
 canonical: "https://snyk.io/blog/sql-injection-cheat-sheet/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/11/snyk-logo-2.png"
+image: "/images/posts/2021/04/8-best-practices-to-prevent-sql-injection-attacks/snyk-logo-2.png"
 categories:
   - "Security"
 tags:

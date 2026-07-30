@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:58:38+00:00"
 description: "As a language, Java has evolved over the last 25 years in a way that has provided excellent backwards compatibility. Here's an overview of the highlights!"
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/07/highlights-of-changes-to-the-core-java-platform/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

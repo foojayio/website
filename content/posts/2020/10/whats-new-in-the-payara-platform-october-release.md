@@ -6,7 +6,7 @@ lastmod: "2020-10-15T17:58:38+00:00"
 description: "We're happy to announce that Payara Platform Community 5.2020.5 and Payara Platform Enterprise 5.22.0 Editions are out!"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2020/10/Release-Thumbail-October-09-e1602683979477.jpg"
+image: "/images/posts/2020/10/whats-new-in-the-payara-platform-october-release/Release-Thumbail-October-09-e1602683979477.jpg"
 categories:
   - "Microservices"
   - "Release Notes"
@@ -96,7 +96,7 @@ See more detailed overview of the fixes and improvements in the Release Notes:
 
 Don't forget to update your Payara Platform to the new version! You can [Download the Payara Community Edition here](https://www.payara.fish/downloads/payara-platform-community-edition/), or request the Payara Enterprise Edition [via this form.](https://www.payara.fish/page/payara-enterprise-downloads/)
 
-As usual: if you have any questions, feedback or suggestions, please post them in the comments below or email us at [\[email protected\]](/cdn-cgi/l/email-protection#61020e0c0c140f081518211100180013004f07081209)
+As usual: if you have any questions, feedback or suggestions, please post them in the comments below or email us at [\[email protected\]](/cdn-cgi/l/email-protection#72111d1f1f071c1b060b3202130b1300135c141b011a)
 
 Original blog can be found here, reused with thanks and permission: <https://blog.payara.fish/whats-new-in-payara-platform-october-2020>
 

@@ -7,7 +7,7 @@ description: "Start with an idea for a game, bring it to life in a prototype, mo
 authors:
   - "almasbaimagambetov"
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/04/picade_hat_pin_numbers-915x1024.png"
+image: "/images/posts/2021/05/creating-a-snake-game-with-javafx-fxgl-in-three-pair-programming-sessions/picade_hat_pin_numbers-915x1024.png"
 categories:
   - "Game Development"
   - "JavaFX"

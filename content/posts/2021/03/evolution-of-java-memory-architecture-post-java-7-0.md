@@ -6,7 +6,7 @@ lastmod: "2021-10-16T21:32:43+00:00"
 description: "The most impactful change to Java has been the movement from PermGen to MetaSpace. Among others, learn about the related changes in Java 8."
 authors:
   - "sumith-puri"
-image: "https://foojay.io/wp-content/uploads/2021/02/java.jpg"
+image: "/images/posts/2021/03/evolution-of-java-memory-architecture-post-java-7-0/java.jpg"
 categories:
   - "Performance"
 tags:

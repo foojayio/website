@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:30:04+00:00"
 description: "Modules, Modules, Modules, Modules, everywhere... when will you publish your first Java module to Maven Central?"
 authors:
   - "sormuras"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/02/modules-modules-everywhere/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

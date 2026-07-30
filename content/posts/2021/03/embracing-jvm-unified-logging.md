@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:25:52+00:00"
 description: "In the previous post, I briefly introduced unified logging and a simple GC configuration. For the savvy GC tuners, there are many options."
 authors:
   - "brice-dutheil"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/03/embracing-jvm-unified-logging/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

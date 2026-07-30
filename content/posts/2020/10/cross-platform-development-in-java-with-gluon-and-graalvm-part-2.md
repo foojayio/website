@@ -6,7 +6,7 @@ lastmod: "2021-08-23T12:59:49+00:00"
 description: "Gluon is a company that enables Java on desktop, embedded, and mobile with a rich, full-featured, JavaFX user interface."
 authors:
   - "bruno-lowagie"
-image: "https://foojay.io/wp-content/uploads/2020/10/gluon-bruno-overview.png"
+image: "/images/posts/2020/10/cross-platform-development-in-java-with-gluon-and-graalvm-part-2/gluon-bruno-overview.png"
 categories:
   - "Gluon"
 tags:

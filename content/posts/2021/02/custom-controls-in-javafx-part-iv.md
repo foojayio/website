@@ -6,7 +6,7 @@ lastmod: "2021-02-19T08:22:37+00:00"
 description: "Continuing the JavaFX custom control series, next I will show you how to create a custom control in JavaFX by using Control and Skin classes."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2021/01/gauge-510x510.png"
+image: "/images/posts/2021/02/custom-controls-in-javafx-part-iv/gauge-510x510.png"
 categories:
   - "JavaFX"
 tags:

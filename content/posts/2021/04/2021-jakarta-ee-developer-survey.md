@@ -6,7 +6,7 @@ lastmod: "2021-08-23T15:33:35+00:00"
 description: "Help to provide valuable insight into the state of the community ti better understand the top priorities for future Jakarta EE releases!"
 authors:
   - "ivar-grimstad"
-image: "https://foojay.io/wp-content/uploads/2021/04/JakartaEESurvey2021_medium.png"
+image: "/images/posts/2021/04/2021-jakarta-ee-developer-survey/JakartaEESurvey2021_medium.png"
 categories:
   - "Jakarta EE"
   - "Microservices"

@@ -7,7 +7,7 @@ description: "This article will demonstrate how to deploy a Spring Boot applicat
 canonical: "https://ashishtechmill.com/running-simple-spring-boot-application-on-openshift"
 authors:
   - "yrashish"
-image: "https://foojay.io/wp-content/uploads/2021/02/New_OpenShift_Featured_Image.png"
+image: "/images/posts/2021/03/running-spring-boot-applications-on-openshift/New_OpenShift_Featured_Image.png"
 categories:
   - "Spring"
 tags:

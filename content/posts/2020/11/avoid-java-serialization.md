@@ -6,7 +6,7 @@ lastmod: "2020-11-11T08:48:40+00:00"
 description: "If you need to Deserialize an inputstream yourself, you should use an ObjectsInputStream with restrictions."
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/11/avoid-java-serialization/Favicon-3-2.png"
 categories:
   - "Security"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2021-10-11T12:38:41+00:00"
 description: "Gang of Four patterns are legend, let's walk through examples of the Observer, Factory, Command, Singleton, Decorator, and Factory Patterns."
 authors:
   - "sumith-puri"
-image: "https://foojay.io/wp-content/uploads/2021/02/java.jpg"
+image: "/images/posts/2021/04/gang-of-four-design-patterns-using-core-java-part-01/java.jpg"
 categories:
   - "Tutorials"
   - "Videos"

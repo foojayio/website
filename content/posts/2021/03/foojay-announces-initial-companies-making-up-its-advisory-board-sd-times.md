@@ -6,7 +6,7 @@ lastmod: "2021-03-26T14:24:15+00:00"
 description: "Azul, Datadog, DataStax, JFrog, Payara, and Snyk are the initial companies that will be a part of the advisory board."
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2021/03/image-3-1024x385.png"
+image: "/images/posts/2021/03/foojay-announces-initial-companies-making-up-its-advisory-board-sd-times/image-3-1024x385.png"
 categories:
   - "Press"
 tags:

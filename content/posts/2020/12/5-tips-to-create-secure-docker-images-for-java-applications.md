@@ -7,7 +7,7 @@ description: "Naively creating custom Docker images for Java apps comes with sec
 canonical: "https://snyk.io/blog/docker-for-java-developers/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/12/adoptopenjdk-graph-1.png"
+image: "/images/posts/2020/12/5-tips-to-create-secure-docker-images-for-java-applications/adoptopenjdk-graph-1.png"
 categories:
   - "Security"
 tags:

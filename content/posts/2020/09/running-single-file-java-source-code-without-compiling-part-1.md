@@ -7,7 +7,7 @@ description: "From OpenJDK 11 onwards, you get the option to launch a single Jav
 canonical: "https://www.infoq.com/articles/single-file-execution-java11/"
 authors:
   - "mohamed-taman"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/09/running-single-file-java-source-code-without-compiling-part-1/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

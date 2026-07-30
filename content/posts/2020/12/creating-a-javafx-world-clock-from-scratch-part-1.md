@@ -6,7 +6,7 @@ lastmod: "2022-04-30T03:38:36+00:00"
 description: "I would like to show you how I created a \"sci-fi\" looking world clock that happens to be a cross-platform Java desktop application."
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2020/12/Screen-Shot-2020-12-07-at-3.57.09-PM-286x510.png"
+image: "/images/posts/2020/12/creating-a-javafx-world-clock-from-scratch-part-1/Screen-Shot-2020-12-07-at-3.57.09-PM-286x510.png"
 categories:
   - "IntelliJ IDEA"
   - "JavaFX"

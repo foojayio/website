@@ -6,7 +6,7 @@ lastmod: "2021-02-26T08:31:10+00:00"
 description: "Learn how to create a custom Control based on the JavaFX Region class. The Region class is the class that all JavaFX controls are based on."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2021/02/buttons.png"
+image: "/images/posts/2021/02/custom-controls-in-javafx-part-v/buttons.png"
 categories:
   - "JavaFX"
 tags:

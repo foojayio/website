@@ -6,7 +6,7 @@ lastmod: "2021-08-23T13:01:07+00:00"
 description: "Here on foojay.io you can already find two posts by Carl Dea to get you started with JavaFX. In this post, I want to show you yet another approach that uses the tools provided by Gluon, who are the maintainers, and the driving force behind OpenJFX. The Gluon start website and the plugin allow you to get started with a new JavaFX project in a few clicks. Thanks to the amazing work done by the Gluon team this also gives you a quick-start for the creation of a mobile application which can be built for both Android and iOS. - by Frank Delporte"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/11/Screenshot-from-2020-11-16-08-33-50-1024x434.png"
+image: "/images/posts/2020/11/starting-a-javafx-project-with-gluon-tools/Screenshot-from-2020-11-16-08-33-50-1024x434.png"
 categories:
   - "Gluon"
   - "IntelliJ IDEA"

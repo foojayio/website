@@ -6,7 +6,7 @@ lastmod: "2021-02-12T10:07:33+00:00"
 description: "In the ongoing series on custom JavaFX controls, learn how to create a custom JavaFX control by extending an existing control."
 authors:
   - "gerrit-grunwald"
-image: "https://foojay.io/wp-content/uploads/2021/01/Extended-Control-2021-01-27-12-52-07.png"
+image: "/images/posts/2021/02/custom-controls-in-javafx-part-iii/Extended-Control-2021-01-27-12-52-07.png"
 categories:
   - "JavaFX"
 tags:

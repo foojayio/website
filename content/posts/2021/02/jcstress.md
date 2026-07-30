@@ -7,7 +7,7 @@ description: "Writing concurrent programs is hard, testing concurrent programs i
 canonical: "https://jfeatures.com/blog/jcstress"
 authors:
   - "vipin-sharma"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/02/jcstress/Favicon-3-2.png"
 categories:
   - "Tools"
 tags:

@@ -7,7 +7,7 @@ description: "Kubernetes is much more than a runtime platform -- through its API
 canonical: "https://blog.payara.fish/creating-a-kubernetes-operator-in-java"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2021/01/kuber.jpg"
+image: "/images/posts/2021/01/creating-a-kubernetes-operator-in-java/kuber.jpg"
 categories:
   - "Kubernetes"
   - "Videos"

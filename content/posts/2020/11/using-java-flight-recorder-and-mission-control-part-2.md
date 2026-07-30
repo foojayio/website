@@ -6,7 +6,7 @@ lastmod: "2025-02-17T09:27:47+00:00"
 description: "Continuing from part 1, to exploit the recording by analyzing it, we have a tool named jfr that ships with the JDK. Let's get started!"
 authors:
   - "brice-dutheil"
-image: "https://foojay.io/wp-content/uploads/2020/11/chunk.png"
+image: "/images/posts/2020/11/using-java-flight-recorder-and-mission-control-part-2/chunk.png"
 categories:
   - "JDK Flight Recorder"
   - "Tools"

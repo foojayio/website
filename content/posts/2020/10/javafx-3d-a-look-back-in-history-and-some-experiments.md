@@ -6,7 +6,7 @@ lastmod: "2020-11-08T20:53:12+00:00"
 description: "JavaFX 3D really is a hidden gem! I've been using JavaFX already for a long time now but wasn't aware of these 3D features!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/10/Screenshot-from-2020-10-25-22-04-10.png"
+image: "/images/posts/2020/10/javafx-3d-a-look-back-in-history-and-some-experiments/Screenshot-from-2020-10-25-22-04-10.png"
 categories:
   - "Embedded"
   - "JavaFX"

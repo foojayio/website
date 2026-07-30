@@ -7,7 +7,7 @@ description: "In this part, we continue with even more harmful attacks and show 
 canonical: "https://snyk.io/blog/serialization-and-deserialization-in-java/"
 authors:
   - "bmvermeer"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/01/explaining-java-deserialization-vulnerabilities-part-2/Favicon-3-2.png"
 categories:
   - "Security"
 tags:

@@ -7,7 +7,7 @@ description: "The Java SE landscape is strewn with acronyms picked up over the l
 canonical: "https://www.helenjoscott.com/posts/the-java-ecosystem"
 authors:
   - "helenjoscott"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/11/openjdk-jdks-and-every-java-acronym-in-between/Favicon-3-2.png"
 categories:
   - "Uncategorized"
 tags:

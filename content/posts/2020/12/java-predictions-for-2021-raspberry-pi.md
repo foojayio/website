@@ -6,7 +6,7 @@ lastmod: "2021-12-10T13:01:30+00:00"
 description: "To celebrate Java and predict highlights for 2021, several key Foojay participants will share their thoughts, starting with Frank Delporte!"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/12/java-predictions-for-2021-raspberry-pi/Favicon-3-2.png"
 categories:
   - "JavaFX"
   - "Pi4J"

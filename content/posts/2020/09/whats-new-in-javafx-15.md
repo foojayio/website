@@ -6,7 +6,7 @@ lastmod: "2020-09-17T20:01:55+00:00"
 description: "A couple of weeks ago, JavaFX version 15 was released. These are some of the highlights and improvements we’ve selected for you to understand its scope."
 authors:
   - "bruno-lowagie"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/09/whats-new-in-javafx-15/Favicon-3-2.png"
 categories:
   - "JavaFX"
   - "Release Notes"

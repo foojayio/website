@@ -7,7 +7,7 @@ description: "In this article, I will cover Java 16 to its language features, wh
 canonical: "https://blog.jetbrains.com/idea/2021/03/java-16-and-intellij-idea/"
 authors:
   - "mala-gupta"
-image: "https://foojay.io/wp-content/uploads/2020/10/1200px-IntelliJ_IDEA_Logo.svg_.png"
+image: "/images/posts/2021/04/java-16-and-intellij-idea/1200px-IntelliJ_IDEA_Logo.svg_.png"
 categories:
   - "IntelliJ IDEA"
   - "Records"

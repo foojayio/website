@@ -7,7 +7,7 @@ description: "Cloud and microservices come up more in architectural decisions. I
 canonical: "https://blog.payara.fish/java-microservices-cloud"
 authors:
   - "jadon-ortlepp"
-image: "https://foojay.io/wp-content/uploads/2020/11/pizza-service.png"
+image: "/images/posts/2021/01/how-to-bring-your-java-microservices-to-the-cloud/pizza-service.png"
 categories:
   - "Microservices"
   - "Tutorials"

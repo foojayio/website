@@ -7,7 +7,7 @@ description: "Vert.x is open-source reactive polyglot software toolkit from the 
 canonical: "http://www.igfasouza.com/blog/raspberry-pi-vert-x-web-potentiometer/"
 authors:
   - "igor-de-souza"
-image: "https://foojay.io/wp-content/uploads/2021/01/Electronic-Component-Potentiometer-624x631-1.jpg"
+image: "/images/posts/2021/01/vert-x-example-on-the-raspberry-pi-with-a-virtual-potentiometer/Electronic-Component-Potentiometer-624x631-1.jpg"
 categories:
   - "Raspberry Pi"
 tags:

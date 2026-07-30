@@ -7,7 +7,7 @@ description: "I’ve gotten a lot of questions about continuous production profi
 canonical: "http://hirt.se/blog/?p=1288"
 authors:
   - "hirt"
-image: "https://foojay.io/wp-content/uploads/2020/11/kpm-1.png"
+image: "/images/posts/2020/11/continuous-production-profiling-and-diagnostics/kpm-1.png"
 categories:
   - "JDK Flight Recorder"
   - "Observability"

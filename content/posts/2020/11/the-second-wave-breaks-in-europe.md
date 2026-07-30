@@ -6,7 +6,7 @@ lastmod: "2020-11-27T10:15:35+00:00"
 description: "With the Software ECG Covid-19 Edition, you can evaluate the most important Covid-19 time series across countries. Read on for details!"
 authors:
   - "johannes-weigend"
-image: "https://foojay.io/wp-content/uploads/2020/11/ekg-2-1.png"
+image: "/images/posts/2020/11/the-second-wave-breaks-in-europe/ekg-2-1.png"
 categories:
   - "JavaFX"
 tags:

@@ -6,7 +6,7 @@ lastmod: "2022-04-30T03:41:23+00:00"
 description: "Building Java apps using the new module system can be a challenge, here I will show you how I was able to build a modern MVC based JavaFX UI!"
 authors:
   - "carldea"
-image: "https://foojay.io/wp-content/uploads/2021/03/Screen-Shot-2021-03-25-at-4.04.43-PM.png"
+image: "/images/posts/2021/04/creating-a-javafx-world-clock-from-scratch-part-3/Screen-Shot-2021-03-25-at-4.04.43-PM.png"
 categories:
   - "Bach"
   - "JavaFX"

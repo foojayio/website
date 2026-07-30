@@ -8,7 +8,7 @@ canonical: "https://webtechie.be/post/2020-05-07-getting-started-with-fxgl/"
 authors:
   - "almasbaimagambetov"
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/11/getting-started-with-fxgl-game-development/Favicon-3-2.png"
 categories:
   - "Game Development"
   - "JavaFX"

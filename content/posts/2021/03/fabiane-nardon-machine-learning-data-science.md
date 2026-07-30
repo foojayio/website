@@ -6,7 +6,7 @@ lastmod: "2023-01-08T07:39:57+00:00"
 description: "I spoke with Fabiane recently about Tail Target, its objectives, the theory behind it, and the underlying technology. Read on!"
 authors:
   - "kevinfarnham"
-image: "https://foojay.io/wp-content/uploads/2021/03/fabiane@tailtarget.com_8314_small-2-700x467.jpg"
+image: "/images/posts/2021/03/fabiane-nardon-machine-learning-data-science/fabiane-tailtarget.com_8314_small-2-700x467.jpg"
 categories:
   - "Interviews"
   - "Machine Learning"

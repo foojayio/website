@@ -7,7 +7,7 @@ description: "One of the super cool things about IntelliJ IDEA is how much code 
 canonical: "https://www.helenjoscott.com/posts/generating-code-with-intellij-idea"
 authors:
   - "helenjoscott"
-image: "https://foojay.io/wp-content/uploads/2021/02/generate-code.png"
+image: "/images/posts/2021/02/generating-code-with-intellij-idea/generate-code.png"
 categories:
   - "IntelliJ IDEA"
 tags:

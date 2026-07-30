@@ -6,7 +6,7 @@ lastmod: "2021-02-22T11:09:11+00:00"
 description: "Subject to change, here's the schedule for FOSDEM 2021, a virtual event this year on 6 and 7 February, for the Friends of OpenJDK devroom!"
 authors:
   - "geertjan-wielenga"
-image: "https://foojay.io/wp-content/uploads/2021/01/image-3-1024x813.png"
+image: "/images/posts/2021/01/friends-of-openjdk-schedule-at-fosdem-2021/image-3-1024x813.png"
 categories:
   - "Events"
 tags:

@@ -7,7 +7,7 @@ description: "The same application was developed in both Spring and Quarkus. The
 canonical: "https://webtechie.be/post/2020-07-28-spring-versus-quarkus-rest-h2-db-on-raspberry-pi/"
 authors:
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2020/09/db_sensor.jpg"
+image: "/images/posts/2020/09/startup-spring-quarkus-raspberry-pi/db_sensor.jpg"
 categories:
   - "Performance"
   - "Raspberry Pi"

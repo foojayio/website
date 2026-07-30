@@ -6,7 +6,7 @@ lastmod: "2023-02-13T12:18:59+00:00"
 description: "Did you know \"var\" won’t work with a null assignment because no specific type can be inferred and we cannot declare a variable of null type?"
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/02/much-ado-about-nothing-in-java/Favicon-3-2.png"
 categories:
   - "Java Core"
 tags:

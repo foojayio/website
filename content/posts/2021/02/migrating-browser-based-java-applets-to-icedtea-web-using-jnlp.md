@@ -6,7 +6,7 @@ lastmod: "2023-05-16T13:40:49+00:00"
 description: "Let's use a 20 year old JAR, once created for a Java Applet to be run in the Java 1.1 Browser Plugin... and run it on JDK 11!"
 authors:
   - "holger-isenberg"
-image: "https://foojay.io/wp-content/uploads/2021/01/image-11-1024x825.png"
+image: "/images/posts/2021/02/migrating-browser-based-java-applets-to-icedtea-web-using-jnlp/image-11-1024x825.png"
 categories:
   - "Java Core"
 tags:

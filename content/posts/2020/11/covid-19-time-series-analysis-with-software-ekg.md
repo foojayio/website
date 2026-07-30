@@ -6,7 +6,7 @@ lastmod: "2020-11-20T10:55:47+00:00"
 description: "Our goal is to provide you with raw data on COVID-19, with a tool that lets you analyze, visualize, and interpret the impact of the pandemic."
 authors:
   - "johannes-weigend"
-image: "https://foojay.io/wp-content/uploads/2020/11/software-ekg-covid-01-1024x555.png"
+image: "/images/posts/2020/11/covid-19-time-series-analysis-with-software-ekg/software-ekg-covid-01-1024x555.png"
 categories:
   - "JavaFX"
   - "Release Notes"

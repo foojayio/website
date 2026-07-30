@@ -6,7 +6,7 @@ lastmod: "2020-09-28T07:31:25+00:00"
 description: "See that the time to execute the bytecode for a simple program is a small fraction of the time to compile it using javac."
 authors:
   - "kevinfarnham"
-image: "https://foojay.io/wp-content/uploads/2020/09/SumNumbers.class.png"
+image: "/images/posts/2020/09/compiling-java-code-executing-bytecode/SumNumbers.class.png"
 categories:
   - "Performance"
 tags:

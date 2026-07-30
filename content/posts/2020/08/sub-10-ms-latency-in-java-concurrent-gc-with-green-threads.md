@@ -6,7 +6,7 @@ lastmod: "2021-03-25T18:08:36+00:00"
 description: "Same problem from the opposite angle: what can we do to help Hazelcast Jet achieve the best performance available on a JVM?"
 authors:
   - "marko-topolnik"
-image: "https://foojay.io/wp-content/uploads/2021/03/2020-08-05-dag1-700x387.png"
+image: "/images/posts/2020/08/sub-10-ms-latency-in-java-concurrent-gc-with-green-threads/2020-08-05-dag1-700x387.png"
 categories:
   - "Performance"
 tags:

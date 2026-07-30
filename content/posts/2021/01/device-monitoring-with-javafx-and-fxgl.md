@@ -7,7 +7,7 @@ description: "In this article, we will be building a system monitoring dashboard
 authors:
   - "almasbaimagambetov"
   - "frankdelporte"
-image: "https://foojay.io/wp-content/uploads/2021/01/diagram.png"
+image: "/images/posts/2021/01/device-monitoring-with-javafx-and-fxgl/diagram.png"
 categories:
   - "JavaFX"
   - "Raspberry Pi"

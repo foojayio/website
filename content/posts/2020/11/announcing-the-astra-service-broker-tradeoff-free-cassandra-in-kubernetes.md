@@ -7,7 +7,7 @@ description: "DataStax Astra Service Broker: seamlessly integrate Cassandra into
 canonical: "https://www.datastax.com/blog/2020/11/announcing-astra-service-broker-tradeoff-free-cassandra-kubernetes"
 authors:
   - "christopher-bradford"
-image: "https://foojay.io/wp-content/uploads/2021/06/astra-service-broker.png"
+image: "/images/posts/2020/11/announcing-the-astra-service-broker-tradeoff-free-cassandra-in-kubernetes/astra-service-broker.png"
 categories:
   - "Apache Cassandra"
   - "Databases"

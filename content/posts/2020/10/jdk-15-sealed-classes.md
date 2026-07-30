@@ -7,7 +7,7 @@ description: "The most significant new feature in JDK 15, and the only change to
 canonical: "https://www.azul.com/jdk-15-release-64-new-features-and-apis/"
 authors:
   - "simonritter"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2020/10/jdk-15-sealed-classes/Favicon-3-2.png"
 categories:
   - "Sealed Classes"
 tags:

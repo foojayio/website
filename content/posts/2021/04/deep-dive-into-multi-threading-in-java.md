@@ -6,7 +6,7 @@ lastmod: "2021-10-11T12:39:53+00:00"
 description: "Multi-threading is a very intriguing topic, even after years of research and development for high quality, robust, and efficient software."
 authors:
   - "sumith-puri"
-image: "https://foojay.io/wp-content/uploads/2021/02/java.jpg"
+image: "/images/posts/2021/04/deep-dive-into-multi-threading-in-java/java.jpg"
 categories:
   - "Uncategorized"
 tags:

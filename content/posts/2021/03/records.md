@@ -7,7 +7,7 @@ description: "Record classes provide a way to model data in Java, simplifying co
 canonical: "https://jfeatures.com/blog/records"
 authors:
   - "vipin-sharma"
-image: "https://foojay.io/wp-content/uploads/2020/04/Favicon-3-2.png"
+image: "/images/posts/2021/03/records/Favicon-3-2.png"
 categories:
   - "Records"
 tags:

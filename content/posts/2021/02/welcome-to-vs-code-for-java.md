@@ -6,7 +6,7 @@ lastmod: "2023-04-11T07:05:42+00:00"
 description: "VS Code has been used by more and more Java developers to edit, build, run, debug, test and deploy their code and manage their projects."
 authors:
   - "yaojin-yang"
-image: "https://foojay.io/wp-content/uploads/2021/02/Importing-project-notification.png"
+image: "/images/posts/2021/02/welcome-to-vs-code-for-java/Importing-project-notification.png"
 categories:
   - "Java Beginner"
   - "Tools"

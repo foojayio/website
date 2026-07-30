@@ -7,7 +7,7 @@ description: "Kotlin offers many cool features, most tend to cite null safety as
 canonical: "https://blog.frankel.ch/kotlin-delegation/"
 authors:
   - "nicolas-frankel"
-image: "https://foojay.io/wp-content/uploads/2021/04/startup-883575_1280.jpg"
+image: "/images/posts/2021/04/kotlin-delegation/startup-883575_1280.jpg"
 categories:
   - "Kotlin"
   - "Research"

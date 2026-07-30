@@ -6,7 +6,7 @@ lastmod: "2021-09-16T14:49:21+00:00"
 description: "What types of garbage collection is available at the market, what GC does for Java applications and how it works within Jelastic PaaS."
 authors:
   - "tetiana-fydorenchyk"
-image: "https://foojay.io/wp-content/uploads/2021/04/java-garbage-collection-choice.png"
+image: "/images/posts/2021/04/java-garbage-collection-types-and-settings-customization-via-jelastic-paas/java-garbage-collection-choice.png"
 categories:
   - "Jakarta EE"
   - "Jelastic"
