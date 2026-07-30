@@ -32,7 +32,7 @@
                   {{ if gt $plain 0 }}
                   <ul class="nav-panel__list">
                     {{ range .Children }}{{ if not .HasChildren }}
-                      <li><a href="{{ .URL | strings.TrimPrefix "/" | relURL }}">{{ .Name }}{{ with .Params.desc }}<span class="nav-panel__desc">{{ . }}</span>{{ end }}</a></li>
+                      <li><a href="{{ .URL | relURL }}">{{ .Name }}{{ with .Params.desc }}<span class="nav-panel__desc">{{ . }}</span>{{ end }}</a></li>
                     {{ end }}{{ end }}
                   </ul>
                   {{ end }}
@@ -41,10 +41,10 @@
                        nested hover flyout — the main fix vs. the WordPress nav. */}}
                   {{ range .Children }}{{ if .HasChildren }}
                     <div class="nav-group">
-                      <a class="nav-group__title" href="{{ .URL | strings.TrimPrefix "/" | relURL }}">{{ .Name }}</a>
+                      <a class="nav-group__title" href="{{ .URL | relURL }}">{{ .Name }}</a>
                       <ul class="nav-panel__list">
                         {{ range .Children }}
-                          <li><a href="{{ .URL | strings.TrimPrefix "/" | relURL }}">{{ .Name }}</a></li>
+                          <li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>
                         {{ end }}
                       </ul>
                     </div>
@@ -61,7 +61,7 @@
             </li>
           {{ else }}
             <li class="nav-item">
-              <a class="nav-link" href="{{ .URL | strings.TrimPrefix "/" | relURL }}"
+              <a class="nav-link" href="{{ .URL | relURL }}"
                  {{ if $page.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>{{ .Name }}</a>
             </li>
           {{ end }}
