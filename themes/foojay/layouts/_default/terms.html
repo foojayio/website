@@ -1,0 +1,17 @@
+{{ define "main" }}
+<div class="page-head">
+  <div class="page-head__inner">
+    <span class="eyebrow">Browse</span>
+    <h1>{{ .Title }}</h1>
+    <p>All {{ .Data.Plural }} used across foojay.io.</p>
+  </div>
+</div>
+
+<div class="content-col full-width">
+  <div class="chip-row chip-row--lg">
+    {{ range .Data.Terms.ByCount }}
+      <a href="{{ .Page.Permalink }}">{{ .Page.Title }} <span class="chip-count">{{ .Count }}</span></a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

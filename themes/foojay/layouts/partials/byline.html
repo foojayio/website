@@ -1,0 +1,11 @@
+{{/* Resolves a post's `author:` slug to its author page.
+     Direct GetPage lookup — the previous version scanned every author page for
+     every card, which is O(posts x authors) on a 1000+ post site. */}}
+{{ with .Params.author }}
+  {{ $author := site.GetPage (printf "/authors/%s" .) }}
+  {{ if $author }}
+    <a class="byline" href="{{ $author.Permalink }}">{{ $author.Title }}</a>
+  {{ else }}
+    <span class="byline">{{ . }}</span>
+  {{ end }}
+{{ end }}

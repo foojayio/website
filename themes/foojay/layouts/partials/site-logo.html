@@ -1,0 +1,9 @@
+{{/* One logo, two places. The PNG already contains the "foojay.io" wordmark, so
+     when params.logo is set it REPLACES the text mark rather than sitting next
+     to it. Height-sized so any aspect ratio works. Falls back to the text
+     wordmark when no logo file is configured. */}}
+{{ with .Site.Params.logo }}
+  <img class="logo__img" src="{{ . | relURL }}" alt="foojay.io">
+{{ else }}
+  <span class="logo__word"><b>foojay</b><span class="dot">.io</span></span>
+{{ end }}

@@ -1,0 +1,18 @@
+<article class="post-card post-card--lead">
+  {{ with .Params.image }}
+  <a href="{{ $.Permalink }}" class="post-card-image" tabindex="-1" aria-hidden="true">
+    <img src="{{ . }}" alt="" decoding="async">
+  </a>
+  {{ end }}
+  <div class="post-card-body">
+    <div class="post-card-meta">
+      <span class="eyebrow">Most recent</span>
+    </div>
+    <h2 class="post-card-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+    {{ with .Params.description }}<p class="post-card-excerpt">{{ . | truncate 210 }}</p>{{ end }}
+    <div class="post-card-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+      {{ partial "byline.html" . }}
+    </div>
+  </div>
+</article>
