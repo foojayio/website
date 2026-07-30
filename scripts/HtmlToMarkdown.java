@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -63,6 +64,16 @@ public final class HtmlToMarkdown {
             ".wp-block-gallery", "figure.gallery", ".gallery");
     private static final String PRESERVE_TOKEN = "PRESERVEDHTMLBLOCKZZ";
     private static final String PRESERVE_TOKEN_END = "ZZEND";
+
+    // YouTube embeds are turned into Hugo's built-in {{< youtube ID >}} shortcode
+    // instead of kept as a raw <iframe> (handled before SELECTOR_PRESERVE, which
+    // would otherwise catch the wrapping figure.wp-block-embed).
+    private static final String SELECTOR_YOUTUBE = String.join(", ",
+            "figure.wp-block-embed-youtube", "figure.is-provider-youtube",
+            "iframe[src*=\"youtube.com/embed\"]", "iframe[src*=\"youtube-nocookie.com/embed\"]",
+            "iframe[src*=\"youtu.be/\"]");
+    private static final Pattern YOUTUBE_ID = Pattern.compile(
+            "(?:youtube(?:-nocookie)?\\.com/embed/|youtu\\.be/|[?&]v=)([A-Za-z0-9_-]{6,})");
 
     // Images hosted on foojay.io die at cutover, so they are pulled local.
     // Third-party images (youtube thumbs, badges, ...) are left untouched.
@@ -119,13 +130,25 @@ public final class HtmlToMarkdown {
     // ---- html -> markdown ------------------------------------------------
 
     /**
-     * Converts the body to Markdown. Load-bearing HTML blocks (see
-     * SELECTOR_PRESERVE) are swapped out for placeholder tokens first, so the
-     * converter can't flatten away the classes/attributes they depend on, then
-     * restored verbatim afterwards.
+     * Converts the body to Markdown. YouTube embeds become {{< youtube ID >}}
+     * shortcodes; other load-bearing HTML blocks (see SELECTOR_PRESERVE) are
+     * swapped out for placeholder tokens so the converter can't flatten away the
+     * classes/attributes they depend on. Both are restored after conversion (the
+     * shortcode/raw HTML never passes through the Markdown converter).
      */
     static String toMarkdown(Element content) {
         List<String> preserved = new ArrayList<>();
+
+        // YouTube embeds -> Hugo shortcode. Done first so the wrapping
+        // figure.wp-block-embed isn't grabbed by SELECTOR_PRESERVE below.
+        for (Element el : outermostMatches(content, SELECTOR_YOUTUBE)) {
+            String id = youtubeId(el);
+            if (id == null) continue; // unparseable -> leave for the raw-HTML preserve pass
+            String token = PRESERVE_TOKEN + preserved.size() + PRESERVE_TOKEN_END;
+            preserved.add("{{< youtube " + id + " >}}");
+            el.replaceWith(new Element("p").text(token));
+        }
+
         for (Element el : outermostMatches(content, SELECTOR_PRESERVE)) {
             String token = PRESERVE_TOKEN + preserved.size() + PRESERVE_TOKEN_END;
             preserved.add(el.outerHtml());
@@ -138,7 +161,20 @@ public final class HtmlToMarkdown {
             md = md.replace(PRESERVE_TOKEN + i + PRESERVE_TOKEN_END,
                     "\n\n" + preserved.get(i) + "\n\n");
         }
+        // Collapse runs of blank lines (left by placeholder restoration and the
+        // converter) down to a single blank line. Treats whitespace-only lines as
+        // blank, but leaves a content line's trailing spaces (Markdown hard breaks).
+        md = md.replaceAll("\\n(?:[ \\t]*\\n)+", "\n\n");
         return md.trim();
+    }
+
+    /** Extracts the video id from a YouTube embed element (a figure wrapping an
+     *  iframe, or the iframe itself), or null if it can't be parsed. */
+    static String youtubeId(Element el) {
+        Element iframe = "iframe".equals(el.tagName()) ? el : el.selectFirst("iframe[src]");
+        if (iframe == null) return null;
+        Matcher m = YOUTUBE_ID.matcher(iframe.attr("src"));
+        return m.find() ? m.group(1) : null;
     }
 
     /** Matched elements that are not themselves nested inside another match. */

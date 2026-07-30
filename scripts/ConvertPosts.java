@@ -108,8 +108,11 @@ public class ConvertPosts {
     static final String SELECTOR_CONTENT_NOISE =
             "h1, .article__details, .article__tags, .article__author, .article-stats-container,"
             + " .article__table, .section-teaser, .teaser, .homepage-today__guide, script, style";
-    static final String SELECTOR_CATEGORY_LINKS = "a[href*=/today/category/]";
-    static final String SELECTOR_TAG_LINKS = "a[href*=/today/tag/]";
+    // Scope to the post's own taxonomy block (.article__tags). A bare
+    // a[href*=/today/category/] also matches the nav/sidebar menu (every post
+    // would get "Podcast", "JC-AI Newsletter", ...) and related-post cards.
+    static final String SELECTOR_CATEGORY_LINKS = ".article__tags a[href*=/today/category/]";
+    static final String SELECTOR_TAG_LINKS = ".article__tags a[href*=/today/tag/]";
     // Authors: scope to the post's own author bio block(s). A bare
     // a[href*=/today/author/] also matches the nav "Authors" link (slug "authors")
     // and the related-post cards' author links -- both wrong. A post can carry
