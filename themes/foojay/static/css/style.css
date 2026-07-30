@@ -817,3 +817,12 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .prose .wp-block-gallery figure { flex: 1 1 45%; margin: 0; }
 .prose .wp-block-gallery img { width: 100%; height: auto; }
 .prose figure::after { content: ""; display: block; clear: both; }
+
+/* --- Click-to-enlarge lightbox (js/lightbox.js) --- */
+.prose img.is-zoomable, img.post-hero.is-zoomable { cursor: zoom-in; }
+.lightbox { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.85); padding: 2rem; }
+.lightbox.is-open { display: flex; }
+.lightbox__img { max-width: 96vw; max-height: 92vh; width: auto; height: auto; border-radius: 4px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); cursor: zoom-out; }
+.lightbox__close { position: absolute; top: 0.75rem; right: 1.25rem; background: none; border: 0; color: #fff; font-size: 2.4rem; line-height: 1; cursor: pointer; padding: 0.25rem 0.5rem; }
+.lightbox__close:hover { opacity: 0.8; }
+body.lightbox-open { overflow: hidden; }

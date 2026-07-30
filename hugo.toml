@@ -12,6 +12,10 @@ enableRobotsTXT = true
 [permalinks]
   posts = "/today/:slug/"
   authors = "/today/author/:slug/"
+  # Taxonomy term pages live under /today/ too, matching the links the theme and
+  # the WordPress site use (default would be /categories/… and /tags/…).
+  categories = "/today/category/:slug/"
+  tags = "/today/tag/:slug/"
 
 [taxonomies]
   category = "categories"
