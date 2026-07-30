@@ -200,6 +200,9 @@ public final class HtmlToMarkdown {
         appendParam(sb, "alt", img.attr("alt"));
         appendParam(sb, "width", img.attr("width"));
         appendParam(sb, "height", img.attr("height"));
+        // Honour an author-set display size (WordPress "is-resized" puts it in an
+        // inline style, e.g. width:300px) so the image isn't rendered oversized.
+        appendParam(sb, "style", img.attr("style"));
         appendParam(sb, "caption", caption != null ? caption.text() : "");
         return sb.append(" >}}").toString();
     }

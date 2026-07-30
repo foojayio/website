@@ -726,6 +726,9 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 
 /* Long-form body copy */
 .prose { font-size: 1.09rem; }
+/* Contain floated images (alignleft/alignright) so a trailing float can't
+   escape the article and overlap the footer. */
+.prose::after { content: ""; display: block; clear: both; }
 .prose > * + * { margin-top: 1.1em; }
 .prose h2 { margin-top: 2.25rem; }
 .prose h3 { margin-top: 1.75rem; }

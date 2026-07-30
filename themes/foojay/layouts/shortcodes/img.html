@@ -7,6 +7,6 @@
   {{- $src = $src | strings.TrimPrefix "/" | relURL -}}
 {{- end -}}
 <figure{{ with .Get "class" }} class="{{ . }}"{{ end }}>
-  <img src="{{ $src }}" alt="{{ .Get "alt" }}"{{ with .Get "width" }} width="{{ . }}"{{ end }}{{ with .Get "height" }} height="{{ . }}"{{ end }} loading="lazy" class="is-zoomable">
+  <img src="{{ $src }}" alt="{{ .Get "alt" }}"{{ with .Get "width" }} width="{{ . }}"{{ end }}{{ with .Get "height" }} height="{{ . }}"{{ end }}{{ with .Get "style" }} style="{{ . | safeCSS }}"{{ end }} loading="lazy" class="is-zoomable">
   {{- with .Get "caption" }}<figcaption class="wp-element-caption">{{ . }}</figcaption>{{ end -}}
 </figure>

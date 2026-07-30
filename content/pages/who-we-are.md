@@ -8,11 +8,8 @@ aliases:
 frozen: false
 ---
 
-<figure class="alignleft size-large is-resized">
- <img fetchpriority="high" decoding="async" width="666" height="681" src="/images/pages/who-we-are/Foojay-and-Java-Duke-with-weblink.png" alt="" class="wp-image-123870" style="width:300px">
-</figure>
+{{< img src="/images/pages/who-we-are/Foojay-and-Java-Duke-with-weblink.png" class="alignleft size-large is-resized" width="666" height="681" style="width:300px" >}}
 
-  
 Foojay - **F** riends **O** f **O** pen**J**DK - is the integrated dashboard for all things Java: a central resource for daily information, curated highlights and categorized reference material for the Java community.
 
 Rather than one single blog or one vendor's view, Foojay collates news, technical deep-dives, release data and community voices into one place - free, vendor-neutral and created by the Java community.
@@ -43,16 +40,8 @@ Oracle owns the trademark on Java and OpenJDK, and it's not allowed to use those
 Logo
 ----
 
-The logos are stored in this [GitHub repository](https://github.com/foojayio/foojay-logo) in various formats.  
+The logos are stored in this [GitHub repository](https://github.com/foojayio/foojay-logo) in various formats.
 
+{{< img src="/images/pages/who-we-are/foojay_podcast.png" class="alignleft size-large is-resized" width="1024" height="1024" style="width:300px" >}}
 
-<figure class="alignleft size-large is-resized">
- <img decoding="async" width="1024" height="341" src="/images/pages/who-we-are/foojay_logo-1024x341.png" alt="" class="wp-image-123869" style="width:300px">
-</figure>
-
-  
-
-
-<figure class="alignleft size-large is-resized">
- <img decoding="async" width="1024" height="1024" src="/images/pages/who-we-are/foojay_podcast.png" alt="" class="wp-image-123871" style="width:300px">
-</figure>
+{{< img src="/images/pages/who-we-are/foojay_logo-1024x341.png" class="alignleft size-large is-resized" width="1024" height="341" style="width:300px" >}}
