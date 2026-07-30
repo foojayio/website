@@ -38,13 +38,19 @@
   var results = document.getElementById('search-page-results');
   var pagefindUrl = {{ "pagefind/pagefind.js" | relURL }};
 
-  // Matches Hugo's section names (content/posts, content/authors,
-  // content/pages, content/pedia), tagged onto every page via
-  // data-pagefind-filter="section:..." on <main> in baseof.html. Order here
-  // is the section-header order in results; anything not listed (a future
-  // content section) still gets shown, just after these, alphabetically.
-  var SECTION_ORDER = ['posts', 'authors', 'pages', 'pedia'];
-  var SECTION_LABELS = { posts: 'Posts', authors: 'Authors', pages: 'Pages', pedia: 'Pedia' };
+  // Matches Hugo's section names (content/authors, content/pedia,
+  // content/posts, content/pages, plus the "categories"/"tags" taxonomies),
+  // tagged onto every page via data-pagefind-filter="section:..." on <main>
+  // in baseof.html. Order here is the section-header order in results, and
+  // only sections that actually have a result are ever shown (see the
+  // Object.keys(groups) below -- a key only exists if something got pushed
+  // into it). Anything not listed here (a future content section, or a new
+  // taxonomy) still gets shown, just after these, alphabetically.
+  var SECTION_ORDER = ['authors', 'pedia', 'posts', 'pages', 'categories'];
+  var SECTION_LABELS = {
+    authors: 'Author', pedia: 'Pedia', posts: 'Post', pages: 'Page',
+    categories: 'Category', tags: 'Tag'
+  };
 
   var pagefindPromise = import(pagefindUrl).catch(function () { return null; });
 
