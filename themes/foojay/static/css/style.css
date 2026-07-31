@@ -976,3 +976,50 @@ body.lightbox-open { overflow: hidden; }
 @media (max-width: 560px) {
   .prose .team-member__photo { width: 96px; height: 96px; margin-right: 1rem; }
 }
+
+/* --- "Where to find us" page: two-column grid of boxed items --- */
+.where-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+.where-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.where-card__img {
+  display: block; width: auto; max-width: 160px; height: auto;
+  margin: 0 0 1rem;
+}
+.where-card__title { margin: 0 0 .5rem; font-size: 1.15rem; line-height: 1.3; }
+/* Body grows so the link row sits pinned to the bottom, keeping cards tidy
+   even when the intro text is a different length. */
+.where-card__body { flex: 1 1 auto; display: flex; flex-direction: column; }
+.where-card__body > :first-child { margin-top: 0; }
+.where-card__body p:last-child { margin: auto 0 0; padding-top: .75rem; }
+/* Links in the bottom row render as small pill buttons. */
+.where-card__body p:last-child a {
+  display: inline-block;
+  margin: .3rem .4rem 0 0;
+  padding: .32rem .8rem;
+  font-size: .9rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--brand-secondary);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.where-card__body p:last-child a:hover {
+  color: var(--brand-accent-strong);
+  border-color: var(--border-strong);
+}
+@media (max-width: 640px) {
+  .where-grid { grid-template-columns: 1fr; }
+}

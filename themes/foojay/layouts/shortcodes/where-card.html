@@ -1,0 +1,12 @@
+{{- /* One boxed item on the "Where to find us" page. Params: image, title.
+       The body (intro sentence + link row) is the shortcode's inner Markdown,
+       rendered so links still go through the render hooks. src goes through
+       resource-url so it picks up the baseURL subpath. */ -}}
+{{- $src := partial "resource-url.html" (dict "page" .Page "src" (.Get "image")) -}}
+<div class="where-card">
+  {{- with $src }}<img class="where-card__img is-zoomable" src="{{ . }}" alt="{{ $.Get "title" }}" loading="lazy">{{ end }}
+  <h3 class="where-card__title">{{ .Get "title" }}</h3>
+  <div class="where-card__body">
+    {{ .Page.RenderString (dict "display" "block") .Inner }}
+  </div>
+</div>
