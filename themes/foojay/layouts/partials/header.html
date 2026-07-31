@@ -72,7 +72,7 @@
       <div class="header-actions header-actions--mobile">
         {{ partial "search-form.html" . }}
         {{ partial "theme-toggle.html" . }}
-        {{ with .Site.Params.headerCta }}
+        {{ range .Site.Params.headerCta }}
           <a class="btn btn--accent" href="{{ .url | strings.TrimPrefix "/" | relURL }}">{{ .label }}</a>
         {{ end }}
       </div>
@@ -81,7 +81,7 @@
     <div class="header-actions">
       {{ partial "search-form.html" . }}
       {{ partial "theme-toggle.html" . }}
-      {{ with .Site.Params.headerCta }}
+      {{ range .Site.Params.headerCta }}
         <a class="btn btn--accent" href="{{ .url | strings.TrimPrefix "/" | relURL }}">{{ .label }}</a>
       {{ end }}
     </div>
