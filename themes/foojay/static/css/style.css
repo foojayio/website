@@ -756,6 +756,7 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 
 /* /jugs/ page: data/jugs.yaml source note + table (themes/foojay/layouts/jugs/single.html) */
 .jugs-source-note { font-size: .92rem; color: var(--ink-muted); }
+.jugs-map { height: 480px; margin: 1.5rem 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
 .jugs-table__links { font-size: .9rem; white-space: nowrap; }
 .jugs-table__edit { text-decoration: none; opacity: .55; }
 .jugs-table__edit:hover { opacity: 1; }
