@@ -1,0 +1,18 @@
+{{ define "main" }}
+<div class="page-head">
+  <div class="page-head__inner">
+    <span class="eyebrow">404</span>
+    <h1>Page not found</h1>
+    <p>That page doesn't exist, or it moved. Try a search, or head back to the front page.</p>
+  </div>
+</div>
+<div class="content-col full-width">
+  <form class="search-page__form" role="search" action="{{ "search/" | relURL }}" method="get">
+    <label>
+      <span class="u-sr">Search foojay.io</span>
+      <input type="search" name="q" placeholder="Search foojay.io" autocomplete="off">
+    </label>
+  </form>
+  <p><a href="{{ "/" | relURL }}">&larr; Back to the homepage</a></p>
+</div>
+{{ end }}
