@@ -22,11 +22,11 @@ Since September 2026, Foojay.io moved from a WordPress system to a static site b
 
 ## 1. Make sure you have an author profile
 
-Every article needs at least one author, and each author has a profile page under `content/authors/`. Your post's `authors:` frontmatter uses author **slugs** — the filename of the matching profile. For example the profile `content/authors/f/frankdelporte.md` is referenced as `authors: ["frankdelporte"]`.
+Every article needs at least one author, and each author has a profile folder named with the author **slug**, grouped by first letter: `content/authors/<first-letter>/<slug>/`. Your post's `authors:` frontmatter uses that slug. For example the profile `content/authors/f/frankdelporte/` is referenced as `authors: ["frankdelporte"]`.
 
-First, check whether your profile already exists in `content/authors/` (profiles are grouped into a subfolder by the first letter of the slug, e.g. `content/authors/f/`). If it does, use that slug and move on to the next step.
+First, check whether your profile folder already exists under `content/authors/` (look in the folder for the first letter of your slug). If it does, use that folder name as your slug and move on to the next step.
 
-**If it doesn't exist yet, create it and include it in the same submission.** Add a file `content/authors/<first-letter>/<your-slug>.md` — for example `content/authors/j/jane-doe.md` — using `archetypes/authors.md` as a starting point; it lists every field with a comment. At a minimum set `title` (your name) and a short `bio`, and add a square `avatar` photo (small and large format) and social links (Bluesky, Mastodon, LinkedIn, GitHub, YouTube, website). Then use that same slug in your article's `authors:` list.
+**If it doesn't exist yet, create it and include it in the same submission.** Make a folder `content/authors/<first-letter>/<your-slug>/` (e.g. `content/authors/j/jane-doe/`) containing an `index.md`. Start from `archetypes/authors.md`, which lists every field with a comment. At a minimum set `title` (your name) and a short `bio`, and add your social links (Bluesky, Mastodon, LinkedIn, GitHub, YouTube, website). For an avatar, drop a square photo into the folder and reference it by filename: put the small version in `avatar:` and, optionally, a larger version in `avatarFull:`. Then use that folder name as the slug in your article's `authors:` list.
 
 ## 2. Prepare your article folder
 

@@ -8,13 +8,40 @@
 </div>
 
 <div class="content-col full-width">
-  <div class="author-grid">
+  <div class="author-filter">
+    <input type="search" id="author-filter" class="author-filter__input" placeholder="Filter authors by name…" aria-label="Filter authors by name" autocomplete="off">
+  </div>
+  <div class="author-grid" id="author-grid">
     {{ range where .Site.RegularPages "Section" "authors" }}
-      <a class="author-card" href="{{ .Permalink }}">
-        {{ with .Params.avatar }}<img src="{{ . | strings.TrimPrefix "/" | relURL }}" alt="" loading="lazy">{{ end }}
-        <span>{{ .Title }}</span>
+      {{ $author := . }}
+      <a class="author-card" href="{{ .Permalink }}" data-name="{{ lower $author.Title }}">
+        {{ with .Params.avatar }}<img src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}" alt="" loading="lazy">{{ end }}
+        <span>{{ $author.Title }}</span>
       </a>
     {{ end }}
   </div>
+  <p class="author-filter__empty" id="author-filter-empty" hidden>No authors match your filter.</p>
 </div>
+
+{{/* Small client-side filter -- just narrows the visible cards by name; the
+     site-wide search (Pagefind) is separate. */}}
+<script>
+  (function () {
+    var input = document.getElementById('author-filter');
+    var grid = document.getElementById('author-grid');
+    if (!input || !grid) return;
+    var empty = document.getElementById('author-filter-empty');
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.author-card'));
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase();
+      var shown = 0;
+      cards.forEach(function (card) {
+        var match = q === '' || card.getAttribute('data-name').indexOf(q) !== -1;
+        card.hidden = !match;
+        if (match) shown++;
+      });
+      if (empty) empty.hidden = shown !== 0;
+    });
+  })();
+</script>
 {{ end }}

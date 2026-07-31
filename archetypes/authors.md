@@ -1,12 +1,13 @@
 ---
-# hugo new content authors/my-name.md --kind authors
-# The FILENAME is the slug that posts reference in their `author:` field, and
-# it is the URL: /today/author/<filename>/
+# An author is a leaf bundle: content/authors/<first-letter>/<slug>/index.md with
+# the avatar image(s) in the same folder. The FOLDER NAME is the slug that posts
+# reference in their `authors:` list, and it is the URL: /today/author/<folder>/
 title: "{{ replace .Name "-" " " | title }}"
 
-# Square. `avatar` is used in cards and grids (96px is plenty), `avatarFull`
-# on the profile and in the author box under an article. If only one exists,
-# set `avatar` — the layouts fall back to it.
+# Square avatar image(s) placed in THIS folder, referenced by bare filename.
+# `avatar` (small) is used in cards, grids and the author box; `avatarFull`
+# (larger) on the profile page. If only one exists, set `avatar` — the layouts
+# fall back to it. e.g. avatar: "avatar.jpg"
 avatar: ""
 avatarFull: ""
 

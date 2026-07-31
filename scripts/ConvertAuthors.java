@@ -61,8 +61,6 @@ public class ConvertAuthors {
 
     static final String BASE_URL = "https://foojay.io";
     static final Path OUTPUT_DIR = Path.of("content/authors");
-    static final Path IMAGE_DIR = Path.of("static/images/author");
-    static final String AVATAR_URL_PREFIX = "/images/author/";
     static final int REQUEST_TIMEOUT_MS = 20_000;
     static final int POLITE_DELAY_MS = 250;
     static final int MAX_AUTHOR_PAGES = 500; // safety cap; real count is ~38
@@ -78,7 +76,6 @@ public class ConvertAuthors {
 
     public static void main(String[] args) throws Exception {
         Files.createDirectories(OUTPUT_DIR);
-        Files.createDirectories(IMAGE_DIR);
 
         String singleUrl = null;
         for (int i = 0; i < args.length; i++) {
@@ -90,7 +87,7 @@ public class ConvertAuthors {
             AuthorData d = scrapeAuthor(singleUrl, slug);
             localizeAvatars(d);
             writeAuthor(d);
-            System.out.println("Wrote " + bucketFor(d.slug) + "/" + d.slug + ".md (single-author test run), avatar=" + d.avatar);
+            System.out.println("Wrote " + d.slug + "/index.md (single-author test run), avatar=" + d.avatar);
             return;
         }
 
@@ -236,51 +233,39 @@ public class ConvertAuthors {
     }
 
     /**
-     * Pulls the avatar local in two versions:
-     *   avatar      -> the URL as served (foojay's 192x192 thumbnail)
-     *   avatarFull  -> the same URL with the WordPress "-WxH" size suffix
-     *                  stripped, i.e. the full-size original upload
-     * Both land in the author's letter bucket. If stripping the suffix changes
-     * nothing (no sized thumbnail), avatarFull just mirrors avatar.
+     * Pulls the avatar local, co-located in the author's bundle directory
+     * (content/authors/<slug>/), in two versions referenced by bare filename:
+     *   avatar      -> the URL as served (foojay's 192x192 thumbnail) -> <slug>.<ext>
+     *   avatarFull  -> the same URL with the WordPress "-WxH" size suffix stripped,
+     *                  i.e. the full-size original                    -> <slug>-full.<ext>
+     * If stripping the suffix changes nothing, avatarFull just mirrors avatar.
      */
     static void localizeAvatars(AuthorData d) throws IOException {
+        d.bundleDir = bundleDirFor(d.slug);
         if (d.avatar == null || d.avatar.isBlank()) {
             d.avatar = "";
             d.avatarFull = "";
             return;
         }
-        String bucket = bucketFor(d.slug);
+        Path bundleDir = d.bundleDir;
         String remoteThumb = d.avatar;
         String remoteFull = stripWpSize(remoteThumb);
 
-        d.avatar = localizeOne(remoteThumb, d.slug, bucket);
+        d.avatar = localizeAvatar(remoteThumb, d.slug, bundleDir);
         d.avatarFull = remoteFull.equals(remoteThumb)
                 ? d.avatar
-                : localizeOne(remoteFull, d.slug + "-full", bucket);
+                : localizeAvatar(remoteFull, d.slug + "-full", bundleDir);
     }
 
     /**
-     * Localizes one remote image to static/images/author/<bucket>/<baseName>.<ext>.
-     * Reuses an already-downloaded file (moving it into the right bucket if an
-     * older run left it elsewhere); otherwise downloads it. Falls back to the
-     * remote URL if the download fails so the profile still renders.
+     * Downloads one avatar into the bundle dir as <baseName>.<ext> and returns the
+     * bare filename (a page-bundle resource). Reuses an already-downloaded file.
+     * Falls back to the remote URL if the download fails so the profile still renders.
      */
-    static String localizeOne(String remoteUrl, String baseName, String bucket) throws IOException {
-        Path bucketDir = IMAGE_DIR.resolve(bucket);
-        Path existing = findExistingAvatar(baseName);
-        if (existing != null) {
-            Path canonical = bucketDir.resolve(existing.getFileName());
-            if (!existing.equals(canonical)) {
-                Files.createDirectories(bucketDir);
-                Files.move(existing, canonical, StandardCopyOption.REPLACE_EXISTING);
-            }
-            return AVATAR_URL_PREFIX + bucket + "/" + canonical.getFileName();
-        }
-        return downloadAvatar(remoteUrl, baseName, bucket);
-    }
-
-    static String downloadAvatar(String remoteUrl, String baseName, String bucket) {
+    static String localizeAvatar(String remoteUrl, String baseName, Path bundleDir) {
         if (remoteUrl == null || remoteUrl.isBlank()) return "";
+        Path existing = findInDir(bundleDir, baseName);
+        if (existing != null) return existing.getFileName().toString();
         try {
             Connection.Response res = Jsoup.connect(remoteUrl)
                     .userAgent(USER_AGENT)
@@ -288,32 +273,31 @@ public class ConvertAuthors {
                     .ignoreContentType(true)
                     .maxBodySize(0)
                     .execute();
-            String ext = extensionFor(remoteUrl, res.contentType());
-            Path bucketDir = IMAGE_DIR.resolve(bucket);
-            Files.createDirectories(bucketDir);
-            Files.write(bucketDir.resolve(baseName + ext), res.bodyAsBytes());
-            return AVATAR_URL_PREFIX + bucket + "/" + baseName + ext;
+            String name = baseName + extensionFor(remoteUrl, res.contentType());
+            Files.createDirectories(bundleDir);
+            Files.write(bundleDir.resolve(name), res.bodyAsBytes());
+            return name;
         } catch (IOException e) {
             System.err.println("  avatar download failed for " + baseName + ": " + e.getMessage() + " (keeping remote URL)");
             return remoteUrl;
         }
     }
 
-    /** Removes a WordPress "-WxH" size suffix (e.g. -192x192) before the file extension. */
-    static String stripWpSize(String url) {
-        return url.replaceFirst("-\\d+x\\d+(?=\\.[A-Za-z0-9]+(?:[?#].*)?$)", "");
-    }
-
-    /** Recursively locates a previously downloaded avatar for baseName, wherever it lives. */
-    static Path findExistingAvatar(String baseName) {
-        if (!Files.isDirectory(IMAGE_DIR)) return null;
-        try (Stream<Path> s = Files.walk(IMAGE_DIR)) {
+    /** A regular file in dir whose name without extension equals baseName, or null. */
+    static Path findInDir(Path dir, String baseName) {
+        if (!Files.isDirectory(dir)) return null;
+        try (Stream<Path> s = Files.list(dir)) {
             return s.filter(Files::isRegularFile)
                     .filter(p -> stripExtension(p.getFileName().toString()).equals(baseName))
                     .findFirst().orElse(null);
         } catch (IOException e) {
             return null;
         }
+    }
+
+    /** Removes a WordPress "-WxH" size suffix (e.g. -192x192) before the file extension. */
+    static String stripWpSize(String url) {
+        return url.replaceFirst("-\\d+x\\d+(?=\\.[A-Za-z0-9]+(?:[?#].*)?$)", "");
     }
 
     static String extensionFor(String url, String contentType) {
@@ -336,28 +320,51 @@ public class ConvertAuthors {
     }
 
     static boolean isFrozen(String slug) {
-        Path f = findExistingAuthorFile(slug);
-        if (f == null) return false;
+        Path bundle = findExistingAuthorBundle(slug);
+        if (bundle == null) return false;
         try {
-            return Files.readString(f).contains("frozen: true");
+            return Files.readString(bundle.resolve("index.md")).contains("frozen: true");
         } catch (IOException e) {
             return false;
         }
     }
 
+    /** First-letter bucket for the author folder (content/authors/<letter>/<slug>/). */
+    static String bucketFor(String slug) {
+        if (slug == null || slug.isEmpty()) return "_";
+        char c = Character.toLowerCase(slug.charAt(0));
+        return (c >= 'a' && c <= 'z') ? String.valueOf(c) : "_";
+    }
+
+    /** The author's bundle dir (content/authors/<letter>/<slug>/), reused if it
+     *  already exists elsewhere so re-runs don't move it. */
+    static Path bundleDirFor(String slug) {
+        Path existing = findExistingAuthorBundle(slug);
+        return existing != null ? existing : OUTPUT_DIR.resolve(bucketFor(slug)).resolve(slug);
+    }
+
+    /** Locates an existing content/authors/**&#47;<slug>/index.md bundle, wherever it lives. */
+    static Path findExistingAuthorBundle(String slug) {
+        if (!Files.isDirectory(OUTPUT_DIR)) return null;
+        try (Stream<Path> s = Files.walk(OUTPUT_DIR)) {
+            return s.filter(p -> p.getFileName().toString().equals("index.md")
+                            && p.getParent() != null
+                            && p.getParent().getFileName().toString().equals(slug))
+                    .map(Path::getParent)
+                    .findFirst().orElse(null);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
     static void writeAuthor(AuthorData d) throws IOException {
-        String bucket = bucketFor(d.slug);
-        Path bucketDir = OUTPUT_DIR.resolve(bucket);
-        Path target = bucketDir.resolve(d.slug + ".md");
+        Path bundleDir = d.bundleDir != null ? d.bundleDir : bundleDirFor(d.slug);
 
         StringBuilder fm = new StringBuilder();
         fm.append("---\n");
         fm.append("title: ").append(yamlString(d.name)).append("\n");
-        // Pin the URL slug to the legacy WordPress author slug (the filename).
-        // Without this, hugo.toml's `:slug` permalink token falls back to the
-        // TITLE (e.g. "Carl Dea" -> carl-dea instead of carldea), changing the
-        // author URL and breaking the slug that posts reference.
-        fm.append("slug: ").append(yamlString(d.slug)).append("\n");
+        // No `slug`: the bundle FOLDER name is the URL slug (permalink
+        // :slugorcontentbasename), and writeAuthor names that folder d.slug.
         fm.append("avatar: ").append(yamlString(d.avatar)).append("\n");
         fm.append("avatarFull: ").append(yamlString(d.avatarFull)).append("\n");
         fm.append("bio: ").append(yamlString(d.bio)).append("\n");
@@ -367,38 +374,13 @@ public class ConvertAuthors {
         fm.append("github: ").append(yamlString(d.github)).append("\n");
         fm.append("youtube: ").append(yamlString(d.youtube)).append("\n");
         fm.append("website: ").append(yamlString(d.website)).append("\n");
-        // No aliases: `slug` above already makes the permalink the legacy
-        // /today/author/<slug>/ URL, so a self-referential alias would be redundant.
         fm.append("frozen: false\n");
         fm.append("---\n");
 
-        Path existing = findExistingAuthorFile(d.slug);
-        Files.createDirectories(bucketDir);
-        Files.writeString(target, fm.toString());
-        if (existing != null && !existing.equals(target)) {
-            Files.delete(existing); // relocate: don't leave a stale copy in the old location
-        }
+        Files.createDirectories(bundleDir);
+        Files.writeString(bundleDir.resolve("index.md"), fm.toString());
 
         System.out.println("Done author: " + d.slug);
-    }
-
-    /** Recursively locates an existing author markdown file for slug, wherever it lives. */
-    static Path findExistingAuthorFile(String slug) {
-        if (!Files.isDirectory(OUTPUT_DIR)) return null;
-        String target = slug + ".md";
-        try (Stream<Path> s = Files.walk(OUTPUT_DIR)) {
-            return s.filter(Files::isRegularFile)
-                    .filter(p -> p.getFileName().toString().equals(target))
-                    .findFirst().orElse(null);
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-    static String bucketFor(String slug) {
-        if (slug == null || slug.isEmpty()) return "_";
-        char c = Character.toLowerCase(slug.charAt(0));
-        return (c >= 'a' && c <= 'z') ? String.valueOf(c) : "_";
     }
 
     static String slugFromUrl(String url) {
@@ -445,6 +427,7 @@ public class ConvertAuthors {
 
     static class AuthorData {
         String slug;
+        Path bundleDir;
         String name;
         String avatar;
         String avatarFull;
