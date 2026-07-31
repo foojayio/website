@@ -1,0 +1,69 @@
+{{ define "main" }}
+<div class="page-head">
+  <div class="page-head__inner">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
+
+<div class="content-col full-width">
+  <article class="page-single prose">
+    {{ .Content }}
+
+    {{/* data/jugs.yaml is regenerated at every build and daily
+         (scripts/FetchJugs.java, .github/workflows/build-deploy.yml +
+         meetup-sync.yml) from the community-run World Wide JUGs directory --
+         nobody should ever hand-edit that file, so say so here where the
+         data is actually shown, not just in a code comment. */}}
+    <p class="jugs-source-note">
+      This list is fetched automatically from the community-run
+      <a href="https://github.com/World-Wide-JUGs/GlobalWWJugs" target="_blank" rel="noopener">World Wide JUGs</a>
+      directory and refreshed with every foojay.io build. If you lead a JUG and it's missing, out of date, or
+      wrong, please add or update it there directly &mdash; open a pull request against the
+      <a href="https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs" target="_blank" rel="noopener"><code>_jugs</code></a>
+      folder (each entry is a small Markdown file), and it'll show up here automatically the next time the site
+      builds.
+    </p>
+
+    {{ $jugs := hugo.Data.jugs }}
+    {{ if $jugs }}
+    <table class="jugs-table">
+      <thead>
+        <tr>
+          <th>User Group</th>
+          <th>Country</th>
+          <th>Founded</th>
+          <th>Connect</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range sort $jugs "name" }}
+        {{ $jug := . }}
+        <tr>
+          <td>
+            {{ with .website }}<a href="{{ . }}" target="_blank" rel="noopener">{{ $jug.name }}</a>{{ else }}{{ .name }}{{ end }}
+          </td>
+          <td>{{ .country }}</td>
+          <td>{{ with .founded_date }}{{ dateFormat "2006" . }}{{ end }}</td>
+          <td class="jugs-table__links">
+            {{ $links := slice }}
+            {{ with .meetup_url }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Meetup</a>` .) }}{{ end }}
+            {{ with .twitter }}{{ $links = $links | append (printf `<a href="https://twitter.com/%s" target="_blank" rel="noopener">Twitter</a>` (. | strings.TrimPrefix "@")) }}{{ end }}
+            {{ with .mastodon }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Mastodon</a>` .) }}{{ end }}
+            {{ with .calendar }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Calendar</a>` .) }}{{ end }}
+            {{ with .email }}{{ $links = $links | append (printf `<a href="mailto:%s">Email</a>` .) }}{{ end }}
+            {{ if and .latitude .longitude }}{{ $links = $links | append (printf `<a href="https://www.google.com/maps?q=%v,%v" target="_blank" rel="noopener">Map</a>` .latitude .longitude) }}{{ end }}
+            {{ delimit $links " &middot; " | safeHTML }}
+          </td>
+          <td><a class="jugs-table__edit" href="{{ .source_url }}" target="_blank" rel="noopener" title="Suggest an edit on GitHub">✎</a></td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+    {{ else }}
+    <p>JUG data hasn't synced yet. It's fetched at every site build from the World Wide JUGs directory linked above.</p>
+    {{ end }}
+  </article>
+</div>
+{{ end }}

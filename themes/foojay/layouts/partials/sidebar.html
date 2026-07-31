@@ -36,11 +36,16 @@
   <section class="widget widget-jugs">
     <h4>Java User Groups</h4>
     <ul>
+      {{/* .website covers every JUG, Meetup-based or not (data/jugs.yaml,
+           regenerated from GlobalWWJugs by scripts/FetchJugs.java) --
+           a hardcoded meetup.com URL would 404 for the majority of JUGs
+           that don't use Meetup. */}}
       {{ range first 8 hugo.Data.jugs }}
-        <li><a href="https://www.meetup.com/{{ .slug }}/">{{ .name }}</a></li>
+        {{ $jug := . }}
+        {{ with .website }}<li><a href="{{ . }}">{{ $jug.name }}</a></li>{{ end }}
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "all-events/" | relURL }}">Full event calendar</a>
+    <a class="view-all" href="{{ "jugs/" | relURL }}">All Java User Groups</a>
   </section>
 
 </aside>

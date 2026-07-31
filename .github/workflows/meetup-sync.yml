@@ -1,4 +1,4 @@
-name: Daily Meetup events sync
+name: Daily JUG list + Meetup events sync
 
 on:
   schedule:
@@ -17,19 +17,25 @@ jobs:
       - name: Set up JBang
         uses: jbangdev/setup-jbang@main
 
+      # Refresh the JUG list first so this always targets the current
+      # upstream World Wide JUGs directory, not whatever was last committed
+      # (also refreshed independently at every deploy by build-deploy.yml).
+      - name: Refresh JUG list
+        run: jbang scripts/FetchJugs.java
+
       - name: Fetch events from Meetup
         env:
           MEETUP_OAUTH_TOKEN: ${{ secrets.MEETUP_OAUTH_TOKEN }}
         run: jbang scripts/FetchMeetupEvents.java
 
-      - name: Commit updated events data
+      - name: Commit updated data
         run: |
           git config user.name "foojay-bot"
           git config user.email "actions@github.com"
-          git add data/events.json
+          git add data/jugs.yaml data/events.json
           if git diff --cached --quiet; then
-            echo "No event changes today."
+            echo "No JUG list or event changes today."
           else
-            git commit -m "chore: daily Meetup events sync"
+            git commit -m "chore: daily JUG list + Meetup events sync"
             git push
           fi

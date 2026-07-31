@@ -740,6 +740,12 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .prose th, .prose td { text-align: left; padding: .6rem .75rem; border-bottom: 1px solid var(--border); }
 .prose th { font-family: var(--font-display); color: var(--ink); }
 
+/* /jugs/ page: data/jugs.yaml source note + table (themes/foojay/layouts/jugs/single.html) */
+.jugs-source-note { font-size: .92rem; color: var(--ink-muted); }
+.jugs-table__links { font-size: .9rem; white-space: nowrap; }
+.jugs-table__edit { text-decoration: none; opacity: .55; }
+.jugs-table__edit:hover { opacity: 1; }
+
 /* Author box under an article */
 .author-callout {
   display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 1.25rem;

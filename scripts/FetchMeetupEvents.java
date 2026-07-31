@@ -18,9 +18,15 @@ import java.time.Duration;
 import java.util.*;
 
 /**
- * Pulls upcoming events for every JUG listed in data/jugs.yaml from Meetup's
- * GraphQL API and writes data/events.json for the Hugo site's calendar page.
- * Run daily by .github/workflows/meetup-sync.yml.
+ * Pulls upcoming events for every JUG in data/jugs.yaml that has a Meetup
+ * group (a `meetup_slug`, derived by scripts/FetchJugs.java from any JUG
+ * whose `website` is a meetup.com URL) from Meetup's GraphQL API, and writes
+ * data/events.json for the Hugo site's calendar page. Run daily by
+ * .github/workflows/meetup-sync.yml, which runs FetchJugs.java first so this
+ * always sees the current upstream JUG list rather than a stale commit.
+ *
+ * JUGs without a Meetup group (their own website/calendar instead) are
+ * skipped here -- there's no Meetup API to query for them.
  *
  * REQUIRES: a Meetup Pro subscription + an OAuth client created under that
  * Pro network (Meetup retired the old open REST API; reading event data now
@@ -74,12 +80,12 @@ public class FetchMeetupEvents {
             System.exit(1);
         }
 
-        List<Map<String, String>> jugs = loadJugs();
-        System.out.println("Loaded " + jugs.size() + " JUGs from " + JUGS_FILE);
+        List<Map<String, Object>> jugs = loadJugs();
+        System.out.println("Loaded " + jugs.size() + " JUGs with a Meetup group from " + JUGS_FILE);
 
         List<Map<String, Object>> allGroups = new ArrayList<>();
-        for (Map<String, String> jug : jugs) {
-            String slug = jug.get("slug");
+        for (Map<String, Object> jug : jugs) {
+            String slug = String.valueOf(jug.get("meetup_slug"));
             try {
                 Map<String, Object> groupResult = fetchEventsForGroup(slug, token);
                 allGroups.add(groupResult);
@@ -103,11 +109,17 @@ public class FetchMeetupEvents {
     }
 
     @SuppressWarnings("unchecked")
-    static List<Map<String, String>> loadJugs() throws IOException {
+    static List<Map<String, Object>> loadJugs() throws IOException {
         Yaml yaml = new Yaml();
+        List<Map<String, Object>> all;
         try (var in = Files.newInputStream(JUGS_FILE)) {
-            return (List<Map<String, String>>) yaml.load(in);
+            all = (List<Map<String, Object>>) yaml.load(in);
         }
+        List<Map<String, Object>> withMeetup = new ArrayList<>();
+        for (Map<String, Object> jug : all) {
+            if (jug.get("meetup_slug") != null) withMeetup.add(jug);
+        }
+        return withMeetup;
     }
 
     static Map<String, Object> fetchEventsForGroup(String slug, String token) throws IOException, InterruptedException {
