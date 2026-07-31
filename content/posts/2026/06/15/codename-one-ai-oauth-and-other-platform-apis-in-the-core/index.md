@@ -1,0 +1,617 @@
+---
+title: "AI, OAuth, And Other Platform APIs In The Core"
+slug: "codename-one-ai-oauth-and-other-platform-apis-in-the-core"
+date: "2026-06-15T09:00:00+00:00"
+description: "Deeper AI integration in the framework core, modern authentication via OAuth / OIDC and WebAuthn passkeys driven from the system browser, and a few smaller"
+canonical: "https://www.codenameone.com/blog/platform-apis-in-the-core/"
+authors:
+  - "shai-almog"
+image: "platform-apis-in-the-core.jpg"
+categories:
+  - "Java"
+tags:
+related_posts:
+  - "own-your-pixels-native-fidelity-on-your-schedule"
+  - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
+  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
+  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
+enlighterjs: true
+frozen: false
+---
+
+![AI, OAuth, And Other Platform APIs In The Core](https://www.codenameone.com/blog/platform-apis-in-the-core.jpg)
+
+<br />
+
+This is the second follow-up to [Friday's release post](https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/). It covers the platform APIs that moved into the framework core this release. There are two headline pieces (AI / LLM and the modern OAuth / OIDC stack), and two smaller pieces (WiFi / connectivity and share-sheet result callbacks). This continues the direction the previous release set when we moved NFC, biometrics, and cryptography into the framework core. The full background on that earlier set is in [NFC, Crypto, Biometrics, And A New Build Cloud](https://www.codenameone.com/blog/nfc-crypto-biometrics-and-build-cloud/).
+| **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
+
+AI: a first-class LLM client and a ChatView component {#h2-0-ai-a-first-class-llm-client-and-a-chatview-component}
+------------------------------------------------------------------------------------------------------------------
+
+[PR #5035](https://github.com/codenameone/CodenameOne/pull/5035) lands the `com.codename1.ai` package, the `ChatView` UI component, the speech and TTS additions, and the build-time dependency injection that wires the native pieces in. [PR #5057](https://github.com/codenameone/CodenameOne/pull/5057) lands the developer-guide chapter and the agent-skill addition so any project generated from the [Initializr](https://www.codenameone.com/initializr/) inherits the new APIs through its bundled `AGENTS.md`.
+
+### LlmClient: the basic chat request {#h3-1-llmclient-the-basic-chat-request}
+
+`com.codename1.ai.LlmClient` is the entry point. The simplest possible use:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">LlmClient client = LlmClient.openai(apiKey);
+
+ChatRequest req = new ChatRequest.Builder()
+        .model("gpt-4o-mini")
+        .system("You are a helpful assistant.")
+        .user("What is the capital of France?")
+        .temperature(0.7)
+        .build();
+
+client.chat(req).onResult((resp, err) -&gt; {
+    if (err != null) {
+        Log.e(err);
+        return;
+    }
+    Log.p(resp.firstChoice().content());
+});</pre>
+
+`LlmClient.openai(...)`, `LlmClient.anthropic(...)`, `LlmClient.gemini(...)`, `LlmClient.ollama(...)`, and `LlmClient.openAiCompatible(baseUrl, apiKey)` are the factories. All five are fully implemented native clients. The OpenAI client also drives Ollama, vLLM, llama.cpp, and any other endpoint that speaks the OpenAI wire format, so most local-model stacks plug in through `LlmClient.openAiCompatible(...)` without a separate driver.
+
+### Streaming chat (what you actually want for chat UIs) {#h3-2-streaming-chat-what-you-actually-want-for-chat-uis}
+
+For any UI that types responses out token-by-token, the streaming entry point is the one to reach for. The callback fires on the EDT, so you can append directly to a text component:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">client.chatStream(req, new ChatStreamListener() {
+
+    @Override
+    public void onDelta(ChatDelta d) {
+        responseLabel.setText(responseLabel.getText() + d.contentDelta());
+        responseLabel.getParent().revalidateLater();
+    }
+
+    @Override
+    public void onComplete(ChatResponse fin) {
+        sendButton.setEnabled(true);
+    }
+
+    @Override
+    public void onError(Throwable t) {
+        Log.e(t);
+        sendButton.setEnabled(true);
+    }
+});</pre>
+
+Under the hood this is a custom `ConnectionRequest` subclass that parses SSE line-by-line and dispatches each delta through `Display.callSerially`. `AsyncResource.cancel()` kills the socket. So a chat UI that has a cancel button is a one-line cancellation.
+
+### Tool calls {#h3-3-tool-calls}
+
+If you want the model to call back into your app, `Tool` / `ToolChoice` give you OpenAI-style function calling. Define the tool, hand the model your model and the available tools, and the response surfaces structured `ToolCall` objects you dispatch:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Tool getWeather = Tool.builder()
+        .name("get_weather")
+        .description("Look up the current weather for a city.")
+        .parameter("city", "string", "The city name, e.g. \"Paris\".")
+        .build();
+
+ChatRequest req = new ChatRequest.Builder()
+        .model("gpt-4o-mini")
+        .user("Is it raining in Tel Aviv right now?")
+        .tool(getWeather)
+        .toolChoice(ToolChoice.AUTO)
+        .build();
+
+client.chat(req).onResult((resp, err) -&gt; {
+    if (err != null) return;
+    for (ToolCall call : resp.firstChoice().toolCalls()) {
+        if ("get_weather".equals(call.name())) {
+            String city = call.argument("city").asString();
+            String json = lookupWeather(city);
+            // Loop the result back into the conversation
+            client.chat(req.replyWithToolResult(call, json))
+                  .onResult((followUp, e) -&gt; updateUi(followUp));
+        }
+    }
+});</pre>
+
+The shape mirrors the OpenAI function-calling contract one for one, so anything you have written against the OpenAI API directly maps across without rethinking.
+
+### Embeddings {#h3-4-embeddings}
+
+`LlmClient.embed(...)` returns a vector for any input string. Useful for similarity search against a local SQLite store ([tomorrow's post](https://www.codenameone.com/blog/build-time-codegen/) will cover the new ORM that pairs with this):
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">EmbeddingRequest er = new EmbeddingRequest.Builder()
+        .model("text-embedding-3-small")
+        .input("Codename One is a cross-platform mobile framework.")
+        .build();
+
+client.embed(er).onResult((emb, err) -&gt; {
+    float[] vector = emb.firstVector();
+    // store, search, compare
+});</pre>
+
+### Image generation {#h3-5-image-generation}
+
+DALL-E and a Replicate scaffold are surfaced through `ImageGenerator`:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ImageGenerator gen = ImageGenerator.openAiDallE(apiKey);
+
+gen.generate("A red bicycle leaning against an olive tree", "1024x1024")
+   .onResult((img, err) -&gt; {
+       if (err != null) return;
+       myImageComponent.setIcon(img);
+   });</pre>
+
+### Working against Ollama in the simulator (no API charges) {#h3-6-working-against-ollama-in-the-simulator-no-api-charges}
+
+`JavaSEPort` pings `localhost:11434` at startup. If it finds Ollama, it sets the `cn1.ai.ollamaDetected` property. With `cn1.ai.simulatorRedirect=auto` (or `=ollama`) every `LlmClient.openai(...)` call routes through the local Ollama endpoint instead of OpenAI's. Production code does not change. The iteration loop, your tests, and your offline debugging stop costing money and stop needing an internet connection.
+
+In `common/codenameone_settings.properties`:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">simulator.cn1.ai.simulatorRedirect=auto</pre>
+
+(The `simulator.` prefix scopes the property to the JavaSE simulator path.) Then run Ollama locally with whichever model your code expects (`ollama run llama3.2` or similar) and your existing `LlmClient.openai(...)` calls go to localhost.
+
+### How to handle API keys {#h3-7-how-to-handle-api-keys}
+
+A direct word on credentials before any of the above sees production. LLM provider API keys (OpenAI, Anthropic, Gemini, your Auth0 / Firebase configs) are bearer tokens with a budget attached. **They must never be checked into source control, embedded in your app binary, or hard-coded in code.** A leaked key can be extracted from any APK or IPA in minutes and used to drain your account.
+
+The correct shape is to fetch the key from your own backend over an authenticated request, then store it on the device using the platform's keychain / keystore. The framework provides both pieces:
+
+* `com.codename1.crypto.SecureStorage` (from the [previous release](https://www.codenameone.com/blog/nfc-crypto-biometrics-and-build-cloud/#cryptography--pr-4994)) is the cross-platform wrapper over iOS Keychain Services and Android `EncryptedSharedPreferences`. Values are encrypted at rest using the platform's hardware-backed protection class where one is available.
+* This release adds single-argument `get / set / remove(account, ...)` overloads next to the existing biometric-gated methods. The new overloads store the value without a per-read Face ID / Touch ID prompt, which is what you want for an LLM API key (you read it on every network call; a biometric prompt every time is not workable). The biometric-gated methods are still there for credentials you do want to gate per use.
+
+A reasonable shape:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static AsyncResource getOpenAiKey() {
+    String cached = SecureStorage.get("openai_api_key");
+    if (cached != null) {
+        return AsyncResource.complete(cached);
+    }
+    return Rest.get(myServer + "/v1/credentials/openai")
+               .bearerToken(userSessionToken())
+               .fetchAsString()
+               .onResult((key, err) -&gt; {
+                   if (err == null) {
+                       SecureStorage.set("openai_api_key", key);
+                   }
+               });
+}</pre>
+
+Your server gates the credential request behind the user's session, your app caches the result on the keychain, and the key never sits anywhere a reverse-engineering pass could find it. If your server rotates the key, invalidate the cache and refetch.
+
+Existing biometric-gated `SecureStorage` calls keep working unchanged. The new overloads are additive.
+
+### ChatView: a ready-made streaming chat UI {#h3-8-chatview-a-ready-made-streaming-chat-ui}
+
+`com.codename1.components.ChatView` is the matching UI component. Scrollable message list, `ChatBubble` for the per-message bubble (theme-aware UIIDs so it picks up the iOS Modern / Material 3 native themes consistently), `ChatInput` for the bottom input bar, and a one-line `bindToLlm(...)` that wires the input to a streaming chat request:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ChatView view = new ChatView();
+getOpenAiKey().onResult((key, err) -&gt; {
+    view.bindToLlm(LlmClient.openai(key),
+                   new ChatRequest.Builder()
+                           .model("gpt-4o-mini")
+                           .system("You are a friendly tutor for "
+                                   + "Codename One developers.")
+                           .build());
+});
+
+Form f = new Form("Chat", new BorderLayout());
+f.add(BorderLayout.CENTER, view);
+f.show();</pre>
+
+The result is a standard mobile chat layout, picked up from whichever native theme the project uses:
+![ChatView running against gpt-4o-mini, showing assistant and user bubbles plus a streaming response and the bottom input bar](https://www.codenameone.com/blog/platform-apis-in-the-core/chatview.png)
+
+<br />
+
+If you want more control than `bindToLlm(...)` gives you (custom message styling, a "thinking" placeholder, hand-rolled retry, persistence to your own model class), drive the view by hand:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ChatView view = new ChatView();
+ConversationStore store = ConversationStore.open("tutor-thread");
+view.setMessages(store.load());
+
+LlmClient client = LlmClient.openai(apiKeyFromKeychain);
+
+view.setInputListener(userText -&gt; {
+    ChatMessage userMsg = ChatMessage.user(userText);
+    view.appendMessage(userMsg);
+    store.append(userMsg);
+
+    ChatMessage assistant = ChatMessage.assistant("");
+    view.appendMessage(assistant);
+
+    ChatRequest req = new ChatRequest.Builder()
+            .model("gpt-4o-mini")
+            .messages(store.load())
+            .build();
+
+    client.chatStream(req, new ChatStreamListener() {
+        @Override
+        public void onDelta(ChatDelta d) {
+            view.appendToLastMessage(d.contentDelta());
+        }
+        @Override
+        public void onComplete(ChatResponse fin) {
+            store.append(ChatMessage.assistant(view.lastMessage().content()));
+            view.setInputEnabled(true);
+        }
+        @Override
+        public void onError(Throwable t) {
+            view.appendToLastMessage(" [error: " + t.getMessage() + "]");
+            view.setInputEnabled(true);
+        }
+    });
+});</pre>
+
+`appendToLastMessage(...)` is the streaming entry point; it marshals through `callSerially` so deltas land on the EDT in order. `ConversationStore` persists the thread (the default backing is `Storage`; pluggable via a custom implementation if you would rather keep it in SQLite or push it to your server).
+
+### The AI cn1libs {#h3-9-the-ai-cn1libs}
+
+The core LLM stack is paired with a set of opt-in cn1libs that wrap specific on-device capabilities: Google ML Kit features, the TensorFlow Lite runtime, a local Whisper transcription engine, and an on-device Stable Diffusion model. Thirteen new cn1libs ship this release.
+
+These cn1libs are not yet listed in the Codename One Preferences cn1lib picker, so for the moment they are added by hand. Drop the matching dependency block into your project's `common/pom.xml` and rebuild. The build-time scanner does the rest: the iOS pod or Swift Package, the Android Gradle dependency, the plist usage strings (`NSCameraUsageDescription` for the vision libraries, `NSSpeechRecognitionUsageDescription` for Whisper, etc.), and the Android permissions (`android.permission.RECORD_AUDIO` for audio capture) are all injected automatically the first time the scanner sees the matching class on the classpath.
+
+For each cn1lib below, the dependency block is identical in shape; only the \`\` changes. The shared pattern is:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    com.codenameone
+    &lt;!-- cn1lib artifact id from below --&gt;
+    ${cn1.version}
+</pre>
+
+#### `cn1-ai-mlkit-text`: text recognition (OCR)
+
+**TL;DR.** Pull printed or handwritten text out of an image (a photo of a page, a sign, a receipt) entirely on-device.
+
+**Platforms.** iOS bridges to `GoogleMLKit/TextRecognition`. Android bridges to `com.google.mlkit:text-recognition`. The JavaSE simulator returns an unsupported error.
+
+**Use cases.** Receipt scanning, sign translation pipelines (combine with `cn1-ai-mlkit-translate`), accessibility tools that read printed text aloud, automated form ingestion.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">byte[] jpeg = capturePhotoBytes();
+TextRecognizer.recognize(jpeg).onResult((text, err) -&gt; {
+    if (err == null) Log.p("OCR: " + text);
+});</pre>
+
+#### `cn1-ai-mlkit-barcode`: barcode and QR scanning
+
+**TL;DR.** Decodes QR, EAN, UPC, Data Matrix, PDF417, and the rest of the common 1D / 2D code families from a captured image.
+
+**Platforms.** iOS bridges to `MLKitBarcodeScanning`. Android bridges to `com.google.mlkit:barcode-scanning`. The JavaSE simulator returns an unsupported error.
+
+**Use cases.** Inventory scanning, ticket / boarding-pass readers, QR-driven onboarding flows, retail loyalty cards.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">byte[] jpeg = capturePhotoBytes();
+BarcodeScanner.scan(jpeg).onResult((codes, err) -&gt; {
+    if (err == null) {
+        for (String code : codes) Log.p("Found: " + code);
+    }
+});</pre>
+
+#### `cn1-ai-mlkit-face`: face detection
+
+**TL;DR.** Returns bounding boxes for human faces detected in an image. Each face is reported as a packed `int[4]` (`x`, `y`, `width`, `height`).
+
+**Platforms.** iOS bridges to `MLKitFaceDetection`. Android bridges to `com.google.mlkit:face-detection`.
+
+**Use cases.** Auto-crop a contact photo, mosaic / blur bystanders in a group shot, drive a face-tracked overlay for AR-lite filters.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">FaceDetector.detect(jpeg).onResult((boxes, err) -&gt; {
+    if (err != null) return;
+    for (int i = 0; i  {
+    if (err == null) Log.p("labels: " + String.join(", ", labels));
+});</pre>
+
+#### `cn1-ai-mlkit-translate`: on-device translation
+
+**TL;DR.** Translate short text between supported language pairs entirely on-device; no server round-trip, no API key, works offline.
+
+**Platforms.** iOS bridges to `MLKitTranslate`. Android bridges to `com.google.mlkit:translate`. Languages are identified by their ISO 639-1 codes (`en`, `fr`, `es`, ...).
+
+**Use cases.** Offline travel assistants, chat translation, accessibility readers for foreign signage (combine with `cn1-ai-mlkit-text`).
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Translator.translate("Where is the train station?", "en", "fr")
+    .onResult((fr, err) -&gt; {
+        if (err == null) Log.p(fr);   // "Où est la gare ?"
+    });</pre>
+
+#### `cn1-ai-mlkit-smartreply`: short reply suggestions
+
+**TL;DR.** Generates short suggested replies for chat conversations, similar to Gmail's Smart Reply chips.
+
+**Platforms.** iOS bridges to `MLKitSmartReply`. Android bridges to `com.google.mlkit:smart-reply`. The input is a JSON array of `{role, message, timestamp, userId}` objects.
+
+**Use cases.** A "quick reply" row above the keyboard in your in-app chat, response suggestions in a CRM inbox.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String thread = "[{\"role\":\"remote\",\"message\":\"See you at 6?\","
+              + "\"timestamp\":" + System.currentTimeMillis() + ","
+              + "\"userId\":\"u42\"}]";
+
+SmartReply.suggest(thread).onResult((suggestions, err) -&gt; {
+    if (err == null) {
+        for (String s : suggestions) Log.p("suggestion: " + s);
+    }
+});</pre>
+
+#### `cn1-ai-mlkit-langid`: language identification
+
+**TL;DR.** Returns the most likely ISO 639-1 code for a given text, or `und` (undetermined) when the input is too short or ambiguous.
+
+**Platforms.** iOS bridges to `MLKitLanguageID`. Android bridges to `com.google.mlkit:language-id`.
+
+**Use cases.** Auto-route a customer-support message to the right team, pick the correct TTS voice for an arbitrary string, pre-screen input before running an expensive translate.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">LanguageIdentifier.identify("Bonjour le monde").onResult((code, err) -&gt; {
+    if (err == null) Log.p(code);   // "fr"
+});</pre>
+
+#### `cn1-ai-mlkit-pose`: pose detection
+
+**TL;DR.** Returns 33 skeletal landmarks per detected pose as a packed `float[3 * 33]` (`x`, `y`, `confidence` triples).
+
+**Platforms.** iOS bridges to `MLKitPoseDetection`. Android bridges to `com.google.mlkit:pose-detection`.
+
+**Use cases.** Fitness apps with form correction, dance / yoga timing analysis, gesture-driven controls.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">PoseDetector.detect(jpeg).onResult((landmarks, err) -&gt; {
+    if (err != null || landmarks.length  {
+    if (err == null) applyBackgroundReplacement(mask);
+});</pre>
+
+#### `cn1-ai-mlkit-docscan`: document scanner
+
+**TL;DR.** Detects a rectangular document in a photo, perspective-corrects it, and writes the cropped JPEG to a temporary file. Returns the file path.
+
+**Platforms.** iOS uses Apple's VisionKit + Core Image rectangle detection (no extra pod). Android uses `com.google.android.gms:play-services-mlkit-document-scanner`.
+
+**Use cases.** "Scan to PDF" flows, expense apps that capture receipts, contract signing flows, ID-document capture.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">DocumentScanner.scanToFile(jpeg).onResult((path, err) -&gt; {
+    if (err == null) uploadDocument(path);
+});</pre>
+
+#### `cn1-ai-tflite`: TensorFlow Lite interpreter
+
+**TL;DR.** A general-purpose on-device inference engine. Bring your own `.tflite` model and run it against a float32 input tensor.
+
+**Platforms.** iOS uses `TensorFlowLiteSwift` (Pods or Swift Package). Android uses `org.tensorflow:tensorflow-lite` + `tensorflow-lite-support`.
+
+**Use cases.** Any custom on-device ML model your team trains or pulls from TF Hub. Image classification, simple regression, recommendation pre-filters.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">byte[] modelBytes = Util.readFully(Display.getInstance().getResourceAsStream(null, "/model.tflite"));
+float[] input = featureVector();
+Interpreter.run(modelBytes, input).onResult((output, err) -&gt; {
+    if (err == null) Log.p("model returned " + output.length + " values");
+});</pre>
+
+#### `cn1-ai-whisper`: speech-to-text via whisper.cpp
+
+**TL;DR.** On-device transcription of a 16 kHz mono WAV file using a `ggml`-format Whisper model. The cn1lib bundles `libwhisper.a`.
+
+**Platforms.** iOS uses the Accelerate framework; Android uses a JNI build of the same `whisper.cpp` core. Models (e.g. `ggml-base.bin`) are not bundled; ship the one your app expects under the app's resources or download on first launch.
+
+**Use cases.** Voice notes, accessibility transcription, offline dictation, podcast indexing.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String modelPath = SecureStorage.getFilePath("ggml-base.bin");
+String audioPath = recordWavToFile();
+WhisperRecognizer.transcribe(modelPath, audioPath)
+    .onResult((text, err) -&gt; {
+        if (err == null) Log.p("heard: " + text);
+    });</pre>
+
+#### `cn1-ai-stablediffusion`: on-device image generation
+
+**TL;DR.** Generates a JPEG from a text prompt using a bundled Stable Diffusion model. Multi-gigabyte payload, **local build only**.
+
+**Platforms.** iOS uses Core ML pipelines compiled from the bundled model. Android uses ONNX Runtime. Both configurations exceed the cloud build server's 2 GB upload limit, so this cn1lib triggers the `cn1.ai.requiresBigUpload` guard and the cloud build aborts with a "build this one locally" message. Add it to a project you build via `mvn cn1:buildAndroid` / `mvn cn1:buildIosXcodeProject` on the developer machine.
+
+**Use cases.** Avatar generation in apps where shipping to a cloud API is undesirable (offline-first apps, regulated industries, privacy-sensitive products).
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">StableDiffusion.generate("a teal hot-air balloon over Lisbon, watercolour",
+                         512, 512, /* steps */ 25)
+    .onResult((jpeg, err) -&gt; {
+        if (err == null) display(Image.createImage(jpeg, 0, jpeg.length));
+    });</pre>
+
+### Why these are cn1libs and not part of the core {#h3-10-why-these-are-cn1libs-and-not-part-of-the-core}
+
+The core gets the AI plumbing every app that adopts AI at all wants: the LLM client, streaming, the chat UI, the secure storage primitive for credentials, the simulator Ollama redirect for offline iteration.
+
+The cn1libs above are specialized verticals. Barcode scanning, document scanning, face detection, smart reply, pose detection, on-device translation, transcription, on-device image generation, each is genuinely useful, but only for some apps. They also each bring a non-trivial native dependency. The Google ML Kit Android frameworks are large; the iOS pods carry their own weight; the bundled `libwhisper.a` and the Stable Diffusion model are big. Pulling all of them into core would tax every app whether the feature is used or not.
+
+The Stable Diffusion cn1lib in particular is large enough that the cloud build server cannot accept the upload at all (it trips the 2 GB pre-upload guard). That kind of opt-in does not belong in a dependency every app inherits.
+
+The corresponding chapter, including the full `LlmClient` API table, the `ChatView` reference, the `SecureStorage` overloads, the simulator Ollama redirect, and the full cn1lib coverage, is at [AI, Chat UI, and Speech](https://www.codenameone.com/developer-guide/#_ai_chat_ui_and_speech) in the developer guide.
+
+OAuth and OIDC: the modern identity stack {#h2-11-oauth-and-oidc-the-modern-identity-stack}
+-------------------------------------------------------------------------------------------
+
+The in-app-WebView `Oauth2` flow that Codename One has shipped since approximately forever was the way every cross-platform mobile framework solved "sign in with Google / Facebook / Microsoft" in the 2010s. It is also the way every one of those identity providers stopped wanting you to solve it. Google has been blocking embedded user agents for years. Apple does not want third-party apps wrapping the Apple ID flow in a `WKWebView`. Microsoft and Facebook joined the chorus. The right answer is the system browser: `ASWebAuthenticationSession` on iOS, Custom Tabs on Android, with PKCE on the wire. That is what [PR #5018](https://github.com/codenameone/CodenameOne/pull/5018) lands. [PR #5039](https://github.com/codenameone/CodenameOne/pull/5039) adds a portable WebAuthn / passkey client on top.
+
+### Sign in with Google (or any OIDC provider) {#h3-12-sign-in-with-google-or-any-oidc-provider}
+
+`com.codename1.io.oidc.OidcClient` is the entry point. Point it at the discovery URL of an OIDC provider, hand it the client id and the redirect URI you registered with the provider, ask for tokens:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">OidcConfiguration cfg = OidcConfiguration.discover("https://accounts.google.com");
+
+OidcClient client = OidcClient.builder()
+        .configuration(cfg)
+        .clientId("123-abc.apps.googleusercontent.com")
+        .redirectUri("com.example.myapp:/oauthredirect")
+        .scopes("openid", "email", "profile")
+        .build();
+
+client.signIn().onResult((tokens, err) -&gt; {
+    if (err != null) {
+        OidcException oe = (OidcException) err;
+        if (oe.getCode() == OidcException.USER_CANCELLED) return;
+        Log.e(oe);
+        return;
+    }
+    String idToken = tokens.getIdToken().raw();
+    String email   = tokens.getIdToken().getClaim("email").asString();
+    proceed(email, idToken);
+});</pre>
+
+Discovery JSON parsed and cached. PKCE S256 challenge generated and verified. State and nonce checked on the callback. ID-token claims decoded for you (we deliberately do not verify the signature client-side; the dev guide is explicit about why and points at the "re-validate on your backend" remedy). Refresh and revoke are first-class. The token store is pluggable via `TokenStore`; the default is `Storage`-backed, but a Keychain-backed or in-memory variant is a small class.
+
+On iOS the system-browser piece routes through `ASWebAuthenticationSession`. On Android through `androidx.browser.customtabs` with a plain `ACTION_VIEW` fallback for the rare device with no Custom Tabs provider. `AuthenticationServices.framework` and `androidx.browser:browser` are auto-linked when the classpath scanner sees `OidcClient` in use.
+
+### Provider wrappers: Google, Apple, Microsoft, Facebook, Auth0, Firebase {#h3-13-provider-wrappers-google-apple-microsoft-facebook-auth0-firebase}
+
+If you would rather not configure OIDC by hand, the existing social classes get a `signIn(...)` method that drives the same stack with the provider's issuer URL pre-wired:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">GoogleConnect.signIn(googleClientId,
+                     "com.example.myapp:/oauthredirect",
+                     "openid", "email", "profile")
+    .onResult((tokens, err) -&gt; { /* ... */ });
+
+MicrosoftConnect.signIn(entraClientId,
+                        "msauth.com.example.myapp://auth",
+                        "User.Read")
+    .onResult((tokens, err) -&gt; { /* ... */ });
+
+Auth0Connect.signIn("tenant.auth0.com", clientId, redirectUri,
+                    "openid profile email")
+    .onResult((tokens, err) -&gt; { /* ... */ });</pre>
+
+`FacebookConnect.signIn(...)` follows the same shape against the Facebook OIDC endpoint. `FirebaseAuth` covers the REST-based Firebase auth surface (email / password, IdP token exchange, refresh) which sits underneath any provider hand-off you might want to drive from app code.
+
+### Sign in with Apple {#h3-14-sign-in-with-apple}
+
+Sign in with Apple is required on iOS for apps that offer any other social login, and on Android it must fall through to a web flow. `com.codename1.social.AppleSignIn` handles both transparently:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">AppleSignIn.signIn()
+    .onResult((result, err) -&gt; {
+        if (err != null) return;
+        String idToken = result.getIdToken();
+        String code    = result.getAuthorizationCode();
+        proceedToBackend(idToken, code);
+    });</pre>
+
+On iOS 13 and later this drops directly into the native Apple sheet via `ASAuthorizationAppleIDProvider`. On non-iOS platforms it falls through to the same OIDC web flow as everything else, so a single line of app code does the right thing on every port. The Maven plugin injects the `com.apple.developer.applesignin` entitlement on iOS when it sees `AppleSignIn` in use; Android does not see it because it is not there.
+
+### Migration from the legacy Oauth2 {#h3-15-migration-from-the-legacy-oauth2}
+
+`com.codename1.io.Oauth2` is now deprecated. Existing code still compiles, but the migration is short and almost always shorter than what it replaces:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Before
+Oauth2 oauth = new Oauth2("https://accounts.google.com/o/oauth2/auth", clientId, redirectUri);
+oauth.setClientSecret(clientSecret);
+oauth.setScope("openid email profile");
+oauth.setBrowserComponent(myBrowserComponent);   // tied to a WKWebView
+String token = oauth.authenticate();             // blocks, opens the web view</pre>
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// After
+OidcClient.builder()
+        .configuration(OidcConfiguration.discover("https://accounts.google.com"))
+        .clientId(clientId)
+        .redirectUri(redirectUri)
+        .scopes("openid", "email", "profile")
+        .build()
+        .signIn()
+        .onResult((tokens, err) -&gt; proceed(tokens.getIdToken().raw()));</pre>
+
+You stop owning the browser. The OS owns it. The cookies live in the platform's authentication session. The user gets the same login experience they have everywhere else on their device.
+
+### WebAuthn / passkeys {#h3-16-webauthn-passkeys}
+
+[PR #5039](https://github.com/codenameone/CodenameOne/pull/5039) layers a portable WebAuthn client on top:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">WebAuthnClient client = WebAuthnClient.getInstance();
+if (!client.isAvailable()) { fallbackToPassword(); return; }
+
+PublicKeyCredentialCreationOptions opts =
+        PublicKeyCredentialCreationOptions.fromServerJson(serverJson);
+client.create(opts).onResult((cred, err) -&gt; {
+    if (err == null) postToRelyingParty(cred.toJson());
+});</pre>
+
+W3C JSON wire format in both directions, so the response can be POSTed verbatim to any standard server-side WebAuthn library. iOS 16+ routes through `ASAuthorizationPlatformPublicKeyCredentialProvider`; Android API 28+ through `androidx.credentials.CredentialManager`. Provider helpers: `Auth0Connect.signInWithPasskey(...)` / `.registerPasskey(...)` and `FirebaseAuth.signInWithPasskey(...)` / `.registerPasskey(...)`.
+
+One thing worth pulling out before you reach for it: if you sign in via OIDC against Google, Apple, Microsoft, Auth0, or Firebase, you usually already *get* passkeys for free. The identity provider runs the WebAuthn ceremony inside the system browser; OIDC just hands you the resulting tokens. So you do not need `WebAuthnClient` for that case. You need it for apps that run their own relying-party backend, and for apps driving the Auth0 or Firebase passkey grants directly.
+
+Full chapter: [Authentication and Identity](https://www.codenameone.com/developer-guide/#_authentication_and_identity).
+
+Connectivity: WiFi, Bonjour, USB, network-type listeners {#h2-17-connectivity-wifi-bonjour-usb-network-type-listeners}
+----------------------------------------------------------------------------------------------------------------------
+
+[PR #5021](https://github.com/codenameone/CodenameOne/pull/5021) lands four packages for apps that need to do more with the network than open an HTTP socket. The shape:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">WiFi wifi = WiFi.getInstance();
+String ssid    = wifi.getCurrentSSID();
+String bssid   = wifi.getBSSID();
+String gateway = wifi.getGateway();
+String ip      = wifi.getIp();
+
+wifi.scan(new ScanOptions().setTimeoutMillis(5000))
+   .onResult((results, err) -&gt; { /* ... */ });
+
+wifi.connect("MyNetwork", "hunter2", Security.WPA2_PSK)
+   .onResult((success, err) -&gt; { /* ... */ });</pre>
+
+`com.codename1.io.wifi` for WiFi info, scan, and connect. `com.codename1.io.wifi.WiFiDirect` for peer-to-peer (Android only by platform reality). `com.codename1.io.bonjour` for mDNS / Zeroconf via `BonjourBrowser` and `BonjourPublisher`. `com.codename1.io.usb` for USB host (Android only). And `NetworkManager.addNetworkTypeListener(...)` plus `NETWORK_TYPE_*` constants so an app can react to a transition between cellular, WiFi, ethernet, or "none":
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">NetworkManager.getInstance().addNetworkTypeListener(evt -&gt; {
+    int type = evt.getNetworkType();
+    if (type == NetworkManager.NETWORK_TYPE_NONE)     showOfflineBanner();
+    else if (type == NetworkManager.NETWORK_TYPE_CELLULAR) suppressLargeBackgroundDownloads();
+    else                                              clearOfflineBanner();
+});</pre>
+
+iOS does not expose programmatic WiFi scanning to third-party apps; `scan()` throws `UnsupportedOperationException` on iOS. iOS also does not expose WiFi Direct or general USB host. None of those are Codename One limitations; they are Apple's. The dev guide is explicit about each platform's limits.
+
+Three new compile-time defines (`CN1_INCLUDE_WIFI_INFO`, `CN1_INCLUDE_HOTSPOT`, `CN1_INCLUDE_BONJOUR`) wrap the iOS native code, set only when the classpath scanner sees the matching Java API in use. Apps that do not use these APIs do not pay for them at App Store review time. Same pattern as the NFC gating from the previous release.
+
+Full reference: [Network Connectivity](https://www.codenameone.com/developer-guide/#_network_connectivity).
+
+Share-sheet result callbacks {#h2-18-share-sheet-result-callbacks}
+------------------------------------------------------------------
+
+[PR #5036](https://github.com/codenameone/CodenameOne/pull/5036) closes a small but persistent gap: `Display.share(...)` and `ShareButton` finally tell you what the user did with the share sheet:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ShareButton btn = new ShareButton();
+btn.setTextToShare("Look at this fox");
+btn.setImageToShare("/fox.jpg");
+btn.setShareResultListener(result -&gt; {
+    switch (result.getStatus()) {
+        case SHARED_TO: track("share_completed", result.getTargetPackage()); break;
+        case DISMISSED: track("share_dismissed"); break;
+        case FAILED:    track("share_failed", result.getError()); break;
+    }
+});</pre>
+
+iOS routes through `UIActivityViewController.completionWithItemsHandler`; Android through `Intent.createChooser` with an `IntentSender` callback (API 22+). The framework normalizes the platform values into `SHARED_TO(packageName)`, `DISMISSED`, or `FAILED`.
+
+### Appearing in other apps' share menus {#h3-19-appearing-in-other-apps-share-menus}
+
+The other half of sharing is the inverse direction: not "let the user share *from* your app", but "let your app *receive* content other apps share". If a user is in Safari, Photos, or Mail and taps the share icon, your app should be able to appear as a target there alongside Messages, WhatsApp, and Instagram. On iOS that requires a separate Share Extension target inside the `.ipa`, with its own bundle, its own `Info.plist`, an App Group string that links it to the host app, and a `ShareViewController` that handles the incoming payload. Historically the recommendation was to bootstrap that target by hand in Xcode, copy the resulting files into the Codename One project under `ios/app_extensions/`, and let the build server's extractor consume them. It worked, but it was a workflow most teams put off because the setup is fiddly.
+
+The same PR ships an `IOSShareExtensionBuilder` Mojo that does all of that for you. A typical setup is one Maven command and a one-time configuration block:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  com.codenameone
+  codenameone-maven-plugin
+
+      com.example.myapp.share
+      MyApp
+      group.com.example.myapp
+
+        PUBLIC_URL
+        PUBLIC_IMAGE
+        PUBLIC_TEXT
+</pre>
+
+Run `mvn cn1:generate-ios-share-extension` and the Mojo writes a complete `.ios.appext` bundle into `ios/app_extensions/`: the `Info.plist` with the right `NSExtension` activation rules for the content types you declared, the App Group entitlement, a minimal `ShareViewController.swift` that lands the payload in the App Group's `UserDefaults(suiteName:)`, and the matching `buildSettings.properties`. The result feeds straight into the existing `IPhoneBuilder.extractAppExtensions` pipeline, so apps that already have a hand-rolled extension keep working unchanged.
+
+On the host-app side you read the payload on launch:
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Anywhere after Display.init has run
+String shared = Storage.getInstance()
+        .readObject("ios.shareExtension.lastPayload");
+if (shared != null) {
+    handleSharedPayload(shared);
+}</pre>
+
+After the next cloud or local build, your app appears in the iOS share sheet for the content types you declared. No Xcode work, no hand-rolled plist, no App Group string typed in three places. The build-time tooling owns it.
+
+Wrapping up {#h2-20-wrapping-up}
+--------------------------------
+
+[Tomorrow's post](https://www.codenameone.com/blog/build-time-codegen/) covers the architectural change in this release: a build-time bytecode annotation framework, the declarative router that is its first consumer, the SQLite ORM and JSON / XML mappers and component binder built on the same SPI, and the build-time SVG / Lottie transcoder that ships in the same release for related reasons.
+
+Back to the [weekly index](https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/).

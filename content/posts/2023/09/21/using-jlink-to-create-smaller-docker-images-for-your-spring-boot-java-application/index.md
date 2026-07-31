@@ -1,0 +1,185 @@
+---
+title: "Using JLink to create smaller Docker images for Spring Boot apps"
+slug: "using-jlink-to-create-smaller-docker-images-for-your-spring-boot-java-application"
+date: "2023-09-21T11:33:05+00:00"
+lastmod: "2023-09-21T11:50:01+00:00"
+description: "An in-depth exploration of utilizing JLink to optimize Docker image sizes, enhancing application security and performance."
+canonical: "https://snyk.io/blog/jlink-create-docker-images-spring-boot-java/"
+authors:
+  - "bmvermeer"
+image: "snyk-logo.png"
+categories:
+  - "Java"
+  - "Security"
+  - "Snyk"
+tags:
+related_posts:
+  - "a-simple-service-with-spring-boot"
+  - "annotation-free-spring"
+  - "better-error-handling-for-your-spring-boot-rest-apis"
+enlighterjs: true
+frozen: false
+---
+
+**Containers bring new flexibility and agility to software development and deployment. However, they also introduce a new attack surface that malicious actors can exploit. A compromised container can give an attacker access to other containers and even the host system. Smaller images that contain fewer artifacts are already a great help in achieving a smaller attack surface.**
+
+In this article, we'll present an in-depth exploration of utilizing JLink to optimize Docker image sizes, enhancing application security and performance. We'll showcase how to use JLink and integrate it with Docker to efficiently deploy your Spring Boot or general Java applications.
+
+Introduction to JLink {#h2-0-introduction-to-jlink}
+---------------------------------------------------
+
+Java is one of the most used programming languages for enterprise application development globally.
+
+However, developers often struggle with the size of the Docker images when deploying Java applications in Docker containers.
+
+One of the ways to solve this problem is to use JLink, a tool introduced in JDK 9.
+
+See how Snyk modernizes AppSec {#h2-1-see-how-snyk-modernizes-appsec}
+---------------------------------------------------------------------
+
+Explore how Snyk helps developers build secure code, open source libraries, containers, and IaC, while giving security teams complete visibility and controls.
+
+[Book a live demo](https://snyk.io/schedule-a-demo/)
+
+JLink (Java Linker) is a command-line tool that assembles and optimizes a set of modules and their dependencies into a custom runtime image. This essentially means it creates a minimal Java runtime environment with only the necessary modules required by your application.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jlink --module-path $JAVA_HOME/jmods:mlib --add-modules my.module --output myRunTime</pre>
+
+In the above command, `my.module` is your module, and `myRuntime` is the custom runtime image that JLink will create.
+
+The role of JLink in creating smaller Docker images {#h2-2-the-role-of-jlink-in-creating-smaller-docker-images}
+---------------------------------------------------------------------------------------------------------------
+
+When creating Docker images for Java applications, the size of the image is often a concern --- particularly for Spring Boot applications, which come with many dependencies. A large Docker image can lead to longer startup times, increased storage costs, and slower deployment processes.
+
+In legacy versions of Java, the Java Development Kit (JDK) came with a Java Runtime Environment (JRE). Only the JRE was needed to run the created Java artifact. Therefore, in the past, it was common to use the JRE in your Docker image or choose a JRE base image for your containers. Newer versions of Java don't always come with a JRE, although some vendors might still create a JRE and corresponding base images. You can use these or a more specific Java runtime tailored to your application.
+
+JLink enables you to create a minimal Java runtime with only the necessary modules. By doing so, it significantly reduces the size of your Docker image. For example, a standard Java runtime environment might be over 200 MB, but with JLink, you can bring it down to less than 50 MB.
+
+Using JLink for a Spring Boot Java application {#h2-3-using-jlink-for-a-spring-boot-java-application}
+-----------------------------------------------------------------------------------------------------
+
+Spring Boot creates a fat JAR for your applications containing all the dependencies. In addition, many Spring Boot applications lack a module declaration. This does not have to be a problem, but we need to determine which modules the application needs and all its dependencies.
+
+### Using Jdeps to find the module {#h3-4-using-jdeps-to-find-the-module}
+
+<br />
+
+Jdeps is a Java tool that shows the package-level or class-level dependencies. The tool, introduced in Java 8, can be used to understand an application's dependencies, which can then be used to create a custom runtime image using JLink.
+
+When ensuring that all our dependencies are located in one directory, we can use jdeps to print a summary of the dependencies.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jdeps -cp 'mydeps/lib/*' -recursive --multi-release 17 -s target/MyJar.jar</pre>
+
+Similarly, we can use jdeps to print all module dependencies recursively for the Spring Boot application and the dependencies.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jdeps --ignore-missing-deps -q  --recursive  --multi-release 17  --print-module-deps  --class-path 'mydeps/lib/*'  target/MyJar.jar</pre>
+
+The output generated by jdeps enables JLink to create a Java Runtime that only contains the modules needed for this Spring-Boot application.
+
+### Output Spring Boot dependencies into a folder {#h3-5-output-spring-boot-dependencies-into-a-folder}
+
+As mentioned, Spring Boot creates a fat JAR that includes all dependencies. However, the dependencies are packed in a particular way inside the JAR and, therefore, are not easy to access by jdeps. There are two simple solutions to get the dependencies with jdeps.
+
+* Unpack the fat JAR file created by Spring Boot.
+  * This option works great if you already have the build artifact created and are not willing or able to rebuild the application. The dependencies will be unpacked into `/BOOT/libs/`.
+* Use a plugin in your build tool that copies the dependencies to a specific folder.
+  * In Maven, this can, for instance, be achieved by using the `maven-dependency-plugin`. In the example below, the dependencies are copied to the `/target/dependency` folder after Maven finishes the package phase.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">1&lt;project&gt;
+2    &lt;!-- ... other configurations ... --&gt;
+3
+4    &lt;build&gt;
+5        &lt;plugins&gt;
+6            &lt;!-- Add the maven-dependency-plugin --&gt;
+7            &lt;plugin&gt;
+8                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+9                &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;
+10                &lt;version&gt;3.1.2&lt;/version&gt;
+11                &lt;executions&gt;
+12                    &lt;execution&gt;
+13                        &lt;id&gt;copy-dependencies&lt;/id&gt;
+14                        &lt;phase&gt;package&lt;/phase&gt;
+15                        &lt;goals&gt;
+16                            &lt;goal&gt;copy-dependencies&lt;/goal&gt;
+17                        &lt;/goals&gt;
+18                        &lt;configuration&gt;
+19                            &lt;!-- Configure the output directory for the dependencies --&gt;
+20                            &lt;outputDirectory&gt;${project.build.directory}/dependency&lt;/outputDirectory&gt;
+21                        &lt;/configuration&gt;
+22                    &lt;/execution&gt;
+23                &lt;/executions&gt;
+24            &lt;/plugin&gt;
+25        &lt;/plugins&gt;
+26    &lt;/build&gt;
+27
+28    &lt;!-- ... other configurations ... --&gt;
+29&lt;/project&gt;</pre>
+
+Building a Docker image with a custom Java Runtime {#h2-6-building-a-docker-image-with-a-custom-java-runtime}
+-------------------------------------------------------------------------------------------------------------
+
+So now, let's combine jdeps and JLink to build a custom Java Runtime. With this runtime, we can create a perfect, minimal Docker image specifically for a Spring Boot application.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">1FROM maven:3-eclipse-temurin-17 as build
+2RUN mkdir /usr/src/project
+3COPY . /usr/src/project
+4WORKDIR /usr/src/project
+5RUN mvn package -DskipTests
+6RUN jar xf target/JavaCoffeeShop.jar
+7RUN jdeps --ignore-missing-deps -q  \
+8    --recursive  \
+9    --multi-release 17  \
+10    --print-module-deps  \
+11    --class-path 'BOOT-INF/lib/*'  \
+12    target/JavaCoffeeShop.jar &gt; deps.info
+13RUN jlink \
+14    --add-modules $(cat deps.info) \
+15    --strip-debug \
+16    --compress 2 \
+17    --no-header-files \
+18    --no-man-pages \
+19    --output /myjre
+20FROM debian:bookworm-slim
+21ENV JAVA_HOME /user/java/jdk17
+22ENV PATH $JAVA_HOME/bin:$PATH
+23COPY --from=build /myjre $JAVA_HOME
+24RUN mkdir /project
+25COPY --from=build /usr/src/project/target/JavaCoffeeShop.jar /project/
+26WORKDIR /project
+27ENTRYPOINT java -jar JavaCoffeeShop.jar</pre>
+
+In the example above, I utilized a multistage Docker build. The initial building stage is based on an `eclipse-temurin` JDK 17 image containing Maven. This stage is used to:
+
+* **Create the Java artifact.** Using Maven, I create the fat executable JAR file that contains the complete application.
+* **Unpack the JAR file to have all the dependencies.** This is only needed if you don't use the `maven-dependency-plugin` as described earlier. If you included it, you can skip this step
+* **Use jdeps to get the necessary modules.** Point to the file containing all the dependency JAR files and the final artifact, and save the list in `deps.info`.
+* **Run JLink to create a custom Java Runtime.** Using the `deps.info` as input and storing it in `/myjre`. We only add the modules needed to JLink and remove debug info, manual pages, and header files.
+
+The second and final stage builds the production image based on a `debian:stable-slim` image.
+
+* **Set environment variables** . Set the `JAVA_HOME` to the path I'll copy `myjre` to, and add `JAVA_HOME` to the `PATH`.
+* **Copy the Java Runtime created by JLink** . Reference the first stage and copy the custom Java Runtime to the location defined as `JAVA_HOME`.
+* **Copy the created Java artifact.** The created fat executable Spring Boot JAR is copied to the dedicated project directory.
+* **Set Entrypoint**
+
+JLink offers several advantages when it comes to creating Docker images for Spring Boot Java applications:
+
+1. **Reduced Image Size:** As mentioned earlier, JLink can help reduce the size of your Docker image, leading to faster deployment and reduced storage costs.
+
+2. **Faster Startup Times:** A smaller Docker image means that your application can start up faster, which is crucial for applications that need to scale quickly.
+
+3. **Security:** By including only the necessary modules, you reduce the attack surface of your application. Fewer modules mean fewer potential security vulnerabilities.
+
+Speaking of security, it's essential to mention the role of Snyk in ensuring the security of your applications. Snyk is a developer security tool that can scan your source code, open source packages, container images, and cloud configurations for vulnerabilities. With Snyk Container and Snyk Open Source, you can detect and fix security issues in your application and its dependencies --- including those in your Docker images.
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ snyk container test your-repo/your-image:tag</pre>
+
+In the above command, `your-repo/your-image:tag` is your Docker image. Snyk will scan it and report any detected vulnerabilities, along with suggestions on how to fix them.
+
+Create smaller and more secure Docker images for Java applications {#h2-7-create-smaller-and-more-secure-docker-images-for-java-applications}
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Be aware that the examples in this article are meant to showcase how to use JLink to create a more concise Docker image for your Java projects. The examples shown do not meet all the best practices for secure Docker images. If you want to know more about that, take a look at our "[++10 best practices to build a Java container with Docker++](https://snyk.io/blog/best-practices-to-build-java-containers-with-docker/)" article for some inspiration.
+
+**In conclusion, JLink is a powerful tool that can help you create smaller, more secure Docker images for your Spring Boot Java applications. Coupled with security tools like Snyk, you can ensure your applications are performant and secure. So, why wait? Sign up for Snyk today and start securing your applications.**

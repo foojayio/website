@@ -1,0 +1,21 @@
+{{- /* Resolve an image reference to a URL, handling all three cases the site
+       uses. Params: page (the Page), src (string), abs (bool -> absolute URL).
+         1. Page-bundle resource (bare filename co-located with index.md)
+            -> its permalink (subpath-correct, publishes the image).
+         2. Root-relative static path (/images/... from pages/pedia)
+            -> relURL/absURL with the leading slash stripped so the subpath applies.
+         3. External / data URL -> unchanged. */ -}}
+{{- $src := .src -}}
+{{- $out := $src -}}
+{{- if not (or (hasPrefix $src "http") (hasPrefix $src "//") (hasPrefix $src "data:")) -}}
+  {{- $res := false -}}
+  {{- with .page }}{{ $res = .Resources.GetMatch $src }}{{ end -}}
+  {{- if $res -}}
+    {{- $out = cond (eq .abs true) $res.Permalink $res.RelPermalink -}}
+  {{- else if eq .abs true -}}
+    {{- $out = $src | strings.TrimPrefix "/" | absURL -}}
+  {{- else -}}
+    {{- $out = $src | strings.TrimPrefix "/" | relURL -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}
