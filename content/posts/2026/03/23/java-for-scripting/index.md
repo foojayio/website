@@ -14,7 +14,6 @@ categories:
   - "JDK 23"
   - "JDK21"
   - "JEPs"
-  - "Uncategorized"
 tags:
 related_posts:
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"

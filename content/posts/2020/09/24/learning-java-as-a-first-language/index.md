@@ -9,7 +9,7 @@ authors:
   - "matt-raible"
 image: "Favicon-3-2.png"
 categories:
-  - "Uncategorized"
+  - "Tutorials"
 tags:
 related_posts:
   - "running-single-file-java-source-code-without-compiling-part-1"

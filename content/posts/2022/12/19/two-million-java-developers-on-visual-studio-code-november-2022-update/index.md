@@ -9,7 +9,6 @@ authors:
 image: "postfix.gif"
 categories:
   - "Tools"
-  - "Uncategorized"
   - "VS Code"
 tags:
 related_posts:

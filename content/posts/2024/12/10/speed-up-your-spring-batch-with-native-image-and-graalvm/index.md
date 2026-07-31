@@ -13,7 +13,6 @@ categories:
   - "Performance"
   - "Spring"
   - "Tools"
-  - "Uncategorized"
   - "Videos"
 tags:
 related_posts:

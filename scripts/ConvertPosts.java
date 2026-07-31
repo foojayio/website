@@ -385,6 +385,7 @@ public class ConvertPosts {
 
         d.categories = linksToNames(doc, SELECTOR_CATEGORY_LINKS, "/today/category/");
         d.tags = linksToNames(doc, SELECTOR_TAG_LINKS, "/today/tag/");
+        normalizeCategories(d);
         d.relatedSlugs = relatedPostSlugs(doc);
 
         Element content = doc.selectFirst(SELECTOR_ARTICLE_CONTENT);
@@ -466,6 +467,63 @@ public class ConvertPosts {
             if (!text.isBlank()) names.add(text);
         }
         return new ArrayList<>(names);
+    }
+
+    // WordPress's catch-all "Uncategorized" is noise on a category page, so we
+    // drop it everywhere. Posts that had NO other category would then vanish
+    // from every category listing, so we guess a fitting one from the title +
+    // tags instead (best-effort keyword match, first rule wins; see RULES).
+    // These categories all exist in template/categories.md.
+    static final String CATEGORY_UNCATEGORIZED = "Uncategorized";
+    static final String CATEGORY_FALLBACK = "Java";
+    static final String[][] CATEGORY_GUESS_RULES = {
+        {"BoxLang", "boxlang"},
+        {"JavaFX", "javafx", "lottie", "gluon", "sheetmusic4j", "scenebuilder"},
+        {"Raspberry Pi", "raspberry pi", "pi4j", "gpio", "risc v", "banana pi", "blinking led"},
+        {"AI", "copilot", "chatgpt", "openai", "gpt", "llm", "genai", "spring ai",
+               "ai agent", "ai agents", "ai powered", "ai system", "ai systems",
+               "ai found", "ai shepherd", "machine learning", "langchain"},
+        {"Mongo", "mongodb", "mongo", "cqrs"},
+        {"Spring", "spring", "grails", "componentscan"},
+        {"Testing", "junit", "testcontainers", "unit test", "testing"},
+        {"Debugging", "debugging", "stack trace", "stack traces", "race conditions"},
+        {"Security", "vulnerability", "cve", "log4j", "cspu", "cspus", "security"},
+        {"Trip Reports", "trip report", "trip reports"},
+        {"Conference", "kcdc", "conference", "devoxx", "jfokus", "jchateau"},
+        {"Agile", "agile", "scrum"},
+        {"Library", "itext", "pdf"},
+        {"DevOps", "jib", "docker", "container", "kubernetes", "openshift"},
+        {"Tutorials", "getting started", "learning java", "new to java", "primer",
+                      "first language", "tutorial", "introduction to", "cheatsheet"},
+        {"Opinion", "predictions", "retrospective", "overengineering", "myths",
+                    "is java still", "why java", "reason java", "emerging technology"},
+        {"Performance", "performance", "profiler", "profile", "profiling",
+                        "cache providers", "garbage collection"},
+        {"Java Core", "thread", "threading", "concurrency", "optional", "stream",
+                      "records", "sealed", "pattern matching", "module", "modules",
+                      "hashcode", "equals", "jvm", "memory management", "logging",
+                      "colorspace", "colorspaces", "images", "bufferedimage", "jshell",
+                      "single file", "teeing", "functional programming", "refactoring",
+                      "field type", "executable jar", "acronym", "core java",
+                      "java platform", "java evolution", "java evolved", "jeps", "panama"},
+    };
+
+    static void normalizeCategories(PostData d) {
+        d.categories.removeIf(c -> c != null && c.strip().equalsIgnoreCase(CATEGORY_UNCATEGORIZED));
+        if (d.categories.isEmpty()) d.categories.add(guessCategory(d.title, d.tags));
+    }
+
+    /** Best-effort category from a post's title + tags, for posts WordPress left
+     *  uncategorized. First matching rule wins; falls back to "Java". */
+    static String guessCategory(String title, List<String> tags) {
+        String hay = " " + ((title == null ? "" : title) + " " + String.join(" ", tags))
+                .toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9]+", " ") + " ";
+        for (String[] rule : CATEGORY_GUESS_RULES) {
+            for (int i = 1; i < rule.length; i++) {
+                if (hay.contains(" " + rule[i] + " ") || hay.contains(rule[i])) return rule[0];
+            }
+        }
+        return CATEGORY_FALLBACK;
     }
 
     static List<String> relatedPostSlugs(Document doc) {

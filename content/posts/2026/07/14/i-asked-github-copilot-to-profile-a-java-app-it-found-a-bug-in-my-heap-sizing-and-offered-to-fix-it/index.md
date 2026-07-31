@@ -8,7 +8,7 @@ authors:
   - "bruno-borges"
 image: "github-copilot-profiling.png"
 categories:
-  - "Uncategorized"
+  - "AI"
 tags:
 related_posts:
 frozen: false

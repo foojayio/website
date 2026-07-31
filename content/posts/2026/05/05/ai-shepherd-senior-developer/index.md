@@ -7,7 +7,7 @@ authors:
   - "markus-westergren"
 image: "image.png"
 categories:
-  - "Uncategorized"
+  - "Java"
 tags:
 related_posts:
 frozen: false

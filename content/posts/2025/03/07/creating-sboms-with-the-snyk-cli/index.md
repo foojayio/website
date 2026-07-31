@@ -12,7 +12,6 @@ categories:
   - "Security"
   - "Snyk"
   - "Tools"
-  - "Uncategorized"
 tags:
 related_posts:
   - "are-critical-vulnerabilities-lurking-in-your-java-ecosystem"

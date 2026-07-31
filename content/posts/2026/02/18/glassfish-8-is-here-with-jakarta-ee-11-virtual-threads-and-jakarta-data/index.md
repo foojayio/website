@@ -11,7 +11,6 @@ categories:
   - "Jakarta EE"
   - "Payara"
   - "Release Notes"
-  - "Uncategorized"
 tags:
 related_posts:
   - "glassfish-8-0-2-released"

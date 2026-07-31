@@ -10,7 +10,6 @@ authors:
 image: "payara_square_logo.jpg"
 categories:
   - "Events"
-  - "Uncategorized"
 tags:
 related_posts:
   - "do-java-jakarta-ee-standards-matter"

@@ -12,7 +12,6 @@ categories:
   - "Graph"
   - "Java"
   - "Neo4J"
-  - "Uncategorized"
 tags:
 related_posts:
   - "breaktime-tech-talks-ep37-vector-database-frustration-microsoft-lazygraphrag"

@@ -13,7 +13,6 @@ categories:
   - "Machine Learning"
   - "Research"
   - "Tools"
-  - "Uncategorized"
   - "Use Cases"
 tags:
 related_posts:

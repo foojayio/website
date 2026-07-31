@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "cover_large.jpg"
 categories:
-  - "Uncategorized"
+  - "Conference"
 tags:
 related_posts:
 frozen: false

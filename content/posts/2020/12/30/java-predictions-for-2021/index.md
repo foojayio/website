@@ -8,7 +8,7 @@ authors:
   - "geertjan-wielenga"
 image: "Favicon-3-2.png"
 categories:
-  - "Uncategorized"
+  - "Opinion"
 tags:
 related_posts:
 frozen: false

@@ -11,7 +11,6 @@ categories:
   - "Jakarta EE"
   - "Payara"
   - "Release Notes"
-  - "Uncategorized"
 tags:
 related_posts:
   - "whats-new-in-the-january-2026-payara-platform-release"

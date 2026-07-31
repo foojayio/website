@@ -12,7 +12,6 @@ categories:
   - "Conference"
   - "Jakarta EE"
   - "Microservices"
-  - "Uncategorized"
 tags:
 related_posts:
 frozen: false

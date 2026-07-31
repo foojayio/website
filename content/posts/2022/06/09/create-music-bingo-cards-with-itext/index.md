@@ -9,7 +9,7 @@ authors:
   - "frankdelporte"
 image: "frank.png"
 categories:
-  - "Uncategorized"
+  - "Library"
 tags:
 related_posts:
   - "10-basic-questions-about-pdf-files-for-java-developers"

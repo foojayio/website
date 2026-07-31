@@ -9,7 +9,7 @@ authors:
   - "nicolas-frankel"
 image: "engineer-4690505_1280.jpg"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
   - "teeing-java-api"

@@ -10,7 +10,6 @@ image: "question-mark-1872665_1280.jpg"
 categories:
   - "Research"
   - "Surveys"
-  - "Uncategorized"
 tags:
 related_posts:
   - "join-slack-com-t-foojay-signup"

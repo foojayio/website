@@ -9,7 +9,7 @@ authors:
   - "helenjoscott"
 image: "java.png"
 categories:
-  - "Uncategorized"
+  - "Java"
 tags:
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"

@@ -12,7 +12,6 @@ image: "payara_square_logo.jpg"
 categories:
   - "Jakarta EE"
   - "Java"
-  - "Uncategorized"
 tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"

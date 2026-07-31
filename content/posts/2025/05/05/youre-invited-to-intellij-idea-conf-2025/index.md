@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "Events"
   - "IntelliJ IDEA"
-  - "Uncategorized"
 tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"

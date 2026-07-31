@@ -123,7 +123,6 @@ frontmatter.
 - TornadoVM
 - Trip Reports
 - Tutorials
-- Uncategorized
 - Use Cases
 - Vaadin
 - Videos

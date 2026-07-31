@@ -9,7 +9,7 @@ authors:
   - "nicolas-frankel"
 image: "Favicon-3-2.png"
 categories:
-  - "Uncategorized"
+  - "Performance"
 tags:
 related_posts:
   - "choosing-a-cache-1"

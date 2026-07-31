@@ -9,7 +9,7 @@ authors:
   - "yrashish"
 image: "jib-ashish-700x400.png"
 categories:
-  - "Uncategorized"
+  - "DevOps"
 tags:
 related_posts:
 enlighterjs: true

@@ -8,7 +8,7 @@ authors:
   - "bazlur-rahman"
 image: "Threading-432x510.png"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
   - "java-thread-programming-part-2"

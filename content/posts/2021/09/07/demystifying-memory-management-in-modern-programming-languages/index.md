@@ -9,7 +9,7 @@ authors:
   - "deepu-sasidharan"
 image: "https://i.imgur.com/R0mdaId.png"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
   - "demystifying-jvm-memory-management"

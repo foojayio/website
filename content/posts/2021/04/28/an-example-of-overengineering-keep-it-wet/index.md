@@ -9,7 +9,7 @@ authors:
   - "nicolas-frankel"
 image: "complexity-5902955_1280.jpg"
 categories:
-  - "Uncategorized"
+  - "Opinion"
 tags:
 related_posts:
 enlighterjs: true

@@ -14,7 +14,6 @@ categories:
   - "Microservices"
   - "Payara"
   - "Release Notes"
-  - "Uncategorized"
 tags:
 related_posts:
   - "whats-new-in-the-july-2026-azul-payara-release"

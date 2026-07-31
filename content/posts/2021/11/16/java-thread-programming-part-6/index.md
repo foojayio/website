@@ -8,7 +8,7 @@ authors:
   - "bazlur-rahman"
 image: "thread-lifecycle-700x379.png"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
   - "java-thread-programming-part-5"

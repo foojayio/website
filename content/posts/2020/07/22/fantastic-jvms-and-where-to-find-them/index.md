@@ -8,7 +8,7 @@ authors:
   - "hirt"
 image: "Favicon-3-2.png"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
   - "boxlang-ai-deep-dive-part-6-of-7-memory-systems-rag-building-ai-that-remembers"

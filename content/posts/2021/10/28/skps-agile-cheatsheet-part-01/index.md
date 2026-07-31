@@ -8,7 +8,7 @@ authors:
   - "sumith-puri"
 image: "images-2.jpg"
 categories:
-  - "Uncategorized"
+  - "Agile"
 tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"

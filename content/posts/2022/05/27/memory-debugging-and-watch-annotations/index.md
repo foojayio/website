@@ -10,7 +10,6 @@ authors:
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
 categories:
   - "Tutorials"
-  - "Uncategorized"
 tags:
 related_posts:
   - "the-basics-of-breakpoints-you-might-not-know"

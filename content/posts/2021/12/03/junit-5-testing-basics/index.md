@@ -9,7 +9,7 @@ authors:
   - "c-guntur"
 image: "Favicon-3-2.png"
 categories:
-  - "Uncategorized"
+  - "Testing"
 tags:
 related_posts:
   - "junit-5-introduction"

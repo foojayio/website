@@ -14,7 +14,6 @@ categories:
   - "Java"
   - "Maven"
   - "Spring"
-  - "Uncategorized"
 tags:
 related_posts:
 enlighterjs: true

@@ -8,7 +8,7 @@ authors:
   - "bazlur-rahman"
 image: "Favicon-3-2.png"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
   - "java-thread-programming-part-1"

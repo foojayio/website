@@ -9,7 +9,7 @@ authors:
   - "helenjoscott"
 image: "Favicon-3-2.png"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
 frozen: false

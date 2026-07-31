@@ -9,7 +9,7 @@ authors:
   - "deepu-sasidharan"
 image: "https://i.imgur.com/M6xKDas.jpeg"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
   - "immutable-collections-in-java-with-sealed-types"

@@ -13,7 +13,6 @@ categories:
   - "Kotlin"
   - "Research"
   - "Scala"
-  - "Uncategorized"
 tags:
 related_posts:
   - "kubernetes-gateway-api"

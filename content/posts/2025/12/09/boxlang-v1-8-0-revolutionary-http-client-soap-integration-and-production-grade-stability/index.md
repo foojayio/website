@@ -8,7 +8,7 @@ authors:
   - "cristobal-escobar"
 image: "BoxLang-Logo-Dark.png"
 categories:
-  - "Uncategorized"
+  - "BoxLang"
 tags:
 related_posts:
 enlighterjs: true

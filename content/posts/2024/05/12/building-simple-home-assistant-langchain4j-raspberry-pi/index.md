@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Machine Learning"
   - "Raspberry Pi"
-  - "Uncategorized"
 tags:
 related_posts:
   - "spring-ai-how-to-write-genai-applications-with-java"

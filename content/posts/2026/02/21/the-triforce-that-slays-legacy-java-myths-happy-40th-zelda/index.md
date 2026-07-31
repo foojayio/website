@@ -8,7 +8,7 @@ authors:
   - "igor-de-souza"
 image: "zelda01.png"
 categories:
-  - "Uncategorized"
+  - "Opinion"
 tags:
 related_posts:
 frozen: false

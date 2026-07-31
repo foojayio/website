@@ -7,7 +7,7 @@ authors:
   - "cristobal-escobar"
 image: "bx-chart-release.jpg"
 categories:
-  - "Uncategorized"
+  - "BoxLang"
 tags:
 related_posts:
   - "boxlang-1-7-0-delivers-streaming-distributed-caching-and-enhanced-jvm-performance"

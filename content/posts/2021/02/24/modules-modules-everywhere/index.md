@@ -8,7 +8,7 @@ authors:
   - "sormuras"
 image: "Favicon-3-2.png"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
   - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"

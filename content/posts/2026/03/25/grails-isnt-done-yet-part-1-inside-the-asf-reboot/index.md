@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "Spring"
   - "Tools"
-  - "Uncategorized"
 tags:
 related_posts:
   - "7-new-vulnerabilities-in-jackson-in-one-day-this-is-what-ai-assisted-security-research-looks-like"

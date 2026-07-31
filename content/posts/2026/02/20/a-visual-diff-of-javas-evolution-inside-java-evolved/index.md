@@ -8,7 +8,7 @@ authors:
   - "bazlur-rahman"
 image: "Screenshot-2026-02-20-at-6.28.07-AM-scaled.png"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
   - "a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-1"

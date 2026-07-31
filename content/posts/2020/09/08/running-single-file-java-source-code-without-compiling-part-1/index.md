@@ -9,7 +9,7 @@ authors:
   - "mohamed-taman"
 image: "Favicon-3-2.png"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
   - "learning-java-as-a-first-language"

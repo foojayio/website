@@ -13,7 +13,6 @@ categories:
   - "Databases"
   - "DataStax"
   - "DevOps"
-  - "Uncategorized"
 tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"

@@ -8,7 +8,7 @@ authors:
   - "c-guntur"
 image: "https://cgunturme.files.wordpress.com/2019/07/junitnodisplayname.png?w=840"
 categories:
-  - "Uncategorized"
+  - "Testing"
 tags:
 related_posts:
   - "junit-5-introduction"

@@ -9,7 +9,7 @@ authors:
   - "c-guntur"
 image: "https://cgunturme.files.wordpress.com/2019/07/dukejunit5.png"
 categories:
-  - "Uncategorized"
+  - "Testing"
 tags:
 related_posts:
   - "book-review-seriously-good-software"

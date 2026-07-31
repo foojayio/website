@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "writing-play-cards-art-design-hands-869927.jpg"
 categories:
-  - "Uncategorized"
+  - "Java"
 tags:
 related_posts:
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"

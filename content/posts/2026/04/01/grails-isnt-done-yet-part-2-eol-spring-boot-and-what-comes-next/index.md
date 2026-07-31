@@ -7,7 +7,7 @@ authors:
   - "steve-poole"
 image: "Favicon-3-2.png"
 categories:
-  - "Uncategorized"
+  - "Spring"
 tags:
 related_posts:
 frozen: false

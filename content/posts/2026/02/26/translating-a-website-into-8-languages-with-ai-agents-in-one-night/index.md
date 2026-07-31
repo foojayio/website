@@ -8,7 +8,7 @@ authors:
   - "bruno-borges"
 image: "Screenshot-2026-02-25-at-22.43.09.png"
 categories:
-  - "Uncategorized"
+  - "AI"
 tags:
 related_posts:
 frozen: false

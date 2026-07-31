@@ -11,7 +11,6 @@ image: "duplicate-finder-banner.png"
 categories:
   - "Java"
   - "Kotlin"
-  - "Uncategorized"
 tags:
 related_posts:
   - "debug-without-breakpoints"

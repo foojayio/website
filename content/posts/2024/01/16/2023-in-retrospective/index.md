@@ -9,7 +9,7 @@ authors:
   - "nicolas-frankel"
 image: "apisix.png"
 categories:
-  - "Uncategorized"
+  - "Opinion"
 tags:
 related_posts:
   - "2022-in-retrospective"

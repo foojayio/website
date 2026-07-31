@@ -12,7 +12,6 @@ categories:
   - "Developer Tools"
   - "IntelliJ IDEA"
   - "Tutorials"
-  - "Uncategorized"
 tags:
 related_posts:
   - "debugging-collections-streams-and-watch-renderers"

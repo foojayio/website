@@ -8,7 +8,7 @@ authors:
   - "mark-stephens"
 image: "https://blog.idrsolutions.com/wp-content/uploads/2020/01/Screenshot-2020-01-20-at-15.22.53-284x300.png"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
   - "learning-java-as-a-first-language"

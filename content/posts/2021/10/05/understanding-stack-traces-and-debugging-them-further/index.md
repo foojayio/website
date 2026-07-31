@@ -9,7 +9,7 @@ authors:
   - "shai-almog"
 image: "Understanding-Stack-Traces1.jpg"
 categories:
-  - "Uncategorized"
+  - "Debugging"
 tags:
 related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"

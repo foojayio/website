@@ -9,7 +9,7 @@ authors:
   - "nicolas-frankel"
 image: "light-bulbs-3958844.jpg"
 categories:
-  - "Uncategorized"
+  - "Java"
 tags:
 related_posts:
   - "building-simple-home-assistant-langchain4j-raspberry-pi"

@@ -9,7 +9,7 @@ authors:
   - "nicolas-frankel"
 image: "image-12.png"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
 enlighterjs: true

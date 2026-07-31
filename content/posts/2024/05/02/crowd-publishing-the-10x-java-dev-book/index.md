@@ -13,7 +13,6 @@ categories:
   - "Books"
   - "Java"
   - "Tutorials"
-  - "Uncategorized"
 tags:
 related_posts:
   - "book-review-practical-design-patterns-for-java-developers"

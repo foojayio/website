@@ -8,7 +8,7 @@ authors:
   - "sumith-puri"
 image: "java.jpg"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
   - "java-thread-programming-part-1"

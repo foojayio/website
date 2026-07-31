@@ -14,7 +14,6 @@ categories:
   - "Java"
   - "Java Beginner"
   - "Maven"
-  - "Uncategorized"
 tags:
 related_posts:
   - "transitioning-to-java-my-first-book"

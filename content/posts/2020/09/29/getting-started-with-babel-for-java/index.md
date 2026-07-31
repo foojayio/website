@@ -9,7 +9,7 @@ authors:
   - "eppleton"
 image: "Favicon-3-2.png"
 categories:
-  - "Uncategorized"
+  - "Tutorials"
 tags:
 related_posts:
 enlighterjs: true

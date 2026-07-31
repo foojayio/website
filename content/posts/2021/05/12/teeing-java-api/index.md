@@ -9,7 +9,7 @@ authors:
   - "nicolas-frankel"
 image: "letter-3038384_1280.jpg"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
   - "optional-stream"

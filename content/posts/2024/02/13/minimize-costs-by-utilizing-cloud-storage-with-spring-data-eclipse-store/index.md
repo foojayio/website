@@ -13,7 +13,6 @@ categories:
   - "nosql"
   - "Performance"
   - "Spring"
-  - "Uncategorized"
 tags:
 related_posts:
   - "microstream-part-1-what-is-it"

@@ -7,7 +7,7 @@ authors:
   - "otavio-santana"
 image: "Technical_ATLAS_QueryOptimization10x.png"
 categories:
-  - "Uncategorized"
+  - "Mongo"
 tags:
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"

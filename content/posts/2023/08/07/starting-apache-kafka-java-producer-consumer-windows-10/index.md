@@ -10,7 +10,6 @@ image: "techila_shots_kafka_java_001.png"
 categories:
   - "Kafka"
   - "Tutorials"
-  - "Uncategorized"
 tags:
 related_posts:
   - "starting-apache-kafka-on-windows-10-kafka-v3-4"

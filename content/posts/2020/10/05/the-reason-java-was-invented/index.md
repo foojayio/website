@@ -8,7 +8,7 @@ authors:
   - "kevinfarnham"
 image: "Favicon-3-2.png"
 categories:
-  - "Uncategorized"
+  - "Java"
 tags:
 related_posts:
 frozen: false

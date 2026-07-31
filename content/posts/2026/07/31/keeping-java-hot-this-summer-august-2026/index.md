@@ -7,7 +7,7 @@ authors:
   - "dominika-tasarz"
 image: "Azul-Payara-Community-New-Release-2.jpg"
 categories:
-  - "Uncategorized"
+  - "Java"
 tags:
 related_posts:
 frozen: false

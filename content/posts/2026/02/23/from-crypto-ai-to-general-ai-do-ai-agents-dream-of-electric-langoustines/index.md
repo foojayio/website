@@ -19,7 +19,6 @@ categories:
   - "Research"
   - "Tools"
   - "Tutorials"
-  - "Uncategorized"
 tags:
 related_posts:
 frozen: false

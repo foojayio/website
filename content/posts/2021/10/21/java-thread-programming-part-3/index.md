@@ -8,7 +8,7 @@ authors:
   - "bazlur-rahman"
 image: "ashim-d-silva-XwfyZjfXGQE-unsplash.jpg"
 categories:
-  - "Uncategorized"
+  - "Java Core"
 tags:
 related_posts:
   - "java-thread-programming-part-1"

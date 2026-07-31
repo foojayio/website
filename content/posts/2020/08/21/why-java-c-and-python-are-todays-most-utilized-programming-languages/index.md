@@ -8,7 +8,7 @@ authors:
   - "kevinfarnham"
 image: "tiobe_20200820.png"
 categories:
-  - "Uncategorized"
+  - "Java"
 tags:
 related_posts:
   - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"

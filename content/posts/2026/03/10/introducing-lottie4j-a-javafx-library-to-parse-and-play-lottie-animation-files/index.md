@@ -8,7 +8,7 @@ authors:
   - "frankdelporte"
 image: "launch-lottie4j-scaled.jpg"
 categories:
-  - "Uncategorized"
+  - "JavaFX"
 tags:
 related_posts:
 enlighterjs: true

@@ -11,7 +11,6 @@ image: "banner-1.png"
 categories:
   - "IntelliJ IDEA"
   - "Kotlin"
-  - "Uncategorized"
   - "Use Cases"
 tags:
 related_posts:

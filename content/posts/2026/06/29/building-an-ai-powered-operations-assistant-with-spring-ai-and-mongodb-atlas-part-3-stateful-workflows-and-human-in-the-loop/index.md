@@ -8,7 +8,7 @@ authors:
   - "matteo-rossi"
 image: "fri1.png"
 categories:
-  - "Uncategorized"
+  - "AI"
 tags:
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"
