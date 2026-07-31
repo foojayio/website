@@ -12,12 +12,21 @@
   <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
   <meta property="og:description" content="{{ $desc }}">
   <meta property="og:url" content="{{ .Permalink }}">
-  <meta property="og:type" content="{{ if eq .Section "posts" }}article{{ else }}website{{ end }}">
+  {{/* .IsPage matters here, not just Section: content/posts/_index.md (the
+       /today/ listing) has Section "posts" too, but it's a list page, not an
+       article -- without the .IsPage check it was getting og:type=article
+       and an article:published_time that didn't mean anything for a listing
+       page. */}}
+  {{ $isPost := and (eq .Section "posts") .IsPage }}
+  <meta property="og:type" content="{{ if $isPost }}article{{ else }}website{{ end }}">
   {{ with .Params.image }}<meta property="og:image" content="{{ . | strings.TrimPrefix "/" | absURL }}">{{ end }}
   <meta name="twitter:card" content="{{ if .Params.image }}summary_large_image{{ else }}summary{{ end }}">
-  {{ if eq .Section "posts" }}
+  {{ if $isPost }}
   <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
   {{ end }}
+  {{/* Thin/JS-only content shouldn't be indexed as a normal page: the search
+       results page has no server-rendered content of its own to rank on. */}}
+  {{ if eq .Type "search" }}<meta name="robots" content="noindex, follow">{{ end }}
 
   {{ with .Site.Params.favicon }}<link rel="icon" href="{{ . | relURL }}">{{ end }}
 
