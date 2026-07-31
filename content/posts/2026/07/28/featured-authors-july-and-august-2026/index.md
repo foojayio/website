@@ -1,6 +1,5 @@
 ---
 title: "Featured Foojay Authors for July and August 2026"
-slug: "featured-authors-july-and-august-2026"
 date: "2026-07-28T09:05:30+00:00"
 lastmod: "2026-07-28T11:03:57+00:00"
 description: "Foojay wouldn't exist without the many contributions from its community, whether it's a single post or an ongoing stream of knowledge sharing. That's why - by Frank Delporte"

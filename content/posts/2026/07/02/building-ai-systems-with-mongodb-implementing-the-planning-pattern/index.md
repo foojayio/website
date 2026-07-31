@@ -1,6 +1,5 @@
 ---
 title: "Building AI Systems with MongoDB: Implementing the Planning Pattern"
-slug: "building-ai-systems-with-mongodb-implementing-the-planning-pattern"
 date: "2026-07-02T10:00:00+00:00"
 description: "Artificial Intelligence has swiftly evolved from a niche research topic to a technology that impacts nearly every aspect of the software industry. Developers now use AI to generate code, review pull requests, create documentation, and accelerate workflows through methods like vibe coding and specification-driven development. While these applications position AI as an engineering tool, a new trend is emerging: integrating AI directly into business workflows within applications. by Otavio Santana"
 authors:
@@ -32,7 +31,7 @@ In this tutorial, you'll:
 
 You can find all the code presented in this tutorial in the GitHub repository:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4e29273a0e29273a263b2c602d2123">[email&nbsp;protected]</a>:soujava/mongodb-ai-planning-pattern.git</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8aede3fecaede3fee2ffe8a4e9e5e7">[email&nbsp;protected]</a>:soujava/mongodb-ai-planning-pattern.git</pre>
 
 Prerequisites {#h2-0-prerequisites}
 -----------------------------------
@@ -53,9 +52,7 @@ The [Planning Pattern](https://docs.cloud.google.com/architecture/choose-design-
 
 Unlike architectures that employ a dedicated planner agent or workflow graph, this implementation uses the language model itself as the planner. During execution, the model repeatedly reasons over the user's objective, selects the most appropriate tool, observes the returned data, and decides whether additional actions are required before producing the final response. This Reason--Act--Observe loop provides a lightweight yet highly effective planning architecture that is widely used in modern agentic systems.
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" width="394" height="465" src="foojay1.png" alt="" class="wp-image-124463" style="width:432px;height:auto">
-</figure>
+{{< img src="foojay1.png" class="size-full is-resized" width="394" height="465" style="width:432px;height:auto" >}}
 
 To illustrate this pattern, we will develop a travel itinerary assistant. Users may ask questions such as "Show me available cities to travel" or "Create a historical itinerary in Portugal." Rather than relying only on training data, the AI agent will access a MongoDB database of cities and attractions that reflects the offerings available at the travel agency. Based on the user's goal, the agent will select suitable tools, retrieve relevant information, and generate recommendations using real application data.
 

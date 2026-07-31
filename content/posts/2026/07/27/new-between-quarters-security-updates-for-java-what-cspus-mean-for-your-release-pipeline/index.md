@@ -1,6 +1,5 @@
 ---
 title: "New Between-Quarters Security Updates for Java: What CSPUs Mean for Your Release Pipeline"
-slug: "new-between-quarters-security-updates-for-java-what-cspus-mean-for-your-release-pipeline"
 date: "2026-07-27T07:31:11+00:00"
 description: "In an announcement on the OpenJDK Updates Mailinglist on July 20, 2026, Rob McKenna explained a change in the Oracle security release cycle for JDK - by Frank Delporte"
 authors:

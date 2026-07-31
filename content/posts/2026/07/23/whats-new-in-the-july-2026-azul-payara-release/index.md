@@ -1,6 +1,5 @@
 ---
 title: "What's New In The July 2026 Azul Payara Release?"
-slug: "whats-new-in-the-july-2026-azul-payara-release"
 date: "2026-07-23T10:28:58+00:00"
 lastmod: "2026-07-23T10:28:59+00:00"
 description: "Azul Payara's July 2026 release: Server and Micro 7.2.0, Jakarta EE 11, and a brute force security fix across every supported line."

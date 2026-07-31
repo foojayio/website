@@ -1,6 +1,5 @@
 ---
 title: "Own Your Pixels: Native Fidelity on Your Schedule"
-slug: "own-your-pixels-native-fidelity-on-your-schedule"
 date: "2026-07-24T15:45:24+00:00"
 description: "Codename One statically links its lightweight UI into your native app, so an OS update cannot silently redesign it. New native-reference fidelity tests let"
 canonical: "https://www.codenameone.com/blog/pixel-perfect-is-a-test/"

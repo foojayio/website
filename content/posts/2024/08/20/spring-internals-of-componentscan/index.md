@@ -1,6 +1,5 @@
 ---
 title: "Spring: Internals of @ComponentScan"
-slug: "spring-internals-of-componentscan"
 date: "2024-08-20T14:48:28+00:00"
 lastmod: "2024-08-31T09:24:52+00:00"
 description: "Explore the nuances of Spring's @ComponentScan in our extensive guide. Gain insights into its internals and optimize your application's configuration effectively."
