@@ -770,7 +770,13 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
   font-size: .78rem; color: var(--ink-muted); background: var(--surface-sunken);
   border: 1px solid var(--border); border-radius: 999px; padding: .1rem .55rem;
 }
-.champions-table__links { font-size: .9rem; white-space: nowrap; }
+/* Champions can have many links (Website, Twitter, Mastodon, Bluesky,
+   LinkedIn, GitHub, YouTube, Sessionize, Speaker Deck). Let the cell wrap onto
+   several lines instead of forcing one long nowrap row that stretches the
+   whole table. Each link stays intact (no mid-word break); only the middot
+   separators are break points. */
+.champions-table__links { font-size: .9rem; line-height: 1.7; }
+.champions-table__links a { white-space: nowrap; }
 
 /* Author box under an article */
 .author-callout {
@@ -948,23 +954,25 @@ body.lightbox-open { overflow: hidden; }
 .list-filter__input:focus { border-color: var(--brand-accent); outline: none; }
 .author-grid .author-card[hidden] { display: none !important; }
 .jugs-table tbody tr[hidden] { display: none !important; }
+.champions-table tbody tr[hidden] { display: none !important; }
 .list-filter__empty { color: var(--ink-muted); margin: 0; }
 
 /* --- Team page (meet-the-team) member cards --- */
+/* Photo is floated (not flex) so the member's name can be a real Markdown ##
+   heading -- that's what puts it in the page's table of contents -- while
+   still sitting beside the avatar. */
 .team-member {
-  display: flex; gap: 1.5rem; align-items: flex-start;
   padding: 1.75rem 0; border-top: 1px solid var(--border);
 }
+.team-member::after { content: ""; display: block; clear: both; }
 .prose .team-member:first-of-type { border-top: 0; padding-top: .5rem; }
 .prose .team-member__photo {
-  flex: 0 0 auto; width: 120px; height: 120px;
-  margin: 0; border-radius: 50%; object-fit: cover;
+  float: left; width: 120px; height: 120px;
+  margin: .35rem 1.5rem .5rem 0; border-radius: 50%; object-fit: cover;
 }
-.team-member__body { min-width: 0; }
-.team-member__body h2 { margin: 0 0 .2rem; }
-.team-member__body > :last-child { margin-bottom: 0; }
+.prose .team-member h2 { margin: 0 0 .2rem; }
+.team-member > :last-child { margin-bottom: 0; }
 .team-member__role { color: var(--brand-secondary); font-weight: 600; margin: 0 0 .75rem; }
 @media (max-width: 560px) {
-  .team-member { flex-direction: column; gap: 1rem; }
-  .prose .team-member__photo { width: 96px; height: 96px; }
+  .prose .team-member__photo { width: 96px; height: 96px; margin-right: 1rem; }
 }

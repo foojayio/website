@@ -29,6 +29,9 @@
          (data/java-champions.yaml -> key "java-champions"), hence index. */}}
     {{ $champions := index hugo.Data "java-champions" }}
     {{ if $champions }}
+    <div class="list-filter">
+      <input type="search" id="champions-filter" class="list-filter__input" placeholder="Filter by name or country…" aria-label="Filter Java Champions by name or country" autocomplete="off">
+    </div>
     <table class="champions-table">
       <thead>
         <tr>
@@ -40,7 +43,7 @@
       </thead>
       <tbody>
         {{ range sort $champions "name" }}
-        <tr>
+        <tr data-filter="{{ lower (printf "%s %s %s" .name (.country | default "") (.city | default "")) }}">
           <td class="champions-table__name">
             {{ with .avatar }}<img src="{{ . }}" alt="" loading="lazy" width="36" height="36">{{ end }}
             <span>{{ .name }}</span>
@@ -67,6 +70,28 @@
         {{ end }}
       </tbody>
     </table>
+    <p class="list-filter__empty" id="champions-filter-empty" hidden>No Java Champions match your filter.</p>
+    {{/* Small client-side filter -- narrows the visible table rows by name,
+         country or city, same pattern as the authors and JUGs pages. */}}
+    <script>
+      (function () {
+        var input = document.getElementById('champions-filter');
+        var table = document.querySelector('.champions-table');
+        if (!input || !table) return;
+        var empty = document.getElementById('champions-filter-empty');
+        var rows = Array.prototype.slice.call(table.querySelectorAll('tbody tr'));
+        input.addEventListener('input', function () {
+          var q = input.value.trim().toLowerCase();
+          var shown = 0;
+          rows.forEach(function (row) {
+            var match = q === '' || (row.getAttribute('data-filter') || '').indexOf(q) !== -1;
+            row.hidden = !match;
+            if (match) shown++;
+          });
+          if (empty) empty.hidden = shown !== 0;
+        });
+      })();
+    </script>
     {{ else }}
     <p>Java Champions data hasn't synced yet. It's fetched at every site build from the directory linked above.</p>
     {{ end }}
