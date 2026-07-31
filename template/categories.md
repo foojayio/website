@@ -1,0 +1,131 @@
+# Available categories
+
+Reference list of categories already used on foojay.io. Prefer an existing
+one (copy it exactly) so articles group together; only invent a new category
+when nothing fits. Use these values in the `categories:` list of your post's
+frontmatter.
+
+- Agile
+- AI
+- Apache Cassandra
+- Apache Pulsar
+- Apache Tomcat
+- Arm
+- Azure
+- Bach
+- Book Announcement
+- Book Review
+- Books
+- BoxLang
+- Campaigns
+- Chronicle Software
+- Cloud
+- CodeRabbit
+- Conference
+- CRaC
+- Data Engineering
+- Databases
+- DataEngineering
+- DataStax
+- Debugging
+- Deep Netts
+- Dependabot
+- Design Patterns
+- Desktop
+- Developer Tools
+- DevOps
+- Dubai JUG
+- Durability
+- Eclipse
+- Elastic
+- Embedded
+- EU DORA Act
+- Events
+- FinOps
+- Foojay
+- Game Development
+- GenAI
+- GitLab
+- Gluon
+- Gradle
+- Graph
+- Hazelcast
+- Hilla
+- IntelliJ IDEA
+- Interviews
+- Jakarta EE
+- Java
+- Java Beginner
+- Java Core
+- JavaFX
+- JavaPro
+- JBang
+- JC-AI Newsletter
+- JDK 23
+- JDK Flight Recorder
+- JDK21
+- Jelastic
+- JEPs
+- JFrog Artifactory
+- JFrog Xray
+- JMS
+- jOOQ
+- JShell
+- JUGs
+- Kafka
+- Kotlin
+- Kubernetes
+- LangChain4j
+- Library
+- LLM
+- Machine Learning
+- Maven
+- Microservices
+- Mongo
+- MQTT
+- Neo4J
+- NetBeans
+- nosql
+- Observability
+- OpenJDK Migration
+- OpenRewrite
+- OpenShift
+- OpenTelemetry
+- Opinion
+- Payara
+- Performance
+- Pi4J
+- Podcast
+- Press
+- Profiler
+- Project Panama
+- Raspberry Pi
+- reactive
+- Records
+- Redis
+- Release Notes
+- Renovate
+- Research
+- RIFE2
+- Scala
+- Sealed Classes
+- Security
+- Snyk
+- Spring
+- sql
+- Streaming
+- Student
+- Surveys
+- Temporal
+- Testcontainers
+- Testing
+- Tools
+- TornadoVM
+- Trip Reports
+- Tutorials
+- Uncategorized
+- Use Cases
+- Vaadin
+- Videos
+- VS Code
+- Webinar

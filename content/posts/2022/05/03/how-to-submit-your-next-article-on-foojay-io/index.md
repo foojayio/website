@@ -1,125 +1,53 @@
 ---
-title: "How To Submit Your Next Article On Foojay.io | Foojay.io Today"
-slug: "how-to-submit-your-next-article-on-foojay-io"
+title: "How To Submit Your Next Article On Foojay.io"
 date: "2022-05-03T18:32:09+00:00"
-lastmod: "2026-07-14T06:23:25+00:00"
-description: "Get started today! Here's the complete guide to publishing or republishing your content on the Foojay.io Wordpress."
+lastmod: "2026-07-31T00:00:00+00:00"
+description: "The complete guide to publishing your article on Foojay.io: prepare a content folder from the template, add your images, and submit it by pull request or email."
 authors:
   - "bazlur-rahman"
   - "frankdelporte"
   - "geertjan-wielenga"
-image: "Screen-Shot-2022-04-28-at-1.55.18-PM-1024x585.png"
+image: ""
 categories:
-  - "Events"
   - "Foojay"
-tags:
+tags: []
 related_posts:
   - "how-to-add-an-event-to-the-foojay-event-calendar"
-  - "foojay-all-about-java-and-the-openjdk-i-programmer"
-  - "foojay-a-place-for-friends-of-openjdk-adt-magazine"
-frozen: false
+frozen: true
 ---
 
-Foojay, the place for friends of OpenJDK, is a friendly community of users of the OpenJDK, such as Java developers and Kotlin developers.
+Foojay, the place for friends of OpenJDK, is a friendly community of Java and Kotlin developers who share tips and insights every day on [Foojay Today](/today/). We would love to publish your article too!
 
-It is a collaborative community with tips and insights being shared on a daily basis on [Foojay Today](http://foojay.io/today/).
+Since September 2026, Foojay.io moved from a WordPress system to a static site built with [Hugo](https://gohugo.io/) and published from a public GitHub repository, [github.com/foojayio/website](https://github.com/foojayio/website). Contributing an article means adding a small folder of files (your text and images) to that repository. You don't need to know Hugo — everything you need is in a ready-made template.
 
-But how to get started and begin publishing your content? We use WordPress, which has several advantages, notably that everyone knows WordPress. (In a perfect world, we'd be using something different and Java-based and anyone with an alternative available in Java or who wants to work on that with us, speak up!)
+## 1. Prepare your article folder
 
-However, the Foojay.io WordPress is not just any WordPress. It has been extended by the brave Foojay.io Development Team in Ukraine. (Read more [about them here](https://www.yelk.io/). Hire the Yelk Team. They're great.) Possibly the Foojay.io WordPress is the most developer-friendly WordPress you have ever encountered, including, for example, built-in support for Markdown and AsciiDoc.
+Each article lives in its own folder that holds an `index.md` file (your article) and any images it uses, all together.
 
-<br />
+1. **Create a folder** named with the URL "slug" you want for your article — lowercase, words separated by dashes. For example a folder called `my-first-java-record` becomes the URL `/today/my-first-java-record/`.
+2. **Copy `template/index.md`** (from the repository's `template/` folder) into your new folder. It contains every frontmatter field with comments explaining how to fill it in.
+3. **Fill in the frontmatter** at the top of `index.md`: `title`, `date`, `description`, your `authors` slug(s), and `categories`. The `template/categories.md` file lists the categories already in use — please reuse an existing one where it fits.
+4. **Write your article** below the frontmatter in [Markdown](https://www.markdownguide.org/basic-syntax/). Start your section headings at `##` — do **not** add a top-level `#` heading, because the `title` is already shown as the page heading. The template includes examples of headings, code blocks, images, tables, and shortcodes (for example `{{</* youtube VIDEO_ID */>}}` to embed a video).
+5. **Add your images** into the same folder and reference them by filename, e.g. `![A caption](diagram.png)`. Set the `image:` field to your preferred preview image.
 
-<br />
+Not an author yet? Include a short bio and (optionally) an avatar so we can create your author profile.
 
-Here's the complete guide to publishing or republishing your content on the Foojay.io WordPress!
+## 2. Submit your article
 
-Writing a Post {#h2-0-writing-a-post}
--------------------------------------
+In order of preference:
 
-1. Get started by joining the [Foojay community on Slack](https://join.slack.com/t/foojay/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ), **go to the #random channel** and say a bit about who you are how you'd like to collaborate with the friends of OpenJDK community (maybe you'd like to share content on foojay.io/today, maybe you'd like to just hang out and chat with other Java or Kotlin users, etc), then **go to the #foojay-site-content** **channel** and ask for your login credentials, if you'd like to blog/share content on foojay.io/today.  
-2. Login to the WordPress: [foojay.io/wp-admin](https://foojay.io/wp-admin).  
-3. Create your post, as shown below, after clicking Posts in the navigation bar on the left or the menubar along the top.  
-4. Write your article, click **Save** **Draft** . Once you have saved a draft, you can disable Markdown if you prefer the WordPress block editor. ***See the Tips and Tricks below, especially when using code blocks in Markdown... Thanks!***   
-5. Make sure to check the preview of your article!
+### Option 1 — Pull request (direct access)
 
-![](Screen-Shot-2022-04-28-at-1.55.18-PM-1024x585.png)
+If you have write access to the repository, create your folder under **`draft/your-slug/`**, commit it, and open a pull request. A maintainer reviews it and moves it into place. If you'd like this access, just ask — mention it in your first pull request or in an email to us.
 
-Publishing a Post {#h2-1-publishing-a-post}
--------------------------------------------
+### Option 2 — Pull request (from a fork)
 
-Once your post is ready, you have saved it as a draft, and checked the preview, you have these options:
+No access yet? [Fork the repository](https://github.com/foojayio/website/fork), add your **`draft/your-slug/`** folder to your fork exactly as in Option 1, and open a pull request from your fork back to the main repository.
 
-1. **Keep it in draft** : Go to the [Foojay community on Slack](https://join.slack.com/t/foojay/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ) \> #foojay-site-content channel, and say "*Hurray, I'm done, \<your article\> is ready to publish!*" One of the editors working on Foojay.io will then follow-up, and if still needed, tweak a bit and schedule the article to be published.
-2. **Schedule yourself** : Check the homepage of Foojay.io for the list of scheduled posts. You can also find this info, when logged in, on the WordPress Dashboard. Find a date without scheduled posts, and use this to schedule your post yourself. Go to the [Foojay community on Slack](https://join.slack.com/t/foojay/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ) \> #foojay-site-content channel, and say "*I scheduled \<your article\> to be published on \<date\>.*"
-3. **Publish immediately** : If your post is urgent, e.g. release notes, an event that's happening, etc. you can also publish it as soon as you're finished. Go to the [Foojay community on Slack](https://join.slack.com/t/foojay/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ) \> #foojay-site-content channel, and say "*This was urgent, so I published \<your article\>.*"
+### Option 3 — Email us a zip
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-thumbnail">
-  <img decoding="async" width="295" height="260" data-id="121942" src="schedule-post-1-295x260.png" alt="" class="wp-image-121942">
- </figure>
- <figure class="wp-block-image size-thumbnail">
-  <img loading="lazy" decoding="async" width="300" height="260" data-id="121943" src="schedule-post-2-300x260.png" alt="" class="wp-image-121943">
- </figure>
-</figure>
+Not comfortable with Git? No problem. **Zip up your article folder** (the `index.md` and its images) and email it to [hello@foojay.io](mailto:hello@foojay.io). We'll take care of the rest.
 
-Tips and Tricks {#h2-2-tips-and-tricks}
----------------------------------------
+## What happens next
 
-### Working with Code Blocks {#h3-3-working-with-code-blocks}
-
-Working with code blocks can be a bit painful if you don't know how they work, and you might be surprised by how they're initially rendered. Some tips:
-
-1. Disable Markdown and, optionally, Asciidoc, then review in WYSIWYG.
-2. Take note of the code snippets and whether they are rendered correctly.
-3. Top right above the article, you see "Save Draft", "Preview", and "Publish". Click "Preview" and then click "Preview in new tab'"
-4. Scroll down, look at the code, if it looks horrible (i.e., no syntax colors), go back to the article, to the place where the code is, copy the code from the preview, click "Code Insert" and select the Language from the drop-down (e.g., Java), paste in the code, click OK.
-5. Alternatively, use the "Convert to blocks" option at the top of the article. This will convert all Markdown code blocks to the better readable format. After that you only need to indicate the highlight type (e.g. "Java", "Bash", ...).
-
-![](Screen-Shot-2022-04-28-at-2.35.06-PM-1024x571.png)
-
-### Writing Tip {#h3-4-writing-tip}
-
-Shorten your long paragraphs. Even one sentence per paragraph is better than multiple long sentences that form long, unscannable paragraphs. Browse the text to make sure everything is readable.
-
-### Featured Image {#h3-5-featured-image}
-
-Add a feature image, please! The news-pages shows each article with an image, and that image is also a preview when sharing your article on social media. Depending on whether you use Markdown writing or WordPress blocks, you will find a section in the right bar for the "Featured image" or below the "Post" title.
-
-<figure class="wp-block-gallery has-nested-images columns-2 wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="317" height="137" data-id="124936" src="blog-featured-image.png" alt="" class="wp-image-124936">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="310" height="341" data-id="124934" src="blog-post-image.png" alt="" class="wp-image-124934">
- </figure>
-</figure>
-
-### Related Posts {#h3-6-related-posts}
-
-Add some Related Articles at the end of the article, this will help people to find more of your or related content:
-![](related-articles-1024x208.png)
-
-### Categories and Homepage {#h3-7-categories-and-homepage}
-
-All content on Foojay is grouped into categories. This is shown on the homepage and other sections of the website. Also crucial for a post's preview box is a featured image. Both of these can be defined on the right-hand side bar, in the Post tab:
-
-* Pick a few categories.
-* Add a featured image, which is nice to have, though not mandatory.
-
-![](Screen-Shot-2022-04-28-at-2.17.15-PM-513x1024.png)
-
-### Search Engine Optimization {#h3-8-search-engine-optimization}
-
-Use these steps to make sure your article is indexed correctly for search engines.
-
-* Scroll down to the section "Yoast SEO" and add the title and a (optional) short description, as shown below.
-
-![](yoast-seo-1024x794.png)
-
-* Is this a cross-post of an article that was already published on another website earlier? Make sure to add a [canonical link](https://en.wikipedia.org/wiki/Canonical_link_element). It will tell search engines where to find the original article. You can also find this at the bottom of the editor page, in the "Yoast SEO" section \> Advanced \> Canonical URL. Fill in the full URL to the original article in this field.
-
-![](foojay-canonical-link.png)
-
-Code Blocks Video {#h2-9-code-blocks-video}
--------------------------------------------
+We review every submission for a good fit and light editing, then publish it and share it with the community. Thanks for writing for the friends of OpenJDK!
