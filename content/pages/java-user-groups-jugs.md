@@ -9,4 +9,4 @@ aliases:
 frozen: true
 ---
 
-**Tip:** With the Foojay.io Podcast, we're doing a virtual world tour to visit all the JUGs. Find these podcasts at [foojay.io/today/category/podcast](https://foojay.io/today/category/podcast/)!
+**Tip:** With the Foojay.io Podcast, we "virtually" visited some of these JUGs. You can find the [podcasts here](https://foojay.io/today/category/podcast/)...

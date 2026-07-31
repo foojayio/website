@@ -20,7 +20,15 @@ Foojay, the place for friends of OpenJDK, is a friendly community of Java and Ko
 
 Since September 2026, Foojay.io moved from a WordPress system to a static site built with [Hugo](https://gohugo.io/) and published from a public GitHub repository, [github.com/foojayio/website](https://github.com/foojayio/website). Contributing an article means adding a small folder of files (your text and images) to that repository. You don't need to know Hugo — everything you need is in a ready-made template.
 
-## 1. Prepare your article folder
+## 1. Make sure you have an author profile
+
+Every article needs at least one author, and each author has a profile page under `content/authors/`. Your post's `authors:` frontmatter uses author **slugs** — the filename of the matching profile. For example the profile `content/authors/f/frankdelporte.md` is referenced as `authors: ["frankdelporte"]`.
+
+First, check whether your profile already exists in `content/authors/` (profiles are grouped into a subfolder by the first letter of the slug, e.g. `content/authors/f/`). If it does, use that slug and move on to the next step.
+
+**If it doesn't exist yet, create it and include it in the same submission.** Add a file `content/authors/<first-letter>/<your-slug>.md` — for example `content/authors/j/jane-doe.md` — using `archetypes/authors.md` as a starting point; it lists every field with a comment. At a minimum set `title` (your name) and a short `bio`, and add a square `avatar` photo (small and large format) and social links (Bluesky, Mastodon, LinkedIn, GitHub, YouTube, website). Then use that same slug in your article's `authors:` list.
+
+## 2. Prepare your article folder
 
 Each article lives in its own folder that holds an `index.md` file (your article) and any images it uses, all together.
 
@@ -30,9 +38,7 @@ Each article lives in its own folder that holds an `index.md` file (your article
 4. **Write your article** below the frontmatter in [Markdown](https://www.markdownguide.org/basic-syntax/). Start your section headings at `##` — do **not** add a top-level `#` heading, because the `title` is already shown as the page heading. The template includes examples of headings, code blocks, images, tables, and shortcodes (for example `{{</* youtube VIDEO_ID */>}}` to embed a video).
 5. **Add your images** into the same folder and reference them by filename, e.g. `![A caption](diagram.png)`. Set the `image:` field to your preferred preview image.
 
-Not an author yet? Include a short bio and (optionally) an avatar so we can create your author profile.
-
-## 2. Submit your article
+## 3. Submit your article
 
 In order of preference:
 
