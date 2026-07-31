@@ -1,5 +1,5 @@
 ---
-title: "A Poor Man's API | Foojay.io Today"
+title: "A Poor Man's API"
 slug: "poor-mans-api"
 date: "2022-11-29T09:13:38+00:00"
 lastmod: "2022-11-29T09:17:12+00:00"

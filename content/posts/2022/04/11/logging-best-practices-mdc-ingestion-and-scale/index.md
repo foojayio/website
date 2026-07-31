@@ -1,5 +1,5 @@
 ---
-title: "Logging Best Practices: MDC, Ingestion, and Scale | Foojay.io Today"
+title: "Logging Best Practices: MDC, Ingestion, and Scale"
 slug: "logging-best-practices-mdc-ingestion-and-scale"
 date: "2022-04-11T12:16:37+00:00"
 lastmod: "2022-04-11T12:54:33+00:00"

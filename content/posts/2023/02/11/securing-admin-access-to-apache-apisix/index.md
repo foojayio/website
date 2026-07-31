@@ -1,5 +1,5 @@
 ---
-title: "Securing Admin Access to Apache APISIX | Foojay.io Today"
+title: "Securing Admin Access to Apache APISIX"
 slug: "securing-admin-access-to-apache-apisix"
 date: "2023-02-11T16:34:59+00:00"
 lastmod: "2023-02-11T16:35:01+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "Top 10 Java Language Features | Foojay.io Today"
+title: "Top 10 Java Language Features"
 slug: "top-10-java-language-features"
 date: "2022-04-12T17:06:07+00:00"
 lastmod: "2022-04-12T17:23:55+00:00"

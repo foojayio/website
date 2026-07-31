@@ -1,5 +1,5 @@
 ---
-title: "Chopping the Monolith: The Demo | Foojay.io Today"
+title: "Chopping the Monolith: The Demo"
 slug: "chopping-monolith-demo"
 date: "2022-05-23T12:53:49+00:00"
 lastmod: "2022-05-23T12:53:50+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "Can Java/Jakarta EE do Microservices? | Foojay.io Today"
+title: "Can Java/Jakarta EE do Microservices?"
 slug: "can-java-jakarta-ee-do-microservices"
 date: "2022-09-01T12:43:12+00:00"
 lastmod: "2022-09-01T12:43:13+00:00"

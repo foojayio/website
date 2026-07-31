@@ -1,5 +1,5 @@
 ---
-title: "Exception Chaos Java Code Quiz | Foojay.io Today"
+title: "Exception Chaos Java Code Quiz"
 slug: "exception-chaos-java-code-quiz"
 date: "2021-10-27T15:03:38+00:00"
 lastmod: "2021-10-27T15:03:39+00:00"

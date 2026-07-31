@@ -1,5 +1,5 @@
 ---
-title: "Control your Arduino with Spring | Foojay.io Today"
+title: "Control your Arduino with Spring"
 slug: "control-your-arduino-with-spring"
 date: "2023-03-25T07:21:04+00:00"
 lastmod: "2023-03-25T07:22:50+00:00"

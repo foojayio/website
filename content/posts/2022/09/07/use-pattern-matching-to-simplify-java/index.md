@@ -1,5 +1,5 @@
 ---
-title: "Use Pattern Matching to Simplify Java | Foojay.io Today"
+title: "Use Pattern Matching to Simplify Java"
 slug: "use-pattern-matching-to-simplify-java"
 date: "2022-09-07T10:55:58+00:00"
 lastmod: "2022-09-07T10:58:05+00:00"

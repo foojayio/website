@@ -1,5 +1,5 @@
 ---
-title: "Boldness in Refactoring! | Foojay.io Today"
+title: "Boldness in Refactoring!"
 slug: "boldness-in-refactoring"
 date: "2023-04-14T08:09:09+00:00"
 lastmod: "2023-04-14T08:21:59+00:00"

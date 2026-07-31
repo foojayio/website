@@ -1,5 +1,5 @@
 ---
-title: "What is a Java Uber-JAR and Why Is It Useful? | Foojay.io Today"
+title: "What is a Java Uber-JAR and Why Is It Useful?"
 slug: "what-is-a-java-uber-jar-and-why-is-it-useful"
 date: "2022-08-04T12:53:49+00:00"
 lastmod: "2022-08-04T12:53:50+00:00"

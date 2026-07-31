@@ -1,5 +1,5 @@
 ---
-title: "On Cosmetics vs. Intrinsics in Programming | Foojay.io Today"
+title: "On Cosmetics vs. Intrinsics in Programming"
 slug: "on-cosmetics-vs-intrinsics-programming"
 date: "2022-09-12T09:39:56+00:00"
 lastmod: "2022-09-12T09:43:40+00:00"

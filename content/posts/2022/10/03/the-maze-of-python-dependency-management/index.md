@@ -1,5 +1,5 @@
 ---
-title: "The Maze of Python Dependency Management | Foojay.io Today"
+title: "The Maze of Python Dependency Management"
 slug: "the-maze-of-python-dependency-management"
 date: "2022-10-03T12:49:11+00:00"
 lastmod: "2022-10-03T12:51:36+00:00"

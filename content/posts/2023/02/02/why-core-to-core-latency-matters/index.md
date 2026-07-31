@@ -1,5 +1,5 @@
 ---
-title: "Why Core-to-Core Latency Matters | Foojay.io Today"
+title: "Why Core-to-Core Latency Matters"
 slug: "why-core-to-core-latency-matters"
 date: "2023-02-02T11:16:43+00:00"
 lastmod: "2023-02-03T10:43:06+00:00"

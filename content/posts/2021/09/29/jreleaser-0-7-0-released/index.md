@@ -1,5 +1,5 @@
 ---
-title: "This Just In: JReleaser 0.7.0 Released! | Foojay.io Today"
+title: "This Just In: JReleaser 0.7.0 Released!"
 slug: "jreleaser-0-7-0-released"
 date: "2021-09-29T12:12:24+00:00"
 lastmod: "2021-09-29T12:13:32+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "Apache APISIX Loves Rust! (And Me Too) | Foojay.io Today"
+title: "Apache APISIX Loves Rust! (And Me Too)"
 slug: "apache-apisix-loves-rust"
 date: "2022-09-26T09:23:23+00:00"
 lastmod: "2022-09-26T09:23:25+00:00"

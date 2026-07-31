@@ -1,5 +1,5 @@
 ---
-title: "Low Latency Microservices, A Retrospective | Foojay.io Today"
+title: "Low Latency Microservices, A Retrospective"
 slug: "low-latency-microservices-a-retrospective"
 date: "2022-10-06T06:25:56+00:00"
 lastmod: "2022-10-06T06:28:26+00:00"

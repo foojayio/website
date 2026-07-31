@@ -1,5 +1,5 @@
 ---
-title: "Daemon Thread Java Code Quiz | Foojay.io Today"
+title: "Daemon Thread Java Code Quiz"
 slug: "daemon-thread-java-code-quiz"
 date: "2021-09-08T07:29:56+00:00"
 lastmod: "2021-10-07T10:23:18+00:00"

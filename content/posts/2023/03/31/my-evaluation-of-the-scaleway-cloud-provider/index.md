@@ -1,5 +1,5 @@
 ---
-title: "My Evaluation of the Scaleway Cloud Provider | Foojay.io Today"
+title: "My Evaluation of the Scaleway Cloud Provider"
 slug: "my-evaluation-of-the-scaleway-cloud-provider"
 date: "2023-03-31T09:54:20+00:00"
 lastmod: "2023-03-31T10:21:37+00:00"

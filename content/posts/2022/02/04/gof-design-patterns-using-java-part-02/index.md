@@ -1,5 +1,5 @@
 ---
-title: "GoF Design Patterns Using Java - Part 02 | Foojay.io Today"
+title: "GoF Design Patterns Using Java - Part 02"
 slug: "gof-design-patterns-using-java-part-02"
 date: "2022-02-04T16:46:55+00:00"
 lastmod: "2022-02-04T16:55:30+00:00"

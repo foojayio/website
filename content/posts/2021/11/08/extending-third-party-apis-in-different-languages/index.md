@@ -1,5 +1,5 @@
 ---
-title: "Extending Third-Party APIs in Different Languages | Foojay.io Today"
+title: "Extending Third-Party APIs in Different Languages"
 slug: "extending-third-party-apis-in-different-languages"
 date: "2021-11-08T08:36:05+00:00"
 lastmod: "2021-11-08T08:37:10+00:00"

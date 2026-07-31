@@ -1,5 +1,5 @@
 ---
-title: "What's New and Exciting in Java 18? | Foojay.io Today"
+title: "What's New and Exciting in Java 18?"
 slug: "whats-new-and-exciting-in-java-18"
 date: "2022-03-22T07:23:21+00:00"
 lastmod: "2022-03-22T07:31:56+00:00"

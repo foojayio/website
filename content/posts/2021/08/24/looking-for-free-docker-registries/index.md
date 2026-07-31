@@ -1,5 +1,5 @@
 ---
-title: "Looking For Free Docker Registries | Foojay.io Today"
+title: "Looking For Free Docker Registries"
 slug: "looking-for-free-docker-registries"
 date: "2021-08-24T07:19:37+00:00"
 lastmod: "2021-08-24T07:19:40+00:00"

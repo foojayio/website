@@ -1,5 +1,5 @@
 ---
-title: "Alternatives to DTO | Foojay.io Today"
+title: "Alternatives to DTO"
 slug: "alternatives-to-dto"
 date: "2022-03-07T11:03:23+00:00"
 lastmod: "2022-03-07T11:12:08+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "Quest for REST | Foojay.io Today"
+title: "Quest for REST"
 slug: "quest-for-rest"
 date: "2023-01-27T14:48:38+00:00"
 lastmod: "2023-01-27T14:49:15+00:00"

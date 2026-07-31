@@ -1,5 +1,5 @@
 ---
-title: "Porting an Existing JavaFX App to iOS | Foojay.io Today"
+title: "Porting an Existing JavaFX App to iOS"
 slug: "porting-an-existing-javafx-app-to-ios"
 date: "2023-02-24T11:42:11+00:00"
 lastmod: "2023-02-24T11:42:13+00:00"

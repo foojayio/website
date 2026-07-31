@@ -1,5 +1,5 @@
 ---
-title: "Observability is Cultural | Foojay.io Today"
+title: "Observability is Cultural"
 slug: "observability-is-cultural"
 date: "2022-11-04T15:23:00+00:00"
 lastmod: "2023-07-18T07:08:40+00:00"

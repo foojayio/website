@@ -1,5 +1,5 @@
 ---
-title: "Function Calculation Java Challenge | Foojay.io Today"
+title: "Function Calculation Java Challenge"
 slug: "function-calculation-java-challenge"
 date: "2021-09-01T10:10:19+00:00"
 lastmod: "2021-09-01T10:10:21+00:00"

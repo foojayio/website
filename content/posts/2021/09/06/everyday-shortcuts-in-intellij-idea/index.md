@@ -1,5 +1,5 @@
 ---
-title: "Everyday Shortcuts in IntelliJ IDEA | Foojay.io Today"
+title: "Everyday Shortcuts in IntelliJ IDEA"
 slug: "everyday-shortcuts-in-intellij-idea"
 date: "2021-09-06T07:27:35+00:00"
 lastmod: "2021-09-06T07:31:41+00:00"

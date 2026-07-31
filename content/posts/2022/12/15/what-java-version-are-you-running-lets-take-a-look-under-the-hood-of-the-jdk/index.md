@@ -1,5 +1,5 @@
 ---
-title: "What Java Version Are You Running? | Foojay.io Today"
+title: "What Java Version Are You Running?"
 slug: "what-java-version-are-you-running-lets-take-a-look-under-the-hood-of-the-jdk"
 date: "2022-12-15T08:59:05+00:00"
 lastmod: "2022-12-15T11:06:02+00:00"

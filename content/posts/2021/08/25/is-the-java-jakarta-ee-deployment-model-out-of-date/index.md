@@ -1,5 +1,5 @@
 ---
-title: "Is the Java/Jakarta EE Deployment Model Out of Date? | Foojay.io Today"
+title: "Is the Java/Jakarta EE Deployment Model Out of Date?"
 slug: "is-the-java-jakarta-ee-deployment-model-out-of-date"
 date: "2021-08-25T13:05:59+00:00"
 lastmod: "2021-08-25T13:06:38+00:00"

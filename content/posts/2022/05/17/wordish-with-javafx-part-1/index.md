@@ -1,5 +1,5 @@
 ---
-title: "Wordish with JavaFX - Part 1 | Foojay.io Today"
+title: "Wordish with JavaFX - Part 1"
 slug: "wordish-with-javafx-part-1"
 date: "2022-05-17T10:13:21+00:00"
 lastmod: "2022-05-24T07:52:44+00:00"

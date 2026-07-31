@@ -1,5 +1,5 @@
 ---
-title: "On The Costs of Hidden Logging | Foojay.io Today"
+title: "On The Costs of Hidden Logging"
 slug: "the-costs-of-hidden-logging"
 date: "2021-10-11T08:05:33+00:00"
 lastmod: "2021-10-11T08:08:55+00:00"

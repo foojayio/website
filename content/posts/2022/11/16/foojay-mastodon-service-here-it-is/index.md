@@ -1,5 +1,5 @@
 ---
-title: "Foojay Mastodon Service: Here It Is! | Foojay.io Today"
+title: "Foojay Mastodon Service: Here It Is!"
 slug: "foojay-mastodon-service-here-it-is"
 date: "2022-11-16T08:44:02+00:00"
 lastmod: "2023-01-27T11:15:31+00:00"

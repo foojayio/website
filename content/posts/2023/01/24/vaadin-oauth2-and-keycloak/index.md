@@ -1,5 +1,5 @@
 ---
-title: "Vaadin, OAuth2, and Keycloak | Foojay.io Today"
+title: "Vaadin, OAuth2, and Keycloak"
 slug: "vaadin-oauth2-and-keycloak"
 date: "2023-01-24T09:34:41+00:00"
 lastmod: "2023-01-24T09:34:42+00:00"

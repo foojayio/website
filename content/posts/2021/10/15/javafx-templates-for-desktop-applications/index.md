@@ -1,5 +1,5 @@
 ---
-title: "JavaFX Templates for Desktop Applications | Foojay.io Today"
+title: "JavaFX Templates for Desktop Applications"
 slug: "javafx-templates-for-desktop-applications"
 date: "2021-10-15T08:48:16+00:00"
 lastmod: "2021-10-18T06:43:51+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "Installing Java with SDKMAN on Raspberry Pi | Foojay.io Today"
+title: "Installing Java with SDKMAN on Raspberry Pi"
 slug: "installing-java-with-sdkman-on-raspberry-pi"
 date: "2022-02-07T12:23:15+00:00"
 lastmod: "2022-02-07T12:23:17+00:00"

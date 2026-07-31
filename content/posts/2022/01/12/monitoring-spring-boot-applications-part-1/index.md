@@ -1,5 +1,5 @@
 ---
-title: "Monitoring Spring Boot Applications (Part 1) | Foojay.io Today"
+title: "Monitoring Spring Boot Applications (Part 1)"
 slug: "monitoring-spring-boot-applications-part-1"
 date: "2022-01-12T16:34:53+00:00"
 lastmod: "2022-01-12T16:44:44+00:00"

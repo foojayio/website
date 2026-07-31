@@ -1,5 +1,5 @@
 ---
-title: "Faster Maven Builds (Part 2): Inside Docker | Foojay.io Today"
+title: "Faster Maven Builds (Part 2): Inside Docker"
 slug: "faster-maven-builds-part-2"
 date: "2021-10-14T08:33:09+00:00"
 lastmod: "2021-10-14T09:15:39+00:00"

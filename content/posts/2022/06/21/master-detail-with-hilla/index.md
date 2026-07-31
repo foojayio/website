@@ -1,5 +1,5 @@
 ---
-title: "Master-Detail with Hilla | Foojay.io Today"
+title: "Master-Detail with Hilla"
 slug: "master-detail-with-hilla"
 date: "2022-06-21T12:13:24+00:00"
 lastmod: "2022-06-21T12:20:09+00:00"

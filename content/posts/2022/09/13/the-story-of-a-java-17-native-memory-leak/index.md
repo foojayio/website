@@ -1,5 +1,5 @@
 ---
-title: "The Story of a Java 17 Native Memory Leak | Foojay.io Today"
+title: "The Story of a Java 17 Native Memory Leak"
 slug: "the-story-of-a-java-17-native-memory-leak"
 date: "2022-09-13T08:15:53+00:00"
 lastmod: "2022-09-13T08:15:55+00:00"

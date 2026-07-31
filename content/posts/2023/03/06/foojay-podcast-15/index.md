@@ -1,5 +1,5 @@
 ---
-title: "Foojay Podcast #15: Japan JUG | Foojay.io Today"
+title: "Foojay Podcast #15: Japan JUG"
 slug: "foojay-podcast-15"
 date: "2023-03-06T08:30:46+00:00"
 lastmod: "2025-11-13T09:13:40+00:00"

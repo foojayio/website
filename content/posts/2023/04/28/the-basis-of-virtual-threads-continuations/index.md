@@ -1,5 +1,5 @@
 ---
-title: "The Basis of Virtual Threads: Continuations | Foojay.io Today"
+title: "The Basis of Virtual Threads: Continuations"
 slug: "the-basis-of-virtual-threads-continuations"
 date: "2023-04-28T13:38:05+00:00"
 lastmod: "2023-04-28T13:45:23+00:00"

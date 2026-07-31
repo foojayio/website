@@ -1,5 +1,5 @@
 ---
-title: "Why Developers Should Use Apache Pulsar | Foojay.io Today"
+title: "Why Developers Should Use Apache Pulsar"
 slug: "why-developers-should-use-apache-pulsar"
 date: "2022-05-19T15:10:49+00:00"
 lastmod: "2022-05-19T15:11:52+00:00"

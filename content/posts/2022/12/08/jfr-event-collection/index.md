@@ -1,5 +1,5 @@
 ---
-title: "JFR Event Collection | Foojay.io Today"
+title: "JFR Event Collection"
 slug: "jfr-event-collection"
 date: "2022-12-08T10:08:52+00:00"
 lastmod: "2023-08-10T07:33:15+00:00"

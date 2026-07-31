@@ -1,5 +1,5 @@
 ---
-title: "Backpressure in Reactive Systems | Foojay.io Today"
+title: "Backpressure in Reactive Systems"
 slug: "backpressure-in-reactive-systems"
 date: "2022-02-11T10:07:46+00:00"
 lastmod: "2022-02-11T10:08:56+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "Hashcode and Equals: Debugging and Performance | Foojay.io Today"
+title: "Hashcode and Equals: Debugging and Performance"
 slug: "hashcode-and-equals-debugging-performance"
 date: "2022-01-07T13:31:35+00:00"
 lastmod: "2022-01-07T13:31:36+00:00"

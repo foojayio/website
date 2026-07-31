@@ -1,5 +1,5 @@
 ---
-title: "Geo-routing with Apache APISIX | Foojay.io Today"
+title: "Geo-routing with Apache APISIX"
 slug: "geo-routing-with-apache-apisix"
 date: "2022-11-07T16:41:47+00:00"
 lastmod: "2022-11-07T16:41:48+00:00"

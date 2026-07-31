@@ -1,5 +1,5 @@
 ---
-title: "Debugger Checklist: Bug Solving Process | Foojay.io Today"
+title: "Debugger Checklist: Bug Solving Process"
 slug: "the-debugger-checklist-part-i"
 date: "2021-09-21T09:37:32+00:00"
 lastmod: "2021-09-21T09:51:23+00:00"

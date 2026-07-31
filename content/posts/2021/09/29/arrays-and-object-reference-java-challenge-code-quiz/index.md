@@ -1,5 +1,5 @@
 ---
-title: "Arrays and Object Reference Java Challenge Code Quiz | Foojay.io Today"
+title: "Arrays and Object Reference Java Challenge Code Quiz"
 slug: "arrays-and-object-reference-java-challenge-code-quiz"
 date: "2021-09-29T11:18:13+00:00"
 lastmod: "2021-09-29T11:18:14+00:00"

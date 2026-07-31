@@ -1,5 +1,5 @@
 ---
-title: "Managing Dependencies in IntelliJ IDEA | Foojay.io Today"
+title: "Managing Dependencies in IntelliJ IDEA"
 slug: "managing-dependencies-in-intellij-idea"
 date: "2023-01-10T15:13:39+00:00"
 lastmod: "2023-08-03T08:27:15+00:00"

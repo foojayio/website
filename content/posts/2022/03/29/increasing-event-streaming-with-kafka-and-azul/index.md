@@ -1,5 +1,5 @@
 ---
-title: "Increasing Event Streaming with Kafka and Azul | Foojay.io Today"
+title: "Increasing Event Streaming with Kafka and Azul"
 slug: "increasing-event-streaming-with-kafka-and-azul"
 date: "2022-03-29T13:41:48+00:00"
 lastmod: "2022-04-26T00:04:28+00:00"

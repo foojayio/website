@@ -1,5 +1,5 @@
 ---
-title: "Discussion: The State of Java 2021 | Foojay.io Today"
+title: "Discussion: The State of Java 2021"
 slug: "discussion-state-of-java-2021"
 date: "2021-10-25T14:05:56+00:00"
 lastmod: "2021-10-25T14:07:04+00:00"

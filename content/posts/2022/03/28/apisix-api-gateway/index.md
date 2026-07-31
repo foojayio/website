@@ -1,5 +1,5 @@
 ---
-title: "APISIX: An API Gateway the Apache Way | Foojay.io Today"
+title: "APISIX: An API Gateway the Apache Way"
 slug: "apisix-api-gateway"
 date: "2022-03-28T07:40:15+00:00"
 lastmod: "2022-03-28T07:40:16+00:00"

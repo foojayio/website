@@ -1,5 +1,5 @@
 ---
-title: "Introducing the GKE Autopilot Cluster | Foojay.io Today"
+title: "Introducing the GKE Autopilot Cluster"
 slug: "introducing-the-gke-autopilot-cluster"
 date: "2022-01-20T08:28:34+00:00"
 lastmod: "2022-01-20T08:28:35+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "What is MicroProfile? | Foojay.io Today"
+title: "What is MicroProfile?"
 slug: "what-is-microprofile"
 date: "2022-09-22T09:03:08+00:00"
 lastmod: "2022-09-22T09:19:10+00:00"

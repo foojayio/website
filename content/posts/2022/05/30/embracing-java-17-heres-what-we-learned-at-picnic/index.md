@@ -1,5 +1,5 @@
 ---
-title: "Embracing Java 17: Here’s What We Learned at Picnic | Foojay.io Today"
+title: "Embracing Java 17: Here’s What We Learned at Picnic"
 slug: "embracing-java-17-heres-what-we-learned-at-picnic"
 date: "2022-05-30T08:10:20+00:00"
 lastmod: "2022-05-31T13:45:14+00:00"

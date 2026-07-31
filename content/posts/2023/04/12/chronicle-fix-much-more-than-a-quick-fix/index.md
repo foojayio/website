@@ -1,5 +1,5 @@
 ---
-title: "Chronicle FIX: Much More Than a Quick Fix | Foojay.io Today"
+title: "Chronicle FIX: Much More Than a Quick Fix"
 slug: "chronicle-fix-much-more-than-a-quick-fix"
 date: "2023-04-12T13:55:24+00:00"
 lastmod: "2023-04-12T13:57:24+00:00"

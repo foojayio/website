@@ -1,5 +1,5 @@
 ---
-title: "Log4j2 Isn’t Killing Java | Foojay.io Today"
+title: "Log4j2 Isn’t Killing Java"
 slug: "log4j-isnt-killing-java"
 date: "2021-12-13T18:51:34+00:00"
 lastmod: "2021-12-14T18:00:30+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "End-to-End Tracing with OpenTelemetry | Foojay.io Today"
+title: "End-to-End Tracing with OpenTelemetry"
 slug: "end-to-end-tracing-opentelemetry"
 date: "2022-08-29T14:24:00+00:00"
 lastmod: "2022-09-03T19:40:42+00:00"

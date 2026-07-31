@@ -1,5 +1,5 @@
 ---
-title: "Native-image with Micronaut | Foojay.io Today"
+title: "Native-image with Micronaut"
 slug: "native-image-micronaut"
 date: "2021-11-22T10:18:53+00:00"
 lastmod: "2021-11-22T10:18:55+00:00"

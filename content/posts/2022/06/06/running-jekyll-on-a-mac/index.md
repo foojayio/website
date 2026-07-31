@@ -1,5 +1,5 @@
 ---
-title: "Running Jekyll on a Mac | Foojay.io Today"
+title: "Running Jekyll on a Mac"
 slug: "running-jekyll-on-a-mac"
 date: "2022-06-06T17:41:49+00:00"
 lastmod: "2022-06-06T17:41:50+00:00"

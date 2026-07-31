@@ -1,5 +1,5 @@
 ---
-title: "Null Safety: Kotlin vs. Java | Foojay.io Today"
+title: "Null Safety: Kotlin vs. Java"
 slug: "null-safety-kotlin-vs-java"
 date: "2023-02-13T12:12:35+00:00"
 lastmod: "2023-02-13T12:13:54+00:00"

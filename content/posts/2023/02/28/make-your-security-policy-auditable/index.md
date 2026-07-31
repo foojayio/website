@@ -1,5 +1,5 @@
 ---
-title: "Make Your Security Policy Auditable | Foojay.io Today"
+title: "Make Your Security Policy Auditable"
 slug: "make-your-security-policy-auditable"
 date: "2023-02-28T11:14:22+00:00"
 lastmod: "2023-02-28T11:14:24+00:00"

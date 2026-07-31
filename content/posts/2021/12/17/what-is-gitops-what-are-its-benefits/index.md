@@ -1,5 +1,5 @@
 ---
-title: "What is GitOps? What are its benefits? | Foojay.io Today"
+title: "What is GitOps? What are its benefits?"
 slug: "what-is-gitops-what-are-its-benefits"
 date: "2021-12-17T16:19:17+00:00"
 lastmod: "2021-12-17T16:19:20+00:00"

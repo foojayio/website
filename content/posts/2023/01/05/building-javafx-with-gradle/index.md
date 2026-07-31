@@ -1,5 +1,5 @@
 ---
-title: "Building JavaFX with Gradle | Foojay.io Today"
+title: "Building JavaFX with Gradle"
 slug: "building-javafx-with-gradle"
 date: "2023-01-05T11:32:24+00:00"
 lastmod: "2023-01-05T21:20:18+00:00"

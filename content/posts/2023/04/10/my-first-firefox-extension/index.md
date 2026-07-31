@@ -1,5 +1,5 @@
 ---
-title: "My First Firefox Extension | Foojay.io Today"
+title: "My First Firefox Extension"
 slug: "my-first-firefox-extension"
 date: "2023-04-10T18:36:13+00:00"
 lastmod: "2023-04-10T18:37:40+00:00"

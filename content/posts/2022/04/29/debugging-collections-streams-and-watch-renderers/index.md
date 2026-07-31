@@ -1,5 +1,5 @@
 ---
-title: "Debugging Collections, Streams, and Watch Renderers | Foojay.io Today"
+title: "Debugging Collections, Streams, and Watch Renderers"
 slug: "debugging-collections-streams-and-watch-renderers"
 date: "2022-04-29T07:54:01+00:00"
 lastmod: "2022-04-29T07:56:16+00:00"

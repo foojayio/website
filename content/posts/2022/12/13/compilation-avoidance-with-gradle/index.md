@@ -1,5 +1,5 @@
 ---
-title: "Compilation Avoidance with Gradle | Foojay.io Today"
+title: "Compilation Avoidance with Gradle"
 slug: "compilation-avoidance-with-gradle"
 date: "2022-12-13T15:35:31+00:00"
 lastmod: "2022-12-13T15:36:42+00:00"

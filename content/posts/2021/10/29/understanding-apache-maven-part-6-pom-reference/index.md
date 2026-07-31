@@ -1,5 +1,5 @@
 ---
-title: "Understanding Apache Maven (Part 6): POM Reference | Foojay.io Today"
+title: "Understanding Apache Maven (Part 6): POM Reference"
 slug: "understanding-apache-maven-part-6-pom-reference"
 date: "2021-10-29T08:20:00+00:00"
 lastmod: "2021-10-29T08:22:31+00:00"

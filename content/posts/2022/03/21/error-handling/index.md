@@ -1,5 +1,5 @@
 ---
-title: "Error Handling in Java and Across Different Languages | Foojay.io Today"
+title: "Error Handling in Java and Across Different Languages"
 slug: "error-handling"
 date: "2022-03-21T11:23:46+00:00"
 lastmod: "2022-03-21T11:23:47+00:00"

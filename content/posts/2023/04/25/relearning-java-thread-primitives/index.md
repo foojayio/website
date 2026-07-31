@@ -1,5 +1,5 @@
 ---
-title: "Relearning Java Thread Primitives | Foojay.io Today"
+title: "Relearning Java Thread Primitives"
 slug: "relearning-java-thread-primitives"
 date: "2023-04-25T05:26:16+00:00"
 lastmod: "2023-04-25T05:27:03+00:00"

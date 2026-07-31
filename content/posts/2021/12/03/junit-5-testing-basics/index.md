@@ -1,5 +1,5 @@
 ---
-title: "JUnit 5 Testing Basics | Foojay.io Today"
+title: "JUnit 5 Testing Basics"
 slug: "junit-5-testing-basics"
 date: "2021-12-03T12:29:06+00:00"
 lastmod: "2022-06-01T20:13:05+00:00"

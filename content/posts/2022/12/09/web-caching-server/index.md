@@ -1,5 +1,5 @@
 ---
-title: "Web resource caching: Server-side | Foojay.io Today"
+title: "Web resource caching: Server-side"
 slug: "web-caching-server"
 date: "2022-12-09T15:32:42+00:00"
 lastmod: "2022-12-09T15:41:12+00:00"

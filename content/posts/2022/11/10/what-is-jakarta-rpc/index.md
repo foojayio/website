@@ -1,5 +1,5 @@
 ---
-title: "What is Jakarta RPC? | Foojay.io Today"
+title: "What is Jakarta RPC?"
 slug: "what-is-jakarta-rpc"
 date: "2022-11-10T15:32:52+00:00"
 lastmod: "2022-11-10T17:45:32+00:00"

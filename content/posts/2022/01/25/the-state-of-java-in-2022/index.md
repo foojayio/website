@@ -1,5 +1,5 @@
 ---
-title: "The State of Java in 2022 | Foojay.io Today"
+title: "The State of Java in 2022"
 slug: "the-state-of-java-in-2022"
 date: "2022-01-25T10:24:08+00:00"
 lastmod: "2022-01-26T08:02:27+00:00"

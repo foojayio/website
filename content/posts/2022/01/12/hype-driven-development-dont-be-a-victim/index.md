@@ -1,5 +1,5 @@
 ---
-title: "Hype-Driven Development: Don't Be a Victim! | Foojay.io Today"
+title: "Hype-Driven Development: Don't Be a Victim!"
 slug: "hype-driven-development-dont-be-a-victim"
 date: "2022-01-12T09:38:51+00:00"
 lastmod: "2022-01-12T09:45:05+00:00"

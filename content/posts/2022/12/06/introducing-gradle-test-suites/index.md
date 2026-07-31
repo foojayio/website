@@ -1,5 +1,5 @@
 ---
-title: "Introducing Gradle Test Suites | Foojay.io Today"
+title: "Introducing Gradle Test Suites"
 slug: "introducing-gradle-test-suites"
 date: "2022-12-06T13:28:26+00:00"
 lastmod: "2022-12-06T16:40:51+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "Beautify Third-Party APIs with Kotlin | Foojay.io Today"
+title: "Beautify Third-Party APIs with Kotlin"
 slug: "beautify-third-party-api-kotlin"
 date: "2021-12-21T08:15:42+00:00"
 lastmod: "2021-12-21T08:16:19+00:00"

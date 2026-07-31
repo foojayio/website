@@ -1,5 +1,5 @@
 ---
-title: "Is it Time to go Back to the Monolith? | Foojay.io Today"
+title: "Is it Time to go Back to the Monolith?"
 slug: "is-it-time-to-go-back-to-the-monolith"
 date: "2023-03-03T15:58:20+00:00"
 lastmod: "2023-03-03T15:58:22+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "FXGL Game Engine 17 Released | Foojay.io Today"
+title: "FXGL Game Engine 17 Released"
 slug: "fxgl-game-engine-17-released"
 date: "2022-01-03T10:43:05+00:00"
 lastmod: "2022-01-03T10:44:09+00:00"

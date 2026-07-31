@@ -1,5 +1,5 @@
 ---
-title: "The State of Pattern Matching in Java 17 | Foojay.io Today"
+title: "The State of Pattern Matching in Java 17"
 slug: "the-state-of-pattern-matching-in-java-17"
 date: "2022-01-03T10:35:42+00:00"
 lastmod: "2022-01-03T10:35:43+00:00"

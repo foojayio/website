@@ -1,5 +1,5 @@
 ---
-title: "The Right Feature at the Right Place | Foojay.io Today"
+title: "The Right Feature at the Right Place"
 slug: "the-right-feature-at-the-right-place"
 date: "2023-02-28T11:08:14+00:00"
 lastmod: "2023-02-28T11:08:15+00:00"

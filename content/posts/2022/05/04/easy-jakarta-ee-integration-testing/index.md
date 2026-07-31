@@ -1,5 +1,5 @@
 ---
-title: "Easy Jakarta EE Integration Testing | Foojay.io Today"
+title: "Easy Jakarta EE Integration Testing"
 slug: "easy-jakarta-ee-integration-testing"
 date: "2022-05-04T14:41:49+00:00"
 lastmod: "2022-05-04T14:57:11+00:00"

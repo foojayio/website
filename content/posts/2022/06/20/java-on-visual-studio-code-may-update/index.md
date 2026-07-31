@@ -1,5 +1,5 @@
 ---
-title: "Java on Visual Studio Code - May Update | Foojay.io Today"
+title: "Java on Visual Studio Code - May Update"
 slug: "java-on-visual-studio-code-may-update"
 date: "2022-06-20T14:06:37+00:00"
 lastmod: "2023-06-13T11:01:05+00:00"

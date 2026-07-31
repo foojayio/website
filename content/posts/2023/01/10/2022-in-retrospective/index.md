@@ -1,5 +1,5 @@
 ---
-title: "2022 in Retrospective | Foojay.io Today"
+title: "2022 in Retrospective"
 slug: "2022-in-retrospective"
 date: "2023-01-10T08:19:43+00:00"
 lastmod: "2023-01-10T08:19:44+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "Leverage the Richness of HTTP Status Codes | Foojay.io Today"
+title: "Leverage the Richness of HTTP Status Codes"
 slug: "leverage-the-richness-of-http-status-codes"
 date: "2023-05-02T09:34:43+00:00"
 lastmod: "2023-05-02T09:34:44+00:00"

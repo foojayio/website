@@ -1,5 +1,5 @@
 ---
-title: "You're Running Untrusted Code! | Foojay.io Today"
+title: "You're Running Untrusted Code!"
 slug: "running-untrusted-code"
 date: "2022-01-17T08:28:24+00:00"
 lastmod: "2026-03-07T20:13:55+00:00"

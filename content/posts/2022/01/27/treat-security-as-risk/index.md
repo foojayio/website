@@ -1,5 +1,5 @@
 ---
-title: "Treat Security as a Risk | Foojay.io Today"
+title: "Treat Security as a Risk"
 slug: "treat-security-as-risk"
 date: "2022-01-27T11:26:57+00:00"
 lastmod: "2022-01-27T11:26:58+00:00"

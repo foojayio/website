@@ -1,5 +1,5 @@
 ---
-title: "Native-image with Quarkus | Foojay.io Today"
+title: "Native-image with Quarkus"
 slug: "native-image-quarkus"
 date: "2021-12-13T17:50:08+00:00"
 lastmod: "2021-12-13T17:50:09+00:00"

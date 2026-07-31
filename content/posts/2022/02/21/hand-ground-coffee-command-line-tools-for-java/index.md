@@ -1,5 +1,5 @@
 ---
-title: "Hand Ground Coffee: Command Line Tools for Java | Foojay.io Today"
+title: "Hand Ground Coffee: Command Line Tools for Java"
 slug: "hand-ground-coffee-command-line-tools-for-java"
 date: "2022-02-21T16:04:15+00:00"
 lastmod: "2022-04-20T07:16:46+00:00"

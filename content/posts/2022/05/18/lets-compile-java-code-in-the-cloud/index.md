@@ -1,5 +1,5 @@
 ---
-title: "Let's Compile Java Code in the Cloud! | Foojay.io Today"
+title: "Let's Compile Java Code in the Cloud!"
 slug: "lets-compile-java-code-in-the-cloud"
 date: "2022-05-18T12:03:34+00:00"
 lastmod: "2022-05-18T12:10:49+00:00"

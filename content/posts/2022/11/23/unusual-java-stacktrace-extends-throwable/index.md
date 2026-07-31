@@ -1,5 +1,5 @@
 ---
-title: "Unusual Java: StackTrace Extends Throwable | Foojay.io Today"
+title: "Unusual Java: StackTrace Extends Throwable"
 slug: "unusual-java-stacktrace-extends-throwable"
 date: "2022-11-23T12:37:13+00:00"
 lastmod: "2022-11-23T12:38:13+00:00"

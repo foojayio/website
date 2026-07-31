@@ -1,5 +1,5 @@
 ---
-title: "Why the Cool Kids Use Event Loops | Foojay.io Today"
+title: "Why the Cool Kids Use Event Loops"
 slug: "why-the-cool-kids-use-event-loops"
 date: "2022-12-14T10:17:48+00:00"
 lastmod: "2023-01-19T08:43:02+00:00"

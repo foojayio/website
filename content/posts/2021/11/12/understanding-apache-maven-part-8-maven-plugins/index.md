@@ -1,5 +1,5 @@
 ---
-title: "Understanding Apache Maven (Part 8): Maven Plugins | Foojay.io Today"
+title: "Understanding Apache Maven (Part 8): Maven Plugins"
 slug: "understanding-apache-maven-part-8-maven-plugins"
 date: "2021-11-12T13:34:48+00:00"
 lastmod: "2021-11-20T11:36:10+00:00"

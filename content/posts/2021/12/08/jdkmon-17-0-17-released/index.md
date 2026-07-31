@@ -1,5 +1,5 @@
 ---
-title: "JDKMon 17.0.17 Released | Foojay.io Today"
+title: "JDKMon 17.0.17 Released"
 slug: "jdkmon-17-0-17-released"
 date: "2021-12-08T09:11:22+00:00"
 lastmod: "2021-12-08T09:11:23+00:00"

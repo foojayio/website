@@ -1,5 +1,5 @@
 ---
-title: "Hardware Acceleration For Java? TornadoVM Can Do It! | Foojay.io Today"
+title: "Hardware Acceleration For Java? TornadoVM Can Do It!"
 slug: "hardware-acceleration-for-java-tornadovm-can-do-it"
 date: "2022-04-01T07:37:03+00:00"
 lastmod: "2023-02-16T08:01:19+00:00"

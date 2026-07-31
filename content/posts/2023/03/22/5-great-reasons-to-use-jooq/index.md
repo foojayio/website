@@ -1,5 +1,5 @@
 ---
-title: "5 Great Reasons to use jOOQ | Foojay.io Today"
+title: "5 Great Reasons to use jOOQ"
 slug: "5-great-reasons-to-use-jooq"
 date: "2023-03-22T14:45:13+00:00"
 lastmod: "2023-03-22T14:45:52+00:00"

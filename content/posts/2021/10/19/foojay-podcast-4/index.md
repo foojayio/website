@@ -1,5 +1,5 @@
 ---
-title: "Foojay Podcast #4: Why Are There So Many JDKs? | Foojay.io Today"
+title: "Foojay Podcast #4: Why Are There So Many JDKs?"
 slug: "foojay-podcast-4"
 date: "2021-10-19T15:38:35+00:00"
 lastmod: "2025-11-13T09:24:31+00:00"

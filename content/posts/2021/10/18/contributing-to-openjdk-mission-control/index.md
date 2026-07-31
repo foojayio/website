@@ -1,5 +1,5 @@
 ---
-title: "Contributing to OpenJDK Mission Control | Foojay.io Today"
+title: "Contributing to OpenJDK Mission Control"
 slug: "contributing-to-openjdk-mission-control"
 date: "2021-10-18T08:33:12+00:00"
 lastmod: "2021-10-18T08:46:27+00:00"

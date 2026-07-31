@@ -1,5 +1,5 @@
 ---
-title: "Java Thread Programming (Part 1) | Foojay.io Today"
+title: "Java Thread Programming (Part 1)"
 slug: "java-thread-programming-part-1"
 date: "2021-10-07T10:07:29+00:00"
 lastmod: "2022-03-25T06:57:10+00:00"

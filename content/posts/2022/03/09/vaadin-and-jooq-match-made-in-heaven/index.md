@@ -1,5 +1,5 @@
 ---
-title: "Vaadin and jOOQ: Match Made in Heaven | Foojay.io Today"
+title: "Vaadin and jOOQ: Match Made in Heaven"
 slug: "vaadin-and-jooq-match-made-in-heaven"
 date: "2022-03-09T08:25:52+00:00"
 lastmod: "2022-03-10T10:03:41+00:00"

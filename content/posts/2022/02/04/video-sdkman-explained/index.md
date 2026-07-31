@@ -1,5 +1,5 @@
 ---
-title: "Video: SDKMAN Explained | Foojay.io Today"
+title: "Video: SDKMAN Explained"
 slug: "video-sdkman-explained"
 date: "2022-02-04T08:30:04+00:00"
 lastmod: "2022-02-04T08:31:28+00:00"

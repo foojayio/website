@@ -1,5 +1,5 @@
 ---
-title: "Understanding Apache Maven (Part 1): The Basics | Foojay.io Today"
+title: "Understanding Apache Maven (Part 1): The Basics"
 slug: "understanding-apache-maven-part-1-the-basics"
 date: "2021-08-27T09:52:13+00:00"
 lastmod: "2021-09-03T09:03:14+00:00"

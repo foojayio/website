@@ -1,5 +1,5 @@
 ---
-title: "Moving Security into the JVM | Foojay.io Today"
+title: "Moving Security into the JVM"
 slug: "moving-security-into-the-jvm"
 date: "2023-02-17T11:15:35+00:00"
 lastmod: "2023-04-27T13:04:54+00:00"

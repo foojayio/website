@@ -1,5 +1,5 @@
 ---
-title: "A List of Cache Providers | Foojay.io Today"
+title: "A List of Cache Providers"
 slug: "a-list-of-cache-providers"
 date: "2021-11-18T08:01:25+00:00"
 lastmod: "2021-11-18T08:03:07+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "Streams Set Distinct Java Code Quiz | Foojay.io Today"
+title: "Streams Set Distinct Java Code Quiz"
 slug: "streams-set-distinct-java-code-quiz"
 date: "2021-11-11T09:36:45+00:00"
 lastmod: "2021-11-11T09:36:46+00:00"

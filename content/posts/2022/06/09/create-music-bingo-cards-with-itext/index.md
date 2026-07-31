@@ -1,5 +1,5 @@
 ---
-title: "Create Music Bingo Cards with iText | Foojay.io Today"
+title: "Create Music Bingo Cards with iText"
 slug: "create-music-bingo-cards-with-itext"
 date: "2022-06-09T08:33:31+00:00"
 lastmod: "2022-06-09T08:33:33+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "How to Add an Event to the Foojay Event Calendar | Foojay.io Today"
+title: "How to Add an Event to the Foojay Event Calendar"
 slug: "how-to-add-an-event-to-the-foojay-event-calendar"
 date: "2022-06-07T09:34:47+00:00"
 lastmod: "2022-06-07T09:39:02+00:00"

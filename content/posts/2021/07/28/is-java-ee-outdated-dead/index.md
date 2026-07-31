@@ -1,5 +1,5 @@
 ---
-title: "Is Java/Jakarta EE Outdated & Dead? | Foojay.io Today"
+title: "Is Java/Jakarta EE Outdated & Dead?"
 slug: "is-java-ee-outdated-dead"
 date: "2021-07-28T08:08:50+00:00"
 lastmod: "2021-07-28T08:08:53+00:00"

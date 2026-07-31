@@ -1,5 +1,5 @@
 ---
-title: "Java Modules in the Pi4J Project? | Foojay.io Today"
+title: "Java Modules in the Pi4J Project?"
 slug: "java-modules-in-the-pi4j-project"
 date: "2021-12-23T15:28:39+00:00"
 lastmod: "2021-12-24T08:31:26+00:00"

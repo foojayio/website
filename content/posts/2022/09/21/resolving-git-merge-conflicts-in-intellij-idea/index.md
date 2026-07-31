@@ -1,5 +1,5 @@
 ---
-title: "Resolving Git Merge Conflicts in IntelliJ IDEA | Foojay.io Today"
+title: "Resolving Git Merge Conflicts in IntelliJ IDEA"
 slug: "resolving-git-merge-conflicts-in-intellij-idea"
 date: "2022-09-21T11:04:06+00:00"
 lastmod: "2022-09-21T11:12:42+00:00"

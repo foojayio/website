@@ -1,5 +1,5 @@
 ---
-title: "Interview with Paul Kocian aka Orango_Mango | Foojay.io Today"
+title: "Interview with Paul Kocian aka Orango_Mango"
 slug: "interview-with-paul-kocian-aka-orango_mango"
 date: "2023-05-08T07:49:40+00:00"
 lastmod: "2023-05-22T08:24:14+00:00"

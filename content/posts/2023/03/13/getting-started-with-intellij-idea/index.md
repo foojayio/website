@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with IntelliJ IDEA | Foojay.io Today"
+title: "Getting Started with IntelliJ IDEA"
 slug: "getting-started-with-intellij-idea"
 date: "2023-03-13T08:26:00+00:00"
 lastmod: "2023-03-13T08:26:02+00:00"

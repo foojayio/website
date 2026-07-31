@@ -1,5 +1,5 @@
 ---
-title: "My Summary of jPrime 2022 | Foojay.io Today"
+title: "My Summary of jPrime 2022"
 slug: "my-summary-of-jprime-2022"
 date: "2022-06-08T18:37:55+00:00"
 lastmod: "2022-06-08T18:38:35+00:00"

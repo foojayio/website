@@ -1,5 +1,5 @@
 ---
-title: "Securely Authenticate to Google Cloud from GitHub | Foojay.io Today"
+title: "Securely Authenticate to Google Cloud from GitHub"
 slug: "securely-authenticate-google-cloud-github"
 date: "2022-05-02T08:57:00+00:00"
 lastmod: "2022-05-02T08:57:22+00:00"

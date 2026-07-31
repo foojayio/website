@@ -1,5 +1,5 @@
 ---
-title: "Say Goodbye to Project Files in Visual Studio Code | Foojay.io Today"
+title: "Say Goodbye to Project Files in Visual Studio Code"
 slug: "say-goodbye-to-project-files-in-visual-studio-code"
 date: "2021-12-21T08:05:46+00:00"
 lastmod: "2021-12-21T08:08:05+00:00"

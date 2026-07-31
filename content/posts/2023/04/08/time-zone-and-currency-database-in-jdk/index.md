@@ -1,5 +1,5 @@
 ---
-title: "Time Zone and Currency Database in JDK | Foojay.io Today"
+title: "Time Zone and Currency Database in JDK"
 slug: "time-zone-and-currency-database-in-jdk"
 date: "2023-04-08T13:39:00+00:00"
 lastmod: "2023-04-08T13:39:45+00:00"

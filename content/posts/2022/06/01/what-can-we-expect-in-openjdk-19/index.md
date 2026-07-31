@@ -1,5 +1,5 @@
 ---
-title: "What Can We Expect In OpenJDK 19? | Foojay.io Today"
+title: "What Can We Expect In OpenJDK 19?"
 slug: "what-can-we-expect-in-openjdk-19"
 date: "2022-06-01T19:00:37+00:00"
 lastmod: "2022-06-02T08:42:36+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "Log4Shell / Leak4J | Foojay.io Today"
+title: "Log4Shell / Leak4J"
 slug: "log4shell-leak4j"
 date: "2021-12-15T12:49:15+00:00"
 lastmod: "2021-12-15T12:52:11+00:00"

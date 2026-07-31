@@ -1,5 +1,5 @@
 ---
-title: "JavaFX Links of February 2023 | Foojay.io Today"
+title: "JavaFX Links of February 2023"
 slug: "javafx-links-of-february-2023"
 date: "2023-02-28T11:24:43+00:00"
 lastmod: "2023-02-28T11:25:04+00:00"

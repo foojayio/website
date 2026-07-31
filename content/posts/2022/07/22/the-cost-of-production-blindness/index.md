@@ -1,5 +1,5 @@
 ---
-title: "The Cost of Production Blindness | Foojay.io Today"
+title: "The Cost of Production Blindness"
 slug: "the-cost-of-production-blindness"
 date: "2022-07-22T08:11:03+00:00"
 lastmod: "2022-07-22T08:11:04+00:00"

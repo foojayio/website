@@ -1,5 +1,5 @@
 ---
-title: "Coroutines on the RaspberryPi (Pi4J-Kotlin) | Foojay.io Today"
+title: "Coroutines on the RaspberryPi (Pi4J-Kotlin)"
 slug: "coroutines-on-the-raspberrypi-pi4j-kotlin"
 date: "2023-04-01T09:05:29+00:00"
 lastmod: "2023-04-01T20:12:59+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "How to Do Faster Maven Builds (Part 1) | Foojay.io Today"
+title: "How to Do Faster Maven Builds (Part 1)"
 slug: "faster-maven-builds-1"
 date: "2021-10-14T08:27:35+00:00"
 lastmod: "2021-10-14T09:11:33+00:00"

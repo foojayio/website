@@ -1,5 +1,5 @@
 ---
-title: "9 Outdated Ideas About Java | Foojay.io Today"
+title: "9 Outdated Ideas About Java"
 slug: "9-outdated-ideas-about-java"
 date: "2023-03-11T08:56:17+00:00"
 lastmod: "2023-07-28T08:01:17+00:00"

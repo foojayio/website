@@ -1,5 +1,5 @@
 ---
-title: "Do Java/Jakarta EE Standards Matter? | Foojay.io Today"
+title: "Do Java/Jakarta EE Standards Matter?"
 slug: "do-java-jakarta-ee-standards-matter"
 date: "2021-09-02T14:43:05+00:00"
 lastmod: "2021-09-03T08:30:24+00:00"

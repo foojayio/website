@@ -1,5 +1,5 @@
 ---
-title: "Native-image with Spring Boot | Foojay.io Today"
+title: "Native-image with Spring Boot"
 slug: "native-spring-boot"
 date: "2021-11-19T11:47:19+00:00"
 lastmod: "2021-11-19T11:52:01+00:00"

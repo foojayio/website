@@ -1,5 +1,5 @@
 ---
-title: "The End of the Beginning for Apache Cassandra | Foojay.io Today"
+title: "The End of the Beginning for Apache Cassandra"
 slug: "the-end-of-the-beginning-for-apache-cassandra"
 date: "2022-07-12T17:43:39+00:00"
 lastmod: "2022-07-13T13:23:48+00:00"

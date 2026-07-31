@@ -1,5 +1,5 @@
 ---
-title: "Publish a Java Project to the Maven Central Repository | Foojay.io Today"
+title: "Publish a Java Project to the Maven Central Repository"
 slug: "how-to-publish-a-java-maven-project-to-the-maven-central-repository"
 date: "2022-05-13T06:22:58+00:00"
 lastmod: "2022-05-13T16:46:17+00:00"

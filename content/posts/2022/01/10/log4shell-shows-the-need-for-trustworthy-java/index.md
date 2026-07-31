@@ -1,5 +1,5 @@
 ---
-title: "Log4Shell Shows The Need for \"Trustworthy Java\" | Foojay.io Today"
+title: "Log4Shell Shows The Need for \"Trustworthy Java\""
 slug: "log4shell-shows-the-need-for-trustworthy-java"
 date: "2022-01-10T10:03:24+00:00"
 lastmod: "2022-01-11T11:05:09+00:00"

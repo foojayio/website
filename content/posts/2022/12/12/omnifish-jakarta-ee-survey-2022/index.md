@@ -1,5 +1,5 @@
 ---
-title: "OmniFish Jakarta EE Survey 2022 | Foojay.io Today"
+title: "OmniFish Jakarta EE Survey 2022"
 slug: "omnifish-jakarta-ee-survey-2022"
 date: "2022-12-12T11:44:26+00:00"
 lastmod: "2022-12-12T11:44:27+00:00"

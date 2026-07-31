@@ -1,5 +1,5 @@
 ---
-title: "Taking VSCodium for a Spin | Foojay.io Today"
+title: "Taking VSCodium for a Spin"
 slug: "taking-vscodium-for-a-spin"
 date: "2022-07-12T08:10:30+00:00"
 lastmod: "2022-07-12T08:10:32+00:00"

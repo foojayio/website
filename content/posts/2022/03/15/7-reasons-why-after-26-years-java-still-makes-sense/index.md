@@ -1,5 +1,5 @@
 ---
-title: "7 Reasons Why, After 26 Years, Java Still Makes Sense! | Foojay.io Today"
+title: "7 Reasons Why, After 26 Years, Java Still Makes Sense!"
 slug: "7-reasons-why-after-26-years-java-still-makes-sense"
 date: "2022-03-15T08:02:48+00:00"
 lastmod: "2025-01-24T10:39:56+00:00"

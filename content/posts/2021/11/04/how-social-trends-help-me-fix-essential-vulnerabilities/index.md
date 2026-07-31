@@ -1,5 +1,5 @@
 ---
-title: "How Social Trends Help Me Fix Essential Vulnerabilities | Foojay.io Today"
+title: "How Social Trends Help Me Fix Essential Vulnerabilities"
 slug: "how-social-trends-help-me-fix-essential-vulnerabilities"
 date: "2021-11-04T14:14:55+00:00"
 lastmod: "2021-11-04T14:16:21+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "Handling Exceptions in Java Lambdas | Foojay.io Today"
+title: "Handling Exceptions in Java Lambdas"
 slug: "exceptions-lambdas"
 date: "2022-10-22T11:36:46+00:00"
 lastmod: "2022-10-22T11:36:47+00:00"

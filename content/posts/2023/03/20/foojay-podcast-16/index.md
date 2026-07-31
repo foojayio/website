@@ -1,5 +1,5 @@
 ---
-title: "Foojay Podcast #16: Welcome to Java 20! | Foojay.io Today"
+title: "Foojay Podcast #16: Welcome to Java 20!"
 slug: "foojay-podcast-16"
 date: "2023-03-20T08:00:14+00:00"
 lastmod: "2025-11-13T09:12:40+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "An Introduction to Scoped Values in Java | Foojay.io Today"
+title: "An Introduction to Scoped Values in Java"
 slug: "an-introduction-to-scoped-values-in-java"
 date: "2023-02-20T11:32:20+00:00"
 lastmod: "2023-02-20T11:32:22+00:00"

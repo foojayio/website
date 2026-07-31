@@ -1,5 +1,5 @@
 ---
-title: "Java Panama Polyglot (C++) Part 1 | Foojay.io Today"
+title: "Java Panama Polyglot (C++) Part 1"
 slug: "java-panama-polyglot-part1"
 date: "2022-04-06T15:41:49+00:00"
 lastmod: "2022-05-26T09:37:35+00:00"

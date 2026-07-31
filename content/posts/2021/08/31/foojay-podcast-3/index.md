@@ -1,5 +1,5 @@
 ---
-title: "Foojay Podcast #3: Journey to Jakarta EE | Foojay.io Today"
+title: "Foojay Podcast #3: Journey to Jakarta EE"
 slug: "foojay-podcast-3"
 date: "2021-08-31T14:26:29+00:00"
 lastmod: "2025-11-13T09:25:09+00:00"

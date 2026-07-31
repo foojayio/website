@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Maven Toolchains | Foojay.io Today"
+title: "Introduction to Maven Toolchains"
 slug: "introduction-to-maven-toolchains"
 date: "2022-01-25T08:20:47+00:00"
 lastmod: "2022-01-25T14:32:30+00:00"

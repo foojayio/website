@@ -1,5 +1,5 @@
 ---
-title: "Multiple Ways to Configure Spring | Foojay.io Today"
+title: "Multiple Ways to Configure Spring"
 slug: "multiple-ways-configure-spring"
 date: "2021-10-06T08:55:34+00:00"
 lastmod: "2021-10-06T08:55:35+00:00"

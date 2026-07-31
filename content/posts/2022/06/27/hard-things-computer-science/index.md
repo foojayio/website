@@ -1,5 +1,5 @@
 ---
-title: "Hard Things in Computer Science | Foojay.io Today"
+title: "Hard Things in Computer Science"
 slug: "hard-things-computer-science"
 date: "2022-06-27T08:13:01+00:00"
 lastmod: "2022-06-27T08:13:57+00:00"

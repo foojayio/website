@@ -1,5 +1,5 @@
 ---
-title: "JDK 7: An Extended Hello and Farewell | Foojay.io Today"
+title: "JDK 7: An Extended Hello and Farewell"
 slug: "jdk-7-an-extended-hello-and-farewell"
 date: "2022-07-12T11:03:39+00:00"
 lastmod: "2022-07-12T11:09:28+00:00"

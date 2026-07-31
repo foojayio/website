@@ -1,5 +1,5 @@
 ---
-title: "Remote Debugging and Developer Observability | Foojay.io Today"
+title: "Remote Debugging and Developer Observability"
 slug: "remote-debugging-and-developer-observability"
 date: "2022-06-10T10:12:26+00:00"
 lastmod: "2023-07-18T07:08:08+00:00"

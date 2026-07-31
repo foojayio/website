@@ -1,5 +1,5 @@
 ---
-title: "Book Review: Quarkus for Spring Developers | Foojay.io Today"
+title: "Book Review: Quarkus for Spring Developers"
 slug: "book-review-quarkus-for-spring-developers"
 date: "2021-10-04T08:25:37+00:00"
 lastmod: "2021-10-14T09:23:37+00:00"

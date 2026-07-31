@@ -1,5 +1,5 @@
 ---
-title: "Java 21 Is Available Today, And It's Quite The Update | Foojay.io Today"
+title: "Java 21 Is Available Today, And It's Quite The Update"
 slug: "java-21-is-available-today-and-its-quite-the-update"
 date: "2023-09-19T05:31:13+00:00"
 lastmod: "2024-02-06T12:29:42+00:00"

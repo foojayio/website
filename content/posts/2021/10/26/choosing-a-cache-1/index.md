@@ -1,5 +1,5 @@
 ---
-title: "How to Choose a Cache: Capabilities | Foojay.io Today"
+title: "How to Choose a Cache: Capabilities"
 slug: "choosing-a-cache-1"
 date: "2021-10-26T13:20:11+00:00"
 lastmod: "2023-02-03T13:39:33+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "On Reassessing TestNG vs. Junit | Foojay.io Today"
+title: "On Reassessing TestNG vs. Junit"
 slug: "reassessing-testng-vs-junit"
 date: "2021-10-19T08:28:48+00:00"
 lastmod: "2021-10-19T08:28:49+00:00"

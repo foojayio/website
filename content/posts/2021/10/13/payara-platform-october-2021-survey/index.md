@@ -1,5 +1,5 @@
 ---
-title: "Payara Platform October 2021 Survey | Foojay.io Today"
+title: "Payara Platform October 2021 Survey"
 slug: "payara-platform-october-2021-survey"
 date: "2021-10-13T07:58:29+00:00"
 lastmod: "2021-10-13T08:03:36+00:00"

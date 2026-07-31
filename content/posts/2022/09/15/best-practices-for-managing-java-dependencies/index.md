@@ -1,5 +1,5 @@
 ---
-title: "Best Practices for Managing Java Dependencies | Foojay.io Today"
+title: "Best Practices for Managing Java Dependencies"
 slug: "best-practices-for-managing-java-dependencies"
 date: "2022-09-15T08:21:10+00:00"
 lastmod: "2022-09-15T08:22:01+00:00"

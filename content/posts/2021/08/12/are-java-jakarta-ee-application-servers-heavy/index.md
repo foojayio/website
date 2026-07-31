@@ -1,5 +1,5 @@
 ---
-title: "Are Java/Jakarta EE Application Servers Heavy? | Foojay.io Today"
+title: "Are Java/Jakarta EE Application Servers Heavy?"
 slug: "are-java-jakarta-ee-application-servers-heavy"
 date: "2021-08-12T07:10:29+00:00"
 lastmod: "2024-02-09T09:42:02+00:00"

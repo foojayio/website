@@ -1,5 +1,5 @@
 ---
-title: "A Java Library’s New Approach To Observability | Foojay.io Today"
+title: "A Java Library’s New Approach To Observability"
 slug: "not-your-grandfathers-logs-a-java-librarys-new-approach-to-observability"
 date: "2023-04-18T08:10:01+00:00"
 lastmod: "2023-07-18T07:07:33+00:00"

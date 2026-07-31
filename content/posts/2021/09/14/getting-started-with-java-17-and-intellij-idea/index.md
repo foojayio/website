@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Java 17 and IntelliJ IDEA | Foojay.io Today"
+title: "Getting Started with Java 17 and IntelliJ IDEA"
 slug: "getting-started-with-java-17-and-intellij-idea"
 date: "2021-09-14T09:20:56+00:00"
 lastmod: "2021-09-14T10:23:35+00:00"

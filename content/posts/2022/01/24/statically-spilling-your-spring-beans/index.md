@@ -1,5 +1,5 @@
 ---
-title: "Statically Spilling Your (Spring) Beans | Foojay.io Today"
+title: "Statically Spilling Your (Spring) Beans"
 slug: "statically-spilling-your-spring-beans"
 date: "2022-01-24T11:25:13+00:00"
 lastmod: "2022-01-24T19:05:22+00:00"

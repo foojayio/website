@@ -1,5 +1,5 @@
 ---
-title: "Jakarta Concurrency: Present and Future | Foojay.io Today"
+title: "Jakarta Concurrency: Present and Future"
 slug: "jakarta-concurrency-present-and-future-2"
 date: "2022-07-13T13:38:25+00:00"
 lastmod: "2022-07-13T13:39:16+00:00"

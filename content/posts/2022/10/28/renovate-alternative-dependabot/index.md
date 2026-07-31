@@ -1,5 +1,5 @@
 ---
-title: "Renovate: Dependabot Alternative | Foojay.io Today"
+title: "Renovate: Dependabot Alternative"
 slug: "renovate-alternative-dependabot"
 date: "2022-10-28T07:17:55+00:00"
 lastmod: "2023-03-27T15:25:07+00:00"

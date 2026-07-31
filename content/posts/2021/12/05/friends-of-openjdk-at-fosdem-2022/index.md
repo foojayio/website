@@ -1,5 +1,5 @@
 ---
-title: "Friends of OpenJDK at FOSDEM 2022 | Foojay.io Today"
+title: "Friends of OpenJDK at FOSDEM 2022"
 slug: "friends-of-openjdk-at-fosdem-2022"
 date: "2021-12-05T12:00:03+00:00"
 lastmod: "2021-12-26T14:17:17+00:00"

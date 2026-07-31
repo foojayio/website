@@ -1,5 +1,5 @@
 ---
-title: "Controlling Electronics with JBang on the Raspberry Pi | Foojay.io Today"
+title: "Controlling Electronics with JBang on the Raspberry Pi"
 slug: "controlling-electronics-with-jbang-on-the-raspberry-pi"
 date: "2022-02-21T10:08:06+00:00"
 lastmod: "2025-02-20T10:51:25+00:00"

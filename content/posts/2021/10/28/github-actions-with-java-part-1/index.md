@@ -1,5 +1,5 @@
 ---
-title: "Lights, Camera, Action: GitHub Actions with Java (Part 1) | Foojay.io Today"
+title: "Lights, Camera, Action: GitHub Actions with Java (Part 1)"
 slug: "github-actions-with-java-part-1"
 date: "2021-10-28T12:36:19+00:00"
 lastmod: "2021-10-28T12:53:46+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "What the Heck Is Project Loom for Java? | Foojay.io Today"
+title: "What the Heck Is Project Loom for Java?"
 slug: "what-the-heck-is-project-loom-for-java"
 date: "2022-08-30T15:13:55+00:00"
 lastmod: "2022-09-19T09:51:37+00:00"

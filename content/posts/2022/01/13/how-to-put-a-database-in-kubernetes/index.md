@@ -1,5 +1,5 @@
 ---
-title: "How to Put a Database in Kubernetes? | Foojay.io Today"
+title: "How to Put a Database in Kubernetes?"
 slug: "how-to-put-a-database-in-kubernetes"
 date: "2022-01-13T09:18:38+00:00"
 lastmod: "2022-07-14T21:14:05+00:00"

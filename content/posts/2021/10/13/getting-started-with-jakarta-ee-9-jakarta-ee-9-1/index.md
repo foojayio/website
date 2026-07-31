@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Jakarta EE 9: Jakarta EE 9.1 | Foojay.io Today"
+title: "Getting Started with Jakarta EE 9: Jakarta EE 9.1"
 slug: "getting-started-with-jakarta-ee-9-jakarta-ee-9-1"
 date: "2021-10-13T08:02:33+00:00"
 lastmod: "2021-10-13T08:13:14+00:00"

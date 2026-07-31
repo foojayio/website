@@ -1,5 +1,5 @@
 ---
-title: "How to Secure Your Web Apps With An API Gateway | Foojay.io Today"
+title: "How to Secure Your Web Apps With An API Gateway"
 slug: "how-to-secure-your-web-apps-with-an-api-gateway"
 date: "2022-07-18T18:50:10+00:00"
 lastmod: "2022-07-18T19:13:51+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "Handling Null: Optional and Nullable Types | Foojay.io Today"
+title: "Handling Null: Optional and Nullable Types"
 slug: "handling-null-optional-and-nullable-types"
 date: "2022-04-04T08:06:37+00:00"
 lastmod: "2023-02-13T12:20:25+00:00"

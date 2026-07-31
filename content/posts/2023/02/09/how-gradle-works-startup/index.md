@@ -1,5 +1,5 @@
 ---
-title: "How Gradle Works: Startup | Foojay.io Today"
+title: "How Gradle Works: Startup"
 slug: "how-gradle-works-startup"
 date: "2023-02-09T08:45:57+00:00"
 lastmod: "2023-03-14T11:34:13+00:00"

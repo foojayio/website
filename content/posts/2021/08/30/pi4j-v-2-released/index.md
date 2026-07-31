@@ -1,5 +1,5 @@
 ---
-title: "Announcement: Pi4J V.2 Released! | Foojay.io Today"
+title: "Announcement: Pi4J V.2 Released!"
 slug: "pi4j-v-2-released"
 date: "2021-08-30T12:13:54+00:00"
 lastmod: "2021-12-10T12:59:06+00:00"

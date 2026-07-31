@@ -1,5 +1,5 @@
 ---
-title: "Presenting with IntelliJ IDEA | Foojay.io Today"
+title: "Presenting with IntelliJ IDEA"
 slug: "presenting-with-intellij-idea"
 date: "2022-10-11T07:14:30+00:00"
 lastmod: "2022-10-11T07:14:32+00:00"

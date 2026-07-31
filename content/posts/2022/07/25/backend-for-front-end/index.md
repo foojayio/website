@@ -1,5 +1,5 @@
 ---
-title: "Discussing Backend For Front-end | Foojay.io Today"
+title: "Discussing Backend For Front-end"
 slug: "backend-for-front-end"
 date: "2022-07-25T14:49:18+00:00"
 lastmod: "2022-07-25T14:49:54+00:00"

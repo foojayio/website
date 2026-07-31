@@ -1,5 +1,5 @@
 ---
-title: "A Return to Annotation-Free Spring | Foojay.io Today"
+title: "A Return to Annotation-Free Spring"
 slug: "annotation-free-spring"
 date: "2021-09-17T12:03:24+00:00"
 lastmod: "2021-09-23T07:03:27+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "JUnit 5 Introduction | Foojay.io Today"
+title: "JUnit 5 Introduction"
 slug: "junit-5-introduction"
 date: "2021-11-26T15:22:59+00:00"
 lastmod: "2021-12-10T12:31:37+00:00"

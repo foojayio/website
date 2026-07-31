@@ -1,5 +1,5 @@
 ---
-title: "Fast JMS for Apache Pulsar: Blazing Performance | Foojay.io Today"
+title: "Fast JMS for Apache Pulsar: Blazing Performance"
 slug: "fast-jms-for-apache-pulsar-modernize-and-reduce-costs-with-blazing-performance"
 date: "2021-12-10T08:54:44+00:00"
 lastmod: "2021-12-10T08:54:46+00:00"

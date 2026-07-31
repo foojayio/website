@@ -1,5 +1,5 @@
 ---
-title: "Stream Limit Filter Java Challenge | Foojay.io Today"
+title: "Stream Limit Filter Java Challenge"
 slug: "stream-limit-filter-java-challenge"
 date: "2021-08-17T07:00:03+00:00"
 lastmod: "2021-09-03T09:38:47+00:00"

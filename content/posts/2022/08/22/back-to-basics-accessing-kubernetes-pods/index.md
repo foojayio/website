@@ -1,5 +1,5 @@
 ---
-title: "Back to Basics: Accessing Kubernetes Pods | Foojay.io Today"
+title: "Back to Basics: Accessing Kubernetes Pods"
 slug: "back-to-basics-accessing-kubernetes-pods"
 date: "2022-08-22T13:56:58+00:00"
 lastmod: "2022-08-22T13:57:30+00:00"
