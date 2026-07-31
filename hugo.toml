@@ -10,8 +10,11 @@ enableRobotsTXT = true
 # old page tree has inconsistent nesting (e.g. /java-quick-start/install-java/...).
 # Posts and authors DO follow a consistent pattern, so we keep it here too.
 [permalinks]
-  posts = "/today/:slug/"
-  authors = "/today/author/:slug/"
+  # :slugorcontentbasename -> the `slug` frontmatter if set, otherwise the post's
+  # bundle FOLDER name (content/posts/<y>/<m>/<d>/<slug>/). So an author just names
+  # the folder and the URL follows -- no `slug` frontmatter needed.
+  posts = "/today/:slugorcontentbasename/"
+  authors = "/today/author/:slugorcontentbasename/"
   # Taxonomy term pages live under /today/ too, matching the links the theme and
   # the WordPress site use (default would be /categories/… and /tags/…).
   categories = "/today/category/:slug/"
