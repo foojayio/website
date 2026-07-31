@@ -382,7 +382,9 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .page-head .eyebrow { margin-bottom: .5rem; }
 .page-head h1 { margin-bottom: .35rem; }
 .page-head p { color: var(--ink-soft); max-width: 62ch; margin: 0; }
-.page-head__rss { margin-top: 1rem; }
+.page-head__meta { display: flex; align-items: center; flex-wrap: wrap; gap: .9rem; }
+.page-head__meta p { margin: 0; }
+.btn--sm { padding: .3rem .75rem; font-size: .82rem; }
 
 .eyebrow {
   display: inline-flex; align-items: center; gap: .5rem;
