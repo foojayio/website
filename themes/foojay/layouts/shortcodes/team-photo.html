@@ -1,0 +1,6 @@
+{{- /* A single team-member avatar. Kept separate from the {{< img >}} figure
+       shortcode so it can be floated beside a real Markdown ## heading (which
+       is what lands the member's name in the page's table of contents).
+       src goes through resource-url so it picks up the baseURL subpath. */ -}}
+{{- $src := partial "resource-url.html" (dict "page" .Page "src" (.Get "src")) -}}
+<img class="team-member__photo is-zoomable" src="{{ $src }}" alt="{{ .Get "alt" }}" loading="lazy">
