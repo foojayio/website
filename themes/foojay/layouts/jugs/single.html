@@ -45,7 +45,13 @@
             {{ with .website }}<a href="{{ . }}" target="_blank" rel="noopener">{{ $jug.name }}</a>{{ else }}{{ .name }}{{ end }}
           </td>
           <td>{{ .country }}</td>
-          <td>{{ with .founded_date }}{{ dateFormat "2006" . }}{{ end }}</td>
+          {{/* founded_date in the source data is inconsistent precision --
+               "2013-01-01", but also just "2009-11" (year-month, no day) for
+               some JUGs, which Hugo's dateFormat/date parser rejects outright
+               (breaks the whole build). Every value seen starts with a
+               4-digit year, so slice that out directly rather than parsing
+               it as a date at all. */}}
+          <td>{{ with .founded_date }}{{ if ge (len .) 4 }}{{ slicestr . 0 4 }}{{ else }}{{ . }}{{ end }}{{ end }}</td>
           <td class="jugs-table__links">
             {{ $links := slice }}
             {{ with .meetup_url }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Meetup</a>` .) }}{{ end }}
