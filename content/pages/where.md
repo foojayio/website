@@ -56,7 +56,7 @@ Watch Foojay on YouTube and share your thoughts.
 
 Follow Foojay on social media and discuss relevant topics.
 
-[Bluesky](https://bsky.app/profile/foojay.io) [X (Twitter)](https://twitter.com/foojayio) [Mastodon](https://foojay.social/@foojay) [LinkedIn](https://www.linkedin.com/company/foojayio)
+[Bluesky](https://bsky.app/profile/foojay.io) [Mastodon](https://foojay.social/@foojay) [LinkedIn](https://www.linkedin.com/company/foojayio)
 
 </div>
 
