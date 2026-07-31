@@ -1,0 +1,48 @@
+{{- /*
+Custom RSS feed for a single author page.
+
+Individual author pages are Hugo "page" kind, not "section"/"taxonomy"/"term",
+so Hugo's embedded RSS template doesn't apply here -- it only ranges over
+`.Pages`/`.RegularPages`, which a "page" kind doesn't have. Without this
+override, turning on `rss` output for author pages (see the cascade in
+content/authors/_index.md) would silently render an empty <channel> with no
+<item>s.
+
+This mirrors the exact author->posts filtering logic used in
+themes/foojay/layouts/authors/single.html (posts credit authors via an
+`authors:` list, or an older single `author:` slug -- match both, de-duped),
+sorted newest first, so the feed lists the same articles the HTML profile
+page shows.
+*/ -}}
+{{- $slug := .File.ContentBaseName }}
+{{- $posts := where site.RegularPages "Section" "posts" }}
+{{- $written := where $posts "Params.authors" "intersect" (slice $slug) | union (where $posts "Params.author" $slug) }}
+{{- $written = $written.ByDate.Reverse }}
+{{- $limit := .Site.Config.Services.RSS.Limit }}
+{{- if ge $limit 1 }}{{ $written = $written | first $limit }}{{ end }}
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ .Title }} on {{ .Site.Title }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>Articles written by {{ .Title }} on {{ .Site.Title }}</description>
+    <generator>Hugo</generator>
+    <language>{{ site.Language.Locale }}</language>
+    {{ with .Site.Copyright }}<copyright>{{ . }}</copyright>{{ end }}
+    {{ if $written }}
+      <lastBuildDate>{{ (index $written 0).Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{ end }}
+    {{- with .OutputFormats.Get "RSS" }}
+      {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+    {{- end }}
+    {{- range $written }}
+      <item>
+        <title>{{ .Title }}</title>
+        <link>{{ .Permalink }}</link>
+        <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+        <guid>{{ .Permalink }}</guid>
+        <description>{{ .Summary | transform.XMLEscape | safeHTML }}</description>
+      </item>
+    {{- end }}
+  </channel>
+</rss>

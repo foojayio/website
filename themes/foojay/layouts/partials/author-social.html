@@ -2,7 +2,8 @@
        nothing when the author has no links set, so callers don't need to guard.
        Used by both the author profile page and the "Written by" post callout. */ -}}
 {{- $a := . -}}
-{{- if or $a.Params.bluesky $a.Params.mastodon $a.Params.linkedin $a.Params.github $a.Params.youtube $a.Params.twitter $a.Params.website -}}
+{{- $rss := $a.OutputFormats.Get "rss" -}}
+{{- if or $a.Params.bluesky $a.Params.mastodon $a.Params.linkedin $a.Params.github $a.Params.youtube $a.Params.twitter $a.Params.website $rss -}}
 <ul class="author-social">
   {{ with $a.Params.bluesky }}<li><a href="{{ . }}" rel="me noopener" target="_blank">Bluesky</a></li>{{ end }}
   {{ with $a.Params.mastodon }}<li><a href="{{ . }}" rel="me noopener" target="_blank">Mastodon</a></li>{{ end }}
@@ -11,5 +12,10 @@
   {{ with $a.Params.youtube }}<li><a href="{{ . }}" rel="noopener" target="_blank">YouTube</a></li>{{ end }}
   {{ with $a.Params.twitter }}<li><a href="{{ . }}" rel="noopener" target="_blank">Twitter/X</a></li>{{ end }}
   {{ with $a.Params.website }}<li><a href="{{ . }}" rel="noopener" target="_blank">Website</a></li>{{ end }}
+  {{/* RSS output is enabled per author via the cascade in content/authors/_index.md
+       (see themes/foojay/layouts/authors/page.rss.xml). Shown here rather than
+       gated on a specific social param so it appears both on the author's own
+       profile page and in the "Written by" callout on each of their posts. */}}
+  {{ with $rss }}<li><a href="{{ .Permalink }}" rel="alternate" type="application/rss+xml">RSS</a></li>{{ end }}
 </ul>
 {{- end -}}

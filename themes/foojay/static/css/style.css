@@ -382,6 +382,7 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .page-head .eyebrow { margin-bottom: .5rem; }
 .page-head h1 { margin-bottom: .35rem; }
 .page-head p { color: var(--ink-soft); max-width: 62ch; margin: 0; }
+.page-head__rss { margin-top: 1rem; }
 
 .eyebrow {
   display: inline-flex; align-items: center; gap: .5rem;

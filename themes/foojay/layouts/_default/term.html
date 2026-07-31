@@ -4,6 +4,11 @@
     <span class="eyebrow">{{ .Data.Singular | humanize }}</span>
     <h1>{{ .Title }}</h1>
     <p>{{ len .Pages }} article{{ if ne (len .Pages) 1 }}s{{ end }} in this {{ .Data.Singular }}.</p>
+    {{/* Category/tag RSS is enabled site-wide via hugo.toml's [outputs] term
+         config, so every term page automatically gets a feed -- link to it. */}}
+    {{ with .OutputFormats.Get "rss" }}
+    <a class="btn btn--ghost page-head__rss" href="{{ .Permalink }}" rel="alternate" type="application/rss+xml">Subscribe via RSS</a>
+    {{ end }}
   </div>
 </div>
 
