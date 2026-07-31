@@ -1,7 +1,7 @@
 <article class="post-card">
   {{ with .Params.image }}
   <a href="{{ $.Permalink }}" class="post-card-image" tabindex="-1" aria-hidden="true">
-    <img src="{{ . | strings.TrimPrefix "/" | relURL }}" alt="" loading="lazy" decoding="async">
+    <img src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="" loading="lazy" decoding="async">
   </a>
   {{ end }}
 

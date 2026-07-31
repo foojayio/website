@@ -2,10 +2,7 @@
        HtmlToMarkdown.java instead of raw <img> HTML so the src goes through
        relURL and picks up the baseURL subpath. Params: src, class, alt, width,
        height, caption. */ -}}
-{{- $src := .Get "src" -}}
-{{- if not (or (hasPrefix $src "http") (hasPrefix $src "//") (hasPrefix $src "data:")) -}}
-  {{- $src = $src | strings.TrimPrefix "/" | relURL -}}
-{{- end -}}
+{{- $src := partial "resource-url.html" (dict "page" .Page "src" (.Get "src")) -}}
 <figure{{ with .Get "class" }} class="{{ . }}"{{ end }}>
   <img src="{{ $src }}" alt="{{ .Get "alt" }}"{{ with .Get "width" }} width="{{ . }}"{{ end }}{{ with .Get "height" }} height="{{ . }}"{{ end }}{{ with .Get "style" }} style="{{ . | safeCSS }}"{{ end }} loading="lazy" class="is-zoomable">
   {{- with .Get "caption" }}<figcaption class="wp-element-caption">{{ . }}</figcaption>{{ end -}}

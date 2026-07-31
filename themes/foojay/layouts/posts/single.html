@@ -2,7 +2,7 @@
 <div class="layout-with-sidebar">
   <article class="post-single">
     <header class="post-header{{ if .Params.image }} post-header--with-hero{{ end }}">
-      {{ with .Params.image }}<img class="post-hero is-zoomable" src="{{ . | strings.TrimPrefix "/" | relURL }}" alt="{{ $.Title }}" loading="lazy">{{ end }}
+      {{ with .Params.image }}<img class="post-hero is-zoomable" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}" loading="lazy">{{ end }}
       {{ with .Params.categories }}
       <div class="post-categories post-categories--top">
         {{ range first 2 . }}<a href="{{ printf "today/category/%s/" (. | urlize) | relURL }}">{{ . }}</a>{{ end }}
