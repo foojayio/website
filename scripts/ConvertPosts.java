@@ -74,11 +74,15 @@ import java.util.stream.Stream;
  * manual edit) is left untouched.
  *
  * FILE LAYOUT:
- * Posts are filed under content/posts/<year>/<month>/<slug>.md, bucketed by the
- * post's *original* publish date so the file doesn't move around on re-runs. This
- * is purely a repo-organization choice for browsability; the public URL stays
- * /today/<slug>/ via the `slug` frontmatter + hugo.toml permalinks, wherever the
- * file lives.
+ * Each post is a Hugo leaf bundle:
+ *   content/posts/<year>/<month>/<day>/<slug>/index.md
+ * with its images co-located in that same directory and referenced by bare
+ * filename (resolved as page-bundle resources -- no separate static/images tree).
+ * This keeps a post and its images together, which is far easier for authors and
+ * makes image URLs baseURL-correct automatically. The directory is bucketed by the
+ * post's *original* publish date so it doesn't move on re-runs (bundleDirFor()
+ * reuses an existing bundle by slug). The public URL stays /today/<slug>/ via the
+ * `slug` frontmatter + hugo.toml permalinks, wherever the bundle lives.
  */
 public class ConvertPosts {
 
@@ -94,12 +98,12 @@ public class ConvertPosts {
     // --concurrency N.
     static final int DEFAULT_CONCURRENCY = 8;
 
-    // Body conversion (image localization + widget detection + HTML->Markdown)
-    // is shared with ConvertPages.java via HtmlToMarkdown.java. Posts keep their
-    // images under static/images/posts/.
-    static final HtmlToMarkdown.Options MD_OPTS = new HtmlToMarkdown.Options(
-            Path.of("static/images/posts"), "/images/posts/", "foojay.io",
-            "foojay-hugo-migration-bot/1.0", REQUEST_TIMEOUT_MS);
+    // Each post is a Hugo leaf bundle: content/posts/<y>/<m>/<d>/<slug>/index.md
+    // with its images co-located in that directory (referenced by bare filename,
+    // resolved as page-bundle resources). Body conversion is shared with the other
+    // converters via HtmlToMarkdown.java; the image Options are built per-post
+    // (imageBaseDir = the bundle dir, empty url prefix -> relative filenames).
+    static final String USER_AGENT = "foojay-hugo-migration-bot/1.0";
 
     // Verified against foojay.io's live listing (2026-07): the /today/ page has
     // featured / "most viewed" / podcast blocks up top that are NOT in date order,
@@ -166,7 +170,7 @@ public class ConvertPosts {
         if (singleUrl != null) {
             PostData data = scrapePost(singleUrl);
             writePost(data, true);
-            System.out.println("Wrote " + data.slug + ".md (single-post test run)");
+            System.out.println("Wrote " + data.slug + "/index.md (single-post test run)");
             return;
         }
 
@@ -360,15 +364,15 @@ public class ConvertPosts {
                 attrContent(doc, "meta[property=article:modified_time]"),
                 d.date);
 
-        // Co-locate this post's images under a dir mirroring its file path,
-        // e.g. content/posts/2026/07/my-post.md -> images/posts/2026/07/my-post/.
-        // Needs the publish date (for the bucket), so it's computed here.
-        String imageSubpath = OUTPUT_DIR.relativize(bucketDirFor(d))
-                .resolve(d.slug).toString().replace(java.io.File.separatorChar, '/');
+        // Resolve the post's bundle directory (needs the publish date) and localize
+        // all images INTO it as bare filenames (empty url prefix).
+        d.bundleDir = bundleDirFor(d);
+        HtmlToMarkdown.Options opts = new HtmlToMarkdown.Options(
+                d.bundleDir, "", "foojay.io", USER_AGENT, REQUEST_TIMEOUT_MS);
 
         // Pull the hero (og:image) local too, so it isn't hotlinked from the
         // WordPress site that goes away at cutover. Non-foojay images are left as-is.
-        String localHero = HtmlToMarkdown.localizeImage(d.image, MD_OPTS, imageSubpath);
+        String localHero = HtmlToMarkdown.localizeImage(d.image, opts, "");
         if (localHero != null) d.image = localHero;
 
         d.authors = authorSlugs(doc);
@@ -386,7 +390,7 @@ public class ConvertPosts {
         Element content = doc.selectFirst(SELECTOR_ARTICLE_CONTENT);
         if (content != null) {
             content.select(SELECTOR_CONTENT_NOISE).remove();
-            HtmlToMarkdown.Result r = HtmlToMarkdown.convert(content, MD_OPTS, imageSubpath);
+            HtmlToMarkdown.Result r = HtmlToMarkdown.convert(content, opts, "");
             d.body = r.markdown;
             d.jdoodle = r.jdoodle;
             d.enlighterjs = r.enlighterjs;
@@ -476,10 +480,10 @@ public class ConvertPosts {
     }
 
     static boolean isFrozen(String slug) {
-        Optional<Path> existing = findExistingPostFile(slug);
-        if (existing.isEmpty()) return false;
+        Optional<Path> bundle = findExistingBundle(slug);
+        if (bundle.isEmpty()) return false;
         try {
-            return Files.readString(existing.get()).contains("frozen: true");
+            return Files.readString(bundle.get().resolve("index.md")).contains("frozen: true");
         } catch (IOException e) {
             return false;
         }
@@ -488,28 +492,37 @@ public class ConvertPosts {
     /** Recursively looks for content/posts/**&#47;<slug>.md so a post already
      *  filed under its year/month keeps living there on re-runs, even if this
      *  run's date parsing landed on a slightly different bucket. */
-    static Optional<Path> findExistingPostFile(String slug) {
+    static Optional<Path> findExistingBundle(String slug) {
         if (!Files.isDirectory(OUTPUT_DIR)) return Optional.empty();
         try (Stream<Path> files = Files.walk(OUTPUT_DIR)) {
-            return files.filter(p -> p.getFileName().toString().equals(slug + ".md")).findFirst();
+            return files.filter(p -> p.getFileName().toString().equals("index.md")
+                            && p.getParent() != null
+                            && p.getParent().getFileName().toString().equals(slug))
+                    .map(Path::getParent)
+                    .findFirst();
         } catch (IOException e) {
             return Optional.empty();
         }
     }
 
-    /** Bucket directory for a post: content/posts/<year>/<month>/, derived from
-     *  the post's original publish date. Falls back to "undated/" (logged) if
-     *  the date couldn't be parsed, so nothing silently gets lost. */
+    /** Date bucket for a post: content/posts/<year>/<month>/<day>/, from the
+     *  publish date. Falls back to "undated/" (logged) if the date won't parse. */
     static Path bucketDirFor(PostData d) {
         try {
             OffsetDateTime dt = OffsetDateTime.parse(d.date, DateTimeFormatter.ISO_DATE_TIME);
-            String year = String.format("%04d", dt.getYear());
-            String month = String.format("%02d", dt.getMonthValue());
-            return OUTPUT_DIR.resolve(year).resolve(month);
+            return OUTPUT_DIR.resolve(String.format("%04d", dt.getYear()))
+                    .resolve(String.format("%02d", dt.getMonthValue()))
+                    .resolve(String.format("%02d", dt.getDayOfMonth()));
         } catch (Exception e) {
             System.err.println("WARN: could not parse date '" + d.date + "' for " + d.slug + ", filing under posts/undated/");
             return OUTPUT_DIR.resolve("undated");
         }
+    }
+
+    /** The post's leaf-bundle directory (content/posts/<y>/<m>/<d>/<slug>/), reused
+     *  if a bundle for this slug already exists so re-runs don't move it. */
+    static Path bundleDirFor(PostData d) {
+        return findExistingBundle(d.slug).orElseGet(() -> bucketDirFor(d).resolve(d.slug));
     }
 
     // ---- Writing markdown --------------------------------------------------
@@ -547,9 +560,9 @@ public class ConvertPosts {
         fm.append("---\n\n");
         fm.append(d.body).append("\n");
 
-        Path out = findExistingPostFile(d.slug).orElseGet(() -> bucketDirFor(d).resolve(d.slug + ".md"));
-        Files.createDirectories(out.getParent());
-        Files.writeString(out, fm.toString());
+        Path bundleDir = d.bundleDir != null ? d.bundleDir : bundleDirFor(d);
+        Files.createDirectories(bundleDir);
+        Files.writeString(bundleDir.resolve("index.md"), fm.toString());
 
         System.out.println("Done post: " + d.title);
     }
@@ -630,6 +643,7 @@ public class ConvertPosts {
 
     static class PostData {
         String url, slug, title, description, canonical, image, date, dateModified, body;
+        Path bundleDir;
         boolean jdoodle, enlighterjs;
         List<String> authors = new ArrayList<>();
         List<String> categories = new ArrayList<>();

@@ -1,10 +1,18 @@
-{{- /* Make root-relative image paths (e.g. the localized /images/pages/... the
-       conversion scripts produce) honour the baseURL subpath. Hugo's relURL
-       only prefixes the subpath when the path does NOT already start with "/",
-       so we strip the leading slash first. External/absolute/data URLs are left
-       untouched. */ -}}
+{{- /* Resolve the image src:
+       1. Page-bundle resource (a plain filename like foo.png co-located with
+          index.md) -> its .RelPermalink (already baseURL-subpath correct, and
+          it publishes the image to the post's URL). This is the author-friendly
+          co-located layout.
+       2. Root-relative static path (/images/... from pages/pedia) -> relURL,
+          stripping the leading slash so the subpath is applied.
+       3. External / data URLs -> untouched. */ -}}
 {{- $dest := .Destination -}}
-{{- if not (or (hasPrefix $dest "http://") (hasPrefix $dest "https://") (hasPrefix $dest "//") (hasPrefix $dest "data:")) -}}
-  {{- $dest = $dest | strings.TrimPrefix "/" | relURL -}}
+{{- $abs := or (hasPrefix $dest "http://") (hasPrefix $dest "https://") (hasPrefix $dest "//") (hasPrefix $dest "data:") -}}
+{{- if not $abs -}}
+  {{- with .Page.Resources.GetMatch $dest -}}
+    {{- $dest = .RelPermalink -}}
+  {{- else -}}
+    {{- $dest = $dest | strings.TrimPrefix "/" | relURL -}}
+  {{- end -}}
 {{- end -}}
 <img src="{{ $dest }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy">
