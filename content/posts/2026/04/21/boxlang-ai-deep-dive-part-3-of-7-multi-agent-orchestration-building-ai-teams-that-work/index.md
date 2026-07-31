@@ -14,7 +14,7 @@ categories:
   - "Java"
 tags:
 related_posts:
-  - "boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework-🧵"
+  - "boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework"
   - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
   - "boxlang-1-14-0-introducing-inner-classes"
   - "jc-ai-newsletter-16"

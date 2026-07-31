@@ -331,7 +331,7 @@ public class ConvertPosts {
         Document doc = fetch(url);
         PostData d = new PostData();
         d.url = stripTrailingSlash(url) + "/";
-        d.slug = lastPathSegment(d.url);
+        d.slug = sanitizeSlug(lastPathSegment(d.url));
 
         d.title = stripSiteSuffix(firstNonBlank(
                 metaContent(doc, "og:title"),
@@ -473,7 +473,7 @@ public class ConvertPosts {
         for (Element a : doc.select(SELECTOR_RELATED_POSTS)) {
             String href = a.absUrl("href");
             if (isLikelyPostUrl(href)) {
-                slugs.add(lastPathSegment(stripTrailingSlash(href) + "/"));
+                slugs.add(sanitizeSlug(lastPathSegment(stripTrailingSlash(href) + "/")));
             }
         }
         return new ArrayList<>(slugs);
@@ -531,10 +531,8 @@ public class ConvertPosts {
         StringBuilder fm = new StringBuilder();
         fm.append("---\n");
         fm.append("title: ").append(yamlString(d.title)).append("\n");
-        // Pin the URL slug to the original WordPress slug (the filename). Without
-        // this, hugo.toml's `:slug` permalink token falls back to the TITLE, which
-        // would change every post's URL. URLs are load-bearing -- keep the legacy one.
-        fm.append("slug: ").append(yamlString(d.slug)).append("\n");
+        // No `slug`: the bundle FOLDER name is the URL slug (hugo.toml permalink
+        // uses :slugorcontentbasename), and writePost names that folder d.slug.
         fm.append("date: ").append(yamlString(d.date)).append("\n");
         if (d.dateModified != null && !d.dateModified.isBlank() && !d.dateModified.equals(d.date)) {
             fm.append("lastmod: ").append(yamlString(d.dateModified)).append("\n");
@@ -633,6 +631,17 @@ public class ConvertPosts {
         return s.toLowerCase()
                 .replaceAll("[^a-z0-9]+", "-")
                 .replaceAll("^-+|-+$", "");
+    }
+
+    /** Cleans a WordPress slug into a safe URL/folder slug: lowercases, replaces
+     *  anything outside [a-z0-9_-] (emoji, spaces, punctuation) with a dash,
+     *  collapses/trims dashes. Keeps existing dashes and underscores. */
+    static String sanitizeSlug(String s) {
+        if (s == null) return "";
+        return s.toLowerCase(Locale.ROOT)
+                .replaceAll("[^a-z0-9_-]+", "-")
+                .replaceAll("-{2,}", "-")
+                .replaceAll("^[-_]+|[-_]+$", "");
     }
 
     static String yamlString(String s) {

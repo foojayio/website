@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 /**
@@ -21,27 +22,43 @@ import java.util.stream.Stream;
  */
 public class ValidateFrontmatter {
 
+    /** A clean URL slug: lowercase letters/digits, separated by single dashes or
+     *  underscores. Flags emoji, spaces, uppercase, etc. */
+    static final Pattern SLUG_FMT = Pattern.compile("[a-z0-9]+(?:[-_][a-z0-9]+)*");
+
     public static void main(String[] args) throws IOException {
         List<String> problems = new ArrayList<>();
 
-        // Posts live under content/posts/<year>/<month>/<slug>.md, so this
-        // needs to walk recursively rather than list the top-level dir.
-        // Track every file per slug so duplicates can be reported: two posts with
-        // the same slug resolve to the same /today/<slug>/ URL, and Hugo would
-        // silently drop one (and one writePost would overwrite the other).
+        // Posts are leaf bundles: content/posts/<y>/<m>/<d>/<slug>/index.md. The URL
+        // slug is the bundle FOLDER name (permalink :slugorcontentbasename), so
+        // that's what we key on -- for duplicate detection (two posts with the same
+        // slug collide on /today/<slug>/), for a clean-slug check, and to verify any
+        // `slug:` frontmatter matches the folder.
         Path postsDir = Path.of("content/posts");
-        Map<String, List<Path>> slugFiles = new TreeMap<>();
+        Map<String, List<Path>> slugDirs = new TreeMap<>();
         if (Files.isDirectory(postsDir)) {
+            List<Path> indexes;
             try (Stream<Path> files = Files.walk(postsDir)) {
-                files.filter(p -> p.toString().endsWith(".md") && !p.getFileName().toString().equals("_index.md"))
-                     .forEach(p -> slugFiles.computeIfAbsent(stripExt(p.getFileName().toString()),
-                             k -> new ArrayList<>()).add(p));
+                indexes = files.filter(p -> p.getFileName().toString().equals("index.md")).toList();
+            }
+            for (Path idx : indexes) {
+                String slug = idx.getParent().getFileName().toString();
+                slugDirs.computeIfAbsent(slug, k -> new ArrayList<>()).add(idx);
+                if (!SLUG_FMT.matcher(slug).matches()) {
+                    problems.add(idx + ": folder name '" + slug + "' is not a clean URL slug"
+                            + " (lowercase letters, digits, dashes and underscores only)");
+                }
+                Map<String, Object> fm = readFrontmatter(idx);
+                Object s = fm == null ? null : fm.get("slug");
+                if (s != null && !s.toString().isBlank() && !s.toString().equals(slug)) {
+                    problems.add(idx + ": frontmatter slug '" + s + "' does not match folder name '" + slug + "'");
+                }
             }
         }
-        slugFiles.forEach((slug, paths) -> {
+        slugDirs.forEach((slug, paths) -> {
             if (paths.size() > 1) problems.add("duplicate post slug '" + slug + "' in: " + paths);
         });
-        Set<String> postSlugs = slugFiles.keySet();
+        Set<String> postSlugs = slugDirs.keySet();
 
         problems.addAll(checkDir(Path.of("content/posts"), List.of("title", "description", "authors")));
         problems.addAll(checkDir(Path.of("content/authors"), List.of("title")));

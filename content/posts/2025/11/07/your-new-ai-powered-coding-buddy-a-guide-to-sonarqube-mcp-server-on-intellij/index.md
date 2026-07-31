@@ -1,6 +1,7 @@
 ---
+aliases:
+  - "/today/your-new-ai-powered-coding-buddy-a-guide-to-sonarqube-mcp-server-on-intellij-🤖/"
 title: "A Guide to SonarQube MCP Server on IntelliJ"
-slug: "your-new-ai-powered-coding-buddy-a-guide-to-sonarqube-mcp-server-on-intellij-🤖"
 date: "2025-11-07T17:00:24+00:00"
 description: "You have an AI-powered assistant to help you out. SonarQube MCP Server comes in. Let's dive into how this cool new MCP can supercharge your daily coding routine. 🚀."
 authors:
