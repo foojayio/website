@@ -38,12 +38,13 @@ import java.util.regex.Pattern;
  * YAML frontmatter block, no body -- e.g.
  * https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/TorontoJUG.md
  *     ---
- *     name:     "Toronto Java User Group"
- *     country:  Canada
- *     website:  https://www.meetup.com/toronto-java-users-group/
- *     location: 43.657764, -79.402487
+ *     name:     "Belgian Java User Group"
+ *     country:  Belgium
+ *     website:  https://bejug.github.io/
+ *     meetup:   https://www.meetup.com/belgian-java-user-group
+ *     location: 50.846816, 4.352442
  *     ---
- * Not every file has every field (twitter/mastodon/calendar/founded_date/
+ * Not every file has every field (meetup/twitter/mastodon/calendar/founded_date/
  * contact/email are all optional and frequently blank), so everything here
  * is written defensively -- a missing field is just omitted, never a blank
  * string or null in the output.
@@ -148,15 +149,19 @@ public class FetchJugs {
 
         String website = trimToNull(front.get("website"));
         putIfPresent(jug, "website", website);
-        if (website != null) {
-            Matcher m = MEETUP_URL.matcher(website);
+
+        // Meetup: only when the dedicated `meetup:` field is provided upstream
+        // (added in GlobalWWJugs, e.g. _jugs/BelgianJUG.md). We deliberately do
+        // NOT infer it from `website` even when that happens to be a meetup.com
+        // URL -- only use a Meetup link when it's specifically given. Both forms
+        // are written: meetup_slug is what FetchMeetupEvents.java needs for the
+        // GraphQL API, meetup_url is the ready-to-link full address.
+        String meetup = trimToNull(front.get("meetup"));
+        if (meetup != null) {
+            Matcher m = MEETUP_URL.matcher(meetup);
             if (m.find()) {
-                // Both forms are written: meetup_slug is what
-                // FetchMeetupEvents.java needs for the GraphQL API,
-                // meetup_url is the ready-to-link full address (per Frank's
-                // request, for calendar import / display use).
                 jug.put("meetup_slug", m.group(1).replaceAll("/+$", ""));
-                jug.put("meetup_url", website);
+                jug.put("meetup_url", meetup);
             }
         }
 
@@ -238,8 +243,9 @@ public class FetchJugs {
                 # To add, fix, or remove a JUG, open a PR against that repo's _jugs/
                 # folder instead: https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs
                 #
-                # meetup_slug/meetup_url are derived when `website` is a meetup.com URL;
-                # scripts/FetchMeetupEvents.java uses meetup_slug to pull calendar events.
+                # meetup_slug/meetup_url are set only when a JUG's file has an explicit
+                # `meetup` field (never inferred from `website`); scripts/FetchMeetupEvents.java
+                # uses meetup_slug to pull calendar events.
 
                 """.stripIndent();
 

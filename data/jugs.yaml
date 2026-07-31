@@ -10,8 +10,9 @@
 # To add, fix, or remove a JUG, open a PR against that repo's _jugs/
 # folder instead: https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs
 #
-# meetup_slug/meetup_url are derived when `website` is a meetup.com URL;
-# scripts/FetchMeetupEvents.java uses meetup_slug to pull calendar events.
+# meetup_slug/meetup_url are set only when a JUG's file has an explicit
+# `meetup` field (never inferred from `website`); scripts/FetchMeetupEvents.java
+# uses meetup_slug to pull calendar events.
 
 - slug: AlmatyJUG
   name: Almaty Java User Group
@@ -72,7 +73,7 @@
 - slug: BelgianJUG
   name: Belgian Java User Group
   country: Belgium
-  website: https://www.meetup.com/belgian-java-user-group
+  website: https://bejug.github.io/
   meetup_slug: belgian-java-user-group
   meetup_url: https://www.meetup.com/belgian-java-user-group
   twitter: BeJUG
@@ -227,6 +228,8 @@
   name: Java User Group Berlin-Brandenburg
   country: Germany
   website: http://www.jug-berlin-brandenburg.de/
+  meetup_slug: jug-bb
+  meetup_url: https://www.meetup.com/jug-bb/
   calendar: https://www.meetup.com/jug-bb/events/ical/
   contact: Oliver Fischer *
   latitude: 52.3644
@@ -291,6 +294,8 @@
   name: Java User Group Duesseldorf Rhein
   country: Germany
   website: http://rheinjug.de/
+  meetup_slug: rheinJUG
+  meetup_url: https://www.meetup.com/rheinJUG/
   calendar: https://www.meetup.com/rheinJUG/events/ical/
   contact: Jens Bendisposto ; Lukas Ladenberger
   email: jug@bendisposto.de
@@ -312,6 +317,8 @@
   name: Java User Group Freiburg
   country: Germany
   website: https://jugfr.de/
+  meetup_slug: Java-User-Group-Freiburg
+  meetup_url: https://www.meetup.com/Java-User-Group-Freiburg/
   calendar: https://www.meetup.com/Java-User-Group-Freiburg/events/ical/
   contact: Michael Heinrichs
   latitude: 51.233334
@@ -370,6 +377,8 @@
   name: Java User Group Hannover
   country: Germany
   website: http://www.jug-h.de/
+  meetup_slug: Java-User-Group-Hannover
+  meetup_url: https://www.meetup.com/Java-User-Group-Hannover/
   calendar: https://www.meetup.com/Java-User-Group-Hannover/events/ical/
   contact: Guenter Jantzen *
   latitude: 52.3759
@@ -408,6 +417,8 @@
   name: Java User Group Karlsruhe
   country: Germany
   website: http://jug-ka.de/
+  meetup_slug: Java-User-Group-Karlsruhe
+  meetup_url: https://www.meetup.com/Java-User-Group-Karlsruhe/
   calendar: https://www.meetup.com/Java-User-Group-Karlsruhe/events/ical/
   contact: Michael Prieß
   latitude: 49.0069
@@ -446,6 +457,8 @@
   name: Java User Group Muenchen
   country: Germany
   website: http://www.jugm.de/
+  meetup_slug: Java-User-Group-Munchen-JUGM
+  meetup_url: https://www.meetup.com/Java-User-Group-Munchen-JUGM/
   calendar: https://www.meetup.com/Java-User-Group-Munchen-JUGM/events/ical/
   founded_date: '2000-01-01'
   contact: Andreas Haug *
@@ -532,6 +545,8 @@
   name: Java User Group Stuttgart
   country: Germany
   website: https://www.jugs.org
+  meetup_slug: de-DE
+  meetup_url: https://www.meetup.com/de-DE/jugstuttgart/
   calendar: https://www.meetup.com/de-DE/jugstuttgart/events/ical/
   contact: Michael Paus ; Rainer Anglett
   latitude: 48.7758
@@ -541,6 +556,8 @@
   name: Java User Group Thueringen
   country: Germany
   website: http://www.jugth.de
+  meetup_slug: jugthde
+  meetup_url: https://www.meetup.com/jugthde/
   calendar: https://www.meetup.com/jugthde/events/ical/
   contact: Benjamin Nothdurft ; Carsten Zeitz
   latitude: 51.011
@@ -598,6 +615,8 @@
   name: JUG NICARAGUA
   country: Nicaragua
   website: https://jugnicaragua.org/
+  meetup_slug: jug-nicaragua
+  meetup_url: https://www.meetup.com/jug-nicaragua/
   twitter: jugnicaragua
   calendar: https://www.meetup.com/jug-nicaragua/events/calendar/
   founded_date: '2018-01-20'
