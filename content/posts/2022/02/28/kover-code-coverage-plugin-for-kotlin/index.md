@@ -1,5 +1,5 @@
 ---
-title: "Kover : Code Coverage plugin for Kotlin | Foojay Today"
+title: "Kover : Code Coverage plugin for Kotlin"
 slug: "kover-code-coverage-plugin-for-kotlin"
 date: "2022-02-28T21:34:12+00:00"
 lastmod: "2023-04-13T07:15:14+00:00"

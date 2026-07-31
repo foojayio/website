@@ -1,5 +1,5 @@
 ---
-title: "GitLab: Your Continuous Deployment One-Stop Shop | Foojay Today"
+title: "GitLab: Your Continuous Deployment One-Stop Shop"
 slug: "gitlab-continuous-deployment-one-stop-shop"
 date: "2021-08-04T07:44:20+00:00"
 lastmod: "2023-06-12T08:57:32+00:00"

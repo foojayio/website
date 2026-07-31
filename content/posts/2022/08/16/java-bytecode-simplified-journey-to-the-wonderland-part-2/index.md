@@ -1,5 +1,5 @@
 ---
-title: "Java Bytecode Simplified: Journey to the Wonderland (Part 2) | Foojay Today"
+title: "Java Bytecode Simplified: Journey to the Wonderland (Part 2)"
 slug: "java-bytecode-simplified-journey-to-the-wonderland-part-2"
 date: "2022-08-16T15:15:22+00:00"
 lastmod: "2022-08-16T15:15:24+00:00"

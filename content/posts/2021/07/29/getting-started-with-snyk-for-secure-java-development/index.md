@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Snyk for Secure Java Development | Foojay Today"
+title: "Getting Started with Snyk for Secure Java Development"
 slug: "getting-started-with-snyk-for-secure-java-development"
 date: "2021-07-29T06:39:02+00:00"
 lastmod: "2021-07-29T06:39:05+00:00"

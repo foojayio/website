@@ -1,5 +1,5 @@
 ---
-title: "Top 7 Features in Jakarta EE 10 Release | Foojay Today"
+title: "Top 7 Features in Jakarta EE 10 Release"
 slug: "top-7-features-in-jakarta-ee-10"
 date: "2022-06-28T08:33:31+00:00"
 lastmod: "2022-06-28T08:36:13+00:00"

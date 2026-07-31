@@ -1,5 +1,5 @@
 ---
-title: "An Introduction to Rust and the JVM | Foojay Today"
+title: "An Introduction to Rust and the JVM"
 slug: "rust-jvm"
 date: "2021-07-27T10:26:20+00:00"
 lastmod: "2021-07-27T10:26:22+00:00"

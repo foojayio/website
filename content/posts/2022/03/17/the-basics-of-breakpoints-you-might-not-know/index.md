@@ -1,5 +1,5 @@
 ---
-title: "The Basics of Breakpoints you Might not Know | Foojay Today"
+title: "The Basics of Breakpoints you Might not Know"
 slug: "the-basics-of-breakpoints-you-might-not-know"
 date: "2022-03-17T10:41:08+00:00"
 lastmod: "2022-03-17T10:41:10+00:00"

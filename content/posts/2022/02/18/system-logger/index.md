@@ -1,5 +1,5 @@
 ---
-title: "System Logger | Foojay Today"
+title: "System Logger"
 slug: "system-logger"
 date: "2022-02-18T12:34:57+00:00"
 lastmod: "2022-02-18T12:34:58+00:00"

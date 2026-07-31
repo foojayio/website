@@ -1,5 +1,5 @@
 ---
-title: "Introducing SAST, DAST, IAST and RASP | Foojay Today"
+title: "Introducing SAST, DAST, IAST and RASP"
 slug: "sast-dast-iast-and-rasp"
 date: "2021-08-05T08:28:52+00:00"
 lastmod: "2021-08-05T08:29:47+00:00"

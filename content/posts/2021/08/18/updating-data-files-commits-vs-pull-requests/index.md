@@ -1,5 +1,5 @@
 ---
-title: "Updating Data Files: Commits vs. Pull Requests? | Foojay Today"
+title: "Updating Data Files: Commits vs. Pull Requests?"
 slug: "updating-data-files-commits-vs-pull-requests"
 date: "2021-08-18T17:22:05+00:00"
 lastmod: "2021-08-18T17:22:08+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "Book Review: \"Help Your Boss Help You\" | Foojay Today"
+title: "Book Review: \"Help Your Boss Help You\""
 slug: "book-review-help-your-boss-help-you"
 date: "2021-08-13T12:19:00+00:00"
 lastmod: "2021-09-03T08:40:14+00:00"

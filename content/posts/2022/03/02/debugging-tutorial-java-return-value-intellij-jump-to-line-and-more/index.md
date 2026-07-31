@@ -1,5 +1,5 @@
 ---
-title: "Java Return Value, IntelliJ Jump to Line | Foojay Today"
+title: "Java Return Value, IntelliJ Jump to Line"
 slug: "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
 date: "2022-03-02T15:33:39+00:00"
 lastmod: "2022-03-03T09:14:55+00:00"

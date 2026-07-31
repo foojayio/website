@@ -1,5 +1,5 @@
 ---
-title: "Project Panama for Newbies (Part 1) | Foojay Today"
+title: "Project Panama for Newbies (Part 1)"
 slug: "project-panama-for-newbies-part-1"
 date: "2026-01-01T09:11:00+00:00"
 lastmod: "2026-01-22T00:11:06+00:00"

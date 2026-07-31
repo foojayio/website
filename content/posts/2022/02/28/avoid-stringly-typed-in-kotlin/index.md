@@ -1,5 +1,5 @@
 ---
-title: "Avoiding Stringly-typed in Kotlin | Foojay Today"
+title: "Avoiding Stringly-typed in Kotlin"
 slug: "avoid-stringly-typed-in-kotlin"
 date: "2022-02-28T16:35:28+00:00"
 lastmod: "2022-02-28T16:35:29+00:00"

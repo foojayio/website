@@ -1,5 +1,5 @@
 ---
-title: "Lessons learned from previous projects | Foojay Today"
+title: "Lessons learned from previous projects"
 slug: "lessons-learned-from-previous-projects"
 date: "2022-03-14T13:02:01+00:00"
 lastmod: "2022-03-14T13:02:03+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "What is Debugging in 140 Seconds | Foojay Today"
+title: "What is Debugging in 140 Seconds"
 slug: "what-is-debugging-in-140-seconds"
 date: "2022-02-14T12:50:58+00:00"
 lastmod: "2022-02-14T12:50:59+00:00"

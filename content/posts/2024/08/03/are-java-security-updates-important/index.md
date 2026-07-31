@@ -1,5 +1,5 @@
 ---
-title: "Are Java Security Updates Important? | Foojay Today"
+title: "Are Java Security Updates Important?"
 slug: "are-java-security-updates-important"
 date: "2024-08-03T14:56:00+00:00"
 lastmod: "2024-10-03T16:34:30+00:00"

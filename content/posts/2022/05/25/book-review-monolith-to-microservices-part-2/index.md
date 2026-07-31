@@ -1,5 +1,5 @@
 ---
-title: "Book Review: Monolith to Microservices (Part 2) | Foojay Today"
+title: "Book Review: Monolith to Microservices (Part 2)"
 slug: "book-review-monolith-to-microservices-part-2"
 date: "2022-05-25T09:09:08+00:00"
 lastmod: "2023-03-16T10:45:19+00:00"

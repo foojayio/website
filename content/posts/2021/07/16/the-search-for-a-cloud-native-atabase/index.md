@@ -1,5 +1,5 @@
 ---
-title: "The Search for a Cloud-Native Database | Foojay Today"
+title: "The Search for a Cloud-Native Database"
 slug: "the-search-for-a-cloud-native-atabase"
 date: "2021-07-16T07:40:06+00:00"
 lastmod: "2021-11-10T22:59:33+00:00"

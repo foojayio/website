@@ -609,11 +609,12 @@ public class ConvertPosts {
         return "";
     }
 
-    /** Drops a trailing site-name suffix ("… | foojay", "… - foojay.io") that the
-     *  WordPress/Yoast <title>/og:title tags append. */
+    /** Drops a trailing site-name suffix ("… | foojay", "… - foojay.io",
+     *  "… | Foojay Today") that the WordPress/Yoast <title>/og:title tags
+     *  append. */
     static String stripSiteSuffix(String title) {
         if (title == null) return "";
-        return title.replaceAll("(?i)\\s*[|\\-–]\\s*foojay(\\.io)?\\s*$", "").strip();
+        return title.replaceAll("(?i)\\s*[|\\-–]\\s*foojay(\\.io)?(\\s+today)?\\s*$", "").strip();
     }
 
     static String lastPathSegment(String urlWithTrailingSlash) {

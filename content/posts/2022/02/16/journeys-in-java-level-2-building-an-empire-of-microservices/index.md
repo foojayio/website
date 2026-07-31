@@ -1,5 +1,5 @@
 ---
-title: "Journeys in Java, Level 2: Building an Empire of Microservices | Foojay Today"
+title: "Journeys in Java, Level 2: Building an Empire of Microservices"
 slug: "journeys-in-java-level-2-building-an-empire-of-microservices"
 date: "2022-02-16T15:29:33+00:00"
 lastmod: "2022-06-01T20:08:48+00:00"

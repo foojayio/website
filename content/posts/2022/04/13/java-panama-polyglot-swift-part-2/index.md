@@ -1,5 +1,5 @@
 ---
-title: "Java Panama Polyglot (Swift) Part 2 | Foojay Today"
+title: "Java Panama Polyglot (Swift) Part 2"
 slug: "java-panama-polyglot-swift-part-2"
 date: "2022-04-13T15:34:59+00:00"
 lastmod: "2022-06-01T20:08:13+00:00"

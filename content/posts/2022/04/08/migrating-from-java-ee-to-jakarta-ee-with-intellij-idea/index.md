@@ -1,5 +1,5 @@
 ---
-title: "Migrating from Java EE to Jakarta EE with IntelliJ IDEA | Foojay Today"
+title: "Migrating from Java EE to Jakarta EE with IntelliJ IDEA"
 slug: "migrating-from-java-ee-to-jakarta-ee-with-intellij-idea"
 date: "2022-04-08T17:02:37+00:00"
 lastmod: "2022-04-08T17:02:38+00:00"

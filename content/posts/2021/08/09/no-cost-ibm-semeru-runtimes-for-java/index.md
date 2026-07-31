@@ -1,5 +1,5 @@
 ---
-title: "No-Cost IBM Semeru Runtimes for Java | Foojay Today"
+title: "No-Cost IBM Semeru Runtimes for Java"
 slug: "no-cost-ibm-semeru-runtimes-for-java"
 date: "2021-08-09T10:57:06+00:00"
 lastmod: "2021-09-14T13:22:31+00:00"

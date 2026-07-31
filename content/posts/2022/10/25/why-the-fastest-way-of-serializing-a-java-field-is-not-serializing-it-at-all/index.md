@@ -1,5 +1,5 @@
 ---
-title: "Why the Fastest Way of Serializing a Java Field is not Serializing it at All | Foojay Today"
+title: "Why the Fastest Way of Serializing a Java Field is not Serializing it at All"
 slug: "why-the-fastest-way-of-serializing-a-java-field-is-not-serializing-it-at-all"
 date: "2022-10-25T12:54:49+00:00"
 lastmod: "2022-10-25T12:54:51+00:00"

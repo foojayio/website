@@ -1,5 +1,5 @@
 ---
-title: "Foojay on Mastodon: An Update | Foojay Today"
+title: "Foojay on Mastodon: An Update"
 slug: "foojay-on-mastodon-an-update"
 date: "2022-12-16T06:45:03+00:00"
 lastmod: "2022-12-16T07:34:59+00:00"

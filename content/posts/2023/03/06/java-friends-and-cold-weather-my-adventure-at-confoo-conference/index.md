@@ -1,5 +1,5 @@
 ---
-title: "My Adventures at ConFoo Conference in Montreal | Foojay Today"
+title: "My Adventures at ConFoo Conference in Montreal"
 slug: "java-friends-and-cold-weather-my-adventure-at-confoo-conference"
 date: "2023-03-06T19:16:06+00:00"
 lastmod: "2023-03-06T19:16:07+00:00"

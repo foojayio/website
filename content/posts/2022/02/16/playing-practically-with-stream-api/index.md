@@ -1,5 +1,5 @@
 ---
-title: "Playing practically with Stream API | Foojay Today"
+title: "Playing practically with Stream API"
 slug: "playing-practically-with-stream-api"
 date: "2022-02-16T00:43:54+00:00"
 lastmod: "2022-02-16T00:43:56+00:00"

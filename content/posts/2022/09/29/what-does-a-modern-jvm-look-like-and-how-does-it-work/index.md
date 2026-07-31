@@ -1,5 +1,5 @@
 ---
-title: "What Does The JVM Look Like, How Does It Work? | Foojay Today"
+title: "What Does The JVM Look Like, How Does It Work?"
 slug: "what-does-a-modern-jvm-look-like-and-how-does-it-work"
 date: "2022-09-29T05:29:00+00:00"
 lastmod: "2022-09-30T05:31:07+00:00"

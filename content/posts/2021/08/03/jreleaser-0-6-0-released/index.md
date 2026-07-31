@@ -1,5 +1,5 @@
 ---
-title: "Announcement: JReleaser 0.6.0 Released! | Foojay Today"
+title: "Announcement: JReleaser 0.6.0 Released!"
 slug: "jreleaser-0-6-0-released"
 date: "2021-08-03T18:15:49+00:00"
 lastmod: "2021-08-03T18:15:51+00:00"

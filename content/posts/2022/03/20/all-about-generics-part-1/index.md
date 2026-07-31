@@ -1,5 +1,5 @@
 ---
-title: "All about Generics: Part 1 | Foojay Today"
+title: "All about Generics: Part 1"
 slug: "all-about-generics-part-1"
 date: "2022-03-20T22:54:03+00:00"
 lastmod: "2022-03-21T07:05:00+00:00"

@@ -1,5 +1,5 @@
 ---
-title: "Announcing New Book: \"Practical Vaadin\" | Foojay Today"
+title: "Announcing New Book: \"Practical Vaadin\""
 slug: "new-book-practical-vaadin"
 date: "2021-08-09T18:02:08+00:00"
 lastmod: "2022-03-25T14:56:15+00:00"

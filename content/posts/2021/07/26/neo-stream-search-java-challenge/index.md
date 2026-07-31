@@ -1,5 +1,5 @@
 ---
-title: "Neo Stream Search Java Challenge | Foojay Today"
+title: "Neo Stream Search Java Challenge"
 slug: "neo-stream-search-java-challenge"
 date: "2021-07-26T08:32:40+00:00"
 lastmod: "2021-08-23T12:16:36+00:00"
