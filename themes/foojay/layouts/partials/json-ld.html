@@ -1,0 +1,71 @@
+{{- /* Structured data (schema.org). Two cases, both built from data that
+       already exists in frontmatter -- nothing new to maintain:
+         1. A post page -> BlogPosting, with each credited author (resolved
+            via author-page.html, same lookup byline.html uses) turned into
+            a Person, so search engines can attribute authorship instead of
+            just seeing a generic byline string.
+         2. An author page itself -> Person, built from the same author
+            frontmatter (bio/avatar/social links) the profile page renders.
+       Nothing is emitted on list/section/taxonomy/home pages -- those aren't
+       a single creative work or person, and Google's guidance is not to add
+       Article/Person markup to pages that aren't one. */ -}}
+
+{{- $isPost := and (eq .Section "posts") .IsPage -}}
+{{- $isAuthor := and (eq .Section "authors") .IsPage -}}
+
+{{- if $isPost -}}
+  {{- $desc := .Params.description | default .Site.Params.description -}}
+  {{- $authorSlugs := .Params.authors -}}
+  {{- if and (not $authorSlugs) .Params.author }}{{ $authorSlugs = slice .Params.author }}{{ end -}}
+  {{- $people := slice -}}
+  {{- range $authorSlugs -}}
+    {{- $author := partial "author-page.html" . -}}
+    {{- if $author -}}
+      {{- $sameAs := slice -}}
+      {{- with $author.Params.linkedin }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+      {{- with $author.Params.github }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+      {{- with $author.Params.mastodon }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+      {{- with $author.Params.bluesky }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+      {{- with $author.Params.youtube }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+      {{- with $author.Params.website }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+      {{- $person := dict "@type" "Person" "name" $author.Title "url" $author.Permalink -}}
+      {{- with $author.Params.bio }}{{ $person = merge $person (dict "description" .) }}{{ end -}}
+      {{- $img := or $author.Params.avatarFull $author.Params.avatar -}}
+      {{- with $img }}{{ $person = merge $person (dict "image" (partial "resource-url.html" (dict "page" $author "src" . "abs" true))) }}{{ end -}}
+      {{- if gt (len $sameAs) 0 }}{{ $person = merge $person (dict "sameAs" $sameAs) }}{{ end -}}
+      {{- $people = $people | append $person -}}
+    {{- else -}}
+      {{- $people = $people | append (dict "@type" "Person" "name" .) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $data := dict
+    "@context" "https://schema.org"
+    "@type" "BlogPosting"
+    "headline" .Title
+    "description" $desc
+    "url" .Permalink
+    "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+    "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+    "publisher" (dict "@type" "Organization" "name" "foojay.io" "logo" (dict "@type" "ImageObject" "url" (.Site.Params.logo | absURL)))
+  -}}
+  {{- if not .Lastmod.IsZero }}{{ $data = merge $data (dict "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
+  {{- with .Params.image }}{{ $data = merge $data (dict "image" (slice (partial "resource-url.html" (dict "page" $ "src" . "abs" true)))) }}{{ end -}}
+  {{- if gt (len $people) 0 }}{{ $data = merge $data (dict "author" $people) }}{{ end -}}
+  <script type="application/ld+json">{{ $data | jsonify (dict "indent" "  ") | safeJS }}</script>
+{{- end -}}
+
+{{- if $isAuthor -}}
+  {{- $sameAs := slice -}}
+  {{- with .Params.linkedin }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+  {{- with .Params.github }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+  {{- with .Params.mastodon }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+  {{- with .Params.bluesky }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+  {{- with .Params.youtube }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+  {{- with .Params.website }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+  {{- $data := dict "@context" "https://schema.org" "@type" "Person" "name" .Title "url" .Permalink -}}
+  {{- with .Params.bio }}{{ $data = merge $data (dict "description" .) }}{{ end -}}
+  {{- $img := or .Params.avatarFull .Params.avatar -}}
+  {{- with $img }}{{ $data = merge $data (dict "image" (partial "resource-url.html" (dict "page" $ "src" . "abs" true))) }}{{ end -}}
+  {{- if gt (len $sameAs) 0 }}{{ $data = merge $data (dict "sameAs" $sameAs) }}{{ end -}}
+  <script type="application/ld+json">{{ $data | jsonify (dict "indent" "  ") | safeJS }}</script>
+{{- end -}}
