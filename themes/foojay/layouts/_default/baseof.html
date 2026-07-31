@@ -65,8 +65,11 @@
        data-pagefind-filter="section:..." tags every page with its Hugo
        section (posts/authors/pages/pedia) so the search page can group
        results under those headers -- set once here rather than in every
-       section's own template. */}}
-  <main class="site-main" id="main" data-pagefind-body{{ with .Section }} data-pagefind-filter="section:{{ . }}"{{ end }}>
+       section's own template. Uses .Type rather than .Section so a page
+       that overrides `type:` in frontmatter (the /jugs/ page is Section
+       "pages" but Type "jugs") gets its own group instead of being lumped
+       in with generic pages. */}}
+  <main class="site-main" id="main" data-pagefind-body{{ with .Type }} data-pagefind-filter="section:{{ . }}"{{ end }}>
     {{ block "main" . }}{{ end }}
   </main>
 
