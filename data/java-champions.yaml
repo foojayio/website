@@ -12,11 +12,126 @@
 #
 # No coordinates yet -- aalmiray/java-champions#318 (pending) would add them
 # via a one-time geocoding script; nothing to read here until it merges.
-#
-# The entries below are a placeholder seed for local `hugo server` testing
-# before scripts/FetchJavaChampions.java has ever run in this checkout --
-# CI overwrites this file with the full list (700+ Champions) on first run.
 
+- name: A N M *Bazlur* Rahman
+  year: 2022
+  country: Canada
+  country_residence: Canada
+  country_citizenship: Bangladesh
+  country_birth: Bangladesh
+  city: Toronto
+  twitter: https://twitter.com/bazlur_rahman
+  mastodon: https://mastodon.online/@bazlur_rahman
+  bluesky: https://bsky.app/profile/bazlur.ca
+  linkedin: https://www.linkedin.com/in/bazlur/
+  github: https://github.com/rokon12
+  website: https://bazlur.ca/
+  sessionize: https://sessionize.com/bazlur/
+  avatar: https://javachampions.org/img/avatars/bazlur_rahman.png
+- name: Adam Bien
+  year: 2007
+  country: Germany
+  twitter: https://twitter.com/AdamBien
+  bluesky: https://bsky.app/profile/adambien.blog
+  avatar: https://javachampions.org/img/avatars/AdamBien.png
+- name: Adam Winer
+  year: 2005
+  country: USA
+  city: San Francisco, California
+  avatar: https://javachampions.org/img/avatars/Adam_Winer.png
+  status:
+  - founding-member
+- name: Agnes Crepet
+  year: 2012
+  country: The Netherlands
+  country_citizenship: France
+  city: Amsterdam
+  twitter: https://twitter.com/agnes_crepet
+  linkedin: https://www.linkedin.com/in/agnescrepet/
+  avatar: https://javachampions.org/img/avatars/agnes_crepet.png
+- name: Ahmed Hashim
+  year: 2007
+  country: Egypt
+  city: Cairo
+  twitter: https://twitter.com/ahmed_hashim
+  avatar: https://javachampions.org/img/avatars/ahmed_hashim.png
+- name: Alan Williamson
+  year: 2005
+  country: USA
+  country_birth: Scotland
+  city: Virginia
+  linkedin: https://www.linkedin.com/in/a1anw2/
+  website: https://alan.is/about
+  avatar: https://javachampions.org/img/avatars/a1anw2.png
+- name: Alberto Salazar
+  year: 2018
+  country: Ecuador
+  twitter: https://twitter.com/betoSalazar
+  linkedin: https://www.linkedin.com/in/alberto-salazar-15334154
+  github: https://github.com/lasalazarr
+  sessionize: https://sessionize.com/alberto-salazar
+  avatar: https://javachampions.org/img/avatars/betoSalazar.png
+- name: Aleksey Shipilev
+  year: 2017
+  country: Germany
+  city: Potsdam, Brandenburg
+  twitter: https://twitter.com/shipilev
+  bluesky: https://bsky.app/profile/shipilev.bsky.social
+  linkedin: https://www.linkedin.com/in/alekseyshipilev/
+  avatar: https://javachampions.org/img/avatars/shipilev.png
+- name: Alex Soto
+  year: 2017
+  country: Spain
+  city: Barcelona
+  twitter: https://twitter.com/alexsotob
+  linkedin: https://www.linkedin.com/in/asotobu/
+  avatar: https://javachampions.org/img/avatars/alexsotob.png
+- name: Alex Theedom
+  year: 2018
+  country: UK
+  city: London
+  twitter: https://twitter.com/alextheedom
+  linkedin: https://www.linkedin.com/in/alextheedom/
+  avatar: https://javachampions.org/img/avatars/alextheedom.png
+- name: Alexis Lopez
+  year: 2017
+  country: Colombia
+  city: Cali, Valle del Cauca
+  twitter: https://twitter.com/acelopezco
+  linkedin: https://www.linkedin.com/in/acelopezco
+  avatar: https://javachampions.org/img/avatars/acelopezco.png
+- name: Altug Bilgin Altintas
+  year: 2026
+  country: Türkiye
+  city: Istanbul
+  twitter: https://x.com/altugaltintas
+  bluesky: https://bsky.app/profile/altuga.bsky.social
+  linkedin: https://www.linkedin.com/in/altuga/
+  github: https://github.com/altuga
+  sessionize: https://sessionize.com/Altuga/
+  avatar: https://javachampions.org/img/avatars/altugaltintas.png
+- name: Amira Lakhal
+  year: 2016
+  country: Switzerland
+  twitter: https://twitter.com/MiraLak
+  linkedin: https://www.linkedin.com/in/amiralakhal/
+  avatar: https://javachampions.org/img/avatars/MiraLak.png
+- name: Ana-Maria Mihalceanu
+  year: 2021
+  country: Romania
+  twitter: https://twitter.com/ammbra1508
+  mastodon: https://mastodon.social/@ammbra1508
+  bluesky: https://bsky.app/profile/ammbra1508.bsky.social
+  linkedin: https://www.linkedin.com/in/ana-maria-mihalceanu-1508/
+  avatar: https://javachampions.org/img/avatars/ammbra1508.png
+  status:
+  - alumni
+- name: Andrei Pangin
+  year: 2020
+  country: Russian Federation
+  twitter: https://twitter.com/AndreiPangin
+  linkedin: https://www.linkedin.com/in/apangin/
+  avatar: https://javachampions.org/img/avatars/AndreiPangin.png
 - name: Andres Almiray
   year: 2010
   country: Switzerland
@@ -26,23 +141,708 @@
   twitter: https://twitter.com/aalmiray
   mastodon: https://mastodon.social/@aalmiray
   bluesky: https://bsky.app/profile/andresalmiray.com
+  youtube: https://www.youtube.com/@aalmiray
   linkedin: https://www.linkedin.com/in/aalmiray
   github: https://github.com/aalmiray
   website: https://andresalmiray.com
   sessionize: https://sessionize.com/andres-almiray
-  youtube: https://www.youtube.com/@aalmiray
   speakerdeck: https://speakerdeck.com/aalmiray
   avatar: https://javachampions.org/img/avatars/aalmiray.png
-- name: George Adams
+- name: Andrzej Grzesik
+  year: 2016
+  country: UK
+  country_citizenship: Poland
+  city: London
+  twitter: https://twitter.com/ags313
+  linkedin: https://www.linkedin.com/in/andrzejgrzesik/
+  sessionize: https://sessionize.com/ags
+  avatar: https://javachampions.org/img/avatars/ags313.png
+- name: Angelika Langer
+  year: 2005
+  country: Germany
+  city: Munich
+  twitter: https://twitter.com/AngelikaLanger
+  linkedin: https://www.linkedin.com/in/angelika-langer-0858501/
+  avatar: https://javachampions.org/img/avatars/AngelikaLanger.png
+- name: Angie Jones
+  year: 2020
+  country: USA
+  city: San Francisco, California
+  twitter: https://twitter.com/techgirl1908
+  bluesky: https://bsky.app/profile/angiejones.tech
+  linkedin: https://www.linkedin.com/in/angiejones/
+  avatar: https://javachampions.org/img/avatars/techgirl1908.png
+- name: Antoine Sabot-Durand
+  year: 2017
+  country: France
+  city: Paris
+  twitter: https://twitter.com/antoine_sd
+  bluesky: https://bsky.app/profile/antoine.sabot-durand.net
+  linkedin: https://www.linkedin.com/in/antoinesabotdurand
+  github: https://github.com/antoinesd
+  sessionize: https://sessionize.com/antoine-sabot-durand
+  speakerdeck: https://speakerdeck.com/antoine_sd
+  avatar: https://javachampions.org/img/avatars/antoine_sd.png
+- name: Anton (Toni) Epple
+  year: 2013
+  country: Germany
+  city: Munich
+  twitter: https://twitter.com/monacotoni
+  linkedin: https://www.linkedin.com/in/antonepple/
+  avatar: https://javachampions.org/img/avatars/monacotoni.png
+- name: Anton Arhipov
+  year: 2014
+  country: Estonia
+  twitter: https://twitter.com/antonarhipov
+  bluesky: https://bsky.app/profile/antonarhipov.bsky.social
+  linkedin: https://www.linkedin.com/in/antonarhipov/
+  sessionize: https://sessionize.com/antonarhipov
+  speakerdeck: https://speakerdeck.com/antonarhipov
+  avatar: https://javachampions.org/img/avatars/antonarhipov.png
+- name: Antonio Goncalves
+  year: 2008
+  country: France
+  city: Paris
+  twitter: https://twitter.com/agoncal
+  mastodon: https://fosstodon.org/@agoncal
+  bluesky: https://bsky.app/profile/agoncal.bsky.social
+  linkedin: https://www.linkedin.com/in/agoncal/
+  avatar: https://javachampions.org/img/avatars/agoncal.png
+- name: Antón María Rodríguez Yuste
+  year: 2022
+  country: Spain
+  city: Galicia
+  bluesky: https://bsky.app/profile/galiglobal.com
+  linkedin: https://www.linkedin.com/in/antonmry/
+  sessionize: https://sessionize.com/antonmry
+  avatar: https://javachampions.org/img/avatars/antonmry.png
+- name: Aristides Villareal
   year: 2021
-  country: England
-  city: Winchester
-  twitter: https://twitter.com/gdams_
-  linkedin: https://www.linkedin.com/in/gdams
-  mastodon: https://fosstodon.org/@gdams
-  bluesky: https://bsky.app/profile/gdams.bsky.social
-  github: https://github.com/gdams
-  avatar: https://javachampions.org/img/avatars/gdams_.png
+  country: Panama
+  twitter: https://twitter.com/aristidesvbravo
+  linkedin: https://www.linkedin.com/in/aristides-villarreal-bravo-6258543/
+  avatar: https://javachampions.org/img/avatars/aristidesvbravo.png
+- name: Arjan Tijms
+  year: 2020
+  country: The Netherlands
+  city: Arnhem, Gelderland
+  twitter: https://twitter.com/arjan_tijms
+  linkedin: https://www.linkedin.com/in/arjan-tijms-1214aa1b1/
+  avatar: https://javachampions.org/img/avatars/arjan_tijms.png
+- name: Arun Gupta
+  year: 2013
+  country: USA
+  city: San Francisco, California
+  twitter: https://twitter.com/arungupta
+  bluesky: https://bsky.app/profile/arungupta.bsky.social
+  linkedin: https://www.linkedin.com/in/arunpgupta/
+  avatar: https://javachampions.org/img/avatars/arungupta.png
+- name: Aslak Knutsen
+  year: 2015
+  country: Norway
+  city: Oslo
+  twitter: https://twitter.com/aslakknutsen
+  linkedin: https://www.linkedin.com/in/aslakknutsen/
+  avatar: https://javachampions.org/img/avatars/aslakknutsen.png
+- name: Attila Szegedi
+  year: 2016
+  country: Hungary
+  country_residence: Switzerland
+  city: Zug
+  mastodon: https://mastodon.social/@attilasz
+  bluesky: https://bsky.app/profile/szegedia.bsky.social
+  linkedin: https://www.linkedin.com/in/atszegedi/
+  github: https://github.com/szegedi
+  avatar: https://javachampions.org/img/avatars/asz.png
+- name: Audrey Neveu
+  year: 2020
+  country: France
+  city: Rouen
+  linkedin: https://www.linkedin.com/in/audreyneveu/
+  avatar: https://javachampions.org/img/avatars/Audrey_Neveu.png
+- name: Aurea Muñoz
+  year: 2026
+  country: Spain
+  twitter: https://x.com/auritamh
+  avatar: https://javachampions.org/img/avatars/auritamh.png
+- name: Axel Fontaine
+  year: 2016
+  country: Germany
+  twitter: https://twitter.com/axelfontaine
+  linkedin: https://www.linkedin.com/in/axel-fontaine-5a9a601/
+  avatar: https://javachampions.org/img/avatars/axelfontaine.png
+- name: Badr El Houari
+  year: 2016
+  country: Morocco
+  city: Casablanca
+  twitter: https://twitter.com/badrelhouari
+  linkedin: https://www.linkedin.com/in/badrelhouari/
+  avatar: https://javachampions.org/img/avatars/badrelhouari.png
+- name: Barry Burd
+  year: 2020
+  country: USA
+  twitter: https://twitter.com/allmycode
+  linkedin: https://www.linkedin.com/in/barry-burd/
+  avatar: https://javachampions.org/img/avatars/barryburdtweets.png
+- name: Baruch Sadogursky
+  year: 2024
+  country: USA
+  country_residence: USA
+  country_citizenship: Israel
+  country_birth: USSR
+  city: Nolensville, TN
+  twitter: https://twitter.com/jbaruch
+  mastodon: https://mastodon.online/@jbaruch
+  bluesky: https://bsky.app/profile/jbaru.ch
+  youtube: https://www.youtube.com/channel/UCZ8-VX2SiAIBE7guw7NG-Sg
+  linkedin: https://www.linkedin.com/in/jbaruch
+  website: https://speaking.jbaru.ch/
+  sessionize: https://sessionize.com/jbaruch/
+  avatar: https://javachampions.org/img/avatars/jbaruch.png
+- name: Bauke Scholtz
+  year: 2017
+  country: The Netherlands
+  twitter: https://twitter.com/OmniFaces
+  linkedin: https://www.linkedin.com/in/balusc/
+  avatar: https://javachampions.org/img/avatars/OmniFaces.png
+- name: Ben Evans
+  year: 2013
+  country: UK
+  country_residence: Spain
+  country_birth: UK
+  city: Barcelona
+  mastodon: https://mastodon.social/@kittylyst
+  linkedin: https://www.linkedin.com/in/kittylyst/
+  github: https://github.com/kittylyst
+  website: https://www.kittylyst.com/
+  avatar: https://javachampions.org/img/avatars/kittylyst.png
+- name: Benjamin Muskalla
+  year: 2021
+  country: Germany
+  twitter: https://twitter.com/bmuskalla
+  bluesky: https://bsky.app/profile/bmuskalla.dev
+  linkedin: https://www.linkedin.com/in/benjaminmuskalla/
+  avatar: https://javachampions.org/img/avatars/bmuskalla.png
+- name: Bernd Müller
+  year: 2026
+  country: Germany
+  city: Wolfenbüttel
+  twitter: https://x.com/berndmuller
+  bluesky: https://bsky.app/profile/berndmuller.bsky.social
+  avatar: https://javachampions.org/img/avatars/berndmuller.png
+- name: Bert Bates
+  year: 2005
+  country: USA
+  twitter: https://twitter.com/BertBates
+  linkedin: https://www.linkedin.com/in/bert-bates-854903234/
+  avatar: https://javachampions.org/img/avatars/BertBates.png
+  status:
+  - founding-member
+- name: Bert Ertman
+  year: 2008
+  country: The Netherlands
+  city: Nijmegen
+  twitter: https://twitter.com/BertErtman
+  linkedin: https://www.linkedin.com/in/bertertman/
+  avatar: https://javachampions.org/img/avatars/BertErtman.png
+- name: Bert Jan Schrijver
+  year: 2017
+  country: The Netherlands
+  city: Utrecht
+  twitter: https://twitter.com/bjschrijver
+  mastodon: https://mastodon.social/@bjschrijver
+  bluesky: https://bsky.app/profile/bjschrijver.dev
+  linkedin: https://www.linkedin.com/in/bjschrijver/
+  avatar: https://javachampions.org/img/avatars/bjschrijver.png
+- name: Bethan Palmer
+  year: 2018
+  country: UK
+  country_residence: Denmark
+  bluesky: https://bsky.app/profile/bet-han.bsky.social
+  linkedin: https://www.linkedin.com/in/bethan-palmer/
+  avatar: https://javachampions.org/img/avatars/BethanKP.png
+- name: Bill Burke
+  year: 2005
+  country: USA
+  twitter: https://twitter.com/patriot1burke
+  bluesky: https://bsky.app/profile/billburke.ie
+  linkedin: https://www.linkedin.com/in/bill-burke-091864121/
+  avatar: https://javachampions.org/img/avatars/Bill_Burke.png
+  status:
+  - founding-member
+- name: Bill Venners
+  year: 2005
+  country: USA
+  twitter: https://twitter.com/bvenners
+  linkedin: https://www.linkedin.com/in/bill-venners-27570a1/
+  avatar: https://javachampions.org/img/avatars/bvenners.png
+- name: Bob Lee
+  year: 2007
+  country: USA
+  city: San Francisco, California
+  twitter: https://twitter.com/crazybob
+  avatar: https://javachampions.org/img/avatars/crazybob.png
+  status:
+  - passed-away
+- name: Bob Paulin
+  year: 2017
+  country: USA
+  city: Chicago, Illinois
+  twitter: https://twitter.com/bobpaulin
+  bluesky: https://bsky.app/profile/bobpaulin.com
+  linkedin: https://www.linkedin.com/in/bobpaulin/
+  avatar: https://javachampions.org/img/avatars/bobpaulin.png
+- name: Brian Benz
+  year: 2020
+  country: USA
+  city: Las Vegas
+  twitter: https://twitter.com/bbenz
+  mastodon: https://mastodon.social/@bbenz
+  bluesky: https://bsky.app/profile/bbenz.bsky.social
+  linkedin: https://www.linkedin.com/in/brianbenz/
+  avatar: https://javachampions.org/img/avatars/bbenz.png
+- name: Brian Demers
+  year: 2021
+  country: USA
+  city: New Hampshire
+  twitter: https://twitter.com/briandemers
+  mastodon: https://mastodon.social/@bdemers
+  bluesky: https://bsky.app/profile/bdemers.io
+  linkedin: https://www.linkedin.com/in/bdemers/
+  github: https://github.com/bdemers
+  sessionize: https://sessionize.com/bdemers/
+  avatar: https://javachampions.org/img/avatars/briandemers.png
+- name: Brian Goetz
+  year: 2006
+  country: USA
+  city: Burlington, Vermont
+  twitter: https://twitter.com/BrianGoetz
+  linkedin: https://www.linkedin.com/in/briangoetz/
+  avatar: https://javachampions.org/img/avatars/BrianGoetz.png
+  status:
+  - alumni
+- name: Brian Sam-Bodden
+  year: 2023
+  country: USA
+  twitter: https://twitter.com/bsbodden
+  bluesky: https://bsky.app/profile/bsbodden.bsky.social
+  linkedin: https://www.linkedin.com/in/sambodden
+  github: https://github.com/bsbodden
+  sessionize: https://sessionize.com/brian-sam-bodden
+  speakerdeck: https://speakerdeck.com/bsbodden
+  avatar: https://javachampions.org/img/avatars/bsbodden.png
+- name: Brian Vermeer
+  year: 2021
+  country: The Netherlands
+  city: Breda
+  twitter: https://twitter.com/BrianVerm
+  mastodon: https://mastodon.social/@brianverm
+  bluesky: https://bsky.app/profile/brianvermeer.nl
+  linkedin: https://www.linkedin.com/in/brianvermeer/
+  website: https://brianvermeer.nl
+  sessionize: https://sessionize.com/brian-vermeer
+  avatar: https://javachampions.org/img/avatars/BrianVermeer.png
+- name: Bruce Eckel
+  year: 2006
+  country: USA
+  city: Colorado
+  twitter: https://twitter.com/BruceEckel
+  bluesky: https://bsky.app/profile/bruceeckel.bsky.social
+  linkedin: https://www.linkedin.com/in/bruceeckel/
+  avatar: https://javachampions.org/img/avatars/BruceEckel.png
+- name: Bruce Hopkins
+  year: 2009
+  country: USA
+  avatar: https://javachampions.org/img/avatars/Bruce_Hopkins.png
+- name: Bruce Snyder
+  year: 2005
+  country: USA
+  city: Louisville, Colorado
+  linkedin: https://www.linkedin.com/in/brucesnyder/
+  avatar: https://javachampions.org/img/avatars/Bruce_Snyder.png
+- name: Bruce Tate
+  year: 2006
+  country: USA
+  city: Chattanooga, Tennessee
+  twitter: https://twitter.com/redrapids
+  bluesky: https://bsky.app/profile/redrapids.bsky.social
+  linkedin: https://www.linkedin.com/in/bruce-tate/
+  avatar: https://javachampions.org/img/avatars/redrapids.png
+- name: Bruno Borges
+  year: 2019
+  country: Canada
+  country_citizenship: Brazil
+  twitter: https://twitter.com/brunoborges
+  mastodon: https://mastodon.social/@brunoborges
+  bluesky: https://bsky.app/profile/brunoborges.bsky.social
+  linkedin: https://www.linkedin.com/in/brunocborges/
+  avatar: https://javachampions.org/img/avatars/brunoborges.png
+- name: Bruno Bossola
+  year: 2005
+  country: UK
+  city: London
+  twitter: https://twitter.com/bbossola
+  linkedin: https://www.linkedin.com/in/bbossola
+  avatar: https://javachampions.org/img/avatars/bbossola.png
+- name: Bruno Ghisi
+  year: 2007
+  country: Brazil
+  city: Florianópolis, Santa Catarina
+  twitter: https://twitter.com/brunogh
+  linkedin: https://www.linkedin.com/in/brunoghisi/
+  avatar: https://javachampions.org/img/avatars/Bruno_Ghisi.png
+- name: Bruno Souza
+  year: 2005
+  country: Brazil
+  city: São Paulo
+  twitter: https://twitter.com/brjavaman
+  bluesky: https://bsky.app/profile/brjavaman.bsky.social
+  linkedin: https://www.linkedin.com/in/brjavaman/
+  website: https://code4.life/
+  avatar: https://javachampions.org/img/avatars/brjavaman.png
+  status:
+  - founding-member
+- name: Burk Hufnagel
+  year: 2020
+  country: USA
+  city: Atlanta
+  twitter: https://twitter.com/BurkHufnagel
+  bluesky: https://bsky.app/profile/burkhufnagel.bsky.social
+  linkedin: https://www.linkedin.com/in/hufnagel/
+  sessionize: https://sessionize.com/burk-hufnagel
+  avatar: https://javachampions.org/img/avatars/BurkHufnagel.png
+- name: Burr Sutter
+  year: 2005
+  country: USA
+  city: Raleigh-Durham, North Carolina
+  twitter: https://twitter.com/burrsutter
+  linkedin: https://www.linkedin.com/in/burrsutter/
+  avatar: https://javachampions.org/img/avatars/burrsutter.png
+- name: Cagatay Civici
+  year: 2017
+  country: Turkey
+  twitter: https://twitter.com/cagataycivici
+  linkedin: https://www.linkedin.com/in/%C3%A7a%C4%9Fatay-%C3%A7ivici-1579b0129/
+  avatar: https://javachampions.org/img/avatars/cagataycivici.png
+- name: Calvin Austin
+  year: 2005
+  country: USA
+  city: San Francisco, California
+  linkedin: https://www.linkedin.com/in/calvin-austin/
+  avatar: https://javachampions.org/img/avatars/Calvin_Austin.png
+- name: Carl Quinn
+  year: 2020
+  country: USA
+  city: California
+  twitter: https://twitter.com/cquinn
+  avatar: https://javachampions.org/img/avatars/cquinn.png
+  status:
+  - passed-away
+- name: Carlos Obregon
+  year: 2022
+  country: Colombia
+  city: Bogota
+  twitter: https://twitter.com/gaijinco
+  linkedin: https://www.linkedin.com/in/carlos-obregon-1565aab/
+  avatar: https://javachampions.org/img/avatars/gaijinco.png
+- name: Carole McDonald
+  year: 2021
+  country: USA
+  city: Florida
+  twitter: https://twitter.com/caroljmcdonald
+  avatar: https://javachampions.org/img/avatars/caroljmcdonald.png
+- name: Cassandra Chin
+  year: 2025
+  country: USA
+  city: Belmont, California
+  twitter: https://twitter.com/cassandraonjava
+  linkedin: https://www.linkedin.com/in/cassandra-chin-developer
+  avatar: https://javachampions.org/img/avatars/cassandraonjava.png
+- name: Chandra Guntur
+  year: 2019
+  country: USA
+  city: New Jersey
+  twitter: https://twitter.com/CGuntur
+  bluesky: https://bsky.app/profile/cguntur.bsky.social
+  linkedin: https://www.linkedin.com/in/cguntur/
+  avatar: https://javachampions.org/img/avatars/CGuntur.png
+- name: Charles Oliver Nutter
+  year: 2013
+  country: USA
+  city: Minneapolis, Minnesota
+  twitter: https://twitter.com/headius
+  mastodon: https://mastodon.social/@headius
+  bluesky: https://bsky.app/profile/headius.bsky.social
+  linkedin: https://www.linkedin.com/in/headius/
+  avatar: https://javachampions.org/img/avatars/headius.png
+- name: Charles Sabourdin
+  year: 2024
+  country: France
+  city: Ile-de-France
+  twitter: https://twitter.com/kanedafromparis
+  avatar: https://javachampions.org/img/avatars/kanedafromparis.png
+- name: Chris Newland
+  year: 2017
+  country: UK
+  city: London
+  mastodon: https://mastodon.social/@chriswhocodes
+  linkedin: https://www.linkedin.com/in/chriswhocodes/
+  avatar: https://javachampions.org/img/avatars/chriswhocodes.png
+- name: Chris Richardson
+  year: 2007
+  country: USA
+  city: San Francisco, California
+  twitter: https://twitter.com/crichardson
+  bluesky: https://bsky.app/profile/crichardson.bsky.social
+  linkedin: https://www.linkedin.com/in/pojos/
+  avatar: https://javachampions.org/img/avatars/crichardson.png
+- name: Chris Thalinger
+  year: 2019
+  country: USA
+  city: Haleiwa, Hawaii
+  avatar: https://javachampions.org/img/avatars/christhalinger.png
+- name: Christian Grobmeier
+  year: 2025
+  country: Germany
+  city: Langerringen
+  mastodon: https://mastodon.social/@grobmeier
+  bluesky: https://bsky.app/profile/grobmeier.de
+  youtube: https://www.youtube.com/@grobmeier
+  linkedin: https://www.linkedin.com/in/grobmeier/
+  github: https://github.com/grobmeier
+  website: https://grobmeier.de
+  avatar: https://javachampions.org/img/avatars/ChristianGrobmeier.png
+- name: Christian Ullenboom
+  year: 2005
+  country: Germany
+  city: Nürnberg, Bavaria
+  linkedin: https://www.linkedin.com/in/christian-ullenboom/
+  avatar: https://javachampions.org/img/avatars/javabuch.png
+- name: Christoph Engelbert
+  year: 2018
+  country: Germany
+  city: Haan, North Rhine-Westphalia
+  twitter: https://twitter.com/noctarius2k
+  mastodon: https://mastodon.online/@noctarius2k
+  bluesky: https://bsky.app/profile/noctarius.com
+  linkedin: https://www.linkedin.com/in/noctarius
+  github: https://github.com/noctarius
+  sessionize: https://sessionize.com/noctarius
+  avatar: https://javachampions.org/img/avatars/noctarius2k.png
+- name: Christopher Judd
+  year: 2017
+  country: USA
+  city: Columbus, Ohio
+  twitter: https://twitter.com/javajudd
+  linkedin: https://www.linkedin.com/in/christophermjudd/
+  github: https://github.com/cjudd/
+  website: https://www.juddsolutions.com/
+  sessionize: https://sessionize.com/christopher-judd/
+  avatar: https://javachampions.org/img/avatars/javajudd.png
+- name: Clara Ko
+  year: 2011
+  country: USA
+  country_citizenship: The Netherlands
+  city: San Francisco, California
+  twitter: https://twitter.com/clarako
+  linkedin: https://www.linkedin.com/in/clarako/
+  avatar: https://javachampions.org/img/avatars/clarako.png
+- name: Clark D. Richey Jr.
+  year: 2005
+  country: USA
+  linkedin: https://www.linkedin.com/in/clark-richey-6b737/
+  avatar: https://javachampions.org/img/avatars/Clark_D_Richey_Jr.png
+  status:
+  - founding-member
+- name: Claus Ibsen
+  year: 2018
+  country: Denmark
+  city: Esbjerg
+  twitter: https://twitter.com/davsclaus
+  linkedin: https://www.linkedin.com/in/davsclaus/
+  avatar: https://javachampions.org/img/avatars/davsclaus.png
+- name: Craig Walls
+  year: 2021
+  country: USA
+  city: Castle Rock, Colorado
+  twitter: https://twitter.com/habuma
+  mastodon: https://fosstodon.org/@habuma
+  bluesky: https://bsky.app/profile/habuma.com
+  youtube: https://www.youtube.com/channel/UC4KvfQvH5XAfbA5g7sMdOww
+  linkedin: https://www.linkedin.com/in/habuma/
+  sessionize: https://sessionize.com/CraigWalls
+  avatar: https://javachampions.org/img/avatars/habuma.png
+- name: César Hernández
+  year: 2016
+  country: Guatemala
+  twitter: https://twitter.com/CesarHgt
+  linkedin: https://www.linkedin.com/in/cesarhernandezgt/
+  avatar: https://javachampions.org/img/avatars/CesarHgt.png
+- name: Dalibor Topic
+  year: 2007
+  country: Germany
+  city: Hamburg
+  twitter: https://twitter.com/robilad
+  bluesky: https://bsky.app/profile/robilad.bsky.social
+  linkedin: https://www.linkedin.com/in/dalibortopic/
+  avatar: https://javachampions.org/img/avatars/robilad.png
+  status:
+  - alumni
+- name: Dan Allen
+  year: 2013
+  country: USA
+  city: Denver, Colorado
+  twitter: https://twitter.com/mojavelinux
+  bluesky: https://bsky.app/profile/mojavelinux.com
+  linkedin: https://www.linkedin.com/in/mojavelinux/
+  avatar: https://javachampions.org/img/avatars/mojavelinux.png
+- name: Dan Heidinga
+  year: 2022
+  country: Canada
+  city: Ottawa, Ontario
+  twitter: https://twitter.com/DanHeidinga
+  linkedin: https://www.linkedin.com/in/dan-heidinga/
+  avatar: https://javachampions.org/img/avatars/DanHeidinga.png
+  status:
+  - alumni
+- name: Dan Malks
+  year: 2007
+  country: USA
+  linkedin: https://www.linkedin.com/in/danmalks/
+  avatar: https://javachampions.org/img/avatars/Dan_Malks.png
+- name: Dan Vega
+  year: 2024
+  country: USA
+  city: Rocky River, OH
+  twitter: https://twitter.com/therealdanvega
+  bluesky: https://bsky.app/profile/danvega.dev
+  linkedin: https://www.linkedin.com/in/danvega/
+  avatar: https://javachampions.org/img/avatars/therealdanvega.png
+- name: Daniel De Luca
+  year: 2015
+  country: Belgium
+  city: Brussels
+  twitter: https://twitter.com/danieldeluca
+  linkedin: https://www.linkedin.com/in/danieldeluca/
+  avatar: https://javachampions.org/img/avatars/danieldeluca.png
+- name: Daniel deOliveira
+  year: 2005
+  country: Brazil
+  twitter: https://twitter.com/danieldfjug
+  avatar: https://javachampions.org/img/avatars/danieldfjug.png
+  status:
+  - founding-member
+  - passed-away
+- name: Daniel Hinojosa
+  year: 2020
+  country: USA
+  city: Albuquerque, NM
+  mastodon: https://mastodon.social/@dhinojosa
+  bluesky: https://bsky.app/profile/dhinojosa.bsky.social
+  linkedin: https://www.linkedin.com/in/dhevolutionnext
+  github: https://github.com/dhinojosa
+  website: https://evolutionnext.com
+  sessionize: https://sessionize.com/daniel-hinojosa
+  avatar: https://javachampions.org/img/avatars/dhinojosa.jpg
+- name: Daniel Oh
+  year: 2023
+  country: USA
+  city: Boston
+  twitter: https://twitter.com/danieloh30
+  bluesky: https://bsky.app/profile/danieloh30.bsky.social
+  linkedin: https://www.linkedin.com/in/daniel-oh-083818112/
+  avatar: https://javachampions.org/img/avatars/danieloh30.png
+- name: David Blevins
+  year: 2015
+  country: USA
+  city: Santa Monica, California
+  twitter: https://twitter.com/dblevins
+  linkedin: https://www.linkedin.com/in/dblevins/
+  avatar: https://javachampions.org/img/avatars/dblevins.png
+- name: David Bock
+  year: 2006
+  country: USA
+  city: Washington DC
+  twitter: https://twitter.com/bokmann
+  bluesky: https://bsky.app/profile/bokmann87.bsky.social
+  linkedin: https://www.linkedin.com/in/davidbock/
+  github: https://github.com/bokmann
+  avatar: https://javachampions.org/img/avatars/bokmann.png
+- name: David Flanagan
+  year: 2005
+  country: USA
+  city: Washington State
+  avatar: https://javachampions.org/img/avatars/__DavidFlanagan.png
+  status:
+  - founding-member
+- name: David Gageot
+  year: 2014
+  country: France
+  city: Paris
+  twitter: https://twitter.com/dgageot
+  linkedin: https://www.linkedin.com/in/davidgageot/
+  avatar: https://javachampions.org/img/avatars/dgageot.png
+- name: David Geary
+  year: 2009
+  country: USA
+  city: Loveland, Colorado
+  linkedin: https://www.linkedin.com/in/davidmgeary/
+  avatar: https://javachampions.org/img/avatars/davidgeary.png
+- name: David Gómez
+  year: 2020
+  country: Spain
+  city: Madrid
+  twitter: https://twitter.com/dgomezg
+  mastodon: https://jvm.social/@dgomezg
+  bluesky: https://bsky.app/profile/dgomezg.bsky.social
+  linkedin: https://www.linkedin.com/in/dgomezg/
+  sessionize: https://sessionize.com/david-gomez-garcia/
+  avatar: https://javachampions.org/img/avatars/dgomezg.png
+- name: David Heffelfinger
+  year: 2017
+  country: USA
+  city: Washington DC
+  twitter: https://twitter.com/ensode
+  bluesky: https://bsky.app/profile/ensode.bsky.social
+  linkedin: https://www.linkedin.com/in/dheffelfinger
+  avatar: https://javachampions.org/img/avatars/ensode.png
+- name: Deepak Alur
+  year: 2006
+  country: USA
+  twitter: https://twitter.com/deepakalur
+  linkedin: https://www.linkedin.com/in/deepakalur/
+  avatar: https://javachampions.org/img/avatars/deepakalur.png
+- name: Deepu K Sasidharan
+  year: 2022
+  country: The Netherlands
+  country_citizenship: India
+  twitter: https://twitter.com/deepu105
+  mastodon: https://mastodon.social/@deepu105
+  bluesky: https://bsky.app/profile/deepu105.bsky.social
+  linkedin: https://www.linkedin.com/in/deepu05
+  github: https://github.com/deepu105
+  website: https://deepu.tech
+  sessionize: https://sessionize.com/deepu-k-sasidharan
+  avatar: https://javachampions.org/img/avatars/deepu105.png
+- name: Dervis Mansuroglu
+  year: 2019
+  country: Norway
+  city: Oslo
+  twitter: https://twitter.com/dervismn
+  bluesky: https://bsky.app/profile/dervis.bsky.social
+  linkedin: https://www.linkedin.com/in/dervism/
+  website: https://dervis.no/
+  sessionize: https://sessionize.com/dervis
+  avatar: https://javachampions.org/img/avatars/dervismn.png
+- name: Dick Wall
+  year: 2005
+  country: UK
+  twitter: https://twitter.com/dickwall
+  bluesky: https://bsky.app/profile/dickwall.bsky.social
+  linkedin: https://www.linkedin.com/in/dickwall/
+  avatar: https://javachampions.org/img/avatars/dickwall.png
+  status:
+  - founding-member
 - name: Dion Almaer
   year: 2005
   country: USA
@@ -51,3 +851,2660 @@
   bluesky: https://bsky.app/profile/almaer.com
   linkedin: https://www.linkedin.com/in/dalmaer/
   avatar: https://javachampions.org/img/avatars/dalmaer.png
+- name: Dirk Lemmermann
+  year: 2019
+  country: Switzerland
+  bluesky: https://bsky.app/profile/dlemmermann.bsky.social
+  linkedin: https://www.linkedin.com/in/dlemmermann/
+  avatar: https://javachampions.org/img/avatars/dlemmermann.png
+- name: Dmitry Aleksandrov
+  year: 2017
+  country: Bulgaria
+  city: Sofia
+  twitter: https://twitter.com/bercut2000
+  mastodon: https://c.im/@bercut2000
+  bluesky: https://bsky.app/profile/bercut2000.bsky.social
+  linkedin: https://www.linkedin.com/in/dalexandrov/
+  avatar: https://javachampions.org/img/avatars/bercut2000.png
+- name: Domingo Suarez
+  year: 2019
+  country: Mexico
+  country_citizenship: Mexico
+  country_birth: Mexico
+  city: Mexico City
+  twitter: https://twitter.com/domix
+  bluesky: https://bsky.app/profile/domingo-suarez.bsky.social
+  linkedin: https://www.linkedin.com/in/domix/
+  github: https://github.com/domix
+  website: https://domingosuarez.com
+  avatar: https://javachampions.org/img/avatars/domix.png
+- name: Donald Raab
+  year: 2018
+  country: USA
+  country_birth: UK
+  city: Metuchen, New Jersey
+  twitter: https://twitter.com/TheDonRaab
+  bluesky: https://bsky.app/profile/thedonraab.bsky.social
+  linkedin: https://www.linkedin.com/in/donald-raab-56016a121/
+  avatar: https://javachampions.org/img/avatars/TheDonRaab.png
+- name: Dr. Alex Blewitt
+  year: 2020
+  country: UK
+  city: Milton Keynes
+  twitter: https://twitter.com/alblue
+  linkedin: https://www.linkedin.com/in/alblue/
+  avatar: https://javachampions.org/img/avatars/alblue.png
+  status:
+  - passed-away
+- name: Dr. Alexey Fyodorov
+  year: 2016
+  country: Russian Federation
+  city: Saint Petersburg
+  twitter: https://twitter.com/23derevo
+  linkedin: https://www.linkedin.com/in/23derevo/
+  avatar: https://javachampions.org/img/avatars/23derevo.png
+- name: Dr. Barry Levine
+  year: 2005
+  country: USA
+  avatar: https://javachampions.org/img/avatars/Barry_Levine.png
+- name: Dr. Cay Horstmann
+  year: 2005
+  country: USA
+  country_residence: Germany
+  city: Düsseldorf
+  mastodon: https://foojay.social/@cayhorstmann
+  bluesky: https://bsky.app/profile/horstmann.com
+  linkedin: https://www.linkedin.com/in/cay-horstmann-659a4b/
+  github: https://github.com/cayhorstmann
+  website: https://horstmann.com
+  avatar: https://javachampions.org/img/avatars/cayhorstmann.png
+- name: Dr. Clement Escoffier
+  year: 2019
+  country: France
+  city: Valence, Rhône-Alpes
+  twitter: https://twitter.com/clementplop
+  mastodon: https://mastodon.social/@clementplop
+  bluesky: https://bsky.app/profile/cescoffier.bsky.social
+  linkedin: https://www.linkedin.com/in/clementescoffier/
+  avatar: https://javachampions.org/img/avatars/clementplop.png
+- name: Dr. Cliff Click
+  year: 2019
+  country: USA
+  city: Sunnyvale, California
+  twitter: https://twitter.com/cliff_click
+  linkedin: https://www.linkedin.com/in/cliff-click-b252a070/
+  avatar: https://javachampions.org/img/avatars/cliff_click.png
+- name: Dr. Cǎtǎlin Tudose
+  year: 2024
+  country: Romania
+  city: Bucharest
+  twitter: https://twitter.com/CatalinTudose5
+  linkedin: https://www.linkedin.com/in/catalin-tudose-847667a1/
+  avatar: https://javachampions.org/img/avatars/CatalinTudose.jpg
+- name: Dr. Daniel Bryant
+  year: 2018
+  country: UK
+  city: London
+  twitter: https://twitter.com/danielbryantuk
+  bluesky: https://bsky.app/profile/danielbryantuk.com
+  linkedin: https://www.linkedin.com/in/danielbryantuk/
+  avatar: https://javachampions.org/img/avatars/danielbryantuk.png
+- name: Dr. Daniel Liang
+  year: 2005
+  country: USA
+  avatar: https://javachampions.org/img/daniel-liang-128x128.jpg
+- name: Dr. Doug Lea
+  year: 2005
+  country: USA
+  city: Syracuse, New York
+  twitter: https://twitter.com/douglea
+  linkedin: https://www.linkedin.com/in/douglea/
+  avatar: https://javachampions.org/img/avatars/douglea.png
+- name: Dr. Edward Lank
+  year: 2005
+  country: Canada
+  city: Kitchener
+  avatar: https://javachampions.org/img/avatars/Edward_Lank.png
+- name: Dr. Fabiane Bizinella Nardon
+  year: 2006
+  country: Brazil
+  city: São Paulo
+  twitter: https://twitter.com/fabianenardon
+  linkedin: https://www.linkedin.com/in/fabianenardon/
+  avatar: https://javachampions.org/img/avatars/fabianenardon.png
+- name: Dr. Heinz M. Kabutz
+  year: 2005
+  country: South Africa
+  country_residence: Greece
+  city: Chorafakia, Chania, Crete
+  twitter: https://twitter.com/heinzkabutz
+  mastodon: https://mastodon.social/@HeinzKabutz
+  bluesky: https://bsky.app/profile/heinzkabutz.com
+  linkedin: https://www.linkedin.com/in/heinzkabutz
+  github: https://github.com/kabutz
+  website: https://www.javaspecialists.eu
+  avatar: https://javachampions.org/img/avatars/heinzkabutz.png
+- name: Dr. Holly Cummins
+  year: 2017
+  country: UK
+  city: London
+  twitter: https://twitter.com/holly_cummins
+  mastodon: https://hachyderm.io/@holly_cummins
+  bluesky: https://bsky.app/profile/hollycummins.com
+  linkedin: https://linkedin.com/in/holly-k-cummins/
+  website: https://hollycummins.com
+  sessionize: https://sessionize.com/holly-cummins
+  speakerdeck: https://speakerdeck.com/hollycummins
+  avatar: https://javachampions.org/img/avatars/holly_cummins.png
+- name: Dr. James Gosling
+  year: 2005
+  country: USA
+  city: San Francisco, California
+  twitter: https://twitter.com/errcraft
+  mastodon: https://universeodon.com/@JamesGosling
+  linkedin: https://www.linkedin.com/in/jamesgosling/
+  avatar: https://javachampions.org/img/avatars/errcraft.png
+  status:
+  - honorary-member
+- name: Dr. Johan Vos
+  year: 2012
+  country: Belgium
+  city: Leuven, Flanders
+  twitter: https://twitter.com/johanvos
+  mastodon: https://mastodon.social/@johanvos
+  bluesky: https://bsky.app/profile/johanvos.bsky.social
+  linkedin: https://www.linkedin.com/in/johanvos/
+  avatar: https://javachampions.org/img/avatars/johanvos.png
+- name: Dr. Jose Pereda
+  year: 2017
+  country: Spain
+  city: Valladolid
+  twitter: https://twitter.com/JPeredaDnr
+  linkedin: https://www.linkedin.com/in/jperedadnr/
+  avatar: https://javachampions.org/img/avatars/JPeredaDnr.png
+- name: Dr. Joshua Bloch
+  year: 2005
+  country: USA
+  city: San Francisco, California
+  twitter: https://twitter.com/joshbloch
+  linkedin: https://www.linkedin.com/in/joshua-bloch-37038/
+  avatar: https://javachampions.org/img/avatars/joshbloch.png
+- name: Dr. José Paumard
+  year: 2015
+  country: France
+  city: Paris
+  twitter: https://twitter.com/JosePaumard
+  bluesky: https://bsky.app/profile/josepaumard.bsky.social
+  linkedin: https://www.linkedin.com/in/jos%C3%A9-paumard-2458ba5/
+  avatar: https://javachampions.org/img/avatars/JosePaumard.png
+  status:
+  - alumni
+- name: Dr. Julien Ponge
+  year: 2024
+  country: France
+  city: Tassin-La-Demi-Lune, Lyon
+  twitter: https://twitter.com/jponge
+  bluesky: https://bsky.app/profile/julien.ponge.org
+  linkedin: https://www.linkedin.com/in/julienponge/
+  github: https://github.com/jponge
+  website: https://julien.ponge.org/
+  avatar: https://javachampions.org/img/avatars/jponge.jpg
+- name: Dr. Kenneth Kousen
+  year: 2017
+  country: USA
+  city: Marlborough, Connecticut
+  twitter: https://twitter.com/kenkousen
+  mastodon: https://foojay.social/@kenkousen
+  bluesky: https://bsky.app/profile/kousenit.com
+  youtube: https://youtube.com/@talesfromthejarside
+  linkedin: https://www.linkedin.com/in/kenkousen/
+  github: https://github.com/kousen
+  website: https://www.kousenit.com
+  sessionize: https://sessionize.com/kenneth-kousen
+  avatar: https://javachampions.org/img/avatars/kenkousen.png
+- name: Dr. Kresten Krab Thorup
+  year: 2005
+  country: Denmark
+  twitter: https://twitter.com/drkrab
+  bluesky: https://bsky.app/profile/drkrab.bsky.social
+  linkedin: https://www.linkedin.com/in/krestenkrabthorup/
+  avatar: https://javachampions.org/img/avatars/drkrab.png
+- name: Dr. Michael Huettermann
+  year: 2006
+  country: Germany
+  country_residence: Germany
+  city: Cologne
+  twitter: https://twitter.com/huettermann
+  linkedin: https://www.linkedin.com/in/huettermann/
+  website: http://huettermann.net
+  avatar: https://javachampions.org/img/avatars/huettermann.png
+- name: Dr. Michael Juntao Yuan
+  year: 2005
+  country: USA
+  city: Austin, Texas
+  twitter: https://twitter.com/juntao
+  avatar: https://javachampions.org/img/avatars/juntao.png
+- name: Dr. Michael Kölling
+  year: 2007
+  country: UK
+  city: London
+  bluesky: https://bsky.app/profile/kolling.uk
+  linkedin: https://www.linkedin.com/in/kolling/
+  avatar: https://javachampions.org/img/avatars/michaelkolling.png
+- name: Dr. Neal Gafter
+  year: 2007
+  country: USA
+  city: Seattle, Washington
+  twitter: https://twitter.com/gafter
+  linkedin: https://www.linkedin.com/in/neal-gafter-625393/
+  avatar: https://javachampions.org/img/avatars/gafter.png
+- name: Dr. Paul Perrone
+  year: 2006
+  country: USA
+  linkedin: https://www.linkedin.com/in/paulperrone/
+  avatar: https://javachampions.org/img/avatars/Paul_Perrone.png
+- name: Dr. Qusay Mahmoud
+  year: 2007
+  country: Canada
+  linkedin: https://www.linkedin.com/in/qmahmoud/
+  avatar: https://javachampions.org/img/avatars/Qusay_Mahmoud.png
+- name: Dr. Raoul-Gabriel Urma
+  year: 2017
+  country: UK
+  city: Cambridge
+  twitter: https://twitter.com/raoulUK
+  linkedin: https://www.linkedin.com/in/raoulurma/
+  avatar: https://javachampions.org/img/avatars/raoulUK.png
+- name: Dr. Remi Forax
+  year: 2016
+  country: France
+  avatar: https://javachampions.org/img/avatars/Remi_Forax.png
+- name: Dr. Richard Warburton
+  year: 2016
+  country: UK
+  city: London
+  twitter: https://twitter.com/RichardWarburto
+  linkedin: https://www.linkedin.com/in/richard-warburton-5b03613/
+  avatar: https://javachampions.org/img/avatars/RichardWarburto.png
+- name: Dr. Rod Johnson
+  year: 2006
+  country: USA
+  country_citizenship: Australia
+  city: Sydney
+  twitter: https://twitter.com/springrod
+  linkedin: https://www.linkedin.com/in/johnsonroda/
+  avatar: https://javachampions.org/img/avatars/springrod.png
+- name: Dr. Venkat Subramaniam
+  year: 2013
+  country: USA
+  city: Broomfield, Colorado
+  twitter: https://twitter.com/venkat_s
+  bluesky: https://bsky.app/profile/venkats.bsky.social
+  linkedin: https://www.linkedin.com/in/vsubramaniam/
+  avatar: https://javachampions.org/img/avatars/venkat_s.png
+- name: Dr. Victor Rentea
+  year: 2019
+  country: Romania
+  city: Bucharest
+  twitter: https://twitter.com/VictorRentea
+  linkedin: https://www.linkedin.com/in/victor-rentea-trainer/
+  avatar: https://javachampions.org/img/avatars/VictorRentea.png
+- name: Dr. Xu Bin
+  year: 2005
+  country: China
+  avatar: https://javachampions.org/img/avatars/Xu_Bin.png
+- name: Dr. Zoran Sevarac
+  year: 2013
+  country: Serbia
+  twitter: https://twitter.com/zsevarac
+  linkedin: https://www.linkedin.com/in/zoran-sevarac-phd-49a9a411/
+  avatar: https://javachampions.org/img/avatars/zsevarac.png
+- name: Drabo Constantin
+  year: 2020
+  country: Burkina Faso
+  twitter: https://twitter.com/PandaConstantin
+  avatar: https://javachampions.org/img/avatars/PandaConstantin.png
+- name: Eberhard Wolff
+  year: 2005
+  country: Germany
+  city: Kaiserslautern
+  twitter: https://twitter.com/ewolff
+  mastodon: https://mastodon.social/@ewolff
+  bluesky: https://bsky.app/profile/ewolff.com
+  linkedin: https://www.linkedin.com/in/eberhardwolff/
+  avatar: https://javachampions.org/img/avatars/ewolff.png
+  status:
+  - founding-member
+  - retired
+- name: Ed Burns
+  year: 2020
+  country: USA
+  city: Florida
+  twitter: https://twitter.com/edburns
+  linkedin: https://www.linkedin.com/in/edburns/
+  avatar: https://javachampions.org/img/avatars/edburns.png
+- name: Eddú Meléndez Gonzales
+  year: 2022
+  country: Perú
+  twitter: https://twitter.com/EdduMelendez
+  bluesky: https://bsky.app/profile/eddumelendez.bsky.social
+  linkedin: https://www.linkedin.com/in/eddumelendez
+  github: https://github.com/eddumelendez
+  sessionize: https://sessionize.com/eddumelendez
+  avatar: https://javachampions.org/img/avatars/EdduMelendez.png
+- name: Eder Ignatowicz
+  year: 2017
+  country: USA
+  country_citizenship: Brazil
+  city: Boston, Massachusetts
+  twitter: https://twitter.com/ederign
+  linkedin: https://www.linkedin.com/in/ederign/
+  avatar: https://javachampions.org/img/avatars/ederign.png
+- name: Edson Yanaga
+  year: 2015
+  country: Brazil
+  country_residence: USA
+  country_birth: Brazil
+  city: Cary, NC
+  twitter: https://twitter.com/yanaga
+  mastodon: https://mastodon.online/@yanaga
+  bluesky: https://bsky.app/profile/yanaga.io
+  linkedin: https://www.linkedin.com/in/yanaga
+  github: https://github.com/yanaga
+  website: https://yanaga.io
+  sessionize: https://sessionize.com/yanaga
+  speakerdeck: http://speakerdeck.com/yanaga
+  avatar: https://javachampions.org/img/avatars/yanaga.png
+- name: Edwin Derks
+  year: 2021
+  country: The Netherlands
+  city: Tilburg
+  twitter: https://twitter.com/edwinderks
+  mastodon: https://mastodon.social/@edwinderks
+  bluesky: https://bsky.app/profile/edwinderks.bsky.social
+  linkedin: https://www.linkedin.com/in/edwin-derks/
+  github: https://github.com/ederks85
+  avatar: https://javachampions.org/img/avatars/edwinderks.png
+- name: Elder Moraes
+  year: 2020
+  country: Brazil
+  city: São Bernardo do Campo/SP
+  twitter: https://twitter.com/elderjava
+  youtube: https://youtube.com/@eldermoraes
+  linkedin: https://linkedin.com/in/eldermoraes
+  github: https://github.com/eldermoraes
+  website: https://eldermoraes.com
+  sessionize: https://sessionize.com/eldermoraes
+  avatar: https://javachampions.org/img/avatars/elderjava.png
+- name: Elias Nogueira
+  year: 2023
+  country: The Netherlands
+  country_residence: The Netherlands
+  country_citizenship: Brazil
+  country_birth: Brazil
+  city: Utrecht
+  twitter: https://twitter.com/eliasnogueira
+  bluesky: https://bsky.app/profile/eliasnogueira.com
+  linkedin: https://www.linkedin.com/in/eliasnogueira
+  github: https://github.com/eliasnogueira
+  website: https://eliasnogueira.com
+  sessionize: https://sessionize.com/elias-nogueira
+  speakerdeck: https://speakerdeck.com/eliasnogueira
+  avatar: https://javachampions.org/img/avatars/eliasnogueira.png
+- name: Emily Jiang
+  year: 2019
+  country: UK
+  city: Southampton
+  twitter: https://twitter.com/emilyfhjiang
+  mastodon: https://mastodon.social/@emilyjiang
+  bluesky: https://bsky.app/profile/emilyjiang.bsky.social
+  linkedin: https://www.linkedin.com/in/emilyfhjiang
+  sessionize: https://sessionize.com/emilyfhjiang
+  avatar: https://javachampions.org/img/avatars/emilyfhjiang.png
+- name: Emmanuel Bernard
+  year: 2017
+  country: France
+  city: Paris
+  twitter: https://twitter.com/emmanuelbernard
+  bluesky: https://bsky.app/profile/emmanuelbernard.com
+  linkedin: https://www.linkedin.com/in/emmanuelbernard/
+  github: https://github.com/emmanuelbernard/
+  website: https://emmanuelbernard.com/
+  avatar: https://javachampions.org/img/avatars/emmanuelbernard.png
+- name: Enrique Lasterra
+  year: 2005
+  country: Spain
+  city: Bilbao
+  avatar: https://javachampions.org/img/avatars/Enriqu_Lasterra.png
+- name: Enrique Zamudio
+  year: 2015
+  country: Mexico
+  country_citizenship: Mexico
+  country_birth: Mexico
+  city: Mexico City
+  twitter: https://twitter.com/chochosmx
+  bluesky: https://bsky.app/profile/chochosmx.bsky.social
+  linkedin: https://www.linkedin.com/in/enriquezamudiolopez/
+  avatar: https://javachampions.org/img/avatars/chochosmx.png
+- name: Eric Deandrea
+  year: 2024
+  country: USA
+  city: Manchester, New Hampshire
+  twitter: https://twitter.com/edeandrea
+  mastodon: https://mastodon.social/@edeandrea
+  bluesky: https://bsky.app/profile/ericdeandrea.dev
+  linkedin: https://www.linkedin.com/in/edeandrea/
+  github: https://github.com/edeandrea
+  sessionize: https://sessionize.com/edeandrea/
+  speakerdeck: https://speakerdeck.com/edeandrea
+  avatar: https://javachampions.org/img/avatars/edeandrea.jpg
+- name: Erin Schnabel
+  year: 2019
+  country: USA
+  city: Wappingers Falls, New York
+  twitter: https://twitter.com/ebullientworks
+  mastodon: https://fosstodon.org/@ebullient
+  bluesky: https://bsky.app/profile/ebullient.dev
+  linkedin: https://www.linkedin.com/in/erinschnabel
+  github: https://github.com/ebullient
+  website: https://ebullient.dev
+  avatar: https://javachampions.org/img/avatars/ebullientworks.png
+- name: Eudris Cabrera
+  year: 2024
+  country: Dominican Republic
+  city: Santiago
+  twitter: https://twitter.com/eudriscabrera
+  linkedin: https://www.linkedin.com/in/eudriscabrera/
+  avatar: https://javachampions.org/img/avatars/eudriscabrera.jpg
+- name: Eugene Paraschiv
+  year: 2021
+  country: Romania
+  twitter: https://twitter.com/baeldung
+  linkedin: https://www.linkedin.com/in/eugenparaschiv/
+  avatar: https://javachampions.org/img/avatars/baeldung.png
+- name: Evgeny Mandrikov
+  year: 2024
+  country: Switzerland
+  twitter: https://twitter.com/%5Fgodin%5F
+  mastodon: https://mastodon.social/@godin
+  bluesky: https://bsky.app/profile/mandrikov.bsky.social
+  linkedin: https://www.linkedin.com/in/mandrikov/
+  github: https://github.com/godin
+  sessionize: https://sessionize.com/godin
+  avatar: https://javachampions.org/img/avatars/godin.png
+- name: Fabrizio Gianneschi
+  year: 2005
+  country: Italy
+  city: Cagliari, Sardinia
+  twitter: https://twitter.com/javabird
+  linkedin: https://www.linkedin.com/in/gianneschi/
+  avatar: https://javachampions.org/img/avatars/javabird.png
+- name: Falk Sippach
+  year: 2023
+  country: Germany
+  city: Darmstadt
+  twitter: https://twitter.com/sippsack
+  mastodon: https://mastodon.social/@sippsack
+  bluesky: https://bsky.app/profile/sippsack.bsky.social/
+  linkedin: https://www.linkedin.com/in/falk-sippach/
+  github: https://github.com/sippsack
+  website: https://www.sippsack.de/
+  avatar: https://javachampions.org/img/avatars/sippsack.png
+- name: Felipe Gaúcho
+  year: 2010
+  country: Brazil
+  city: Rio de Janeiro
+  avatar: https://javachampions.org/img/avatars/Felipe_Gaucho.png
+  status:
+  - passed-away
+- name: Fernando Anselmo
+  year: 2006
+  country: Brazil
+  linkedin: https://www.linkedin.com/in/fernando-anselmo-bb423623/
+  avatar: https://javachampions.org/img/avatars/Fernando_Anselmo.png
+- name: Fernando Babadopulos
+  year: 2017
+  country: Brazil
+  city: São Paulo
+  twitter: https://twitter.com/babadopulos
+  linkedin: https://www.linkedin.com/in/babadopulos/
+  avatar: https://javachampions.org/img/avatars/babadopulos.png
+- name: Filippo Diotalevi
+  year: 2005
+  country: UK
+  country_citizenship: Italy
+  city: London
+  linkedin: https://www.linkedin.com/in/fdiotalevi/
+  avatar: https://javachampions.org/img/avatars/fdiotalevi.png
+- name: Flavia Coelho
+  year: 2006
+  country: Brazil
+  city: São Paulo
+  avatar: https://javachampions.org/img/avatars/Flavia_Coelho.png
+- name: Floyd Marinescu
+  year: 2005
+  country: Canada
+  city: Etobicoke, Ontario
+  twitter: https://twitter.com/floydmarinescu
+  linkedin: https://www.linkedin.com/in/floydm/
+  avatar: https://javachampions.org/img/avatars/floydmarinescu.png
+- name: Francesco Nigro
+  year: 2023
+  country: Italy
+  twitter: https://twitter.com/forked_franz
+  linkedin: https://www.linkedin.com/in/francesco-nigro-69963597/
+  avatar: https://javachampions.org/img/avatars/forked_franz.png
+- name: Francisco Isidro
+  year: 2023
+  country: Brazil
+  city: São Paulo
+  twitter: https://twitter.com/prof_isidro
+  avatar: https://javachampions.org/img/avatars/prof_isidro.png
+- name: Frank Delporte
+  year: 2023
+  country: Belgium
+  mastodon: https://foojay.social/@frankdelporte
+  bluesky: https://bsky.app/profile/frankdelporte.be
+  youtube: https://www.youtube.com/@FrankDelporte
+  linkedin: https://www.linkedin.com/in/frankdelporte/
+  github: https://github.com/FDelporte
+  website: https://webtechie.be/
+  sessionize: https://sessionize.com/frank-delporte/
+  avatar: https://javachampions.org/img/avatars/FrankDelporte.png
+- name: Frank Greco
+  year: 2007
+  country: USA
+  city: New York City, New York
+  twitter: https://twitter.com/frankgreco
+  linkedin: https://www.linkedin.com/in/frankdgreco/
+  avatar: https://javachampions.org/img/avatars/frankgreco.png
+- name: Frans Thamura
+  year: 2005
+  country: Indonesia
+  city: Jakarta
+  twitter: https://twitter.com/fthamura
+  avatar: https://javachampions.org/img/avatars/fthamura.png
+  status:
+  - passed-away
+- name: Freddy Guime
+  year: 2015
+  country: USA
+  city: Seattle, Washington
+  bluesky: https://bsky.app/profile/fguime.bsky.social
+  linkedin: https://www.linkedin.com/in/fguime/
+  avatar: https://javachampions.org/img/avatars/fguime.png
+- name: Gail C. Anderson
+  year: 2016
+  country: USA
+  city: San Diego, California
+  twitter: https://twitter.com/gail_asgteach
+  bluesky: https://bsky.app/profile/gail-asgteach.bsky.social
+  linkedin: https://www.linkedin.com/in/gail-asgteach/
+  website: https://asgteach.com/
+  avatar: https://javachampions.org/img/avatars/gail_asgteach.png
+- name: Gavin King
+  year: 2005
+  country: Spain
+  country_citizenship: UK
+  twitter: https://twitter.com/1ovthafew
+  linkedin: https://www.linkedin.com/in/gavinking/
+  avatar: https://javachampions.org/img/avatars/1ovthafew.png
+- name: Geert Bevin
+  year: 2006
+  country: Belgium
+  twitter: https://twitter.com/gbevin
+  mastodon: https://uwyn.net/@gbevin
+  bluesky: https://bsky.app/profile/gbevin.uwyn.com
+  linkedin: https://www.linkedin.com/in/gbevin/
+  avatar: https://javachampions.org/img/avatars/gbevin.png
+- name: Geertjan Wielenga
+  year: 2020
+  country: The Netherlands
+  city: Amsterdam
+  twitter: https://twitter.com/GeertjanW
+  linkedin: https://www.linkedin.com/in/geertjanwielenga/
+  avatar: https://javachampions.org/img/avatars/GeertjanW.png
+- name: Geir Magnusson
+  year: 2006
+  country: USA
+  city: Wilton, Connecticut
+  twitter: https://twitter.com/geirmagnusson
+  linkedin: https://www.linkedin.com/in/geirmagnussonjr/
+  avatar: https://javachampions.org/img/avatars/geirmagnusson.png
+- name: George Adams
+  year: 2021
+  country: England
+  city: Winchester
+  twitter: https://twitter.com/gdams_
+  mastodon: https://fosstodon.org/@gdams
+  bluesky: https://bsky.app/profile/gdams.bsky.social
+  linkedin: https://www.linkedin.com/in/gdams
+  github: https://github.com/gdams
+  avatar: https://javachampions.org/img/avatars/gdams_.png
+- name: Gerardo Horvilleur
+  year: 2005
+  country: Mexico
+  country_citizenship: Mexico
+  country_birth: Mexico
+  city: Mexico City
+  twitter: https://twitter.com/magoghm
+  linkedin: https://www.linkedin.com/in/gerardohorvilleur/
+  avatar: https://javachampions.org/img/avatars/magoghm.png
+  status:
+  - founding-member
+- name: Gerrit Grunwald
+  year: 2013
+  country: Germany
+  city: Münster, North Rhine-Westphalia
+  twitter: https://twitter.com/hansolo_
+  mastodon: https://mastodon.social/@hansolo_
+  bluesky: https://bsky.app/profile/hansolo.eu
+  youtube: https://www.youtube.com/@hansolo312
+  linkedin: https://www.linkedin.com/in/gerritgrunwald
+  github: https://github.com/HanSolo
+  website: https://harmoniccode.blogspot.com/
+  sessionize: https://sessionize.com/gerrit-grunwald
+  avatar: https://javachampions.org/img/avatars/hansolo_.png
+- name: Gil Tene
+  year: 2017
+  country: USA
+  city: San Francisco, California
+  twitter: https://twitter.com/giltene
+  linkedin: https://www.linkedin.com/in/giltene/
+  avatar: https://javachampions.org/img/avatars/giltene.png
+- name: Glenn Renfro
+  year: 2023
+  country: USA
+  city: Atlanta
+  twitter: https://twitter.com/cppwfs
+  linkedin: https://www.linkedin.com/in/cppwfs/
+  avatar: https://javachampions.org/img/avatars/cppwfs.png
+- name: Grace Jansen
+  year: 2022
+  country: UK
+  twitter: https://twitter.com/gracejansen27
+  linkedin: https://www.linkedin.com/in/grace-jansen/
+  avatar: https://javachampions.org/img/avatars/gracejansen27.png
+- name: Graeme Rocher
+  year: 2019
+  country: Spain
+  country_citizenship: UK
+  city: Bilbao
+  twitter: https://twitter.com/graemerocher
+  bluesky: https://bsky.app/profile/graemerocher.bsky.social
+  linkedin: https://www.linkedin.com/in/graemerocher/
+  avatar: https://javachampions.org/img/avatars/graemerocher.png
+  status:
+  - alumni
+- name: Grzegorz Piwowarek
+  year: 2026
+  country: Poland
+  city: Warsaw
+  twitter: https://x.com/pivovarit
+  bluesky: https://bsky.app/profile/pivovarit.bsky.social
+  linkedin: https://www.linkedin.com/in/gpiwowarek/
+  github: https://github.com/pivovarit
+  website: https://4comprehension.com
+  avatar: https://javachampions.org/img/avatars/pivovarit.png
+- name: Guillaume Laforge
+  year: 2017
+  country: France
+  city: Paris
+  twitter: https://twitter.com/glaforge
+  mastodon: https://uwyn.net/@glaforge
+  bluesky: https://bsky.app/profile/glaforge.dev
+  linkedin: https://www.linkedin.com/in/glaforge/
+  website: https://glaforge.dev/
+  sessionize: https://sessionize.com/glaforge
+  avatar: https://javachampions.org/img/avatars/glaforge.png
+- name: Gunnar Hillert
+  year: 2016
+  country: USA
+  country_citizenship: Germany
+  city: Holualoa, Hawaii
+  twitter: https://twitter.com/ghillert
+  bluesky: https://bsky.app/profile/hillert.bsky.social
+  linkedin: https://www.linkedin.com/in/hillert/
+  github: https://github.com/ghillert
+  website: https://hillert.com
+  avatar: https://javachampions.org/img/avatars/ghillert.png
+- name: Gunnar Morling
+  year: 2019
+  country: Germany
+  city: Hamburg
+  twitter: https://twitter.com/gunnarmorling
+  mastodon: https://mastodon.online/@gunnarmorling
+  bluesky: https://bsky.app/profile/gunnar.bsky.social
+  linkedin: https://www.linkedin.com/in/gunnar-morling-2b44b7229/
+  avatar: https://javachampions.org/img/avatars/gunnarmorling.png
+- name: Haim Yadid
+  year: 2022
+  country: Israel
+  twitter: https://twitter.com/lifeyx
+  youtube: https://www.youtube.com/playlist?list=PL6DehzPjjueerkXWcy1AkoRNxWTLRCnrT
+  linkedin: https://www.linkedin.com/in/haimyadid
+  github: https://github.com/lifey
+  sessionize: https://sessionize.com/lifey
+  avatar: https://javachampions.org/img/avatars/lifeyx.png
+- name: Hanno Embregts
+  year: 2023
+  country: The Netherlands
+  city: Leusden
+  twitter: https://twitter.com/hannotify
+  mastodon: https://foojay.social/@hannotify
+  bluesky: https://bsky.app/profile/hanno.codes
+  linkedin: https://www.linkedin.com/in/hannoembregts
+  github: https://github.com/hannotify
+  website: https://hanno.codes
+  sessionize: https://sessionize.com/hanno-embregts
+  avatar: https://javachampions.org/img/avatars/hannotify.png
+- name: Hans Dockter
+  year: 2023
+  country: USA
+  twitter: https://twitter.com/hans_d
+  linkedin: https://www.linkedin.com/in/hansdockter/
+  avatar: https://javachampions.org/img/avatars/hans_d.png
+- name: Harshad Oak
+  year: 2007
+  country: India
+  city: Pune, Maharashtra
+  twitter: https://twitter.com/HarshadOak
+  bluesky: https://bsky.app/profile/harshadoak.bsky.social
+  linkedin: https://www.linkedin.com/in/harshadoak/
+  avatar: https://javachampions.org/img/avatars/HarshadOak.png
+- name: Hendrik Ebbers
+  year: 2016
+  country: Germany
+  city: Dortmund
+  twitter: https://twitter.com/hendrikEbbers
+  mastodon: https://mastodon.cloud/@hendrikEbbers
+  linkedin: https://www.linkedin.com/in/hendrik-ebbers/
+  avatar: https://javachampions.org/img/avatars/hendrikEbbers.png
+- name: Henri Tremblay
+  year: 2016
+  country: Canada
+  city: Montréal, Québec
+  twitter: https://twitter.com/henri_tremblay
+  mastodon: https://mastodon.world/@henri
+  bluesky: https://bsky.app/profile/henri.tremblay.pro
+  linkedin: https://www.linkedin.com/in/henritremblay
+  github: https://github.com/henri-tremblay
+  website: https://blog.tremblay.pro
+  avatar: https://javachampions.org/img/avatars/henri_tremblay.png
+- name: Henry Coles
+  year: 2020
+  country: Scotland
+  city: Edinburgh
+  twitter: https://twitter.com/_pitest
+  mastodon: https://mastodon.me.uk/@hjc
+  bluesky: https://bsky.app/profile/pitest.bsky.social
+  linkedin: https://www.linkedin.com/in/henry-coles-474ab93/
+  avatar: https://javachampions.org/img/avatars/_pitest.png
+- name: Hillmer Chona
+  year: 2019
+  country: Colombia
+  twitter: https://twitter.com/HillmerCh
+  linkedin: https://www.linkedin.com/in/hillmerch/
+  avatar: https://javachampions.org/img/avatars/HillmerCh.png
+- name: Hovhannes Avoyan
+  year: 2005
+  country: USA
+  country_citizenship: Armenia
+  city: San Francisco, California
+  avatar: https://javachampions.org/img/avatars/Hovhannes_Avoyan.png
+- name: Howard Lewis Ship
+  year: 2010
+  country: USA
+  city: Portland, Oregon
+  linkedin: https://www.linkedin.com/in/howard-lewis-ship-a86a0a21b/
+  avatar: https://javachampions.org/img/avatars/hlship.png
+- name: Ian F. Darwin
+  year: 2005
+  country: Canada
+  city: Ontario
+  twitter: https://twitter.com/Ian_Darwin
+  mastodon: https://fosstodon.org/@IanDarwin/
+  linkedin: https://www.linkedin.com/in/idarwin/
+  github: https://github.com/IanDarwin
+  website: https://darwinsys.com
+  sessionize: https://sessionize.com/ian-darwin/
+  avatar: https://javachampions.org/img/avatars/Ian_Darwin.png
+  status:
+  - founding-member
+- name: Ionut Balosin
+  year: 2025
+  country: Austria
+  city: Vienna
+  twitter: https://twitter.com/ionutbalosin
+  mastodon: https://mastodon.social/@ionutbalosin
+  bluesky: https://bsky.app/profile/ionutbalosin.bsky.social
+  linkedin: https://www.linkedin.com/in/ionutbalosin/
+  github: https://github.com/ionutbalosin
+  website: https://ionutbalosin.com/
+  avatar: https://javachampions.org/img/avatars/ionutbalosin.png
+- name: Ivan St. Ivanov
+  year: 2018
+  country: Bulgaria
+  city: Sofia
+  twitter: https://twitter.com/ivan_stefanov
+  bluesky: https://bsky.app/profile/ivannov.bsky.social
+  linkedin: https://www.linkedin.com/in/ivan-ivanov-25ab324/
+  avatar: https://javachampions.org/img/avatars/ivan_stefanov.png
+- name: Ivar Grimstad
+  year: 2016
+  country: Sweden
+  country_residence: Sweden
+  country_citizenship: Norway
+  country_birth: Norway
+  city: Malmo
+  twitter: https://twitter.com/ivar_grimstad
+  mastodon: https://mastodon.social/deck/@ivar_grimstad
+  bluesky: https://bsky.app/profile/theguywiththeduketattoo.com
+  linkedin: https://www.linkedin.com/in/ivargrimstad/
+  github: https://github.com/ivargrimstad
+  website: https://www.agilejava.eu/
+  sessionize: https://sessionize.com/ivar-grimstad/
+  speakerdeck: https://speakerdeck.com/ivargrimstad
+  avatar: https://javachampions.org/img/avatars/ivar_grimstad.png
+- name: Iván López
+  year: 2025
+  country: Spain
+  city: Madrid
+  twitter: https://twitter.com/ilopmar
+  bluesky: https://bsky.app/profile/ilopmar.bsky.social
+  linkedin: https://www.linkedin.com/in/ivanlopezmartin
+  github: https://github.com/ilopmar
+  avatar: https://javachampions.org/img/avatars/ilopmar.png
+- name: Ix-chel Ruiz
+  year: 2017
+  country: Switzerland
+  country_citizenship: Mexico
+  city: Basel
+  twitter: https://twitter.com/ixchelruiz
+  mastodon: https://mastodon.social/@ixchelruiz
+  bluesky: https://bsky.app/profile/ixchelruiz.bsky.social
+  linkedin: https://www.linkedin.com/in/ixchelruiz/
+  sessionize: https://sessionize.com/ixchelruiz
+  avatar: https://javachampions.org/img/avatars/ixchelruiz.png
+- name: Jacek Laskowski
+  year: 2015
+  country: Poland
+  city: Warsaw
+  twitter: https://twitter.com/jaceklaskowski
+  bluesky: https://bsky.app/profile/books.japila.pl
+  linkedin: https://www.linkedin.com/in/jaceklaskowski/
+  avatar: https://javachampions.org/img/avatars/jaceklaskowski.png
+- name: Jack Shirazi
+  year: 2005
+  country: UK
+  city: Westminster Abbey, Greater London
+  linkedin: https://www.linkedin.com/in/jack-shirazi-a547831/
+  avatar: https://javachampions.org/img/avatars/Jack_Shirazi.png
+- name: Jacob Hookom
+  year: 2005
+  country: USA
+  city: Minneapolis-St. Paul, Minnesota
+  twitter: https://twitter.com/jacobhookom
+  linkedin: https://www.linkedin.com/in/jacobhookom/
+  avatar: https://javachampions.org/img/avatars/jacobhookom.png
+  status:
+  - founding-member
+- name: Jakob Jenkov
+  year: 2022
+  country: Denmark
+  city: Copenhagen
+  twitter: https://twitter.com/jjenkov
+  linkedin: https://www.linkedin.com/in/jakob-jenkov-4a3a8/
+  avatar: https://javachampions.org/img/avatars/jjenkov.png
+- name: James Strachan
+  year: 2011
+  country: UK
+  city: Mells, Somerset
+  twitter: https://twitter.com/jstrachan
+  bluesky: https://bsky.app/profile/jstrachan.bsky.social
+  linkedin: https://www.linkedin.com/in/jstrachan/
+  avatar: https://javachampions.org/img/avatars/jstrachan.png
+- name: James Ward
+  year: 2021
+  country: USA
+  city: Crested Butte, Colorado
+  twitter: https://twitter.com/JamesWard
+  bluesky: https://bsky.app/profile/jamesward.com
+  youtube: https://www.youtube.com/@JamesWard
+  linkedin: https://www.linkedin.com/in/jamesward
+  github: https://github.com/jamesward
+  website: https://jamesward.com
+  sessionize: https://sessionize.com/jamesward
+  avatar: https://javachampions.org/img/avatars/_JamesWard.png
+- name: Jason Hunter
+  year: 2005
+  country: Singapore
+  country_citizenship: USA
+  twitter: https://twitter.com/hunterhacker
+  linkedin: https://www.linkedin.com/in/jasonhunter3/
+  avatar: https://javachampions.org/img/avatars/hunterhacker.png
+- name: Jason Lee
+  year: 2023
+  country: USA
+  city: Oklahoma City, Oklahoma
+  twitter: https://twitter.com/jasondlee
+  mastodon: https://mastodon.cloud/@jasondlee
+  bluesky: https://bsky.app/profile/jasondlee.bsky.social
+  linkedin: https://www.linkedin.com/in/jasondlee/
+  github: https://github.com/jasondlee/
+  website: https://jasondl.ee/
+  sessionize: https://sessionize.com/jasondlee/
+  avatar: https://javachampions.org/img/avatars/jasondlee.png
+- name: Jayson Raymond
+  year: 2005
+  country: USA
+  avatar: https://javachampions.org/img/avatars/Jayson_Raymond.png
+- name: Jean Bisutti
+  year: 2021
+  country: France
+  city: Paris
+  twitter: https://twitter.com/jean_bisutti
+  mastodon: https://mastodon.social/@jean_bisutti
+  bluesky: https://bsky.app/profile/jeanbisutti.bsky.social
+  linkedin: https://www.linkedin.com/in/jean-bisutti-33587090/
+  sessionize: https://sessionize.com/jean-bisutti/
+  avatar: https://javachampions.org/img/avatars/jean_bisutti.png
+- name: Jean-François Arcand
+  year: 2018
+  country: Canada
+  city: Montreal
+  twitter: https://twitter.com/jfarcand
+  linkedin: https://www.linkedin.com/in/jfarcand/
+  avatar: https://javachampions.org/img/avatars/jfarcand.png
+- name: Jean-Michel Doudoux
+  year: 2014
+  country: France
+  city: Metz
+  twitter: https://twitter.com/jmdoudoux
+  bluesky: https://bsky.app/profile/jmdoudoux.bsky.social
+  linkedin: https://www.linkedin.com/in/jmdoudoux/
+  avatar: https://javachampions.org/img/avatars/jmdoudoux.png
+- name: Jean-Philippe Bempel
+  year: 2021
+  country: France
+  city: Paris
+  twitter: https://twitter.com/jpbempel
+  mastodon: https://mastodon.online/@jpbempel
+  bluesky: https://bsky.app/profile/jpbempel.bsky.social
+  linkedin: https://www.linkedin.com/in/jeanphilippebempel
+  github: https://github.com/jpbempel
+  website: https://jpbempel.github.io/
+  sessionize: https://sessionize.com/jean-philippe-bempel/
+  avatar: https://javachampions.org/img/avatars/jpbempel.png
+- name: Jeanne Boyarsky
+  year: 2019
+  country: USA
+  city: New York City, New York
+  twitter: https://twitter.com/jeanneboyarsky
+  mastodon: https://mastodon.social/@jeanneboyarsky
+  bluesky: https://bsky.app/profile/jeanneboyarsky.bsky.social
+  linkedin: https://www.linkedin.com/in/jeanne-boyarsky/
+  sessionize: https://sessionize.com/jeanneboyarsky
+  avatar: https://javachampions.org/img/avatars/jeanneboyarsky.png
+- name: Jeff Cobb
+  year: 2005
+  country: USA
+  linkedin: https://www.linkedin.com/in/jeffcobbseattle/
+  avatar: https://javachampions.org/img/avatars/Jeff_Cobb.png
+- name: Jeff Genender
+  year: 2009
+  country: USA
+  city: Denver, Colorado
+  twitter: https://twitter.com/jgenender
+  linkedin: https://www.linkedin.com/in/jgenender/
+  avatar: https://javachampions.org/img/avatars/jgenender.png
+- name: Jennifer Reif
+  year: 2025
+  country: USA
+  city: St. Louis
+  twitter: https://twitter.com/JMHReif
+  linkedin: https://www.linkedin.com/in/jmhreif
+  avatar: https://javachampions.org/img/avatars/jmhreif.png
+- name: Jim Gough
+  year: 2020
+  country: UK
+  city: London
+  twitter: https://twitter.com/Jim__Gough
+  linkedin: https://www.linkedin.com/in/jpgough/
+  avatar: https://javachampions.org/img/avatars/Jim__Gough.png
+- name: Jim Manico
+  year: 2018
+  country: USA
+  city: Anahola, Hawaii
+  twitter: https://twitter.com/manicode
+  linkedin: https://www.linkedin.com/in/jmanico/
+  avatar: https://javachampions.org/img/avatars/manicode.png
+- name: Jim Weaver
+  year: 2008
+  country: USA
+  city: Indianapolis, Indiana
+  twitter: https://twitter.com/JavaFXpert
+  linkedin: https://www.linkedin.com/in/javafxpert/
+  avatar: https://javachampions.org/img/avatars/JavaFXpert.png
+- name: Joe Walker
+  year: 2006
+  country: UK
+  city: Leicester
+  linkedin: https://www.linkedin.com/in/joewalkeruk/
+  avatar: https://javachampions.org/img/avatars/Joe_Walker.png
+- name: Joe Winchester
+  year: 2006
+  country: UK
+  city: Southampton
+  twitter: https://twitter.com/JoeWinchester
+  linkedin: https://www.linkedin.com/in/joewinchester/
+  avatar: https://javachampions.org/img/avatars/JoeWinchester.png
+- name: Joel Costigliola
+  year: 2021
+  country: New Zealand
+  country_citizenship: France
+  twitter: https://twitter.com/JoCosti
+  mastodon: https://mstdn.social/@JoCosti
+  bluesky: https://bsky.app/profile/jocosti.bsky.social
+  linkedin: https://www.linkedin.com/in/joelcostigliola/
+  avatar: https://javachampions.org/img/avatars/JoCosti.png
+- name: Johan Janssen
+  year: 2024
+  country: The Netherlands
+  bluesky: https://bsky.app/profile/johanjanssen.bsky.social
+  linkedin: https://www.linkedin.com/in/johanjanssen2001/
+  avatar: https://javachampions.org/img/avatars/johanjanssen42.png
+- name: John Paul "JP" Petines
+  year: 2005
+  country: Canada
+  country_birth: Philipines
+  city: Toronto, Ontario
+  twitter: https://twitter.com/jppetines
+  avatar: https://javachampions.org/img/avatars/jppetines.png
+  status:
+  - founding-member
+- name: Jonas Bonér
+  year: 2011
+  country: Sweden
+  linkedin: https://www.linkedin.com/in/jonasboner/
+  avatar: https://javachampions.org/img/avatars/jboner.png
+- name: Jonatan Ivanov
+  year: 2024
+  country: USA
+  country_residence: USA
+  country_birth: Hungary
+  city: Seattle, Washington
+  twitter: https://twitter.com/jonatan_ivanov
+  bluesky: https://bsky.app/profile/jonatan-ivanov.bsky.social
+  linkedin: https://www.linkedin.com/in/jonatan-ivanov/
+  github: https://github.com/jonatan-ivanov
+  website: https://develotters.com
+  sessionize: https://sessionize.com/jonatan-ivanov
+  avatar: https://javachampions.org/img/avatars/jonatan_ivanov.png
+- name: Jonathan Giles
+  year: 2018
+  country: New Zealand
+  twitter: https://twitter.com/JonathanGiles
+  mastodon: https://hachyderm.io/@JonathanGiles
+  bluesky: https://bsky.app/profile/jonathangiles.net
+  linkedin: https://www.linkedin.com/in/jonathangiles/
+  avatar: https://javachampions.org/img/avatars/JonathanGiles.png
+- name: Jonathan Schneider
+  year: 2024
+  country: USA
+  city: Miami
+  twitter: https://twitter.com/jon_k_schneider
+  linkedin: https://www.linkedin.com/in/jonkschneider
+  avatar: https://javachampions.org/img/avatars/jon_k_schneider.png
+- name: Jonathan Vila
+  year: 2020
+  country: Spain
+  city: Barcelona
+  twitter: https://twitter.com/vilojona
+  bluesky: https://bsky.app/profile/vilojona.bsky.social
+  linkedin: https://www.linkedin.com/in/jonathanvila/
+  website: https://aytartana.wordpress.com
+  sessionize: https://sessionize.com/jonathan-vila/
+  avatar: https://javachampions.org/img/avatars/vilojona.png
+- name: Jorge Hidalgo
+  year: 2023
+  country: Spain
+  city: Málaga
+  twitter: https://twitter.com/deors314
+  bluesky: https://bsky.app/profile/deors.bsky.social
+  linkedin: https://www.linkedin.com/in/deors/
+  avatar: https://javachampions.org/img/avatars/deors314.png
+- name: Jorge Vargas
+  year: 2007
+  country: Mexico
+  country_citizenship: Mexico
+  country_birth: Mexico
+  city: Mexico City
+  twitter: https://twitter.com/edivargas
+  linkedin: https://www.linkedin.com/in/edivargas
+  github: https://github.com/edivargas
+  website: https://jorgevargas.mx
+  sessionize: https://sessionize.com/edivargas
+  avatar: https://javachampions.org/img/avatars/edivargas.png
+- name: Josh Juneau
+  year: 2017
+  country: USA
+  city: Chicago, Illinois
+  twitter: https://twitter.com/javajuneau
+  mastodon: https://fosstodon.org/@javajuneau
+  linkedin: https://www.linkedin.com/in/josh-juneau-84b4867/
+  avatar: https://javachampions.org/img/avatars/javajuneau.png
+- name: Josh Long
+  year: 2015
+  country: USA
+  city: San Francisco, California
+  twitter: https://twitter.com/starbuxman
+  mastodon: https://mastodon.online/@starbuxman
+  bluesky: https://bsky.app/profile/starbuxman.joshlong.com
+  linkedin: https://www.linkedin.com/in/joshlong/
+  avatar: https://javachampions.org/img/avatars/starbuxman.png
+- name: Joshua Marinacci
+  year: 2010
+  country: USA
+  city: Eugene, Oregon
+  twitter: https://twitter.com/joshmarinacci
+  linkedin: https://www.linkedin.com/in/joshmarinacci/
+  avatar: https://javachampions.org/img/avatars/joshmarinacci.png
+- name: José Díaz
+  year: 2018
+  country: Perú
+  twitter: https://twitter.com/jamdiazdiaz
+  linkedin: https://www.linkedin.com/in/joedayz/
+  avatar: https://javachampions.org/img/avatars/jamdiazdiaz.png
+- name: Juergen Hoeller
+  year: 2009
+  country: Austria
+  city: Linz, Upper Austria
+  twitter: https://twitter.com/springjuergen
+  linkedin: https://www.linkedin.com/in/juergenhoeller/
+  avatar: https://javachampions.org/img/avatars/springjuergen.png
+- name: Julien Dubois
+  year: 2018
+  country: France
+  city: Paris
+  twitter: https://twitter.com/juliendubois
+  bluesky: https://bsky.app/profile/jdubois.bsky.social
+  linkedin: https://www.linkedin.com/in/juliendubois/
+  avatar: https://javachampions.org/img/avatars/juliendubois.png
+- name: Julien Viet
+  year: 2025
+  country: France
+  city: Marseille
+  twitter: https://twitter.com/julienviet
+  linkedin: https://www.linkedin.com/in/julienviet/
+  avatar: https://javachampions.org/img/avatars/julienviet.png
+- name: Justin Lee
+  year: 2014
+  country: USA
+  city: New York City, New York
+  twitter: https://twitter.com/evanchooly
+  mastodon: https://mastodon.social/@evanchooly
+  bluesky: https://bsky.app/profile/evanchooly.bsky.social
+  linkedin: https://www.linkedin.com/in/justinlee/
+  github: https://github.com/evanchooly
+  website: http://antwerkz.com
+  sessionize: https://sessionize.com/evanchooly
+  avatar: https://javachampions.org/img/avatars/evanchooly.png
+- name: Karl Heinz Marbaise
+  year: 2024
+  country: Germany
+  country_citizenship: Germany
+  country_birth: Germany
+  city: Würselen
+  twitter: https://twitter.com/khmarbaise
+  mastodon: https://mastodon.social/@khmarbaise
+  bluesky: https://bsky.app/profile/khmarbaise.bsky.social
+  youtube: https://youtube.com/@khmarbaise
+  linkedin: https://www.linkedin.com/in/khmarbaise/
+  github: https://github.com/khmarbaise
+  website: https://soebes.io
+  sessionize: https://sessionize.com/khmarbaise
+  avatar: https://javachampions.org/img/avatars/khmarbaise.png
+- name: Kate Stanley
+  year: 2021
+  country: UK
+  city: Hampshire
+  twitter: https://twitter.com/KateStanley91
+  linkedin: https://www.linkedin.com/in/katherine-kate-stanley-3796b579/
+  avatar: https://javachampions.org/img/avatars/KateStanley91.png
+- name: Kathy Sierra
+  year: 2005
+  country: USA
+  avatar: https://javachampions.org/img/avatars/Kathy_Sierra.png
+  status:
+  - founding-member
+- name: Katia Aresti
+  year: 2019
+  country: France
+  country_citizenship: Spain
+  twitter: https://twitter.com/karesti
+  linkedin: https://www.linkedin.com/in/karesti/
+  avatar: https://javachampions.org/img/avatars/karesti.png
+- name: Kevin Dubois
+  year: 2024
+  country: Belgium
+  country_residence: Switzerland
+  city: Val de Bagnes
+  twitter: https://twitter.com/kevindubois
+  mastodon: https://mastodon.social/@kevindubois
+  bluesky: https://bsky.app/profile/kevindubois.com
+  youtube: https://youtube.com/@thekevindubois
+  linkedin: https://www.linkedin.com/in/kevindubois/
+  github: https://github.com/kdubois
+  website: https://www.kevindubois.com
+  sessionize: https://sessionize.com/kevindubois
+  avatar: https://javachampions.org/img/avatars/kevindubois.png
+- name: Kevin Nilson
+  year: 2009
+  country: USA
+  city: San Francisco, California
+  twitter: https://twitter.com/javaclimber
+  linkedin: https://www.linkedin.com/in/kevinnilson/
+  avatar: https://javachampions.org/img/avatars/javaclimber.png
+- name: Kirk Pepperdine
+  year: 2005
+  country: Canada
+  city: Kelowna, British Columbia
+  twitter: https://twitter.com/kcpeppe
+  bluesky: https://bsky.app/profile/kcpeppe.bsky.social
+  linkedin: https://www.linkedin.com/in/kirk-pepperdine/
+  avatar: https://javachampions.org/img/avatars/kcpeppe.png
+- name: Kito Mann
+  year: 2017
+  country: USA
+  city: Glen Allen, Virginia
+  twitter: https://twitter.com/kito99
+  mastodon: https://mastodon.social/@kito99
+  bluesky: https://bsky.app/profile/kitomann.bsky.social
+  linkedin: https://www.linkedin.com/in/kitomann/
+  github: https://github.com/kito99
+  avatar: https://javachampions.org/img/avatars/kito99.png
+- name: Klaasjan Tukker
+  year: 2005
+  country: USA
+  country_birth: The Netherlands
+  city: Seattle, Washington
+  twitter: https://twitter.com/ktukker
+  linkedin: https://www.linkedin.com/in/ktukker/
+  avatar: https://javachampions.org/img/avatars/ktukker.png
+  status:
+  - founding-member
+- name: Kohsuke Kawaguchi
+  year: 2020
+  country: USA
+  country_birth: Japan
+  city: San Jose, California
+  twitter: https://twitter.com/kohsukekawa
+  linkedin: https://www.linkedin.com/in/kohsukekawaguchi/
+  avatar: https://javachampions.org/img/avatars/kohsukekawa.png
+- name: Koichi Sakata
+  year: 2018
+  country: Japan
+  city: Osaka
+  twitter: https://twitter.com/jyukutyo
+  avatar: https://javachampions.org/img/avatars/jyukutyo.png
+- name: Konrad Malawski
+  year: 2017
+  country: Poland
+  country_residence: Japan
+  twitter: https://twitter.com/ktosopl
+  bluesky: https://bsky.app/profile/kto.so
+  linkedin: https://www.linkedin.com/in/konrad-ktoso-malawski/
+  avatar: https://javachampions.org/img/avatars/ktosopl.png
+- name: Lars Vogel
+  year: 2012
+  country: Germany
+  city: Hamburg
+  twitter: https://twitter.com/vogella
+  linkedin: https://www.linkedin.com/in/vogella/
+  avatar: https://javachampions.org/img/avatars/vogella.png
+- name: Laurentiu Spilca
+  year: 2024
+  country: Romania
+  city: Bucharest
+  twitter: https://twitter.com/laurspilca
+  linkedin: https://www.linkedin.com/in/laurspilca/
+  avatar: https://javachampions.org/img/avatars/laurspilca.png
+- name: Leonardo de Moura Rocha Lima
+  year: 2017
+  country: Brazil
+  city: São Paulo
+  linkedin: https://www.linkedin.com/in/leomrlima/
+  avatar: https://javachampions.org/img/avatars/leomrlima.png
+- name: Linda van der Pal
+  year: 2013
+  country: The Netherlands
+  city: Amsterdam
+  twitter: https://twitter.com/DuchessFounder
+  linkedin: https://www.linkedin.com/in/lvdpal/
+  avatar: https://javachampions.org/img/avatars/DuchessFounder.png
+- name: Loiane Groner
+  year: 2020
+  country: USA
+  country_citizenship: Brazil
+  city: Orlando, Florida
+  twitter: https://twitter.com/loiane
+  youtube: https://www.youtube.com/@loianegroner
+  linkedin: https://www.linkedin.com/in/loiane
+  github: https://github.com/loiane
+  website: https://loiane.com
+  sessionize: https://sessionize.com/loiane
+  avatar: https://javachampions.org/img/avatars/loiane.png
+- name: Lucio Benfante
+  year: 2006
+  country: Italy
+  city: Verona
+  twitter: https://twitter.com/luciobenfante
+  mastodon: https://mastodon.social/@luciobenfante
+  bluesky: https://bsky.app/profile/luciobenfante.bsky.social
+  linkedin: https://www.linkedin.com/in/benfante/
+  github: https://github.com/benfante
+  avatar: https://javachampions.org/img/avatars/luciobenfante.png
+- name: Ludovic Champenois
+  year: 2022
+  country: USA
+  city: Mountain View, California
+  twitter: https://twitter.com/ludoch
+  bluesky: https://bsky.app/profile/ludoch.bsky.social
+  linkedin: https://www.linkedin.com/in/ludovicchampenois/
+  avatar: https://javachampions.org/img/avatars/ludoch.png
+- name: Lukas Eder
+  year: 2015
+  country: Switzerland
+  city: St. Gallen
+  mastodon: https://mastodon.social/@lukaseder
+  bluesky: https://bsky.app/profile/lukaseder.bsky.social
+  linkedin: https://www.linkedin.com/in/lukaseder/
+  avatar: https://javachampions.org/img/avatars/lukaseder.png
+- name: Luqman Saeed
+  year: 2026
+  country: Ghana
+  city: Accra
+  bluesky: https://bsky.app/profile/luqmansaeed.com
+  avatar: https://javachampions.org/img/avatars/luqmansaeed.png
+- name: Maarten Mulders
+  year: 2022
+  country: The Netherlands
+  city: Apeldoorn
+  twitter: https://twitter.com/mthmulders
+  mastodon: https://mastodon.online/@mthmulders
+  bluesky: https://bsky.app/profile/mthmulders.bsky.social
+  linkedin: https://www.linkedin.com/in/mthmulders/
+  website: https://maarten.mulders.it/
+  sessionize: https://sessionize.com/mthmulders/
+  speakerdeck: https://speakerdeck.com/mthmulders/
+  avatar: https://javachampions.org/img/avatars/mthmulders.png
+- name: Magno Cavalcante
+  year: 2006
+  country: Brazil
+  city: Rio de Janeiro
+  twitter: https://twitter.com/magnocav
+  linkedin: https://www.linkedin.com/in/magnocav/
+  avatar: https://javachampions.org/img/avatars/magnocav.png
+- name: Mala Gupta
+  year: 2018
+  country: India
+  city: New Delhi, Delhi
+  twitter: https://twitter.com/eMalaGupta
+  bluesky: https://bsky.app/profile/malagupta.bsky.social
+  linkedin: https://www.linkedin.com/in/malagupta/
+  avatar: https://javachampions.org/img/avatars/eMalaGupta.png
+- name: Manfred Riem
+  year: 2005
+  country: USA
+  city: Provo, Utah
+  twitter: https://twitter.com/mnriem
+  linkedin: https://www.linkedin.com/in/mriem/
+  avatar: https://javachampions.org/img/avatars/mnriem.png
+  status:
+  - founding-member
+- name: Mani Sarkar
+  year: 2018
+  country: UK
+  twitter: https://twitter.com/theNeomatrix369
+  mastodon: https://mastodon.online/@neomatrix369
+  linkedin: https://www.linkedin.com/in/mani-sarkar/
+  avatar: https://javachampions.org/img/avatars/theNeomatrix369.png
+- name: Marc Hoffmann
+  year: 2014
+  country: Germany
+  twitter: https://twitter.com/marcandsweep
+  mastodon: https://mastodon.social/@marcandsweep
+  avatar: https://javachampions.org/img/avatars/marcandsweep.png
+- name: Marc Philipp
+  year: 2025
+  country: Germany
+  city: Karlsruhe
+  mastodon: https://chaos.social/@marcphilipp
+  bluesky: https://bsky.app/profile/marcphilipp.de
+  linkedin: https://www.linkedin.com/in/marcphilipp
+  website: https://marcphilipp.de
+  speakerdeck: https://speakerdeck.com/marcphilipp
+  avatar: https://javachampions.org/img/avatars/marcphilipp.png
+- name: Marcin Grzejszczak
+  year: 2024
+  country: Poland
+  twitter: https://twitter.com/MGrzejszczak
+  mastodon: https://fosstodon.org/@toomuchcoding
+  bluesky: https://bsky.app/profile/toomuchcoding.com
+  linkedin: https://www.linkedin.com/in/marcin-grzejszczak-15565119/
+  github: https://github.com/marcingrzejszczak/
+  website: https://toomuchcoding.com
+  avatar: https://javachampions.org/img/avatars/MGrzejszczak.png
+- name: Marcus Hellberg
+  year: 2025
+  country: USA
+  city: Tahoe
+  twitter: https://twitter.com/marcushellberg
+  bluesky: https://bsky.app/profile/marcushellberg.dev
+  linkedin: https://www.linkedin.com/in/marcushellberg
+  github: https://github.com/marcushellberg
+  sessionize: https://sessionize.com/marcushellberg
+  avatar: https://javachampions.org/img/avatars/marcushellberg.png
+- name: Marcus Hirt
+  year: 2019
+  country: Sweden
+  country_residence: Switzerland
+  country_citizenship: Switzerland
+  country_birth: Sweden
+  city: Küssnacht am Rigi, SZ
+  twitter: https://twitter.com/hirt
+  mastodon: https://mastodon.social/@hirt
+  linkedin: https://www.linkedin.com/in/mhirt/
+  github: https://github.com/thegreystone
+  website: https://hirt.se/blog/
+  avatar: https://javachampions.org/img/avatars/hirt.png
+- name: Marcus Lagergren
+  year: 2016
+  country: Sweden
+  twitter: https://twitter.com/lagergren
+  linkedin: https://www.linkedin.com/in/lagergren/
+  avatar: https://javachampions.org/img/avatars/lagergren.png
+- name: Mario Fusco
+  year: 2016
+  country: Italy
+  city: Milan
+  twitter: https://twitter.com/mariofusco
+  linkedin: https://www.linkedin.com/in/mario-fusco-3467213/
+  avatar: https://javachampions.org/img/avatars/mariofusco.png
+- name: Mario Torre
+  year: 2014
+  country: Germany
+  country_birth: Italy
+  city: Hamburg
+  twitter: https://twitter.com/neugens
+  mastodon: https://mastodon.social/@MarioTorre
+  bluesky: https://bsky.app/profile/mariotorre.bsky.social
+  linkedin: https://www.linkedin.com/in/neugens/
+  avatar: https://javachampions.org/img/avatars/neugens.png
+- name: Marit van Dijk
+  year: 2023
+  country: The Netherlands
+  city: Amstelveen
+  twitter: https://twitter.com/MaritvanDijk77
+  mastodon: https://mastodon.social/@maritvandijk
+  bluesky: https://bsky.app/profile/maritvandijk.bsky.social
+  linkedin: https://www.linkedin.com/in/maritvandijk/
+  github: https://github.com/mlvandijk
+  website: https://maritvandijk.com/
+  sessionize: https://sessionize.com/maritvandijk/
+  avatar: https://javachampions.org/img/avatars/maritvandijk.png
+- name: Mark Heckler
+  year: 2016
+  country: USA
+  city: Godfrey, Illinois
+  twitter: https://twitter.com/mkheck
+  mastodon: https://mastodon.cloud/@mkheck
+  bluesky: https://bsky.app/profile/mkheck.bsky.social
+  youtube: https://www.youtube.com/c/MarkHeckler
+  linkedin: https://www.linkedin.com/in/markheckler
+  sessionize: https://sessionize.com/mkheck
+  xing: https://www.xing.com/profile/Mark_Heckler
+  avatar: https://javachampions.org/img/avatars/MkHeck.png
+- name: Mark Paluch
+  year: 2024
+  country: Germany
+  twitter: https://twitter.com/mp911de
+  mastodon: https://mastodon.social/@mp911de
+  bluesky: https://bsky.app/profile/mp911de.bsky.social
+  linkedin: https://www.linkedin.com/in/mark-paluch-6482092a4
+  github: https://github.com/mp911de
+  website: https://paluch.biz
+  avatar: https://javachampions.org/img/avatars/mp911de.png
+- name: Mark Struberg
+  year: 2019
+  country: Austria
+  city: Vienna
+  twitter: https://twitter.com/struberg
+  bluesky: https://bsky.app/profile/struberg.bsky.social
+  avatar: https://javachampions.org/img/avatars/struberg.png
+- name: Markus Eisele
+  year: 2014
+  country: Germany
+  city: Munich
+  twitter: https://twitter.com/myfear
+  mastodon: https://mastodon.online/@myfear
+  bluesky: https://bsky.app/profile/myfear.com
+  youtube: https://www.youtube.com/@myfear
+  linkedin: https://www.linkedin.com/in/markuseisele/
+  github: https://github.com/myfear
+  website: https://www.eisele.net
+  sessionize: https://sessionize.com/markus-eisele
+  avatar: https://javachampions.org/img/avatars/myfear.png
+- name: Martijn Verburg
+  year: 2012
+  country: UK
+  country_residence: New Zealand
+  country_birth: The Netherlands
+  twitter: https://twitter.com/karianna
+  mastodon: https://mastodon.social/@martijnverburg
+  bluesky: https://bsky.app/profile/karianna.bsky.social
+  linkedin: https://www.linkedin.com/in/martijnverburg
+  github: https://github.com/karianna
+  sessionize: https://sessionize.com/martijnverburg
+  avatar: https://javachampions.org/img/avatars/karianna.png
+- name: Martin Thompson
+  year: 2015
+  country: UK
+  twitter: https://twitter.com/mjpt777
+  linkedin: https://www.linkedin.com/in/martinjthompson/
+  avatar: https://javachampions.org/img/avatars/mjpt777.png
+- name: Mary Grygleski
+  year: 2021
+  country: USA
+  country_birth: Hong Kong
+  city: Chicago
+  twitter: https://twitter.com/mgrygles
+  mastodon: https://foojay.social/@mgrygles
+  bluesky: https://bsky.app/profile/mgrygles.bsky.social
+  youtube: https://www.youtube.com/@marygrygleski9271
+  linkedin: https://www.linkedin.com/in/mary-grygleski/
+  github: https://github.com/mgrygles
+  website: https://discord.gg/RMU4Juw
+  sessionize: https://sessionize.com/mary-grygleski
+  avatar: https://javachampions.org/img/avatars/mgrygles.png
+- name: María Arias de Reyna
+  year: 2020
+  country: Spain
+  country_residence: Spain
+  country_birth: Spain
+  city: Seville
+  mastodon: https://floss.social/@delawen
+  youtube: https://www.youtube.com/channel/UCpO52sJmB0ormGRjGMT7iSw
+  linkedin: https://www.linkedin.com/in/delawen/
+  github: https://github.com/Delawen/
+  website: https://delawen.com
+  sessionize: https://sessionize.com/delawen/
+  avatar: https://javachampions.org/img/avatars/delawen.png
+- name: Matt Raible
+  year: 2016
+  country: USA
+  city: Denver, Colorado
+  twitter: https://twitter.com/mraible
+  bluesky: https://bsky.app/profile/mraible.bsky.social
+  youtube: https://youtube.com/mraible
+  linkedin: https://linkedin.com/in/mraible
+  website: https://raibledesigns.com
+  sessionize: https://sessionize.com/mraible
+  speakerdeck: https://speakerdeck.com/mraible
+  avatar: https://javachampions.org/img/avatars/mraible.png
+- name: Mattias Karlsson
+  year: 2009
+  country: Sweden
+  city: Stockholm
+  twitter: https://twitter.com/matkar
+  mastodon: https://mastodon.social/@matkar
+  bluesky: https://bsky.app/profile/matkar.bsky.social
+  linkedin: https://www.linkedin.com/in/mattiask/
+  avatar: https://javachampions.org/img/avatars/matkar.png
+- name: Maurice Naftalin
+  year: 2014
+  country: Scotland
+  city: Edinburgh
+  twitter: https://twitter.com/mauricenaftalin
+  bluesky: https://bsky.app/profile/mauricenaftalin.bsky.social
+  linkedin: https://www.linkedin.com/in/maurice-naftalin/
+  sessionize: https://sessionize.com/Maurice_Naftalin
+  avatar: https://javachampions.org/img/avatars/mauricenaftalin.png
+- name: Mauricio Salatino
+  year: 2025
+  country: UK
+  city: London
+  twitter: https://twitter.com/salaboy
+  bluesky: https://bsky.app/profile/salaboy.com
+  linkedin: https://www.linkedin.com/in/salaboy/
+  avatar: https://javachampions.org/img/avatars/salaboy.png
+- name: Max Rydahl Andersen
+  year: 2026
+  country: Denmark
+  bluesky: https://bsky.app/profile/maxandersen.xam.dk
+  linkedin: https://www.linkedin.com/in/maxrydahlandersen/
+  avatar: https://javachampions.org/img/avatars/maxandersen.png
+- name: Melissa McKay
+  year: 2021
+  country: USA
+  city: Colorado
+  twitter: https://twitter.com/melissajmckay
+  linkedin: https://www.linkedin.com/in/melissajmckay
+  sessionize: https://sessionize.com/melissa-mckay
+  avatar: https://javachampions.org/img/avatars/melissajmckay.png
+- name: Mert Caliskan
+  year: 2014
+  country: Turkey
+  city: Ankara
+  twitter: https://twitter.com/mertcal
+  linkedin: https://www.linkedin.com/in/mertcaliskan
+  avatar: https://javachampions.org/img/avatars/mertcal.png
+- name: Michael Heinrichs
+  year: 2017
+  country: Germany
+  city: Freiburg
+  twitter: https://twitter.com/net0pyr
+  linkedin: https://www.linkedin.com/in/heinrichs/
+  avatar: https://javachampions.org/img/avatars/net0pyr.png
+- name: Michael Hunger
+  year: 2018
+  country: Germany
+  city: Dresden
+  twitter: https://twitter.com/mesirii
+  mastodon: https://chaos.social/@mesirii
+  bluesky: https://bsky.app/profile/mesirii.de
+  linkedin: https://www.linkedin.com/in/jexpde/
+  avatar: https://javachampions.org/img/avatars/mesirii.png
+- name: Michael Levin
+  year: 2011
+  country: USA
+  linkedin: https://www.linkedin.com/in/zoobird/
+  avatar: https://javachampions.org/img/avatars/mikelevin77.png
+- name: Michael Nascimento Santos
+  year: 2006
+  country: Brazil
+  twitter: https://twitter.com/mr__m
+  linkedin: https://www.linkedin.com/in/michaelnascimento/
+  avatar: https://javachampions.org/img/avatars/mr__m.png
+- name: Michael P. Redlich
+  year: 2023
+  country: USA
+  city: Flemington, New Jersey
+  twitter: https://twitter.com/mpredli
+  mastodon: https://mastodon.sdf.org/@mpredli01
+  linkedin: https://www.linkedin.com/pub/michael-redlich/0/966/13a
+  github: https://github.com/mpredli01
+  website: https://redlich.net
+  sessionize: https://sessionize.com/michael-redlich
+  avatar: https://javachampions.org/img/avatars/mpredli.png
+- name: Michael Simons
+  year: 2018
+  country: Germany
+  city: Aachen, North Rhine-Westphalia
+  mastodon: https://mastodon.social/@rotnroll666
+  bluesky: https://bsky.app/profile/rotnroll666.bsky.social
+  linkedin: https://www.linkedin.com/in/michael-simons-196712139/
+  github: https://github.com/michael-simons
+  website: https://info.michael-simons.eu
+  avatar: https://javachampions.org/img/avatars/rotnroll666.png
+- name: Michael T. Minella
+  year: 2018
+  country: USA
+  city: Naperville, Illinois
+  twitter: https://twitter.com/michaelminella
+  bluesky: https://bsky.app/profile/michaelminella.com
+  linkedin: https://www.linkedin.com/in/michaelminella/
+  github: https://github.com/mminella
+  website: https://michaelminella.com
+  avatar: https://javachampions.org/img/avatars/michaelminella.png
+- name: Michael Van Riper
+  year: 2008
+  country: USA
+  city: Silicon Valley, California
+  twitter: https://twitter.com/vanriper
+  linkedin: https://www.linkedin.com/in/vanriper/
+  avatar: https://javachampions.org/img/avatars/vanriper.png
+- name: Michael Vitz
+  year: 2021
+  country: Germany
+  country_residence: Germany
+  country_birth: Germany
+  city: Moenchengladbach
+  twitter: https://twitter.com/michaelvitz
+  mastodon: https://innoq.social/@michaelvitz
+  bluesky: https://bsky.app/profile/michael.vitz.me
+  youtube: https://www.youtube.com/@michael-on-code
+  linkedin: https://www.linkedin.com/in/michaelvitz/
+  github: https://github.com/mvitz
+  website: https://michael.vitz.me
+  sessionize: https://sessionize.com/michaelvitz/
+  xing: https://www.xing.com/profile/Michael_Vitz2
+  avatar: https://javachampions.org/img/avatars/michaelvitz.png
+- name: Mike Cannon-Brookes
+  year: 2006
+  country: Australia
+  city: Sydney
+  twitter: https://twitter.com/mcannonbrookes
+  linkedin: https://www.linkedin.com/in/mcannonbrookes/
+  avatar: https://javachampions.org/img/avatars/mcannonbrookes.png
+- name: Miro Wengner
+  year: 2018
+  country: Germany
+  city: Munich, Bavaria
+  twitter: https://twitter.com/miragemiko
+  bluesky: https://bsky.app/profile/mirowengner.bsky.social
+  linkedin: https://www.linkedin.com/in/mwengner/
+  github: https://github.com/mirage22
+  website: https://www.wengnermiro.com
+  sessionize: https://sessionize.com/miro-wengner
+  avatar: https://javachampions.org/img/avatars/miragemiko.png
+- name: Mo Li
+  year: 2005
+  country: China
+  avatar: https://javachampions.org/img/avatars/Mo_Li.png
+- name: Mohamed Taman
+  year: 2015
+  country: Serbia
+  country_birth: Egypt
+  city: Belgrade
+  twitter: https://twitter.com/_tamanm
+  linkedin: https://www.linkedin.com/in/mohamedtaman/
+  avatar: https://javachampions.org/img/avatars/_tamanm.png
+- name: Mohammed Aboullaite
+  year: 2024
+  country: Sweden
+  country_citizenship: Morocco
+  city: Stockholm
+  twitter: https://twitter.com/laytoun
+  linkedin: https://www.linkedin.com/in/aboullaite
+  avatar: https://javachampions.org/img/avatars/laytoun.png
+- name: Monica Beckwith
+  year: 2017
+  country: USA
+  city: Texas
+  twitter: https://twitter.com/mon_beck
+  linkedin: https://www.linkedin.com/in/monicabeckwith/
+  avatar: https://javachampions.org/img/avatars/mon_beck.png
+- name: Murat Yener
+  year: 2015
+  country: Turkey
+  twitter: https://twitter.com/yenerm
+  linkedin: https://www.linkedin.com/in/muratyener/
+  avatar: https://javachampions.org/img/avatars/yenerm.png
+- name: Nacho Cougil
+  year: 2022
+  country: Spain
+  city: Barcelona
+  twitter: https://twitter.com/icougil
+  mastodon: https://jvm.social/@icougil
+  bluesky: https://bsky.app/profile/icougil.bsky.social
+  linkedin: https://www.linkedin.com/in/icougil/
+  github: https://github.com/icougil
+  website: https://nacho.cougil.com
+  sessionize: https://sessionize.com/icougil
+  avatar: https://javachampions.org/img/avatars/icougil.png
+- name: Nate Schutta
+  year: 2023
+  country: USA
+  city: Forest Lake, MN
+  twitter: https://twitter.com/ntschutta
+  bluesky: https://bsky.app/profile/nts.bsky.social
+  youtube: https://www.youtube.com/channel/UCQv8lTtoo-rNOmfrlQn6IyQ
+  linkedin: https://www.linkedin.com/in/nate-schutta/
+  github: https://github.com/ntschutta/
+  website: https://ntschutta.io
+  sessionize: https://sessionize.com/nathaniel-schutta/
+  avatar: https://javachampions.org/img/avatars/ntschutta.png
+- name: Neal Tisdale
+  year: 2005
+  country: USA
+  city: Marietta, Georgia
+  avatar: https://javachampions.org/img/avatars/Neal_Tisdale.png
+  status:
+  - founding-member
+- name: Neil Griffin
+  year: 2017
+  country: USA
+  city: Orlando, Florida
+  twitter: https://twitter.com/NeilGriffin95
+  linkedin: https://www.linkedin.com/in/neilgriffin95/
+  avatar: https://javachampions.org/img/avatars/NeilGriffin95.png
+- name: Nicolai Parlog
+  year: 2019
+  country: Germany
+  country_residence: Germany
+  city: Karlsruhe
+  twitter: https://twitter.com/nipafx
+  mastodon: https://mastodon.social/@nipafx
+  bluesky: https://bsky.app/profile/nipafx.dev
+  youtube: https://youtube.com/nipafx
+  github: https://github.com/nipafx/
+  website: https://nipafx.dev
+  avatar: https://javachampions.org/img/avatars/nipafx.png
+  status:
+  - alumni
+- name: Nikhil Nanivadekar
+  year: 2018
+  country: USA
+  twitter: https://twitter.com/NikhilNanivade
+  linkedin: https://www.linkedin.com/in/nikhilnanivadekar/
+  avatar: https://javachampions.org/img/avatars/NikhilNanivade.png
+- name: Nitsan Wakart
+  year: 2018
+  country: South Africa
+  city: Cape Town
+  twitter: https://twitter.com/nitsanw
+  linkedin: https://www.linkedin.com/in/nitsanwakart/
+  avatar: https://javachampions.org/img/avatars/nitsanw.png
+- name: Norman Maurer
+  year: 2016
+  country: Germany
+  city: Frankfurt
+  twitter: https://twitter.com/normanmaurer
+  linkedin: https://www.linkedin.com/in/normanmaurer/
+  avatar: https://javachampions.org/img/avatars/normanmaurer.png
+- name: Oezcan Acar
+  year: 2009
+  country: Turkey
+  country_residence: Germany
+  city: Frankfurt
+  twitter: https://twitter.com/oezcanacar
+  linkedin: https://www.linkedin.com/in/acar1/
+  avatar: https://javachampions.org/img/avatars/oezcanacar.png
+- name: Oleg Šelajev
+  year: 2017
+  country: Estonia
+  city: Tartu
+  twitter: https://twitter.com/shelajev
+  bluesky: https://bsky.app/profile/shelajev.bsky.social
+  youtube: https://www.youtube.com/@shelajev
+  linkedin: https://www.linkedin.com/in/shelajev/
+  github: https://github.com/shelajev/
+  sessionize: https://sessionize.com/oleg-selajev/
+  avatar: https://javachampions.org/img/avatars/shelajev.png
+- name: Oleh Dokuka
+  year: 2019
+  country: Ukraine
+  twitter: https://twitter.com/OlehDokuka
+  linkedin: https://www.linkedin.com/in/olegdokuka/
+  avatar: https://javachampions.org/img/avatars/OlehDokuka.png
+- name: Oliver Drotbohm
+  year: 2017
+  country: Germany
+  city: Dresden
+  mastodon: https://chaos.social/@odrotbohm
+  bluesky: https://bsky.app/profile/odrotbohm.de
+  linkedin: https://www.linkedin.com/in/odrotbohm
+  github: https://github.com/odrotbohm
+  website: https://odrotbohm.de
+  sessionize: https://sessionize.com/odrotbohm
+  speakerdeck: https://speakerdeck.com/olivergierke
+  avatar: https://javachampions.org/img/avatars/odrotbohm.png
+- name: Oliver Ihns
+  year: 2005
+  country: Germany
+  city: Hamburg
+  twitter: https://twitter.com/oliverihns
+  linkedin: https://www.linkedin.com/in/oliver-ihns-4455609/
+  avatar: https://javachampions.org/img/avatars/oliverihns.png
+- name: Olivier Schmitt
+  year: 2005
+  country: Switzerland
+  country_citizenship: France
+  city: Geneva
+  linkedin: https://www.linkedin.com/in/olivier-schmitt-architect/
+  avatar: https://javachampions.org/img/avatars/Olivier_Schmitt.png
+  status:
+  - founding-member
+- name: Ondro Mihályi
+  year: 2019
+  country: Czech Republic
+  city: Prague
+  twitter: https://twitter.com/OndroMih
+  mastodon: https://mastodon.online/@ondromih
+  bluesky: https://bsky.app/profile/ondromih.bsky.social
+  linkedin: https://www.linkedin.com/in/mihalyiondrej/
+  avatar: https://javachampions.org/img/avatars/OndroMih.png
+- name: Otávio Gonçalves de Santana
+  year: 2015
+  country: Brazil
+  city: São Paulo
+  twitter: https://twitter.com/otaviojava
+  linkedin: https://www.linkedin.com/in/otaviojava/
+  avatar: https://javachampions.org/img/avatars/otaviojava.png
+- name: Panos Konstantinidis
+  year: 2007
+  country: Greece
+  twitter: https://twitter.com/panoskonst
+  avatar: https://javachampions.org/img/avatars/panoskonst.png
+- name: Paris Apostolopoulos
+  year: 2007
+  country: UK
+  country_citizenship: Greece
+  city: London
+  twitter: https://twitter.com/javapapo
+  bluesky: https://bsky.app/profile/javapapo.bsky.social
+  linkedin: https://www.linkedin.com/in/javapapo/
+  avatar: https://javachampions.org/img/avatars/javapapo.png
+- name: Patrick Baumgartner
+  year: 2025
+  country: Switzerland
+  city: St. Gallen
+  twitter: https://twitter.com/patbaumgartner
+  mastodon: https://mastodon.social/@patbaumgartner
+  bluesky: https://bsky.app/profile/patbaumgartner.com
+  linkedin: https://www.linkedin.com/in/patbaumgartner/
+  github: https://github.com/patbaumgartner
+  website: https://patbaumgartner.com/
+  sessionize: https://sessionize.com/patbaumgartner/
+  avatar: https://javachampions.org/img/avatars/patbaumgartner.png
+- name: Patrick Linskey
+  year: 2005
+  country: USA
+  twitter: https://twitter.com/plinskey
+  linkedin: https://www.linkedin.com/in/plinskey/
+  avatar: https://javachampions.org/img/avatars/plinskey.png
+- name: Patrycja Wegrzynowicz
+  year: 2024
+  country: Poland
+  twitter: https://twitter.com/yonlabs
+  linkedin: https://www.linkedin.com/in/patrycjaw/
+  avatar: https://javachampions.org/img/avatars/yonlabs.jpg
+- name: Paul Bakker
+  year: 2017
+  country: USA
+  city: San Jose, CA
+  twitter: https://twitter.com/pbakker
+  mastodon: https://mastodon.online/@paulbakker
+  bluesky: https://bsky.app/profile/pbakker.bsky.social
+  linkedin: https://www.linkedin.com/in/paulb01/
+  avatar: https://javachampions.org/img/avatars/pbakker.png
+- name: Paul J. Deitel
+  year: 2005
+  country: USA
+  city: Sudbury, Massachusetts
+  twitter: https://twitter.com/deitel
+  linkedin: https://www.linkedin.com/in/pauldeitel/
+  avatar: https://javachampions.org/http://i.picasion.com/resize89/e4a02b14694e419dbd39f90befecd1ee.jpg
+- name: Paul L. Anderson
+  year: 2016
+  country: USA
+  city: San Diego, California
+  twitter: https://twitter.com/Paul_ASGTeach
+  linkedin: https://www.linkedin.com/in/paul-asgteach/
+  avatar: https://javachampions.org/img/avatars/Paul_ASGTeach.png
+- name: Paul Lipton
+  year: 2005
+  country: USA
+  avatar: https://javachampions.org/img/avatars/Paul_Lipton.png
+- name: Paul Webber
+  year: 2005
+  country: USA
+  city: Poway, California
+  twitter: https://twitter.com/CaptainWebber
+  linkedin: https://www.linkedin.com/in/captainwebber/
+  avatar: https://javachampions.org/img/avatars/CaptainWebber.png
+- name: Peter Lawrey
+  year: 2015
+  country: UK
+  city: Surrey
+  twitter: https://twitter.com/PeterLawrey
+  mastodon: https://mastodon.social/@PeterLawrey
+  bluesky: https://bsky.app/profile/peterlawrey.bsky.social
+  linkedin: https://www.linkedin.com/in/peterlawrey/
+  avatar: https://javachampions.org/img/avatars/PeterLawrey.png
+- name: Peter Pilgrim
+  year: 2007
+  country: UK
+  city: Milton Keynes, England
+  twitter: https://twitter.com/peter_pilgrim
+  bluesky: https://bsky.app/profile/peterpilgrim.bsky.social
+  linkedin: https://www.linkedin.com/in/peterpilgrim2000/
+  avatar: https://javachampions.org/img/avatars/peter_pilgrim.png
+- name: Piotr Przybyl
+  year: 2023
+  country: Poland
+  city: Wrocław
+  twitter: https://twitter.com/piotrprz
+  mastodon: https://mstdn.social/@piotrprz
+  bluesky: https://bsky.app/profile/piotrprz.bsky.social
+  linkedin: https://www.linkedin.com/in/piotrprzybyl/
+  website: https://softwaregarden.dev/
+  sessionize: https://sessionize.com/piotr-przybyl/
+  avatar: https://javachampions.org/img/avatars/piotrprz.png
+- name: Pratik Patel
+  year: 2016
+  country: USA
+  city: Atlanta, Georgia
+  twitter: https://twitter.com/prpatel
+  bluesky: https://bsky.app/profile/prpatel.bsky.social
+  linkedin: https://www.linkedin.com/in/prpatel/
+  avatar: https://javachampions.org/img/avatars/prpatel.png
+- name: Prof. Dierk König
+  year: 2016
+  country: Switzerland
+  city: Zürich
+  twitter: https://twitter.com/mittie
+  bluesky: https://bsky.app/profile/dierk-koenig.bsky.social
+  linkedin: https://www.linkedin.com/in/mittie/
+  avatar: https://javachampions.org/img/avatars/mittie.png
+- name: Prof. Ken Fogel
+  year: 2018
+  country: Canada
+  city: Cote Saint-Luc, Quebec
+  twitter: https://twitter.com/omniprof
+  mastodon: https://mastodon.social/@omniprof
+  bluesky: https://bsky.app/profile/omniprof.bsky.social
+  linkedin: https://www.linkedin.com/in/kenfogel/
+  avatar: https://javachampions.org/img/avatars/omniprof.png
+- name: Prof. Matjaz Juric
+  year: 2010
+  country: Slovenia
+  twitter: https://twitter.com/matjazbj
+  linkedin: https://www.linkedin.com/in/matjaz-b-juric-93b645/
+  avatar: https://javachampions.org/img/avatars/matjazbj.png
+- name: Prof. William Pugh
+  year: 2007
+  country: USA
+  city: Maryland
+  twitter: https://twitter.com/wpugh
+  linkedin: https://www.linkedin.com/in/billpugh/
+  avatar: https://javachampions.org/img/avatars/wpugh.png
+- name: Rabea Gransberger
+  year: 2017
+  country: Germany
+  city: Bremen
+  mastodon: https://mastodon.social/@rgransberger
+  bluesky: https://bsky.app/profile/rgransberger.bsky.social
+  linkedin: https://www.linkedin.com/in/rgransberger/
+  avatar: https://javachampions.org/img/avatars/rgransberger.png
+- name: Rafael Del Nero
+  year: 2018
+  country: Ireland
+  city: Dublin, Leinster
+  twitter: https://twitter.com/RafaDelNero
+  linkedin: https://www.linkedin.com/in/rafadelnero/
+  avatar: https://javachampions.org/img/avatars/RafaDelNero.png
+- name: Rafael Winterhalter
+  year: 2015
+  country: Norway
+  city: Oslo
+  mastodon: https://mastodon.social/@rafaelcodes
+  bluesky: https://bsky.app/profile/rafaelcodes.bsky.social
+  linkedin: https://www.linkedin.com/in/rafaelwth
+  github: https://github.com/raphw
+  website: https://rafael.codes
+  sessionize: https://sessionize.com/rafaelw
+  avatar: https://javachampions.org/img/avatars/rafaelcodes.png
+- name: Rahman Usta
+  year: 2018
+  country: Turkey
+  country_residence: Poland
+  city: Krakow
+  twitter: https://twitter.com/ustarahman
+  linkedin: https://www.linkedin.com/in/rahmanusta/
+  avatar: https://javachampions.org/img/avatars/ustarahman.png
+- name: Rajmahendra Hegde
+  year: 2016
+  country: India
+  city: Hyderabad, Telangana
+  twitter: https://twitter.com/rajmahendrar
+  linkedin: https://www.linkedin.com/in/rajmahendrar/
+  avatar: https://javachampions.org/img/avatars/rajmahendrar.png
+- name: Ray Tsang
+  year: 2018
+  country: USA
+  city: New York City, New York
+  twitter: https://twitter.com/saturnism
+  mastodon: https://mastodon.social/@saturnism
+  bluesky: https://bsky.app/profile/saturnism.me
+  linkedin: https://www.linkedin.com/in/rayjtsang/
+  github: https://github.com/saturnism
+  website: https://saturnism.me
+  avatar: https://javachampions.org/img/avatars/saturnism.png
+- name: Raymond Augé
+  year: 2021
+  country: Canada
+  twitter: https://twitter.com/rotty3000
+  linkedin: https://www.linkedin.com/in/raymond-auge/
+  avatar: https://javachampions.org/img/avatars/rotty3000.png
+- name: Richard Fichtner
+  year: 2024
+  country: Germany
+  city: Weiden in der Oberpfalz
+  twitter: https://twitter.com/RichardFichtner
+  mastodon: https://fosstodon.org/@RichardFichtner
+  bluesky: https://bsky.app/profile/richard.fichtner.dev
+  linkedin: https://www.linkedin.com/in/richardfichtner
+  github: https://github.com/rfichtner/
+  sessionize: https://sessionize.com/richard-fichtner/
+  avatar: https://javachampions.org/img/avatars/RichardFichtner.png
+- name: Rick Hightower
+  year: 2017
+  country: USA
+  city: Dublin, California
+  twitter: https://twitter.com/RickHigh
+  linkedin: https://www.linkedin.com/in/rickhigh/
+  avatar: https://javachampions.org/img/avatars/RickHigh.png
+- name: Rickard Oberg
+  year: 2011
+  country: Malaysia
+  city: Selangor
+  twitter: https://twitter.com/rickardoberg
+  linkedin: https://www.linkedin.com/in/rickardoberg/
+  avatar: https://javachampions.org/img/avatars/rickardoberg.png
+  status:
+  - retired
+- name: Robert Scholte
+  year: 2019
+  country: The Netherlands
+  city: Groningen
+  twitter: https://twitter.com/rfscholte
+  mastodon: https://mstdn.social/@rfscholte
+  bluesky: https://bsky.app/profile/rfscholte.bsky.social
+  linkedin: https://www.linkedin.com/in/rfscholte/
+  avatar: https://javachampions.org/img/avatars/rfscholte.png
+- name: Roberto Cortez
+  year: 2016
+  country: Portugal
+  city: Coimbra
+  twitter: https://twitter.com/radcortez
+  linkedin: https://www.linkedin.com/in/radcortez/
+  avatar: https://javachampions.org/img/avatars/radcortez.png
+- name: Rodrigo Graciano
+  year: 2022
+  country: USA
+  country_citizenship: Brazil
+  city: New York City, New York
+  twitter: https://twitter.com/rodrigograciano
+  mastodon: https://mastodon.social/@graciano
+  bluesky: https://bsky.app/profile/graciano.bsky.social
+  linkedin: https://www.linkedin.com/in/rodrigograciano/
+  sessionize: https://sessionize.com/graciano
+  avatar: https://javachampions.org/img/avatars/rodrigograciano.png
+- name: Romain Guy
+  year: 2006
+  country: USA
+  city: Los Altos, California
+  twitter: https://twitter.com/romainguy
+  bluesky: https://bsky.app/profile/romainguy.dev
+  linkedin: https://www.linkedin.com/in/romainguy/
+  avatar: https://javachampions.org/img/avatars/romainguy.png
+- name: Roman Elizarov
+  year: 2006
+  country: Russian Federation
+  twitter: https://twitter.com/relizarov
+  linkedin: https://www.linkedin.com/in/relizarov/
+  avatar: https://javachampions.org/img/avatars/relizarov.png
+- name: Roman Kennke
+  year: 2017
+  country: Germany
+  city: Freiburg
+  twitter: https://twitter.com/rkennke
+  linkedin: https://www.linkedin.com/in/romankennke/
+  avatar: https://javachampions.org/img/avatars/rkennke.png
+- name: Rommel Feria
+  year: 2005
+  country: Philippines
+  mastodon: https://social.lol/@rom
+  avatar: https://javachampions.org/img/avatars/rom.png
+  status:
+  - founding-member
+- name: Ron Hitchens
+  year: 2008
+  country: UK
+  country_citizenship: USA
+  city: London
+  twitter: https://twitter.com/ronhitchens
+  linkedin: https://www.linkedin.com/in/ronhitchens/
+  avatar: https://javachampions.org/img/avatars/ronhitchens.png
+- name: Roy van Rijn
+  year: 2018
+  country: The Netherlands
+  city: Maassluis, South Holland Province
+  twitter: https://twitter.com/royvanrijn
+  mastodon: https://mastodon.social/@royvanrijn
+  bluesky: https://bsky.app/profile/royvanrijn.com
+  linkedin: https://www.linkedin.com/in/royvanrijn/
+  avatar: https://javachampions.org/img/avatars/royvanrijn.png
+- name: Ruslan Synytsky
+  year: 2020
+  country: Ukraine
+  country_residence: Cyprus
+  city: Zhytomyr/Limassol
+  twitter: https://twitter.com/siruslan
+  linkedin: https://www.linkedin.com/in/siruslan/
+  avatar: https://javachampions.org/img/avatars/siruslan.png
+- name: Russel Winder
+  year: 2021
+  country: UK
+  city: London
+  twitter: https://twitter.com/russel_winder
+  linkedin: https://www.linkedin.com/in/russelwinder/
+  avatar: https://javachampions.org/img/avatars/russel_winder.png
+  status:
+  - passed-away
+- name: Rustam Mehmandarov
+  year: 2017
+  country: Norway
+  twitter: https://twitter.com/RMehmandarov
+  mastodon: https://mastodon.social/@mehmandarov
+  bluesky: https://bsky.app/profile/rustam.no
+  linkedin: https://www.linkedin.com/in/mehmandarov/
+  website: https://rustam.no
+  sessionize: https://sessionize.com/mehmandarov
+  avatar: https://javachampions.org/img/avatars/rmehmandarov.png
+- name: Régina ten Bruggencate
+  year: 2011
+  country: The Netherlands
+  city: Apeldoorn
+  twitter: https://twitter.com/reginatb38
+  linkedin: https://www.linkedin.com/in/reginatb/
+  avatar: https://javachampions.org/img/avatars/reginatb38.png
+- name: San-Hong Li
+  year: 2020
+  country: China
+  twitter: https://twitter.com/sanhong_li
+  linkedin: https://www.linkedin.com/in/san-hong-li-443732a/
+  avatar: https://javachampions.org/img/avatars/sanhong_li.png
+- name: Sander Mak
+  year: 2017
+  country: The Netherlands
+  city: Nijmegen
+  twitter: https://twitter.com/Sander_Mak
+  mastodon: https://federate.social/@sander_mak
+  linkedin: https://www.linkedin.com/in/sandermak/
+  avatar: https://javachampions.org/img/avatars/Sander_Mak.png
+- name: Sandra Parsick
+  year: 2020
+  country: Germany
+  city: Neuss
+  mastodon: https://mastodon.social/@sparsick
+  linkedin: https://www.linkedin.com/in/sandra-parsick/
+  avatar: https://javachampions.org/img/avatars/SandraParsick.png
+- name: Sanne Grinovero
+  year: 2020
+  country: UK
+  country_citizenship: Italy
+  city: London
+  twitter: https://twitter.com/SanneGrinovero
+  mastodon: https://fosstodon.org/@sanne
+  bluesky: https://bsky.app/profile/sannegrinovero.bsky.social
+  linkedin: https://www.linkedin.com/in/sannegrinovero/
+  avatar: https://javachampions.org/img/avatars/SanneGrinovero.png
+- name: Sean M. Phillips
+  year: 2017
+  country: USA
+  city: Washington DC
+  twitter: https://twitter.com/SeanMiPhillips
+  linkedin: https://www.linkedin.com/in/seanmiphillips/
+  avatar: https://javachampions.org/img/avatars/SeanMiPhillips.png
+- name: Sebastian Daschner
+  year: 2016
+  country: Germany
+  city: Munich
+  twitter: https://twitter.com/DaschnerS
+  mastodon: https://mastodon.social/@daschners
+  bluesky: https://bsky.app/profile/daschners.bsky.social
+  youtube: https://youtube.com/@SebastianDaschnerIT
+  linkedin: https://www.linkedin.com/in/sebastian-daschner-9894bb103/
+  github: https://github.com/sdaschner
+  website: https://www.sebastian-daschner.com
+  sessionize: https://sessionize.com/sebastian-daschner
+  avatar: https://javachampions.org/img/avatars/DaschnerS.png
+- name: Sergei Egorov
+  year: 2020
+  country: Russian Federation
+  twitter: https://twitter.com/bsideup
+  bluesky: https://bsky.app/profile/bsideup.github.io
+  linkedin: https://www.linkedin.com/in/bsideup/
+  avatar: https://javachampions.org/img/avatars/bsideup.png
+- name: Sergey Astakhov
+  year: 2005
+  country: Russian Federation
+  avatar: https://javachampions.org/img/avatars/Sergey_Astakhov.png
+- name: Shin Tanimoto
+  year: 2018
+  country: Japan
+  city: Yokohama, Kanagawa
+  twitter: https://twitter.com/cero_t
+  linkedin: https://www.linkedin.com/in/shintanimoto/
+  avatar: https://javachampions.org/img/avatars/cero_t.png
+- name: Simon Maple
+  year: 2014
+  country: UK
+  city: Basingstoke, Hampshire
+  twitter: https://twitter.com/sjmaple
+  bluesky: https://bsky.app/profile/sjmaple.bsky.social
+  linkedin: https://www.linkedin.com/in/simonmaple/
+  avatar: https://javachampions.org/img/avatars/sjmaple.png
+- name: Simon Martinelli
+  year: 2023
+  country: Switzerland
+  city: Erlach
+  twitter: https://twitter.com/simas_ch
+  mastodon: https://mastodon.social/@SimonMartinelli
+  bluesky: https://bsky.app/profile/martinelli.ch
+  youtube: https://www.youtube.com/@simonmartinelli
+  linkedin: https://www.linkedin.com/in/simonmartinelli
+  github: https://github.com/simasch
+  website: https://martinelli.ch
+  sessionize: https://sessionize.com/simon-martinelli
+  speakerdeck: https://speakerdeck.com/simas
+  avatar: https://javachampions.org/img/avatars/simas_ch.png
+- name: Simon Ritter
+  year: 2016
+  country: UK
+  city: Twickenham
+  twitter: https://twitter.com/speakjava
+  mastodon: https://mastodon.social/@speakjava
+  bluesky: https://bsky.app/profile/speakjava.bsky.social
+  linkedin: https://www.linkedin.com/in/siritter/
+  avatar: https://javachampions.org/img/avatars/speakjava.png
+- name: Simone Bordet
+  year: 2016
+  country: Italy
+  city: Turin
+  twitter: https://twitter.com/simonebordet
+  mastodon: https://mastodon.online/@simonebordet
+  bluesky: https://bsky.app/profile/simonebordet.bsky.social
+  linkedin: https://www.linkedin.com/in/simonebordet
+  github: https://github.com/sbordet
+  sessionize: https://sessionize.com/simonebordet
+  avatar: https://javachampions.org/img/avatars/simonebordet.png
+- name: Sooyeul Yang
+  year: 2005
+  country: South Korea
+  linkedin: https://www.linkedin.com/in/javaoracle/
+  avatar: https://javachampions.org/img/avatars/Sooyeul_Yang.png
+- name: Srikanth Raju
+  year: 2006
+  country: USA
+  linkedin: https://www.linkedin.com/in/srikanthraju/
+  avatar: https://javachampions.org/img/avatars/Srikanth_Raju.png
+- name: Stephan Janssen
+  year: 2005
+  country: Belgium
+  city: Bruges
+  twitter: https://twitter.com/Stephan007
+  mastodon: https://techhub.social/@stephan007
+  bluesky: https://bsky.app/profile/stephanjanssen.be
+  linkedin: https://www.linkedin.com/in/stephanjanssen/
+  avatar: https://javachampions.org/img/avatars/Stephan007.png
+- name: Stephane Maldini
+  year: 2022
+  country: USA
+  country_citizenship: France
+  city: California
+  twitter: https://twitter.com/smaldini
+  avatar: https://javachampions.org/img/avatars/smaldini.png
+  status:
+  - passed-away
+- name: Stephen Chin
+  year: 2009
+  country: USA
+  city: Belmont, California
+  twitter: https://twitter.com/steveonjava
+  bluesky: https://bsky.app/profile/steveonjava.bsky.social
+  linkedin: https://www.linkedin.com/in/steveonjava/
+  avatar: https://javachampions.org/img/avatars/steveonjava.png
+- name: Stephen Colebourne
+  year: 2007
+  country: UK
+  city: London
+  twitter: https://twitter.com/jodastephen
+  bluesky: https://bsky.app/profile/jodastephen.bsky.social
+  linkedin: https://www.linkedin.com/in/stephencolebourne/
+  github: https://github.com/jodastephen
+  avatar: https://javachampions.org/img/avatars/jodastephen.png
+- name: Steve Poole
+  year: 2025
+  country: UK
+  city: Hook
+  twitter: https://twitter.com/spoole167
+  avatar: https://javachampions.org/img/avatars/spoole167.png
+- name: Stéphane Épardaud
+  year: 2025
+  country: France
+  city: Nice
+  twitter: https://x.com/UnFroMage
+  bluesky: https://bsky.app/profile/unfromage.bsky.social
+  linkedin: https://www.linkedin.com/in/stephaneepardaud/
+  avatar: https://javachampions.org/img/avatars/UnFroMage.png
+- name: Sven Reimers
+  year: 2015
+  country: Germany
+  city: Konstanz
+  twitter: https://twitter.com/SvenNB
+  mastodon: https://mastodon.social/@svenreimers
+  bluesky: https://bsky.app/profile/sreimers.bsky.social
+  linkedin: https://www.linkedin.com/in/svenreimers/
+  avatar: https://javachampions.org/img/avatars/SvenNB.png
+- name: Sébastien Blanc
+  year: 2020
+  country: France
+  city: Nice
+  twitter: https://twitter.com/sebi2706
+  bluesky: https://bsky.app/profile/sebi2706.bsky.social
+  linkedin: https://www.linkedin.com/in/s%C3%A9bastien-blanc-08a73b1/
+  avatar: https://javachampions.org/img/avatars/sebi2706.png
+- name: Tagir Valeev
+  year: 2020
+  country: Russian Federation
+  country_residence: Germany
+  city: Munich
+  twitter: https://twitter.com/tagir_valeev
+  mastodon: https://mastodon.online/@tagir_valeev
+  bluesky: https://bsky.app/profile/tagir-valeev.bsky.social
+  linkedin: https://www.linkedin.com/in/tagir-valeev/
+  github: https://github.com/amaembo/
+  avatar: https://javachampions.org/img/avatars/tagir_valeev.png
+- name: Tasha Carl
+  year: 2013
+  country: Belgium
+  twitter: https://twitter.com/imifos
+  avatar: https://javachampions.org/img/avatars/imifos.png
+- name: Tatu Saloranta
+  year: 2021
+  country: USA
+  city: Seattle
+  twitter: https://twitter.com/cowtowncoder
+  bluesky: https://bsky.app/profile/cowtowncoder.bsky.social
+  linkedin: https://www.linkedin.com/in/tatu-saloranta-b2b36/
+  avatar: https://javachampions.org/img/avatars/cowtowncoder.png
+- name: Thomas Vitale
+  year: 2025
+  country: Denmark
+  city: Aarhus
+  twitter: https://twitter.com/vitalethomas
+  bluesky: https://bsky.app/profile/thomasvitale.com
+  linkedin: https://www.linkedin.com/in/vitalethomas/
+  avatar: https://javachampions.org/img/avatars/vitalethomas.png
+- name: Thor Henning Hetland
+  year: 2005
+  country: Norway
+  city: Oslo
+  twitter: https://twitter.com/javatotto
+  bluesky: https://bsky.app/profile/javatotto.bsky.social
+  linkedin: https://www.linkedin.com/in/thorhenninghetland
+  avatar: https://javachampions.org/img/avatars/javatotto.png
+- name: Tobias Frech
+  year: 2023
+  country: Germany
+  city: Ludwigsburg
+  mastodon: https://ijug.social/@TobiasFrech
+  linkedin: https://www.linkedin.com/in/javaadministration/
+  github: https://github.com/JOpsDev
+  avatar: https://javachampions.org/img/avatars/TobiasFrech.png
+- name: Tom Cools
+  year: 2023
+  country: Belgium
+  twitter: https://twitter.com/TCoolsIT
+  mastodon: https://mastodon.social/@TCoolsIT
+  bluesky: https://bsky.app/profile/tomcools.be
+  linkedin: https://www.linkedin.com/in/tom-cools-17547548/
+  sessionize: https://sessionize.com/tom-cools/
+  avatar: https://javachampions.org/img/avatars/TCoolsIT.png
+- name: Tom Schindl
+  year: 2015
+  country: Austria
+  twitter: https://twitter.com/tomsontom
+  mastodon: https://mastodon.social/@tomsontom
+  bluesky: https://bsky.app/profile/tomsontom.bsky.social
+  linkedin: https://www.linkedin.com/in/tom-schindl-178ba63/
+  avatar: https://javachampions.org/img/avatars/tomsontom.png
+- name: Tomasz Nurkiewicz
+  year: 2018
+  country: Poland
+  city: Warsaw
+  mastodon: https://fosstodon.org/@nurkiewicz
+  linkedin: https://www.linkedin.com/in/nurkiewicz
+  github: https://github.com/nurkiewicz
+  website: https://nurkiewicz.com
+  avatar: https://javachampions.org/img/avatars/tnurkiewicz.png
+- name: Trisha Gee
+  year: 2014
+  country: Spain
+  country_citizenship: UK
+  city: Seville, Andalusia
+  twitter: https://twitter.com/trisha_gee
+  mastodon: https://jvm.social/@trisha_gee
+  bluesky: https://bsky.app/profile/trishagee.bsky.social
+  linkedin: https://www.linkedin.com/in/trishagee/
+  github: https://trishagee.com/
+  website: https://www.agilejava.eu/
+  sessionize: https://sessionize.com/trisha-gee/
+  speakerdeck: https://github.com/trishagee
+  avatar: https://javachampions.org/img/avatars/trisha_gee.png
+- name: Trustin Lee
+  year: 2020
+  country: South Korea
+  twitter: https://twitter.com/trustin
+  linkedin: https://www.linkedin.com/in/trustin/
+  avatar: https://javachampions.org/img/avatars/trustin.png
+- name: Valere Dejardin
+  year: 2005
+  country: France
+  avatar: https://javachampions.org/img/avatars/Valere_Dejardin.png
+  status:
+  - founding-member
+- name: Victor Grazi
+  year: 2012
+  country: USA
+  city: New York City, New York
+  twitter: https://twitter.com/vgrazi
+  linkedin: https://www.linkedin.com/in/victorgrazi/
+  avatar: https://javachampions.org/img/avatars/vgrazi.png
+- name: Viktor Gamov
+  year: 2021
+  country: USA
+  country_residence: USA
+  city: New York, New York
+  twitter: https://twitter.com/gAmUssA
+  bluesky: https://bsky.app/profile/gamussa.dev
+  youtube: https://www.youtube.com/@viktorgamov
+  linkedin: https://linkedin.com/in/vikgamov
+  github: https://github.com/gamussa/
+  website: http://gamov.io/
+  sessionize: https://sessionize.com/vikgamov
+  avatar: https://javachampions.org/img/avatars/gAmUssA.png
+- name: Viktor Klang
+  year: 2018
+  country: Sweden
+  city: Angelholm
+  twitter: https://twitter.com/viktorklang
+  bluesky: https://bsky.app/profile/viktorklang.com
+  linkedin: https://www.linkedin.com/in/viktorklang/
+  avatar: https://javachampions.org/img/avatars/viktorklang.png
+  status:
+  - alumni
+- name: Vincent Brabant
+  year: 2005
+  country: Belgium
+  twitter: https://twitter.com/vbrabant
+  avatar: https://javachampions.org/img/avatars/vbrabant.png
+  status:
+  - founding-member
+- name: Vincent Massol
+  year: 2005
+  country: France
+  city: Paris
+  twitter: https://twitter.com/vmassol
+  linkedin: https://www.linkedin.com/in/vmassol/
+  avatar: https://javachampions.org/img/avatars/vmassol.png
+- name: Vincent Mayers
+  year: 2016
+  country: USA
+  city: Atlanta, Georgia
+  twitter: https://twitter.com/vincentmayers
+  bluesky: https://bsky.app/profile/mayers.io
+  linkedin: https://www.linkedin.com/in/vincentmayers/
+  avatar: https://javachampions.org/img/avatars/vincentmayers.png
+- name: Vinicius Senger
+  year: 2016
+  country: Brazil
+  twitter: https://twitter.com/vsenger
+  linkedin: https://www.linkedin.com/in/viniciussenger/
+  avatar: https://javachampions.org/img/avatars/vsenger.png
+- name: Vlad Mihalcea
+  year: 2017
+  country: Romania
+  city: Cluj County
+  twitter: https://twitter.com/vlad_mihalcea
+  bluesky: https://bsky.app/profile/vladmihalcea.bsky.social
+  linkedin: https://www.linkedin.com/in/vladmihalcea/
+  avatar: https://javachampions.org/img/avatars/vlad_mihalcea.png
+- name: Víctor Orozco
+  year: 2018
+  country: Guatemala
+  country_residence: Brazil
+  city: São Paulo
+  twitter: https://twitter.com/tuxtor
+  mastodon: https://fosstodon.org/@tuxtor
+  bluesky: https://bsky.app/profile/tuxtor.bsky.social
+  linkedin: https://www.linkedin.com/in/victororozco/
+  avatar: https://javachampions.org/img/avatars/tuxtor.png
+- name: Yakov Fain
+  year: 2005
+  country: USA
+  city: New York City, New York
+  twitter: https://twitter.com/yfain
+  linkedin: https://www.linkedin.com/in/yfain/
+  website: https://yakovfain.com/
+  avatar: https://javachampions.org/img/avatars/yfain.png
+- name: Yakov Sirotkin
+  year: 2005
+  country: Russian Federation
+  city: Saint Petersburg
+  twitter: https://twitter.com/yakov_sirotkin
+  linkedin: https://www.linkedin.com/in/yakovsirotkin/
+  avatar: https://javachampions.org/img/avatars/yakov_sirotkin.png
+- name: Yara Senger
+  year: 2012
+  country: Brazil
+  city: São Paulo
+  twitter: https://twitter.com/yara_tdc
+  linkedin: https://www.linkedin.com/in/yaramascarenhas/
+  avatar: https://javachampions.org/img/avatars/yarasenger.png
+- name: Yoshio Terada
+  year: 2016
+  country: Japan
+  city: Yokohama, Kanagawa
+  twitter: https://twitter.com/yoshioterada
+  linkedin: https://www.linkedin.com/in/yoshioterada/
+  avatar: https://javachampions.org/img/avatars/yoshioterada.png
+- name: Yusuke Yamamoto
+  year: 2019
+  country: Japan
+  city: Tokyo
+  twitter: https://twitter.com/yusuke
+  linkedin: https://www.linkedin.com/in/yusuke/
+  avatar: https://javachampions.org/img/avatars/yusuke.png
+- name: Yuuichi Sakuraba
+  year: 2005
+  country: Japan
+  twitter: https://twitter.com/skrb
+  bluesky: https://bsky.app/profile/skrb95.bsky.social
+  linkedin: https://www.linkedin.com/in/yuichi-sakuraba-4129699/
+  avatar: https://javachampions.org/img/avatars/skrb.png
