@@ -5,15 +5,7 @@
       {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}">{{ end }}
       <h1>{{ .Title }}</h1>
       {{ with .Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}
-      <ul class="author-social">
-        {{ with .Params.bluesky }}<li><a href="{{ . }}" rel="me" target="_blank">Bluesky</a></li>{{ end }}
-        {{ with .Params.mastodon }}<li><a href="{{ . }}" rel="me" target="_blank">Mastodon</a></li>{{ end }}
-        {{ with .Params.linkedin }}<li><a href="{{ . }}" target="_blank">LinkedIn</a></li>{{ end }}
-        {{ with .Params.github }}<li><a href="{{ . }}" target="_blank">GitHub</a></li>{{ end }}
-        {{ with .Params.youtube }}<li><a href="{{ . }}" target="_blank">YouTube</a></li>{{ end }}
-        {{ with .Params.twitter }}<li><a href="{{ . }}" target="_blank">Twitter/X</a></li>{{ end }}
-        {{ with .Params.website }}<li><a href="{{ . }}" target="_blank">Website</a></li>{{ end }}
-      </ul>
+      {{ partial "author-social.html" . }}
     </div>
 
     {{ $slug := .File.ContentBaseName }}
