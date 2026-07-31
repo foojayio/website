@@ -31,6 +31,7 @@ enableRobotsTXT = true
   # No leading slash: Hugo's relURL only adds the baseURL subpath (e.g. /website/
   # on the GitHub Pages test deploy) to paths that DON'T already start with "/".
   logo = "images/foojay-logo.png"
+  favicon = "images/favicon.png"
   # Path to the JUG list consumed by the events sidebar/calendar page.
   jugsDataFile = "jugs"
   eventsDataFile = "events"
