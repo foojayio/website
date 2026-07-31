@@ -1,0 +1,75 @@
+{{ define "main" }}
+<div class="page-head">
+  <div class="page-head__inner">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
+
+<div class="content-col full-width">
+  <article class="page-single prose">
+    {{ .Content }}
+
+    {{/* data/java-champions.yaml is regenerated at every build and daily
+         (scripts/FetchJavaChampions.java, .github/workflows/build-deploy.yml
+         + meetup-sync.yml) from the official Java Champions directory --
+         nobody should ever hand-edit that file, so say so here where the
+         data is actually shown, not just in a code comment. */}}
+    <p class="champions-source-note">
+      This list is fetched automatically from the official
+      <a href="https://github.com/aalmiray/java-champions" target="_blank" rel="noopener">Java Champions directory</a>
+      (the data behind <a href="https://javachampions.org/" target="_blank" rel="noopener">javachampions.org</a>)
+      and refreshed with every foojay.io build. If you're a Java Champion and your entry is missing, out of date, or
+      wrong, please
+      <a href="https://github.com/aalmiray/java-champions/edit/main/java-champions.yml" target="_blank" rel="noopener">edit <code>java-champions.yml</code> directly</a>
+      and it'll show up here automatically the next time the site builds.
+    </p>
+
+    {{/* Dot notation can't reach a data key with a hyphen in it
+         (data/java-champions.yaml -> key "java-champions"), hence index. */}}
+    {{ $champions := index hugo.Data "java-champions" }}
+    {{ if $champions }}
+    <table class="champions-table">
+      <thead>
+        <tr>
+          <th>Champion</th>
+          <th>Year</th>
+          <th>Country</th>
+          <th>Connect</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range sort $champions "name" }}
+        <tr>
+          <td class="champions-table__name">
+            {{ with .avatar }}<img src="{{ . }}" alt="" loading="lazy" width="36" height="36">{{ end }}
+            <span>{{ .name }}</span>
+            {{ with .status }}<span class="champions-table__status">{{ delimit . ", " }}</span>{{ end }}
+          </td>
+          <td>{{ .year }}</td>
+          <td>
+            {{ .country }}{{ with .city }}, {{ . }}{{ end }}
+          </td>
+          <td class="champions-table__links">
+            {{ $links := slice }}
+            {{ with .website }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Website</a>` .) }}{{ end }}
+            {{ with .twitter }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Twitter</a>` .) }}{{ end }}
+            {{ with .mastodon }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Mastodon</a>` .) }}{{ end }}
+            {{ with .bluesky }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Bluesky</a>` .) }}{{ end }}
+            {{ with .linkedin }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">LinkedIn</a>` .) }}{{ end }}
+            {{ with .github }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">GitHub</a>` .) }}{{ end }}
+            {{ with .youtube }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">YouTube</a>` .) }}{{ end }}
+            {{ with .sessionize }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Sessionize</a>` .) }}{{ end }}
+            {{ with .speakerdeck }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Speaker Deck</a>` .) }}{{ end }}
+            {{ delimit $links " &middot; " | safeHTML }}
+          </td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+    {{ else }}
+    <p>Java Champions data hasn't synced yet. It's fetched at every site build from the directory linked above.</p>
+    {{ end }}
+  </article>
+</div>
+{{ end }}

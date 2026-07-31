@@ -136,6 +136,12 @@ enableRobotsTXT = true
   url = "/jugs/"
   weight = 23
 
+[[menu.main]]
+  name = "Java Champions"
+  parent = "Resources"
+  url = "/java-champions/"
+  weight = 24
+
 # ---------------------------------------------------------------------------
 # Java Basics: the deep Quick Start tree. Third level renders as columns, so
 # the 11-step tutorial no longer hides behind two hover intents.

@@ -34,18 +34,25 @@ jobs:
       - name: Refresh JUG list
         run: jbang scripts/FetchJugs.java
 
-      - name: Commit updated JUG list
+      # Refreshes data/java-champions.yaml from the official Java Champions
+      # directory (https://github.com/aalmiray/java-champions) so /java-champions/
+      # is never more than one build behind it. Also run daily by
+      # .github/workflows/meetup-sync.yml, independent of deploys.
+      - name: Refresh Java Champions list
+        run: jbang scripts/FetchJavaChampions.java
+
+      - name: Commit updated data
         run: |
           git config user.name "foojay-bot"
           git config user.email "actions@github.com"
-          git add data/jugs.yaml
+          git add data/jugs.yaml data/java-champions.yaml
           if git diff --cached --quiet; then
-            echo "No JUG list changes."
+            echo "No JUG list or Java Champions changes."
           else
             # [skip ci]: this push is to the same branch/event this workflow
             # already triggers on -- without it, committing here would kick
             # off another build-deploy run for every push to main.
-            git commit -m "chore: refresh JUG list from World Wide JUGs [skip ci]"
+            git commit -m "chore: refresh JUG list + Java Champions list [skip ci]"
             git push
           fi
 

@@ -1,4 +1,4 @@
-name: Daily JUG list + Meetup events sync
+name: Daily JUG + Java Champions + Meetup events sync
 
 on:
   schedule:
@@ -23,6 +23,11 @@ jobs:
       - name: Refresh JUG list
         run: jbang scripts/FetchJugs.java
 
+      # Independent of the JUG list above -- just piggybacking on the same
+      # daily schedule/workflow rather than adding a whole new one.
+      - name: Refresh Java Champions list
+        run: jbang scripts/FetchJavaChampions.java
+
       - name: Fetch events from Meetup
         env:
           MEETUP_OAUTH_TOKEN: ${{ secrets.MEETUP_OAUTH_TOKEN }}
@@ -32,10 +37,10 @@ jobs:
         run: |
           git config user.name "foojay-bot"
           git config user.email "actions@github.com"
-          git add data/jugs.yaml data/events.json
+          git add data/jugs.yaml data/java-champions.yaml data/events.json
           if git diff --cached --quiet; then
-            echo "No JUG list or event changes today."
+            echo "No JUG list, Java Champions, or event changes today."
           else
-            git commit -m "chore: daily JUG list + Meetup events sync"
+            git commit -m "chore: daily JUG list + Java Champions + Meetup events sync"
             git push
           fi

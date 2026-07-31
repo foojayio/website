@@ -761,6 +761,17 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .jugs-table__edit { text-decoration: none; opacity: .55; }
 .jugs-table__edit:hover { opacity: 1; }
 
+/* /java-champions/ page: data/java-champions.yaml source note + table
+   (themes/foojay/layouts/champions/single.html) */
+.champions-source-note { font-size: .92rem; color: var(--ink-muted); }
+.champions-table__name { display: flex; align-items: center; gap: .6rem; }
+.champions-table__name img { width: 36px; height: 36px; border-radius: 50%; flex: 0 0 auto; object-fit: cover; }
+.champions-table__status {
+  font-size: .78rem; color: var(--ink-muted); background: var(--surface-sunken);
+  border: 1px solid var(--border); border-radius: 999px; padding: .1rem .55rem;
+}
+.champions-table__links { font-size: .9rem; white-space: nowrap; }
+
 /* Author box under an article */
 .author-callout {
   display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 1.25rem;
