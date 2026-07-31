@@ -71,6 +71,9 @@
     {{ end }}
 
     {{ if $jugs }}
+    <div class="list-filter">
+      <input type="search" id="jugs-filter" class="list-filter__input" placeholder="Filter by name or country…" aria-label="Filter JUGs by name or country" autocomplete="off">
+    </div>
     <table class="jugs-table">
       <thead>
         <tr>
@@ -84,7 +87,7 @@
       <tbody>
         {{ range sort $jugs "name" }}
         {{ $jug := . }}
-        <tr>
+        <tr data-filter="{{ lower (printf "%s %s" $jug.name (.country | default "")) }}">
           <td>
             {{ with .website }}<a href="{{ . }}" target="_blank" rel="noopener">{{ $jug.name }}</a>{{ else }}{{ .name }}{{ end }}
           </td>
@@ -111,6 +114,28 @@
         {{ end }}
       </tbody>
     </table>
+    <p class="list-filter__empty" id="jugs-filter-empty" hidden>No JUGs match your filter.</p>
+    {{/* Small client-side filter -- narrows the visible table rows by name or
+         country, same pattern as the authors page. */}}
+    <script>
+      (function () {
+        var input = document.getElementById('jugs-filter');
+        var table = document.querySelector('.jugs-table');
+        if (!input || !table) return;
+        var empty = document.getElementById('jugs-filter-empty');
+        var rows = Array.prototype.slice.call(table.querySelectorAll('tbody tr'));
+        input.addEventListener('input', function () {
+          var q = input.value.trim().toLowerCase();
+          var shown = 0;
+          rows.forEach(function (row) {
+            var match = q === '' || (row.getAttribute('data-filter') || '').indexOf(q) !== -1;
+            row.hidden = !match;
+            if (match) shown++;
+          });
+          if (empty) empty.hidden = shown !== 0;
+        });
+      })();
+    </script>
     {{ else }}
     <p>JUG data hasn't synced yet. It's fetched at every site build from the World Wide JUGs directory linked above.</p>
     {{ end }}
