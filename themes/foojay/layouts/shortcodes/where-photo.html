@@ -1,0 +1,6 @@
+{{- /* Illustration for a "Where to find us" card. Kept as a bare <img> (not a
+       figure) so it sits inside a .where-card next to a real Markdown ## heading
+       -- the heading is what lands the card title in the page's table of
+       contents. src goes through resource-url for the baseURL subpath. */ -}}
+{{- $src := partial "resource-url.html" (dict "page" .Page "src" (.Get "src")) -}}
+<img class="where-card__img is-zoomable" src="{{ $src }}" alt="{{ .Get "alt" }}" loading="lazy">
