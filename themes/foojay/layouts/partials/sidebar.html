@@ -2,6 +2,8 @@
   {{/* Repeated on every page -- excluded from the search index so results
        aren't dominated by sidebar widget text. */}}
 
+  {{ partial "toc.html" . }}
+
   {{ with .Site.Params.sponsors }}
   <section class="widget widget-sponsors">
     <h4>Thanks to our sponsors</h4>
@@ -23,6 +25,13 @@
     <a class="view-all" href="{{ "today/" | relURL }}">All categories</a>
   </section>
 
+  {{/* Authors + JUGs are dropped whenever a TOC is showing: a post long
+       enough to have h2/h3 headings makes for a tall sidebar once these are
+       added on top of it, and the whole aside is one sticky block -- so
+       past a certain combined height, the TOC (listed first) scrolls out of
+       view instead of staying visible the whole time, defeating the point.
+       Short posts with no TOC still get the full widget set as before. */}}
+  {{ if not .TableOfContents }}
   <section class="widget widget-authors">
     <h4>Authors</h4>
     <ul>
@@ -47,5 +56,6 @@
     </ul>
     <a class="view-all" href="{{ "jugs/" | relURL }}">All Java User Groups</a>
   </section>
+  {{ end }}
 
 </aside>

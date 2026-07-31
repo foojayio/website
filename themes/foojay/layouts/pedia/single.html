@@ -1,6 +1,10 @@
 {{ define "main" }}
-<div class="content-col full-width">
-  <article class="post-single pedia-single">
+{{/* Most pedia entries are a short glossary definition with no headings,
+     so .TableOfContents is empty and this stays full-width -- only entries
+     long enough to have h2/h3s get the "On this page" sidebar. */}}
+{{ $hasToc := .TableOfContents }}
+<div class="{{ if $hasToc }}layout-with-sidebar{{ else }}content-col full-width{{ end }}">
+  <article class="{{ if $hasToc }}content-col {{ end }}post-single pedia-single">
     <p class="pedia-back"><a href="{{ "pedia/" | relURL }}">&larr; Java Terms Explained</a></p>
 
     <h1>{{ .Title }}</h1>
@@ -11,5 +15,10 @@
 
     <p class="pedia-back pedia-back--foot"><a href="{{ "pedia/" | relURL }}">&larr; Back to all terms</a></p>
   </article>
+  {{ if $hasToc }}
+  <aside class="sidebar" data-pagefind-ignore>
+    {{ partial "toc.html" . }}
+  </aside>
+  {{ end }}
 </div>
 {{ end }}

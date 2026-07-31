@@ -1,0 +1,15 @@
+{{- /* Sticky "On this page" table of contents + scroll-spy, built from
+       Hugo's automatic h2/h3 heading extraction (.TableOfContents) -- no
+       manual heading list to maintain. Renders nothing when a page has no
+       h2/h3 headings, so short posts/pages/pedia entries are unaffected.
+       Paired with static/js/toc.js (highlights the link for whichever
+       heading is currently in view) and the .toc rules in style.css. */ -}}
+{{/* .TableOfContents already renders its own <nav id="TableOfContents">
+     wrapper around the <ul>, so this outer element is a plain <div> rather
+     than a second, redundant <nav> landmark. */}}
+{{ with .TableOfContents }}
+<div class="widget toc" data-pagefind-ignore>
+  <h4>On this page</h4>
+  {{ . }}
+</div>
+{{ end }}

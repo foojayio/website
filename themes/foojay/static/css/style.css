@@ -493,6 +493,17 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 }
 .sponsor-logos { gap: .5rem; }
 
+/* "On this page" table of contents + scroll-spy (partials/toc.html,
+   static/js/toc.js). Nested for h2 > h3 (Hugo's default TOC levels). */
+.toc #TableOfContents ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .05rem; }
+.toc #TableOfContents > ul > li > ul { margin-top: .05rem; padding-left: .9rem; }
+.toc #TableOfContents a {
+  display: block; padding: .32rem 0 .32rem .75rem; font-size: .92rem;
+  color: var(--ink-soft); border-left: 2px solid transparent; line-height: 1.3;
+}
+.toc #TableOfContents a:hover { color: var(--brand-accent-strong); }
+.toc #TableOfContents a.is-active { color: var(--brand-accent-strong); border-left-color: var(--brand-accent-strong); font-weight: 600; }
+
 /* ------------------------------------------------------------- article --- */
 
 .post-single, .page-single { max-width: 88ch; }
@@ -732,6 +743,9 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .prose > * + * { margin-top: 1.1em; }
 .prose h2 { margin-top: 2.25rem; }
 .prose h3 { margin-top: 1.75rem; }
+/* So a TOC-link jump (or any #heading link) doesn't leave the heading
+   tucked under the sticky header. */
+.prose h2, .prose h3 { scroll-margin-top: calc(var(--header-h) + 1rem); }
 .prose ul, .prose ol { padding-left: 1.4rem; }
 .prose li + li { margin-top: .35rem; }
 .prose figure { margin: 1.75rem 0; }
