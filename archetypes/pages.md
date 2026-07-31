@@ -6,9 +6,8 @@ canonical: ""
 # /java-quick-start/install-java/install-java-on-windows/) can be
 # reproduced exactly instead of relying on Hugo's default section nesting.
 url: ""
-# Opt-in loaders for interactive widgets carried over from WordPress. The
-# conversion script (ConvertPages.java) sets these automatically when it detects
-# the widget in the body; set them by hand if you add one manually.
+# Opt-in loaders for interactive widgets carried over from WordPress. Set them
+# by hand when a page embeds one of these widgets.
 #   jdoodle: true      -> load the JDoodle runner for <div data-pym-src=...> snippets
 #   enlighterjs: true  -> load EnlighterJS for <pre class="EnlighterJSRAW"> code blocks
 aliases: []

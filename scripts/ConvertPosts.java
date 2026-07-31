@@ -58,8 +58,8 @@ import java.util.stream.Stream;
  * theme changes; scrapePost() logs a WARNING when the content selector matches nothing.
  *
  * BODY CONVERSION:
- * The body is converted to Markdown by HtmlToMarkdown.java (shared with
- * ConvertPages.java via `//SOURCES`), which also pulls foojay-hosted images local
+ * The body is converted to Markdown by HtmlToMarkdown.java (included via
+ * `//SOURCES`), which also pulls foojay-hosted images local
  * (co-located per post under static/images/posts/<year>/<month>/<slug>/) and flags
  * the JDoodle / EnlighterJS widgets so the theme only loads their scripts where used.
  *

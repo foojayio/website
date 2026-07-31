@@ -18,9 +18,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Shared body conversion for the WordPress -> Hugo migration scripts
- * (ConvertPosts.java and ConvertPages.java, which include this file via
- * jbang's `//SOURCES HtmlToMarkdown.java`).
+ * Shared body conversion for the WordPress -> Hugo migration scripts. Now used
+ * by ConvertPosts.java (which includes this file via jbang's
+ * `//SOURCES HtmlToMarkdown.java`); the one-off page/glossary scrapers that also
+ * used it have been retired now that content/pages and content/pedia are done.
  *
  * Given the scraped article-content element it:
  *   1. downloads foojay-hosted images local (so nothing hotlinks the WP site

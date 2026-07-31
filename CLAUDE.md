@@ -9,11 +9,14 @@ IntelliJ's terminal, read this before making changes.
 
 - **Hugo skeleton**: `hugo.toml`, `themes/foojay/` (layouts + `static/css/style.css`),
   `archetypes/` for posts/authors/pages.
-- **Three jbang conversion scripts** in `scripts/`: `ConvertPosts.java`,
-  `ConvertAuthors.java`, `ConvertPages.java`. They scrape the live
-  foojay.io site (no WP admin/DB access was used or assumed) and write Hugo
-  content markdown. All three are idempotent (safe to re-run repeatedly) and
-  respect a `frozen: true` frontmatter flag to avoid clobbering hand-edited files.
+- **Two jbang conversion scripts** in `scripts/`: `ConvertPosts.java` and
+  `ConvertAuthors.java`. They scrape the live foojay.io site (no WP admin/DB
+  access was used or assumed) and write Hugo content markdown. Both are
+  idempotent (safe to re-run repeatedly) and respect a `frozen: true` frontmatter
+  flag to avoid clobbering hand-edited files. (The one-off `ConvertPages.java`
+  and `ConvertPedia.java` scrapers were removed once `content/pages/` and
+  `content/pedia/` were converted — those sections are hand-maintained now; only
+  posts and authors keep growing on the live site, so only those are re-scraped.)
 - **`scripts/FetchJugs.java`**: regenerates `data/jugs.yaml` from the
   community-run [World Wide JUGs directory](https://github.com/World-Wide-JUGs/GlobalWWJugs)
   (one Markdown-with-YAML-frontmatter file per JUG under its `_jugs/`

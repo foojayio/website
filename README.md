@@ -48,7 +48,6 @@ uses virtual threads; the rest need 17+).
 ```bash
 jbang scripts/ConvertPosts.java     # /today/ posts        -> content/posts/
 jbang scripts/ConvertAuthors.java   # /today/author/       -> content/authors/
-jbang scripts/ConvertPedia.java     # /pedia/ glossary     -> content/pedia/
 ```
 
 These are **idempotent** — safe to re-run on a schedule during the trial. They
@@ -57,6 +56,11 @@ slug so a bundle stays put across re-runs, and skip any file whose frontmatter i
 hand-marked `frozen: true`. Body-HTML→Markdown conversion (image localization,
 YouTube/`{{< img >}}` shortcodes, widget preservation) is shared via
 `HtmlToMarkdown.java`.
+
+The one-off page and glossary scrapers (`ConvertPages.java`, `ConvertPedia.java`)
+have been removed — `content/pages/` and `content/pedia/` are done and now
+maintained by hand. Only posts and authors still get re-scraped, since those keep
+growing on the live site.
 
 Each `Convert*` script also supports `--url <single page URL>` to test/tune its
 scraping against one real page, and `ConvertPosts` supports `--days N` / `--since
