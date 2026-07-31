@@ -4,4 +4,4 @@
   * If JFX Central -> links@jfx-central.com
 * Content for log4j-cve.md
 * Content for advisory board
-* 
+* Content for Foojay.io AI Portal

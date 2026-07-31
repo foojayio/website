@@ -100,6 +100,8 @@ enableRobotsTXT = true
   parent = "News"
   url = "/today/category/jc-ai-newsletter/"
   weight = 13
+  [menu.main.params]
+    desc = "Newsletter curated by Miro Wengner"
 
 [[menu.main]]
   name = "Foojay.io AI Portal"
@@ -168,7 +170,7 @@ enableRobotsTXT = true
   url = "/pedia"
   weight = 31
   [menu.main.params]
-    desc = "The jargon dictionary"
+    desc = "The Java and OpenJDK jargon dictionary"
 
 [[menu.main]]
   name = "Other Tutorials"
