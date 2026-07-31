@@ -44,6 +44,4 @@ Sidenote: this tutorial is based on a section of the book "[Getting Started with
 
 
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" src="/images/pages/java-quick-start/quick-start-tutorial/ebook-paperbook.jpg" alt="" class="wp-image-36654" width="300" height="200">
-</figure>
+ {{< img src="/images/pages/java-quick-start/quick-start-tutorial/ebook-paperbook.jpg" alt="" width="300" height="200" >}}

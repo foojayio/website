@@ -24,20 +24,10 @@ Once the `.msi` file has completed downloading, double-click it, and follow the 
 
 
 
-<figure class="wp-block-gallery has-nested-images columns-4 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img fetchpriority="high" decoding="async" width="616" height="481" data-id="61633" src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-1.png" alt="" class="wp-image-61633">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="616" height="481" data-id="61632" src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-2.png" alt="" class="wp-image-61632">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="616" height="481" data-id="61630" src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-3.png" alt="" class="wp-image-61630">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="616" height="481" data-id="61631" src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-4.png" alt="" class="wp-image-61631">
- </figure>
-</figure>
+  {{< img src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-1.png" alt="" width="616" height="481" >}}
+  {{< img src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-2.png" alt="" width="616" height="481" >}}
+  {{< img src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-3.png" alt="" width="616" height="481" >}}
+  {{< img src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-4.png" alt="" width="616" height="481" >}}
 
 
 

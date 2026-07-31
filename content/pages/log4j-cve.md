@@ -102,22 +102,16 @@ Relevant Tweets
 
 
 
-<figure class="wp-block-image size-large is-resized">
- <a target="_blank" href="https://twitter.com/malwaretechblog/status/1469289471463944198"><img decoding="async" src="/images/pages/log4j-cve/image-950x1024.png" alt="" class="wp-image-50965" width="436" height="469"></a>
-</figure>
+ <a target="_blank" href="https://twitter.com/malwaretechblog/status/1469289471463944198">{{< img src="/images/pages/log4j-cve/image-950x1024.png" alt="" width="436" height="469" >}}</a>
 
 
 
 
 
-<figure class="wp-block-image size-large is-resized">
- <a target="_blank" href="https://twitter.com/malwaretechblog/status/1470096336133373954"><img decoding="async" src="/images/pages/log4j-cve/kryptos-1024x1000.png" alt="" class="wp-image-50966" width="438" height="428"></a>
-</figure>
+ <a target="_blank" href="https://twitter.com/malwaretechblog/status/1470096336133373954">{{< img src="/images/pages/log4j-cve/kryptos-1024x1000.png" alt="" width="438" height="428" >}}</a>
 
 
 
 
 
-<figure class="wp-block-image size-large is-resized">
- <a target="_blank" href="https://twitter.com/TomGranot/status/1469704635715706885"><img loading="lazy" decoding="async" src="/images/pages/log4j-cve/checking-1024x802.png" alt="" class="wp-image-50978" width="440" height="345"></a>
-</figure>
+ <a target="_blank" href="https://twitter.com/TomGranot/status/1469704635715706885">{{< img src="/images/pages/log4j-cve/checking-1024x802.png" alt="" width="440" height="345" >}}</a>
