@@ -2,7 +2,12 @@
 <div class="layout-with-sidebar">
   <div class="content-col">
     <div class="author-profile">
-      {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}">{{ end }}
+      {{/* Explicit data-pagefind-meta so Pagefind's site search uses the
+           author's own photo as the result thumbnail. Without this, Pagefind's
+           automatic image detection scans the whole indexed page -- including
+           the post-grid below -- and can end up picking a post's hero image
+           instead of the avatar. */}}
+      {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" data-pagefind-meta="image[src]" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}">{{ end }}
       <h1>{{ .Title }}</h1>
       {{ with .Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}
       {{ partial "author-social.html" . }}
