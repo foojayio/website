@@ -1,7 +1,7 @@
 ---
 title: "How to Create a Spring Boot Fraud Scoring Service"
 date: "2026-07-31T08:45:43+00:00"
-lastmod: "2026-07-31T08:52:06+00:00"
+lastmod: "2026-07-31T11:36:10+00:00"
 description: "Most Java teams who want a machine learning model in production end up standing up a Python service and calling it over HTTP. That works, but it buys you, - by Geertjan Wielenga"
 authors:
   - "geertjan-wielenga"
@@ -20,26 +20,28 @@ frozen: false
 
 Most Java teams who want a machine learning model in production end up standing up a Python service and calling it over HTTP. That works, but it buys you, as a Java developer, a second runtime, a second deployment pipeline, a network hop on every prediction, and a team boundary that turns retraining into someone else's ticket.
 
-**Deep Netts removes that split: it's a pure-Java deep learning library, so the model trains in Java, serializes to a file, and loads back into your Spring Boot application as an ordinary bean. Predictions become in-process method calls measured in microseconds, with nothing extra to deploy, secure, or monitor.**
+**[Deep Netts](https://www.deepnetts.com/) removes that split: it's a pure-Java deep learning library, so the model trains in Java, serializes to a file, and loads back into your Spring Boot application as an ordinary bean. Predictions become in-process method calls measured in microseconds, with nothing extra to deploy, secure, or monitor.**
 
-This tutorial starts from Deep Netts' credit card fraud detection example and takes it somewhere the example deliberately doesn't go --- a running HTTP service shaped like something you could put in front of real traffic. You'll:
+This tutorial starts from [Deep Netts' credit card fraud detection example](https://github.com/deepnetts/CreditCardFraudDetection) and takes it somewhere the example doesn't go --- a running HTTP service shaped like something you could put in front of real traffic.
+
+You'll:
 
 1. Train a feed-forward network on the public Kaggle transactions dataset.
-2. Export it alongside the scaling parameters it silently depends on
+2. Export it alongside the scaling parameters it silently depends on.
 3. Wrap it in a Spring Boot application with proper thread safety, a decision threshold you chose on purpose, health checks, and regression tests.
 
-Expect to spend as much time on operational concerns --- dependency resolution in CI, model versioning, licensing limits --- as on the network architecture, because in practice those are what decide whether the thing survives its first month. B
+Expect to spend as much time on operational concerns --- dependency resolution in CI and model versioning --- as on the network architecture, because in practice those are what decide whether the thing survives its first month.
 
-udget around two hours.
+Plan around two hours for working through the scenario below!
 
 Step 1 --- Get the original example running {#h2-0-step-1-get-the-original-example-running}
 -------------------------------------------------------------------------------------------
 
 ### 1.1 Install Deep Netts into your local Maven repository {#h3-1-1-1-install-deep-netts-into-your-local-maven-repository}
 
-Deep Netts Pro is not on Maven Central, you need it for this scenario, and it is free (unless you're making more than $1M).
+Deep Netts Pro is not on Maven Central, you need it for this scenario, and it is free (unless the annual revenue generated through the product is over USD 100,000 and the total company revenue is over USD 1,000,000, as explained in step 11 "Licensing, before you go live", below).
 
-Download the Deep Netts Pro ZIP from [deepnetts.com/download-latest](https://www.deepnetts.com/download-latest), unzip it, then run the import script from the extracted directory:
+Download the Deep Netts Pro ZIP from [Deep Netts](https://www.deepnetts.com/) (click "Free download" in the top right) unzip it, then run the import script from the extracted directory:
 
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./importToLocalMaven.sh      # importToLocalMaven.bat on Windows
 </pre>

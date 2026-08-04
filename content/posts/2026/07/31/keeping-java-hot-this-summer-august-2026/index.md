@@ -1,13 +1,16 @@
 ---
 title: "Keeping Java Hot This Summer"
 date: "2026-07-31T09:50:18+00:00"
-lastmod: "2026-07-31T09:50:27+00:00"
+lastmod: "2026-07-31T16:16:40+00:00"
 description: "Simon Ritter tours US & Canada JUGs in August 2026 with a deep technical talk on JVM startup and warmup. Find your city and register."
 authors:
   - "dominika-tasarz"
 image: "Azul-Payara-Community-New-Release-2.jpg"
 categories:
+  - "CRaC"
   - "Java"
+  - "Java Beginner"
+  - "JUGs"
 tags:
 related_posts:
 frozen: false
@@ -46,8 +49,8 @@ The full tour details {#h2-2-the-full-tour-details}
 |   Date    |        JUG        |                                                                            Registration                                                                             |
 |:---------:|:-----------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | August 4  | New York Java SIG |                              [Register on Meetup](https://www.meetup.com/javasig/events/315813188/?eventOrigin=group_upcoming_events)                               |
-| August 5  | Garden State JUG  |                                                                   [gsjug.org](https://gsjug.org/)                                                                   |
-| August 6  |   Montreal JUG    |                [meetup.com/montreal-jug](https://www.meetup.com/montreal-jug/) --- event page not yet posted, follow the group for the announcement                 |
+| August 5  | Garden State JUG  |               [Register Here](https://www.eventbrite.com/e/keeping-your-java-hot-by-solving-the-jvm-startup-and-warmup-problem-tickets-1994985965727)               |
+| August 6  |   Montreal JUG    |            [Register on Meetup](https://www.eventbrite.com/e/keeping-your-java-hot-by-solving-the-jvm-startup-and-warmup-problem-tickets-1994985965727)             |
 | August 25 |    Ottawa JUG     |                       [Register on Meetup](https://www.meetup.com/ottawa-java-user-group/events/315767728/?eventOrigin=group_featured_event)                        |
 | August 27 |    Toronto JUG    | [meetup.com/toronto-java-users-group](https://www.meetup.com/toronto-java-users-group/events/) --- event page not yet posted, follow the group for the announcement |
 
