@@ -23,6 +23,7 @@ topics:
   - "CodeRabbit"
   - "Developer Tools"
   - "GenAI"
+wpSlug: "coderabbit"
 canonical: "https://foojay.io/sponsor/coderabbit/"
 frozen: false
 ---

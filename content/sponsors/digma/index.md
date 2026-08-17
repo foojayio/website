@@ -24,6 +24,7 @@ topics:
   - "Observability"
   - "Digma"
   - "Micrometer"
+wpSlug: "digma"
 canonical: "https://foojay.io/sponsor/digma/"
 frozen: false
 ---

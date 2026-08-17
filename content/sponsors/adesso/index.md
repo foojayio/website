@@ -17,6 +17,7 @@ github: ""
 # are this sponsor's articles. ConvertSponsors.java preserves this list verbatim.
 authors:
 topics:
+wpSlug: "adesso"
 canonical: "https://foojay.io/sponsor/adesso/"
 frozen: false
 ---

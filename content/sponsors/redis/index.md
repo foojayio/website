@@ -20,6 +20,7 @@ authors:
   - "rowan-trollope"
 topics:
   - "Redis"
+wpSlug: "redis"
 canonical: "https://foojay.io/sponsor/redis/"
 frozen: false
 ---
