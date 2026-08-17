@@ -196,7 +196,7 @@ IntelliJ's terminal, read this before making changes.
   `params.sponsors` list from `hugo.toml` that was never populated, so the
   widget had always silently rendered nothing.
 - **Sponsor URLs keep the WP slug**: bundle folders are named after the
-  WordPress slug (e.g. `azul-enterprise-java-platform-foojay-io-gold-sponsor`,
+  WordPress slug (e.g. `azul`,
   not `azul`) and `hugo.toml`'s `[permalinks] sponsors` maps the section to
   `/sponsor/:slugorcontentbasename/`, reproducing the legacy path exactly so
   no alias is needed. Renaming a folder silently breaks a live URL.

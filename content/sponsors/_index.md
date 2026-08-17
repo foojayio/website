@@ -10,7 +10,7 @@ heroTitle: "Who Keeps Foojay Running"
 # sits on -- so it was invisible filler that only ate layout width. Re-download
 # the original and it will need cropping again; the artwork's bounding box is
 # x 320..530, y 0..308.
-heroImage: "sponsors-banner.png"
+heroImage: "/images/sponsors/sponsors-banner.png"
 description: "The organisations funding foojay.io — the platform, podcast, events and content that hundreds of thousands of Java and OpenJDK developers rely on every day."
 canonical: "https://foojay.io/our-sponsors/"
 # The section listing lives at the WordPress path, not at /sponsors/. Individual

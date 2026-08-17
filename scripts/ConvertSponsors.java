@@ -368,17 +368,56 @@ public class ConvertSponsors {
         return existing != null ? existing : OUTPUT_DIR.resolve(slug);
     }
 
+    /**
+     * Locates the bundle for a WordPress slug, by folder name OR by the
+     * `wpSlug:` recorded in its frontmatter.
+     *
+     * The wpSlug fallback is what makes a folder RENAME safe. Some WordPress
+     * sponsor slugs are SEO strings rather than names
+     * ("azul-enterprise-java-platform-foojay-io-gold-sponsor"), so a folder
+     * will sometimes be shortened by hand to something sane. Matching on the
+     * folder name alone, a re-run would then fail to recognise the renamed
+     * bundle and write a SECOND one under the old slug -- duplicating the
+     * sponsor and starting it with an empty `authors:` list, silently emptying
+     * its article page. Matching on wpSlug keeps the rename stable forever.
+     *
+     * writeSponsor() emits an `aliases:` entry for the old path whenever the
+     * folder name and wpSlug differ, so renaming never breaks the live URL.
+     */
     static Path findExistingBundle(String slug) {
         if (!Files.isDirectory(OUTPUT_DIR)) return null;
         try (Stream<Path> s = Files.walk(OUTPUT_DIR)) {
-            return s.filter(p -> p.getFileName().toString().equals("index.md")
+            List<Path> bundles = s.filter(p -> p.getFileName().toString().equals("index.md")
                             && p.getParent() != null
-                            && p.getParent().getFileName().toString().equals(slug))
+                            && !p.getParent().equals(OUTPUT_DIR))
                     .map(Path::getParent)
-                    .findFirst().orElse(null);
+                    .toList();
+            for (Path b : bundles) {
+                if (b.getFileName().toString().equals(slug)) return b;
+            }
+            for (Path b : bundles) {
+                if (slug.equals(frontmatterValue(b.resolve("index.md"), "wpSlug"))) return b;
+            }
+            return null;
         } catch (IOException e) {
             return null;
         }
+    }
+
+    /** The value of a simple `key: "value"` frontmatter line, or null. */
+    static String frontmatterValue(Path md, String key) {
+        if (!Files.isRegularFile(md)) return null;
+        try {
+            for (String line : Files.readAllLines(md)) {
+                if (line.startsWith(key + ":")) {
+                    return line.substring(key.length() + 1).trim().replaceAll("^\"|\"$", "");
+                }
+                if (line.equals("---") && !line.isEmpty()) continue;
+            }
+        } catch (IOException e) {
+            // fall through
+        }
+        return null;
     }
 
     static void writeSponsor(SponsorData d) throws IOException {
@@ -417,6 +456,20 @@ public class ConvertSponsors {
         // topic list from their posts' categories instead.
         fm.append("topics:\n");
         for (String t : d.topics) fm.append("  - ").append(yamlString(t)).append("\n");
+
+        // The WordPress slug, recorded so findExistingBundle() can still match
+        // this bundle after its folder has been renamed (see that method).
+        fm.append("wpSlug: ").append(yamlString(d.slug)).append("\n");
+
+        // If the folder was renamed, the WP URL must keep working -- URLs are
+        // load-bearing here (see CLAUDE.md). Hugo's permalink follows the FOLDER
+        // name, so the old path is preserved as an alias. Emitted automatically
+        // rather than left to whoever does the rename to remember.
+        String folder = d.bundleDir.getFileName().toString();
+        if (!folder.equals(d.slug)) {
+            fm.append("aliases:\n");
+            fm.append("  - ").append(yamlString("/sponsor/" + d.slug + "/")).append("\n");
+        }
 
         fm.append("canonical: ").append(yamlString(BASE_URL + "/sponsor/" + d.slug + "/")).append("\n");
         fm.append("frozen: false\n");

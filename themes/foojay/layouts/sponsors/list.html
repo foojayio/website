@@ -11,7 +11,11 @@
 </div>
 
 <div class="content-col full-width">
-  <article class="page-single prose">
+  {{/* --wide: this page is a card grid, not prose, so it opts out of the 88ch
+       reading measure that would otherwise leave the right third empty. The
+       hero's own text still reads at a sane length because it sits in the
+       narrower of the hero's two columns. */}}
+  <article class="page-single page-single--wide prose">
     {{/* Two-column hero (text left, banner right) collapsing to one column on
          narrow screens -- same arrangement as the WordPress page. The image is
          decorative, so alt="" keeps it out of the accessibility tree rather

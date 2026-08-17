@@ -530,6 +530,11 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 /* ------------------------------------------------------------- article --- */
 
 .post-single, .page-single { max-width: 88ch; }
+/* Opt out of the 88ch reading measure. That cap is right for prose -- a line
+   longer than ~90 characters is hard to track back to the next line -- but
+   wrong for pages whose content is a grid or table rather than paragraphs,
+   which just get a wide empty gutter on the right instead. */
+.page-single--wide { max-width: none; }
 .post-single .post-meta {
   display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
   color: var(--ink-muted); font-size: .93rem; margin-bottom: 1.25rem;
@@ -1251,7 +1256,10 @@ body.lightbox-open { overflow: hidden; }
 .sponsor-stat span { color: var(--ink-muted); font-size: .85rem; }
 
 .sponsor-section { margin: 2.5rem 0; }
-.sponsor-section > h2 { font-size: 1.35rem; margin: 0 0 1rem; }
+/* scroll-margin so an "On this page" jump doesn't park the heading under the
+   sticky header -- same reason .prose h2/h3 carry it. Applied to the heading
+   wherever it sits, since the articles heading is nested in .section-head. */
+.sponsor-section h2 { font-size: 1.35rem; margin: 0 0 1rem; scroll-margin-top: calc(var(--header-h) + 1rem); }
 
 .sponsor-topics { display: flex; flex-wrap: wrap; gap: .5rem; }
 .sponsor-topic {
