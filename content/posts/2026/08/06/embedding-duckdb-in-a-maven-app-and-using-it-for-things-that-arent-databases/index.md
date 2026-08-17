@@ -1,11 +1,11 @@
 ---
 title: "Embedding DuckDB in a Maven App (and Using It for Things That Aren't Databases)"
 date: "2026-08-06T08:46:28+00:00"
-lastmod: "2026-08-06T09:21:47+00:00"
+lastmod: "2026-08-11T13:52:51+00:00"
 description: "DuckDB is described as \"SQLite for analytics,\" which is true: it's an in-process database engine that runs inside your application, with no server to - by Geertjan Wielenga"
 authors:
   - "geertjan-wielenga"
-image: "images.png"
+image: "Favicon-3-2.png"
 categories:
   - "Databases"
   - "Java"
@@ -15,15 +15,6 @@ related_posts:
 enlighterjs: true
 frozen: false
 ---
-
-### Author (1)
-
-![Avatar photo](cropped-geertjan-3-41-32-80x80.png)  
-[#### Geertjan Wielenga](https://foojay.io/today/author/geertjan-wielenga/)
-
-* [](https://x.com/geertjanw)
-* [](https://www.facebook.com/geertjanw)
-* [](https://www.linkedin.com/in/geertjanwielenga/)
 
 [DuckDB](https://duckdb.org/) is described as "SQLite for analytics," which is true: it's an in-process database engine that runs inside your application, with no server to install or manage. What's less obvious from that description is that **you can get value out of it without ever creating a database at all**. Because it can query CSV, JSON, and Parquet files directly --- local or over HTTP --- it works perfectly well as an embedded data-crunching library that happens to speak SQL.
 

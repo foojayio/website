@@ -1,7 +1,7 @@
 ---
 title: "Jakarta Agentic AI Hits Its First Milestone"
 date: "2026-08-05T10:43:12+00:00"
-lastmod: "2026-08-05T10:43:14+00:00"
+lastmod: "2026-08-07T08:11:13+00:00"
 description: "Jakarta Agentic AI hits its first milestone - 1.0.0-M1 is live on Maven Central, with a draft spec defining annotation-driven AI agents for Jakarta EE."
 authors:
   - "dominika-tasarz"
@@ -16,7 +16,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Jakarta Agentic AI just shipped its first deliverable: [version 1.0.0-M1 is live on Maven Central](https://central.sonatype.com/artifact/jakarta.agentic-ai/jakarta.agentic-ai-api/1.0.0-M1) and [the draft 1.0 specification is out for review](https://github.com/jakartaee/agentic-ai/releases/download/1.0.0-M1/jakarta-agentic-ai-1.0.0-M1.pdf). The project now has a specific API surface that developers can look at, try out and give feedback on.
+[Jakarta Agentic AI](https://jakarta.ee/specifications/agentic-ai/1.0/)just shipped its first deliverable: [version 1.0.0-M1 is live on Maven Central](https://central.sonatype.com/artifact/jakarta.agentic-ai/jakarta.agentic-ai-api/1.0.0-M1) and [the draft 1.0 specification is out for review](https://github.com/jakartaee/agentic-ai/releases/download/1.0.0-M1/jakarta-agentic-ai-1.0.0-M1.pdf). The project now has a specific API surface that developers can look at, try out and give feedback on.
 
 Quick recap - what is Jakarta Agentic AI? {#h2-0-quick-recap-what-is-jakarta-agentic-ai}
 ----------------------------------------------------------------------------------------
