@@ -398,6 +398,14 @@ public class ConvertSponsors {
             for (Path b : bundles) {
                 if (slug.equals(frontmatterValue(b.resolve("index.md"), "wpSlug"))) return b;
             }
+            // Bundles written before `wpSlug:` existed don't carry it, but they
+            // do carry `canonical:` -- which ends in the same WP slug. Without
+            // this fallback, the first run after a rename can't recognise such a
+            // bundle and duplicates the sponsor with an empty `authors:` list.
+            String canonical = BASE_URL + "/sponsor/" + slug + "/";
+            for (Path b : bundles) {
+                if (canonical.equals(frontmatterValue(b.resolve("index.md"), "canonical"))) return b;
+            }
             return null;
         } catch (IOException e) {
             return null;
