@@ -84,6 +84,13 @@ public final class HtmlToMarkdown {
     private static final Pattern YOUTUBE_ID = Pattern.compile(
             "(?:youtube(?:-nocookie)?\\.com/embed/|youtu\\.be/|[?&]v=)([A-Za-z0-9_-]{6,})");
 
+    // Flexmark renders every <hr> as this thematic break. WordPress bodies are
+    // littered with decorative <hr>s between sections -- they carried styling the
+    // WP theme supplied and this site doesn't, so here they land as bare rules
+    // that add nothing. Dropped rather than converted to `---`.
+    private static final Pattern FLEXMARK_THEMATIC_BREAK =
+            Pattern.compile("(?m)^[ \\t]*\\*\\*\\* \\*\\* \\* \\*\\* \\*\\*\\*[ \\t]*$");
+
     // Images hosted on foojay.io die at cutover, so they are pulled local.
     // Third-party images (youtube thumbs, badges, ...) are left untouched.
     private static final Pattern IMAGE_HREF =
@@ -193,6 +200,11 @@ public final class HtmlToMarkdown {
 
         String md = FlexmarkHtmlConverter.builder().build().convert(content.html()).trim();
 
+        // Drop the <hr> rules the converter just emitted. Done BEFORE the
+        // placeholders are restored, so a code sample that happens to contain
+        // the same run of asterisks can never be hit.
+        md = FLEXMARK_THEMATIC_BREAK.matcher(md).replaceAll("");
+
         for (int i = 0; i < preserved.size(); i++) {
             md = md.replace(PRESERVE_TOKEN + i + PRESERVE_TOKEN_END,
                     "\n\n" + preserved.get(i) + "\n\n");
@@ -215,7 +227,8 @@ public final class HtmlToMarkdown {
      * untouched -- it's significant in Python, YAML and anything wrapped.
      */
     public static String codeFence(String code, String enlighterLanguage) {
-        String body = code == null ? "" : code.replace("\r\n", "\n").replaceAll("\\s+$", "");
+        String body = code == null ? "" : resolveDoubleEscaped(
+                code.replace("\r\n", "\n").replaceAll("\\s+$", ""));
         int longestRun = 0, run = 0;
         for (char c : body.toCharArray()) {
             run = (c == '`') ? run + 1 : 0;
@@ -223,6 +236,48 @@ public final class HtmlToMarkdown {
         }
         String fence = "`".repeat(Math.max(3, longestRun + 1));
         return fence + fenceLanguage(enlighterLanguage) + "\n" + body + "\n" + fence;
+    }
+
+    /**
+     * Resolves the HTML entities left over in code by WordPress's double-escaping.
+     *
+     * Some post bodies store a Java lambda arrow as `-&amp;gt;`, so the HTML
+     * parser hands us `-&gt;` and that lands in the fence verbatim. The live WP
+     * site renders those blocks wrong too (it really does show `-&gt;`), so this
+     * is a long-standing content bug rather than something the conversion
+     * introduced -- but now that the fence is the storage format, it's ours.
+     *
+     * WHY NOT JUST UNESCAPE EVERYTHING AGAIN. A second blanket pass can't tell
+     * WordPress's damage apart from an entity the author meant literally, because
+     * both arrive here looking identical. Two real cases in content/ prove it:
+     * a JSF sample whose `value="Food &amp; Culture"` attribute is CORRECT XML,
+     * and a post that appends the string `"&nbsp;"` to build HTML padding --
+     * unescaping either one corrupts the sample. So only entities that cannot
+     * plausibly be literal source are resolved:
+     *
+     *   &lt; &gt; &quot; &apos; (+ numeric forms)  -- always; no snippet in
+     *       content/ wants a literal one, they're all mangled operators/generics.
+     *   &amp;  -- ONLY in the three shapes where it is unambiguously an operator
+     *       rather than markup: the `&&` operator, a shell redirect (`2>&1`) and
+     *       a URL query separator (`?a=1&b=2`). A bare `&amp;` is left alone.
+     *
+     * Anything else, `&nbsp;` included, is left exactly as it is. Idempotent:
+     * once an entity is resolved there is nothing left for a second run to find.
+     */
+    public static String resolveDoubleEscaped(String code) {
+        if (code == null || code.indexOf('&') < 0) return code;
+        String s = code;
+        s = s.replaceAll("&lt;|&#0*60;|&#[xX]0*3[cC];", "<");
+        s = s.replaceAll("&gt;|&#0*62;|&#[xX]0*3[eE];", ">");
+        s = s.replaceAll("&quot;|&#0*34;|&#[xX]0*22;", "\"");
+        s = s.replaceAll("&apos;|&#0*39;|&#[xX]0*27;", "'");
+        // `&&` -- replaced as a pair so both halves resolve in one pass.
+        s = s.replace("&amp;&amp;", "&&");
+        // Shell redirect: `2>&1`. Runs after &gt; above, so the `>` is real by now.
+        s = s.replaceAll("(?<=>)&amp;", "&");
+        // URL query separator: preceded by the end of a value, followed by `key=`.
+        s = s.replaceAll("(?<=[?&\\w])&amp;(?=[A-Za-z_][\\w.-]*=)", "&");
+        return s;
     }
 
     /**

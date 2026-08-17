@@ -229,7 +229,7 @@ private static void sendCommand(String service, HomeAssistantCommand command) th
     });
 
     System.out.println("Number of entities changed: " + changes.size());
-    changes.forEach(change -&gt; System.out.println("Entity ID: " + change.entityId() + ", State: " + change.state()));
+    changes.forEach(change -> System.out.println("Entity ID: " + change.entityId() + ", State: " + change.state()));
 }
 ```
 

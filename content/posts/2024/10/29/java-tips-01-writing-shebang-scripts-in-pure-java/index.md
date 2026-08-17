@@ -63,7 +63,7 @@ public class HelloCLI {
         System.out.println("Welcome to the Java CLI. Type 'help' for a list of commands or 'exit' to quit.");
 
         while (true) {
-            System.out.print("Command&gt; ");
+            System.out.print("Command> ");
             String command = scanner.nextLine().trim().toLowerCase();
 
             switch (command) {
@@ -144,7 +144,7 @@ Here's what you should see when you run it:
 ```
 ./hello
 Welcome to the Java CLI. Type 'help' for a list of commands or 'exit' to quit.
-Command&gt; help
+Command> help
 Available commands:
 - greet: Prints a friendly greeting.
 - date: Displays today's date.
@@ -155,17 +155,17 @@ Available commands:
 - help: Shows this help message.
 - exit: Exits the program.
 
-Command&gt; greet
+Command> greet
 Hello, Java enthusiast!
-Command&gt; date
+Command> date
 Today's date: 2024-10-27
-Command&gt; random
+Command> random
 Random number (1-100): 99
-Command&gt; add
+Command> add
 Enter first number: 5
 Enter second number: 39999
 Result: 40004.0
-Command&gt; exit
+Command> exit
 Exiting... Goodbye!
 ```
 

@@ -62,7 +62,7 @@ or in case of configuring this copy automatically in a test project see our exam
 For both options, Payara Server should be restarted:
 
 ```
-${PAYARA_HOME}\bin&gt; .\asadmin restart-domain
+${PAYARA_HOME}\bin> .\asadmin restart-domain
 ```
 
 

@@ -108,7 +108,7 @@ For example, let's add quite a (too) simplistic check for our decay:
 void decays() {
     int initialSize = 100;
     int result = Main.calculateSize(false, 100, true, true, 5, 5);
-    assertTrue(initialSize &gt; result);
+    assertTrue(initialSize > result);
 }
 ```
 

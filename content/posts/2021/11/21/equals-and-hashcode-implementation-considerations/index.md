@@ -92,7 +92,7 @@ public class Temperature {
             return false;
         }
         Temperature that = (Temperature) o; //
-        return Double.compare(that.value, value) == 0 &amp;&amp; unit == that.unit; //
+        return Double.compare(that.value, value) == 0 && unit == that.unit; //
     }
 
     @Override
@@ -233,7 +233,7 @@ Luckily, Vlad Mihalcea shows us [how to implement this correctly](https://vladmi
             return false;
         }
         User user = (User) o;
-        return id != null &amp;&amp;
+        return id != null &&
                 id.equals(user.id);
     }
 

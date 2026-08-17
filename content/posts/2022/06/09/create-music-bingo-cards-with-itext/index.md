@@ -224,7 +224,7 @@ private static void addBingoCard(Document document, BingoCard bingoCard) throws 
 }
 
 private static void addEmptyLine(Paragraph paragraph, int number) {
-    for (int i = 0; i &lt; number; i++) {
+    for (int i = 0; i < number; i++) {
         paragraph.add(new Paragraph(" "));
     }
 }

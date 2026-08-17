@@ -32,6 +32,11 @@ import java.util.stream.Stream;
  * themes/foojay/layouts/_default/_markup/render-codeblock.html, so the site is
  * visually unchanged -- only the storage format moves.
  *
+ * It also repairs WordPress's double-escaping inside fences -- bodies that
+ * store a lambda arrow as `-&amp;gt;`, so the code reads `-&gt;` -- using the
+ * same rule the conversion scripts apply (HtmlToMarkdown.resolveDoubleEscaped).
+ * Same origin, same cleanup: WP damage to a code block that is now ours to own.
+ *
  * This runs over content that has already been converted. The conversion
  * scripts emit fences directly from now on (HtmlToMarkdown.codeFence), so a
  * re-run of ConvertPosts/ConvertPages produces the same shape and this script
@@ -64,6 +69,8 @@ public class MigrateEnlighterToFences {
     static final Pattern INLINE = Pattern.compile(
             "<code\\b[^>]*\\bclass=\"[^\"]*EnlighterJSRAW[^\"]*\"[^>]*>(.*?)</code>",
             Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
+    /** A fence line, split into indent / backtick run / info string. */
+    static final Pattern FENCE_LINE = Pattern.compile("^([ \\t]*)(`{3,})(.*)$");
 
     public static void main(String[] args) throws IOException {
         boolean dryRun = false;
@@ -82,7 +89,7 @@ public class MigrateEnlighterToFences {
             files = s.filter(p -> p.toString().endsWith(".md")).sorted().toList();
         }
 
-        int changedFiles = 0, blocks = 0, inlines = 0;
+        int changedFiles = 0, blocks = 0, inlines = 0, entityLines = 0;
         Map<String, Integer> byLanguage = new TreeMap<>();
 
         for (Path file : files) {
@@ -90,7 +97,8 @@ public class MigrateEnlighterToFences {
             int split = bodyStart(original);
             String head = original.substring(0, split);
             String body = original.substring(split);
-            if (!body.contains("EnlighterJSRAW")) continue;
+            // Two independent repairs below; a file needs only one of them.
+            if (!body.contains("EnlighterJSRAW") && body.indexOf('&') < 0) continue;
 
             StringBuilder out = new StringBuilder();
             Matcher m = BLOCK.matcher(body);
@@ -117,7 +125,10 @@ public class MigrateEnlighterToFences {
             }
             out.append(collapseBlankLines(body.substring(last)));
 
-            String newBody = out.toString();
+            // Blank-line hygiene only makes sense where a block was actually
+            // lifted out; on a file that just needs the entity repair below,
+            // rewrapping its prose would be an unrelated cosmetic diff.
+            String newBody = fileBlocks > 0 ? out.toString() : body;
             Matcher im = INLINE.matcher(newBody);
             StringBuilder inlineOut = new StringBuilder();
             int fileInlines = 0;
@@ -140,20 +151,60 @@ public class MigrateEnlighterToFences {
             newBody = FENCE_INFO.matcher(newBody).replaceAll(r ->
                     r.group(1) + (r.group(2) == null ? "" : r.group(2).trim()));
 
+            int[] fileEntities = new int[1];
+            newBody = fixFenceEntities(newBody, fileEntities);
+
             if (newBody.equals(body)) continue;
             changedFiles++;
             blocks += fileBlocks;
             inlines += fileInlines;
+            entityLines += fileEntities[0];
             if (!dryRun) Files.writeString(file, head + newBody);
         }
 
-        System.out.printf("%s %d file(s), %d block(s), %d inline snippet(s)%n",
-                dryRun ? "[dry-run] would change" : "Changed", changedFiles, blocks, inlines);
+        System.out.printf("%s %d file(s), %d block(s), %d inline snippet(s), %d double-escaped line(s)%n",
+                dryRun ? "[dry-run] would change" : "Changed", changedFiles, blocks, inlines, entityLines);
         System.out.println("Fence languages emitted:");
         byLanguage.entrySet().stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .forEach(e -> System.out.printf("  %-12s %d%n", e.getKey(), e.getValue()));
         if (dryRun) System.out.println("\nNothing written. Re-run without --dry-run to apply.");
+    }
+
+    /**
+     * Repairs WordPress's double-escaping (`-&gt;` where the author wrote `->`)
+     * inside every fenced block, via HtmlToMarkdown.resolveDoubleEscaped -- the
+     * single definition of which entities are safe to resolve, shared with the
+     * conversion scripts so a re-scrape produces the same result.
+     *
+     * Scoped to fence BODIES on purpose. In prose an `&amp;` is ordinary
+     * Markdown that the author typed, and preserved raw-HTML blocks (embeds,
+     * galleries, inline SVG) need their entities exactly as they are.
+     */
+    static String fixFenceEntities(String body, int[] fixedLines) {
+        String[] lines = body.split("\n", -1);
+        String openMarker = null; // non-null while inside a fence
+        for (int i = 0; i < lines.length; i++) {
+            Matcher m = FENCE_LINE.matcher(lines[i]);
+            boolean isFence = m.matches();
+            if (openMarker == null) {
+                // Opening fence. A backtick in the info string means this isn't
+                // one (inline code can start a line), so it's treated as prose.
+                if (isFence && m.group(3).indexOf('`') < 0) openMarker = m.group(2);
+                continue;
+            }
+            // Closing fence: at least as long as the opener, nothing else on it.
+            if (isFence && m.group(2).length() >= openMarker.length() && m.group(3).isBlank()) {
+                openMarker = null;
+                continue;
+            }
+            String fixed = HtmlToMarkdown.resolveDoubleEscaped(lines[i]);
+            if (!fixed.equals(lines[i])) {
+                lines[i] = fixed;
+                fixedLines[0]++;
+            }
+        }
+        return String.join("\n", lines);
     }
 
     /**

@@ -102,15 +102,15 @@ MATCH (s:Session {sessionId: row.`Session Id`})
 WITH row, s, apoc.text.split(row.`Speaker Ids`,',') as speakerIds
 UNWIND speakerIds as speakerId
 MERGE (sp:Speaker {speakerId: speakerId})
-MERGE (s)-[r:GIVEN_BY]-&gt;(sp)
+MERGE (s)-[r:GIVEN_BY]->(sp)
 WITH row, s, apoc.text.split(row.`Topic of your presentation`,',') as topics
 UNWIND topics as topic
 MERGE (t:Topic {name: trim(topic)})
-MERGE (s)-[r2:TAGGED_WITH]-&gt;(t)
+MERGE (s)-[r2:TAGGED_WITH]->(t)
 WITH row, s, apoc.text.split(row.`Level`,',') as levels
 UNWIND levels as level
 MERGE (l:Level {level: trim(level)})
-MERGE (s)-[r3:CATEGORIZED_IN]-&gt;(l)
+MERGE (s)-[r3:CATEGORIZED_IN]->(l)
 RETURN count(row);
 ```
 
@@ -125,7 +125,7 @@ MERGE (sp:Speaker {speakerId: row.`Speaker Id`})
 WITH row, sp, apoc.text.split(row.timezone,',') as timezones
 UNWIND timezones as zone
 MERGE (t:Timezone {timezone: trim(zone)})
-MERGE (sp)-[r:IN]-&gt;(t)
+MERGE (sp)-[r:IN]->(t)
 WITH row, sp
 CALL {
     WITH row, sp
@@ -169,7 +169,7 @@ Last, but not least, we need to import session ratings so that we can filter ses
 LOAD CSV WITH HEADERS FROM "file:///evaluation-results.csv" as row
 MATCH (s:Session {sessionId: row.`Session Id`})
 MERGE (r:Rating {rating: toFloat(row.`Final Evaluation`)})
-MERGE (s)-[r2:HAS_RATING]-&gt;(r)
+MERGE (s)-[r2:HAS_RATING]->(r)
 RETURN count(row);
 ```
 
@@ -186,11 +186,11 @@ First, we need to see what sessions are available in each region. We started wit
 
 ```cypher
 //Retrieve sessions in APAC region timezones with rating threshold
-MATCH (s:Session)-[r1:GIVEN_BY]-&gt;(sp:Speaker)-[r2]-&gt;(t:Timezone)
+MATCH (s:Session)-[r1:GIVEN_BY]->(sp:Speaker)-[r2]->(t:Timezone)
 WHERE t:APAC
 WITH s, sp, t
-MATCH (s)-[r2:HAS_RATING]-&gt;(r:Rating)
-WHERE r.rating &gt;= 4.0
+MATCH (s)-[r2:HAS_RATING]->(r:Rating)
+WHERE r.rating >= 4.0
 RETURN s.sessionId, s.title, sp.lastName, sp.firstName, collect(t.timezone), r.rating;
 ```
 
@@ -207,9 +207,9 @@ With our content solidified, we wanted to create speaker cards for each session,
 
 ```cypher
 //Single speaker session card
-MATCH (s:Session)-[r:GIVEN_BY]-&gt;(sp:Speaker)
+MATCH (s:Session)-[r:GIVEN_BY]->(sp:Speaker)
 WHERE s.status = "Accepted"
-AND COUNT { (s)-[:GIVEN_BY]-&gt;(:Speaker) } = 1
+AND COUNT { (s)-[:GIVEN_BY]->(:Speaker) } = 1
 RETURN sp.firstName+" "+sp.lastName as speakerName, sp.tagline as tagline, sp.profilePic as profilePicture, s.title as sessionTitle
 ```
 

@@ -138,7 +138,7 @@ The API is small. Build the container, register sections with `addSection(header
 StickyHeaderContainer sticky = new StickyHeaderContainer();
 sticky.setTransitionStyle(StickyHeaderContainer.TRANSITION_SLIDE);
 sticky.setTransitionDurationMillis(250);
-for (char c = 'A'; c <= &#039;Z&#039;; c++) {
+for (char c = 'A'; c <= 'Z'; c++) {
     Label header = new Label("" + c, "StickyHeader");
     Container items = new Container(BoxLayout.y());
     for (int i = 0; i < 5; i++) {

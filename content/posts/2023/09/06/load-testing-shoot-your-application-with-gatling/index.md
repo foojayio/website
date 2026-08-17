@@ -378,7 +378,7 @@ We have three options:
 2) using the `Session` API
 
 ```
-ChainBuilder sessionStep = exec(session -&gt; {
+ChainBuilder sessionStep = exec(session -> {
     return session.set("someField", "value");
 });
 ```
@@ -405,7 +405,7 @@ A full summary can be found on the [feeder](https://gatling.io/docs/gatling/refe
 But a basic one can be as easy as:
 
 ```
-Iterator&lt;Map&gt; feeder = Stream.generate((Supplier&lt;Map&gt;) () -&gt; Collections.singletonMap("dieRoll", ThreadLocalRandom.current().nextInt(1, 7))).iterator();
+Iterator<Map> feeder = Stream.generate((Supplier<Map>) () -> Collections.singletonMap("dieRoll", ThreadLocalRandom.current().nextInt(1, 7))).iterator();
 ```
 
 
@@ -498,7 +498,7 @@ Then we could do something akin to:
 .check(
     bodyString()
         .transform(String::toUpperCase)
-        .validate("Contains HELLO validation", (value, session) -&gt; {
+        .validate("Contains HELLO validation", (value, session) -> {
             if (value.startsWith("HELLO")) {
                 return value;
             } else {
@@ -522,7 +522,7 @@ Here we're:
 Then in subsequent checks, we can use this value:
 
 ```
-.checkIf(session -&gt; session.getString("loudMessage") != null).then(status().not(404))
+.checkIf(session -> session.getString("loudMessage") != null).then(status().not(404))
 ```
 
 

@@ -70,8 +70,8 @@ public class TraditionalConcurrencyExample {
 
   public static String getUserInfoTraditional(String userId) throws Exception {
     try (ExecutorService executor = Executors.newCachedThreadPool()) {
-      Future&lt;String&gt; future1 = executor.submit(() -> fetchUserData(userId));
-      Future&lt;String&gt; future2 = executor.submit(() -> fetchUserPreferences(userId));
+      Future<String> future1 = executor.submit(() -> fetchUserData(userId));
+      Future<String> future2 = executor.submit(() -> fetchUserPreferences(userId));
 
       try {
         String userData = future1.get();
@@ -88,7 +88,7 @@ public class TraditionalConcurrencyExample {
   }
 
   void main() {
-    for (int i = 0; i &lt; 5; i++) {
+    for (int i = 0; i < 5; i++) {
       try {
         System.out.println("Attempt " + (i + 1) + ": " +
             getUserInfoTraditional("user123"));

@@ -192,12 +192,12 @@ public class HandlesKataDisplayNames extends DisplayNameGenerator.Standard {
         for (char c : text.toCharArray()) {
             char nc = c;
 
-            if (isUpperCase(nc) &amp;&amp; !isUpperCase(lastChar)) {
-                if (lastChar != ' ' &amp;&amp; isLetterOrDigit(lastChar)) {
+            if (isUpperCase(nc) && !isUpperCase(lastChar)) {
+                if (lastChar != ' ' && isLetterOrDigit(lastChar)) {
                     builder.append(" ");
                 }
                 nc = Character.toLowerCase(c);
-            } else if (isDigit(lastChar) &amp;&amp; !isDigit(c)) {
+            } else if (isDigit(lastChar) && !isDigit(c)) {
                 if (lastChar != ' ') {
                     builder.append(" ");
                 }

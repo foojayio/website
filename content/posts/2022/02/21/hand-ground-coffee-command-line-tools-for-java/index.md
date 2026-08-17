@@ -131,19 +131,19 @@ import static java.util.function.Predicate.*;
 record Cell(int x, int y) {
    Stream nb() {
        return range(x()-1,x()+2)
-         .mapToObj(i -&gt; i)
-         .flatMap(x -&gt; range(y()-1,y()+2)
-         .mapToObj(y -&gt; new Cell(x,y)))
-         .filter(c -&gt; !this.equals(c));
+         .mapToObj(i -> i)
+         .flatMap(x -> range(y()-1,y()+2)
+         .mapToObj(y -> new Cell(x,y)))
+         .filter(c -> !this.equals(c));
    }
    boolean alive(Set cells) {
        var count = nb().filter(cells::contains).count();
-       return (cells.contains(this) &amp;&amp; count == 2) || count == 3;
+       return (cells.contains(this) && count == 2) || count == 3;
    }
 }
 Set evolve(Set cells) {
-    return cells.stream().flatMap(c -&gt; c.nb()).distinct()
-    .filter(c -&gt; c.alive(cells))
+    return cells.stream().flatMap(c -> c.nb()).distinct()
+    .filter(c -> c.alive(cells))
     .collect(toSet());
 }
 void print(Set cells) {
@@ -153,8 +153,8 @@ void print(Set cells) {
                      cells.stream().mapToInt(Cell::y).max().getAsInt());
 
     range(min.y(), max.y()+1)
-    .mapToObj(y -&gt; range(min.x(), max.x()+1)
-    .mapToObj(x -&gt; cells.contains(new Cell(x,y)) ? "X" : " ")
+    .mapToObj(y -> range(min.x(), max.x()+1)
+    .mapToObj(x -> cells.contains(new Cell(x,y)) ? "X" : " ")
     .collect(joining(""))).forEach(System.out::println);
 }
 """
@@ -166,12 +166,12 @@ var cells = Set.of(new Cell(1,0), new Cell(2,1), new Cell(0,2),new Cell(1,2),new
 
 void gen(Set cells, int steps) {
     print(cells);
-    if (steps&gt;0) gen(evolve(cells),steps-1);
+    if (steps>0) gen(evolve(cells),steps-1);
 }
 
 Set parse(String s) {
-    Arrays.stream(s.split("\n")).mapIndexed((x,l) -&gt;
-    Arrays.stream(l.split("")).mapIndexed(y,c) -&gt; )
+    Arrays.stream(s.split("\n")).mapIndexed((x,l) ->
+    Arrays.stream(l.split("")).mapIndexed(y,c) -> )
 }
 ```
 
@@ -203,11 +203,11 @@ With `java -jar file.jar` the main class is determined from the meta information
 Since Java 11, [JEP 330](https://openjdk.java.net/jeps/330) is available, so source files can be executed directly.
 
 ```java
-cat &gt; Hello.java &lt; hello &lt;&lt;EOF
+cat > Hello.java < hello <<EOF
 #!/usr/bin/java --source 10
 public class Hello {
     public static void main(String...args) {
-        System.out.println(&quot;Hello &quot;+String.join(&quot; &quot;,args)+&quot;!&quot;);
+        System.out.println("Hello "+String.join(" ",args)+"!");
     }
 }
 EOF
@@ -253,12 +253,12 @@ Here is an example of our `Hello.java` class, where you can see for example that
 ```
 javap -c Hello
 
-Compiled from &quot;Hello.java&quot;
+Compiled from "Hello.java"
 public class Hello {
   // Constructor with Super-Constructor call
   public Hello();
     Code:
-       // load &quot;this&quot; on stack
+       // load "this" on stack
        0: aload_0
        4: return
 
@@ -266,7 +266,7 @@ public class Hello {
     Code:
        0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
        3: ldc           #13                 // String
-       // load first parameter on stack, i.e. &quot;args&quot;
+       // load first parameter on stack, i.e. "args"
        5: aload_0
        6: invokestatic  #15                 // Method java/lang/String.join:(Ljava/lang/CharSequence;[Ljava/lang/CharSequence;)Ljava/lang/String;
        // string concatenation
@@ -403,7 +403,7 @@ Since some components of the JDK have been discontinued in recent years, `jdeprs
 Example:
 
 ```
-jdeprscan --release 11 testcontainers/testcontainers/1.9.1/testcontainers-1.9.1.jar 2&gt;&amp;1 | grep -v 'error: cannot '
+jdeprscan --release 11 testcontainers/testcontainers/1.9.1/testcontainers-1.9.1.jar 2>&1 | grep -v 'error: cannot '
 Jar file testcontainers/testcontainers/1.9.1/testcontainers-1.9.1.jar:
 class org/testcontainers/shaded/org/apache/commons/lang/reflect/FieldUtils uses
   deprecated method java/lang/reflect/AccessibleObject::isAccessible()Z

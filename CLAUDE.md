@@ -65,6 +65,18 @@ IntelliJ's terminal, read this before making changes.
   because the WP site keeps serving Enlighter markup until cutover, so a late
   re-scrape can reintroduce blocks. `--dry-run` reports without writing;
   `--path <dir>` narrows the scan.
+
+  It also repairs **WordPress's double-escaping inside fences** — bodies that
+  store a lambda arrow as `-&amp;gt;`, so the code renders as `-&gt;`. (The
+  live WP site shows those wrong too; it's an old content bug, not a conversion
+  one.) The rule lives in `HtmlToMarkdown.resolveDoubleEscaped` so the scrapers
+  and this script agree, and it is deliberately narrow: `&lt; &gt; &quot;
+  &apos;` always resolve, but a bare `&amp;` does **not** — in an XML/XHTML
+  sample `&amp;` is correct source. `&amp;` is only resolved as the `&&`
+  operator, a shell redirect (`2>&1`) or a URL query separator. Don't "simplify"
+  this into a second blanket unescape: content/ has a JSF snippet whose
+  `value="Food &amp; Culture"` and a post that appends a literal `"&nbsp;"`
+  string, and a blanket pass corrupts both.
 - **`scripts/ValidateFrontmatter.java`**: PR-time content check (required
   fields present, no dangling `related_posts` references, no sponsor
   `authors:` slug without a matching author bundle), run by
@@ -191,6 +203,14 @@ IntelliJ's terminal, read this before making changes.
   fences from the conversion scripts, so a re-scrape produces the same shape;
   `MigrateEnlighterToFences.java` above cleans up anything that slips through.
   Don't reintroduce raw `<pre class="EnlighterJSRAW">` into `content/`.
+- **WordPress's decorative `<hr>`s are dropped, not converted.** Flexmark
+  renders `<hr>` as `*** ** * ** ***`, and WP bodies are full of them between
+  sections — they carried styling the WP theme supplied and this one doesn't,
+  so on Hugo they were bare rules that added nothing. `HtmlToMarkdown` strips
+  them from the converter's output (`FLEXMARK_THEMATIC_BREAK`), before the
+  preserved placeholders are restored, so a code sample containing the same
+  asterisks is never touched. ~950 were removed from `content/` in one pass;
+  this keeps a re-scrape from putting them back.
 - **Posts are filed by publish date, not flat**: `content/posts/<year>/<month>/<slug>.md`,
   bucketed by the post's original publish date (parsed in `ConvertPosts.java`'s
   `bucketDirFor()`), purely to keep a 1000+-post directory browsable. This has

@@ -245,7 +245,7 @@ Then, the following request calls the method and updates the movie's year proper
 Update movie year:
 
 ```bash
-% http PATCH ":8080/movies/updateYear?movieId=9876&amp;year=2018"
+% http PATCH ":8080/movies/updateYear?movieId=9876&year=2018"
 
 {
     "actors": [],

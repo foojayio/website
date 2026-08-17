@@ -323,7 +323,7 @@ With the guarded patterns, you can add this condition to the case label, as foll
 public class MyEarth {
     int getDamage(Object obj) {
         return switch (obj) {
-            case AirPollution airPol &amp;&amp; airPol.getAQI() > 200 -> 500;
+            case AirPollution airPol && airPol.getAQI() > 200 -> 500;
             case Deforestation deforestation -> deforestation.getTreeDamage();
             case null, default -> -1;
         };

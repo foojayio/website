@@ -103,7 +103,7 @@ Now you have Neo4j running on Kubernetes! You can test it out by opening the Neo
 CALL apoc.meta.graph();
 
 // Find some nodes and relationships
-MATCH (b:Book)&lt;-[r:AUTHORED]-(a:Author) RETURN * LIMIT 20;
+MATCH (b:Book)<-[r:AUTHORED]-(a:Author) RETURN * LIMIT 20;
 ```
 
 

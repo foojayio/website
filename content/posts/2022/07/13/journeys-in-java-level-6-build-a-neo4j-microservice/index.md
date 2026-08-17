@@ -147,7 +147,7 @@ Next, we need a repository interface where we can define methods to interact wit
 interface ReviewRepository extends ReactiveCrudRepository {
 	Flux findFirst1000By();
 
-	@Query("MATCH (r:Review)-[rel:WRITTEN_FOR]-&gt;(b:Book {book_id: $book_id}) RETURN r;")
+	@Query("MATCH (r:Review)-[rel:WRITTEN_FOR]->(b:Book {book_id: $book_id}) RETURN r;")
 	Flux findReviewsByBook(String book_id);
 }
 ```

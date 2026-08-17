@@ -380,7 +380,7 @@ This is done with a `before` handler in SparkJava, that on successful validation
 static void handleAuthAndSetUser(Request req, String jwtSecret) {
     String token = req.headers("Authorization");
     String bearer = "Bearer ";
-    if (token != null &amp;&amp; !token.isBlank() &amp;&amp; token.startsWith(bearer)) {
+    if (token != null && !token.isBlank() && token.startsWith(bearer)) {
         token = token.substring(bearer.length());
         String userId = AuthUtils.verify(token, jwtSecret);
         req.attribute("user", userId);

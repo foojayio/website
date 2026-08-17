@@ -37,7 +37,7 @@ You should get the a result like this, with the version info depending on the on
 Microsoft Windows [Version 10.0.22621.963]
 (c) Microsoft Corporation. All rights reserved.
 
-C:\Windows\System32&gt; java -version
+C:\Windows\System32> java -version
 openjdk version "21.0.2" 2024-01-16 LTS
 OpenJDK Runtime Environment Zulu21.32+17-CA (build 21.0.2+13-LTS)
 OpenJDK 64-Bit Server VM Zulu21.32+17-CA (build 21.0.2+13-LTS, mixed mode, sharing)

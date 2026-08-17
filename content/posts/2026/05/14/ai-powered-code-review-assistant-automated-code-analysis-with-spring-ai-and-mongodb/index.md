@@ -108,7 +108,7 @@ Each pattern's `id` is a human-readable slug like `unclosed-resources` or `hardc
 
 To see what a pattern looks like as a JSON document, here are two examples. The first describes an empty catch block, a common error-handling problem:
 
-```````
+```
 {
   "_id": "empty-catch-block",
   "name": "Empty catch block",
@@ -120,19 +120,7 @@ To see what a pattern looks like as a JSON document, here are two examples. The 
   "exampleGoodCode": "try { connection.close(); } catch (SQLException e) { logger.warn(\"Failed to close: {}\", e.getMessage()); }",
   "explanation": "Empty catch blocks silently swallow errors. When something fails, there is no log entry and no way to diagnose the problem."
 }
-``````json
-{
-  "_id": "hardcoded-credentials",
-  "name": "Hardcoded credentials",
-  "description": "Storing passwords, API keys, or secrets as string literals in source code",
-  "language": "java",
-  "severity": "CRITICAL",
-  "category": "security",
-  "exampleBadCode": "private static final String DB_PASSWORD = \"s3cretP@ss!\";",
-  "exampleGoodCode": "@Value(\"${db.password}\") private String dbPassword;",
-  "explanation": "Hardcoded credentials end up in version control and build artifacts. Use environment variables or a secrets manager."
-}
-```````
+```
 
 
 The second describes hardcoded credentials, a security anti-pattern:
