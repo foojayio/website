@@ -1,0 +1,16 @@
+{{- /* A sponsor's logo tile. The logo files are supplied by the sponsors
+       themselves and are a mix of light-on-transparent and dark-on-transparent
+       artwork, so each carries its own `logoBackground` (scraped from the
+       inline style WordPress renders). Without that backing colour a white
+       wordmark disappears on the light theme -- hence a fixed per-sponsor
+       background rather than the page background.
+
+       Params: page (the sponsor Page), class (extra CSS class, optional). */ -}}
+{{- $p := .page -}}
+<div class="sponsor-logo{{ with .class }} {{ . }}{{ end }}"{{ with $p.Params.logoBackground }} style="background-color: {{ . }}"{{ end }}>
+  {{- with $p.Params.logo -}}
+  <img src="{{ partial "resource-url.html" (dict "page" $p "src" .) }}" alt="{{ $p.Title }}" loading="lazy" decoding="async">
+  {{- else -}}
+  <span class="sponsor-logo__fallback">{{ substr $p.Title 0 1 }}</span>
+  {{- end -}}
+</div>

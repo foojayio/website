@@ -7,9 +7,13 @@
 {{/* .TableOfContents already renders its own <nav id="TableOfContents">
      wrapper around the <ul>, so this outer element is a plain <div> rather
      than a second, redundant <nav> landmark. */}}
-{{ with .TableOfContents }}
+{{/* Guarded by has-toc.html, NOT by `with .TableOfContents` -- Hugo emits the
+     empty <nav> wrapper even when there are no headings, so `with` was always
+     true and this widget rendered as a bare "On this page" heading with
+     nothing under it on the home and listing pages. */}}
+{{ if partial "has-toc.html" . }}
 <div class="widget toc" data-pagefind-ignore>
   <h4>On this page</h4>
-  {{ . }}
+  {{ .TableOfContents }}
 </div>
 {{ end }}

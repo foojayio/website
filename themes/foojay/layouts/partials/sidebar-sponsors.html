@@ -1,0 +1,39 @@
+{{- /* "Thanks to our sponsors" sidebar widget.
+
+       Driven by content/sponsors/ (the same bundles behind /our-sponsors/ and
+       each /sponsor/<slug>/ profile), so adding a sponsor is one re-run of
+       scripts/ConvertSponsors.java and nothing here has to change. It replaces
+       an older scaffold that read a `params.sponsors` list from hugo.toml which
+       was never populated -- meaning the widget silently rendered nothing.
+
+       Tier does two things here: it sets the ORDER (via sponsors-ordered.html
+       -- gold, silver, bronze, alphabetical within each) and the SIZE (gold
+       logos largest, bronze smallest), so the placement visibly reflects what
+       each tier pays for -- the sidebar equivalent of the tier grouping on
+       /our-sponsors/.
+
+       Unlike the authors/JUGs widgets, this is NOT dropped on pages with a
+       table of contents: sponsor visibility is contractual, so it stays on
+       every page the sidebar appears on. It's placed directly under the TOC for
+       that reason. */ -}}
+{{- $section := site.GetPage "/sponsors" -}}
+{{- with $section -}}
+{{- $ordered := partial "sponsors-ordered.html" . -}}
+{{- with $ordered }}
+<section class="widget widget-sponsors">
+  <h4>Thanks to our sponsors</h4>
+  <div class="sponsor-side-list">
+    {{ range . }}
+    <a class="sponsor-side sponsor-side--{{ .Params.tier | default "other" }}" href="{{ .RelPermalink }}">
+      {{ partial "sponsor-logo.html" (dict "page" . "class" "sponsor-logo--side") }}
+      <span class="sponsor-side__text">
+        <strong>{{ .Title }}</strong>
+        {{ with .Params.tier }}<em>{{ title . }}</em>{{ end }}
+      </span>
+    </a>
+    {{ end }}
+  </div>
+  <a class="view-all" href="{{ $section.RelPermalink }}">View all sponsors</a>
+</section>
+{{ end -}}
+{{- end -}}

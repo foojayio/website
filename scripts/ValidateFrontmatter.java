@@ -63,7 +63,9 @@ public class ValidateFrontmatter {
         problems.addAll(checkDir(Path.of("content/posts"), List.of("title", "description", "authors")));
         problems.addAll(checkDir(Path.of("content/authors"), List.of("title")));
         problems.addAll(checkDir(Path.of("content/pages"), List.of("title", "url")));
+        problems.addAll(checkDir(Path.of("content/sponsors"), List.of("title", "tier")));
         problems.addAll(checkRelatedPosts(postsDir, postSlugs));
+        problems.addAll(checkSponsorAuthors(Path.of("content/sponsors"), authorSlugs()));
 
         if (problems.isEmpty()) {
             System.out.println("Frontmatter check passed.");
@@ -113,6 +115,54 @@ public class ValidateFrontmatter {
                     for (Object slug : list) {
                         if (slug != null && !postSlugs.contains(slug.toString())) {
                             problems.add(file + ": related_posts references unknown slug '" + slug + "'");
+                        }
+                    }
+                }
+            }
+        }
+        return problems;
+    }
+
+    /**
+     * Every author slug that exists, i.e. every content/authors/**&#47;<slug>/index.md
+     * bundle folder name. Author bundles are bucketed by first letter, so the
+     * folder name -- not the path -- is the slug, exactly as posts and the
+     * templates treat it.
+     */
+    static Set<String> authorSlugs() throws IOException {
+        Path dir = Path.of("content/authors");
+        if (!Files.isDirectory(dir)) return Set.of();
+        try (Stream<Path> files = Files.walk(dir)) {
+            return files.filter(p -> p.getFileName().toString().equals("index.md"))
+                    .map(p -> p.getParent().getFileName().toString())
+                    .collect(java.util.stream.Collectors.toSet());
+        }
+    }
+
+    /**
+     * A sponsor's `authors:` list IS its article list: the profile template
+     * (themes/foojay/layouts/sponsors/single.html) shows every post written by
+     * those slugs. A typo therefore doesn't error, it just silently drops
+     * articles off the sponsor's page -- which is exactly the class of mistake
+     * a PR check should catch, same reasoning as the related_posts check above.
+     *
+     * An EMPTY list is fine and not reported: a newly added sponsor legitimately
+     * has no authors on foojay.io yet, and the page renders an explanatory
+     * empty state for that case.
+     */
+    static List<String> checkSponsorAuthors(Path sponsorsDir, Set<String> authorSlugs) throws IOException {
+        List<String> problems = new ArrayList<>();
+        if (!Files.isDirectory(sponsorsDir)) return problems;
+
+        try (Stream<Path> files = Files.walk(sponsorsDir)) {
+            for (Path file : files.filter(p -> p.getFileName().toString().equals("index.md")).toList()) {
+                Map<String, Object> fm = readFrontmatter(file);
+                if (fm == null) continue;
+                if (fm.get("authors") instanceof List<?> list) {
+                    for (Object slug : list) {
+                        if (slug != null && !authorSlugs.contains(slug.toString())) {
+                            problems.add(file + ": authors references unknown author slug '" + slug
+                                    + "' (expected a folder name under content/authors/)");
                         }
                     }
                 }

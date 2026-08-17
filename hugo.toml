@@ -15,6 +15,10 @@ enableRobotsTXT = true
   # the folder and the URL follows -- no `slug` frontmatter needed.
   posts = "/today/:slugorcontentbasename/"
   authors = "/today/author/:slugorcontentbasename/"
+  # Sponsors keep their WordPress URL (singular /sponsor/, plural section) --
+  # scripts/ConvertSponsors.java names each bundle folder after the WP slug, so
+  # this pattern reproduces the legacy path exactly and no alias is needed.
+  sponsors = "/sponsor/:slugorcontentbasename/"
   # Taxonomy term pages live under /today/ too, matching the links the theme and
   # the WordPress site use (default would be /categories/… and /tags/…).
   categories = "/today/category/:slug/"
@@ -329,3 +333,11 @@ enableRobotsTXT = true
   parent = "About"
   url = "/board/"
   weight = 45
+
+[[menu.main]]
+  name = "Our Sponsors"
+  parent = "About"
+  url = "/our-sponsors/"
+  weight = 46
+  [menu.main.params]
+    desc = "The organisations that keep foojay.io running"

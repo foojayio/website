@@ -1,0 +1,152 @@
+{{ define "main" }}
+{{ $sponsor := . }}
+{{ $section := site.GetPage "/sponsors" }}
+
+{{/* Every article credited to this sponsor's `authors:`. One source of truth
+     (partials/sponsor-posts.html) -- the counts, the topic list and the article
+     grid below are all derived from it, so they can never disagree. */}}
+{{ $posts := partial "sponsor-posts.html" . }}
+{{ $podcasts := where $posts "Params.categories" "intersect" (slice "Podcast") }}
+
+<div class="layout-with-sidebar">
+  <div class="content-col">
+
+    <div class="sponsor-profile">
+      {{/* Pagefind picks a result thumbnail by scanning the indexed page; without
+           this the article grid further down can win over the sponsor's own logo. */}}
+      <div class="sponsor-profile__head" data-pagefind-meta="image[src]">
+        {{ partial "sponsor-logo.html" (dict "page" . "class" "sponsor-logo--large") }}
+        <div class="sponsor-profile__intro">
+          {{ with .Params.tier }}<span class="sponsor-badge sponsor-badge--{{ . }}">{{ title . }} Sponsor</span>{{ end }}
+          <h1>{{ .Title }}</h1>
+          {{ with .Params.tagline }}<p class="sponsor-profile__tagline">{{ . }}</p>{{ end }}
+        </div>
+      </div>
+
+      {{ $links := slice }}
+      {{ with .Params.website }}{{ $links = $links | append (dict "url" . "label" ($sponsor.Params.websiteLabel | default "Website")) }}{{ end }}
+      {{ with .Params.linkedin }}{{ $links = $links | append (dict "url" . "label" "LinkedIn") }}{{ end }}
+      {{ with .Params.youtube }}{{ $links = $links | append (dict "url" . "label" "YouTube") }}{{ end }}
+      {{ with .Params.bluesky }}{{ $links = $links | append (dict "url" . "label" "Bluesky") }}{{ end }}
+      {{ with .Params.mastodon }}{{ $links = $links | append (dict "url" . "label" "Mastodon") }}{{ end }}
+      {{ with .Params.twitter }}{{ $links = $links | append (dict "url" . "label" "X") }}{{ end }}
+      {{ with .Params.github }}{{ $links = $links | append (dict "url" . "label" "GitHub") }}{{ end }}
+      {{ with $links }}
+      <div class="sponsor-profile__links">
+        {{ range . }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .label }}</a>{{ end }}
+      </div>
+      {{ end }}
+    </div>
+
+    {{ if $posts }}
+    <div class="sponsor-stats">
+      <div class="sponsor-stat"><strong>{{ len $posts }}</strong><span>Article{{ if ne (len $posts) 1 }}s{{ end }}</span></div>
+      {{ with len $podcasts }}<div class="sponsor-stat"><strong>{{ . }}</strong><span>Podcast{{ if ne . 1 }}s{{ end }}</span></div>{{ end }}
+      <div class="sponsor-stat"><strong>{{ len $sponsor.Params.authors }}</strong><span>Author{{ if ne (len $sponsor.Params.authors) 1 }}s{{ end }}</span></div>
+    </div>
+    {{ end }}
+
+    {{ with .Content }}
+    <section class="sponsor-section prose">
+      <h2>About {{ $sponsor.Title }}</h2>
+      {{ . }}
+    </section>
+    {{ end }}
+
+    {{/* Topics covered: the categories this sponsor's authors actually write
+         about, most-used first. Derived rather than stored so it tracks new
+         posts automatically; the scraped `topics:` frontmatter is only a
+         fallback for a sponsor that has no authors linked yet. */}}
+    {{ $topics := slice }}
+    {{ if $posts }}
+      {{ $counts := dict }}
+      {{ range $posts }}
+        {{ range .Params.categories }}
+          {{ $counts = merge $counts (dict . (add (int (index $counts . | default 0)) 1)) }}
+        {{ end }}
+      {{ end }}
+      {{ $ranked := slice }}
+      {{ range $name, $n := $counts }}{{ $ranked = $ranked | append (dict "name" $name "n" $n) }}{{ end }}
+      {{ range first 8 (sort $ranked "n" "desc") }}{{ $topics = $topics | append .name }}{{ end }}
+    {{ else }}
+      {{ $topics = .Params.topics | default slice }}
+    {{ end }}
+    {{ with $topics }}
+    <section class="sponsor-section">
+      <h2>Topics covered</h2>
+      <div class="sponsor-topics">
+        {{ range . }}<a class="sponsor-topic" href="{{ printf "today/category/%s/" (. | urlize) | relURL }}">{{ . }}</a>{{ end }}
+      </div>
+    </section>
+    {{ end }}
+
+    <section class="sponsor-section" id="sponsor-articles">
+      <div class="section-head">
+        <h2>Articles from {{ .Title }}</h2>
+        {{ if gt (len $posts) 12 }}<span class="section-head__count">showing 12 of {{ len $posts }}</span>{{ end }}
+      </div>
+      {{ if $posts }}
+      <div class="post-grid">
+        {{ range first 12 $posts }}{{ partial "post-card.html" . }}{{ end }}
+      </div>
+      {{/* The full list lives on the authors' own pages -- no separate paginated
+           per-sponsor archive to maintain. */}}
+      {{/* Author pages are bucketed by first letter (content/authors/<letter>/<slug>/),
+           so a slug can't be resolved with site.GetPage "/authors/<slug>" -- the
+           bucket is in the path but never in the slug. Match on ContentBaseName
+           (the bundle folder name) instead, which is exactly what posts and
+           authors/single.html use for author identity, and is bucket-agnostic. */}}
+      {{ $authorPages := where site.RegularPages "Section" "authors" }}
+      <p class="sponsor-authors-note">
+        All articles by
+        {{ range $i, $slug := .Params.authors }}
+          {{- if $i }}, {{ end -}}
+          {{- with where $authorPages "File.ContentBaseName" $slug -}}
+            {{- with index . 0 }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end -}}
+          {{- else -}}
+            {{/* No author page for this slug: a typo in the sponsor's
+                 `authors:` list, or an author who hasn't been converted yet.
+                 Shown plainly rather than silently dropped so it's noticeable. */}}
+            <span class="sponsor-authors-note__missing" title="No author page found for &quot;{{ $slug }}&quot;">{{ $slug }}</span>
+          {{- end -}}
+        {{ end }}.
+      </p>
+      {{ else }}
+      <p>No articles are linked to this sponsor yet. Articles are attributed by listing the sponsor's
+        foojay.io authors in <code>authors:</code> on
+        <code>content/sponsors/{{ .File.ContentBaseName }}/index.md</code>.</p>
+      {{ end }}
+    </section>
+
+    <section class="sponsors-cta">
+      <h2>Want your company featured here?</h2>
+      <p>Reach hundreds of thousands of Java developers every day through sponsored content, podcasts and events.</p>
+      <p class="sponsors-cta__links">
+        {{ with $section.Params.prospectus }}<a class="sponsors-button" href="{{ partial "resource-url.html" (dict "page" $section "src" .) }}" target="_blank" rel="noopener">Read the sponsorship prospectus</a>{{ end }}
+        {{ with $section.Params.contactEmail }}<a class="sponsors-button sponsors-button--outline" href="mailto:{{ . }}?subject=Foojay%20sponsorship">Get in touch</a>{{ end }}
+      </p>
+    </section>
+  </div>
+
+  <aside class="sidebar" data-pagefind-ignore>
+    <div class="widget">
+      <h3 class="widget-title">More sponsors</h3>
+      <div class="sponsor-mini-list">
+        {{/* Same order as everywhere else sponsors are listed: gold, silver,
+             bronze, alphabetical within each tier -- not Hugo's default page
+             order. */}}
+        {{ range first 6 (where (partial "sponsors-ordered.html" .) "Permalink" "!=" .Permalink) }}
+        <a class="sponsor-mini" href="{{ .RelPermalink }}">
+          {{ partial "sponsor-logo.html" (dict "page" . "class" "sponsor-logo--mini") }}
+          <span>
+            <strong>{{ .Title }}</strong>
+            {{ with .Params.tier }}<em>{{ title . }}</em>{{ end }}
+          </span>
+        </a>
+        {{ end }}
+      </div>
+      <p><a href="{{ $section.RelPermalink }}">View all sponsors</a></p>
+    </div>
+  </aside>
+</div>
+{{ end }}

@@ -43,8 +43,19 @@ IntelliJ's terminal, read this before making changes.
   actually use Meetup) in `data/jugs.yaml`. Requires a Meetup Pro
   subscription + OAuth token (`MEETUP_OAUTH_TOKEN` secret) — Meetup retired
   the old open REST API.
+- **`scripts/ConvertSponsors.java`**: converts the sponsor section from the live
+  WP site into `content/sponsors/<wp-slug>/index.md` page bundles (logo pulled
+  local as a bundle resource, About text through `HtmlToMarkdown`). Reads the
+  index at `/our-sponsors/` for the tier, then each `/sponsor/<slug>/` profile
+  for the rest. Idempotent and `frozen: true`-aware like the `Convert*`
+  scripts, and run by hand for the same reason they are — it scrapes the
+  WordPress site that goes away at cutover, so it does **not** belong in CI
+  next to `FetchJugs`/`FetchJavaChampions` (those pull from upstream GitHub
+  repos that outlive the migration). See "sponsors ↔ articles" below for the
+  one field it deliberately does not own.
 - **`scripts/ValidateFrontmatter.java`**: PR-time content check (required
-  fields present, no dangling `related_posts` references), run by
+  fields present, no dangling `related_posts` references, no sponsor
+  `authors:` slug without a matching author bundle), run by
   `.github/workflows/pr-check.yml` in lieu of a visual preview (GitHub Pages
   has no per-PR preview URLs).
 - **`.github/workflows/build-deploy.yml`**: builds with Hugo and deploys to
@@ -126,6 +137,21 @@ IntelliJ's terminal, read this before making changes.
    script to backfill it into GoatCounter via its `/api/v0/count` API (which
    does support backdated `created_at` per hit for exactly this) — ask before
    building the seeder, it needs a real GoatCounter account to test against.
+8. **The paid homepage banner carousel is NOT built — and it's revenue-bearing.**
+   The live WP home page (its page title is literally "Home – CTA and Sponsor
+   Blocks") opens with a Splide carousel of "Sponsored Content" teasers —
+   currently CodeRabbit, Azul and foojay's own Sustainability eBook. Each slide
+   has its own background colour, image, headline, description and CTA link,
+   with impression attributes (`data-entry`/`data-current`) on the button. This
+   is the homepage-banner benefit the tiers actually sell: 10/year gold, 6
+   silver, 3 bronze. It is a **campaign** model, not a sponsor one — one
+   sponsor runs many banners a year, each with its own creative and date
+   window — so it does NOT belong in the sponsor bundles; it wants its own
+   `data/sponsor-campaigns.yaml` (or similar) with start/end dates plus
+   rotation in `index.html`. Nothing in this repo replaces it yet, so **cutting
+   over without building it silently drops something sponsors have paid for.**
+   Decide with Frank whether impressions/clicks need tracking too (WP counts
+   them) before designing the data model.
 
 ## Conventions to keep following
 
@@ -145,6 +171,35 @@ IntelliJ's terminal, read this before making changes.
   parsing is imperfect.
 - **`related_posts` is manual**, chosen by the author — never replace it
   with an automated tag-similarity algorithm.
+- **Sponsors ↔ articles is an author list, and it's hand-maintained.**
+  WordPress works out a sponsor's articles through a plugin relation we have
+  no access to. Here the link is explicit: each
+  `content/sponsors/<slug>/index.md` carries `authors:`, a list of author
+  slugs (the bundle folder names under `content/authors/`), and
+  `themes/foojay/layouts/partials/sponsor-posts.html` resolves that to every
+  post any of them wrote. That partial is the single definition — the article
+  grid, the article/podcast/author counts and the "Topics covered" list on a
+  sponsor page are all derived from it at build time, so nothing goes stale
+  and no counts are stored. `ConvertSponsors.java` reads `authors:` back out of
+  the existing file and writes it through unchanged, so re-scraping never
+  clobbers it; `ValidateFrontmatter.java` fails the PR on a slug that matches
+  no author. Note this makes our numbers legitimately differ from WordPress's
+  (Redis shows 11 articles here vs 1 there) — author-based attribution is
+  broader than whatever WP was doing. That's the intended semantics; if a
+  sponsor should own fewer posts, narrow its `authors:` list.
+- **Sponsors appear site-wide via the sidebar**, not just on `/our-sponsors/`:
+  `themes/foojay/layouts/partials/sidebar-sponsors.html` lists every sponsor
+  tier-ordered, with the logo sized by tier (gold largest). Deliberately NOT
+  subject to the TOC-height cull that drops the authors/JUGs widgets on long
+  posts — sponsor visibility is contractual, so it stays on every page the
+  sidebar renders on. It replaced a dead scaffold that read a
+  `params.sponsors` list from `hugo.toml` that was never populated, so the
+  widget had always silently rendered nothing.
+- **Sponsor URLs keep the WP slug**: bundle folders are named after the
+  WordPress slug (e.g. `azul-enterprise-java-platform-foojay-io-gold-sponsor`,
+  not `azul`) and `hugo.toml`'s `[permalinks] sponsors` maps the section to
+  `/sponsor/:slugorcontentbasename/`, reproducing the legacy path exactly so
+  no alias is needed. Renaming a folder silently breaks a live URL.
 - Posts are contributed via PR (see `CONTRIBUTING.md`); the repo is public.
 - **`data/jugs.yaml` is generated, not authored here** — it's overwritten by
   `scripts/FetchJugs.java` at every deploy and daily sync. Never add/edit a

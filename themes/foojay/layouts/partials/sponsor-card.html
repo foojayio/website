@@ -1,0 +1,20 @@
+{{- /* One sponsor tile on /our-sponsors/ (and in the "More sponsors" sidebar
+       list on a sponsor's own page). The article count is derived from the
+       sponsor's `authors:` via sponsor-posts.html, never stored, so it can't
+       drift the way the scraped WordPress number would. */ -}}
+{{ $posts := partialCached "sponsor-posts.html" . .RelPermalink }}
+<article class="sponsor-card sponsor-card--{{ .Params.tier | default "other" }}">
+  <a class="sponsor-card__link" href="{{ .RelPermalink }}">
+    {{ partial "sponsor-logo.html" (dict "page" .) }}
+    <h3 class="sponsor-card__title">{{ .Title }}</h3>
+  </a>
+  {{ with .Params.tagline }}<p class="sponsor-card__tagline">{{ . }}</p>{{ end }}
+  <div class="sponsor-card__meta">
+    {{ with .Params.tier }}<span class="sponsor-badge sponsor-badge--{{ . }}">{{ title . }}</span>{{ end }}
+    {{ with len $posts }}<span class="sponsor-card__count">{{ . }} article{{ if ne . 1 }}s{{ end }}</span>{{ end }}
+  </div>
+  <div class="sponsor-card__actions">
+    {{ with .Params.website }}<a href="{{ . }}" target="_blank" rel="noopener">{{ $.Params.websiteLabel | default "Website" }}</a>{{ end }}
+    <a href="{{ .RelPermalink }}">View profile</a>
+  </div>
+</article>

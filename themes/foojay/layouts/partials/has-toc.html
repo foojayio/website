@@ -1,0 +1,19 @@
+{{- /* Does this page have a table of contents with actual entries?
+
+       Hugo's .TableOfContents ALWAYS returns markup -- for a page with no
+       qualifying headings it still emits `<nav id="TableOfContents"></nav>`,
+       a non-empty string. So `{{ with .TableOfContents }}` and
+       `{{ if not .TableOfContents }}` are ALWAYS true/false respectively,
+       whatever the page contains. That silently caused three separate bugs:
+       an empty "On this page" widget on the home and listing pages, the
+       authors/JUGs sidebar widgets being culled there for a TOC that wasn't
+       actually rendering, and 24 of 30 pedia entries getting the two-column
+       sidebar layout when they were meant to stay full-width.
+
+       Testing for a list item is what we actually mean -- "the TOC has
+       entries" -- and it stays correct regardless of the startLevel/endLevel
+       in [markup.tableOfContents], which .Fragments.Headings would not
+       (Fragments reports headings the TOC may be configured to exclude).
+
+       Use this everywhere instead of testing .TableOfContents directly. */ -}}
+{{- return (strings.Contains (printf "%s" .TableOfContents) "<li") -}}

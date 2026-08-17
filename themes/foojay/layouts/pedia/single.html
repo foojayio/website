@@ -2,7 +2,7 @@
 {{/* Most pedia entries are a short glossary definition with no headings,
      so .TableOfContents is empty and this stays full-width -- only entries
      long enough to have h2/h3s get the "On this page" sidebar. */}}
-{{ $hasToc := .TableOfContents }}
+{{ $hasToc := partial "has-toc.html" . }}
 <div class="{{ if $hasToc }}layout-with-sidebar{{ else }}content-col full-width{{ end }}">
   <article class="{{ if $hasToc }}content-col {{ end }}post-single pedia-single">
     <p class="pedia-back"><a href="{{ "pedia/" | relURL }}">&larr; Java Terms Explained</a></p>

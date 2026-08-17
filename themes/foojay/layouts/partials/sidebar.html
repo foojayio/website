@@ -4,16 +4,9 @@
 
   {{ partial "toc.html" . }}
 
-  {{ with .Site.Params.sponsors }}
-  <section class="widget widget-sponsors">
-    <h4>Thanks to our sponsors</h4>
-    <ul class="sponsor-logos">
-      {{ range . }}
-        <li><a href="{{ .url }}">{{ with .logo }}<img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">{{ else }}{{ .name }}{{ end }}</a></li>
-      {{ end }}
-    </ul>
-  </section>
-  {{ end }}
+  {{/* Built from content/sponsors/ -- see the partial for why it sits here and
+       why it survives the TOC-height cull below. */}}
+  {{ partial "sidebar-sponsors.html" . }}
 
   <section class="widget widget-categories">
     <h4>Categories</h4>
@@ -31,7 +24,7 @@
        past a certain combined height, the TOC (listed first) scrolls out of
        view instead of staying visible the whole time, defeating the point.
        Short posts with no TOC still get the full widget set as before. */}}
-  {{ if not .TableOfContents }}
+  {{ if not (partial "has-toc.html" .) }}
   <section class="widget widget-authors">
     <h4>Authors</h4>
     <ul>

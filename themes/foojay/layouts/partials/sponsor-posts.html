@@ -1,0 +1,25 @@
+{{- /* Every post attributed to a sponsor, newest first.
+
+       This is the whole sponsor<->article link. WordPress derives it from a
+       plugin relation we can't read; here it is explicit and hand-maintained:
+       a sponsor's frontmatter lists `authors:` (the folder names under
+       content/authors/), and a post belongs to the sponsor when any of those
+       slugs wrote it. Everything shown on a sponsor page that counts or
+       summarises articles goes through this partial, so there is exactly one
+       definition of "a sponsor's articles".
+
+       Posts credit authors as an `authors:` list; older ones may still carry a
+       single `author:` slug -- match both and de-dupe, same as
+       authors/single.html does for one author.
+
+       Param: the sponsor Page. Returns: a slice of Pages (empty when the
+       sponsor has no authors listed yet). */ -}}
+{{- $authors := .Params.authors -}}
+{{- $result := slice -}}
+{{- if $authors -}}
+  {{- $posts := where site.RegularPages "Section" "posts" -}}
+  {{- $result = where $posts "Params.authors" "intersect" $authors -}}
+  {{- $result = $result | union (where $posts "Params.author" "in" $authors) -}}
+  {{- $result = sort $result "Date" "desc" -}}
+{{- end -}}
+{{- return $result -}}

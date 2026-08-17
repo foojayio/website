@@ -1,0 +1,88 @@
+{{ define "main" }}
+{{ $page := . }}
+{{ $tiers := .Params.tiers }}
+{{ $sponsors := .Pages }}
+
+<div class="page-head">
+  <div class="page-head__inner">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
+
+<div class="content-col full-width">
+  <article class="page-single prose">
+    {{/* Two-column hero (text left, banner right) collapsing to one column on
+         narrow screens -- same arrangement as the WordPress page. The image is
+         decorative, so alt="" keeps it out of the accessibility tree rather
+         than making screen readers announce a meaningless filename. */}}
+    <section class="sponsors-hero{{ if .Params.heroImage }} sponsors-hero--split{{ end }}">
+      <div class="sponsors-hero__text">
+        <h2>{{ .Params.heroTitle | default "Who Keeps Foojay Running" }}</h2>
+        {{ .Content }}
+        {{/* The prospectus is a local PDF (static/files/), so it goes through
+             resource-url.html for the same reason images do: it applies the
+             baseURL subpath the GitHub Pages test deploy sits under, while
+             leaving an absolute URL untouched if one is ever configured. */}}
+        {{ with .Params.prospectus }}
+        <p><a class="sponsors-button" href="{{ partial "resource-url.html" (dict "page" $page "src" .) }}" target="_blank" rel="noopener">Become a Sponsor</a></p>
+        {{ end }}
+      </div>
+      {{ with .Params.heroImage }}
+      <div class="sponsors-hero__image">
+        <img src="{{ partial "resource-url.html" (dict "page" $page "src" .) }}" alt="" width="235" height="309" decoding="async">
+      </div>
+      {{ end }}
+    </section>
+
+    {{/* Tier order, labels, icons and blurbs all come from the `tiers` list in
+         content/sponsors/_index.md rather than from the sponsor pages, so a
+         tier is described in exactly one place. The "Other sponsors" group at
+         the bottom catches any sponsor whose tier isn't in that list, so a new
+         tier appearing upstream can never make a sponsor silently vanish. */}}
+    {{ $known := slice }}
+    {{ range $tiers }}{{ $known = $known | append .name }}{{ end }}
+
+    {{ range $tiers }}
+      {{ $tier := . }}
+      {{ with where $sponsors "Params.tier" $tier.name }}
+      <section class="sponsors-tier sponsors-tier--{{ $tier.name }}">
+        <div class="sponsors-tier__head">
+          {{/* The tier marker is a CSS ::before disc tinted by the heading's
+               own colour (see .sponsors-tier__head h2::before) rather than an
+               emoji — decorative, so it needs no alt text or aria handling. */}}
+          <h2>{{ $tier.label }} Sponsors</h2>
+          <span class="sponsors-tier__count">{{ len . }} sponsor{{ if ne (len .) 1 }}s{{ end }}</span>
+        </div>
+        {{ with $tier.blurb }}<p class="sponsors-tier__blurb">{{ . }}</p>{{ end }}
+        <div class="sponsors-grid">
+          {{ range sort . "Title" }}{{ partial "sponsor-card.html" . }}{{ end }}
+        </div>
+      </section>
+      {{ end }}
+    {{ end }}
+
+    {{ with where $sponsors "Params.tier" "not in" $known }}
+    <section class="sponsors-tier">
+      <div class="sponsors-tier__head">
+        <h2>Other Sponsors</h2>
+        <span class="sponsors-tier__count">{{ len . }} sponsor{{ if ne (len .) 1 }}s{{ end }}</span>
+      </div>
+      <div class="sponsors-grid">
+        {{ range sort . "Title" }}{{ partial "sponsor-card.html" . }}{{ end }}
+      </div>
+    </section>
+    {{ end }}
+
+    <section class="sponsors-cta">
+      <h2>Support the Java Community</h2>
+      <p>Join our sponsors and reach hundreds of thousands of Java &amp; OpenJDK developers every day through
+        articles, podcasts, events and more.</p>
+      <p class="sponsors-cta__links">
+        {{ with $page.Params.prospectus }}<a class="sponsors-button" href="{{ partial "resource-url.html" (dict "page" $page "src" .) }}" target="_blank" rel="noopener">Read the sponsorship prospectus</a>{{ end }}
+        {{ with $page.Params.contactEmail }}<a class="sponsors-button sponsors-button--outline" href="mailto:{{ . }}?subject=Foojay%20sponsorship">Get in touch</a>{{ end }}
+      </p>
+    </section>
+  </article>
+</div>
+{{ end }}

@@ -8,7 +8,7 @@
 {{/* Short pages (a couple of paragraphs, no h2/h3s) have no
      .TableOfContents and stay full-width; longer ones -- the Java Quick
      Start steps, install guides, etc. -- get the "On this page" sidebar. */}}
-{{ $hasToc := .TableOfContents }}
+{{ $hasToc := partial "has-toc.html" . }}
 <div class="{{ if $hasToc }}layout-with-sidebar{{ else }}content-col full-width{{ end }}">
   <article class="{{ if $hasToc }}content-col {{ end }}page-single prose">
     {{ .Content }}

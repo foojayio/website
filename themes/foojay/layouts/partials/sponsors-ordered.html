@@ -1,0 +1,25 @@
+{{- /* Every sponsor, ordered gold > silver > bronze, then alphabetically by
+       name within each tier.
+
+       Tier ORDER comes from the `tiers` list in content/sponsors/_index.md --
+       the same list that supplies each tier's label, icon and blurb -- so
+       there is exactly one place that knows what tiers exist and how they
+       rank. Sorting on the `tier` string itself would give bronze/gold/silver,
+       which is alphabetical nonsense.
+
+       Sponsors on a tier not in that list are appended at the end rather than
+       dropped, so a tier added upstream can never make a sponsor silently
+       disappear from a listing.
+
+       Takes no arguments; returns a slice of sponsor Pages. */ -}}
+{{- $section := site.GetPage "/sponsors" -}}
+{{- $ordered := slice -}}
+{{- with $section -}}
+  {{- $known := slice -}}
+  {{- range .Params.tiers }}{{ $known = $known | append .name }}{{ end -}}
+  {{- range .Params.tiers -}}
+    {{- $ordered = $ordered | append (sort (where $section.Pages "Params.tier" .name) "Title") -}}
+  {{- end -}}
+  {{- $ordered = $ordered | append (sort (where $section.Pages "Params.tier" "not in" $known) "Title") -}}
+{{- end -}}
+{{- return $ordered -}}

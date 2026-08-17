@@ -494,7 +494,27 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
   font-family: var(--font-display); font-weight: 700; font-size: .88rem;
   color: var(--brand-accent-strong);
 }
-.sponsor-logos { gap: .5rem; }
+/* Sidebar sponsor widget (partials/sidebar-sponsors.html). Tier drives the
+   logo size as well as the order, so gold reads first and largest -- the
+   sidebar counterpart to the tier grouping on /our-sponsors/. */
+.sponsor-side-list { display: grid; gap: .1rem; }
+.sponsor-side {
+  display: flex; align-items: center; gap: .7rem;
+  padding: .45rem 0;
+  color: var(--ink-soft);
+}
+.sponsor-side:hover { color: var(--brand-accent-strong); }
+.sponsor-side__text strong { display: block; font-size: .95rem; font-weight: 600; line-height: 1.25; }
+.sponsor-side__text em { font-style: normal; font-size: .78rem; color: var(--ink-muted); }
+/* Sized per tier. The tile itself is square-ish and the logo is object-fit:
+   contain (see .sponsor-logo), so wordmarks and icon marks stay comparable. */
+.sponsor-logo--side { width: 44px; height: 44px; padding: .3rem; flex: 0 0 auto; border-radius: 8px; }
+.sponsor-side--gold   .sponsor-logo--side { width: 64px; height: 64px; }
+.sponsor-side--silver .sponsor-logo--side { width: 52px; height: 52px; }
+.sponsor-side--bronze .sponsor-logo--side { width: 42px; height: 42px; }
+.sponsor-side--gold   .sponsor-side__text em { color: var(--tier-gold); font-weight: 600; }
+.sponsor-side--silver .sponsor-side__text em { color: var(--tier-silver); font-weight: 600; }
+.sponsor-side--bronze .sponsor-side__text em { color: var(--tier-bronze); font-weight: 600; }
 
 /* "On this page" table of contents + scroll-spy (partials/toc.html,
    static/js/toc.js). Nested for h2 > h3 (Hugo's default TOC levels). */
@@ -1027,4 +1047,256 @@ body.lightbox-open { overflow: hidden; }
 }
 @media (max-width: 640px) {
   .where-grid { grid-template-columns: 1fr; }
+}
+
+/* --- Sponsors (/our-sponsors/ and /sponsor/<slug>/) --------------------- */
+/* Tier accents are their own tokens rather than inline colours: the tier
+   badge, the card's top rule and the section heading all have to agree, and
+   the dark scheme below only has to restate these three. */
+:root {
+  /* foojay.io's own sponsor-hero blue -- see .sponsors-hero. */
+  --sponsors-hero-bg: #2f56ca;
+  --tier-gold:   #c8912a;
+  --tier-silver: #7d8894;
+  --tier-bronze: #a4682f;
+}
+
+/* Hero card. The blue, the 18px radius and the soft shadow are taken from
+   foojay.io's own .sponsors__hero (#2F56CA) -- the banner artwork is drawn to
+   sit on that blue, so it only reads correctly against it. Kept as a fixed
+   colour in both schemes rather than a theme token for the same reason: the
+   image can't follow a light/dark swap. */
+.sponsors-hero {
+  margin-bottom: 2.5rem;
+  padding: clamp(1.75rem, 4vw, 3.25rem);
+  border-radius: 18px;
+  background: var(--sponsors-hero-bg);
+  box-shadow: 0 18px 40px rgba(53, 98, 229, .18);
+  color: #fff;
+}
+.prose .sponsors-hero h2 { margin-top: 0; color: #fff; }
+.sponsors-hero p { color: rgba(255, 255, 255, .92); }
+/* Any prose link inside the card (not the CTA button, which has its own fill). */
+.sponsors-hero a:not(.sponsors-button) { color: #fff; text-decoration: underline; }
+/* Text left, banner right. minmax(0,…) on the text column stops long prose from
+   forcing the grid wider than its container. */
+.sponsors-hero--split {
+  display: grid;
+  /* The banner is cropped to its artwork (see the note in _index.md), so the
+     image column only needs the 235px the artwork actually occupies -- the
+     text takes everything else. Before the crop, more than half the image
+     column was flat #3057ca that happened to match the card, so widening the
+     column made the layout emptier, not the artwork bigger. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 235px);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+.sponsors-hero__text > :last-child { margin-bottom: 0; }
+/* Capped at natural width so it never upscales into blur. */
+.sponsors-hero__image img { width: 100%; max-width: 235px; height: auto; margin-inline: auto; }
+@media (max-width: 720px) {
+  /* Single column, and the banner drops below the text -- it's decorative, so
+     it shouldn't push the intro and the CTA below the fold on a phone. */
+  .sponsors-hero--split { grid-template-columns: 1fr; }
+  .sponsors-hero__image { order: 2; }
+}
+
+.sponsors-button {
+  display: inline-block;
+  margin: .35rem .5rem .35rem 0;
+  padding: .6rem 1.2rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .95rem;
+  text-decoration: none;
+  color: #fff;
+  background: var(--brand-accent);
+  border: 1px solid var(--brand-accent);
+  border-radius: 999px;
+}
+.sponsors-button:hover { background: var(--brand-accent-strong); border-color: var(--brand-accent-strong); color: #fff; }
+.sponsors-button--outline {
+  color: var(--brand-secondary);
+  background: transparent;
+  border-color: var(--border-strong);
+}
+.sponsors-button--outline:hover { color: var(--brand-accent-strong); background: transparent; border-color: var(--brand-accent); }
+
+.sponsors-tier { margin: 2.5rem 0; }
+.sponsors-tier__head { display: flex; align-items: center; gap: 1rem; }
+.prose .sponsors-tier__head h2 { margin: 0; }
+/* The rule between heading and count is drawn by the flex gap filler so it
+   stretches to whatever space is left, at any heading length. */
+.sponsors-tier__head::after {
+  content: ""; flex: 1 1 auto; height: 1px; background: var(--border); order: 1;
+}
+.sponsors-tier__count { order: 2; color: var(--ink-muted); font-size: .9rem; white-space: nowrap; }
+.sponsors-tier__blurb { color: var(--ink-soft); font-size: .95rem; margin: .6rem 0 1.25rem; }
+/* Tier marker: a disc in the heading's own colour, replacing the 🥈/🥉 medal
+   emoji — those render with a literal "2" and "3" in most fonts, and the
+   number-free medal emoji are all gold-coloured, so they can't carry a
+   silver/bronze distinction. currentColor means the per-tier rules below are
+   the only place a tier colour is named. */
+.sponsors-tier__head h2::before {
+  content: "";
+  display: inline-block;
+  width: .58em; height: .58em;
+  margin-right: .5em;
+  border-radius: 50%;
+  background: currentColor;
+  vertical-align: .02em;
+}
+.sponsors-tier--gold   .sponsors-tier__head h2 { color: var(--tier-gold); }
+.sponsors-tier--silver .sponsors-tier__head h2 { color: var(--tier-silver); }
+.sponsors-tier--bronze .sponsors-tier__head h2 { color: var(--tier-bronze); }
+
+.sponsors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.sponsor-card {
+  display: flex; flex-direction: column;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--border-strong);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.sponsor-card--gold   { border-top-color: var(--tier-gold); }
+.sponsor-card--silver { border-top-color: var(--tier-silver); }
+.sponsor-card--bronze { border-top-color: var(--tier-bronze); }
+.sponsor-card__link { text-decoration: none; color: inherit; }
+.prose .sponsor-card__title, .sponsor-card__title {
+  margin: .9rem 0 0; font-size: 1.15rem; line-height: 1.3;
+}
+.sponsor-card__tagline { margin: .4rem 0 0; color: var(--ink-soft); font-size: .95rem; }
+.sponsor-card__meta { display: flex; align-items: center; gap: .6rem; margin-top: .9rem; }
+.sponsor-card__count { color: var(--ink-muted); font-size: .85rem; }
+/* Pushed to the bottom so cards line up however long the tagline runs. */
+.sponsor-card__actions {
+  display: flex; flex-wrap: wrap; gap: .9rem;
+  margin: auto 0 0; padding-top: .9rem;
+  font-size: .9rem; font-weight: 600;
+}
+
+/* Logos are supplied by the sponsors and come as a mix of dark-on-transparent
+   and light-on-transparent artwork, so the tile paints the per-sponsor
+   `logoBackground` from frontmatter. object-fit: contain keeps very wide
+   wordmarks and square icons on the same visual footing. */
+.sponsor-logo {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 84px;
+  padding: .9rem;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.sponsor-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.sponsor-logo__fallback { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--ink-muted); }
+.sponsor-logo--large { width: 160px; height: 120px; flex: 0 0 auto; }
+.sponsor-logo--mini { width: 48px; height: 48px; padding: .35rem; flex: 0 0 auto; border-radius: 8px; }
+
+.sponsor-badge {
+  display: inline-block;
+  padding: .2rem .65rem;
+  font-family: var(--font-display);
+  font-size: .78rem; font-weight: 700; letter-spacing: .02em;
+  color: #fff; background: var(--ink-muted);
+  border-radius: 999px;
+}
+.sponsor-badge--gold   { background: var(--tier-gold); }
+.sponsor-badge--silver { background: var(--tier-silver); }
+.sponsor-badge--bronze { background: var(--tier-bronze); }
+
+/* --- sponsor profile page --- */
+.sponsor-profile {
+  padding: 1.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.sponsor-profile__head { display: flex; gap: 1.5rem; align-items: center; }
+.sponsor-profile__intro h1 { margin: .5rem 0 0; font-size: clamp(1.6rem, 3.5vw, 2.2rem); }
+.sponsor-profile__tagline { margin: .4rem 0 0; color: var(--ink-soft); font-size: 1.05rem; }
+.sponsor-profile__links {
+  display: flex; flex-wrap: wrap; gap: .5rem;
+  margin-top: 1.25rem; padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.sponsor-profile__links a {
+  padding: .32rem .8rem;
+  font-size: .9rem; font-weight: 600; text-decoration: none;
+  color: var(--brand-secondary);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.sponsor-profile__links a:hover { color: var(--brand-accent-strong); border-color: var(--border-strong); }
+
+.sponsor-stats { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0; }
+.sponsor-stat {
+  flex: 1 1 120px;
+  padding: 1rem;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.sponsor-stat strong { display: block; font-family: var(--font-display); font-size: 1.75rem; line-height: 1.1; }
+.sponsor-stat span { color: var(--ink-muted); font-size: .85rem; }
+
+.sponsor-section { margin: 2.5rem 0; }
+.sponsor-section > h2 { font-size: 1.35rem; margin: 0 0 1rem; }
+
+.sponsor-topics { display: flex; flex-wrap: wrap; gap: .5rem; }
+.sponsor-topic {
+  padding: .3rem .8rem;
+  font-size: .9rem; font-weight: 600; text-decoration: none;
+  color: var(--brand-secondary);
+  background: var(--brand-secondary-soft);
+  border-radius: 999px;
+}
+.sponsor-topic:hover { color: var(--brand-accent-strong); }
+
+.sponsor-authors-note { margin-top: 1.25rem; color: var(--ink-muted); font-size: .9rem; }
+/* An `authors:` slug with no matching author page — surfaced rather than
+   dropped, so a typo in a sponsor's list is visible instead of silent. */
+.sponsor-authors-note__missing { color: var(--tier-bronze); border-bottom: 1px dotted currentColor; cursor: help; }
+
+.section-head__count { color: var(--ink-muted); font-size: .9rem; }
+
+.sponsors-cta {
+  margin: 3rem 0 0;
+  padding: 2rem;
+  text-align: center;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.sponsors-cta h2 { margin: 0 0 .5rem; font-size: 1.35rem; }
+.prose .sponsors-cta h2 { margin-top: 0; }
+.sponsors-cta p { color: var(--ink-soft); }
+.sponsors-cta__links { margin-bottom: 0; }
+
+.sponsor-mini-list { display: flex; flex-direction: column; gap: .85rem; }
+.sponsor-mini { display: flex; align-items: center; gap: .75rem; text-decoration: none; color: inherit; }
+.sponsor-mini strong { display: block; font-size: .95rem; }
+.sponsor-mini em { color: var(--ink-muted); font-size: .82rem; font-style: normal; }
+
+@media (max-width: 560px) {
+  .sponsor-profile__head { flex-direction: column; align-items: flex-start; }
+  .sponsor-logo--large { width: 100%; }
+}
+
+/* Tier accents in the dark scheme: the light-mode values are metallic mid-tones
+   that go muddy on a dark surface, so they're lifted rather than reused. */
+:root[data-theme="dark"] {
+  --tier-gold:   #e0b354;
+  --tier-silver: #a7b3c0;
+  --tier-bronze: #cd8b4e;
 }
