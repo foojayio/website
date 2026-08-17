@@ -9,11 +9,11 @@ aliases:
 frozen: false
 ---
 
-*** ** * ** ***
-
 Is Java not available on your Mac OS X computer yet?
 
 No problem, let's use an installer to make the process really easy.
+
+## Download and Install Java on macOS
 
 This is a direct link to the Azul Zulu build of OpenJDK distribution, version 25, as an installer:
 
@@ -26,18 +26,18 @@ Many more distributions and versions of Java exist. You can [read more info here
 
 Once the `.dmg` file completed downloading, double-click it, and follow the instructions.
 
+## Validate the Java Installation
+
 After the installation has completed, you can check the installed version by opening a Terminal and running the `java -version` command.
 
 You should get the following result:
 
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% java -version
+```bash
+% java -version
 
 openjdk version "25" 2025-09-16 LTS
 OpenJDK Runtime Environment Zulu25.28+85-CA (build 25+36-LTS)
-OpenJDK 64-Bit Server VM Zulu25.28+85-CA (build 25+36-LTS, mixed mode, sharing)</pre>
-
-
+OpenJDK 64-Bit Server VM Zulu25.28+85-CA (build 25+36-LTS, mixed mode, sharing)
+```
 
 That's it. You're now ready to run Java programs and, even better... create your own!

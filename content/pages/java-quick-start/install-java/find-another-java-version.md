@@ -8,8 +8,6 @@ aliases:
 frozen: false
 ---
 
-*** ** * ** ***
-
 The OpenJDK project is the "mother of all Java's". It's a project [you can find on GitHub](https://github.com/openjdk/) and contains all the sources of Java. But the OpenJDK project doesn't produce the runtime you need to get Java on your computer. Many community projects and commercial companies produce the runtime you can download.
 
 A few of them:
@@ -19,8 +17,6 @@ A few of them:
 * [Eclipse Temurin](https://adoptium.net/temurin/releases/): Open source Java SE build based upon OpenJDK.
 * [Red Hat](https://developers.redhat.com/products/openjdk/download): Free and open source implementation of the Java Platform, Standard Edition.
 
-And there are many more, as you discover thanks to [Foojay's Disco API](https://foojay.io/today/disco-api-helping-you-to-find-any-openjdk-distribution/) with more information about the various distributions and versions, and in this video by [Gerrit Grunwald](https://foojay.io/today/author/gerrit-grunwald/)!
-
-
+And there are many more, as you can discover thanks to [Foojay's Disco API](https://foojay.io/today/disco-api-helping-you-to-find-any-openjdk-distribution/) with more information about the various distributions and versions, and in this video by [Gerrit Grunwald](https://foojay.io/today/author/gerrit-grunwald/)!
 
 {{< youtube m5V7JXeVc2s >}}
